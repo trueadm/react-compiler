@@ -1,0 +1,6 @@
+lib
+flow-typed
+tests/**/*.js
+babel.config.js
+scripts/test-externs.js
+sandbox

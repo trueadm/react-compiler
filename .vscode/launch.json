@@ -7,8 +7,20 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/index.js"
+      "name": "Run tests",
+      "program": "${workspaceFolder}/scripts/test.js",
+      "args": [
+        "simple-app2"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run sandbox",
+      "program": "${workspaceFolder}/lib/cli.js",
+      "args": [
+        "--entry=sandbox/App.js",
+      ]
     }
   ]
 }
