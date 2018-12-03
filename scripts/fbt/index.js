@@ -1106,7 +1106,7 @@ module.exports = (function() {
       pattern = this._accessTable(table, substitutions, args, argsIndex + 1);
     }
     if (pattern != null) {
-      babelHelpers.extends(substitutions, arg[ARG.SUBSTITUTION]);
+      Object.assign(substitutions, arg[ARG.SUBSTITUTION]);
     }
     return pattern;
   };

@@ -196,8 +196,53 @@ function UFI2ReactionsCount() {
   );
 }
 
+var UFIReactionsProfileBrowserUtils = {
+  ["getDialogURI"]: function (_ref) {
+    return "dialog_uri";
+  },
+  ["getPageURI"]: function (_ref2) {
+    return "page_uri";
+  },
+  ["getPrimerProps"]: function (args) {
+    var pageURI = UFIReactionsProfileBrowserUtils["getPageURI"](args);
+    var dialogURI = UFIReactionsProfileBrowserUtils["getDialogURI"](args);
+    return {
+      ["ajaxify"]: dialogURI,
+      ["href"]: pageURI,
+      ["rel"]: "dialog"
+    };
+  }
+};
+
+function getReactionKeyFromType(type): string {
+  return "key";
+}
+
+function UFI2ReactionIconTooltipTitle() {
+  return null;
+}
+
+function AbstractButton() {
+  return null;
+}
+
+function UFIReactionIcon() {
+  return null;
+}
+
+function LazyContentTooltip() {
+  return (// LazyContentTooltip OPCODES
+    [0 // COMPONENT
+    , "LazyContentTooltip" // DISPLAY_NAME
+    , createTemplateNode([20 // UNCONDITIONAL_TEMPLATE
+    , [2 // ROOT_STATIC_VALUE
+    , null], null // COMPUTE_FUNCTION
+    ])]
+  );
+}
+
 function UFI2TopReactions_ComputeFunction // COMPUTE_FUNCTION
-(className, feedback) {
+(className, feedback, feedbackTargetID) {
   var __cached__1;
 
   var __cached__0;
@@ -214,7 +259,12 @@ function UFI2TopReactions_ComputeFunction // COMPUTE_FUNCTION
 
   var topThreeReactions = topReactions["slice"](0, 3);
 
-  function $UFI2TopReactions_renderLink(): React.Node {
+  function $UFI2TopReactions_renderLink(actorID, reactionEdge, reactionIndex): React.Node {
+    var selectedReactionIndex = null;
+    var reactionType = reactionEdge != null ? reactionEdge["node"] != null ? reactionEdge["node"]["reaction_type"] : reactionEdge["node"] : reactionEdge;
+    var reactionKey = getReactionKeyFromType(reactionType);
+    var reactionsNotFocused = selectedReactionIndex === null;
+    var currentReactionIsFocused = selectedReactionIndex === reactionIndex;
     return [];
   }
 
@@ -230,15 +280,14 @@ function UFI2TopReactions() {
     [0 // COMPONENT
     , "UFI2TopReactions" // DISPLAY_NAME
     , createTemplateNode([22 // TEMPLATE
-    , [6 // OPEN_ELEMENT
-    , "foo", 61 // DYNAMIC_PROP
+    , [9 // OPEN_ELEMENT_SPAN
+    , 61 // DYNAMIC_PROP
     , "aria-label", 0, 0, 63 // DYNAMIC_PROP_CLASS_NAME
     , 0, 1, 60 // STATIC_PROP
     , "role", "toolbar", 46 // ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE
     , 2, [20 // UNCONDITIONAL_TEMPLATE
-    , [9 // OPEN_ELEMENT_SPAN
-    , 41 // ELEMENT_STATIC_CHILDREN_VALUE
-    , "123", 10 // CLOSE_ELEMENT
+    , [29 // REF_COMPONENT
+    , LazyContentTooltip, null // COMPONENT_PROPS_ARRAY
     ], null // COMPUTE_FUNCTION
     ] // ARRAY_MAP_OPCODES
     , null // ARRAY_MAP_COMPUTE_FUNCTION
@@ -272,26 +321,24 @@ var __hoisted__opcodes__1 = [29 // REF_COMPONENT
 
 function FeedStoryUFISummary_ComputeFunction // COMPUTE_FUNCTION
 (feedback, feedbackTargetID, onClickCommentsCount) {
-  var _ref, _ref2, _ref3, _ref4;
-
   var can_show_seen_by = feedback["can_show_seen_by"];
   var comment_count = feedback["comment_count"];
   var reaction_count = feedback["reaction_count"];
   var seen_by_count = feedback["seen_by_count"];
   var share_count = feedback["share_count"];
   var viewCount = feedback["video_view_count"];
-  var seenByCount = ((_ref = seen_by_count) != null ? _ref["count"] : _ref) || 0;
+  var seenByCount = (seen_by_count != null ? seen_by_count["count"] : seen_by_count) || 0;
   var canShowSeenBy = can_show_seen_by === true && seenByCount > 0;
-  var commentsCount = (_ref2 = comment_count) != null ? _ref2["total_count"] : _ref2;
-  var reactionsCount = (_ref3 = reaction_count) != null ? _ref3["count"] : _ref3;
-  var sharesCount = (_ref4 = share_count) != null ? _ref4["count"] : _ref4;
+  var commentsCount = comment_count != null ? comment_count["total_count"] : comment_count;
+  var reactionsCount = reaction_count != null ? reaction_count["count"] : reaction_count;
+  var sharesCount = share_count != null ? share_count["count"] : share_count;
 
   if (!canShowSeenBy && !commentsCount && !reactionsCount && !sharesCount && !viewCount) {
     return null;
   }
 
   cx("fbFeedStoryUFI/topReactions");
-  return [(_ref3 = reaction_count) != null ? _ref3["count"] : _ref3, [createReactNode(__hoisted__opcodes__0, [[cx("fbFeedStoryUFI/topReactions"), feedback]]), void 0]];
+  return [reaction_count != null ? reaction_count["count"] : reaction_count, [createReactNode(__hoisted__opcodes__0, [[cx("fbFeedStoryUFI/topReactions"), feedback, feedbackTargetID]]), void 0]];
 }
 
 function FeedStoryUFISummary() {

@@ -1019,6 +1019,16 @@ function createOpcodesForCompositeComponent(
     invariant(false, "TODO");
   }
   if (isStatic) {
+    if (Array.isArray(attributesPath)) {
+      for (let attributePath of attributesPath) {
+        attributePath.node.canDCE = true;
+      }
+    }
+    if (Array.isArray(childrenPath)) {
+      for (let childPath of childrenPath) {
+        childPath.node.canDCE = true;
+      }
+    }
     pushOpcodeValue(opcodes, t.nullLiteral(), "COMPONENT_PROPS_ARRAY");
   } else {
     const { propsArray, canInlineArray } = createPropsArrayForCompositeComponent(

@@ -156,7 +156,60 @@ function UFI2ReactionsCount() {
   return null;
 }
 
-function UFI2TopReactions({ className, feedback }: { className?: string, feedback: FeedbackType }) {
+var UFIReactionsProfileBrowserUtils = {
+  getDialogURI: function getDialogURI(_ref) {
+    var actorID = _ref.actorID;
+    var feedbackTargetID = _ref.feedbackTargetID;
+    var reactionKey = _ref.reactionKey;
+    return "dialog_uri";
+  },
+
+  getPageURI: function getPageURI(_ref2) {
+    var actorID = _ref2.actorID;
+    var feedbackTargetID = _ref2.feedbackTargetID;
+    return "page_uri";
+  },
+
+  getPrimerProps: function getPrimerProps(args) {
+    var pageURI = UFIReactionsProfileBrowserUtils.getPageURI(args);
+    var dialogURI = UFIReactionsProfileBrowserUtils.getDialogURI(args);
+    return {
+      ajaxify: dialogURI,
+      href: pageURI,
+      rel: "dialog",
+    };
+  },
+};
+
+function getReactionKeyFromType(type): string {
+  return "key";
+}
+
+function UFI2ReactionIconTooltipTitle() {
+  return null;
+}
+
+function AbstractButton() {
+  return null;
+}
+
+function UFIReactionIcon() {
+  return null;
+}
+
+function LazyContentTooltip() {
+  return null;
+}
+
+function UFI2TopReactions({
+  className,
+  feedback,
+  feedbackTargetID,
+}: {
+  className?: string,
+  feedback: FeedbackType,
+  feedbackTargetID: string,
+}) {
   var top_reactions = feedback.top_reactions;
   var topReactions = top_reactions != null ? top_reactions.edges : top_reactions;
   topReactions || invariant(0, "UFI2TopReactions: Expected top reactions");
@@ -174,8 +227,82 @@ function UFI2TopReactions({ className, feedback }: { className?: string, feedbac
 
   var topThreeReactions = topReactions.slice(0, 3);
 
-  function $UFI2TopReactions_renderLink(): React.Node {
-    return <span>123</span>;
+  function $UFI2TopReactions_renderLink(actorID, reactionEdge, reactionIndex): React.Node {
+    var selectedReactionIndex = null;
+    var i18nReactionCount = (_ref2 = reactionEdge) != null ? _ref2.i18n_reaction_count : _ref2;
+    var i18nReactionName =
+      reactionEdge != null
+        ? reactionEdge.node != null
+          ? reactionEdge.node.localized_name
+          : reactionEdge.node
+        : reactionEdge;
+    var reactionType =
+      reactionEdge != null
+        ? reactionEdge.node != null
+          ? reactionEdge.node.reaction_type
+          : reactionEdge.node
+        : reactionEdge;
+    var reactionKey = getReactionKeyFromType(reactionType);
+    var primerProps = UFIReactionsProfileBrowserUtils.getPrimerProps({
+      actorID: actorID,
+      feedbackTargetID: feedbackTargetID,
+      reactionKey: reactionKey,
+    });
+
+    var reactionsNotFocused = selectedReactionIndex === null;
+    var currentReactionIsFocused = selectedReactionIndex === reactionIndex;
+    var tabIndex = (reactionsNotFocused && reactionIndex === 0) || currentReactionIsFocused ? 0 : -1;
+
+    var placeholder = React.createElement(
+      "div",
+      null,
+      React.createElement(UFI2ReactionIconTooltipTitle, null, i18nReactionName),
+
+      fbt._("Loading\u2026", null, { hash_key: "2Ct2DW" }),
+    );
+
+    return React.createElement(
+      LazyContentTooltip,
+      {
+        className: cx("UFI2TopReactions/tooltip"),
+        contentRenderer: null,
+        contentRendererProps: {
+          feedbackTargetID: feedbackTargetID,
+          i18nReactionName: i18nReactionName,
+          reactionType: reactionType,
+        },
+
+        "data-testid": "UFI2TopReactions/tooltip_" + reactionType,
+        key: reactionKey,
+        placeholder: placeholder,
+        tabIndex: -1,
+      },
+
+      React.createElement(
+        AbstractButton,
+        Object.assign({}, primerProps, {
+          "aria-label": fbt._(
+            "{i18nReactionCount} {i18nReactionName}",
+
+            [fbt._param("i18nReactionCount", i18nReactionCount), fbt._param("i18nReactionName", i18nReactionName)],
+            { hash_key: "1yBDpL" },
+          ),
+
+          className: cx("UFI2TopReactions/link"),
+          label: [
+            React.createElement(UFIReactionIcon, {
+              className: cx("UFI2TopReactions/icon"),
+              key: "reactionIcon",
+              reaction: reactionKey,
+            }),
+          ],
+
+          ref: null,
+          role: "button",
+          tabIndex: tabIndex,
+        }),
+      ),
+    );
   }
 
   return React.createElement(
