@@ -816,7 +816,7 @@ function getNodeAndInlineStatusFromValuePath(path, state, componentPath) {
   } else if (t.isObjectExpression(node) && pathContainsReactElement(pathRef, state)) {
     return createPropTemplateForObjectExpression(pathRef, state, componentPath);
   } else if (t.isJSXText(node)) {
-    node = t.stringLiteral(node.value);
+    node = t.stringLiteral(node.value.trim());
   } else if (t.isJSXElement(node)) {
     [node, canInline] = createPropTemplateFromJSXElement(pathRef, state, componentPath);
   } else if (isReactCreateElement(pathRef, state)) {
@@ -889,6 +889,7 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
       return { node: t.arrayExpression(childrenNodes), canInline: canInlineChildren };
     }
   }
+  let spreadResult = null;
   if (attributesPath !== null && Array.isArray(attributesPath)) {
     for (let attributePath of attributesPath) {
       if (t.isJSXAttribute(attributePath.node)) {
@@ -901,6 +902,28 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
         if (propName === attributeName) {
           const valuePath = attributePath.get("value");
           return getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
+        }
+      } else if (t.isJSXSpreadAttribute(attributePath.node) && t.isIdentifier(attributePath.node.argument)) {
+        const argumentPath = attributePath.get("argument");
+        const argumentPathRef = getReferenceFromExpression(argumentPath, state);
+
+        if (t.isObjectExpression(argumentPathRef.node)) {
+          const propertiesPath = argumentPathRef.get("properties");
+
+          for (let propertyPath of propertiesPath) {
+            if (t.isObjectProperty(propertyPath.node)) {
+              const key = propertyPath.node.key;
+              const valuePath = propertyPath.get("value");
+              if (t.isIdentifier(key) && key.name === propName) {
+                spreadResult = getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
+                break;
+              }
+            } else {
+              invariant(false, "TODO");
+            }
+          }
+        } else {
+          invariant(false, "TODO");
         }
       } else if (t.isObjectProperty(attributePath.node)) {
         const nameNode = attributePath.node.key;
@@ -917,6 +940,9 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
         invariant(false, "TODO");
       }
     }
+  }
+  if (spreadResult !== null) {
+    return spreadResult;
   }
   if (defaultPropValue !== null) {
     return defaultPropValue;
