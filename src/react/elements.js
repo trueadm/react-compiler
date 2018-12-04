@@ -889,7 +889,7 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
       return { node: t.arrayExpression(childrenNodes), canInline: canInlineChildren };
     }
   }
-  let spreadResult = null;
+  let result = null;
   if (attributesPath !== null && Array.isArray(attributesPath)) {
     for (let attributePath of attributesPath) {
       if (t.isJSXAttribute(attributePath.node)) {
@@ -901,7 +901,7 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
         }
         if (propName === attributeName) {
           const valuePath = attributePath.get("value");
-          return getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
+          result = getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
         }
       } else if (t.isJSXSpreadAttribute(attributePath.node) && t.isIdentifier(attributePath.node.argument)) {
         const argumentPath = attributePath.get("argument");
@@ -915,7 +915,7 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
               const key = propertyPath.node.key;
               const valuePath = propertyPath.get("value");
               if (t.isIdentifier(key) && key.name === propName) {
-                spreadResult = getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
+                result = getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
                 break;
               }
             } else {
@@ -934,15 +934,15 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
         }
         if (propName === attributeName) {
           const valuePath = attributePath.get("value");
-          return getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
+          result = getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
         }
       } else {
         invariant(false, "TODO");
       }
     }
   }
-  if (spreadResult !== null) {
-    return spreadResult;
+  if (result !== null) {
+    return result;
   }
   if (defaultPropValue !== null) {
     return defaultPropValue;
