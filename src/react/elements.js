@@ -19,6 +19,7 @@ import {
   isCommonJsLikeRequireCall,
   isHostComponent,
   isNodeWithinReactElementTemplate,
+  isObjectAssignCall,
   isOpcodesTemplateFromFuncCall,
   isPrimitive,
   isReactCreateElement,
@@ -1298,6 +1299,8 @@ export function createOpcodesForReactCreateElement(path, opcodes, state, compone
         // NO-OP
       } else if (t.isObjectExpression(configPathRef.node)) {
         attributesPath = configPath.get("properties");
+      } else if (t.isCallExpression(configPathRef.node)) {
+        attributesPath = configPathRef;
       } else {
         invariant(false, "TODO");
       }

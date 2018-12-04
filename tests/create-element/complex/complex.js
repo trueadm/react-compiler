@@ -189,7 +189,33 @@ function UFI2ReactionIconTooltipTitle() {
   return null;
 }
 
-function AbstractButton() {
+function AbstractButton({
+  depressed,
+  disabled,
+  image,
+  imageRight,
+  label,
+  labelIsHidden,
+  ...buttonProps
+}: {
+  ajaxify: string,
+  "aria-label": string,
+  className: string,
+  depressed?: boolean,
+  disabled?: boolean,
+  href: string,
+  image?: React.Node,
+  imageRight?: React.Node,
+  label: React.Node,
+  labelIsHidden: boolean,
+  rel: string,
+  role: string,
+  tabIndex: number,
+}) {
+  var className =
+    cx("abstractButton/root") +
+    (disabled ? " " + cx("public/abstractButton/disabled") : "") +
+    (depressed ? " " + cx("public/abstractButton/depressed") : "");
   return null;
 }
 
@@ -197,8 +223,36 @@ function UFIReactionIcon() {
   return null;
 }
 
-function LazyContentTooltip() {
+function Tooltip() {
   return null;
+}
+
+function LazyContentTooltip({
+  children,
+  contentRenderer,
+  contentRendererProps,
+  errorMessage,
+  placeholder,
+  ...otherProps
+}: {
+  children: React.Node,
+  className: string,
+  contentRenderer: void,
+  contentRendererProps: void,
+  errorMessage: string,
+  placeholder: React.Node,
+  tabIndex: number,
+}) {
+  return React.createElement(
+    Tooltip,
+    Object.assign({}, otherProps, {
+      onFocus: null,
+      onMouseEnter: null,
+      tooltip: placeholder,
+    }),
+
+    children,
+  );
 }
 
 function UFI2TopReactions({

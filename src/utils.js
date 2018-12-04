@@ -933,3 +933,20 @@ export function isFbtCall(pathRef, state) {
   }
   return false;
 }
+
+export function isObjectAssignCall(pathRef, state) {
+  const node = pathRef.node;
+  if (t.isCallExpression(node)) {
+    const calleePath = pathRef.get("callee");
+    const calleePathRef = getReferenceFromExpression(calleePath, state);
+
+    return (
+      t.isMemberExpression(calleePathRef.node) &&
+      t.isIdentifier(calleePathRef.node.object) &&
+      calleePathRef.node.object.name === "Object" &&
+      t.isIdentifier(calleePathRef.node.property) &&
+      calleePathRef.node.property.name === "assign"
+    );
+  }
+  return false;
+}
