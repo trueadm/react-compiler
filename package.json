@@ -39,6 +39,7 @@
     "fbt": "file:scripts/fbt",
     "glob": "^7.1.3",
     "google-closure-compiler": "^20181028.0.1",
+    "jsdom": "^13.0.0",
     "prettier": "^1.15.2",
     "react": "^16.7.0-alpha.0",
     "react-compiler-runtime": "file:scripts/compiler-runtime",

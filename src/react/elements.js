@@ -543,7 +543,7 @@ function canInlineNode(path, state) {
   return false;
 }
 
-function hoistOpcodesNode(path, state, opcodesNode) {
+function getTopLevelPathFromComponentPath(path) {
   let parentPath = path.parentPath;
   let lastPathKey = path.key;
 
@@ -551,6 +551,10 @@ function hoistOpcodesNode(path, state, opcodesNode) {
     lastPathKey = parentPath.key;
     parentPath = parentPath.parentPath;
   }
+  return { key: lastPathKey, path: parentPath };
+}
+
+function hoistOpcodesNode(componentPath, state, opcodesNode) {
   const hash = JSON.stringify(opcodesNode);
   const propTemplateOpcodeCache = state.propTemplateOpcodeCache;
 
@@ -559,12 +563,20 @@ function hoistOpcodesNode(path, state, opcodesNode) {
   }
   const identifier = t.identifier("__hoisted__opcodes__" + state.counters.hoistedOpcodes++);
   markNodeAsUsed(identifier);
+  let hoistDepth = 0;
+  let currentPath = componentPath;
 
-  if (t.isProgram(parentPath.node)) {
-    const body = parentPath.node.body;
-    body.splice(lastPathKey, 0, t.variableDeclaration("var", [t.variableDeclarator(identifier, opcodesNode)]));
-  } else {
-    invariant(false, "TODO");
+  while (hoistDepth++ < 3) {
+    let { key, path } = getTopLevelPathFromComponentPath(currentPath);
+    if (t.isProgram(path.node)) {
+      const body = path.node.body;
+      body.splice(key, 0, t.variableDeclaration("var", [t.variableDeclarator(identifier, opcodesNode)]));
+    } else {
+      currentPath = path;
+      if (hoistDepth > 1) {
+        invariant(false, "TODO");
+      }
+    }
   }
 
   propTemplateOpcodeCache.set(hash, identifier);
@@ -901,6 +913,7 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
         }
         if (propName === attributeName) {
           const valuePath = attributePath.get("value");
+          valuePath.node.canDCE = true;
           result = getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
         }
       } else if (t.isJSXSpreadAttribute(attributePath.node) && t.isIdentifier(attributePath.node.argument)) {
@@ -915,6 +928,7 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
               const key = propertyPath.node.key;
               const valuePath = propertyPath.get("value");
               if (t.isIdentifier(key) && key.name === propName) {
+                valuePath.node.canDCE = true;
                 result = getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
                 break;
               }
@@ -934,6 +948,7 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
         }
         if (propName === attributeName) {
           const valuePath = attributePath.get("value");
+          valuePath.node.canDCE = true;
           result = getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
         }
       } else {
@@ -955,6 +970,7 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
               const key = propertyPath.node.key;
               const valuePath = propertyPath.get("value");
               if (t.isIdentifier(key) && key.name === propName) {
+                valuePath.node.canDCE = true;
                 result = getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
                 break;
               }

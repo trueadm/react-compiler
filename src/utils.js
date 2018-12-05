@@ -518,6 +518,8 @@ function getAllObjectPropertiesMapFromTypeAnnotation(path, annotation, state) {
     for (let propertyAnnotation of annotation.properties) {
       if (t.isObjectTypeProperty(propertyAnnotation) && t.isIdentifier(propertyAnnotation.key)) {
         propertiesMap.set(propertyAnnotation.key.name, propertyAnnotation.value);
+      } else if (t.isObjectTypeProperty(propertyAnnotation) && t.isStringLiteral(propertyAnnotation.key)) {
+        propertiesMap.set(propertyAnnotation.key.value, propertyAnnotation.value);
       } else {
         invariant(false, "TODO");
       }

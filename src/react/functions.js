@@ -368,6 +368,10 @@ function insertComputFunctionCachedOpcodes(componentPath, state) {
     for (let [, { cachedOpcodes }] of computeFunctionCache) {
       if (cachedOpcodes !== null) {
         const { node, opcodesArray } = cachedOpcodes;
+        if (cachedOpcodes.inserted) {
+          continue;
+        }
+        cachedOpcodes.inserted = true;
         declarators.push(t.variableDeclarator(node, opcodesArray));
       }
     }

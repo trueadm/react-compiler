@@ -15,6 +15,11 @@ const ClosureCompiler = require("google-closure-compiler").compiler;
 const argv = require("minimist")(process.argv.slice(2));
 const { compileEntryModuleFileToDirectory, parseAndCompileSource } = require("../lib/compiler");
 const path = require("path");
+const { JSDOM } = require("jsdom");
+const { window } = new JSDOM(``);
+
+/* eslint-disable-next-line */
+global.window = window; global.document = window.document;
 
 const sizeFlag = argv.size || false;
 const benchmarkFlag = argv.benchmark || false;

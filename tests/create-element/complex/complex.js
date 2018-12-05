@@ -216,6 +216,7 @@ function AbstractButton({
     cx("abstractButton/root") +
     (disabled ? " " + cx("public/abstractButton/disabled") : "") +
     (depressed ? " " + cx("public/abstractButton/depressed") : "");
+
   return null;
 }
 
@@ -223,9 +224,40 @@ function UFIReactionIcon() {
   return null;
 }
 
-function Tooltip() {
+function createTooltipPortal(content, container): null {
   return null;
 }
+
+function Tooltip({
+  children,
+  display,
+  tooltip,
+  ...otherProps
+}: {
+  children: React.Node,
+  display: string,
+  tooltip: null | React.Node,
+}) {
+  var $Tooltip_container = document.createElement("div");
+
+  if (display === "block") {
+    return React.createElement(
+      "div",
+      otherProps,
+      tooltip !== null ? createTooltipPortal(tooltip, $Tooltip_container) : null,
+      children,
+    );
+  } else {
+    return React.createElement(
+      "span",
+      otherProps,
+      tooltip !== null ? createTooltipPortal(tooltip, $Tooltip_container) : null,
+      children,
+    );
+  }
+}
+
+Tooltip.defaultProps = { display: "inline" };
 
 function LazyContentTooltip({
   children,
@@ -333,6 +365,7 @@ function UFI2TopReactions({
       },
 
       React.createElement(
+        // The compiler currently thinks this is static... which it is not
         AbstractButton,
         Object.assign({}, primerProps, {
           "aria-label": fbt._(
