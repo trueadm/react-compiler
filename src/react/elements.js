@@ -816,7 +816,7 @@ function getNodeAndInlineStatusFromValuePath(path, state, componentPath) {
   } else if (t.isObjectExpression(node) && pathContainsReactElement(pathRef, state)) {
     return createPropTemplateForObjectExpression(pathRef, state, componentPath);
   } else if (t.isJSXText(node)) {
-    node = t.stringLiteral(node.value.trim());
+    node = t.stringLiteral(handleWhiteSpace(node.value));
   } else if (t.isJSXElement(node)) {
     [node, canInline] = createPropTemplateFromJSXElement(pathRef, state, componentPath);
   } else if (isReactCreateElement(pathRef, state)) {
@@ -1376,7 +1376,7 @@ export function createOpcodesForReactCreateElement(path, opcodes, state, compone
       if (t.isNullLiteral(configPathRef.node)) {
         // NO-OP
       } else if (t.isObjectExpression(configPathRef.node)) {
-        attributesPath = configPath.get("properties");
+        attributesPath = configPathRef.get("properties");
       } else if (t.isCallExpression(configPathRef.node)) {
         attributesPath = configPathRef;
       } else {

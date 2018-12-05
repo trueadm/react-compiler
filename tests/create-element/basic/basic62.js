@@ -22,7 +22,15 @@ function Component({ a, b, c, ...others }: { a: string, b: string, c: string, cl
     a,
     b,
     c,
-    React.createElement(Component2, others),
+    React.createElement(
+      Component2,
+      Object.assign(
+        {
+          className: "123",
+        },
+        others,
+      ),
+    ),
   );
 }
 
