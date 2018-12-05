@@ -203,7 +203,11 @@ var UFIReactionsProfileBrowserUtils = {
   ["getPageURI"]: function (_ref2) {
     return "page_uri";
   },
-  ["getPrimerProps"]: function (args) {
+  ["getPrimerProps"]: function (args): {
+    ajaxify: string,
+    href: string,
+    ref: string,
+  } {
     var pageURI = UFIReactionsProfileBrowserUtils["getPageURI"](args);
     var dialogURI = UFIReactionsProfileBrowserUtils["getDialogURI"](args);
     return {
@@ -229,10 +233,10 @@ function UFI2ReactionIconTooltipTitle() {
   );
 }
 
-function AbstractButton() {
-  return (// AbstractButton OPCODES
+function Link() {
+  return (// Link OPCODES
     [0 // COMPONENT
-    , "AbstractButton" // DISPLAY_NAME
+    , "Link" // DISPLAY_NAME
     , createTemplateNode([20 // UNCONDITIONAL_TEMPLATE
     , [2 // ROOT_STATIC_VALUE
     , null], null // COMPUTE_FUNCTION
@@ -240,8 +244,85 @@ function AbstractButton() {
   );
 }
 
+function AbstractButton_ComputeFunction // COMPUTE_FUNCTION
+(ajaxify, aria_label, className, depressed, disabled, href, image, imageRight, label, labelIsHidden, rel, role, tabIndex, type) {
+  var _className = cx("abstractButton/root") + (disabled ? " " + cx("public/abstractButton/disabled") : "") + (depressed ? " " + cx("public/abstractButton/depressed") : "");
+
+  if (href) {
+    return [0];
+  } else if (type && type !== "submit") {
+    var __cached__2;
+
+    __cached__2 = joinClasses(className, _className);
+    return [1, ajaxify, aria_label, rel, __cached__2, disabled, type, image, labelIsHidden, label, imageRight];
+  } else {
+    var __cached__3;
+
+    __cached__3 = joinClasses(className, _className);
+    return [2, ajaxify, aria_label, rel, __cached__3, disabled, image, labelIsHidden, label, imageRight];
+  }
+}
+
+function AbstractButton() {
+  return (// AbstractButton OPCODES
+    [0 // COMPONENT
+    , "AbstractButton" // DISPLAY_NAME
+    , createTemplateNode([21 // CONDITIONAL_TEMPLATE
+    , AbstractButton_ComputeFunction, [0 // CONDITIONAL_ROOT_INDEX
+    , [29 // REF_COMPONENT
+    , Link, null // COMPONENT_PROPS_ARRAY
+    ], 1 // CONDITIONAL_ROOT_INDEX
+    , [6 // OPEN_ELEMENT
+    , "button", 61 // DYNAMIC_PROP
+    , "ajaxify", 0, 1, 61 // DYNAMIC_PROP
+    , "aria-label", 0, 2, 61 // DYNAMIC_PROP
+    , "rel", 0, 3, 63 // DYNAMIC_PROP_CLASS_NAME
+    , 0, 4, 61 // DYNAMIC_PROP
+    , "disabled", 32, 5, 61 // DYNAMIC_PROP
+    , "type", 0, 6, 47 // ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE
+    , 7, 30 // CONDITIONAL
+    , 8, [9 // OPEN_ELEMENT_SPAN
+    , 62 // STATIC_PROP_CLASS_NAME
+    , "accessible_elem", 48 // ELEMENT_DYNAMIC_CHILDREN_REACT_NODE_TEMPLATE
+    , 9, 10 // CLOSE_ELEMENT
+    ] // CONDITIONAL_CONSEQUENT
+    , [47 // ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE
+    , 9] // CONDITIONAL_ALTERNATE
+    , 47 // ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE
+    , 10, 10 // CLOSE_ELEMENT
+    ], 2 // CONDITIONAL_ROOT_INDEX
+    , [6 // OPEN_ELEMENT
+    , "button", 61 // DYNAMIC_PROP
+    , "ajaxify", 0, 1, 61 // DYNAMIC_PROP
+    , "aria-label", 0, 2, 61 // DYNAMIC_PROP
+    , "rel", 0, 3, 63 // DYNAMIC_PROP_CLASS_NAME
+    , 0, 4, 61 // DYNAMIC_PROP
+    , "disabled", 32, 5, 60 // STATIC_PROP
+    , "type", "submit", 64 // STATIC_PROP_VALUE
+    , "1", 47 // ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE
+    , 6, 30 // CONDITIONAL
+    , 7, [9 // OPEN_ELEMENT_SPAN
+    , 62 // STATIC_PROP_CLASS_NAME
+    , "accessible_elem", 48 // ELEMENT_DYNAMIC_CHILDREN_REACT_NODE_TEMPLATE
+    , 8, 10 // CLOSE_ELEMENT
+    ] // CONDITIONAL_CONSEQUENT
+    , [47 // ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE
+    , 8] // CONDITIONAL_ALTERNATE
+    , 47 // ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE
+    , 9, 10 // CLOSE_ELEMENT
+    ]]])]
+  );
+}
+
 function UFIReactionIcon() {
-  return null;
+  return (// UFIReactionIcon OPCODES
+    [0 // COMPONENT
+    , "UFIReactionIcon" // DISPLAY_NAME
+    , createTemplateNode([20 // UNCONDITIONAL_TEMPLATE
+    , [2 // ROOT_STATIC_VALUE
+    , null], null // COMPUTE_FUNCTION
+    ])]
+  );
 }
 
 function createTooltipPortal(content, container): null {
@@ -249,13 +330,13 @@ function createTooltipPortal(content, container): null {
 }
 
 function Tooltip_ComputeFunction // COMPUTE_FUNCTION
-(children, display, tooltip) {
+(children, className, data_testid, display, tabIndex, tooltip) {
   var $Tooltip_container = document["createElement"]("div");
 
   if (display === "block") {
-    return [0, tooltip !== null ? createTooltipPortal(tooltip, $Tooltip_container) : null, children];
+    return [0, className, data_testid, tabIndex, tooltip !== null ? createTooltipPortal(tooltip, $Tooltip_container) : null, children];
   } else {
-    return [1, tooltip !== null ? createTooltipPortal(tooltip, $Tooltip_container) : null, children];
+    return [1, className, data_testid, tabIndex, tooltip !== null ? createTooltipPortal(tooltip, $Tooltip_container) : null, children];
   }
 }
 
@@ -266,12 +347,18 @@ function Tooltip() {
     , createTemplateNode([21 // CONDITIONAL_TEMPLATE
     , Tooltip_ComputeFunction, [0 // CONDITIONAL_ROOT_INDEX
     , [8 // OPEN_ELEMENT_DIV
-    , 47 // ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE
-    , 2, 10 // CLOSE_ELEMENT
+    , 63 // DYNAMIC_PROP_CLASS_NAME
+    , 0, 1, 61 // DYNAMIC_PROP
+    , "data-testid", 0, 2, 61 // DYNAMIC_PROP
+    , "tabindex", 8, 3, 47 // ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE
+    , 5, 10 // CLOSE_ELEMENT
     ], 1 // CONDITIONAL_ROOT_INDEX
     , [9 // OPEN_ELEMENT_SPAN
-    , 47 // ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE
-    , 2, 10 // CLOSE_ELEMENT
+    , 63 // DYNAMIC_PROP_CLASS_NAME
+    , 0, 1, 61 // DYNAMIC_PROP
+    , "data-testid", 0, 2, 61 // DYNAMIC_PROP
+    , "tabindex", 8, 3, 47 // ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE
+    , 5, 10 // CLOSE_ELEMENT
     ]]])]
   );
 }
@@ -281,8 +368,8 @@ Tooltip["defaultProps"] = {
 };
 
 function LazyContentTooltip_ComputeFunction // COMPUTE_FUNCTION
-(children, className, contentRenderer, contentRendererProps, errorMessage, placeholder, tabIndex) {
-  return [[children, "inline", placeholder]];
+(children, className, contentRenderer, contentRendererProps, data_testid, errorMessage, placeholder, tabIndex) {
+  return [[children, className, data_testid, "inline", tabIndex, placeholder]];
 }
 
 function LazyContentTooltip() {
@@ -296,18 +383,22 @@ function LazyContentTooltip() {
   );
 }
 
-var __hoisted__opcodes__0 = [29 // REF_COMPONENT
-, AbstractButton, null // COMPONENT_PROPS_ARRAY
+var __hoisted__opcodes__1 = [29 // REF_COMPONENT
+, AbstractButton, 0 // COMPONENT_PROPS_ARRAY
 ];
-var __hoisted__opcodes__0 = [29, AbstractButton, null];
-var __hoisted__opcodes__1 = [8 // OPEN_ELEMENT_DIV
+var __hoisted__opcodes__1 = [29, AbstractButton, 0];
+var __hoisted__opcodes__0 = [29 // REF_COMPONENT
+, UFIReactionIcon, null // COMPONENT_PROPS_ARRAY
+];
+var __hoisted__opcodes__0 = [29, UFIReactionIcon, null];
+var __hoisted__opcodes__2 = [8 // OPEN_ELEMENT_DIV
 , 29 // REF_COMPONENT
 , UFI2ReactionIconTooltipTitle, null // COMPONENT_PROPS_ARRAY
 , 42 // ELEMENT_DYNAMIC_CHILD_VALUE
 , 0, 10 // CLOSE_ELEMENT
 ];
-var __hoisted__opcodes__1 = [8, 29, UFI2ReactionIconTooltipTitle, null, 42, 0, 10];
-var __opcodes__8 = // $UFI2TopReactions_renderLink OPCODES
+var __hoisted__opcodes__2 = [8, 29, UFI2ReactionIconTooltipTitle, null, 42, 0, 10];
+var __opcodes__10 = // $UFI2TopReactions_renderLink OPCODES
 [20 // UNCONDITIONAL_TEMPLATE
 , [29 // REF_COMPONENT
 , LazyContentTooltip, 0 // COMPONENT_PROPS_ARRAY
@@ -333,23 +424,33 @@ function UFI2TopReactions_ComputeFunction // COMPUTE_FUNCTION
   var topThreeReactions = topReactions["slice"](0, 3);
 
   function $UFI2TopReactions_renderLink(actorID, reactionEdge, reactionIndex): React.Node {
-    var __cached__2;
+    var __cached__5;
+
+    var __cached__4;
 
     var selectedReactionIndex = null;
     var i18nReactionName = reactionEdge != null ? reactionEdge["node"] != null ? reactionEdge["node"]["localized_name"] : reactionEdge["node"] : reactionEdge;
     var reactionType = reactionEdge != null ? reactionEdge["node"] != null ? reactionEdge["node"]["reaction_type"] : reactionEdge["node"] : reactionEdge;
     var reactionKey = getReactionKeyFromType(reactionType);
+
+    var primerProps = __cached__4 = UFIReactionsProfileBrowserUtils["getPrimerProps"]({
+      ["actorID"]: actorID,
+      ["feedbackTargetID"]: feedbackTargetID,
+      ["reactionKey"]: reactionKey
+    });
+
     var reactionsNotFocused = selectedReactionIndex === null;
     var currentReactionIsFocused = selectedReactionIndex === reactionIndex;
-    __cached__2 = fbt["_"]("Loading\u2026", null, {
+    __cached__5 = fbt["_"]("Loading\u2026", null, {
       ["hash_key"]: "2Ct2DW"
     });
+    cx("UFI2TopReactions/link");
     cx("UFI2TopReactions/tooltip");
-    return [[createReactNode(__hoisted__opcodes__0), cx("UFI2TopReactions/tooltip"), null, {
+    return [[createReactNode(__hoisted__opcodes__1, [[__cached__4["ajaxify"], void 0, cx("UFI2TopReactions/link"), void 0, void 0, __cached__4["href"], void 0, void 0, [createReactNode(__hoisted__opcodes__0)], void 0, void 0, "button", reactionsNotFocused && reactionIndex === 0 || currentReactionIsFocused ? 0 : -1, void 0]]), cx("UFI2TopReactions/tooltip"), null, {
       ["feedbackTargetID"]: feedbackTargetID,
       ["i18nReactionName"]: i18nReactionName,
       ["reactionType"]: reactionType
-    }, void 0, createReactNode(__hoisted__opcodes__1, [__cached__2]), -1]];
+    }, "UFI2TopReactions/tooltip_" + reactionType, void 0, createReactNode(__hoisted__opcodes__2, [__cached__5]), -1]];
   }
 
   __cached__1 = joinClasses(cx("UFI2TopReactions/root"), className);
@@ -357,10 +458,10 @@ function UFI2TopReactions_ComputeFunction // COMPUTE_FUNCTION
     ["hash_key"]: "30H01m"
   });
   return [__cached__0, __cached__1, topThreeReactions, function (edge: Edge, ii: number): React.Node {
-    var __cached__3;
+    var __cached__6;
 
-    __cached__3 = $UFI2TopReactions_renderLink(actorID, edge, ii);
-    return [__cached__3];
+    __cached__6 = $UFI2TopReactions_renderLink(actorID, edge, ii);
+    return [__cached__6];
   }];
 }
 
@@ -376,7 +477,7 @@ function UFI2TopReactions() {
     , "role", "toolbar", 46 // ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE
     , 2, [20 // UNCONDITIONAL_TEMPLATE
     , [23 // TEMPLATE_FROM_FUNC_CALL
-    , __opcodes__8, 0 // COMPUTE_VALUES
+    , __opcodes__10, 0 // COMPUTE_VALUES
     ], null // COMPUTE_FUNCTION
     ] // ARRAY_MAP_OPCODES
     , 3 // ARRAY_MAP_COMPUTE_FUNCTION
@@ -401,16 +502,16 @@ function UFI2RealtimeContainer() {
   );
 }
 
-var __hoisted__opcodes__2 = [29 // REF_COMPONENT
+var __hoisted__opcodes__3 = [29 // REF_COMPONENT
 , UFI2TopReactions, 0 // COMPONENT_PROPS_ARRAY
 ];
-var __hoisted__opcodes__2 = [29, UFI2TopReactions, 0];
-var __hoisted__opcodes__2 = [29, UFI2TopReactions, 0];
-var __hoisted__opcodes__3 = [29 // REF_COMPONENT
+var __hoisted__opcodes__3 = [29, UFI2TopReactions, 0];
+var __hoisted__opcodes__3 = [29, UFI2TopReactions, 0];
+var __hoisted__opcodes__4 = [29 // REF_COMPONENT
 , UFI2ReactionsCount, null // COMPONENT_PROPS_ARRAY
 ];
-var __hoisted__opcodes__3 = [29, UFI2ReactionsCount, null];
-var __hoisted__opcodes__3 = [29, UFI2ReactionsCount, null];
+var __hoisted__opcodes__4 = [29, UFI2ReactionsCount, null];
+var __hoisted__opcodes__4 = [29, UFI2ReactionsCount, null];
 
 function FeedStoryUFISummary_ComputeFunction // COMPUTE_FUNCTION
 (feedback, feedbackTargetID, onClickCommentsCount) {
@@ -431,7 +532,7 @@ function FeedStoryUFISummary_ComputeFunction // COMPUTE_FUNCTION
   }
 
   cx("fbFeedStoryUFI/topReactions");
-  return [reaction_count != null ? reaction_count["count"] : reaction_count, [createReactNode(__hoisted__opcodes__2, [[cx("fbFeedStoryUFI/topReactions"), feedback, feedbackTargetID]]), void 0]];
+  return [reaction_count != null ? reaction_count["count"] : reaction_count, [createReactNode(__hoisted__opcodes__3, [[cx("fbFeedStoryUFI/topReactions"), feedback, feedbackTargetID]]), void 0]];
 }
 
 function FeedStoryUFISummary() {
@@ -448,7 +549,7 @@ function FeedStoryUFISummary() {
     , "fbFeedStoryUFI__reactionsSummary", 29 // REF_COMPONENT
     , UFI2ErrorBoundary, 1 // COMPONENT_PROPS_ARRAY
     , 29 // REF_COMPONENT
-    , UFI2ErrorBoundary, [createReactNode(__hoisted__opcodes__3), void 0] // COMPONENT_PROPS_ARRAY
+    , UFI2ErrorBoundary, [createReactNode(__hoisted__opcodes__4), void 0] // COMPONENT_PROPS_ARRAY
     , 10 // CLOSE_ELEMENT
     ] // CONDITIONAL_CONSEQUENT
     , null // CONDITIONAL_ALTERNATE
@@ -521,7 +622,7 @@ type UFI2RootRendererProps = {
     share_now_menu_uri: string,
   },
 };
-var __hoisted__opcodes__4 = [8 // OPEN_ELEMENT_DIV
+var __hoisted__opcodes__5 = [8 // OPEN_ELEMENT_DIV
 , 62 // STATIC_PROP_CLASS_NAME
 , "fbFeedStoryUFI__summaryAndActionsContainer", 29 // REF_COMPONENT
 , FeedStoryUFISummary, 0 // COMPONENT_PROPS_ARRAY
@@ -541,13 +642,13 @@ var __hoisted__opcodes__4 = [8 // OPEN_ELEMENT_DIV
 , 10 // CLOSE_ELEMENT
 , 10 // CLOSE_ELEMENT
 ];
-var __hoisted__opcodes__4 = [8, 62, "fbFeedStoryUFI__summaryAndActionsContainer", 29, FeedStoryUFISummary, 0, 8, 62, "fbFeedStoryUFI__actionLinks", 29, UFI2ReactionActionLink, null, 30, 1, [29, UFI2AnswerActionLink, null], [29, UFI2CommentActionLink, null], 29, UFI2ShareActionLink, null, 10, 10];
-var __hoisted__opcodes__4 = [8, 62, "fbFeedStoryUFI__summaryAndActionsContainer", 29, FeedStoryUFISummary, 0, 8, 62, "fbFeedStoryUFI__actionLinks", 29, UFI2ReactionActionLink, null, 30, 1, [29, UFI2AnswerActionLink, null], [29, UFI2CommentActionLink, null], 29, UFI2ShareActionLink, null, 10, 10];
+var __hoisted__opcodes__5 = [8, 62, "fbFeedStoryUFI__summaryAndActionsContainer", 29, FeedStoryUFISummary, 0, 8, 62, "fbFeedStoryUFI__actionLinks", 29, UFI2ReactionActionLink, null, 30, 1, [29, UFI2AnswerActionLink, null], [29, UFI2CommentActionLink, null], 29, UFI2ShareActionLink, null, 10, 10];
+var __hoisted__opcodes__5 = [8, 62, "fbFeedStoryUFI__summaryAndActionsContainer", 29, FeedStoryUFISummary, 0, 8, 62, "fbFeedStoryUFI__actionLinks", 29, UFI2ReactionActionLink, null, 30, 1, [29, UFI2AnswerActionLink, null], [29, UFI2CommentActionLink, null], 29, UFI2ShareActionLink, null, 10, 10];
 
 function FeedStoryUFIRootRenderer_ComputeFunction // COMPUTE_FUNCTION
 (contextForFeedback, feedLocation, feedback, feedbackSource, feedbackTargetID, linkedCommentId, shareable_config) {
   var state = getRendererStateFromProps();
-  return [[createReactNode(__hoisted__opcodes__4, [[feedback, feedbackTargetID, null], feedback["is_q_and_a"]])]];
+  return [[createReactNode(__hoisted__opcodes__5, [[feedback, feedbackTargetID, null], feedback["is_q_and_a"]])]];
 }
 
 function FeedStoryUFIRootRenderer() {

@@ -146,6 +146,8 @@ export function getCodeLocation(node) {
   if (!loc) {
     if (t.isLogicalExpression(node)) {
       return getCodeLocation(node.left);
+    } else if (t.isIdentifier(node)) {
+      return "unknown location";
     }
   }
   return `${loc.start.line}:${loc.start.column}`;
@@ -580,19 +582,18 @@ export function getShapeOfPropsObject(path, state) {
         const spreadPropertyAnnotations = [];
 
         for (let [propertyName] of propertyAnnotations) {
+          const sanitizedName = propertyName.replace(/-/g, "_");
           if (!propsFound.has(propertyName)) {
             propsFound.add(propertyName);
             paramNames.push({
               annotation: propertyAnnotations.get(propertyName),
               isRest: true,
               key: propertyName,
-              value: propertyName,
+              value: sanitizedName,
             });
             const identifier = t.identifier(propertyName);
-            propsParam.pushContainer(
-              "properties",
-              t.objectProperty(identifier, t.identifier(propertyName), false, true),
-            );
+            const sanitizedIdentifier = t.identifier(sanitizedName);
+            propsParam.pushContainer("properties", t.objectProperty(identifier, sanitizedIdentifier, false, true));
             const alreadyTransformed = new Set();
             path.traverse({
               Identifier(identifierPath) {
@@ -603,13 +604,13 @@ export function getShapeOfPropsObject(path, state) {
                   const parentPath = identifierPath.parentPath;
 
                   if (t.isMemberExpression(parentPath.node)) {
-                    alreadyTransformed.add(identifier);
-                    parentPath.replaceWith(identifier);
+                    alreadyTransformed.add(sanitizedIdentifier);
+                    parentPath.replaceWith(sanitizedIdentifier);
                   }
                 }
               },
             });
-            spreadProperties.push(t.objectProperty(identifier, identifier, false, true));
+            spreadProperties.push(t.objectProperty(identifier, sanitizedIdentifier, false, true));
             spreadPropertyAnnotations.push(t.objectTypeProperty(identifier, propertyAnnotations.get(propertyName)));
           }
         }

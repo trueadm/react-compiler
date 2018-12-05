@@ -170,7 +170,7 @@ var UFIReactionsProfileBrowserUtils = {
     return "page_uri";
   },
 
-  getPrimerProps: function getPrimerProps(args) {
+  getPrimerProps: function getPrimerProps(args): { ajaxify: string, href: string, ref: string } {
     var pageURI = UFIReactionsProfileBrowserUtils.getPageURI(args);
     var dialogURI = UFIReactionsProfileBrowserUtils.getDialogURI(args);
     return {
@@ -189,13 +189,22 @@ function UFI2ReactionIconTooltipTitle() {
   return null;
 }
 
+function Link() {
+  return null;
+}
+
 function AbstractButton({
+  className,
   depressed,
   disabled,
+  href,
   image,
   imageRight,
   label,
   labelIsHidden,
+  role,
+  tabIndex,
+  type,
   ...buttonProps
 }: {
   ajaxify: string,
@@ -211,13 +220,58 @@ function AbstractButton({
   rel: string,
   role: string,
   tabIndex: number,
+  type?: string
 }) {
-  var className =
+  var _className =
     cx("abstractButton/root") +
     (disabled ? " " + cx("public/abstractButton/disabled") : "") +
     (depressed ? " " + cx("public/abstractButton/depressed") : "");
+  var imageChild = image;
+  var imageRightChild = imageRight;
 
-  return null;
+  if (href) {
+    var isDisabledButton = disabled && role === "button";
+    return React.createElement(
+      Link,
+      Object.assign({}, buttonProps, {
+        "aria-disabled": isDisabledButton ? true : undefined,
+        className: joinClasses(className, _className),
+        onClick: null,
+        tabIndex: disabled ? -1 : tabIndex,
+      }),
+
+      imageChild,
+      labelIsHidden ? React.createElement("span", { className: cx("accessible_elem") }, label) : label,
+      imageRightChild,
+    );
+  } else if (type && type !== "submit") {
+    return React.createElement(
+      "button",
+      Object.assign({}, buttonProps, {
+        className: joinClasses(className, _className),
+        disabled: disabled,
+        type: type,
+      }),
+
+      imageChild,
+      labelIsHidden ? React.createElement("span", { className: cx("accessible_elem") }, label) : label,
+      imageRightChild,
+    );
+  } else {
+    return React.createElement(
+      "button",
+      Object.assign({}, buttonProps, {
+        className: joinClasses(className, _className),
+        disabled: disabled,
+        type: "submit",
+        value: "1",
+      }),
+
+      imageChild,
+      labelIsHidden ? React.createElement("span", { className: cx("accessible_elem") }, label) : label,
+      imageRightChild,
+    );
+  }
 }
 
 function UFIReactionIcon() {
@@ -235,7 +289,10 @@ function Tooltip({
   ...otherProps
 }: {
   children: React.Node,
+  className: string,
+  "data-testid": string,
   display: string,
+  tabIndex: number,
   tooltip: null | React.Node,
 }) {
   var $Tooltip_container = document.createElement("div");
@@ -271,6 +328,7 @@ function LazyContentTooltip({
   className: string,
   contentRenderer: void,
   contentRendererProps: void,
+  "data-testid": string,
   errorMessage: string,
   placeholder: React.Node,
   tabIndex: number,
@@ -315,7 +373,7 @@ function UFI2TopReactions({
 
   function $UFI2TopReactions_renderLink(actorID, reactionEdge, reactionIndex): React.Node {
     var selectedReactionIndex = null;
-    var i18nReactionCount = (_ref2 = reactionEdge) != null ? _ref2.i18n_reaction_count : _ref2;
+    var i18nReactionCount = reactionEdge != null ? reactionEdge.i18n_reaction_count : reactionEdge;
     var i18nReactionName =
       reactionEdge != null
         ? reactionEdge.node != null
@@ -365,7 +423,6 @@ function UFI2TopReactions({
       },
 
       React.createElement(
-        // The compiler currently thinks this is static... which it is not
         AbstractButton,
         Object.assign({}, primerProps, {
           "aria-label": fbt._(

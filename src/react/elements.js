@@ -9,6 +9,7 @@ import {
 import {
   escapeText,
   getAllPathsFromMutatedBinding,
+  getCachedRuntimeValue,
   getCodeLocation,
   getComponentName,
   getRuntimeValueHash,
@@ -945,6 +946,8 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
 
         if (t.isIdentifier(nameNode)) {
           attributeName = nameNode.name;
+        } else if (t.isStringLiteral(nameNode)) {
+          attributeName = nameNode.value;
         }
         if (propName === attributeName) {
           const valuePath = attributePath.get("value");
@@ -978,6 +981,24 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
               invariant(false, "TODO");
             }
           }
+        } else if (t.isCallExpression(argumentPathRef.node)) {
+          const annotation = getTypeAnnotationForExpression(argumentPathRef, state);
+
+          if (t.isObjectTypeAnnotation(annotation)) {
+            for (let typeProperty of annotation.properties) {
+              const typePropertyKey = typeProperty.key;
+
+              if (t.isIdentifier(typePropertyKey) && propName === typePropertyKey.name) {
+                const cachedNode = getCachedRuntimeValue(argumentPathRef.node, state);
+                result = { node: t.memberExpression(cachedNode, typePropertyKey), canInline: false };
+              } else if (t.isStringLiteral(typePropertyKey) && propName === typePropertyKey.value) {
+                const cachedNode = getCachedRuntimeValue(argumentPathRef.node, state);
+                result = { node: t.memberExpression(cachedNode, typePropertyKey, true), canInline: false };
+              }
+            }
+          } else {
+            invariant(false, "TODO");
+          }
         } else {
           invariant(false, "TODO");
         }
@@ -1008,7 +1029,7 @@ function createPropsArrayForCompositeComponent(
   const propsArray = [];
 
   for (let propShape of shapeOfPropsObject) {
-    const propName = propShape.value;
+    const propName = propShape.key;
     const { node, canInline } = getPropNodeForCompositeComponent(
       propName,
       attributesPath,

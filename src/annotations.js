@@ -120,6 +120,8 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
 
               if (t.isIdentifier(typePropertyKey) && node.name === typePropertyKey.name) {
                 return typeProperty.value;
+              } else if (t.isStringLiteral(typePropertyKey) && node.name === typePropertyKey.value) {
+                return typeProperty.value;
               }
             }
           } else {
@@ -131,6 +133,8 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
           const typePropertyKey = typeProperty.key;
 
           if (t.isIdentifier(typePropertyKey) && node.name === typePropertyKey.name) {
+            return typeProperty.value;
+          } else if (t.isStringLiteral(typePropertyKey) && node.name === typePropertyKey.value) {
             return typeProperty.value;
           }
         }
@@ -281,7 +285,12 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
       } else if (t.isNumericLiteral(leftExpression.node) && t.isNumericLiteral(rightExpression.node)) {
         return t.numberTypeAnnotation();
       }
-      invariant("false", "TODO");
+      const leftAnnotation = getTypeAnnotationForExpression(leftPath, state);
+      const rightAnnotation = getTypeAnnotationForExpression(rightPath, state);
+      if (t.isStringTypeAnnotation(leftAnnotation) || t.isStringTypeAnnotation(rightAnnotation)) {
+        return t.stringTypeAnnotation();
+      }
+      invariant(false, "TODO");
     } else if (operator === "instanceof" || operator === "in") {
       return t.booleanTypeAnnotation();
     }
