@@ -5,14 +5,7 @@ function Component() {
     className: "big-div",
     id: "big",
   };
-  return React.createElement(
-    "div",
-    Object.assign({}, props, {
-      id: "override1",
-      className: "override2",
-    }),
-    "Hello world",
-  );
+  return React.createElement("div", props, "Hello world");
 }
 
 Component.compileRootComponent = true;

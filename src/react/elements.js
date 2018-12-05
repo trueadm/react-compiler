@@ -890,7 +890,7 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
     }
   }
   let result = null;
-  if (attributesPath !== null && Array.isArray(attributesPath)) {
+  if (Array.isArray(attributesPath)) {
     for (let attributePath of attributesPath) {
       if (t.isJSXAttribute(attributePath.node)) {
         const nameNode = attributePath.node.name;
@@ -939,6 +939,35 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
       } else {
         invariant(false, "TODO");
       }
+    }
+  } else if (t.isCallExpression(attributesPath)) {
+    if (isObjectAssignCall(attributesPath, state)) {
+      const args = attributesPath.get("arguments");
+
+      for (let argumentPath of args) {
+        const argumentPathRef = getReferenceFromExpression(argumentPath, state);
+
+        if (t.isObjectExpression(argumentPathRef.node)) {
+          const propertiesPath = argumentPathRef.get("properties");
+
+          for (let propertyPath of propertiesPath) {
+            if (t.isObjectProperty(propertyPath.node)) {
+              const key = propertyPath.node.key;
+              const valuePath = propertyPath.get("value");
+              if (t.isIdentifier(key) && key.name === propName) {
+                result = getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
+                break;
+              }
+            } else {
+              invariant(false, "TODO");
+            }
+          }
+        } else {
+          invariant(false, "TODO");
+        }
+      }
+    } else {
+      invariant(false, "TODO");
     }
   }
   if (result !== null) {
@@ -1239,12 +1268,7 @@ function createOpcodesForReactCreateElementHostComponent(tagName, args, opcodes,
     const configPathRef = getReferenceFromExpression(configPath, state);
     const configNode = configPathRef.node;
 
-    if (t.isNullLiteral(configNode)) {
-      // NO-OP
-    } else if (t.isObjectExpression(configNode)) {
-      const propertiesPath = configPathRef.get("properties");
-      const propsMap = getPropsMapFromObjectExpression(propertiesPath);
-
+    const createOpcodesGivenPropsMap = propsMap => {
       if (tagName === "input") {
         if (propsMap.has("type")) {
           createOpcodesForReactElementHostNodePropValue(
@@ -1260,6 +1284,34 @@ function createOpcodesForReactCreateElementHostComponent(tagName, args, opcodes,
       }
       for (let [propName, valuePath] of propsMap) {
         createOpcodesForReactElementHostNodePropValue(tagName, valuePath, propName, opcodes, state, componentPath);
+      }
+    };
+
+    if (t.isNullLiteral(configNode)) {
+      // NO-OP
+    } else if (t.isObjectExpression(configNode)) {
+      const propertiesPath = configPathRef.get("properties");
+      const propsMap = getPropsMapFromObjectExpression(propertiesPath);
+
+      createOpcodesGivenPropsMap(propsMap);
+    } else if (t.isCallExpression(configNode)) {
+      if (isObjectAssignCall(configPathRef, state)) {
+        const objectAssignArgs = configPathRef.get("arguments");
+        let propsMap = new Map();
+
+        for (let argumentPath of objectAssignArgs) {
+          const argumentPathRef = getReferenceFromExpression(argumentPath, state);
+
+          if (t.isObjectExpression(argumentPathRef.node)) {
+            const propertiesPath = argumentPathRef.get("properties");
+            propsMap = new Map([...propsMap, ...getPropsMapFromObjectExpression(propertiesPath)]);
+          } else {
+            invariant(false, "TODO");
+          }
+        }
+        createOpcodesGivenPropsMap(propsMap);
+      } else {
+        invariant(false, "TODO");
       }
     } else {
       invariant(false, "TODO");

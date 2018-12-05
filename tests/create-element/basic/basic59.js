@@ -1,12 +1,35 @@
 var React = require("react");
 
+function Component2({
+  children,
+  className,
+  id,
+  foo,
+}: {
+  children: string,
+  className: string,
+  id: string,
+  foo: string,
+}) {
+  return React.createElement(
+    "div",
+    {
+      className: className,
+      id: id,
+    },
+    children,
+    foo,
+  );
+}
+
 function Component() {
   const props = {
     className: "big-div",
     id: "big",
+    foo: "bar",
   };
   return React.createElement(
-    "div",
+    Component2,
     Object.assign({}, props, {
       id: "override1",
       className: "override2",
