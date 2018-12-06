@@ -19,11 +19,13 @@ const { JSDOM } = require("jsdom");
 const { window } = new JSDOM(``);
 
 /* eslint-disable-next-line */
-global.window = window; global.document = window.document;
+global.window = window;
+/* eslint-disable-next-line */
+global.document = window.document;
 
 const sizeFlag = argv.size || false;
 const benchmarkFlag = argv.benchmark || false;
-const filterTests = Array.isArray(argv._) && argv._.length > 0 ? argv._[0] : null;
+let filterTests = Array.isArray(argv._) && argv._.length > 0 ? argv._[0] : null;
 
 function transformSource(source) {
   source = source.replace(
@@ -77,7 +79,7 @@ function renderOriginalComponentToString(component, props) {
   if (global.gc) global.gc();
   if (benchmarkFlag) {
     // Run 5 times to warm up cache
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       ReactDOMServer.renderToString(createElementForTesting(component, props));
     }
   }
@@ -96,7 +98,7 @@ function renderCompiledComponentToString(component, props) {
   if (global.gc) global.gc();
   if (benchmarkFlag) {
     // Run 5 times to warm up cache
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       renderToString(createElementForTesting(component, props));
     }
   }
@@ -354,6 +356,9 @@ console.log(chalk.gray("\nRunning tests:\n"));
 
 let tests = glob.sync("tests/**/*.js", { ignore: "tests/modules/**/*.js" });
 tests = [...tests, ...glob.sync("tests/modules/**/index.js")];
+if (benchmarkFlag && filterTests === null) {
+  filterTests = "benchmark";
+}
 if (filterTests !== null) {
   tests = tests.filter(file => file.includes(filterTests));
 }

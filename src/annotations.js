@@ -291,8 +291,17 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
         return t.stringTypeAnnotation();
       }
       invariant(false, "TODO");
-    } else if (operator === "instanceof" || operator === "in") {
+    } else if (
+      operator === "instanceof" ||
+      operator === "in" ||
+      operator === "!=" ||
+      operator === "!==" ||
+      operator === "==" ||
+      operator === "==="
+    ) {
       return t.booleanTypeAnnotation();
+    } else {
+      invariant(false, "TODO");
     }
   } else if (t.isUpdateExpression(node)) {
     const operator = node.operator;
@@ -320,6 +329,8 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
         `Missing or <any> type annotation for runtime value "${path.node.name}" at ${getCodeLocation(path.node)}`,
       );
     } else {
+      debugger;
+      getTypeAnnotationForExpression(path, state);
       throw new Error(`Missing or <any> type annotation at ${getCodeLocation(path.node)}`);
     }
   }
@@ -506,6 +517,19 @@ export function assertType(path, assetType, hasOneOf, state, ...types) {
           } else if (!assertion) {
             return false;
           }
+        }
+        break;
+      }
+      case "FunctionTypeAnnotation": {
+        const returnTypeAnnotation = assetType.returnType;
+        const assertion = assertType(path, returnTypeAnnotation, hasOneOf, state, ...types);
+
+        if (hasOneOf) {
+          if (assertion) {
+            return true;
+          }
+        } else if (!assertion) {
+          return false;
         }
         break;
       }

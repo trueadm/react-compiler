@@ -170,7 +170,17 @@ var UFIReactionsProfileBrowserUtils = {
     return "page_uri";
   },
 
-  getPrimerProps: function getPrimerProps(args): { ajaxify: string, href: string, ref: string } {
+  getPrimerProps: function getPrimerProps(
+    args,
+  ): {
+    ajaxify: string,
+    "aria-disabled": string,
+    "aria-label": string,
+    className: string,
+    href: string,
+    ref: string,
+    tabIndex: number,
+  } {
     var pageURI = UFIReactionsProfileBrowserUtils.getPageURI(args);
     var dialogURI = UFIReactionsProfileBrowserUtils.getDialogURI(args);
     return {
@@ -189,8 +199,101 @@ function UFI2ReactionIconTooltipTitle() {
   return null;
 }
 
-function Link() {
-  return null;
+function parseHref(rawHref): Array<string, string> {
+  var href_string = "#";
+  var shimhash = null;
+
+  return [rawHref, shimhash];
+}
+
+function AbstractLink({
+  href,
+  linkRef,
+  nofollow,
+  noopener,
+  onClick,
+  rel,
+  shimhash,
+  useMetaReferrer,
+  useRedirect,
+}: {
+  href: string,
+  linkRef: string,
+  nofollow: boolean,
+  noopener: boolean,
+  shimhash: null | string,
+  target: string,
+  useRedirect: boolean,
+  useMetaReferrer: boolean,
+}) {
+  var outputHref = href;
+  var outputRel = rel;
+
+  if (useRedirect) {
+    outputHref = href + shimhash || "";
+  }
+
+  if (nofollow) {
+    outputRel = outputRel ? outputRel + " nofollow" : "nofollow";
+  }
+
+  if (noopener) {
+    outputRel = outputRel ? outputRel + " noopener" : "noopener";
+  }
+
+  return React.createElement(
+    "a",
+    Object.assign({}, otherProps, {
+      href: outputHref.toString(),
+      rel: outputRel,
+      ref: linkRef,
+      onClick: null,
+    }),
+  );
+}
+
+function Link({
+  allowunsafehref,
+  href,
+  linkRef,
+  s,
+  target,
+  ...otherProps
+}: {
+  ajaxify: string,
+  allowunsafehref?: boolean,
+  children: Array<React.Node>,
+  href: string,
+  linkRef: string,
+  onClick: null | (() => void),
+  rel?: string,
+  s?: boolean,
+  target?: string,
+}) {
+  var rawHref = href;
+  var isSafeToSkipShim = s;
+  var parsed_href = parseHref(rawHref);
+  var href = parsed_href[0];
+  var shimhash = parsed_href[1];
+  var nofollow = shimhash != null;
+  var useRedirect = shimhash != null;
+  var useMetaReferrer = false;
+
+  var noopener = shimhash !== null && target === "_blank";
+
+  return React.createElement(
+    AbstractLink,
+    Object.assign({}, otherProps, {
+      href: href,
+      linkRef: linkRef,
+      nofollow: nofollow,
+      noopener: noopener,
+      shimhash: shimhash,
+      target: target,
+      useRedirect: useRedirect,
+      useMetaReferrer: useMetaReferrer,
+    }),
+  );
 }
 
 function AbstractButton({
@@ -220,7 +323,7 @@ function AbstractButton({
   rel: string,
   role: string,
   tabIndex: number,
-  type?: string
+  type?: string,
 }) {
   var _className =
     cx("abstractButton/root") +

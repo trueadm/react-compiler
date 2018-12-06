@@ -250,6 +250,8 @@ function recursivelyGetReferenceFromExpression(path, state, visitedBindings, err
       propertyName = node.property.name;
     } else if (node.computed && t.isStringLiteral(node.property)) {
       propertyName = node.property.value;
+    } else if (node.computed && t.isNumericLiteral(node.property)) {
+      propertyName = node.property.value;
     } else if (node.computed && t.isIdentifier(node.property)) {
       // TODO get around to doing computed properties properly
       return path;

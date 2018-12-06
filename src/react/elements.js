@@ -972,7 +972,10 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
             if (t.isObjectProperty(propertyPath.node)) {
               const key = propertyPath.node.key;
               const valuePath = propertyPath.get("value");
-              if (t.isIdentifier(key) && key.name === propName) {
+              if (
+                (t.isIdentifier(key) && key.name === propName) ||
+                (t.isStringLiteral(key) && key.value === propName)
+              ) {
                 valuePath.node.canDCE = true;
                 result = getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
                 break;
