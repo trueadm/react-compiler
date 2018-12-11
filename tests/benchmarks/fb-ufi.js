@@ -204,6 +204,7 @@ function AbstractLink({
   ajaxify: string,
   "aria-disabled": string,
   "aria-label": string,
+  children: Array<React.Node>,
   className: string,
   href: string,
   linkRef: string,

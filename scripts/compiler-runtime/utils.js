@@ -261,7 +261,7 @@ function applyState(targetState, state) {
 }
 
 function isReactNode(node) {
-  return node.t !== undefined && node.v !== undefined;
+  return node !== null && node.t !== undefined && node.v !== undefined;
 }
 
 /* eslint-disable-next-line */

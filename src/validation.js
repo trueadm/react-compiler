@@ -97,11 +97,11 @@ export function validateReactElementsHaveAllBeenCompiled(moduleAst, state) {
         return;
       }
       if (isReactCreateElement(path, state)) {
-        // throw new Error(
-        //   `The compiler failed to reach React.createElement and compile it away at ${getCodeLocation(
-        //     path.node,
-        //   )}. This is likely due to an unsupported code style or due to the complexity of the component code.`,
-        // );
+        throw new Error(
+          `The compiler failed to reach React.createElement and compile it away at ${getCodeLocation(
+            path.node,
+          )}. This is likely due to an unsupported code style or due to the complexity of the component code.`,
+        );
       }
     },
   });
@@ -113,5 +113,21 @@ export function validateFunctionComponentUsesDestructuredProps(path) {
 
   if (node.params.length > 0 && !t.isObjectPattern(node.params[0])) {
     throw new Error(`Compilation failed on component "${name}". "props" argument must be a destructured object.`);
+  }
+}
+
+export function validateParamsDoNotConflictOuterScope(params, componentPath, path, state) {
+  for (let param of params) {
+    if (t.isIdentifier(param)) {
+      const paramName = param.name;
+      const binding = componentPath.scope.getBinding(paramName);
+      if (binding !== undefined && binding.path !== path) {
+        throw new Error(
+          `Compilation failed due to a function paramater of the same name being created in an outer scope at ${getCodeLocation(
+            path.node,
+          )}`,
+        );
+      }
+    }
   }
 }

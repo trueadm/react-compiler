@@ -209,7 +209,7 @@ function renderReactNodeToString(node, isChild, runtimeValues, state) {
   } else if (isReactNode(node)) {
     state.lastChildWasTextNode = false;
     const templateOpcodes = node.t;
-    const templateRuntimeValues = node.v;
+    let templateRuntimeValues = node.v;
     renderOpcodesToString(templateOpcodes, templateRuntimeValues, state);
   } else if (isArray(node)) {
     for (let i = 0, length = node.length; i < length; ++i) {
@@ -340,6 +340,7 @@ function renderContextConsumerUnconditionalTemplate(index, opcodes, runtimeValue
 function renderElementCloseRenderString(state) {
   if (state.currentElementTagIsOpen === true) {
     state.renderString += state.elementCloseRenderString;
+    state.currentElementTagIsOpen = false;
   }
 }
 
@@ -587,6 +588,7 @@ function renderRootDynamicValue(index, opcodes, runtimeValues, state) {
 }
 
 function renderDynamicChildReactNodeTemplate(index, opcodes, runtimeValues, state) {
+  renderElementCloseRenderString(state);
   const reactNodeOrArrayPointer = opcodes[++index];
   const reactNodeOrArray = runtimeValues[reactNodeOrArrayPointer];
   renderReactNodeToString(reactNodeOrArray, true, runtimeValues, state);
@@ -594,6 +596,7 @@ function renderDynamicChildReactNodeTemplate(index, opcodes, runtimeValues, stat
 }
 
 function renderDynamicChildrenReactNodeTemplate(index, opcodes, runtimeValues, state) {
+  renderElementCloseRenderString(state);
   const reactNodeOrArrayPointer = opcodes[++index];
   const reactNodeOrArray = runtimeValues[reactNodeOrArrayPointer];
   state.lastChildWasTextNode = false;
@@ -626,7 +629,6 @@ function renderRefComponent(index, opcodes, runtimeValues, state) {
 function renderOpenFragment(index, opcodes, runtimeValues, state) {
   renderElementCloseRenderString(state);
   state.elementCloseRenderString = "";
-  state.currentElementTagIsOpen = false;
   state.lastChildWasTextNode = false;
   if (state.hasMarkedRootElement === false) {
     state.hasMarkedRootElement = true;
@@ -793,7 +795,6 @@ function renderComponentWithHooks(index, opcodes, runtimeValues, state) {
 
 function renderStaticChildrenValue(index, opcodes, runtimeValues, state) {
   renderElementCloseRenderString(state);
-  state.currentElementTagIsOpen = false;
   const staticTextContent = opcodes[++index];
   state.renderString += staticTextContent;
   return index;
@@ -804,7 +805,6 @@ function renderStaticChildValue(index, opcodes, runtimeValues, state) {
     state.renderString += "<!-- -->";
   }
   renderElementCloseRenderString(state);
-  state.currentElementTagIsOpen = false;
   const staticTextChild = opcodes[++index];
   state.renderString += staticTextChild;
   state.lastChildWasTextNode = true;
@@ -813,7 +813,6 @@ function renderStaticChildValue(index, opcodes, runtimeValues, state) {
 
 function renderDynamicChildrenValue(index, opcodes, runtimeValues, state) {
   renderElementCloseRenderString(state);
-  state.currentElementTagIsOpen = false;
   state.lastChildWasTextNode = false;
   const dynamicTextContentPointer = opcodes[++index];
   const dynamicTextContent = runtimeValues[dynamicTextContentPointer];
@@ -823,7 +822,6 @@ function renderDynamicChildrenValue(index, opcodes, runtimeValues, state) {
 
 function renderDynamicChildValue(index, opcodes, runtimeValues, state) {
   renderElementCloseRenderString(state);
-  state.currentElementTagIsOpen = false;
   const dynamicTextChildPointer = opcodes[++index];
   const dynamicTextChild = runtimeValues[dynamicTextChildPointer];
   renderValueToString(dynamicTextChild, state, true);
@@ -908,7 +906,6 @@ function renderOpenSpanElement(index, opcodes, runtimeValues, state) {
 
 function renderCloseElement(index, opcodes, runtimeValues, state) {
   renderElementCloseRenderString(state);
-  state.currentElementTagIsOpen = false;
   state.lastChildWasTextNode = false;
   state.renderString += `</${state.currentElementTag}>`;
   const elementTagStack = state.elementTagStack;
@@ -920,7 +917,6 @@ function renderCloseElement(index, opcodes, runtimeValues, state) {
 
 function renderCloseVoidElement(index, opcodes, runtimeValues, state) {
   renderElementCloseRenderString(state);
-  state.currentElementTagIsOpen = false;
   const elementTagStack = state.elementTagStack;
   const elementTagStackIndex = --state.elementTagStackIndex;
   state.currentElementTag = elementTagStack[elementTagStackIndex];

@@ -481,10 +481,14 @@ export function isReactObject(path, state) {
   return false;
 }
 
-export function moveOutCallExpressionFromTemplate(expressionContainerPath, callExpressionPath) {
+export function moveOutCallExpressionFromTemplate(expressionContainerPath, callExpressionPath, state) {
   let parentPath = expressionContainerPath;
   let lastPathKey = expressionContainerPath.key;
 
+  // Do not bother taking fb cx calls out
+  if (isFbCxCall(callExpressionPath, state)) {
+    return;
+  }
   while (!t.isBlockStatement(parentPath.node) && !t.isArrowFunctionExpression(parentPath.parentPath.node)) {
     lastPathKey = parentPath.key;
     parentPath = parentPath.parentPath;
@@ -953,3 +957,6 @@ export function isObjectAssignCall(pathRef, state) {
   }
   return false;
 }
+
+export const emptyObject = t.objectExpression([]);
+emptyObject.canDCE = true;

@@ -7,6 +7,7 @@ import {
   isIdentifierReferenceConstant,
 } from "../references";
 import {
+  emptyObject,
   escapeText,
   getAllPathsFromMutatedBinding,
   getCachedRuntimeValue,
@@ -50,7 +51,7 @@ import {
 import { dangerousStyleValue, hyphenateStyleName } from "./style";
 import { createOpcodesForReactFunctionComponent, createOpcodesForReactComputeFunction } from "./functions";
 import { getPropInformation, isUnitlessNumber, transformStaticOpcodes } from "./prop-information";
-import { validateArgumentsDoNotContainTemplateNodes } from "../validation";
+import { validateArgumentsDoNotContainTemplateNodes, validateParamsDoNotConflictOuterScope } from "../validation";
 import invariant from "../invariant";
 import * as t from "@babel/types";
 import { createOpcodesForCxMockCall } from "../mocks/cx";
@@ -777,11 +778,14 @@ function createPropTemplateForFunctionExpression(pathRef, state, componentPath) 
     const funcNode = t.arrowFunctionExpression([], t.callExpression(t.identifier("createReactNode"), [hoistedOpcodes]));
     return { node: funcNode, canInline: true };
   } else {
+    const params = pathRef.node.params;
+    validateParamsDoNotConflictOuterScope(params, componentPath, pathRef, state);
+    pathRef.node.params = [];
     const funcNode = t.arrowFunctionExpression(
-      [],
-      t.callExpression(t.identifier("createReactNode"), [hoistedOpcodes, pathRef.node]),
+      params,
+      t.callExpression(t.identifier("createReactNode"), [hoistedOpcodes, t.callExpression(pathRef.node, [])]),
     );
-    return { node: funcNode, canInline: true };
+    return { node: funcNode, canInline: false };
   }
 }
 
@@ -790,7 +794,7 @@ function createPropForCallExpression(path, pathRef, state, componentPath) {
   validateArgumentsDoNotContainTemplateNodes(path, pathRef, state);
 
   if (isNodeWithinReactElementTemplate(path, state)) {
-    moveOutCallExpressionFromTemplate(path, pathRef);
+    moveOutCallExpressionFromTemplate(path, pathRef, state);
   }
 
   if (assertType(path, getTypeAnnotationForExpression(pathRef, state), true, state, "REACT_NODE")) {
@@ -878,7 +882,7 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
       }
     }
   }
-  if (propName === "children") {
+  if (propName === "children" && childrenPath !== null) {
     const filteredChildrenPath = childrenPath.filter(childPath => {
       if (t.isJSXText(childPath.node) && handleWhiteSpace(childPath.node.value) === "") {
         return false;
@@ -1190,6 +1194,7 @@ export function createOpcodesForJSXElement(path, opcodes, state, componentPath) 
   } else {
     invariant(false, "TODO");
   }
+  path.replaceWith(emptyObject);
 }
 
 function getPropsMapFromJSXElementAttributes(attributesPath, state) {
@@ -1284,8 +1289,13 @@ function createOpcodesForJSXElementHostComponent(tagName, attributesPath, childr
       }
       propsMap.delete("type");
     }
+    const renderChildren = propsMap.get("children");
+    propsMap.delete("children");
     for (let [propName, valuePath] of propsMap) {
       createOpcodesForReactElementHostNodePropValue(tagName, valuePath, propName, opcodes, state, componentPath);
+    }
+    if (renderChildren !== undefined) {
+      createOpcodesForReactElementHostNodeChild(renderChildren, true, opcodes, state, componentPath);
     }
   }
   const filteredChildrenPath = childrenPath.filter(childPath => {
@@ -1323,8 +1333,13 @@ function createOpcodesForReactCreateElementHostComponent(tagName, args, opcodes,
         }
         propsMap.delete("type");
       }
+      const renderChildren = propsMap.get("children");
+      propsMap.delete("children");
       for (let [propName, valuePath] of propsMap) {
         createOpcodesForReactElementHostNodePropValue(tagName, valuePath, propName, opcodes, state, componentPath);
+      }
+      if (renderChildren !== undefined) {
+        createOpcodesForReactElementHostNodeChild(renderChildren, true, opcodes, state, componentPath);
       }
     };
 
@@ -1455,4 +1470,5 @@ export function createOpcodesForReactCreateElement(path, opcodes, state, compone
       componentPath,
     );
   }
+  path.replaceWith(emptyObject);
 }

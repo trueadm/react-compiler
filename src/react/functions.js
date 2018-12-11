@@ -1,6 +1,7 @@
 import { pushOpcode, pushOpcodeValue } from "../opcodes";
 import { getBindingPathRef, getReferenceFromExpression } from "../references";
 import {
+  emptyObject,
   getComponentName,
   getShapeOfPropsObject,
   isPrimitive,
@@ -46,7 +47,7 @@ function createOpcodesForTemplateBranch(
     runtimeValuesArray[index] = runtimeValue;
   }
   if (!path.removed) {
-    if (path.node === originalPathNode) {
+    if (path.node === originalPathNode || path.node === emptyObject) {
       path.replaceWith(t.arrayExpression(runtimeValuesArray));
     } else if (t.isBlockStatement(path.node)) {
       for (let blockNode of path.node.body) {

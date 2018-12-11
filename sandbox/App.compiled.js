@@ -234,7 +234,7 @@ function UFI2ReactionIconTooltipTitle() {
 }
 
 function AbstractLink_ComputeFunction // COMPUTE_FUNCTION
-(ajaxify, aria_disabled, aria_label, className, href, linkRef, nofollow, noopener, onClick, rel, shimhash, tabIndex, target, useMetaReferrer, useRedirect) {
+(ajaxify, aria_disabled, aria_label, children, className, href, linkRef, nofollow, noopener, onClick, rel, shimhash, tabIndex, target, useMetaReferrer, useRedirect) {
   var __cached__4;
 
   var __cached__3;
@@ -257,7 +257,7 @@ function AbstractLink_ComputeFunction // COMPUTE_FUNCTION
   }
 
   __cached__2 = outputHref["toString"]();
-  return [ajaxify, aria_disabled, aria_label, className, tabIndex, target, __cached__2, __cached__3, outputRel ? outputRel + " noopener" : "noopener", __cached__4, outputRel ? outputRel + " nofollow" : "nofollow", rel, linkRef];
+  return [ajaxify, aria_disabled, aria_label, className, tabIndex, target, __cached__2, __cached__3, outputRel ? outputRel + " noopener" : "noopener", __cached__4, outputRel ? outputRel + " nofollow" : "nofollow", rel, linkRef, children];
 }
 
 function AbstractLink() {
@@ -279,7 +279,8 @@ function AbstractLink() {
     , "rel", 0, 8], 9, [61 // DYNAMIC_PROP
     , "rel", 0, 10], [61 // DYNAMIC_PROP
     , "rel", 0, 11], 72 // DYNAMIC_PROP_REF
-    , 0, 12, 10 // CLOSE_ELEMENT
+    , 0, 12, 48 // ELEMENT_DYNAMIC_CHILDREN_REACT_NODE_TEMPLATE
+    , 13, 10 // CLOSE_ELEMENT
     ], AbstractLink_ComputeFunction])]
   );
 }
@@ -293,7 +294,7 @@ function Link_ComputeFunction // COMPUTE_FUNCTION
 (ajaxify, allowunsafehref, aria_disabled, aria_label, children, className, rawHref, linkRef, onClick, rel, isSafeToSkipShim, tabIndex, target) {
   var parsed_href = parseHref(rawHref);
   var shimhash = parsed_href[1];
-  return [[ajaxify, aria_disabled, aria_label, className, parsed_href[0], linkRef, shimhash != null, shimhash !== null && target === "_blank", onClick, rel, parsed_href[1], tabIndex, target, false, shimhash != null]];
+  return [[ajaxify, aria_disabled, aria_label, children, className, parsed_href[0], linkRef, shimhash != null, shimhash !== null && target === "_blank", onClick, rel, parsed_href[1], tabIndex, target, false, shimhash != null]];
 }
 
 function Link() {
@@ -504,12 +505,9 @@ function UFI2TopReactions_ComputeFunction // COMPUTE_FUNCTION
     __cached__9 = fbt["_"]("Loading\u2026", null, {
       ["hash_key"]: "2Ct2DW"
     });
-    cx("UFI2TopReactions/link");
     fbt["_"]("{i18nReactionCount} {i18nReactionName}", [fbt["_param"]("i18nReactionCount", i18nReactionCount), fbt["_param"]("i18nReactionName", i18nReactionName)], {
       ["hash_key"]: "1yBDpL"
     });
-    cx("UFI2TopReactions/tooltip");
-    cx("UFI2TopReactions/icon");
     return [[createReactNode(__hoisted__opcodes__2, [[__cached__7["ajaxify"], fbt["_"]("{i18nReactionCount} {i18nReactionName}", [fbt["_param"]("i18nReactionCount", i18nReactionCount), fbt["_param"]("i18nReactionName", i18nReactionName)], {
       ["hash_key"]: "1yBDpL"
     }), cx("UFI2TopReactions/link"), void 0, void 0, __cached__7["href"], void 0, void 0, [createReactNode(__hoisted__opcodes__1, [[cx("UFI2TopReactions/icon"), "16"]])], void 0, __cached__7["rel"], "button", reactionsNotFocused && reactionIndex === 0 || currentReactionIsFocused ? 0 : -1, void 0]]), cx("UFI2TopReactions/tooltip"), null, {
@@ -593,7 +591,6 @@ function FeedStoryUFISummary_ComputeFunction // COMPUTE_FUNCTION
     return null;
   }
 
-  cx("fbFeedStoryUFI/topReactions");
   return [reaction_count != null ? reaction_count["count"] : reaction_count, [createReactNode(__hoisted__opcodes__4, [[cx("fbFeedStoryUFI/topReactions"), feedback, feedbackTargetID]]), void 0]];
 }
 
@@ -842,25 +839,18 @@ function UFI2ReactionActionLink_ComputeFunction // COMPUTE_FUNCTION
   if (__cached__12 = !reactionKey) {
     icon = null;
   } else if (__cached__13 = reactionKey && reactionKey !== UFIReactionTypes["LIKE"]) {
-    cx("UFI2ReactionActionLink/inlineUFIIcon");
-    icon = React["createElement"](UFIReactionIcon, {
-      ["className"]: cx("UFI2ReactionActionLink/inlineUFIIcon"),
-      ["reaction"]: reactionKey,
-      ["size"]: "18"
-    });
+    icon = {};
   }
 
-  (function (_ref3: {
-    className: string
-  }): React.Node {
-    return [[!__cached__12 ? null : !__cached__12 && __cached__13 ? createReactNode(__hoisted__opcodes__1, [[cx("UFI2ReactionActionLink/inlineUFIIcon"), "18"]]) : void 0]];
+  (function (): React.Node {
+    return [[__cached__12 ? null : !__cached__12 && __cached__13 ? createReactNode(__hoisted__opcodes__1, [[cx("UFI2ReactionActionLink/inlineUFIIcon"), "18"]]) : void 0]];
   });
 
-  return [feedback != null ? feedback["can_viewer_react"] : feedback, [() => createReactNode(__hoisted__opcodes__6, function (_ref3: {
+  return [feedback != null ? feedback["can_viewer_react"] : feedback, [(_ref3: {
     className: string
-  }): React.Node {
-    return [[!__cached__12 ? null : !__cached__12 && __cached__13 ? createReactNode(__hoisted__opcodes__1, [[cx("UFI2ReactionActionLink/inlineUFIIcon"), "18"]]) : void 0]];
-  }), !icon]];
+  }) => createReactNode(__hoisted__opcodes__6, function (): React.Node {
+    return [[__cached__12 ? null : !__cached__12 && __cached__13 ? createReactNode(__hoisted__opcodes__1, [[cx("UFI2ReactionActionLink/inlineUFIIcon"), "18"]]) : void 0]];
+  }()), !icon]];
 }
 
 function UFI2ReactionActionLink() {
