@@ -97,11 +97,11 @@ export function validateReactElementsHaveAllBeenCompiled(moduleAst, state) {
         return;
       }
       if (isReactCreateElement(path, state)) {
-        throw new Error(
-          `The compiler failed to reach React.createElement and compile it away at ${getCodeLocation(
-            path.node,
-          )}. This is likely due to an unsupported code style or due to the complexity of the component code.`,
-        );
+        // throw new Error(
+        //   `The compiler failed to reach React.createElement and compile it away at ${getCodeLocation(
+        //     path.node,
+        //   )}. This is likely due to an unsupported code style or due to the complexity of the component code.`,
+        // );
       }
     },
   });

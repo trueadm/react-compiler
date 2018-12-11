@@ -329,7 +329,6 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
         `Missing or <any> type annotation for runtime value "${path.node.name}" at ${getCodeLocation(path.node)}`,
       );
     } else {
-      debugger;
       getTypeAnnotationForExpression(path, state);
       throw new Error(`Missing or <any> type annotation at ${getCodeLocation(path.node)}`);
     }

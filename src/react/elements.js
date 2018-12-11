@@ -572,6 +572,7 @@ function hoistOpcodesNode(componentPath, state, opcodesNode) {
     if (t.isProgram(path.node)) {
       const body = path.node.body;
       body.splice(key, 0, t.variableDeclaration("var", [t.variableDeclarator(identifier, opcodesNode)]));
+      break;
     } else {
       currentPath = path;
       if (hoistDepth > 1) {

@@ -323,7 +323,7 @@ function AbstractButton({
   rel: string,
   role: string,
   tabIndex: number,
-  type?: string
+  type?: string,
 }) {
   var _className =
     cx("abstractButton/root") +
@@ -379,10 +379,6 @@ function AbstractButton({
       imageRightChild,
     );
   }
-}
-
-function UFIReactionIcon() {
-  return null;
 }
 
 function createTooltipPortal(content, container): null {
@@ -645,8 +641,286 @@ function FeedStoryUFISummary({
   );
 }
 
-function UFI2ReactionActionLink() {
-  return null;
+var UFIReactionTypes = {
+  LIKE: 1,
+  ordering: [1, 2, 13, 11, 12, 4, 5, 3, 10, 7, 8, 14, 15],
+  NONE: 0,
+  reactions: {
+    "1": {
+      class_name: "public/ufiReactionsIcons/like",
+      color: "#4080ff",
+      display_name: "Like",
+      is_deprecated: false,
+      is_visible: true,
+      name: "like",
+      type: 1,
+    },
+
+    "2": {
+      class_name: "public/ufiReactionsIcons/love",
+      color: "#f25268",
+      display_name: "Love",
+      is_deprecated: false,
+      is_visible: true,
+      name: "love",
+      type: 2,
+    },
+
+    "3": {
+      class_name: "public/ufiReactionsIcons/wow",
+      color: "#f0ba15",
+      display_name: "Wow",
+      is_deprecated: false,
+      is_visible: true,
+      name: "wow",
+      type: 3,
+    },
+
+    "4": {
+      class_name: "public/ufiReactionsIcons/haha",
+      color: "#f0ba15",
+      display_name: "Haha",
+      is_deprecated: false,
+      is_visible: true,
+      name: "haha",
+      type: 4,
+    },
+
+    "5": {
+      class_name: "public/ufiReactionsIcons/yay",
+      color: "#f0ba15",
+      display_name: "Yay",
+      is_deprecated: true,
+      is_visible: true,
+      name: "yay",
+      type: 5,
+    },
+
+    "7": {
+      class_name: "public/ufiReactionsIcons/sorry",
+      color: "#f0ba15",
+      display_name: "Sad",
+      is_deprecated: false,
+      is_visible: true,
+      name: "sorry",
+      type: 7,
+    },
+
+    "8": {
+      class_name: "public/ufiReactionsIcons/anger",
+      color: "#f7714b",
+      display_name: "Angry",
+      is_deprecated: false,
+      is_visible: true,
+      name: "anger",
+      type: 8,
+    },
+
+    "10": {
+      class_name: "public/ufiReactionsIcons/confused",
+      color: "#f0ba15",
+      display_name: "Confused",
+      is_deprecated: true,
+      is_visible: true,
+      name: "confused",
+      type: 10,
+    },
+
+    "11": {
+      class_name: "public/ufiReactionsIcons/dorothy",
+      color: "#7e64c4",
+      display_name: "Thankful",
+      is_deprecated: false,
+      is_visible: true,
+      name: "dorothy",
+      type: 11,
+    },
+
+    "12": {
+      class_name: "public/ufiReactionsIcons/toto",
+      color: "#EC7EBD",
+      display_name: "Pride",
+      is_deprecated: false,
+      is_visible: true,
+      name: "toto",
+      type: 12,
+    },
+
+    "13": {
+      class_name: null,
+      color: "#1d2129",
+      display_name: "Selfie",
+      is_deprecated: false,
+      is_visible: false,
+      name: "selfie",
+      type: 13,
+    },
+
+    "14": {
+      class_name: "public/ufiReactionsIcons/flame",
+      color: "#4080ff",
+      display_name: "React",
+      is_deprecated: false,
+      is_visible: false,
+      name: "flame",
+      type: 14,
+    },
+
+    "15": {
+      class_name: "public/ufiReactionsIcons/plane",
+      color: "#4080ff",
+      display_name: "React",
+      is_deprecated: false,
+      is_visible: false,
+      name: "plane",
+      type: 15,
+    },
+  },
+};
+
+var UFI2ReactionUtils = {
+  checkReactionKey: function checkReactionKey(viewerReactionKey) {
+    if (viewerReactionKey && !UFIReactionTypes.reactions[viewerReactionKey]) {
+      return 0;
+    }
+
+    return viewerReactionKey || 0;
+  },
+};
+
+function UFI2ActionLink({
+  children,
+  showIcon,
+}: {
+  children: ({ className: string }) => React.Node,
+  showIcon: boolean,
+}) {
+  var showIcon = showIcon === undefined ? true : showIcon;
+  return React.createElement(
+    "span",
+    { className: cx("UFI2ActionLink/root") },
+    children({
+      className: cx("UFI2ActionLink/link") + (showIcon ? " " + cx("UFI2ActionLink/withIcon") : ""),
+    }),
+  );
+}
+
+function UFI2ReactionLink({ children }: { children: React.Node }) {
+  return children;
+}
+
+var UFICommonInteractionEvents = {
+  UFI_OPTIMISTIC_COMMENT: "UFIOptimisticComment",
+  UFI_PERSISTED_COMMENT: "UFIPersistedComment",
+  UFI2_OPTIMISTIC_COMMENT: "UFI2OptimisticComment",
+  UFI2_PERSISTED_COMMENT: "UFI2PersistedComment",
+  UFI_TOP_LEVEL_COMMENTS_PAGINATION: "UFITopLevelCommentsPagination",
+  UFI2_TOP_LEVEL_COMMENTS_PAGINATION: "UFI2TopLevelCommentsPagination",
+  UFI2_REPLY_COMMENTS_PAGINATION: "UFI2ReplyCommentsPagination",
+  UFI_SHARE_DIALOG_OPENS: "UFIShareDialogOpens",
+  UFI2_SHARE_DIALOG_OPENS: "UFI2ShareDialogOpens",
+  UFI_COMPOSER_INPUT_FOCUS: "UFIComposerInputFocus",
+  UFI_STORY_REACTION: "UFIStoryReaction",
+  UFI_COMMENT_REACTION: "UFICommentReaction",
+  UFI2_STORY_REACTION: "UFI2StoryReaction",
+  UFI2_COMMENT_REACTION: "UFI2CommentReaction",
+};
+
+var HOVER_SHOW_DELAY = 525;
+var HOVER_HIDE_DELAY = 750;
+
+function UFIReactionIcon({ className, size }: { className: string, size: string }) {
+  return React.createElement(
+    "span",
+    {
+      className: joinClasses(
+        cx("ufiReactionsIcons/root") +
+          (size === "13"
+            ? " " + cx("ufiReactionsIcons/13")
+            : "") +
+          (size === "16"
+            ? " " + cx("ufiReactionsIcons/16")
+            : "") +
+          (size === "18"
+            ? " " + cx("ufiReactionsIcons/18")
+            : "") +
+          (size === "48"
+            ? " " + cx("ufiReactionsIcons/48")
+            : "") +
+          (size === "96"
+            ? " " + cx("ufiReactionsIcons/96")
+            : ""),
+        className,
+        cx("ufiReactions-dorothy-2017-v2/root") +
+          (" " + cx("ufiReactions-toto-2017-v2/root"))
+      )
+    },
+
+    123
+  );
+}
+
+UFIReactionIcon.defaultProps = {
+  className: null,
+  grayscale: false,
+  size: "16"
+};
+
+function UFI2ReactionActionLink({ className, feedback }: { className: string, feedback: FeedbackType }) {
+  var viewerReactionKey =
+    feedback != null
+      ? feedback.viewer_feedback_reaction_info != null
+        ? feedback.viewer_feedback_reaction_info.key
+        : feedback.viewer_feedback_reaction_info
+      : feedback;
+
+  var reactionKey = UFI2ReactionUtils.checkReactionKey(viewerReactionKey);
+
+  var icon = void 0;
+  if (!reactionKey) {
+    icon = null;
+  } else if (reactionKey && reactionKey !== UFIReactionTypes.LIKE) {
+    icon = React.createElement(UFIReactionIcon, {
+      className: cx("UFI2ReactionActionLink/inlineUFIIcon"),
+      reaction: reactionKey,
+      size: "18",
+    });
+  }
+
+  return (feedback != null
+  ? feedback.can_viewer_react
+  : feedback)
+    ? React.createElement(UFI2ActionLink, { showIcon: !icon }, function(_ref3: { className: string }): React.Node {
+        var actionLinkClassName = _ref3.className;
+        return React.createElement(
+          "div",
+          {
+            className: cx("UFI2ReactionActionLink/root"),
+            "data-testid": "UFI2ReactionLink/actionLink",
+          },
+
+          React.createElement(
+            UFI2ReactionLink,
+            {
+              className: joinClasses(
+                (reactionKey === UFIReactionTypes.LIKE ? cx("UFI2ReactionActionLink/liked") : "") +
+                  (" " + cx("UFI2ReactionActionLink/link")) +
+                  (!reactionKey ? " " + cx("UFI2ReactionActionLink/notLiked") : ""),
+                actionLinkClassName,
+                className,
+              ),
+
+              feedback: feedback,
+              hideDelay: HOVER_HIDE_DELAY,
+              interactionEvent: UFICommonInteractionEvents.UFI2_STORY_REACTION,
+              showDelay: HOVER_SHOW_DELAY,
+            },
+
+            icon,
+          ),
+        );
+      })
+    : null;
 }
 
 function UFI2AnswerActionLink() {
