@@ -779,6 +779,8 @@ var UFIReactionTypes = {
   },
 };
 
+var REACTIONS = UFIReactionTypes.reactions;
+
 var UFI2ReactionUtils = {
   checkReactionKey: function checkReactionKey(viewerReactionKey) {
     if (viewerReactionKey && !UFIReactionTypes.reactions[viewerReactionKey]) {
@@ -806,8 +808,118 @@ function UFI2ActionLink({
   );
 }
 
-function UFI2ReactionLink({ children }: { children: React.Node }) {
-  return children;
+function UFIReactionsMenu() {
+  return null;
+}
+
+function AWithFocusEvents({
+  children,
+  onKeyboardFocus,
+  onMouseFocus,
+  ...otherProps
+}: {
+  "aria-pressed": boolean,
+  children: React.Node,
+  className: string,
+  "data-testid": string,
+  href: string,
+  onKeyboardFocus: null,
+  onMouseFocus: null,
+  role: string,
+  style: { color: string },
+  tabIndex: number,
+}) {
+  return React.createElement(
+    "a",
+    Object.assign({}, otherProps, {
+      onClick: null,
+      onFocus: null,
+      onKeyUp: null,
+    }),
+  );
+}
+
+function UFI2ReactionLink({
+  children,
+  className,
+  feedback,
+}: {
+  children: React.Node,
+  className: string,
+  feedback: FeedbackType,
+}) {
+  var state = {
+    menuShown: false,
+  };
+  var viewerReactionKey =
+    feedback != null
+      ? feedback.viewer_feedback_reaction_info != null
+        ? feedback.viewer_feedback_reaction_info.key
+        : feedback.viewer_feedback_reaction_info
+      : feedback;
+
+  var reactionKey = UFI2ReactionUtils.checkReactionKey(viewerReactionKey);
+  var label = void 0;
+  var textColor = void 0;
+  if (!reactionKey) {
+    label = REACTIONS[UFIReactionTypes.LIKE].display_name;
+  } else {
+    var _REACTIONS$reactionKe = REACTIONS[reactionKey];
+    var display_name = _REACTIONS$reactionKe.display_name;
+    var color = _REACTIONS$reactionKe.color;
+    label = display_name;
+    textColor = color;
+  }
+
+  function $UFI2ReactionLink_getSupportedReactions() {
+    return ((feedback != null ? feedback.supported_reactions : feedback) || [])
+      .map(function(_) {
+        return _.key;
+      })
+      .filter(Boolean);
+  }
+
+  var menu =
+    state.menuShown && UFIReactionsMenu
+      ? React.createElement(UFIReactionsMenu, {
+          initialReaction: reactionKey,
+          onBlur: null,
+          onFocus: null,
+          onMouseEnter: null,
+          onMouseLeave: null,
+          onReactionClick: null,
+          shown: state.menuShown,
+          supportedReactions: $UFI2ReactionLink_getSupportedReactions(),
+        })
+      : null;
+
+  return React.createElement(
+    React.Fragment,
+    null,
+    React.createElement(
+      AWithFocusEvents,
+      {
+        "aria-pressed": !!reactionKey,
+        className: joinClasses(!!reactionKey ? cx("UFI2ReactionLink/hasReacted") : "", className),
+
+        "data-testid": "UFI2ReactionLink",
+        href: "#",
+        onClick: null,
+        onMouseDown: null,
+        onMouseEnter: null,
+        onMouseLeave: null,
+        ref: "trigger",
+        role: "button",
+        style: { color: textColor },
+        tabIndex: 0,
+      },
+
+      children,
+      label,
+    ),
+
+    menu,
+  );
 }
 
 var UFICommonInteractionEvents = {
@@ -836,35 +948,24 @@ function UFIReactionIcon({ className, size }: { className: string, size: string 
     {
       className: joinClasses(
         cx("ufiReactionsIcons/root") +
-          (size === "13"
-            ? " " + cx("ufiReactionsIcons/13")
-            : "") +
-          (size === "16"
-            ? " " + cx("ufiReactionsIcons/16")
-            : "") +
-          (size === "18"
-            ? " " + cx("ufiReactionsIcons/18")
-            : "") +
-          (size === "48"
-            ? " " + cx("ufiReactionsIcons/48")
-            : "") +
-          (size === "96"
-            ? " " + cx("ufiReactionsIcons/96")
-            : ""),
+          (size === "13" ? " " + cx("ufiReactionsIcons/13") : "") +
+          (size === "16" ? " " + cx("ufiReactionsIcons/16") : "") +
+          (size === "18" ? " " + cx("ufiReactionsIcons/18") : "") +
+          (size === "48" ? " " + cx("ufiReactionsIcons/48") : "") +
+          (size === "96" ? " " + cx("ufiReactionsIcons/96") : ""),
         className,
-        cx("ufiReactions-dorothy-2017-v2/root") +
-          (" " + cx("ufiReactions-toto-2017-v2/root"))
-      )
+        cx("ufiReactions-dorothy-2017-v2/root") + (" " + cx("ufiReactions-toto-2017-v2/root")),
+      ),
     },
 
-    123
+    123,
   );
 }
 
 UFIReactionIcon.defaultProps = {
   className: null,
   grayscale: false,
-  size: "16"
+  size: "16",
 };
 
 function UFI2ReactionActionLink({ className, feedback }: { className: string, feedback: FeedbackType }) {

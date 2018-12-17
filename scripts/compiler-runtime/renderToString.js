@@ -448,7 +448,7 @@ function renderStyleValue(styleName, styleValue, state) {
   } else {
     state.lastChildWasStyle = true;
   }
-  state.renderString += `${delimiter}${styleName}:${styleValue}`;
+  state.styleRenderString += `${delimiter}${styleName}:${styleValue}`;
 }
 
 function renderStaticPropStyle(index, opcodes, runtimeValues, state) {
@@ -518,13 +518,15 @@ function renderDynamicPropValue(index, opcodes, runtimeValues, state) {
 }
 
 function renderOpenPropStyle(index, opcodes, runtimeValues, state) {
-  state.renderString += ` style="`;
+  state.styleRenderString = "";
   state.lastChildWasStyle = false;
   return index;
 }
 
 function renderClosePropStyle(index, opcodes, runtimeValues, state) {
-  state.renderString += `"`;
+  if (state.styleRenderString !== "") {
+    state.renderString += ` style="${state.styleRenderString}"`;
+  }
   return index;
 }
 

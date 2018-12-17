@@ -219,6 +219,7 @@ function createState(props) {
     propsArray: emptyArray,
     renderString: "",
     rootPropsObject: props,
+    styleRenderString: "",
   };
 }
 
