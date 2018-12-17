@@ -51,7 +51,10 @@ function createOpcodesForTemplateBranch(
       path.replaceWith(t.arrayExpression(runtimeValuesArray));
     } else if (t.isBlockStatement(path.node)) {
       for (let blockNode of path.node.body) {
-        if (t.isReturnStatement(blockNode) && blockNode.argument === originalPathNode) {
+        if (
+          t.isReturnStatement(blockNode) &&
+          (blockNode.argument === originalPathNode || blockNode.argument === emptyObject)
+        ) {
           blockNode.argument = t.arrayExpression(runtimeValuesArray);
           break;
         }

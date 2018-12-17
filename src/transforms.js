@@ -161,8 +161,7 @@ export function applyCachedRuntimeValues(functionPath, runtimeCachedValues) {
   if (runtimeCachedValues.size > 0) {
     // Convert to block statement
     if (!t.isBlockStatement(functionPath.node.body)) {
-      throw new Error("TODO: check");
-      functionPath.node.body = t.blockStatement([t.returnStatement(functionPath.node.body)]);
+      throw new Error("TODO: should never hit this");
     }
     for (let [, { node, targetBody }] of runtimeCachedValues) {
       targetBody.unshift(t.variableDeclaration("var", [t.variableDeclarator(node)]));

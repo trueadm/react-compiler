@@ -87,6 +87,7 @@ function createOpcodesForCallExpression(path, refPath, opcodes, state, component
   validateArgumentsDoNotContainTemplateNodes(path, refPath, state);
 
   if (isNodeWithinReactElementTemplate(path, state)) {
+    refPath.node.movedOut = true;
     moveOutCallExpressionFromTemplate(path, refPath, state);
   }
   if (assertType(path, getTypeAnnotationForExpression(refPath, state), true, state, "REACT_NODE")) {

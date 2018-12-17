@@ -1194,7 +1194,17 @@ export function createOpcodesForJSXElement(path, opcodes, state, componentPath) 
   } else {
     invariant(false, "TODO");
   }
-  path.replaceWith(emptyObject);
+  if (t.isBlockStatement(path.node)) {
+    const body = path.get("body");
+    const returnStatement = body[body.length - 1];
+    if (t.isReturnStatement(returnStatement)) {
+      returnStatement.get("argument").replaceWith(emptyObject);
+    } else {
+      invariant(false, "Should never happen");
+    }
+  } else {
+    path.replaceWith(emptyObject);
+  }
 }
 
 function getPropsMapFromJSXElementAttributes(attributesPath, state) {
@@ -1470,5 +1480,15 @@ export function createOpcodesForReactCreateElement(path, opcodes, state, compone
       componentPath,
     );
   }
-  path.replaceWith(emptyObject);
+  if (t.isBlockStatement(path.node)) {
+    const body = path.get("body");
+    const returnStatement = body[body.length - 1];
+    if (t.isReturnStatement(returnStatement)) {
+      returnStatement.get("argument").replaceWith(emptyObject);
+    } else {
+      invariant(false, "Should never happen");
+    }
+  } else {
+    path.replaceWith(emptyObject);
+  }
 }
