@@ -1025,12 +1025,114 @@ function UFI2ReactionActionLink({ className, feedback }: { className: string, fe
     : null;
 }
 
-function UFI2AnswerActionLink() {
-  return null;
+function ShimButton({
+  children,
+  form,
+  inline,
+  keyActivationToClickEvent,
+  keyActivationToClickRef,
+  onRef,
+  pressed,
+  ...buttonProps
+}: {
+  children: string,
+  className: string,
+  inline: void | boolean,
+  form: void | string,
+  keyActivationToClickEvent: null,
+  keyActivationToClickRef: null,
+  onClick: () => void | null,
+  onRef: () => void | null,
+  pressed: void | boolean,
+}) {
+  if (form === "link") {
+    return React.createElement(
+      "a",
+      Object.assign({}, buttonProps, {
+        "aria-pressed": pressed,
+        ref: null,
+        role: "button",
+        onKeyPress: null,
+      }),
+
+      children,
+    );
+  }
+  return inline
+    ? React.createElement(
+        "span",
+        Object.assign({}, buttonProps, {
+          "aria-pressed": pressed,
+          ref: null,
+          role: "button",
+          onKeyPress: null,
+        }),
+
+        children,
+      )
+    : React.createElement(
+        "div",
+        Object.assign({}, buttonProps, {
+          "aria-pressed": pressed,
+          ref: null,
+          role: "button",
+          onKeyPress: null,
+        }),
+
+        children,
+      );
 }
 
-function UFI2CommentActionLink() {
-  return null;
+function UFI2AnswerActionLink({
+  className,
+  feedback,
+  onClick,
+}: {
+  className: string,
+  feedback: FeedbackType,
+  onClick: null,
+}) {
+  return feedback && feedback.can_viewer_comment && feedback.is_q_and_a
+    ? React.createElement(UFI2ActionLink, null, function(_ref: { className: string }): React.Node {
+        var actionLinkClassName = _ref.className;
+        return React.createElement(
+          ShimButton,
+          {
+            className: joinClasses(cx("UFI2AnswerActionLink/root"), actionLinkClassName, className),
+
+            onClick: onClick,
+          },
+
+          fbt._("Answer", null, { hash_key: "7wbRt" }),
+        );
+      })
+    : null;
+}
+
+function UFI2CommentActionLink({
+  className,
+  feedback,
+  onClick,
+}: {
+  className: string,
+  feedback: FeedbackType,
+  onClick: null,
+}) {
+  return feedback && feedback.can_viewer_comment
+    ? React.createElement(UFI2ActionLink, null, function(_ref: { className: string }): React.Node {
+        var actionLinkClassName = _ref.className;
+        return React.createElement(
+          ShimButton,
+          {
+            className: joinClasses(cx("UFI2CommentActionLink/root"), actionLinkClassName, className),
+
+            onClick: onClick,
+          },
+
+          fbt._("Comment", null, { hash_key: "2MdL3e" }),
+        );
+      })
+    : null;
 }
 
 function UFI2ShareActionLink() {
