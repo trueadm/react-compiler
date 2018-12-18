@@ -185,8 +185,8 @@ function getReactionKeyFromType(type): string {
   return "key";
 }
 
-function UFI2ReactionIconTooltipTitle() {
-  return null;
+function UFI2ReactionIconTooltipTitle({ children }: { children: string }) {
+  return React.createElement("div", { className: cx("UFI2ReactionIconTooltipTitle/root") }, children);
 }
 
 function AbstractLink({
@@ -475,7 +475,7 @@ function UFI2TopReactions({
 
   var topThreeReactions = topReactions.slice(0, 3);
 
-  function $UFI2TopReactions_renderLink(actorID, reactionEdge, reactionIndex): React.Node {
+  function $UFI2TopReactions_renderLink(actorID: string, reactionEdge: Edge, reactionIndex: number): React.Node {
     var selectedReactionIndex = null;
     var i18nReactionCount = reactionEdge != null ? reactionEdge.i18n_reaction_count : reactionEdge;
     var i18nReactionName =

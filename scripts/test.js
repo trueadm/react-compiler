@@ -78,7 +78,7 @@ function renderOriginalComponentToString(component, props) {
   /* eslint-disable-next-line */
   if (global.gc) global.gc();
   if (benchmarkFlag) {
-    // Run 5 times to warm up cache
+    // Run 10 times to warm up cache
     for (let i = 0; i < 10; i++) {
       ReactDOMServer.renderToString(createElementForTesting(component, props));
     }
@@ -97,7 +97,7 @@ function renderCompiledComponentToString(component, props) {
   /* eslint-disable-next-line */
   if (global.gc) global.gc();
   if (benchmarkFlag) {
-    // Run 5 times to warm up cache
+    // Run 10 times to warm up cache
     for (let i = 0; i < 10; i++) {
       renderToString(createElementForTesting(component, props));
     }
