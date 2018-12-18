@@ -4,12 +4,12 @@ import cx from "cx";
 
 export function createOpcodesForCxMockCall(path, opcodes, state) {
   const node = path.node;
-  const firstArgument = node.arguments[0];
-
-  if (t.isStringLiteral(firstArgument)) {
-    const str = firstArgument.value;
-    opcodes.push(t.stringLiteral(cx(str)));
-  } else {
-    invariant(false, "TODO");
-  }
+  const args = node.arguments.map(arg => {
+    if (t.isStringLiteral(arg)) {
+      return arg.value;
+    } else {
+      invariant(false, "TODO");
+    }
+  });
+  opcodes.push(t.stringLiteral(cx.apply(null, args)));
 }

@@ -152,8 +152,105 @@ function UFI2CommentsProvider() {
   return null;
 }
 
-function UFI2ReactionsCount() {
-  return null;
+function UFI2ReactionsCount({ feedback, feedbackTargetID }: { feedback: FeedbackType, feedbackTargetID: string }) {
+  var i18n_reaction_count = feedback.i18n_reaction_count;
+  var important_reactors = feedback.important_reactors;
+  var viewer_current_actor = feedback.viewer_current_actor;
+  var viewer_feedback_reaction_info = feedback.viewer_feedback_reaction_info;
+  var reaction_count = feedback.reaction_count;
+  var actorID =
+    feedback != null
+      ? feedback.viewer_current_actor != null
+        ? feedback.viewer_current_actor.id
+        : feedback.viewer_current_actor
+      : feedback;
+  actorID || invariant(0, "UFI2ReactionsCount: Expected an actor ID");
+  var reactionCount = reaction_count != null ? reaction_count.count : reaction_count;
+
+  reactionCount != null || invariant(0, "UFI2ReactionsCount: Expected a reaction count");
+
+  i18n_reaction_count || invariant(0, "UFI2ReactionsCount: Expected an i18n_reaction_count");
+
+  if (reactionCount === 0) {
+    return null;
+  }
+
+  var actorName = viewer_current_actor != null ? viewer_current_actor.name : viewer_current_actor;
+  var importantReactors = (important_reactors != null ? important_reactors.nodes : important_reactors) || [];
+  var viewerReacted = viewer_feedback_reaction_info != null;
+  var importantReactorsCount = viewerReacted ? importantReactors.length + 1 : importantReactors.length;
+
+  var tooltipIsNecessary = importantReactorsCount < reactionCount;
+  var Tooltip = tooltipIsNecessary ? LazyContentTooltip : NoopTooltip;
+  var tooltipProps = tooltipIsNecessary
+    ? {
+        contentRenderer: null,
+        contentRendererProps: {
+          feedbackTargetID: feedbackTargetID,
+          reactionCount: reactionCount,
+        },
+      }
+    : {};
+  var primerProps = UFIReactionsProfileBrowserUtils.getPrimerProps({
+    actorID: actorID,
+    feedbackTargetID: feedbackTargetID,
+  });
+
+  return React.createElement(
+    AbstractButton,
+    Object.assign({}, primerProps, {
+      className: cx("UFI2ReactionsCount/root"),
+      "data-testid": "UFI2ReactionsCount/root",
+      label: [
+        React.createElement(
+          "span",
+          {
+            "aria-hidden": true,
+            className: cx("UFI2ReactionsCount/countOnlySentence"),
+            key: "count-sentence",
+          },
+
+          // React.createElement(
+          //   Tooltip,
+          //   Object.assign(
+          //     {
+          //       className: cx("UFI2ReactionsCount/sentence"),
+          //     },
+
+          //     tooltipProps,
+          //   ),
+
+          //   i18n_reaction_count,
+          // ),
+        ),
+
+        React.createElement(
+          "span",
+          {
+            className: cx("UFI2ReactionsCount/sentence", "foo", "UFI2ReactionsCount/sentenceWithSocialContext"),
+
+            "data-testid": "UFI2ReactionsCount/sentenceWithSocialContext",
+            key: "social-sentence",
+          },
+
+          // React.createElement(
+          //   Tooltip,
+          //   tooltipProps,
+          //   React.createElement(SentenceWithSocialContext, {
+          //     actorName: actorName,
+          //     i18nReactionCount: i18n_reaction_count,
+          //     importantReactors: importantReactors,
+          //     reactionCount: reactionCount,
+          //     viewerReacted: viewerReacted,
+          //   }),
+          // ),
+        ),
+      ],
+
+      onClick: this.$UFI2ReactionsCount_onClick,
+      role: "button",
+    }),
+  );
 }
 
 var UFIReactionsProfileBrowserUtils = {
@@ -205,6 +302,7 @@ function AbstractLink({
   "aria-disabled": string,
   "aria-label": string,
   children: Array<React.Node>,
+  "data-testid": string,
   className: string,
   href: string,
   linkRef: string,
@@ -265,6 +363,7 @@ function Link({
   "aria-label": string,
   className: string,
   children: Array<React.Node>,
+  "data-testid": string,
   href: string,
   linkRef: string,
   onClick: null | (() => void),
@@ -314,6 +413,7 @@ function AbstractButton({
   ajaxify: string,
   "aria-label": string,
   className: string,
+  "data-testid": string,
   depressed?: boolean,
   disabled?: boolean,
   href: string,
@@ -1135,8 +1235,208 @@ function UFI2CommentActionLink({
     : null;
 }
 
-function UFI2ShareActionLink() {
-  return null;
+function UFI2ShareActionLink({
+  className,
+  feedback,
+  feedbackTargetID,
+  shareableConfig,
+}: {
+  className: string,
+  feedback: FeedbackType,
+  feedbackTargetID: string,
+  shareableConfig: void,
+}) {
+  var state = {
+    focusOnInit: false,
+    interacted: false,
+    isLoading: false,
+    misinformationDialogConfirmed: false,
+    openAfterMisinformationConfirmed: false,
+    openOnInit: false,
+  };
+  var _state = state;
+  var focusOnInit = _state.focusOnInit;
+  var interacted = _state.interacted;
+  var isLoading = _state.isLoading;
+  var misinformationDialogConfirmed = _state.misinformationDialogConfirmed;
+  var openAfterMisinformationConfirmed = _state.openAfterMisinformationConfirmed;
+  var openOnInit = _state.openOnInit;
+
+  if (!shareableConfig || !shareableConfig.share_action_link_uri) {
+    return null;
+  }
+
+  var actorID =
+    feedback != null
+      ? feedback.viewer_current_actor != null
+        ? feedback.viewer_current_actor.id
+        : feedback.viewer_current_actor
+      : feedback;
+  var misinformationConfirmDialogURI =
+    shareableConfig != null ? shareableConfig.misinformation_confirm_dialog_uri : shareableConfig;
+
+  var shareActionLinkRel =
+    shareableConfig != null
+      ? shareableConfig.share_action_link_primer_attributes != null
+        ? shareableConfig.share_action_link_primer_attributes.rel
+        : shareableConfig.share_action_link_primer_attributes
+      : shareableConfig;
+
+  var shareActionLinkURI = "#";
+
+  var shareNowMenuURIAsString = shareableConfig != null ? shareableConfig.share_now_menu_uri : shareableConfig;
+
+  if (misinformationConfirmDialogURI && !misinformationDialogConfirmed) {
+    return React.createElement(UFI2ActionLink, null, function(_ref7: { className: string }): React.Node {
+      var actionLinkClassName = _ref7.className;
+      return React.createElement(ShareLink, {
+        className: actionLinkClassName,
+        onClick: null,
+      });
+    });
+  }
+
+  var shareNowMenuURI = void 0;
+  if (actorID) {
+    shareActionLinkURI = "#";
+    shareNowMenuURI = "#";
+  }
+
+  var shareLinkProps = {
+    isLoading: isLoading,
+    onFocus: null,
+    onMouseDown: null,
+    onMouseOver: null,
+    onMouseUp: null,
+  };
+
+  return React.createElement(UFI2ActionLink, null, function(_ref9: { className: string }): React.Node {
+    var actionLinkClassName = _ref9.className;
+    return React.createElement(
+      "span",
+      {
+        className: joinClasses(cx("UFI2ShareActionLink/root"), className),
+      },
+
+      React.createElement(
+        ShareLink,
+        Object.assign({}, shareLinkProps, {
+          className: actionLinkClassName,
+        }),
+      ),
+    );
+  });
+}
+
+function $ShareLink_getQualifiedHref(props: { href: string | null }): null | string {
+  var href = props.href;
+  if (!href) {
+    return null;
+  }
+  return href;
+}
+
+function ShareLink({
+  className,
+  isLoading,
+  rel,
+  ...props
+}: {
+  className: string,
+  isLoading: void | boolean,
+  rel: void | string,
+  href: null | string,
+}) {
+  var linkHref = $ShareLink_getQualifiedHref(props) || "#";
+  var title = "work user"
+    ? fbt._("Send this to coworkers or post it on your timeline.", null, { hash_key: "2zccV8" })
+    : fbt._("Send this to friends or post it on your timeline.", null, {
+        hash_key: "Y9LzE",
+      });
+
+  var trackingInfo = '{ "tn": "dummy", "type": 25 }';
+  var spinner =
+    isLoading === true
+      ? React.createElement(XUISpinner, {
+          className: cx("UFI2ShareActionLink/spinner"),
+        })
+      : null;
+
+  return React.createElement(
+    "a",
+    Object.assign({}, props, {
+      href: linkHref,
+      className: joinClasses(cx("UFI2ShareActionLink/link"), className),
+      "data-ft": trackingInfo,
+      onClick: null,
+      ref: null,
+      rel: rel,
+      role: "button",
+      tabIndex: 0,
+      title: title,
+    }),
+
+    fbt._("Share", null, { hash_key: "gaj3j" }),
+
+    spinner,
+  );
+}
+
+var USE_CSS = true;
+
+function XUISpinner({
+  background,
+  className,
+  paused,
+  showOnAsync,
+  size,
+  ...spanProps
+}: {
+  background: string,
+  className: string,
+  paused: void | boolean,
+  showOnAsync: boolean,
+  size: string,
+}) {
+  var imageClass =
+    cx("img") +
+    (" " + cx("xuiSpinner/root")) +
+    (size == "small" ? " " + cx("xuiSpinner/small") : "") +
+    (size == "large" ? " " + cx("xuiSpinner/large") : "") +
+    (background == "light" ? " " + cx("xuiSpinner/light") : "") +
+    (background == "dark" ? " " + cx("xuiSpinner/dark") : "") +
+    (showOnAsync ? " " + cx("xuiSpinner/showOnAsync") : "") +
+    (!USE_CSS ? " " + cx("xuiSpinner/animatedGIF") : "") +
+    (USE_CSS && paused ? " " + cx("xuiSpinner/pauseAnimation") : "");
+
+  return React.createElement(
+    LoadingMarker,
+    null,
+    React.createElement(
+      "span",
+      Object.assign({}, spanProps, {
+        className: joinClasses(className, imageClass),
+        role: "progressbar",
+        "aria-valuetext": fbt._("Loading...", null, {
+          hash_key: "2pEOeS",
+        }),
+
+        "aria-busy": "true",
+        "aria-valuemin": "0",
+        "aria-valuemax": "100",
+      }),
+    ),
+  );
+}
+
+XUISpinner.defaultProps = {
+  showOnAsync: false,
+  size: "small",
+  background: "light",
+};
+
+function LoadingMarker({ children }: { children: React.Node }) {
+  return children;
 }
 
 function getRendererStateFromProps(props) {
