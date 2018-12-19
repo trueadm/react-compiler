@@ -1,4 +1,4 @@
-import { isDestructuredRef, getReferenceFromExpression } from "./references";
+import { isDestructuredRef, isIdentifierReferenceConstant, getReferenceFromExpression } from "./references";
 import * as t from "@babel/types";
 import { getTypeAlias, getTypeAnnotationForExpression, assertType } from "./annotations";
 import invariant from "./invariant";
@@ -173,9 +173,28 @@ export function getComponentName(node) {
   return "anonymous func";
 }
 
-export function isHostComponent(strName) {
-  const firstChar = strName[0];
-  return firstChar === firstChar.toLowerCase() && firstChar !== "_" && firstChar !== "$";
+export function isConditionalComponentType(path, state) {
+  const pathRef = getReferenceFromExpression(path, state);
+  if (t.isConditionalExpression(pathRef.node)) {
+    return true;
+  }
+  if (t.isIdentifier(pathRef.node) && !isIdentifierReferenceConstant(pathRef, state)) {
+    return true;
+  }
+  return false;
+}
+
+export function isHostComponentType(path, state) {
+  if (t.isStringLiteral(path.node)) {
+    return true;
+  } else if (t.isJSXIdentifier(path.node)) {
+    const firstChar = path.node.name[0];
+    if (firstChar === firstChar.toLowerCase() && firstChar !== "_" && firstChar !== "$") {
+      return true;
+    }
+  }
+  const pathRef = getReferenceFromExpression(path, state);
+  return t.isStringLiteral(pathRef.node);
 }
 
 export function getPathConditions(rootPath, path, state) {

@@ -176,15 +176,16 @@ const opcodeRenderFuncs = [
 
 const PropFlagPartialTemplate = 1;
 const PropFlagReactEvent = 1 << 1; // starts with on
-const PropFlagReserved = 1 << 2;
-const PropFlagString = 1 << 3;
-const PropFlagBooleanishString = 1 << 4;
-const PropFlagBoolean = 1 << 5;
-const PropFlagOverloadedBoolean = 1 << 6;
-const PropFlagNumeric = 1 << 6;
-const PropFlagPositiveNumeric = 1 << 7;
-const PropFlagXlinkNamespace = 1 << 8;
-const PropFlagXmlNamespace = 1 << 9;
+// TODO support the below flags:
+// const PropFlagReserved = 1 << 2;
+// const PropFlagString = 1 << 3;
+// const PropFlagBooleanishString = 1 << 4;
+// const PropFlagBoolean = 1 << 5;
+// const PropFlagOverloadedBoolean = 1 << 6;
+// const PropFlagNumeric = 1 << 6;
+// const PropFlagPositiveNumeric = 1 << 7;
+// const PropFlagXlinkNamespace = 1 << 8;
+// const PropFlagXmlNamespace = 1 << 9;
 
 function noOp(index, opcodes, runtimeValues, state) {
   return index + 1;

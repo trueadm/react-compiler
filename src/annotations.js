@@ -155,7 +155,6 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
             const typeForReference = getTypeAnnotationForExpression(rightPath, state, errorOnMissingType);
             types.push(typeForReference);
           } else {
-            debugger;
             invariant(false, "TODO");
           }
         }

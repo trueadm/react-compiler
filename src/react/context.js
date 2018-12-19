@@ -4,7 +4,7 @@ import {
   getCodeLocation,
   getRuntimeValueIndex,
   handleWhiteSpace,
-  isHostComponent,
+  isHostComponentType,
   isReactCreateElement,
   isReactObject,
   markNodeAsUsed,
@@ -104,7 +104,7 @@ function isReferenceReactContextConsumerOrProvider(path, name, state) {
     const objectPath = path.get("object");
 
     return isReferenceReactContext(objectPath, state);
-  } else if ((t.isJSXIdentifier(node) || t.isIdentifier(node)) && !isHostComponent(node.name)) {
+  } else if ((t.isJSXIdentifier(node) || t.isIdentifier(node)) && !isHostComponentType(path, state)) {
     let pathRef = getReferenceFromExpression(path, state);
 
     if (isDestructuredRef(pathRef)) {

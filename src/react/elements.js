@@ -19,7 +19,8 @@ import {
   handleWhiteSpace,
   isArrayMapConstructorTemplate,
   isCommonJsLikeRequireCall,
-  isHostComponent,
+  isConditionalComponentType,
+  isHostComponentType,
   isNodeWithinReactElementTemplate,
   isObjectAssignCall,
   isOpcodesTemplateFromFuncCall,
@@ -393,14 +394,12 @@ export function createOpcodesForJSXFragment(path, opcodes, state, componentPath)
   createOpcodesForReactFragment(children, opcodes, state, componentPath);
 }
 
-function createOpcodesForReactCreateElementFragment(path, opcodes, state, componentPath) {
-  const args = path.get("arguments");
+function createOpcodesForReactCreateElementFragment(args, opcodes, state, componentPath) {
   let children = null;
 
   if (args.length > 2) {
     children = args.slice(2);
   }
-
   createOpcodesForReactFragment(children, opcodes, state, componentPath);
 }
 
@@ -1151,49 +1150,13 @@ function createOpcodesForCompositeComponent(
 }
 
 export function createOpcodesForJSXElement(path, opcodes, state, componentPath) {
-  const node = path.node;
   const openingElementPath = path.get("openingElement");
-  const openingElement = node.openingElement;
-  const name = openingElement.name;
-  const namePath = openingElementPath.get("name");
+  const typePath = openingElementPath.get("name");
   const attributesPath = openingElementPath.get("attributes");
   const childrenPath = path.get("children");
 
-  if (isReferenceReactContextProvider(namePath, state)) {
-    const contextObjectRuntimeValueIndex = getContextObjectRuntimeValueIndex(namePath, state);
-    pushOpcode(opcodes, "OPEN_CONTEXT_PROVIDER", contextObjectRuntimeValueIndex);
-    createOpcodesForJSXElementHostComponent(null, attributesPath, childrenPath, opcodes, state, componentPath);
-    pushOpcode(opcodes, "CLOSE_CONTEXT_PROVIDER");
-  } else if (isReferenceReactContextConsumer(namePath, state)) {
-    createOpcodesForReactContextConsumer(namePath, childrenPath, opcodes, state, componentPath);
-  } else if (isReactFragment(namePath, state)) {
-    createOpcodesForJSXFragment(path, opcodes, state, componentPath);
-  } else if (t.isJSXIdentifier(name)) {
-    const strName = name.name;
+  createOpcodesForJSXElementType(typePath, attributesPath, childrenPath, opcodes, state, componentPath);
 
-    if (isHostComponent(strName)) {
-      const isVoidElement = voidElements.has(strName);
-      if (strName === "div") {
-        pushOpcode(opcodes, "OPEN_ELEMENT_DIV");
-      } else if (strName === "span") {
-        pushOpcode(opcodes, "OPEN_ELEMENT_SPAN");
-      } else if (isVoidElement) {
-        pushOpcode(opcodes, "OPEN_VOID_ELEMENT", strName);
-      } else {
-        pushOpcode(opcodes, "OPEN_ELEMENT", strName);
-      }
-      createOpcodesForJSXElementHostComponent(strName, attributesPath, childrenPath, opcodes, state, componentPath);
-      if (isVoidElement) {
-        pushOpcode(opcodes, "CLOSE_VOID_ELEMENT");
-      } else {
-        pushOpcode(opcodes, "CLOSE_ELEMENT");
-      }
-    } else {
-      createOpcodesForCompositeComponent(path, strName, attributesPath, childrenPath, opcodes, state, componentPath);
-    }
-  } else {
-    invariant(false, "TODO");
-  }
   if (t.isBlockStatement(path.node)) {
     const body = path.get("body");
     const returnStatement = body[body.length - 1];
@@ -1204,6 +1167,61 @@ export function createOpcodesForJSXElement(path, opcodes, state, componentPath) 
     }
   } else {
     path.replaceWith(emptyObject);
+  }
+}
+
+function createOpcodesForJSXElementType(typePath, attributesPath, childrenPath, opcodes, state, componentPath) {
+  const typeName = t.isStringLiteral(typePath.node) ? typePath.node.value : typePath.node.name;
+
+  if (isReferenceReactContextProvider(typePath, state)) {
+    const contextObjectRuntimeValueIndex = getContextObjectRuntimeValueIndex(typePath, state);
+    pushOpcode(opcodes, "OPEN_CONTEXT_PROVIDER", contextObjectRuntimeValueIndex);
+    createOpcodesForJSXElementHostComponent(null, attributesPath, childrenPath, opcodes, state, componentPath);
+    pushOpcode(opcodes, "CLOSE_CONTEXT_PROVIDER");
+  } else if (isReferenceReactContextConsumer(typePath, state)) {
+    createOpcodesForReactContextConsumer(typePath, childrenPath, opcodes, state, componentPath);
+  } else if (isReactFragment(typePath, state)) {
+    createOpcodesForJSXFragment(typePath, opcodes, state, componentPath);
+  } else if (isHostComponentType(typePath, state)) {
+    const isVoidElement = voidElements.has(typeName);
+    if (typeName === "div") {
+      pushOpcode(opcodes, "OPEN_ELEMENT_DIV");
+    } else if (typeName === "span") {
+      pushOpcode(opcodes, "OPEN_ELEMENT_SPAN");
+    } else if (isVoidElement) {
+      pushOpcode(opcodes, "OPEN_VOID_ELEMENT", typeName);
+    } else {
+      pushOpcode(opcodes, "OPEN_ELEMENT", typeName);
+    }
+    createOpcodesForJSXElementHostComponent(typeName, attributesPath, childrenPath, opcodes, state, componentPath);
+    if (isVoidElement) {
+      pushOpcode(opcodes, "CLOSE_VOID_ELEMENT");
+    } else {
+      pushOpcode(opcodes, "CLOSE_ELEMENT");
+    }
+  } else if (isConditionalComponentType(typePath, state)) {
+    const typePathRef = getReferenceFromExpression(typePath, state);
+    if (t.isConditionalExpression(typePathRef.node)) {
+      createOpcodesForConditionalExpressionTemplate(
+        typePathRef,
+        opcodes,
+        state,
+        (conditionalPath, conditionalOpcodes) => {
+          createOpcodesForJSXElementType(
+            conditionalPath,
+            attributesPath,
+            childrenPath,
+            conditionalOpcodes,
+            state,
+            componentPath,
+          );
+        },
+      );
+      return;
+    }
+    invariant(false, "TODO");
+  } else {
+    createOpcodesForCompositeComponent(typePath, typeName, attributesPath, childrenPath, opcodes, state, componentPath);
   }
 }
 
@@ -1396,23 +1414,9 @@ function createOpcodesForReactCreateElementHostComponent(tagName, args, opcodes,
   }
 }
 
-export function createOpcodesForReactCreateElement(path, opcodes, state, componentPath) {
-  path.node.canDCE = true;
-  if (t.isMemberExpression(path.node.callee)) {
-    path.node.callee.object.canDCE = true;
-  }
-  const args = path.get("arguments");
-
-  if (args.length === 0) {
-    throw new Error(
-      `Compiler failed to due React.createElement() called with no arguments at ${getCodeLocation(path.node)}`,
-    );
-  }
-  const namePath = args[0];
-  const namePathRef = getReferenceFromExpression(namePath, state);
-  const nameNode = namePathRef.node;
-
-  if (t.isStringLiteral(nameNode)) {
+function createOpcodesForReactCreateElementType(typePath, args, opcodes, state, componentPath) {
+  if (isHostComponentType(typePath, state)) {
+    const nameNode = typePath.node;
     const strName = nameNode.value;
     const isVoidElement = voidElements.has(strName);
     if (strName === "div") {
@@ -1430,6 +1434,20 @@ export function createOpcodesForReactCreateElement(path, opcodes, state, compone
     } else {
       pushOpcode(opcodes, "CLOSE_ELEMENT");
     }
+  } else if (isConditionalComponentType(typePath, state)) {
+    const typePathRef = getReferenceFromExpression(typePath, state);
+    if (t.isConditionalExpression(typePathRef.node)) {
+      createOpcodesForConditionalExpressionTemplate(
+        typePathRef,
+        opcodes,
+        state,
+        (conditionalPath, conditionalOpcodes) => {
+          createOpcodesForReactCreateElementType(conditionalPath, args, conditionalOpcodes, state, componentPath);
+        },
+      );
+      return;
+    }
+    invariant(false, "TODO");
   } else {
     let componentName;
     let attributesPath = null;
@@ -1453,25 +1471,25 @@ export function createOpcodesForReactCreateElement(path, opcodes, state, compone
       childrenPath = args.slice(2);
     }
 
-    if (isReferenceReactContextProvider(namePath, state)) {
-      const contextObjectRuntimeValueIndex = getContextObjectRuntimeValueIndex(namePath, state);
+    if (isReferenceReactContextProvider(typePath, state)) {
+      const contextObjectRuntimeValueIndex = getContextObjectRuntimeValueIndex(typePath, state);
       pushOpcode(opcodes, "OPEN_CONTEXT_PROVIDER", contextObjectRuntimeValueIndex);
       createOpcodesForReactCreateElementHostComponent(null, args, opcodes, state, componentPath);
       pushOpcode(opcodes, "CLOSE_CONTEXT_PROVIDER");
       return;
-    } else if (isReferenceReactContextConsumer(namePath, state)) {
-      createOpcodesForReactContextConsumer(namePath, childrenPath, opcodes, state, componentPath);
+    } else if (isReferenceReactContextConsumer(typePath, state)) {
+      createOpcodesForReactContextConsumer(typePath, childrenPath, opcodes, state, componentPath);
       return;
-    } else if (t.isIdentifier(namePath.node)) {
-      componentName = namePath.node.name;
-    } else if (isReactFragment(namePath, state)) {
-      createOpcodesForReactCreateElementFragment(path, opcodes, state, componentPath);
+    } else if (t.isIdentifier(typePath.node)) {
+      componentName = typePath.node.name;
+    } else if (isReactFragment(typePath, state)) {
+      createOpcodesForReactCreateElementFragment(args, opcodes, state, componentPath);
       return;
     } else {
       invariant(false, "TODO");
     }
     createOpcodesForCompositeComponent(
-      path,
+      typePath,
       componentName,
       attributesPath,
       childrenPath,
@@ -1480,6 +1498,24 @@ export function createOpcodesForReactCreateElement(path, opcodes, state, compone
       componentPath,
     );
   }
+}
+
+export function createOpcodesForReactCreateElement(path, opcodes, state, componentPath) {
+  path.node.canDCE = true;
+  if (t.isMemberExpression(path.node.callee)) {
+    path.node.callee.object.canDCE = true;
+  }
+  const args = path.get("arguments");
+
+  if (args.length === 0) {
+    throw new Error(
+      `Compiler failed to due React.createElement() called with no arguments at ${getCodeLocation(path.node)}`,
+    );
+  }
+  const typePath = args[0];
+
+  createOpcodesForReactCreateElementType(typePath, args, opcodes, state, componentPath);
+
   if (t.isBlockStatement(path.node)) {
     const body = path.get("body");
     const returnStatement = body[body.length - 1];
