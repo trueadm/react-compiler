@@ -14,6 +14,7 @@ import { getTypeAnnotationForExpression } from "../annotations";
 import { applyCachedRuntimeValues } from "../transforms";
 import { createOpcodesForNode } from "../nodes";
 import { isDevMode } from "../flags";
+import invariant from "../invariant";
 import * as t from "@babel/types";
 
 function createOpcodesForTemplateBranch(
@@ -94,11 +95,7 @@ function createOpcodesForTemplateBranches(
     if (!emitComputeFunctionOpcode || isBranchStatic) {
       pushOpcodeValue(opcodes, t.nullLiteral(), "COMPUTE_FUNCTION");
     } else {
-      if (computeFunction.id == null) {
-        throw new Error("TODO");
-      } else {
-        pushOpcodeValue(opcodes, computeFunction.id, "COMPUTE_FUNCTION");
-      }
+      pushOpcodeValue(opcodes, t.identifier(getComponentName(functionPath)), "COMPUTE_FUNCTION");
     }
     return isBranchStatic;
   } else {
@@ -190,7 +187,7 @@ export function createOpcodesForReactComputeFunction(
     return state.computeFunctionCache.get(computeFunction);
   }
   if (emitComputeFunctionOpcode) {
-    updateComputeFunctionName(computeFunction);
+    updateComputeFunctionName(functionPath);
   }
 
   const templateBranches = [];
@@ -291,7 +288,7 @@ function getDefaultPropsObjectExpressionPath(binding, state) {
 
 export function createOpcodesForReactFunctionComponent(componentPath, state) {
   const computeFunction = componentPath.node;
-  const name = getComponentName(computeFunction);
+  const name = getComponentName(componentPath);
   const functionKind = componentPath.scope.getBinding(name).kind;
   const binding = getBindingPathRef(componentPath, name, state);
   const shapeOfPropsObject = getShapeOfPropsObject(componentPath, state);
@@ -385,12 +382,17 @@ function insertComputFunctionCachedOpcodes(componentPath, state) {
   }
 }
 
-function updateComputeFunctionName(computeFunction) {
-  const name = getComponentName(computeFunction);
+function updateComputeFunctionName(functionPath) {
+  const name = getComponentName(functionPath);
   // Change compute function name
-  if (t.isFunctionDeclaration(computeFunction)) {
-    if (t.isIdentifier(computeFunction.id)) {
-      computeFunction.id.name = `${name}_ComputeFunction`;
+  if (t.isFunctionDeclaration(functionPath.node) && t.isIdentifier(functionPath.node.id)) {
+    functionPath.node.id.name = `${name}_ComputeFunction`;
+  } else {
+    const parentPath = functionPath.parentPath;
+    if (t.isVariableDeclarator(parentPath.node) && t.isIdentifier(parentPath.node.id)) {
+      parentPath.node.id.name = `${name}_ComputeFunction`;
+    } else {
+      invariant(false, "TODO");
     }
   }
 }
@@ -456,6 +458,36 @@ function convertFunctionComponentToComputeFunctionAndEmitOpcodes(
           componentPath.replaceWithMultiple([computeFunction, arrayWrapperFunction]);
         }
       }
+    }
+  } else {
+    const parentPath = componentPath.parentPath;
+
+    if (t.isVariableDeclarator(parentPath.node) && t.isIdentifier(parentPath.node.id)) {
+      markNodeAsUsed(parentPath.node.id);
+      const identifier = t.identifier(name);
+      markNodeAsUsed(identifier);
+
+      if (isRootComponent) {
+        if (isStatic) {
+          parentPath.node.id.name = name;
+          componentPath.replaceWith(opcodesArray);
+        } else {
+          parentPath.replaceWithMultiple([parentPath.node, t.variableDeclarator(identifier, opcodesArray)]);
+        }
+      } else {
+        const arrayWrapperFunction = t.variableDeclarator(
+          identifier,
+          t.functionExpression(null, [], t.blockStatement([t.returnStatement(opcodesArray)])),
+        );
+        if (isStatic) {
+          parentPath.node.id.name = name;
+          componentPath.replaceWith(arrayWrapperFunction);
+        } else {
+          parentPath.replaceWithMultiple([parentPath.node, arrayWrapperFunction]);
+        }
+      }
+    } else {
+      invariant(false, "TODO");
     }
   }
 }

@@ -28,6 +28,7 @@ import {
   isReactCreateElement,
   isReactFragment,
   joinPathConditions,
+  markNodeAsDCE,
   markNodeAsUsed,
   moveOutCallExpressionFromTemplate,
   moveOutFunctionFromTemplate,
@@ -112,7 +113,7 @@ function createOpcodesForArrayMapTemplate(childPath, opcodes, state, componentPa
 }
 
 function createOpcodesForReactElementHostNodePropValue(tagName, valuePath, propNameStr, opcodes, state, componentPath) {
-  valuePath.node.canDCE = true;
+  markNodeAsDCE(valuePath.node);
   const valueRefPath = getReferenceFromExpression(valuePath, state);
   const typeAnnotation = getTypeAnnotationForExpression(valueRefPath, state);
 
@@ -218,7 +219,7 @@ function createOpcodesForReactElementHostNodePropValue(tagName, valuePath, propN
 }
 
 function createOpcodesForReactElementHostNodeChild(childPath, onlyChild, opcodes, state, componentPath) {
-  childPath.node.canDCE = true;
+  markNodeAsDCE(childPath.node);
   let refChildPath = getReferenceFromExpression(childPath, state);
 
   if (isDestructuredRef(refChildPath)) {
@@ -248,7 +249,7 @@ function createOpcodesForReactElementHostNodeChild(childPath, onlyChild, opcodes
   }
 
   if (t.isConditionalExpression(childNode) && assertType(childPath, typeAnnotation, true, state, "REACT_NODE")) {
-    childNode.canDCE = true;
+    markNodeAsDCE(childNode);
     createOpcodesForConditionalExpressionTemplate(
       refChildPath,
       opcodes,
@@ -261,7 +262,7 @@ function createOpcodesForReactElementHostNodeChild(childPath, onlyChild, opcodes
   }
 
   if (t.isLogicalExpression(childNode) && assertType(childPath, typeAnnotation, true, state, "REACT_NODE")) {
-    childNode.canDCE = true;
+    markNodeAsDCE(childNode);
     createOpcodesForLogicalExpressionTemplate(
       refChildPath,
       opcodes,
@@ -282,7 +283,7 @@ function createOpcodesForReactElementHostNodeChild(childPath, onlyChild, opcodes
   }
 
   if (t.isArrayExpression(childNode)) {
-    childNode.canDCE = true;
+    markNodeAsDCE(childNode);
     const elementsPath = refChildPath.get("elements");
     if (elementsPath.length > 0) {
       if (elementsPath.length === 0) {
@@ -396,7 +397,7 @@ export function createOpcodesForJSXFragment(path, opcodes, state, componentPath)
 
 function createOpcodesForReactCreateElementFragment(args, opcodes, state, componentPath) {
   let children = null;
-
+  markNodeAsDCE(args[0].node);
   if (args.length > 2) {
     children = args.slice(2);
   }
@@ -847,7 +848,7 @@ function getNodeAndInlineStatusFromValuePath(path, state, componentPath) {
     if (state.isRootComponent || (!t.isIdentifier(node) && !t.isMemberExpression(node))) {
       throw new Error(
         `The compiler found a React element type used as props in component <${getComponentName(
-          componentPath.node,
+          componentPath,
         )}> but was unable to statically find JSX template at ${getCodeLocation(pathRef.node)}`,
       );
     }
@@ -918,7 +919,7 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
         }
         if (propName === attributeName) {
           const valuePath = attributePath.get("value");
-          valuePath.node.canDCE = true;
+          markNodeAsDCE(valuePath.node);
           result = getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
         }
       } else if (t.isJSXSpreadAttribute(attributePath.node) && t.isIdentifier(attributePath.node.argument)) {
@@ -933,7 +934,7 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
               const key = propertyPath.node.key;
               const valuePath = propertyPath.get("value");
               if (t.isIdentifier(key) && key.name === propName) {
-                valuePath.node.canDCE = true;
+                markNodeAsDCE(valuePath.node);
                 result = getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
                 break;
               }
@@ -955,7 +956,7 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
         }
         if (propName === attributeName) {
           const valuePath = attributePath.get("value");
-          valuePath.node.canDCE = true;
+          markNodeAsDCE(valuePath.node);
           result = getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
         }
       } else {
@@ -980,7 +981,7 @@ function getPropNodeForCompositeComponent(propName, attributesPath, childrenPath
                 (t.isIdentifier(key) && key.name === propName) ||
                 (t.isStringLiteral(key) && key.value === propName)
               ) {
-                valuePath.node.canDCE = true;
+                markNodeAsDCE(valuePath.node);
                 result = getNodeAndInlineStatusFromValuePath(valuePath, state, componentPath);
                 break;
               }
@@ -1109,24 +1110,20 @@ function createOpcodesForCompositeComponent(
     const childState = externalModuleState || { ...state, ...{ isRootComponent: false } };
     result = createOpcodesForReactFunctionComponent(compositeComponentPath, childState);
   }
-  const { defaultProps, functionKind, isStatic, shapeOfPropsObject } = result;
+  const { defaultProps, isStatic, shapeOfPropsObject } = result;
 
-  if (functionKind === "hoisted") {
-    const componentNameIdentifier = t.identifier(componentName);
-    markNodeAsUsed(componentNameIdentifier);
-    pushOpcode(opcodes, "REF_COMPONENT", componentNameIdentifier);
-  } else {
-    invariant(false, "TODO");
-  }
+  const componentNameIdentifier = t.identifier(componentName);
+  markNodeAsUsed(componentNameIdentifier);
+  pushOpcode(opcodes, "REF_COMPONENT", componentNameIdentifier);
   if (isStatic) {
     if (Array.isArray(attributesPath)) {
       for (let attributePath of attributesPath) {
-        attributePath.node.canDCE = true;
+        markNodeAsDCE(attributePath.node);
       }
     }
     if (Array.isArray(childrenPath)) {
       for (let childPath of childrenPath) {
-        childPath.node.canDCE = true;
+        markNodeAsDCE(childPath.node);
       }
     }
     pushOpcodeValue(opcodes, t.nullLiteral(), "COMPONENT_PROPS_ARRAY");
@@ -1221,7 +1218,24 @@ function createOpcodesForJSXElementType(typePath, attributesPath, childrenPath, 
     }
     invariant(false, "TODO");
   } else {
-    createOpcodesForCompositeComponent(typePath, typeName, attributesPath, childrenPath, opcodes, state, componentPath);
+    let componentName = typeName;
+
+    if (typeName === undefined) {
+      if (t.isFunctionDeclaration(typePath.node)) {
+        componentName = typePath.node.id.name;
+      } else {
+        invariant(false, "TODO");
+      }
+    }
+    createOpcodesForCompositeComponent(
+      typePath,
+      componentName,
+      attributesPath,
+      childrenPath,
+      opcodes,
+      state,
+      componentPath,
+    );
   }
 }
 
@@ -1482,12 +1496,15 @@ function createOpcodesForReactCreateElementType(typePath, args, opcodes, state, 
       return;
     } else if (t.isIdentifier(typePath.node)) {
       componentName = typePath.node.name;
+    } else if (t.isFunctionDeclaration(typePath.node)) {
+      componentName = typePath.node.id.name;
     } else if (isReactFragment(typePath, state)) {
       createOpcodesForReactCreateElementFragment(args, opcodes, state, componentPath);
       return;
     } else {
       invariant(false, "TODO");
     }
+
     createOpcodesForCompositeComponent(
       typePath,
       componentName,
@@ -1501,9 +1518,9 @@ function createOpcodesForReactCreateElementType(typePath, args, opcodes, state, 
 }
 
 export function createOpcodesForReactCreateElement(path, opcodes, state, componentPath) {
-  path.node.canDCE = true;
+  markNodeAsDCE(path.node);
   if (t.isMemberExpression(path.node.callee)) {
-    path.node.callee.object.canDCE = true;
+    markNodeAsDCE(path.node.callee.object);
   }
   const args = path.get("arguments");
 

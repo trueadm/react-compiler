@@ -3,6 +3,7 @@ import {
   removePath,
   wasParentPathFlaggedWithDCE,
   wasParentPathRemoved,
+  isReactObject,
 } from "./utils";
 import traverse from "@babel/traverse";
 import * as t from "@babel/types";
@@ -13,6 +14,15 @@ function filterReferencePaths(path, state) {
     return true;
   }
   if (path.node.canDCE) {
+    return false;
+  }
+  const parentPath = path.parentPath;
+  if (
+    t.isMemberExpression(parentPath.node) &&
+    (isReactObject(parentPath.get("object"), state) &&
+      ((t.isIdentifier(parentPath.node.property) && parentPath.node.property.name === "createElement") ||
+        (t.isStringLiteral(parentPath.node.property) && parentPath.node.property.value === "createElement")))
+  ) {
     return false;
   }
   // Ignore React.Node types referencing React

@@ -38,7 +38,7 @@
     "eslint-plugin-prettier": "^3.0.0",
     "fbt": "file:scripts/fbt",
     "glob": "^7.1.3",
-    "google-closure-compiler": "^20181028.0.1",
+    "google-closure-compiler": "^20181210.0.0",
     "jsdom": "^13.0.0",
     "prettier": "^1.15.2",
     "react": "^16.7.0-alpha.0",

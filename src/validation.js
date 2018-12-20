@@ -109,7 +109,7 @@ export function validateReactElementsHaveAllBeenCompiled(moduleAst, state) {
 
 export function validateFunctionComponentUsesDestructuredProps(path) {
   const node = path.node;
-  const name = getComponentName(node);
+  const name = getComponentName(path);
 
   if (node.params.length > 0 && !t.isObjectPattern(node.params[0])) {
     throw new Error(`Compilation failed on component "${name}". "props" argument must be a destructured object.`);

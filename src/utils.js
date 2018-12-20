@@ -166,11 +166,16 @@ export function isRootPathConditional(componentPath, path) {
   return false;
 }
 
-export function getComponentName(node) {
-  if (t.isIdentifier(node.id)) {
-    return node.id.name;
+export function getComponentName(componentPath) {
+  if (t.isFunctionDeclaration(componentPath.node) && t.isIdentifier(componentPath.node.id)) {
+    return componentPath.node.id.name;
   }
-  return "anonymous func";
+  const parentPath = componentPath.parentPath;
+
+  if (t.isVariableDeclarator(parentPath.node) && t.isIdentifier(parentPath.node.id)) {
+    return parentPath.node.id.name;
+  }
+  invariant(false, "TODO");
 }
 
 export function isConditionalComponentType(path, state) {
@@ -404,6 +409,58 @@ export function optimizedEscapeAttributeValue(text) {
 export function isOpcodesTemplateFromFuncCall(opcodes) {
   // 23 is TEMPLATE_FROM_FUNC_CALL
   return opcodes.length > 1 && t.isNumericLiteral(opcodes[0]) && opcodes[0].value === 23;
+}
+
+export function markNodeAsDCE(node) {
+  if (node == null) {
+    return;
+  }
+  node.used = false;
+  node.canDCE = true;
+
+  if (
+    t.isJSXIdentifier(node) ||
+    t.isIdentifier(node) ||
+    t.isBooleanLiteral(node) ||
+    t.isNumericLiteral(node) ||
+    t.isStringLiteral(node) ||
+    t.isNullLiteral(node) ||
+    t.isJSXText(node)
+  ) {
+    // NO-OP
+  } else if (t.isJSXExpressionContainer(node)) {
+    markNodeAsDCE(node.expression);
+  } else if (t.isMemberExpression(node) || t.isJSXMemberExpression(node)) {
+    markNodeAsDCE(node.object);
+    markNodeAsDCE(node.property);
+  } else if (t.isConditionalExpression(node)) {
+    markNodeAsDCE(node.alternate);
+    markNodeAsDCE(node.consequent);
+  } else if (t.isUpdateExpression(node) || t.isUnaryExpression(node)) {
+    markNodeAsDCE(node.argument);
+  } else if (t.isTemplateLiteral(node)) {
+    for (let expression of node.expressions) {
+      markNodeAsDCE(expression);
+    }
+  } else if (t.isLogicalExpression(node) || t.isBinaryExpression(node) || t.isAssignmentExpression(node)) {
+    markNodeAsDCE(node.left);
+    markNodeAsDCE(node.right);
+  } else if (t.isCallExpression(node)) {
+    markNodeAsDCE(node.callee);
+    for (let arg of node.arguments) {
+      markNodeAsDCE(arg);
+    }
+  } else if (t.isArrayExpression(node)) {
+    for (let element of node.elements) {
+      markNodeAsDCE(element);
+    }
+  } else if (t.isArrowFunctionExpression(node) || t.isFunctionExpression(node) || t.isFunctionDeclaration(node)) {
+    markNodeAsDCE(node.id);
+  } else if (t.isObjectExpression(node) || t.isJSXElement(node) || t.isJSXFragment(node)) {
+    // TODO
+  } else {
+    invariant(false, "TODO");
+  }
 }
 
 // Used nodes do not get dead code eliminated

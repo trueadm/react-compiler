@@ -132,7 +132,7 @@ function createOpcodesForCallExpressionReturningTemplateNodes(
     pushOpcode(opcodes, "REACT_NODE_TEMPLATE_FROM_FUNC_CALL", runtimeValuePointer);
     return;
   }
-  const name = getComponentName(calleePath.node);
+  const name = getComponentName(calleePath);
   const { opcodes: computeFunctionOpcodes, isStatic, cachedOpcodes } = createOpcodesForReactComputeFunction(
     calleePath,
     state,

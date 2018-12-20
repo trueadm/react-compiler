@@ -189,6 +189,8 @@ async function runTest(file, originalSource, compiledSource, minifySources) {
     compiledSize = _compiledSize;
     originalComponent = executeSource(minifiedOriginalSource, false);
     compiledComponent = executeSource(minifiedCompiledSource, false);
+    console.log(minifiedOriginalSource);
+    console.log(minifiedCompiledSource);
   } else {
     originalComponent = executeSource(originalSource, true);
     compiledComponent = executeSource(compiledSource, true);

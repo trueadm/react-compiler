@@ -28,50 +28,65 @@ function applyFbtTransforms(ast) {
   // TODO
 }
 
+function checkIfIdHasFlag(id, path, compilerContext, moduleFilePath) {
+  // Check if the function has the ".compile = true" flag
+  if (t.isIdentifier(id)) {
+    const binding = path.scope.getBinding(id.name);
+    let hasCompileFlag = false;
+
+    if (binding === undefined) {
+      return;
+    }
+    for (let referencePath of binding.referencePaths) {
+      let parentPath = referencePath.parentPath;
+      let parentNode = parentPath.node;
+      if (
+        t.isMemberExpression(parentNode) &&
+        t.isIdentifier(parentNode.object) &&
+        parentNode.object.name === id.name &&
+        t.isIdentifier(parentNode.property) &&
+        parentNode.property.name === "compileRootComponent"
+      ) {
+        parentPath = parentPath.parentPath;
+        parentNode = parentPath.node;
+
+        if (
+          t.isAssignmentExpression(parentNode) &&
+          t.isBooleanLiteral(parentNode.right) &&
+          parentNode.right.value === true
+        ) {
+          removePath(parentPath);
+          hasCompileFlag = true;
+          break;
+        }
+      }
+    }
+
+    if (hasCompileFlag) {
+      validateFunctionComponentUsesDestructuredProps(path);
+      const moduleState = compilerContext.modules.get(moduleFilePath).state;
+      moduleState.needsCompiling();
+      createOpcodesForReactFunctionComponent(path, moduleState);
+      makeClosureCompilerAdvancedFriendly(path);
+    }
+  }
+}
+
 function applyReactVmOpcodes(moduleFilePath, ast, compilerContext) {
   traverse(ast, {
+    FunctionExpression(path) {
+      const parentPath = path.parentPath;
+
+      if (t.isVariableDeclarator(parentPath.node)) {
+        const id = parentPath.node.id;
+        checkIfIdHasFlag(id, path, compilerContext, moduleFilePath);
+      }
+    },
     FunctionDeclaration(path) {
       const node = path.node;
       const id = node.id;
 
-      // Check if the function has the ".compile = true" flag
-      if (t.isIdentifier(id)) {
-        const binding = path.scope.getBinding(id.name);
-        let hasCompileFlag = false;
-
-        for (let referencePath of binding.referencePaths) {
-          let parentPath = referencePath.parentPath;
-          let parentNode = parentPath.node;
-          if (
-            t.isMemberExpression(parentNode) &&
-            t.isIdentifier(parentNode.object) &&
-            parentNode.object.name === id.name &&
-            t.isIdentifier(parentNode.property) &&
-            parentNode.property.name === "compileRootComponent"
-          ) {
-            parentPath = parentPath.parentPath;
-            parentNode = parentPath.node;
-
-            if (
-              t.isAssignmentExpression(parentNode) &&
-              t.isBooleanLiteral(parentNode.right) &&
-              parentNode.right.value === true
-            ) {
-              removePath(parentPath);
-              hasCompileFlag = true;
-              break;
-            }
-          }
-        }
-
-        if (hasCompileFlag) {
-          validateFunctionComponentUsesDestructuredProps(path);
-          const moduleState = compilerContext.modules.get(moduleFilePath).state;
-          moduleState.needsCompiling();
-          createOpcodesForReactFunctionComponent(path, moduleState);
-          makeClosureCompilerAdvancedFriendly(path);
-        }
-      }
+      checkIfIdHasFlag(id, path, compilerContext, moduleFilePath);
     },
   });
 }
