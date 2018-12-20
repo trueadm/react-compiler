@@ -10,8 +10,7 @@ var Footer = require("./Footer.compiled.js");
 
 import type { IndexProps } from "./type";
 
-function App_ComputeFunction // COMPUTE_FUNCTION
-(x) {
+function App_ComputeFunction(x) {
   var __cached__0;
 
   __cached__0 = formatString(x);
@@ -30,5 +29,6 @@ var App = // App OPCODES
 , 1, 29 // REF_COMPONENT
 , Footer, 2 // COMPONENT_PROPS_ARRAY
 , 10 // CLOSE_ELEMENT
-], App_ComputeFunction])];
+], App_ComputeFunction // COMPUTE_FUNCTION
+])];
 module["exports"] = App;

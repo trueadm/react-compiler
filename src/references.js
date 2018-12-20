@@ -49,7 +49,7 @@ export function isDestructuredRef(obj) {
 
 export function isIdentifierReferenceConstant(path, state, errorOnBadIdentifier = true) {
   const node = path.node;
-  if (node.name === "undefined") {
+  if (node.name === "undefined" || node.name === "arguments") {
     return true;
   }
   if (globalBindings.has(node.name)) {

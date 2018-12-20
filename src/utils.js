@@ -456,7 +456,7 @@ export function markNodeAsDCE(node) {
     }
   } else if (t.isArrowFunctionExpression(node) || t.isFunctionExpression(node) || t.isFunctionDeclaration(node)) {
     markNodeAsDCE(node.id);
-  } else if (t.isObjectExpression(node) || t.isJSXElement(node) || t.isJSXFragment(node)) {
+  } else if (t.isObjectExpression(node) || t.isJSXElement(node) || t.isJSXFragment(node) || t.isObjectProperty(node)) {
     // TODO
   } else {
     invariant(false, "TODO");

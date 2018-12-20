@@ -1,33 +1,28 @@
 import { createTemplateNode } from "react-compiler-runtime";
-
-// props:{val: "hello world"}
-var Component2_ComputeFunction = function (children) {
-  return [children];
-},
-    Component2 = function () {
-  return (// Component2 OPCODES
-    [0 // COMPONENT
-    , "Component2" // DISPLAY_NAME
-    , createTemplateNode([20 // UNCONDITIONAL_TEMPLATE
-    , [9 // OPEN_ELEMENT_SPAN
-    , 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
-    , 0, 10 // CLOSE_ELEMENT
-    ], Component2_ComputeFunction // COMPUTE_FUNCTION
-    ])]
-  );
-};
-
-var Component_ComputeFunction = function (val) {
-  return [[val]];
-},
-    Component = // Component OPCODES
+var Component = // Component OPCODES
 [0 // COMPONENT
 , "Component" // DISPLAY_NAME
-, ["val"] // ROOT_PROPS_SHAPE
+, null // ROOT_PROPS_SHAPE
 , createTemplateNode([20 // UNCONDITIONAL_TEMPLATE
-, [29 // REF_COMPONENT
-, Component2, 0 // COMPONENT_PROPS_ARRAY
-], Component_ComputeFunction // COMPUTE_FUNCTION
+, [12 // OPEN_FRAGMENT
+, 8 // OPEN_ELEMENT_DIV
+, 41 // ELEMENT_STATIC_CHILDREN_VALUE
+, "Hello world", 10 // CLOSE_ELEMENT
+, 12 // OPEN_FRAGMENT
+, 9 // OPEN_ELEMENT_SPAN
+, 41 // ELEMENT_STATIC_CHILDREN_VALUE
+, "123", 10 // CLOSE_ELEMENT
+, 40 // ELEMENT_STATIC_CHILD_VALUE
+, "456", 7 // OPEN_VOID_ELEMENT
+, "input", 60 // STATIC_PROP
+, "type", "text", 11 // CLOSE_VOID_ELEMENT
+, 12 // OPEN_FRAGMENT
+, 12 // OPEN_FRAGMENT
+, 41 // ELEMENT_STATIC_CHILDREN_VALUE
+, "789", 13 // CLOSE_FRAGMENT
+, 13 // CLOSE_FRAGMENT
+, 13 // CLOSE_FRAGMENT
+, 13 // CLOSE_FRAGMENT
+], null // COMPUTE_FUNCTION
 ])];
-
 module["exports"] = Component;

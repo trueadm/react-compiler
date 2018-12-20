@@ -389,10 +389,8 @@ function createOpcodesForReactElementHostNodeChild(childPath, onlyChild, opcodes
   }
 }
 
-export function createOpcodesForJSXFragment(path, opcodes, state, componentPath) {
-  const children = path.get("children");
-
-  createOpcodesForReactFragment(children, opcodes, state, componentPath);
+export function createOpcodesForJSXFragment(childrenPath, opcodes, state, componentPath) {
+  createOpcodesForReactFragment(childrenPath, opcodes, state, componentPath);
 }
 
 function createOpcodesForReactCreateElementFragment(args, opcodes, state, componentPath) {
@@ -1178,7 +1176,7 @@ function createOpcodesForJSXElementType(typePath, attributesPath, childrenPath, 
   } else if (isReferenceReactContextConsumer(typePath, state)) {
     createOpcodesForReactContextConsumer(typePath, childrenPath, opcodes, state, componentPath);
   } else if (isReactFragment(typePath, state)) {
-    createOpcodesForJSXFragment(typePath, opcodes, state, componentPath);
+    createOpcodesForJSXFragment(childrenPath, opcodes, state, componentPath);
   } else if (isHostComponentType(typePath, state)) {
     const isVoidElement = voidElements.has(typeName);
     if (typeName === "div") {

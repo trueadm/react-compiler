@@ -9,8 +9,7 @@ var __opcodes__1 = // renderDivWithText OPCODES
 ], null // COMPUTE_FUNCTION
 ];
 
-function App_ComputeFunction // COMPUTE_FUNCTION
-() {
+function App_ComputeFunction() {
   var __cached__1;
 
   var __cached__0;
@@ -41,5 +40,6 @@ var App = // App OPCODES
 , 41 // ELEMENT_STATIC_CHILDREN_VALUE
 , "Span!", 10 // CLOSE_ELEMENT
 , 10 // CLOSE_ELEMENT
-], App_ComputeFunction])];
+], App_ComputeFunction // COMPUTE_FUNCTION
+])];
 module["exports"] = App;

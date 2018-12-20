@@ -1,7 +1,6 @@
 import { createTemplateNode } from "react-compiler-runtime";
 
-function Foo_ComputeFunction // COMPUTE_FUNCTION
-(text) {
+function Foo_ComputeFunction(text) {
   return [text];
 }
 
@@ -16,6 +15,7 @@ export default function Foo() {
     , "em", 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
     , 0, 10 // CLOSE_ELEMENT
     , 10 // CLOSE_ELEMENT
-    ], Foo_ComputeFunction])]
+    ], Foo_ComputeFunction // COMPUTE_FUNCTION
+    ])]
   );
 }

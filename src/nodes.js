@@ -267,7 +267,7 @@ export function createOpcodesForNode(path, refPath, opcodes, state, componentPat
   } else if (t.isJSXElement(node)) {
     createOpcodesForJSXElement(refPath, opcodes, state, componentPath);
   } else if (t.isJSXFragment(node)) {
-    createOpcodesForJSXFragment(refPath, opcodes, state, componentPath);
+    createOpcodesForJSXFragment(refPath.get("children"), opcodes, state, componentPath);
   } else if (typeof node === "string") {
     createOpcodesForString(node, opcodes, isRoot, processNodeValueFunc);
   } else if (t.isJSXText(node) || isPrimitive(node)) {

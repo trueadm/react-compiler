@@ -6,8 +6,7 @@ const {
 
 import type { HeaderProps } from "./type";
 
-function Header_ComputeFunction // COMPUTE_FUNCTION
-(x) {
+function Header_ComputeFunction(x) {
   return [x];
 }
 
@@ -19,7 +18,8 @@ function Header() {
     , [8 // OPEN_ELEMENT_DIV
     , 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
     , 0, 10 // CLOSE_ELEMENT
-    ], Header_ComputeFunction])]
+    ], Header_ComputeFunction // COMPUTE_FUNCTION
+    ])]
   );
 }
 

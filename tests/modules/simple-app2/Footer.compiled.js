@@ -1,8 +1,7 @@
 import { createTemplateNode } from "react-compiler-runtime";
 import type { FooterProps } from "./type";
 
-function Footer_ComputeFunction // COMPUTE_FUNCTION
-(x) {
+function Footer_ComputeFunction(x) {
   return [x];
 }
 
@@ -14,7 +13,8 @@ function Footer() {
     , [8 // OPEN_ELEMENT_DIV
     , 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
     , 0, 10 // CLOSE_ELEMENT
-    ], Footer_ComputeFunction])]
+    ], Footer_ComputeFunction // COMPUTE_FUNCTION
+    ])]
   );
 }
 
