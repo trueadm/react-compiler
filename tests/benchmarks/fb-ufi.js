@@ -148,8 +148,22 @@ function UFI2ErrorBoundary({
   return React.createElement(ErrorBoundary, otherProps, children);
 }
 
-function UFI2CommentsProvider() {
-  return null;
+function UFI2CommentsProvider({ children, feedback }) {
+  // TODO
+  // var orderingMode = $UFI2CommentsRenderer_getOrderingMode();
+  // var state = {
+    
+  // };
+  // var availableCommentIDs = state.availableCommentIDs;
+  // var isCommentsListExpanded = state.isCommentsListExpanded;
+  // var visibleCommentsWindow = state.visibleCommentsWindow;
+  // var totalCount =
+  //   ((_ref9 = feedback) != null
+  //     ? (_ref9 = _ref9.display_comments) != null
+  //       ? _ref9.count
+  //       : _ref9
+  //     : _ref9) || 0;
+  return null
 }
 
 function UFI2ReactionsCount({ feedback, feedbackTargetID }: { feedback: FeedbackType, feedbackTargetID: string }) {
@@ -501,21 +515,12 @@ function Tooltip({
 }) {
   var $Tooltip_container = document.createElement("div");
 
-  if (display === "block") {
-    return React.createElement(
-      "div",
-      otherProps,
-      tooltip !== null ? createTooltipPortal(tooltip, $Tooltip_container) : null,
-      children,
-    );
-  } else {
-    return React.createElement(
-      "span",
-      otherProps,
-      tooltip !== null ? createTooltipPortal(tooltip, $Tooltip_container) : null,
-      children,
-    );
-  }
+  return React.createElement(
+    display === "block" ? "div" : "span",
+    otherProps,
+    tooltip !== null ? createTooltipPortal(tooltip, $Tooltip_container) : null,
+    children,
+  );
 }
 
 Tooltip.defaultProps = { display: "inline" };
@@ -1158,29 +1163,17 @@ function ShimButton({
       children,
     );
   }
-  return inline
-    ? React.createElement(
-        "span",
-        Object.assign({}, buttonProps, {
-          "aria-pressed": pressed,
-          ref: null,
-          role: "button",
-          onKeyPress: null,
-        }),
+  return React.createElement(
+    inline ? "span" : "div",
+    Object.assign({}, buttonProps, {
+      "aria-pressed": pressed,
+      ref: null,
+      role: "button",
+      onKeyPress: null,
+    }),
 
-        children,
-      )
-    : React.createElement(
-        "div",
-        Object.assign({}, buttonProps, {
-          "aria-pressed": pressed,
-          ref: null,
-          role: "button",
-          onKeyPress: null,
-        }),
-
-        children,
-      );
+    children,
+  );
 }
 
 function UFI2AnswerActionLink({
