@@ -1,6 +1,6 @@
-var React = require("react");
+import React from "react";
 
-function Component() {
+export function Component() {
   return (
     <>
       <div>Hello world</div>
@@ -9,9 +9,7 @@ function Component() {
         456
         <input type="text" />
         <>
-          <>
-            789
-          </>
+          <>789</>
         </>
       </>
     </>
@@ -19,5 +17,3 @@ function Component() {
 }
 
 Component.compileRootComponent = true;
-
-module.exports = Component;

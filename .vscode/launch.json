@@ -19,7 +19,7 @@
       "name": "Run sandbox",
       "program": "${workspaceFolder}/lib/cli.js",
       "args": [
-        "--entry=sandbox/App.js",
+        "--entry=node-sandbox/App.js",
       ]
     }
   ]

@@ -3,4 +3,5 @@ flow-typed
 tests/**/*.js
 babel.config.js
 scripts/test-externs.js
-sandbox
+browser-sandbox
+node-sandbox

@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "description": "Browser sandbox for the React compiler",
+  "scripts": {
+    "build-compiler": "node ../lib/cli.js --entry=src/App.js",
+    "build-bundle": "rollup --config rollup-config.js",
+    "build": "yarn build-compiler && yarn build-bundle"
+  },
+  "author": "Dominic Gannaway",
+  "license": "MIT",
+  "devDependencies": {
+    "react": "^16.7.0",
+    "react-compiler-runtime": "file:../scripts/compiler-runtime/",
+    "rollup": "^1.0.1",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0"
+  }
+}
