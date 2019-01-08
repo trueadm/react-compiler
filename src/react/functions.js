@@ -13,7 +13,6 @@ import {
 import { getTypeAnnotationForExpression } from "../annotations";
 import { applyCachedRuntimeValues } from "../transforms";
 import { createOpcodesForNode } from "../nodes";
-import { isDevMode } from "../flags";
 import invariant from "../invariant";
 import * as t from "@babel/types";
 
@@ -321,11 +320,6 @@ export function createOpcodesForReactFunctionComponent(componentPath, state) {
   );
   result.isStatic = isStatic;
 
-  if (isDevMode) {
-    pushOpcodeValue(opcodes, name, "DISPLAY_NAME");
-  } else {
-    pushOpcodeValue(opcodes, t.nullLiteral(), "DISPLAY_NAME");
-  }
   if (state.isRootComponent) {
     if (shapeOfPropsObject !== null) {
       pushOpcodeValue(

@@ -1,7 +1,6 @@
 import { createTemplateNode } from "react-compiler-runtime";
 export var Component = // Component OPCODES
 [0 // COMPONENT
-, "Component" // DISPLAY_NAME
 , null // ROOT_PROPS_SHAPE
 , createTemplateNode([20 // UNCONDITIONAL_TEMPLATE
 , [12 // OPEN_FRAGMENT

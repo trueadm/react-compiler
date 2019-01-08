@@ -735,19 +735,13 @@ function renderUnconditionalTemplate(index, opcodes, runtimeValues, state) {
 }
 
 function renderComponent(index, opcodes, runtimeValues, state) {
-  const displayName = opcodes[++index];
   let currentComponent = state.currentComponent;
   const previousComponent = currentComponent;
   if (currentComponent === null) {
     const rootPropsShape = opcodes[++index];
-    currentComponent = state.currentComponent = createRootComponent(
-      displayName,
-      state.rootPropsObject,
-      rootPropsShape,
-      false,
-    );
+    currentComponent = state.currentComponent = createRootComponent(state.rootPropsObject, rootPropsShape, false);
   } else {
-    state.currentComponent = createComponent(displayName, state.propsArray, false);
+    state.currentComponent = createComponent(state.propsArray, false);
   }
   const templateNode = opcodes[++index];
   const creationOpcodes = templateNode.c;
@@ -763,21 +757,15 @@ function renderComponent(index, opcodes, runtimeValues, state) {
 }
 
 function renderComponentWithHooks(index, opcodes, runtimeValues, state) {
-  const displayName = opcodes[++index];
   let currentComponent = state.currentComponent;
 
   state.computeFunctionUsesHooks = true;
   const previousComponent = state.currentComponent;
   if (currentComponent === null) {
     const rootPropsShape = opcodes[++index];
-    currentComponent = state.currentComponent = createRootComponent(
-      displayName,
-      state.rootPropsObject,
-      rootPropsShape,
-      false,
-    );
+    currentComponent = state.currentComponent = createRootComponent(state.rootPropsObject, rootPropsShape, false);
   } else {
-    state.currentComponent = createComponent(displayName, state.propsArray, true);
+    state.currentComponent = createComponent(state.propsArray, true);
   }
   const templateNode = opcodes[++index];
   const creationOpcodes = templateNode.c;

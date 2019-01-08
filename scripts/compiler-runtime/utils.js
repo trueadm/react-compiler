@@ -182,7 +182,7 @@ function popCurrentContextValue(context, state) {
   }
 }
 
-function createRootComponent(displayName, rootProps, rootPropsShape, usesHooks) {
+function createRootComponent(rootProps, rootPropsShape, usesHooks) {
   const props = [];
   if (rootPropsShape !== null) {
     for (let i = 0, length = rootPropsShape.length; i < length; i++) {
@@ -190,12 +190,11 @@ function createRootComponent(displayName, rootProps, rootPropsShape, usesHooks) 
       props.push(rootProps[propShape]);
     }
   }
-  return createComponent(displayName, props, usesHooks);
+  return createComponent(props, usesHooks);
 }
 
-function createComponent(displayName, props, usesHooks) {
+function createComponent(props, usesHooks) {
   return {
-    displayName,
     props,
     usesHooks,
   };
