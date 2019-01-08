@@ -392,7 +392,7 @@
     noOp, // EMPTY 5
     noOp, // OPEN_ELEMENT: 6,
     noOp, // OPEN_VOID_ELEMENT: 7,
-    noOp, // OPEN_ELEMENT_DIV: 8,
+    renderMountOpenDivElement, // OPEN_ELEMENT_DIV: 8,
     noOp, // OPEN_ELEMENT_SPAN: 9,
     noOp, // CLOSE_ELEMENT: 10,
     noOp, // CLOSE_ELEMENT: 11,
@@ -425,7 +425,7 @@
     noOp, // EMPTY 38
     noOp, // EMPTY 39
     noOp, // ELEMENT_STATIC_CHILD_VALUE: 40,
-    noOp, // ELEMENT_STATIC_CHILDREN_VALUE: 41,
+    renderMountStaticChildrenValue, // ELEMENT_STATIC_CHILDREN_VALUE: 41,
     noOp, // ELEMENT_DYNAMIC_CHILD_VALUE: 42,
     noOp, // ELEMENT_DYNAMIC_CHILDREN_VALUE: 43,
     noOp, // ELEMENT_DYNAMIC_CHILD_TEMPLATE_FROM_FUNC_CALL: 44,
@@ -535,6 +535,14 @@
     0, // DYNAMIC_PROP_REF: 72,
   ];
 
+  function createElement(tagName) {
+    return document.createElement(tagName);
+  }
+
+  function appendChild(parentElement, element) {
+    parentElement.appendChild(element);
+  }
+
   function noOp(index, opcodes, runtimeValues, state) {
     return index;
   }
@@ -544,6 +552,19 @@
   }
 
   function renderMountCloseFragment(index, opcodes, runtimeValues, state) {
+    return index;
+  }
+
+  function renderMountOpenDivElement(index, opcodes, runtimeValues, state) {
+    const elem = createElement("div");
+    state.currentNode = elem;
+    state.nodeStack[state.nodeStackIndex++] = elem;
+    return index;
+  }
+
+  function renderMountStaticChildrenValue(index, opcodes, runtimeValues, state) {
+    const staticTextContent = opcodes[++index];
+    state.currentNode.textContext = staticTextContent;
     return index;
   }
 
@@ -597,14 +618,15 @@
       } else {
         index = renderOpcode(index, opcodes, runtimeValues, state) + 1;
       }
-      index++;
     }
   }
 
   function createState$1(rootPropsObject) {
     return {
       currentComponent: null,
-      currentElement: null,
+      currentNode: null,
+      nodeStack: [],
+      nodeStackIndex: 0,
       propsArray: emptyArray$1,
       rootPropsObject,
     };
@@ -618,6 +640,7 @@
       state = createState$1(memoizedProps);
       rootFiber.state = state;
       renderMountOpcodes(mountOpcodes, emptyArray$1, state);
+      appendChild(DOMContainer, state.currentNode);
     }
   }
 

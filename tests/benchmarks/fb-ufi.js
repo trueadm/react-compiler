@@ -148,7 +148,7 @@ function UFI2ErrorBoundary({
   return React.createElement(ErrorBoundary, otherProps, children);
 }
 
-function UFI2CommentsProvider({ children, feedback }) {
+function UFI2CommentsProvider({ children, feedback }: { children: React.Node, feedback: FeedbackType }) {
   // TODO
   // var orderingMode = $UFI2CommentsRenderer_getOrderingMode();
   // var state = {
