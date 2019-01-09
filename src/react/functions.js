@@ -426,10 +426,18 @@ function convertFunctionComponentToComputeFunctionAndEmitOpcodes(
       if (isStatic) {
         componentPath.replaceWith(t.variableDeclaration("var", [t.variableDeclarator(identifier, opcodesArray)]));
       } else {
-        componentPath.replaceWithMultiple([
-          computeFunction,
-          t.variableDeclaration("var", [t.variableDeclarator(identifier, opcodesArray)]),
-        ]);
+        const opcodesArrayDeclaration = t.variableDeclaration("var", [t.variableDeclarator(identifier, opcodesArray)]);
+        if (
+          t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
+          t.isExportNamedDeclaration(componentPath.parentPath.node)
+        ) {
+          const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
+            ? t.exportDefaultDeclaration(opcodesArrayDeclaration)
+            : t.exportNamedDeclaration(opcodesArrayDeclaration, []);
+          componentPath.parentPath.replaceWithMultiple([computeFunction, exportNode]);
+        } else {
+          componentPath.replaceWithMultiple([computeFunction, opcodesArrayDeclaration]);
+        }
       }
     } else {
       const arrayWrapperFunction = t.functionDeclaration(
@@ -446,7 +454,7 @@ function convertFunctionComponentToComputeFunctionAndEmitOpcodes(
         ) {
           const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
             ? t.exportDefaultDeclaration(arrayWrapperFunction)
-            : t.isExportNamedDeclaration(arrayWrapperFunction);
+            : t.exportNamedDeclaration(arrayWrapperFunction, []);
           componentPath.parentPath.replaceWithMultiple([computeFunction, exportNode]);
         } else {
           componentPath.replaceWithMultiple([computeFunction, arrayWrapperFunction]);

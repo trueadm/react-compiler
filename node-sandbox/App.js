@@ -1,15 +1,15 @@
-var React = require("react");
+import React from "react";
 
-function Component() {
+export function Component({ val }: { val: string }) {
   return (
     <>
       <div>Hello world</div>
       <>
-        <span>123</span>
+        <span>{val}</span>
         456
         <input type="text" />
         <>
-          <>789</>
+          <>{val}</>
         </>
       </>
     </>
@@ -17,5 +17,3 @@ function Component() {
 }
 
 Component.compileRootComponent = true;
-
-module.exports = Component;

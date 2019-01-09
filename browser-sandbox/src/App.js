@@ -1,15 +1,15 @@
 import React from "react";
 
-export function Component() {
+export function Component({ val }: { val: string }) {
   return (
     <>
       <div>Hello world</div>
       <>
-        <span>123</span>
+        <span>{val}</span>
         456
         <input type="text" />
         <>
-          <>789</>
+          <>{val}</>
         </>
       </>
     </>

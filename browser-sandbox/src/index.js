@@ -6,4 +6,4 @@ import { render } from "react-compiler-runtime/render";
 
 const root = document.getElementById("root");
 
-render(React.createElement(Component), root);
+render(React.createElement(Component, { val: "Hello world" }), root);

@@ -46,8 +46,8 @@ const mountOpcodeRenderFuncs = [
   noOp, // EMPTY 39
   renderMountStaticChildValue, // ELEMENT_STATIC_CHILD_VALUE: 40,
   renderMountStaticChildrenValue, // ELEMENT_STATIC_CHILDREN_VALUE: 41,
-  noOp, // ELEMENT_DYNAMIC_CHILD_VALUE: 42,
-  noOp, // ELEMENT_DYNAMIC_CHILDREN_VALUE: 43,
+  renderMountDynamicChildValue, // ELEMENT_DYNAMIC_CHILD_VALUE: 42,
+  renderMountDynamicChildrenValue, // ELEMENT_DYNAMIC_CHILDREN_VALUE: 43,
   noOp, // ELEMENT_DYNAMIC_CHILD_TEMPLATE_FROM_FUNC_CALL: 44,
   noOp, // ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL: 45,
   noOp, // ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE: 46,
@@ -265,9 +265,30 @@ function renderMountStaticChildrenValue(index, opcodes, runtimeValues, state) {
   return index;
 }
 
+function renderMountDynamicChildrenValue(index, opcodes, runtimeValues, state) {
+  const dynamicTextContentPointer = opcodes[++index];
+  const dynamicTextContent = runtimeValues[dynamicTextContentPointer];
+  state.currentNode.textContent = dynamicTextContent;
+  return index;
+}
+
 function renderMountStaticChildValue(index, opcodes, runtimeValues, state) {
   const staticTextChild = opcodes[++index];
   const textNode = createTextNode(staticTextChild);
+  const currentNode = state.currentNode;
+
+  if (currentNode === null) {
+    state.currentNode = textNode;
+  } else {
+    appendChild(currentNode, textNode);
+  }
+  return index;
+}
+
+function renderMountDynamicChildValue(index, opcodes, runtimeValues, state) {
+  const dynamicTextChildPointer = opcodes[++index];
+  const dynamicTextChild = runtimeValues[dynamicTextChildPointer];
+  const textNode = createTextNode(dynamicTextChild);
   const currentNode = state.currentNode;
 
   if (currentNode === null) {

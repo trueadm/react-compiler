@@ -31,9 +31,13 @@
   };
   var reactCompilerRuntime_2 = reactCompilerRuntime.createTemplateNode;
 
+  function Component_ComputeFunction(val) {
+    return [val];
+  }
+
   var Component = // Component OPCODES
   [0 // COMPONENT
-  , null // ROOT_PROPS_SHAPE
+  , ["val"] // ROOT_PROPS_SHAPE
   , reactCompilerRuntime_2([20 // UNCONDITIONAL_TEMPLATE
   , [12 // OPEN_FRAGMENT
   , 8 // OPEN_ELEMENT_DIV
@@ -41,20 +45,20 @@
   , "Hello world", 10 // CLOSE_ELEMENT
   , 12 // OPEN_FRAGMENT
   , 9 // OPEN_ELEMENT_SPAN
-  , 41 // ELEMENT_STATIC_CHILDREN_VALUE
-  , "123", 10 // CLOSE_ELEMENT
+  , 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
+  , 0, 10 // CLOSE_ELEMENT
   , 40 // ELEMENT_STATIC_CHILD_VALUE
   , "456", 7 // OPEN_VOID_ELEMENT
   , "input", 60 // STATIC_PROP
   , "type", "text", 11 // CLOSE_VOID_ELEMENT
   , 12 // OPEN_FRAGMENT
   , 12 // OPEN_FRAGMENT
-  , 40 // ELEMENT_STATIC_CHILD_VALUE
-  , "789", 13 // CLOSE_FRAGMENT
+  , 42 // ELEMENT_DYNAMIC_CHILD_VALUE
+  , 0, 13 // CLOSE_FRAGMENT
   , 13 // CLOSE_FRAGMENT
   , 13 // CLOSE_FRAGMENT
   , 13 // CLOSE_FRAGMENT
-  ], null // COMPUTE_FUNCTION
+  ], Component_ComputeFunction // COMPUTE_FUNCTION
   ])];
 
   function createCommonjsModule(fn, module) {
@@ -426,8 +430,8 @@
     noOp, // EMPTY 39
     renderMountStaticChildValue, // ELEMENT_STATIC_CHILD_VALUE: 40,
     renderMountStaticChildrenValue, // ELEMENT_STATIC_CHILDREN_VALUE: 41,
-    noOp, // ELEMENT_DYNAMIC_CHILD_VALUE: 42,
-    noOp, // ELEMENT_DYNAMIC_CHILDREN_VALUE: 43,
+    renderMountDynamicChildValue, // ELEMENT_DYNAMIC_CHILD_VALUE: 42,
+    renderMountDynamicChildrenValue, // ELEMENT_DYNAMIC_CHILDREN_VALUE: 43,
     noOp, // ELEMENT_DYNAMIC_CHILD_TEMPLATE_FROM_FUNC_CALL: 44,
     noOp, // ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL: 45,
     noOp, // ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE: 46,
@@ -645,9 +649,30 @@
     return index;
   }
 
+  function renderMountDynamicChildrenValue(index, opcodes, runtimeValues, state) {
+    const dynamicTextContentPointer = opcodes[++index];
+    const dynamicTextContent = runtimeValues[dynamicTextContentPointer];
+    state.currentNode.textContent = dynamicTextContent;
+    return index;
+  }
+
   function renderMountStaticChildValue(index, opcodes, runtimeValues, state) {
     const staticTextChild = opcodes[++index];
     const textNode = createTextNode(staticTextChild);
+    const currentNode = state.currentNode;
+
+    if (currentNode === null) {
+      state.currentNode = textNode;
+    } else {
+      appendChild(currentNode, textNode);
+    }
+    return index;
+  }
+
+  function renderMountDynamicChildValue(index, opcodes, runtimeValues, state) {
+    const dynamicTextChildPointer = opcodes[++index];
+    const dynamicTextChild = runtimeValues[dynamicTextChildPointer];
+    const textNode = createTextNode(dynamicTextChild);
     const currentNode = state.currentNode;
 
     if (currentNode === null) {
@@ -773,6 +798,6 @@
 
   const root = document.getElementById("root");
 
-  render_2(react.createElement(Component), root);
+  render_2(react.createElement(Component, { val: "Hello world" }), root);
 
 }));
