@@ -409,7 +409,7 @@ function createOpcodesForReactFragment(children, opcodes, state, componentPath) 
       createOpcodesForReactElementHostNodeChild(children[i], false, opcodes, state, componentPath);
     }
   } else if (children.length === 1) {
-    createOpcodesForReactElementHostNodeChild(children[0], true, opcodes, state, componentPath);
+    createOpcodesForReactElementHostNodeChild(children[0], false, opcodes, state, componentPath);
   }
   pushOpcode(opcodes, "CLOSE_FRAGMENT");
 }

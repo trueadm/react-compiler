@@ -671,10 +671,10 @@ function renderMultiConditional(index, opcodes, runtimeValues, state) {
 
 function renderStaticProp(index, opcodes, runtimeValues, state) {
   const propName = opcodes[++index];
-  const staticPropValueOrPartialTemplate = opcodes[++index];
+  const staticPropValue = opcodes[++index];
 
-  if (staticPropValueOrPartialTemplate !== null && staticPropValueOrPartialTemplate !== undefined) {
-    state.renderString += ` ${propName}="${staticPropValueOrPartialTemplate}"`;
+  if (staticPropValue !== null && staticPropValue !== undefined) {
+    state.renderString += ` ${propName}="${staticPropValue}"`;
   }
   return index;
 }

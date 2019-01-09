@@ -1,6 +1,6 @@
 "use strict";
 
-const { createComponent, createRootComponent, emptyArray, reactElementSymbol } = require("./utils");
+const { createComponent, createRootComponent, emptyArray, isArray, reactElementSymbol } = require("./utils");
 const rootFibers = new Map();
 
 const mountOpcodeRenderFuncs = [
@@ -10,11 +10,11 @@ const mountOpcodeRenderFuncs = [
   noOp, // DYNAMIC_VALUE: 3,
   noOp, // EMPTY 4
   noOp, // EMPTY 5
-  noOp, // OPEN_ELEMENT: 6,
-  noOp, // OPEN_VOID_ELEMENT: 7,
+  renderMountOpenElement, // OPEN_ELEMENT: 6,
+  renderMountOpenVoidElement, // OPEN_VOID_ELEMENT: 7,
   renderMountOpenDivElement, // OPEN_ELEMENT_DIV: 8,
-  noOp, // OPEN_ELEMENT_SPAN: 9,
-  noOp, // CLOSE_ELEMENT: 10,
+  renderMountOpenSpanElement, // OPEN_ELEMENT_SPAN: 9,
+  renderMountCloseElement, // CLOSE_ELEMENT: 10,
   noOp, // CLOSE_ELEMENT: 11,
   renderMountOpenFragment, // OPEN_FRAGMENT: 12,
   renderMountCloseFragment, // CLOSE_FRAGMENT: 13,
@@ -44,7 +44,7 @@ const mountOpcodeRenderFuncs = [
   noOp, // EMPTY 37
   noOp, // EMPTY 38
   noOp, // EMPTY 39
-  noOp, // ELEMENT_STATIC_CHILD_VALUE: 40,
+  renderMountStaticChildValue, // ELEMENT_STATIC_CHILD_VALUE: 40,
   renderMountStaticChildrenValue, // ELEMENT_STATIC_CHILDREN_VALUE: 41,
   noOp, // ELEMENT_DYNAMIC_CHILD_VALUE: 42,
   noOp, // ELEMENT_DYNAMIC_CHILDREN_VALUE: 43,
@@ -64,7 +64,7 @@ const mountOpcodeRenderFuncs = [
   noOp, // EMPTY 57
   noOp, // EMPTY 58
   noOp, // EMPTY 59
-  noOp, // STATIC_PROP: 60,
+  renderMountStaticProp, // STATIC_PROP: 60,
   noOp, // DYNAMIC_PROP: 61,
   noOp, // STATIC_PROP_CLASS_NAME: 62,
   noOp, // DYNAMIC_PROP_CLASS_NAME: 63,
@@ -155,36 +155,126 @@ const doesOpcodeFuncTerminate = [
   0, // DYNAMIC_PROP_REF: 72,
 ];
 
-function createElement(tagName) {
-  return document.createElement(tagName);
-}
-
-function appendChild(parentElement, element) {
-  parentElement.appendChild(element);
-}
-
 function noOp(index, opcodes, runtimeValues, state) {
   return index;
 }
 
+function createElement(tagName) {
+  return document.createElement(tagName);
+}
+
+function createTextNode(text) {
+  return document.createTextNode(text);
+}
+
+function appendChild(parentElementOrFragment, element) {
+  if (isArray(parentElementOrFragment)) {
+    parentElementOrFragment.push(element);
+  } else if (isArray(element)) {
+    for (let i = 0, length = element.length; i < length; i++) {
+      appendChild(parentElementOrFragment, element[i]);
+    }
+  } else {
+    parentElementOrFragment.appendChild(element);
+  }
+}
+
+function pushNodeOrFragment(state, nextNodeOrFragment) {
+  if (state.currentNodeIsVoidElement === true) {
+    state.currentNodeIsVoidElement = false;
+    popNodeOrFragment(state);
+  }
+  const currentNode = state.currentNode;
+  if (currentNode !== null) {
+    state.nodeStack[state.nodeStackIndex++] = currentNode;
+  }
+  state.currentNode = nextNodeOrFragment;
+}
+
+function popNodeOrFragment(state) {
+  if (state.currentNodeIsVoidElement === true) {
+    state.currentNodeIsVoidElement = false;
+    popNodeOrFragment(state);
+  }
+  let nodeStackIndex = state.nodeStackIndex;
+
+  if (nodeStackIndex !== 0) {
+    const nodeStack = state.nodeStack;
+    const childNode = state.currentNode;
+    nodeStackIndex = --state.nodeStackIndex;
+    const parentNode = nodeStack[nodeStackIndex];
+    state.currentNode = parentNode;
+    appendChild(parentNode, childNode);
+    nodeStack[nodeStackIndex] = null;
+  }
+}
+
+function renderMountStaticProp(index, opcodes, runtimeValues, state) {
+  const propName = opcodes[++index];
+  const staticPropValue = opcodes[++index];
+
+  state.currentNode.setAttribute(propName, staticPropValue);
+  return index;
+}
+
 function renderMountOpenFragment(index, opcodes, runtimeValues, state) {
+  pushNodeOrFragment(state, []);
   return index;
 }
 
 function renderMountCloseFragment(index, opcodes, runtimeValues, state) {
+  popNodeOrFragment(state);
+  return index;
+}
+
+function renderMountOpenElement(index, opcodes, runtimeValues, state) {
+  const elementTag = opcodes[++index];
+  const elem = createElement(elementTag);
+  pushNodeOrFragment(state, elem);
+  return index;
+}
+
+function renderMountOpenVoidElement(index, opcodes, runtimeValues, state) {
+  const elementTag = opcodes[++index];
+  const elem = createElement(elementTag);
+  pushNodeOrFragment(state, elem);
+  state.currentNodeIsVoidElement = true;
   return index;
 }
 
 function renderMountOpenDivElement(index, opcodes, runtimeValues, state) {
   const elem = createElement("div");
-  state.currentNode = elem;
-  state.nodeStack[state.nodeStackIndex++] = elem;
+  pushNodeOrFragment(state, elem);
+  return index;
+}
+
+function renderMountOpenSpanElement(index, opcodes, runtimeValues, state) {
+  const elem = createElement("span");
+  pushNodeOrFragment(state, elem);
+  return index;
+}
+
+function renderMountCloseElement(index, opcodes, runtimeValues, state) {
+  popNodeOrFragment(state);
   return index;
 }
 
 function renderMountStaticChildrenValue(index, opcodes, runtimeValues, state) {
   const staticTextContent = opcodes[++index];
-  state.currentNode.textContext = staticTextContent;
+  state.currentNode.textContent = staticTextContent;
+  return index;
+}
+
+function renderMountStaticChildValue(index, opcodes, runtimeValues, state) {
+  const staticTextChild = opcodes[++index];
+  const textNode = createTextNode(staticTextChild);
+  const currentNode = state.currentNode;
+
+  if (currentNode === null) {
+    state.currentNode = textNode;
+  } else {
+    appendChild(currentNode, textNode);
+  }
   return index;
 }
 
@@ -248,6 +338,7 @@ function createState(rootPropsObject) {
   return {
     currentComponent: null,
     currentNode: null,
+    currentNodeIsVoidElement: false,
     nodeStack: [],
     nodeStackIndex: 0,
     propsArray: emptyArray,
