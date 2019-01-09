@@ -29,7 +29,7 @@ const mountOpcodeRenderFuncs = [
   noOp, // TEMPLATE: 22,
   noOp, // TEMPLATE_FROM_FUNC_CALL: 23,
   noOp, // REACT_NODE_TEMPLATE_FROM_FUNC_CALL: 24,
-  noOp, // MULTI_CONDITIONAL: 25,
+  renderMountMultiConditional, // MULTI_CONDITIONAL: 25,
   noOp, // CONTEXT_CONSUMER_UNCONDITIONAL_TEMPLATE: 26,
   noOp, // CONTEXT_CONSUMER_CONDITIONAL_TEMPLATE: 27,
   noOp, // CONTEXT_CONSUMER_TEMPLATE: 28,
@@ -66,8 +66,8 @@ const mountOpcodeRenderFuncs = [
   noOp, // EMPTY 59
   renderMountStaticProp, // STATIC_PROP: 60,
   noOp, // DYNAMIC_PROP: 61,
-  noOp, // STATIC_PROP_CLASS_NAME: 62,
-  noOp, // DYNAMIC_PROP_CLASS_NAME: 63,
+  renderMountStaticClassNameProp, // STATIC_PROP_CLASS_NAME: 62,
+  renderMountDynamicClassNameProp, // DYNAMIC_PROP_CLASS_NAME: 63,
   noOp, // STATIC_PROP_VALUE: 64,
   noOp, // DYNAMIC_PROP_VALUE: 65,
   noOp, // STATIC_PROP_STYLE: 66,
@@ -155,8 +155,10 @@ const doesOpcodeFuncTerminate = [
   0, // DYNAMIC_PROP_REF: 72,
 ];
 
+const PropFlagPartialTemplate = 1;
+
 function noOp(index, opcodes, runtimeValues, state) {
-  return index;
+  return index + 1;
 }
 
 function createElement(tagName) {
@@ -209,11 +211,56 @@ function popNodeOrFragment(state) {
   }
 }
 
+function renderMountMultiConditional(index, opcodes, runtimeValues, state) {
+  const conditionalSize = opcodes[++index];
+  const startingIndex = index;
+  const conditionalDefaultIndex = conditionalSize - 1;
+  for (let conditionalIndex = 0; conditionalIndex < conditionalSize; ++conditionalIndex) {
+    if (conditionalIndex === conditionalDefaultIndex) {
+      const defaultCaseOpcodes = opcodes[++index];
+      if (defaultCaseOpcodes !== null) {
+        renderMountOpcodes(defaultCaseOpcodes, runtimeValues, state);
+      }
+    } else {
+      const caseConditionPointer = opcodes[++index];
+      const caseConditionValue = runtimeValues[caseConditionPointer];
+      if (caseConditionValue) {
+        const caseOpcodes = opcodes[++index];
+        if (caseOpcodes !== null) {
+          renderMountOpcodes(caseOpcodes, runtimeValues, state);
+        }
+        break;
+      }
+      ++index;
+    }
+  }
+  return startingIndex + (conditionalSize - 1) * 2 + 1;
+}
+
 function renderMountStaticProp(index, opcodes, runtimeValues, state) {
   const propName = opcodes[++index];
   const staticPropValue = opcodes[++index];
 
   state.currentNode.setAttribute(propName, staticPropValue);
+  return index;
+}
+
+function renderMountStaticClassNameProp(index, opcodes, runtimeValues, state) {
+  const staticClassName = opcodes[++index];
+  state.currentNode.className = staticClassName;
+  return index;
+}
+
+function renderMountDynamicClassNameProp(index, opcodes, runtimeValues, state) {
+  const propInformation = opcodes[++index];
+  const dynamicClassNamePointer = opcodes[++index];
+  const dynamicClassName = runtimeValues[dynamicClassNamePointer];
+
+  if (propInformation & PropFlagPartialTemplate) {
+    throw new Error("TODO renderMountDynamicClassNameProp");
+  } else if (dynamicClassName !== null && dynamicClassName !== undefined) {
+    state.currentNode.className = dynamicClassName;
+  }
   return index;
 }
 

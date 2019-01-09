@@ -1,18 +1,24 @@
 import React from "react";
 
-export function Component({ val }: { val: string }) {
+export function Component({ cond, defaultClassName }: { cond: boolean, defaultClassName: string }) {
+  let children = [
+    <li key="default" className={defaultClassName}>
+      Default item
+    </li>
+  ];
+
+  if (cond) {
+    children = [
+      <li key="generic" className={"generic-item"}>
+        Generic item
+      </li>
+    ];
+  }
+
   return (
-    <>
-      <div>Hello world</div>
-      <>
-        <span>{val}</span>
-        456
-        <input type="text" />
-        <>
-          <>{val}</>
-        </>
-      </>
-    </>
+    <ul id="list-view" className={"list"}>
+      {children}
+    </ul>
   );
 }
 

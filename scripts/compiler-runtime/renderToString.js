@@ -704,12 +704,12 @@ function renderStaticClassNameProp(index, opcodes, runtimeValues, state) {
 function renderDynamicClassNameProp(index, opcodes, runtimeValues, state) {
   const propInformation = opcodes[++index];
   const dynamicClassNamePointer = opcodes[++index];
-  const dynamicClassNameOrPartialTemplate = runtimeValues[dynamicClassNamePointer];
+  const dynamicClassName = runtimeValues[dynamicClassNamePointer];
 
   if (propInformation & PropFlagPartialTemplate) {
     throw new Error("TODO renderDynamicClassNameProp");
-  } else if (dynamicClassNameOrPartialTemplate !== null && dynamicClassNameOrPartialTemplate !== undefined) {
-    state.renderString += ` class="${escapeText(dynamicClassNameOrPartialTemplate)}"`;
+  } else if (dynamicClassName !== null && dynamicClassName !== undefined) {
+    state.renderString += ` class="${escapeText(dynamicClassName)}"`;
   }
   return index;
 }

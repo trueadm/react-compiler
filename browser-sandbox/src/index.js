@@ -5,5 +5,6 @@ import React from "react";
 import { render } from "react-compiler-runtime/render";
 
 const root = document.getElementById("root");
+const props = { cond: false, defaultClassName: "default-item" };
 
-render(React.createElement(Component, { val: "Hello world" }), root);
+render(React.createElement(Component, props), root);
