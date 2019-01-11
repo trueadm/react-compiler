@@ -1,12 +1,13 @@
 import commonjs from "rollup-plugin-commonjs";
 import nodeResolve from "rollup-plugin-node-resolve";
 import replace from "rollup-plugin-replace";
-import babel from 'rollup-plugin-babel';
+import babel from "rollup-plugin-babel";
+import closure from 'rollup-plugin-google-closure-compiler';
 
 export default {
   input: "src/react.js",
   output: {
-    file: "react-bundle.js",
+    file: "build/react-bundle.js",
     format: "umd",
     name: "App",
   },
@@ -16,6 +17,16 @@ export default {
     }),
     babel({
       presets: [
+        [
+          "@babel/preset-env",
+          {
+            loose: true,
+            modules: false,
+            targets: {
+              ie: "11",
+            },
+          },
+        ],
         "@babel/preset-react",
       ],
     }),
@@ -24,5 +35,6 @@ export default {
       main: true,
     }),
     commonjs(),
+    closure(),
   ],
 };
