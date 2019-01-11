@@ -112,6 +112,7 @@ function createModuleState(moduleFilePath, compilerContext) {
     },
     propTemplateOpcodeCache: new Map(),
     resolveModuleBindingSync: compilerContext.resolveModuleBindingSync,
+    reconcilerValueIndex: 0,
     runtimeCachedValues: null,
     runtimeConditionals: null,
     runtimeValues: null,

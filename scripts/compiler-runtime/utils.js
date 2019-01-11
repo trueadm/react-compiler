@@ -182,7 +182,7 @@ function popCurrentContextValue(context, state) {
   }
 }
 
-function createRootComponent(rootProps, rootPropsShape, usesHooks) {
+function convertRootPropsToPropsArray(rootProps, rootPropsShape) {
   const props = [];
   if (rootPropsShape !== null) {
     for (let i = 0, length = rootPropsShape.length; i < length; i++) {
@@ -190,7 +190,11 @@ function createRootComponent(rootProps, rootPropsShape, usesHooks) {
       props.push(rootProps[propShape]);
     }
   }
-  return createComponent(props, usesHooks);
+  return props;
+}
+
+function createRootComponent(rootProps, rootPropsShape, usesHooks) {
+  return createComponent(convertRootPropsToPropsArray(rootProps, rootPropsShape), usesHooks);
 }
 
 function createComponent(props, usesHooks) {
@@ -268,6 +272,7 @@ function isReactNode(node) {
 module.exports = {
   applyState,
   cloneState,
+  convertRootPropsToPropsArray,
   createComponent,
   createElementForTesting,
   createMarkupForRoot,

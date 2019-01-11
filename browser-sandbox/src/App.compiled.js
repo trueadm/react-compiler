@@ -1,52 +1,90 @@
-function getLiBody(bodyText: string): React.Node {
-  return [bodyText];
-}
-
-var __opcodes__0 = // getLiBody OPCODES
-[20 // UNCONDITIONAL_TEMPLATE
-, [9 // OPEN_ELEMENT_SPAN
-, 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
-, 0, 10 // CLOSE_ELEMENT
-], null // COMPUTE_FUNCTION
-];
-
-function Component_ComputeFunction(cond, defaultClassName, id) {
-  var __cached__2;
-
-  var __cached__0;
-
-  __cached__2 = getLiBody("Default item");
-
-  if (__cached__0 = cond) {
-    var __cached__1;
-
-    __cached__1 = getLiBody("Generic item");
-  }
-
-  return [id + "-conntected", __cached__0, __cached__1, defaultClassName, __cached__2];
+function Component_ComputeFunction(val1, val2, val3, val4, val5, val6, val7) {
+  return [val1, val2, val3, val4, val5, val6, val7];
 }
 
 export var Component = // Component OPCODES
 [0 // COMPONENT
-, ["cond", "defaultClassName", "id"] // ROOT_PROPS_SHAPE
+, ["val1", "val2", "val3", "val4", "val5", "val6", "val7"] // ROOT_PROPS_SHAPE
 , [20 // UNCONDITIONAL_TEMPLATE
-, [6 // OPEN_ELEMENT
-, "ul", 61 // DYNAMIC_PROP
-, "id", 0, 0, 62 // STATIC_PROP_CLASS_NAME
-, "list", 25 // MULTI_CONDITIONAL
-, 2 // MULTI_CONDITIONAL_SIZE
-, 1, [6 // OPEN_ELEMENT
-, "li", 70 // STATIC_PROP_KEY
-, "generic", 62 // STATIC_PROP_CLASS_NAME
-, "generic-item", 45 // ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL
-, __opcodes__0, 2 // COMPUTE_VALUES
+, [8 // OPEN_ELEMENT_DIV
+, 0 // VALUE_POINTER_INDEX
+, 62 // STATIC_PROP_CLASS_NAME
+, "container", 6 // OPEN_ELEMENT
+, "header", 1 // VALUE_POINTER_INDEX
+, 62 // STATIC_PROP_CLASS_NAME
+, "header-bar", 6 // OPEN_ELEMENT
+, "h1", 2 // VALUE_POINTER_INDEX
+, 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
+, 0, 10 // CLOSE_ELEMENT
 , 10 // CLOSE_ELEMENT
-], [6 // OPEN_ELEMENT
-, "li", 70 // STATIC_PROP_KEY
-, "default", 63 // DYNAMIC_PROP_CLASS_NAME
-, 0, 3, 45 // ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL
-, __opcodes__0, 4 // COMPUTE_VALUES
+, 6 // OPEN_ELEMENT
+, "section", 3 // VALUE_POINTER_INDEX
+, 62 // STATIC_PROP_CLASS_NAME
+, "section-divider", 8 // OPEN_ELEMENT_DIV
+, 4 // VALUE_POINTER_INDEX
+, 6 // OPEN_ELEMENT
+, "h2", 5 // VALUE_POINTER_INDEX
+, 41 // ELEMENT_STATIC_CHILDREN_VALUE
+, "Sub-section #1", 10 // CLOSE_ELEMENT
+, 8 // OPEN_ELEMENT_DIV
+, 6 // VALUE_POINTER_INDEX
+, 62 // STATIC_PROP_CLASS_NAME
+, "details", 6 // OPEN_ELEMENT
+, "p", 7 // VALUE_POINTER_INDEX
+, 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
+, 1, 10 // CLOSE_ELEMENT
+, 9 // OPEN_ELEMENT_SPAN
+, 8 // VALUE_POINTER_INDEX
+, 63 // DYNAMIC_PROP_CLASS_NAME
+, 0, 2, 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
+, 3, 10 // CLOSE_ELEMENT
+, 6 // OPEN_ELEMENT
+, "button", 9 // VALUE_POINTER_INDEX
+, 62 // STATIC_PROP_CLASS_NAME
+, "button", 60 // STATIC_PROP
+, "id", "button1", 41 // ELEMENT_STATIC_CHILDREN_VALUE
+, "Click here!", 10 // CLOSE_ELEMENT
+, 6 // OPEN_ELEMENT
+, "button", 10 // VALUE_POINTER_INDEX
+, 62 // STATIC_PROP_CLASS_NAME
+, "button", 60 // STATIC_PROP
+, "id", "button1", 41 // ELEMENT_STATIC_CHILDREN_VALUE
+, "Click here!", 10 // CLOSE_ELEMENT
 , 10 // CLOSE_ELEMENT
-], 10 // CLOSE_ELEMENT
+, 10 // CLOSE_ELEMENT
+, 8 // OPEN_ELEMENT_DIV
+, 11 // VALUE_POINTER_INDEX
+, 6 // OPEN_ELEMENT
+, "h2", 12 // VALUE_POINTER_INDEX
+, 41 // ELEMENT_STATIC_CHILDREN_VALUE
+, "Sub-section #2", 10 // CLOSE_ELEMENT
+, 8 // OPEN_ELEMENT_DIV
+, 13 // VALUE_POINTER_INDEX
+, 62 // STATIC_PROP_CLASS_NAME
+, "details", 6 // OPEN_ELEMENT
+, "p", 14 // VALUE_POINTER_INDEX
+, 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
+, 4, 10 // CLOSE_ELEMENT
+, 9 // OPEN_ELEMENT_SPAN
+, 15 // VALUE_POINTER_INDEX
+, 63 // DYNAMIC_PROP_CLASS_NAME
+, 0, 5, 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
+, 6, 10 // CLOSE_ELEMENT
+, 6 // OPEN_ELEMENT
+, "button", 16 // VALUE_POINTER_INDEX
+, 62 // STATIC_PROP_CLASS_NAME
+, "button", 60 // STATIC_PROP
+, "id", "button1", 41 // ELEMENT_STATIC_CHILDREN_VALUE
+, "Click here!", 10 // CLOSE_ELEMENT
+, 6 // OPEN_ELEMENT
+, "button", 17 // VALUE_POINTER_INDEX
+, 62 // STATIC_PROP_CLASS_NAME
+, "button", 60 // STATIC_PROP
+, "id", "button1", 41 // ELEMENT_STATIC_CHILDREN_VALUE
+, "Click here!", 10 // CLOSE_ELEMENT
+, 10 // CLOSE_ELEMENT
+, 10 // CLOSE_ELEMENT
+, 10 // CLOSE_ELEMENT
+, 10 // CLOSE_ELEMENT
 ], Component_ComputeFunction // COMPUTE_FUNCTION
 ]];

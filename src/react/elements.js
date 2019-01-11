@@ -1105,7 +1105,11 @@ function createOpcodesForCompositeComponent(
         compositeComponentPath = propertyPath;
       }
     }
-    const childState = externalModuleState || { ...state, ...{ isRootComponent: false } };
+    const childState = externalModuleState || {
+      ...state,
+      ...{ isRootComponent: false },
+      ...{ reconcilerValueIndex: 1 },
+    };
     result = createOpcodesForReactFunctionComponent(compositeComponentPath, childState);
   }
   const { defaultProps, isStatic, shapeOfPropsObject } = result;
@@ -1179,6 +1183,7 @@ function createOpcodesForJSXElementType(typePath, attributesPath, childrenPath, 
     createOpcodesForJSXFragment(childrenPath, opcodes, state, componentPath);
   } else if (isHostComponentType(typePath, state)) {
     const isVoidElement = voidElements.has(typeName);
+    const reconcilerValueIndex = state.reconcilerValueIndex++;
     if (typeName === "div") {
       pushOpcode(opcodes, "OPEN_ELEMENT_DIV");
     } else if (typeName === "span") {
@@ -1188,6 +1193,7 @@ function createOpcodesForJSXElementType(typePath, attributesPath, childrenPath, 
     } else {
       pushOpcode(opcodes, "OPEN_ELEMENT", typeName);
     }
+    pushOpcodeValue(opcodes, reconcilerValueIndex, "VALUE_POINTER_INDEX");
     createOpcodesForJSXElementHostComponent(typeName, attributesPath, childrenPath, opcodes, state, componentPath);
     if (isVoidElement) {
       pushOpcode(opcodes, "CLOSE_VOID_ELEMENT");
@@ -1431,6 +1437,7 @@ function createOpcodesForReactCreateElementType(typePath, args, opcodes, state, 
     const nameNode = typePath.node;
     const strName = nameNode.value;
     const isVoidElement = voidElements.has(strName);
+    const reconcilerValueIndex = state.reconcilerValueIndex++;
     if (strName === "div") {
       pushOpcode(opcodes, "OPEN_ELEMENT_DIV");
     } else if (strName === "span") {
@@ -1440,6 +1447,7 @@ function createOpcodesForReactCreateElementType(typePath, args, opcodes, state, 
     } else {
       pushOpcode(opcodes, "OPEN_ELEMENT", strName);
     }
+    pushOpcodeValue(opcodes, reconcilerValueIndex, "VALUE_POINTER_INDEX");
     createOpcodesForReactCreateElementHostComponent(strName, args, opcodes, state, componentPath);
     if (isVoidElement) {
       pushOpcode(opcodes, "CLOSE_VOID_ELEMENT");

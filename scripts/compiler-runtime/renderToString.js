@@ -833,7 +833,7 @@ function renderOpenElement(index, opcodes, runtimeValues, state) {
     state.elementCloseRenderString += ` ${createMarkupForRoot()}`;
   }
   state.elementCloseRenderString += ">";
-  return index;
+  return index + 1;
 }
 
 function renderOpenVoidElement(index, opcodes, runtimeValues, state) {
@@ -852,7 +852,7 @@ function renderOpenVoidElement(index, opcodes, runtimeValues, state) {
     state.elementCloseRenderString += ` ${createMarkupForRoot()}`;
   }
   state.elementCloseRenderString += "/>";
-  return index;
+  return index + 1;
 }
 
 function renderOpenDivElement(index, opcodes, runtimeValues, state) {
@@ -871,7 +871,7 @@ function renderOpenDivElement(index, opcodes, runtimeValues, state) {
     state.elementCloseRenderString += ` ${createMarkupForRoot()}`;
   }
   state.elementCloseRenderString += ">";
-  return index;
+  return index + 1;
 }
 
 function renderOpenSpanElement(index, opcodes, runtimeValues, state) {
@@ -890,7 +890,7 @@ function renderOpenSpanElement(index, opcodes, runtimeValues, state) {
     state.elementCloseRenderString += ` ${createMarkupForRoot()}`;
   }
   state.elementCloseRenderString += ">";
-  return index;
+  return index + 1;
 }
 
 function renderCloseElement(index, opcodes, runtimeValues, state) {
