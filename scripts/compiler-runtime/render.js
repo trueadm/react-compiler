@@ -49,7 +49,7 @@ const mountOpcodeRenderFuncs = [
   renderMountDynamicChildValue, // ELEMENT_DYNAMIC_CHILD_VALUE: 42,
   renderMountDynamicChildrenValue, // ELEMENT_DYNAMIC_CHILDREN_VALUE: 43,
   noOp, // ELEMENT_DYNAMIC_CHILD_TEMPLATE_FROM_FUNC_CALL: 44,
-  noOp, // ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL: 45,
+  renderMountDynamicChildrenTemplateFromFunctionCall, // ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL: 45,
   noOp, // ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE: 46,
   noOp, // ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE: 47,
   noOp, // ELEMENT_DYNAMIC_CHILDREN_REACT_NODE_TEMPLATE: 48,
@@ -65,7 +65,7 @@ const mountOpcodeRenderFuncs = [
   noOp, // EMPTY 58
   noOp, // EMPTY 59
   renderMountStaticProp, // STATIC_PROP: 60,
-  noOp, // DYNAMIC_PROP: 61,
+  renderMountDynamicProp, // DYNAMIC_PROP: 61,
   renderMountStaticClassNameProp, // STATIC_PROP_CLASS_NAME: 62,
   renderMountDynamicClassNameProp, // DYNAMIC_PROP_CLASS_NAME: 63,
   noOp, // STATIC_PROP_VALUE: 64,
@@ -181,10 +181,10 @@ function appendChild(parentElementOrFragment, element) {
   }
 }
 
-function pushNodeOrFragment(state, nextNodeOrFragment) {
+function pushNodeOrFragment(state, nextNodeOrFragment, workInProgress) {
   if (state.currentNodeIsVoidElement === true) {
     state.currentNodeIsVoidElement = false;
-    popNodeOrFragment(state);
+    popNodeOrFragment(state, workInProgress);
   }
   const currentNode = state.currentNode;
   if (currentNode !== null) {
@@ -193,14 +193,16 @@ function pushNodeOrFragment(state, nextNodeOrFragment) {
   state.currentNode = nextNodeOrFragment;
 }
 
-function popNodeOrFragment(state) {
+function popNodeOrFragment(state, workInProgress) {
   if (state.currentNodeIsVoidElement === true) {
     state.currentNodeIsVoidElement = false;
-    popNodeOrFragment(state);
+    popNodeOrFragment(state, workInProgress);
   }
   let nodeStackIndex = state.nodeStackIndex;
 
-  if (nodeStackIndex !== 0) {
+  if (nodeStackIndex === 0) {
+    state.currentNode = null;
+  } else {
     const nodeStack = state.nodeStack;
     const childNode = state.currentNode;
     nodeStackIndex = --state.nodeStackIndex;
@@ -211,7 +213,15 @@ function popNodeOrFragment(state) {
   }
 }
 
-function renderMountMultiConditional(index, opcodes, runtimeValues, state) {
+function renderMountDynamicChildrenTemplateFromFunctionCall(index, opcodes, runtimeValues, state, workInProgress) {
+  const templateOpcodes = opcodes[++index];
+  const computeValuesPointer = opcodes[++index];
+  const computeValues = runtimeValues[computeValuesPointer];
+  renderMountOpcodes(templateOpcodes, computeValues, state, workInProgress);
+  return index;
+}
+
+function renderMountMultiConditional(index, opcodes, runtimeValues, state, workInProgress) {
   const conditionalSize = opcodes[++index];
   const startingIndex = index;
   const conditionalDefaultIndex = conditionalSize - 1;
@@ -219,7 +229,7 @@ function renderMountMultiConditional(index, opcodes, runtimeValues, state) {
     if (conditionalIndex === conditionalDefaultIndex) {
       const defaultCaseOpcodes = opcodes[++index];
       if (defaultCaseOpcodes !== null) {
-        renderMountOpcodes(defaultCaseOpcodes, runtimeValues, state);
+        renderMountOpcodes(defaultCaseOpcodes, runtimeValues, state, workInProgress);
       }
     } else {
       const caseConditionPointer = opcodes[++index];
@@ -227,7 +237,7 @@ function renderMountMultiConditional(index, opcodes, runtimeValues, state) {
       if (caseConditionValue) {
         const caseOpcodes = opcodes[++index];
         if (caseOpcodes !== null) {
-          renderMountOpcodes(caseOpcodes, runtimeValues, state);
+          renderMountOpcodes(caseOpcodes, runtimeValues, state, workInProgress);
         }
         break;
       }
@@ -242,6 +252,20 @@ function renderMountStaticProp(index, opcodes, runtimeValues, state) {
   const staticPropValue = opcodes[++index];
 
   state.currentNode.setAttribute(propName, staticPropValue);
+  return index;
+}
+
+function renderMountDynamicProp(index, opcodes, runtimeValues, state) {
+  const propName = opcodes[++index];
+  const propInformation = opcodes[++index];
+  const dynamicPropValuePointer = opcodes[++index];
+  const dynamicPropValue = runtimeValues[dynamicPropValuePointer];
+
+  if (propInformation & PropFlagPartialTemplate) {
+    throw new Error("TODO renderStaticProp");
+  } else if (dynamicPropValue !== null && dynamicPropValue !== undefined) {
+    state.currentNode.setAttribute(propName, dynamicPropValue);
+  }
   return index;
 }
 
@@ -264,45 +288,45 @@ function renderMountDynamicClassNameProp(index, opcodes, runtimeValues, state) {
   return index;
 }
 
-function renderMountOpenFragment(index, opcodes, runtimeValues, state) {
-  pushNodeOrFragment(state, []);
+function renderMountOpenFragment(index, opcodes, runtimeValues, state, workInProgress) {
+  pushNodeOrFragment(state, [], workInProgress);
   return index;
 }
 
-function renderMountCloseFragment(index, opcodes, runtimeValues, state) {
-  popNodeOrFragment(state);
+function renderMountCloseFragment(index, opcodes, runtimeValues, state, workInProgress) {
+  popNodeOrFragment(state, workInProgress);
   return index;
 }
 
-function renderMountOpenElement(index, opcodes, runtimeValues, state) {
+function renderMountOpenElement(index, opcodes, runtimeValues, state, workInProgress) {
   const elementTag = opcodes[++index];
   const elem = createElement(elementTag);
-  pushNodeOrFragment(state, elem);
+  pushNodeOrFragment(state, elem, workInProgress);
   return index;
 }
 
-function renderMountOpenVoidElement(index, opcodes, runtimeValues, state) {
+function renderMountOpenVoidElement(index, opcodes, runtimeValues, state, workInProgress) {
   const elementTag = opcodes[++index];
   const elem = createElement(elementTag);
-  pushNodeOrFragment(state, elem);
+  pushNodeOrFragment(state, elem, workInProgress);
   state.currentNodeIsVoidElement = true;
   return index;
 }
 
-function renderMountOpenDivElement(index, opcodes, runtimeValues, state) {
+function renderMountOpenDivElement(index, opcodes, runtimeValues, state, workInProgress) {
   const elem = createElement("div");
-  pushNodeOrFragment(state, elem);
+  pushNodeOrFragment(state, elem, workInProgress);
   return index;
 }
 
-function renderMountOpenSpanElement(index, opcodes, runtimeValues, state) {
+function renderMountOpenSpanElement(index, opcodes, runtimeValues, state, workInProgress) {
   const elem = createElement("span");
-  pushNodeOrFragment(state, elem);
+  pushNodeOrFragment(state, elem, workInProgress);
   return index;
 }
 
-function renderMountCloseElement(index, opcodes, runtimeValues, state) {
-  popNodeOrFragment(state);
+function renderMountCloseElement(index, opcodes, runtimeValues, state, workInProgress) {
+  popNodeOrFragment(state, workInProgress);
   return index;
 }
 
@@ -346,7 +370,7 @@ function renderMountDynamicChildValue(index, opcodes, runtimeValues, state) {
   return index;
 }
 
-function renderMountComponent(index, opcodes, runtimeValues, state) {
+function renderMountComponent(index, opcodes, runtimeValues, state, workInProgress) {
   let currentComponent = state.currentComponent;
   const previousComponent = currentComponent;
   if (currentComponent === null) {
@@ -355,16 +379,17 @@ function renderMountComponent(index, opcodes, runtimeValues, state) {
   } else {
     state.currentComponent = createComponent(state.propsArray, false);
   }
-  const templateNode = opcodes[++index];
-  const creationOpcodes = templateNode.c;
+  const creationOpcodes = opcodes[++index];
+  const componentFiber = createOpcodeFiber(currentComponent, runtimeValues);
+  insertChildFiberIntoParentFiber(workInProgress, componentFiber);
   const previousValue = state.currentValue;
   state.currentValue = undefined;
-  renderMountOpcodes(creationOpcodes, runtimeValues, state);
+  renderMountOpcodes(creationOpcodes, runtimeValues, state, componentFiber);
   state.currentValue = previousValue;
   state.currentComponent = previousComponent;
 }
 
-function renderMountUnconditionalTemplate(index, opcodes, runtimeValues, state) {
+function renderMountUnconditionalTemplate(index, opcodes, runtimeValues, state, workInProgress) {
   const templateOpcodes = opcodes[++index];
   const computeFunction = opcodes[++index];
   let templateRuntimeValues = runtimeValues;
@@ -381,10 +406,13 @@ function renderMountUnconditionalTemplate(index, opcodes, runtimeValues, state) 
       state.computeFunctionUsesHooks = false;
     }
   }
-  renderMountOpcodes(templateOpcodes, templateRuntimeValues, state);
+  const templateFiber = createOpcodeFiber(null, templateRuntimeValues);
+  insertChildFiberIntoParentFiber(workInProgress, templateFiber);
+  renderMountOpcodes(templateOpcodes, templateRuntimeValues, state, templateFiber);
+  templateFiber.stateNode = state.currentNode;
 }
 
-function renderMountOpcodes(opcodes, runtimeValues, state) {
+function renderMountOpcodes(opcodes, runtimeValues, state, workInProgress) {
   const opcodesLength = opcodes.length;
   let index = 0;
 
@@ -394,10 +422,10 @@ function renderMountOpcodes(opcodes, runtimeValues, state) {
     const renderOpcode = mountOpcodeRenderFuncs[opcode];
     const shouldTerminate = doesOpcodeFuncTerminate[opcode];
     if (shouldTerminate === 1) {
-      renderOpcode(index, opcodes, runtimeValues, state);
+      renderOpcode(index, opcodes, runtimeValues, state, workInProgress);
       return;
     } else {
-      index = renderOpcode(index, opcodes, runtimeValues, state) + 1;
+      index = renderOpcode(index, opcodes, runtimeValues, state, workInProgress) + 1;
     }
   }
 }
@@ -414,28 +442,49 @@ function createState(rootPropsObject) {
   };
 }
 
-function renderRootFiber(rootFiber, DOMContainer) {
-  let { memoizedProps, mountOpcodes, state } = rootFiber;
+function appendFiberStateNodes(DOMContainer, fiber) {
+  while (fiber !== null) {
+    const sibling = fiber.sibling;
+    if (sibling !== null) {
+      appendFiberStateNodes(DOMContainer, sibling);
+    }
+    const stateNode = fiber.stateNode;
+    if (stateNode !== null && (isArray(stateNode) || stateNode.parentNode !== undefined)) {
+      appendChild(DOMContainer, stateNode);
+      return;
+    }
+    fiber = fiber.child;
+  }
+}
 
-  if (state === null) {
+function renderRootFiber(rootFiber, creationOpcodes, DOMContainer, props) {
+  if (rootFiber.child === null) {
     // Mount
-    state = createState(memoizedProps);
-    rootFiber.state = state;
-    renderMountOpcodes(mountOpcodes, emptyArray, state);
-    appendChild(DOMContainer, state.currentNode);
+    const state = createState(props);
+    renderMountOpcodes(creationOpcodes, emptyArray, state, rootFiber);
+    appendFiberStateNodes(DOMContainer, rootFiber);
   } else {
     // Update
   }
 }
 
-function createRootFiber(mountOpcodes, memoizedProps) {
+function createOpcodeFiber(stateNode, values) {
   return {
-    memoizedProps,
-    mountOpcodes,
-    state: null,
-    unmountOpcodes: [],
-    updateOpcodes: [],
+    child: null,
+    sibling: null,
+    parent: null,
+    stateNode,
+    values,
   };
+}
+
+function insertChildFiberIntoParentFiber(parent, child) {
+  child.parent = parent;
+  if (parent.child === null) {
+    parent.child = child;
+  } else {
+    // TODO
+  }
 }
 
 function renderNodeToRootContainer(node, DOMContainer) {
@@ -447,10 +496,10 @@ function renderNodeToRootContainer(node, DOMContainer) {
     }
   } else if (node.$$typeof === reactElementSymbol) {
     if (rootFiber === undefined) {
-      rootFiber = createRootFiber(node.type, node.props);
+      rootFiber = createOpcodeFiber(null, null);
       rootFibers.set(DOMContainer, rootFiber);
     }
-    return renderRootFiber(rootFiber, DOMContainer);
+    return renderRootFiber(rootFiber, node.type, DOMContainer, node.props);
   } else {
     throw new Error("render() expects a ReactElement as the first argument");
   }

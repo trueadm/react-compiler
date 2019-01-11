@@ -1,22 +1,26 @@
 import React from "react";
 
-export function Component({ cond, defaultClassName }: { cond: boolean, defaultClassName: string }) {
+function getLiBody(bodyText: string): React.Node {
+  return <span>{bodyText}</span>;
+}
+
+export function Component({ cond, defaultClassName, id }: { cond: boolean, defaultClassName: string, id: string }) {
   let children = [
     <li key="default" className={defaultClassName}>
-      Default item
-    </li>
+      {getLiBody("Default item")}
+    </li>,
   ];
 
   if (cond) {
     children = [
       <li key="generic" className={"generic-item"}>
-        Generic item
-      </li>
+        {getLiBody("Generic item")}
+      </li>,
     ];
   }
 
   return (
-    <ul id="list-view" className={"list"}>
+    <ul id={id + "-conntected"} className={"list"}>
       {children}
     </ul>
   );

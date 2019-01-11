@@ -30,7 +30,7 @@ let filterTests = Array.isArray(argv._) && argv._.length > 0 ? argv._[0] : null;
 function transformSource(source) {
   source = source.replace(
     /import {\W.*} from "react-compiler-runtime";/g,
-    `const { "createReactNode": createReactNode, "createTemplateNode": createTemplateNode } = require("react-compiler-runtime");`,
+    `const { "createReactNode": createReactNode } = require("react-compiler-runtime");`,
   );
   return babel.transform(source, {
     configFile: false,

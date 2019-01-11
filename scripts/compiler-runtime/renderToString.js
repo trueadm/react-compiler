@@ -683,12 +683,12 @@ function renderDynamicProp(index, opcodes, runtimeValues, state) {
   const propName = opcodes[++index];
   const propInformation = opcodes[++index];
   const dynamicPropValuePointer = opcodes[++index];
-  const dynamicPropValueOrPartialTemplate = runtimeValues[dynamicPropValuePointer];
+  const dynamicPropValue = runtimeValues[dynamicPropValuePointer];
 
   if (propInformation & PropFlagPartialTemplate) {
     throw new Error("TODO renderStaticProp");
-  } else if (dynamicPropValueOrPartialTemplate !== null && dynamicPropValueOrPartialTemplate !== undefined) {
-    state.renderString += renderDynamicAttributeValue(propName, propInformation, dynamicPropValueOrPartialTemplate);
+  } else if (dynamicPropValue !== null && dynamicPropValue !== undefined) {
+    state.renderString += renderDynamicAttributeValue(propName, propInformation, dynamicPropValue);
   }
   return index;
 }
@@ -743,8 +743,7 @@ function renderComponent(index, opcodes, runtimeValues, state) {
   } else {
     state.currentComponent = createComponent(state.propsArray, false);
   }
-  const templateNode = opcodes[++index];
-  const creationOpcodes = templateNode.c;
+  const creationOpcodes = opcodes[++index];
   const previousValue = state.currentValue;
   state.currentValue = undefined;
   renderOpcodesToString(creationOpcodes, runtimeValues, state);
@@ -767,8 +766,7 @@ function renderComponentWithHooks(index, opcodes, runtimeValues, state) {
   } else {
     state.currentComponent = createComponent(state.propsArray, true);
   }
-  const templateNode = opcodes[++index];
-  const creationOpcodes = templateNode.c;
+  const creationOpcodes = opcodes[++index];
   const previousValue = state.currentValue;
   state.currentValue = undefined;
   renderOpcodesToString(creationOpcodes, runtimeValues, state);

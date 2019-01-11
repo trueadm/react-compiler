@@ -331,11 +331,7 @@ export function createOpcodesForReactFunctionComponent(componentPath, state) {
       pushOpcodeValue(opcodes, t.nullLiteral(), "ROOT_PROPS_SHAPE");
     }
   }
-  state.helpers.add("createTemplateNode");
-  pushOpcodeValue(
-    opcodes,
-    t.callExpression(t.identifier("createTemplateNode"), [t.arrayExpression(computeFunctionOpcodes)]),
-  );
+  pushOpcodeValue(opcodes, t.arrayExpression(computeFunctionOpcodes));
 
   const opcodesArray = normalizeOpcodes(opcodes);
   opcodesArray.leadingComments = [{ type: "BlockComment", value: ` ${name} OPCODES` }];

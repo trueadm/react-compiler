@@ -199,27 +199,10 @@ function applyPostTransforms(compilerContext) {
 function addModuleHelpers(ast, moduleState) {
   const helpers = moduleState.helpers;
 
-  if (helpers.has("createReactNode") && helpers.has("createTemplateNode")) {
-    ast.program.body.unshift(
-      t.importDeclaration(
-        [
-          t.importSpecifier(t.identifier("createReactNode"), t.identifier("createReactNode")),
-          t.importSpecifier(t.identifier("createTemplateNode"), t.identifier("createTemplateNode")),
-        ],
-        t.stringLiteral("react-compiler-runtime"),
-      ),
-    );
-  } else if (helpers.has("createReactNode")) {
+  if (helpers.has("createReactNode")) {
     ast.program.body.unshift(
       t.importDeclaration(
         [t.importSpecifier(t.identifier("createReactNode"), t.identifier("createReactNode"))],
-        t.stringLiteral("react-compiler-runtime"),
-      ),
-    );
-  } else if (helpers.has("createTemplateNode")) {
-    ast.program.body.unshift(
-      t.importDeclaration(
-        [t.importSpecifier(t.identifier("createTemplateNode"), t.identifier("createTemplateNode"))],
         t.stringLiteral("react-compiler-runtime"),
       ),
     );
