@@ -37,6 +37,6 @@ export default {
     commonjs({
       ignore: ["react"],
     }),
-    closure(),
+    // closure(),
   ],
 };

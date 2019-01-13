@@ -162,7 +162,7 @@ function renderStyleValue(styleName, styleValue, state) {
 
 function renderOpcodesToString(opcodes, runtimeValues, state) {
   const opcodesLength = opcodes.length;
-  let index = 0;
+  let index = 2;
 
   // Render opcodes from the opcode jump-table
   while (index < opcodesLength) {

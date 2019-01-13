@@ -23,7 +23,7 @@ function createOpcodesForTemplateBranch(
   componentPath,
   processNodeValueFunc,
 ) {
-  const opcodes = [];
+  const opcodes = [t.numericLiteral(0), t.numericLiteral(0)];
   const runtimeValues = new Map();
   if (templateBranchIndex !== null) {
     runtimeValues.set(t.numericLiteral(templateBranchIndex), {
@@ -81,6 +81,7 @@ function createOpcodesForTemplateBranches(
     if (contextObjectRuntimeValueIndex !== null) {
       pushOpcode(opcodes, "CONTEXT_CONSUMER_UNCONDITIONAL_TEMPLATE", contextObjectRuntimeValueIndex);
     } else {
+      opcodes.push(t.numericLiteral(0), t.numericLiteral(0));
       pushOpcode(opcodes, "UNCONDITIONAL_TEMPLATE");
     }
     const [opcodesForTemplateBranch, isBranchStatic] = createOpcodesForTemplateBranch(
@@ -110,6 +111,7 @@ function createOpcodesForTemplateBranches(
       if (contextObjectRuntimeValueIndex !== null) {
         pushOpcode(opcodes, "CONTEXT_CONSUMER_TEMPLATE", contextObjectRuntimeValueIndex);
       } else {
+        opcodes.push(t.numericLiteral(0), t.numericLiteral(0));
         pushOpcode(opcodes, "TEMPLATE");
       }
       const [opcodesForTemplateBranch, isBranchStatic] = createOpcodesForTemplateBranch(
@@ -138,6 +140,7 @@ function createOpcodesForTemplateBranches(
       if (contextObjectRuntimeValueIndex !== null) {
         pushOpcode(opcodesTemplate, "CONTEXT_CONSUMER_CONDITIONAL_TEMPLATE", contextObjectRuntimeValueIndex);
       } else {
+        opcodesTemplate.push(t.numericLiteral(0), t.numericLiteral(0));
         pushOpcode(opcodesTemplate, "CONDITIONAL_TEMPLATE");
       }
       let templateBranchIndex = 0;
@@ -309,7 +312,7 @@ export function createOpcodesForReactFunctionComponent(componentPath, state) {
     typeAnnotation,
   };
   state.compiledComponentCache.set(name, result);
-  const opcodes = [];
+  const opcodes = [t.numericLiteral(0), t.numericLiteral(0)];
 
   if (doesFunctionComponentUseHooks(componentPath, state)) {
     pushOpcode(opcodes, "COMPONENT_WITH_HOOKS");

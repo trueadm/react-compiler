@@ -46,7 +46,7 @@ export function createOpcodesForMutatedBinding(childPath, opcodes, state, compon
     const joinedPathConditionsNode = joinPathConditions(pathConditions, state);
     const conditionalValuePointer = getRuntimeValueIndex(joinedPathConditionsNode, state);
     pushOpcodeValue(opcodes, conditionalValuePointer);
-    const pathOpcodes = [];
+    const pathOpcodes = [t.numericLiteral(0), t.numericLiteral(0)];
     callback(path, pathOpcodes);
     pushOpcodeValue(opcodes, normalizeOpcodes(pathOpcodes));
   }
@@ -54,7 +54,7 @@ export function createOpcodesForMutatedBinding(childPath, opcodes, state, compon
   if (t.isVariableDeclarator(node)) {
     if (node.init !== null) {
       const elsePath = binding.path.get("init");
-      const pathOpcodes = [];
+      const pathOpcodes = [t.numericLiteral(0), t.numericLiteral(0)];
       callback(elsePath, pathOpcodes);
       pushOpcodeValue(opcodes, normalizeOpcodes(pathOpcodes));
     } else {
@@ -143,8 +143,9 @@ function createOpcodesForCallExpressionReturningTemplateNodes(
   if (isStatic) {
     // TODO we might want to us a TEMPLATE_FROM_FUNC_CALL if this static computed
     // function occurs more than once, to remove code size.
-    const extractedOpcodes = computeFunctionOpcodes[1].elements;
-    opcodes.push(...extractedOpcodes);
+    const extractedOpcodes = computeFunctionOpcodes[3].elements;
+    // We need to account for the first 2 entries being the spaces for update/unmount opcodes arrays
+    opcodes.push(...extractedOpcodes.slice(2));
   } else {
     if (state.externalPathRefs.has(calleePath)) {
       const pathRef = state.externalPathRefs.get(calleePath);
@@ -199,13 +200,13 @@ export function createOpcodesForConditionalExpressionTemplate(path, opcodes, sta
 
   const runtimeValuePointer = getRuntimeValueIndex(test, state);
   pushOpcodeValue(opcodes, runtimeValuePointer);
-  const consequentOpcodes = [];
+  const consequentOpcodes = [t.numericLiteral(0), t.numericLiteral(0)];
   const consequentPath = path.get("consequent");
   const consequentPathRef = getReferenceFromExpression(consequentPath, state);
   callback(consequentPathRef, consequentOpcodes);
   pushOpcodeValue(opcodes, normalizeOpcodes(consequentOpcodes), "CONDITIONAL_CONSEQUENT");
 
-  const alternateOpcodes = [];
+  const alternateOpcodes = [t.numericLiteral(0), t.numericLiteral(0)];
   const alternatePath = path.get("alternate");
   const alternatePathRef = getReferenceFromExpression(alternatePath, state);
   callback(alternatePathRef, alternateOpcodes);
@@ -219,13 +220,13 @@ export function createOpcodesForLogicalExpressionTemplate(path, opcodes, state, 
   } else {
     pushOpcode(opcodes, "LOGICAL_AND");
   }
-  const leftOpcodes = [];
+  const leftOpcodes = [t.numericLiteral(0), t.numericLiteral(0)];
   const leftPath = path.get("left");
   const leftPathRef = getReferenceFromExpression(leftPath, state);
   callback(leftPathRef, leftOpcodes);
   pushOpcodeValue(opcodes, normalizeOpcodes(leftOpcodes), "LOGICAL_LEFT");
 
-  const rightOpcodes = [];
+  const rightOpcodes = [t.numericLiteral(0), t.numericLiteral(0)];
   const rightPath = path.get("right");
   const rightPathhRef = getReferenceFromExpression(rightPath, state);
   callback(rightPathhRef, rightOpcodes);

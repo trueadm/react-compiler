@@ -10,9 +10,9 @@ function Header_ComputeFunction(x) {
 
 function Header() {
   return (// Header OPCODES
-    [0 // COMPONENT
-    , [20 // UNCONDITIONAL_TEMPLATE
-    , [8 // OPEN_ELEMENT_DIV
+    [0, 0, 0 // COMPONENT
+    , [0, 0, 20 // UNCONDITIONAL_TEMPLATE
+    , [0, 0, 8 // OPEN_ELEMENT_DIV
     , 0 // VALUE_POINTER_INDEX
     , 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
     , 0, 10 // CLOSE_ELEMENT

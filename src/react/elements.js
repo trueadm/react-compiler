@@ -585,7 +585,7 @@ function hoistOpcodesNode(componentPath, state, opcodesNode) {
 }
 
 function createPropTemplateFromJSXElement(path, state, componentPath) {
-  const opcodes = [];
+  const opcodes = [t.numericLiteral(0), t.numericLiteral(0)];
   const runtimeValues = new Map();
   const childState = { ...state, ...{ runtimeValues } };
 
@@ -609,7 +609,7 @@ function createPropTemplateFromJSXElement(path, state, componentPath) {
 }
 
 function createPropTemplateFromReactCreateElement(path, state, componentPath) {
-  const opcodes = [];
+  const opcodes = [t.numericLiteral(0), t.numericLiteral(0)];
   const runtimeValues = new Map();
   const childState = { ...state, ...{ runtimeValues } };
 

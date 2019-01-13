@@ -10,7 +10,7 @@
       "name": "Run tests",
       "program": "${workspaceFolder}/scripts/test.js",
       "args": [
-        "array"
+        "simple-app"
       ]
     },
     {

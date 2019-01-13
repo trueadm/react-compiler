@@ -1,10 +1,10 @@
 var Header = require("./Header.compiled.js");
 
 var App = // App OPCODES
-[0 // COMPONENT
+[0, 0, 0 // COMPONENT
 , null // ROOT_PROPS_SHAPE
-, [20 // UNCONDITIONAL_TEMPLATE
-, [8 // OPEN_ELEMENT_DIV
+, [0, 0, 20 // UNCONDITIONAL_TEMPLATE
+, [0, 0, 8 // OPEN_ELEMENT_DIV
 , 0 // VALUE_POINTER_INDEX
 , 29 // REF_COMPONENT
 , Header, null // COMPONENT_PROPS_ARRAY

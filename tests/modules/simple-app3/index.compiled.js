@@ -1,8 +1,8 @@
 import Foo from "./Foo.compiled.js";
 import { renderText, renderDiv, renderDivWithText, renderSpan } from "./utils.compiled.js";
 var __opcodes__1 = // renderDivWithText OPCODES
-[20 // UNCONDITIONAL_TEMPLATE
-, [8 // OPEN_ELEMENT_DIV
+[0, 0, 20 // UNCONDITIONAL_TEMPLATE
+, [0, 0, 8 // OPEN_ELEMENT_DIV
 , 1 // VALUE_POINTER_INDEX
 , 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
 , 0, 10 // CLOSE_ELEMENT
@@ -24,10 +24,10 @@ function App_ComputeFunction() {
 }
 
 var App = // App OPCODES
-[0 // COMPONENT
+[0, 0, 0 // COMPONENT
 , null // ROOT_PROPS_SHAPE
-, [20 // UNCONDITIONAL_TEMPLATE
-, [8 // OPEN_ELEMENT_DIV
+, [0, 0, 20 // UNCONDITIONAL_TEMPLATE
+, [0, 0, 8 // OPEN_ELEMENT_DIV
 , 0 // VALUE_POINTER_INDEX
 , 29 // REF_COMPONENT
 , Foo, 0 // COMPONENT_PROPS_ARRAY
