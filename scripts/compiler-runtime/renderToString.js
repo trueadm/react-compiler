@@ -1,12 +1,8 @@
-"use strict";
-// This renderToString implementation is for testing React compiled output.
-
-const { finishHooks, prepareToUseHooks, useHooksDispatcher } = require("./dispatcher");
-const {
+import { finishHooks, prepareToUseHooks, useHooksDispatcher } from "./ssr-dispatcher";
+import {
   applyState,
   cloneState,
   createComponent,
-  createElementForTesting,
   createMarkupForRoot,
   createRootComponent,
   createState,
@@ -18,12 +14,11 @@ const {
   popCurrentContextValue,
   pushCurrentContextValue,
   reactElementSymbol,
-} = require("./utils");
+} from "./utils";
 
 const ReactElementNode = Symbol();
 
 const COMPONENT = 0;
-const COMPONENT_WITH_HOOKS = 1;
 const STATIC_VALUE = 2;
 const DYNAMIC_VALUE = 3;
 const OPEN_ELEMENT = 6;
@@ -162,7 +157,7 @@ function renderStyleValue(styleName, styleValue, state) {
 
 function renderOpcodesToString(opcodes, runtimeValues, state) {
   const opcodesLength = opcodes.length;
-  let index = 2;
+  let index = 0;
 
   // Render opcodes from the opcode jump-table
   while (index < opcodesLength) {
@@ -368,7 +363,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         const arrayMapOpcodes = opcodes[++index];
         const arrayMapComputeFunctionPointer = opcodes[++index];
         const arrayMapComputeFunction =
-          arrayMapComputeFunctionPointer === null ? null : runtimeValues[arrayMapComputeFunctionPointer];
+          arrayMapComputeFunctionPointer === 0 ? null : runtimeValues[arrayMapComputeFunctionPointer];
 
         const arrayLength = array.length;
         for (let i = 0; i < arrayLength; ++i) {
@@ -428,7 +423,6 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
           state.elementCloseRenderString += ` ${createMarkupForRoot()}`;
         }
         state.elementCloseRenderString += ">";
-        ++index;
         break;
       }
       case OPEN_ELEMENT_SPAN: {
@@ -447,7 +441,6 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
           state.elementCloseRenderString += ` ${createMarkupForRoot()}`;
         }
         state.elementCloseRenderString += ">";
-        ++index;
         break;
       }
       case OPEN_ELEMENT: {
@@ -466,7 +459,6 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
           state.elementCloseRenderString += ` ${createMarkupForRoot()}`;
         }
         state.elementCloseRenderString += ">";
-        ++index;
         break;
       }
       case CLOSE_ELEMENT: {
@@ -507,7 +499,6 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
           state.elementCloseRenderString += ` ${createMarkupForRoot()}`;
         }
         state.elementCloseRenderString += "/>";
-        ++index;
         break;
       }
       case CLOSE_VOID_ELEMENT: {
@@ -519,6 +510,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         break;
       }
       case CONDITIONAL: {
+        ++index; // hostNodeValuePointer
         const conditionValuePointer = opcodes[++index];
         const conditionValue = runtimeValues[conditionValuePointer];
         const consequentOpcodes = opcodes[++index];
@@ -562,22 +554,12 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
       }
       case UNCONDITIONAL_TEMPLATE: {
         const templateOpcodes = opcodes[++index];
-        // Values pointer index
-        ++index;
         const computeFunction = opcodes[++index];
         let templateRuntimeValues = runtimeValues;
         // TODO try passing individual props if array is small enough, using array spread?
         // Array.prototype.apply is not as fast as normal function calls typically.
-        if (computeFunction !== null) {
-          const computeFunctionUsesHooks = state.computeFunctionUsesHooks;
-          if (computeFunctionUsesHooks === true) {
-            prepareToUseHooks(state.currentComponent);
-          }
+        if (computeFunction !== 0) {
           templateRuntimeValues = computeFunction.apply(null, state.currentComponent.props);
-          if (computeFunctionUsesHooks === true) {
-            finishHooks();
-            state.computeFunctionUsesHooks = false;
-          }
         }
         renderOpcodesToString(templateOpcodes, templateRuntimeValues, state);
         return;
@@ -596,27 +578,18 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         break;
       }
       case CONDITIONAL_TEMPLATE: {
-        // Values pointer index
-        ++index;
         const computeFunction = opcodes[++index];
-        const conditionBranchOpcodes = opcodes[++index];
         let templateRuntimeValues = runtimeValues;
         // TODO try passing individual props if array is small enough, using array spread?
         // Array.prototype.apply is not as fast as normal function calls typically.
-        if (computeFunction !== null) {
-          const computeFunctionUsesHooks = state.computeFunctionUsesHooks;
-          if (computeFunctionUsesHooks === true) {
-            prepareToUseHooks(state.currentComponent);
-          }
+        if (computeFunction !== 0) {
+          ++index;
           templateRuntimeValues = computeFunction.apply(null, state.currentComponent.props);
-          if (computeFunctionUsesHooks === true) {
-            finishHooks();
-            state.computeFunctionUsesHooks = false;
-          }
           if (templateRuntimeValues === null) {
             return null;
           }
         }
+        const conditionBranchOpcodes = opcodes[++index];
         const conditionBranchOpcodesLength = conditionBranchOpcodes.length;
         const conditionBranchToUseKey = templateRuntimeValues[0];
         let branchIndex = 0;
@@ -633,6 +606,8 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
       }
       case MULTI_CONDITIONAL: {
         const conditionalSize = opcodes[++index];
+        ++index; // Value pointer index
+        ++index; // Case pointer index
         const startingIndex = index;
         const conditionalDefaultIndex = conditionalSize - 1;
         for (let conditionalIndex = 0; conditionalIndex < conditionalSize; ++conditionalIndex) {
@@ -659,22 +634,12 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
       }
       case TEMPLATE: {
         const templateOpcodes = opcodes[++index];
-        // Value pointers index
-        ++index;
         const computeFunction = opcodes[++index];
         let templateRuntimeValuesOrNull;
         // TODO try passing individual props if array is small enough, using array spread?
         // Array.prototype.apply is not as fast as normal function calls typically.
-        if (computeFunction !== null) {
-          const computeFunctionUsesHooks = state.computeFunctionUsesHooks;
-          if (computeFunctionUsesHooks === true) {
-            prepareToUseHooks(state.currentComponent);
-          }
+        if (computeFunction !== 0) {
           templateRuntimeValuesOrNull = computeFunction.apply(null, state.currentComponent.props);
-          if (computeFunctionUsesHooks === true) {
-            finishHooks();
-            state.computeFunctionUsesHooks = false;
-          }
         }
         if (templateRuntimeValuesOrNull === null) {
           return null;
@@ -684,6 +649,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
       case COMPONENT: {
         let currentComponent = state.currentComponent;
         const previousComponent = currentComponent;
+        const usesHooks = opcodes[++index];
         if (currentComponent === null) {
           const rootPropsShape = opcodes[++index];
           currentComponent = state.currentComponent = createRootComponent(state.rootPropsObject, rootPropsShape, false);
@@ -693,36 +659,15 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         const creationOpcodes = opcodes[++index];
         const previousValue = state.currentValue;
         state.currentValue = undefined;
+        if (usesHooks === 1) {
+          prepareToUseHooks(currentComponent);
+        }
         renderOpcodesToString(creationOpcodes, runtimeValues, state);
+        if (usesHooks === 1) {
+          finishHooks(currentComponent);
+        }
         const currentValue = state.currentValue;
         if (currentValue !== null && currentValue !== undefined && currentValue !== ReactElementNode) {
-          state.renderString += escapeText(currentValue);
-        }
-        state.currentValue = previousValue;
-        state.currentComponent = previousComponent;
-        return;
-      }
-      case COMPONENT_WITH_HOOKS: {
-        let currentComponent = state.currentComponent;
-
-        state.computeFunctionUsesHooks = true;
-        const previousComponent = state.currentComponent;
-        if (currentComponent === null) {
-          const rootPropsShape = opcodes[++index];
-          currentComponent = state.currentComponent = createRootComponent(state.rootPropsObject, rootPropsShape, false);
-        } else {
-          state.currentComponent = createComponent(state.propsArray, true);
-        }
-        const creationOpcodes = opcodes[++index];
-        const previousValue = state.currentValue;
-        state.currentValue = undefined;
-        renderOpcodesToString(creationOpcodes, runtimeValues, state);
-        const currentValue = state.currentValue;
-        if (currentValue === undefined || currentValue === null) {
-          // NO-OP
-        } else if (currentValue !== undefined && currentValue !== null && isReactNode(currentValue)) {
-          renderReactNodeToString(currentValue, false, runtimeValues, state);
-        } else if (currentValue !== ReactElementNode) {
           state.renderString += escapeText(currentValue);
         }
         state.currentValue = previousValue;
@@ -732,8 +677,6 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
       case CONTEXT_CONSUMER_UNCONDITIONAL_TEMPLATE: {
         const reactContextObjectPointer = opcodes[++index];
         const templateOpcodes = opcodes[++index];
-        // Values pointer index
-        ++index;
         const computeFunctionPointer = opcodes[++index];
         let templateRuntimeValues = runtimeValues;
         if (computeFunctionPointer !== null) {
@@ -822,12 +765,6 @@ function renderNode(node) {
   }
 }
 
-function renderToString(node) {
+export function renderToString(node) {
   return useHooksDispatcher(() => renderNode(node));
 }
-
-/* eslint-disable-next-line */
-module.exports = {
-  createElementForTesting,
-  renderToString,
-};

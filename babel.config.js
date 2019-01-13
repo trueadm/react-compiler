@@ -18,6 +18,8 @@ module.exports = function(api) {
 
   // Default
   return {
+    include: [/node_modules/, /scripts/],
+    ignore: [],
     presets: [
       [
         "@babel/env",

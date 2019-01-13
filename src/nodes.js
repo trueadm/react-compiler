@@ -38,6 +38,10 @@ export function createOpcodesForMutatedBinding(childPath, opcodes, state, compon
   }
   pushOpcode(opcodes, "MULTI_CONDITIONAL");
   pushOpcodeValue(opcodes, paths.length + 1, "MULTI_CONDITIONAL_SIZE");
+  const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
+  pushOpcodeValue(opcodes, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
+  const reconcilerValueIndexForCase = state.reconciler.valueIndex++;
+  pushOpcodeValue(opcodes, reconcilerValueIndexForCase, "CASE_VALUE_POINTER_INDEX");
   // Given that mutliple conditions might evalaute to true, we reverse the conditions.
   // This means the last condition we hit the evaluates to true is the one we use. The default
   // should always be the last case, so we add that on after all the paths are dealt with.
@@ -46,7 +50,7 @@ export function createOpcodesForMutatedBinding(childPath, opcodes, state, compon
     const joinedPathConditionsNode = joinPathConditions(pathConditions, state);
     const conditionalValuePointer = getRuntimeValueIndex(joinedPathConditionsNode, state);
     pushOpcodeValue(opcodes, conditionalValuePointer);
-    const pathOpcodes = [t.numericLiteral(0), t.numericLiteral(0)];
+    const pathOpcodes = [];
     callback(path, pathOpcodes);
     pushOpcodeValue(opcodes, normalizeOpcodes(pathOpcodes));
   }
@@ -54,11 +58,11 @@ export function createOpcodesForMutatedBinding(childPath, opcodes, state, compon
   if (t.isVariableDeclarator(node)) {
     if (node.init !== null) {
       const elsePath = binding.path.get("init");
-      const pathOpcodes = [t.numericLiteral(0), t.numericLiteral(0)];
+      const pathOpcodes = [];
       callback(elsePath, pathOpcodes);
       pushOpcodeValue(opcodes, normalizeOpcodes(pathOpcodes));
     } else {
-      pushOpcodeValue(opcodes, t.nullLiteral());
+      pushOpcodeValue(opcodes, t.numericLiteral(0));
     }
   } else {
     // TODO
@@ -143,9 +147,9 @@ function createOpcodesForCallExpressionReturningTemplateNodes(
   if (isStatic) {
     // TODO we might want to us a TEMPLATE_FROM_FUNC_CALL if this static computed
     // function occurs more than once, to remove code size.
-    const extractedOpcodes = computeFunctionOpcodes[3].elements;
+    const extractedOpcodes = computeFunctionOpcodes[1].elements;
     // We need to account for the first 2 entries being the spaces for update/unmount opcodes arrays
-    opcodes.push(...extractedOpcodes.slice(2));
+    opcodes.push(...extractedOpcodes);
   } else {
     if (state.externalPathRefs.has(calleePath)) {
       const pathRef = state.externalPathRefs.get(calleePath);
@@ -198,15 +202,17 @@ export function createOpcodesForConditionalExpressionTemplate(path, opcodes, sta
     runtimeConditionals.set(test, runtimeConditionalIndex);
   }
 
+  const reconcilerValueIndex = state.reconciler.valueIndex++;
+  pushOpcodeValue(opcodes, reconcilerValueIndex, "VALUE_POINTER_INDEX");
   const runtimeValuePointer = getRuntimeValueIndex(test, state);
   pushOpcodeValue(opcodes, runtimeValuePointer);
-  const consequentOpcodes = [t.numericLiteral(0), t.numericLiteral(0)];
+  const consequentOpcodes = [];
   const consequentPath = path.get("consequent");
   const consequentPathRef = getReferenceFromExpression(consequentPath, state);
   callback(consequentPathRef, consequentOpcodes);
   pushOpcodeValue(opcodes, normalizeOpcodes(consequentOpcodes), "CONDITIONAL_CONSEQUENT");
 
-  const alternateOpcodes = [t.numericLiteral(0), t.numericLiteral(0)];
+  const alternateOpcodes = [];
   const alternatePath = path.get("alternate");
   const alternatePathRef = getReferenceFromExpression(alternatePath, state);
   callback(alternatePathRef, alternateOpcodes);
@@ -220,13 +226,13 @@ export function createOpcodesForLogicalExpressionTemplate(path, opcodes, state, 
   } else {
     pushOpcode(opcodes, "LOGICAL_AND");
   }
-  const leftOpcodes = [t.numericLiteral(0), t.numericLiteral(0)];
+  const leftOpcodes = [];
   const leftPath = path.get("left");
   const leftPathRef = getReferenceFromExpression(leftPath, state);
   callback(leftPathRef, leftOpcodes);
   pushOpcodeValue(opcodes, normalizeOpcodes(leftOpcodes), "LOGICAL_LEFT");
 
-  const rightOpcodes = [t.numericLiteral(0), t.numericLiteral(0)];
+  const rightOpcodes = [];
   const rightPath = path.get("right");
   const rightPathhRef = getReferenceFromExpression(rightPath, state);
   callback(rightPathhRef, rightOpcodes);

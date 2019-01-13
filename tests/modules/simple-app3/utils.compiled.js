@@ -1,3 +1,4 @@
+import "react-compiler-runtime";
 export function renderText(): string {
   return "Text!";
 }

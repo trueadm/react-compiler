@@ -9,8 +9,9 @@
       "request": "launch",
       "name": "Run tests",
       "program": "${workspaceFolder}/scripts/test.js",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/babel-node",
       "args": [
-        "simple-app"
+        "simple-app3"
       ]
     },
     {

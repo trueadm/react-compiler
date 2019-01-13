@@ -60,7 +60,13 @@ export function removePath(path) {
       }
     } else {
       if (t.isImportDefaultSpecifier(parentPath.node)) {
-        removePath(parentPath.parentPath);
+        const specifiers = parentPath.parentPath.node.specifiers;
+        for (let i = 0; i < specifiers.length; i++) {
+          if (specifiers[i] === parentPath.node) {
+            parentPath.parentPath.node.specifiers.splice(i, 1);
+            break;
+          }
+        }
       }
       if (t.isVariableDeclarator(parentPath) && path.key === "id") {
         removePath(parentPath);
@@ -259,9 +265,9 @@ export function joinPathConditions(pathConditions, state) {
 
 export function normalizeOpcodes(opcodes) {
   if (opcodes.length === 0) {
-    return t.nullLiteral();
+    return t.numericLiteral(0);
   } else if (opcodes.length === 1 && t.isNullLiteral(opcodes[0])) {
-    return t.nullLiteral();
+    return t.numericLiteral(0);
   }
   return t.arrayExpression(opcodes);
 }
@@ -550,9 +556,20 @@ export function isReactObject(path, state) {
   if (
     isCommonJsLikeRequireCall(pathRef) &&
     t.isStringLiteral(node.arguments[0]) &&
-    node.arguments[0].value === "react"
+    (node.arguments[0].value === "react" || node.arguments[0].value === "react-compiler-runtime")
   ) {
     return true;
+  }
+  if (t.isImportDefaultSpecifier(pathRef.node)) {
+    const parentPath = pathRef.parentPath;
+
+    if (
+      t.isImportDeclaration(parentPath.node) &&
+      t.isStringLiteral(parentPath.node.source) &&
+      (parentPath.node.source.value === "react" || parentPath.node.source.value === "react-compiler-runtime")
+    ) {
+      return true;
+    }
   }
   return false;
 }
@@ -816,6 +833,17 @@ export function isReactHook(path, state) {
       if (isReactObject(objectPath, state) && t.isIdentifier(calleePathRef.node.property)) {
         const propertyName = calleePathRef.node.property.name;
         return propertyName.startsWith("use");
+      }
+    }
+    if (t.isImportSpecifier(calleePathRef.node)) {
+      const parentPath = calleePathRef.parentPath;
+
+      if (
+        t.isImportDeclaration(parentPath.node) &&
+        t.isStringLiteral(parentPath.node.source) &&
+        (parentPath.node.source.value === "react" || parentPath.node.source.value === "react-compiler-runtime")
+      ) {
+        return calleePathRef.node.imported.name.startsWith("use");
       }
     }
   }

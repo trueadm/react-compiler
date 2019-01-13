@@ -23,7 +23,7 @@ function createOpcodesForTemplateBranch(
   componentPath,
   processNodeValueFunc,
 ) {
-  const opcodes = [t.numericLiteral(0), t.numericLiteral(0)];
+  const opcodes = [];
   const runtimeValues = new Map();
   if (templateBranchIndex !== null) {
     runtimeValues.set(t.numericLiteral(templateBranchIndex), {
@@ -81,7 +81,6 @@ function createOpcodesForTemplateBranches(
     if (contextObjectRuntimeValueIndex !== null) {
       pushOpcode(opcodes, "CONTEXT_CONSUMER_UNCONDITIONAL_TEMPLATE", contextObjectRuntimeValueIndex);
     } else {
-      opcodes.push(t.numericLiteral(0), t.numericLiteral(0));
       pushOpcode(opcodes, "UNCONDITIONAL_TEMPLATE");
     }
     const [opcodesForTemplateBranch, isBranchStatic] = createOpcodesForTemplateBranch(
@@ -92,12 +91,12 @@ function createOpcodesForTemplateBranches(
       processNodeValueFunc,
     );
     pushOpcodeValue(opcodes, normalizeOpcodes(opcodesForTemplateBranch));
-    const reconcilerValueIndex = state.reconcilerValueIndex++;
-    pushOpcodeValue(opcodes, reconcilerValueIndex, "VALUE_POINTER_INDEX");
     if (!emitComputeFunctionOpcode || isBranchStatic) {
-      pushOpcodeValue(opcodes, t.nullLiteral(), "COMPUTE_FUNCTION");
+      pushOpcodeValue(opcodes, t.numericLiteral(0), "COMPUTE_FUNCTION");
     } else {
       pushOpcodeValue(opcodes, t.identifier(getComponentName(functionPath)), "COMPUTE_FUNCTION");
+      const reconcilerValueIndex = state.reconciler.valueIndex++;
+      pushOpcodeValue(opcodes, reconcilerValueIndex, "VALUE_POINTER_INDEX");
     }
     return isBranchStatic;
   } else {
@@ -111,7 +110,6 @@ function createOpcodesForTemplateBranches(
       if (contextObjectRuntimeValueIndex !== null) {
         pushOpcode(opcodes, "CONTEXT_CONSUMER_TEMPLATE", contextObjectRuntimeValueIndex);
       } else {
-        opcodes.push(t.numericLiteral(0), t.numericLiteral(0));
         pushOpcode(opcodes, "TEMPLATE");
       }
       const [opcodesForTemplateBranch, isBranchStatic] = createOpcodesForTemplateBranch(
@@ -122,15 +120,15 @@ function createOpcodesForTemplateBranches(
         processNodeValueFunc,
       );
       pushOpcodeValue(opcodes, normalizeOpcodes(opcodesForTemplateBranch));
-      const reconcilerValueIndex = state.reconcilerValueIndex++;
-      pushOpcodeValue(opcodes, reconcilerValueIndex, "VALUE_POINTER_INDEX");
       if (!emitComputeFunctionOpcode || isBranchStatic) {
-        pushOpcodeValue(opcodes, t.nullLiteral(), "COMPUTE_FUNCTION");
+        pushOpcodeValue(opcodes, t.numericLiteral(0), "COMPUTE_FUNCTION");
       } else {
         if (computeFunction.id == null) {
           throw new Error("TODO");
         } else {
           pushOpcodeValue(opcodes, computeFunction.id, "COMPUTE_FUNCTION");
+          const reconcilerValueIndex = state.reconciler.valueIndex++;
+          pushOpcodeValue(opcodes, reconcilerValueIndex, "VALUE_POINTER_INDEX");
         }
       }
       return isBranchStatic;
@@ -140,7 +138,6 @@ function createOpcodesForTemplateBranches(
       if (contextObjectRuntimeValueIndex !== null) {
         pushOpcode(opcodesTemplate, "CONTEXT_CONSUMER_CONDITIONAL_TEMPLATE", contextObjectRuntimeValueIndex);
       } else {
-        opcodesTemplate.push(t.numericLiteral(0), t.numericLiteral(0));
         pushOpcode(opcodesTemplate, "CONDITIONAL_TEMPLATE");
       }
       let templateBranchIndex = 0;
@@ -163,15 +160,15 @@ function createOpcodesForTemplateBranches(
           templateBranchIndex++;
         }
       }
-      const reconcilerValueIndex = state.reconcilerValueIndex++;
-      pushOpcodeValue(opcodesTemplate, reconcilerValueIndex, "VALUE_POINTER_INDEX");
       if (!emitComputeFunctionOpcode || isStatic) {
-        pushOpcodeValue(opcodesTemplate, t.nullLiteral(), "COMPUTE_FUNCTION");
+        pushOpcodeValue(opcodesTemplate, t.numericLiteral(0), "COMPUTE_FUNCTION");
       } else {
         if (computeFunction.id == null) {
           throw new Error("TODO");
         } else {
           pushOpcodeValue(opcodesTemplate, computeFunction.id, "COMPUTE_FUNCTION");
+          const reconcilerValueIndex = state.reconciler.valueIndex++;
+          pushOpcodeValue(opcodesTemplate, reconcilerValueIndex, "VALUE_POINTER_INDEX");
         }
       }
       if (!isStatic) {
@@ -312,13 +309,10 @@ export function createOpcodesForReactFunctionComponent(componentPath, state) {
     typeAnnotation,
   };
   state.compiledComponentCache.set(name, result);
-  const opcodes = [t.numericLiteral(0), t.numericLiteral(0)];
+  const opcodes = [];
 
-  if (doesFunctionComponentUseHooks(componentPath, state)) {
-    pushOpcode(opcodes, "COMPONENT_WITH_HOOKS");
-  } else {
-    pushOpcode(opcodes, "COMPONENT");
-  }
+  pushOpcode(opcodes, "COMPONENT");
+  pushOpcodeValue(opcodes, doesFunctionComponentUseHooks(componentPath, state) ? 1 : 0, "USES_HOOKS");
 
   const { opcodes: computeFunctionOpcodes, isStatic } = createOpcodesForReactComputeFunction(
     componentPath,
@@ -337,7 +331,7 @@ export function createOpcodesForReactFunctionComponent(componentPath, state) {
         "ROOT_PROPS_SHAPE",
       );
     } else {
-      pushOpcodeValue(opcodes, t.nullLiteral(), "ROOT_PROPS_SHAPE");
+      pushOpcodeValue(opcodes, t.numericLiteral(0), "ROOT_PROPS_SHAPE");
     }
   }
   pushOpcodeValue(opcodes, t.arrayExpression(computeFunctionOpcodes));
@@ -409,6 +403,7 @@ function doesFunctionComponentUseHooks(componentPath, state) {
   componentPath.traverse({
     CallExpression(path) {
       if (isReactHook(path, state)) {
+        markNodeAsUsed(path.node);
         usesHooks = true;
       }
     },

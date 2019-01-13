@@ -1,22 +1,25 @@
+import glob from "glob";
+import { promisify } from "util";
+import fs from "fs";
+import { transform } from "@babel/core";
+import { performance } from "perf_hooks";
+import chalk from "chalk";
+import { createElementForTesting } from "./compiler-runtime/utils";
+import { renderToString } from "./compiler-runtime/renderToString";
+import tmp from "tmp";
+import { compiler as ClosureCompiler } from "google-closure-compiler";
+import path from "path";
+import { JSDOM } from "jsdom";
+import { createReactNode } from "./compiler-runtime/index";
+
 process.env.NODE_ENV = "production";
 
-const glob = require("glob");
-const { promisify } = require("util");
-const fs = require("fs");
+const { compileEntryModuleFileToDirectory, parseAndCompileSource } = require("../lib/compiler");
+const { window } = new JSDOM(``);
 const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
-const babel = require("@babel/core");
-const ReactDOMServer = require("react-dom/server");
-const { performance } = require("perf_hooks");
-const chalk = require("chalk");
-const { createElementForTesting, renderToString } = require("./compiler-runtime/renderToString");
-const tmp = require("tmp");
-const ClosureCompiler = require("google-closure-compiler").compiler;
 const argv = require("minimist")(process.argv.slice(2));
-const { compileEntryModuleFileToDirectory, parseAndCompileSource } = require("../lib/compiler");
-const path = require("path");
-const { JSDOM } = require("jsdom");
-const { window } = new JSDOM(``);
+const ReactDOMServer = require("react-dom/server");
 
 /* eslint-disable-next-line */
 global.window = window;
@@ -32,7 +35,7 @@ function transformSource(source) {
     /import {\W.*} from "react-compiler-runtime";/g,
     `const { "createReactNode": createReactNode } = require("react-compiler-runtime");`,
   );
-  return babel.transform(source, {
+  return transform(source, {
     configFile: false,
     presets: ["@babel/preset-flow"],
     plugins: [
@@ -44,9 +47,11 @@ function transformSource(source) {
 
 function loadBabelRegister() {
   require("@babel/register")({
+    include: [/node_modules/, /scripts/, /tests/],
+    ignore: [],
     cache: false,
     configFile: false,
-    presets: ["@babel/preset-flow"],
+    presets: ["@babel/preset-env", "@babel/preset-flow"],
     plugins: [
       ["@babel/plugin-transform-modules-commonjs", { loose: true, allowTopLevelThis: true }],
       ["@babel/plugin-proposal-object-rest-spread", { loose: true, useBuiltIns: true }],
@@ -60,9 +65,21 @@ function executeSource(source, needsTransforming) {
   /* eslint-disable-next-line */
   let fn = new Function("require", "module", "exports", transformedSource);
   const module = {};
+  const exports = {};
+  module.exports = exports;
   try {
-    /* eslint-disable-next-line */
-    fn(require, module, exports);
+    fn(
+      _path => {
+        if (_path === "react-compiler-runtime") {
+          return {
+            createReactNode,
+          };
+        }
+        return require(_path);
+      },
+      module,
+      exports,
+    );
   } catch (error) {
     console.log("Failed to execute sourcecode:\n\n");
     console.error(error.stack);

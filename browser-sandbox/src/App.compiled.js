@@ -1,25 +1,21 @@
-function Component_ComputeFunction(cond, val) {
-  return [cond];
+import React from "react-compiler-runtime";
+const {
+  ["useState"]: useState
+} = React;
+
+function Component_ComputeFunction() {
+  const [value] = useState("Hello world");
+  return [value];
 }
 
 export var Component = // Component OPCODES
-[0, 0, 0 // COMPONENT
-, ["cond", "val"] // ROOT_PROPS_SHAPE
-, [0, 0, 20 // UNCONDITIONAL_TEMPLATE
-, [0, 0, 8 // OPEN_ELEMENT_DIV
-, 0 // VALUE_POINTER_INDEX
-, 30 // CONDITIONAL
-, 0, [0, 0, 9 // OPEN_ELEMENT_SPAN
+[0 // COMPONENT
+, 1 // USES_HOOKS
+, 0 // ROOT_PROPS_SHAPE
+, [20 // UNCONDITIONAL_TEMPLATE
+, [8 // OPEN_ELEMENT_DIV
+, 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
+, 0, 10 // CLOSE_ELEMENT
+], Component_ComputeFunction // COMPUTE_FUNCTION
 , 1 // VALUE_POINTER_INDEX
-, 41 // ELEMENT_STATIC_CHILDREN_VALUE
-, "123", 10 // CLOSE_ELEMENT
-] // CONDITIONAL_CONSEQUENT
-, [0, 0, 9 // OPEN_ELEMENT_SPAN
-, 2 // VALUE_POINTER_INDEX
-, 41 // ELEMENT_STATIC_CHILDREN_VALUE
-, "456", 10 // CLOSE_ELEMENT
-] // CONDITIONAL_ALTERNATE
-, 10 // CLOSE_ELEMENT
-], 0 // VALUE_POINTER_INDEX
-, Component_ComputeFunction // COMPUTE_FUNCTION
 ]];

@@ -170,8 +170,8 @@ function recursivelyGetReferenceFromExpression(path, state, visitedBindings, err
   }
   // Check if this a reference in another file
   if (t.isCallExpression(node) && isCommonJsLikeRequireCall(path)) {
-    const moduleName = path.node.arguments[0].value;
-    if (moduleName === "react") {
+    const moduleName = node.arguments[0].value;
+    if (moduleName === "react" || moduleName === "react-compiler-runtime") {
       return path;
     }
     const externalPathRef = state.resolveModuleBindingSync(moduleName, state.currentModulePath, "default");
@@ -189,6 +189,9 @@ function recursivelyGetReferenceFromExpression(path, state, visitedBindings, err
 
     if (t.isImportDeclaration(parentPath.node)) {
       const moduleName = parentPath.node.source.value;
+      if (moduleName === "react" || moduleName === "react-compiler-runtime") {
+        return path;
+      }
       const externalPathRef = state.resolveModuleBindingSync(moduleName, state.currentModulePath, bindingName);
       state.externalPathRefs.set(externalPathRef, path);
       return externalPathRef;
@@ -198,6 +201,9 @@ function recursivelyGetReferenceFromExpression(path, state, visitedBindings, err
 
     if (t.isImportDeclaration(parentPath.node)) {
       const moduleName = parentPath.node.source.value;
+      if (moduleName === "react" || moduleName === "react-compiler-runtime") {
+        return path;
+      }
       const externalPathRef = state.resolveModuleBindingSync(moduleName, state.currentModulePath, "default");
       state.externalPathRefs.set(externalPathRef, path);
       return externalPathRef;

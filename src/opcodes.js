@@ -96,7 +96,7 @@ export function pushOpcode(opcodes, key, value, valueComment) {
   if (value !== undefined) {
     if (Array.isArray(value)) {
       if (value.length === 0) {
-        pushOpcodeValue(opcodes, t.nullLiteral());
+        pushOpcodeValue(opcodes, t.numericLiteral(0));
       } else {
         for (let val of value) {
           pushOpcodeValue(opcodes, val, valueComment);

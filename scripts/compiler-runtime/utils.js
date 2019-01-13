@@ -1,15 +1,13 @@
-"use strict";
-
 const ROOT_ATTRIBUTE_NAME = "data-reactroot";
 const uppercasePattern = /([A-Z])/g;
 const msPattern = /^ms-/;
-const reactElementSymbol = Symbol.for("react.element");
-const isArray = Array.isArray;
-const emptyArray = [];
+export const reactElementSymbol = Symbol.for("react.element");
+export const isArray = Array.isArray;
+export const emptyArray = [];
 
 const rxUnescaped = new RegExp(/["'&<>]/);
 
-function escapeText(text) {
+export function escapeText(text) {
   if (typeof text === "string") {
     /* Much faster when there is no unescaped characters */
     if (!rxUnescaped.test(text)) {
@@ -130,18 +128,18 @@ function optimizedEscapeAttributeValue(text) {
   return text.toString();
 }
 
-function createMarkupForRoot() {
+export function createMarkupForRoot() {
   return ROOT_ATTRIBUTE_NAME + '=""';
 }
 
-function hyphenateStyleName(name) {
+export function hyphenateStyleName(name) {
   return name
     .replace(uppercasePattern, "-$1")
     .toLowerCase()
     .replace(msPattern, "-ms-");
 }
 
-function createElementForTesting(type, props) {
+export function createElementForTesting(type, props) {
   return {
     $$typeof: reactElementSymbol,
     key: null,
@@ -151,7 +149,7 @@ function createElementForTesting(type, props) {
   };
 }
 
-function getCurrentContextValue(context, state) {
+export function getCurrentContextValue(context, state) {
   const contextValueStack = state.contextValueStack.get(context);
 
   if (contextValueStack === undefined) {
@@ -161,7 +159,7 @@ function getCurrentContextValue(context, state) {
   }
 }
 
-function pushCurrentContextValue(context, value, state) {
+export function pushCurrentContextValue(context, value, state) {
   const contextValueStack = state.contextValueStack.get(context);
 
   if (contextValueStack === undefined) {
@@ -171,7 +169,7 @@ function pushCurrentContextValue(context, value, state) {
   }
 }
 
-function popCurrentContextValue(context, state) {
+export function popCurrentContextValue(context, state) {
   const contextValueStack = state.contextValueStack.get(context);
 
   if (contextValueStack !== undefined) {
@@ -182,9 +180,9 @@ function popCurrentContextValue(context, state) {
   }
 }
 
-function convertRootPropsToPropsArray(rootProps, rootPropsShape) {
+export function convertRootPropsToPropsArray(rootProps, rootPropsShape) {
   const props = [];
-  if (rootPropsShape !== null) {
+  if (rootPropsShape !== 0) {
     for (let i = 0, length = rootPropsShape.length; i < length; i++) {
       let propShape = rootPropsShape[i];
       props.push(rootProps[propShape]);
@@ -193,21 +191,20 @@ function convertRootPropsToPropsArray(rootProps, rootPropsShape) {
   return props;
 }
 
-function createRootComponent(rootProps, rootPropsShape, usesHooks) {
+export function createRootComponent(rootProps, rootPropsShape, usesHooks) {
   return createComponent(convertRootPropsToPropsArray(rootProps, rootPropsShape), usesHooks);
 }
 
-function createComponent(props, usesHooks) {
+export function createComponent(props, usesHooks) {
   return {
     props,
     usesHooks,
   };
 }
 
-function createState(props) {
+export function createState(props) {
   return {
     componentOpcodeCache: new Map(),
-    computeFunctionUsesHooks: false,
     contextValueStack: new Map(),
     currentComponent: null,
     currentElementTag: "",
@@ -226,10 +223,9 @@ function createState(props) {
   };
 }
 
-function cloneState(state) {
+export function cloneState(state) {
   const clonedState = createState(null);
   clonedState.componentOpcodeCache = state.componentOpcodeCache;
-  clonedState.computeFunctionUsesHooks = state.computeFunctionUsesHooks;
   clonedState.contextValueStack = state.contextValueStack;
   clonedState.currentComponent = state.currentComponent;
   clonedState.currentElementTag = state.currentElementTag;
@@ -246,9 +242,8 @@ function cloneState(state) {
   return clonedState;
 }
 
-function applyState(targetState, state) {
+export function applyState(targetState, state) {
   targetState.componentOpcodeCache = state.componentOpcodeCache;
-  targetState.computeFunctionUsesHooks = state.computeFunctionUsesHooks;
   targetState.contextValueStack = state.contextValueStack;
   targetState.currentComponent = state.currentComponent;
   targetState.currentElementTag = state.currentElementTag;
@@ -264,27 +259,6 @@ function applyState(targetState, state) {
   targetState.renderString = state.renderString;
 }
 
-function isReactNode(node) {
+export function isReactNode(node) {
   return node !== null && node.t !== undefined && node.v !== undefined;
 }
-
-/* eslint-disable-next-line */
-module.exports = {
-  applyState,
-  cloneState,
-  convertRootPropsToPropsArray,
-  createComponent,
-  createElementForTesting,
-  createMarkupForRoot,
-  createRootComponent,
-  createState,
-  emptyArray,
-  escapeText,
-  getCurrentContextValue,
-  hyphenateStyleName,
-  isArray,
-  isReactNode,
-  popCurrentContextValue,
-  pushCurrentContextValue,
-  reactElementSymbol,
-};

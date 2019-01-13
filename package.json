@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel src --out-dir lib --source-maps",
     "watch": "babel src scripts --out-dir lib --watch --source-maps --verbose",
-    "test": "node --expose-gc scripts/test.js",
+    "test": "babel-node --expose-gc scripts/test.js",
     "sandbox": "node lib/cli.js --entry=sandbox/App.js"
   },
   "author": "Dominic Gannaway",
@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
+    "@babel/node": "^7.2.2",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-transform-flow-strip-types": "^7.0.0",
     "@babel/plugin-transform-modules-commonjs": "^7.1.0",

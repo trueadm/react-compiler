@@ -37,6 +37,9 @@ export default {
     commonjs({
       ignore: ["react"],
     }),
-    // closure(),
+    // closure({
+    //   language_in: 'ECMASCRIPT5_STRICT',
+    //   language_out: 'ECMASCRIPT5_STRICT',
+    // }),
   ],
 };

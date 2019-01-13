@@ -101,7 +101,7 @@ function createOpcodesForArrayMapTemplate(childPath, opcodes, state, componentPa
   pushOpcodeValue(opcodes, arrayRuntimeValuePointer);
   pushOpcodeValue(opcodes, normalizeOpcodes(arrayMapOpcodes), "ARRAY_MAP_OPCODES");
   if (isStatic) {
-    pushOpcodeValue(opcodes, t.nullLiteral(), "ARRAY_MAP_COMPUTE_FUNCTION");
+    pushOpcodeValue(opcodes, t.numericLiteral(0), "ARRAY_MAP_COMPUTE_FUNCTION");
   } else {
     let nodeToReference = mapFunctionPath.node;
     if (t.isFunctionDeclaration(nodeToReference)) {
@@ -585,7 +585,7 @@ function hoistOpcodesNode(componentPath, state, opcodesNode) {
 }
 
 function createPropTemplateFromJSXElement(path, state, componentPath) {
-  const opcodes = [t.numericLiteral(0), t.numericLiteral(0)];
+  const opcodes = [];
   const runtimeValues = new Map();
   const childState = { ...state, ...{ runtimeValues } };
 
@@ -609,7 +609,7 @@ function createPropTemplateFromJSXElement(path, state, componentPath) {
 }
 
 function createPropTemplateFromReactCreateElement(path, state, componentPath) {
-  const opcodes = [t.numericLiteral(0), t.numericLiteral(0)];
+  const opcodes = [];
   const runtimeValues = new Map();
   const childState = { ...state, ...{ runtimeValues } };
 
@@ -1108,7 +1108,7 @@ function createOpcodesForCompositeComponent(
     const childState = externalModuleState || {
       ...state,
       ...{ isRootComponent: false },
-      ...{ reconcilerValueIndex: 1 },
+      ...{ reconciler: { valueIndex: 0 } },
     };
     result = createOpcodesForReactFunctionComponent(compositeComponentPath, childState);
   }
@@ -1183,7 +1183,6 @@ function createOpcodesForJSXElementType(typePath, attributesPath, childrenPath, 
     createOpcodesForJSXFragment(childrenPath, opcodes, state, componentPath);
   } else if (isHostComponentType(typePath, state)) {
     const isVoidElement = voidElements.has(typeName);
-    const reconcilerValueIndex = state.reconcilerValueIndex++;
     if (typeName === "div") {
       pushOpcode(opcodes, "OPEN_ELEMENT_DIV");
     } else if (typeName === "span") {
@@ -1193,7 +1192,6 @@ function createOpcodesForJSXElementType(typePath, attributesPath, childrenPath, 
     } else {
       pushOpcode(opcodes, "OPEN_ELEMENT", typeName);
     }
-    pushOpcodeValue(opcodes, reconcilerValueIndex, "VALUE_POINTER_INDEX");
     createOpcodesForJSXElementHostComponent(typeName, attributesPath, childrenPath, opcodes, state, componentPath);
     if (isVoidElement) {
       pushOpcode(opcodes, "CLOSE_VOID_ELEMENT");
@@ -1437,7 +1435,6 @@ function createOpcodesForReactCreateElementType(typePath, args, opcodes, state, 
     const nameNode = typePath.node;
     const strName = nameNode.value;
     const isVoidElement = voidElements.has(strName);
-    const reconcilerValueIndex = state.reconcilerValueIndex++;
     if (strName === "div") {
       pushOpcode(opcodes, "OPEN_ELEMENT_DIV");
     } else if (strName === "span") {
@@ -1447,7 +1444,6 @@ function createOpcodesForReactCreateElementType(typePath, args, opcodes, state, 
     } else {
       pushOpcode(opcodes, "OPEN_ELEMENT", strName);
     }
-    pushOpcodeValue(opcodes, reconcilerValueIndex, "VALUE_POINTER_INDEX");
     createOpcodesForReactCreateElementHostComponent(strName, args, opcodes, state, componentPath);
     if (isVoidElement) {
       pushOpcode(opcodes, "CLOSE_VOID_ELEMENT");

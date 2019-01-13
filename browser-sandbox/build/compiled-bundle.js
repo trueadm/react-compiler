@@ -3,638 +3,53 @@
   factory();
 }(function () { 'use strict';
 
-  function Component_ComputeFunction(cond, val) {
-    return [cond];
+  var React = require("react");
+
+  var SharedReactInternals = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+  var ReactCurrentDispatcher = SharedReactInternals.ReactCurrentDispatcher;
+  debugger;
+  /* eslint-disable-next-line */
+
+
+  var reactCompilerRuntime = {
+    createReactNode: function createReactNode(t, v) {
+      return {
+        t: t,
+        v: v || null
+      };
+    },
+    useState: function useState() {// TODO
+    }
+  };
+
+  var useState = reactCompilerRuntime["useState"];
+
+  function Component_ComputeFunction() {
+    var _useState = useState("Hello world"),
+        value = _useState[0];
+
+    return [value];
   }
 
   var Component = // Component OPCODES
-  [0, 0, 0 // COMPONENT
-  , ["cond", "val"] // ROOT_PROPS_SHAPE
-  , [0, 0, 20 // UNCONDITIONAL_TEMPLATE
-  , [0, 0, 8 // OPEN_ELEMENT_DIV
-  , 0 // VALUE_POINTER_INDEX
-  , 30 // CONDITIONAL
-  , 0, [0, 0, 9 // OPEN_ELEMENT_SPAN
+  [0 // COMPONENT
+  , 1 // USES_HOOKS
+  , 0 // ROOT_PROPS_SHAPE
+  , [20 // UNCONDITIONAL_TEMPLATE
+  , [8 // OPEN_ELEMENT_DIV
+  , 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
+  , 0, 10 // CLOSE_ELEMENT
+  ], Component_ComputeFunction // COMPUTE_FUNCTION
   , 1 // VALUE_POINTER_INDEX
-  , 41 // ELEMENT_STATIC_CHILDREN_VALUE
-  , "123", 10 // CLOSE_ELEMENT
-  ] // CONDITIONAL_CONSEQUENT
-  , [0, 0, 9 // OPEN_ELEMENT_SPAN
-  , 2 // VALUE_POINTER_INDEX
-  , 41 // ELEMENT_STATIC_CHILDREN_VALUE
-  , "456", 10 // CLOSE_ELEMENT
-  ] // CONDITIONAL_ALTERNATE
-  , 10 // CLOSE_ELEMENT
-  ], 0 // VALUE_POINTER_INDEX
-  , Component_ComputeFunction // COMPUTE_FUNCTION
   ]];
 
-  function createCommonjsModule(fn, module) {
-  	return module = { exports: {} }, fn(module, module.exports), module.exports;
-  }
-
-  /*
-  object-assign
-  (c) Sindre Sorhus
-  @license MIT
-  */
-  /* eslint-disable no-unused-vars */
-
-  var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-  var hasOwnProperty = Object.prototype.hasOwnProperty;
-  var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-  function toObject(val) {
-    if (val === null || val === undefined) {
-      throw new TypeError('Object.assign cannot be called with null or undefined');
-    }
-
-    return Object(val);
-  }
-
-  function shouldUseNative() {
-    try {
-      if (!Object.assign) {
-        return false;
-      } // Detect buggy property enumeration order in older V8 versions.
-      // https://bugs.chromium.org/p/v8/issues/detail?id=4118
-
-
-      var test1 = new String('abc'); // eslint-disable-line no-new-wrappers
-
-      test1[5] = 'de';
-
-      if (Object.getOwnPropertyNames(test1)[0] === '5') {
-        return false;
-      } // https://bugs.chromium.org/p/v8/issues/detail?id=3056
-
-
-      var test2 = {};
-
-      for (var i = 0; i < 10; i++) {
-        test2['_' + String.fromCharCode(i)] = i;
-      }
-
-      var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-        return test2[n];
-      });
-
-      if (order2.join('') !== '0123456789') {
-        return false;
-      } // https://bugs.chromium.org/p/v8/issues/detail?id=3056
-
-
-      var test3 = {};
-      'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-        test3[letter] = letter;
-      });
-
-      if (Object.keys(Object.assign({}, test3)).join('') !== 'abcdefghijklmnopqrst') {
-        return false;
-      }
-
-      return true;
-    } catch (err) {
-      // We don't expect any of the above to throw, but better to be safe.
-      return false;
-    }
-  }
-
-  var objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
-    var from;
-    var to = toObject(target);
-    var symbols;
-
-    for (var s = 1; s < arguments.length; s++) {
-      from = Object(arguments[s]);
-
-      for (var key in from) {
-        if (hasOwnProperty.call(from, key)) {
-          to[key] = from[key];
-        }
-      }
-
-      if (getOwnPropertySymbols) {
-        symbols = getOwnPropertySymbols(from);
-
-        for (var i = 0; i < symbols.length; i++) {
-          if (propIsEnumerable.call(from, symbols[i])) {
-            to[symbols[i]] = from[symbols[i]];
-          }
-        }
-      }
-    }
-
-    return to;
-  };
-
-  var n = "function" === typeof Symbol && Symbol.for,
-      p = n ? Symbol.for("react.element") : 60103,
-      q = n ? Symbol.for("react.portal") : 60106,
-      r = n ? Symbol.for("react.fragment") : 60107,
-      t = n ? Symbol.for("react.strict_mode") : 60108,
-      u = n ? Symbol.for("react.profiler") : 60114,
-      v = n ? Symbol.for("react.provider") : 60109,
-      w = n ? Symbol.for("react.context") : 60110,
-      x = n ? Symbol.for("react.concurrent_mode") : 60111,
-      y = n ? Symbol.for("react.forward_ref") : 60112,
-      z = n ? Symbol.for("react.suspense") : 60113,
-      A = n ? Symbol.for("react.memo") : 60115,
-      B = n ? Symbol.for("react.lazy") : 60116,
-      C = "function" === typeof Symbol && Symbol.iterator;
-
-  function aa(a, b, e, c, d, g, h, f) {
-    if (!a) {
-      a = void 0;
-      if (void 0 === b) a = Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else {
-        var l = [e, c, d, g, h, f],
-            m = 0;
-        a = Error(b.replace(/%s/g, function () {
-          return l[m++];
-        }));
-        a.name = "Invariant Violation";
-      }
-      a.framesToPop = 1;
-      throw a;
-    }
-  }
-
-  function D(a) {
-    for (var b = arguments.length - 1, e = "https://reactjs.org/docs/error-decoder.html?invariant=" + a, c = 0; c < b; c++) {
-      e += "&args[]=" + encodeURIComponent(arguments[c + 1]);
-    }
-
-    aa(!1, "Minified React error #" + a + "; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ", e);
-  }
-
-  var E = {
-    isMounted: function isMounted() {
-      return !1;
-    },
-    enqueueForceUpdate: function enqueueForceUpdate() {},
-    enqueueReplaceState: function enqueueReplaceState() {},
-    enqueueSetState: function enqueueSetState() {}
-  },
-      F = {};
-
-  function G(a, b, e) {
-    this.props = a;
-    this.context = b;
-    this.refs = F;
-    this.updater = e || E;
-  }
-
-  G.prototype.isReactComponent = {};
-
-  G.prototype.setState = function (a, b) {
-    "object" !== typeof a && "function" !== typeof a && null != a ? D("85") : void 0;
-    this.updater.enqueueSetState(this, a, b, "setState");
-  };
-
-  G.prototype.forceUpdate = function (a) {
-    this.updater.enqueueForceUpdate(this, a, "forceUpdate");
-  };
-
-  function H() {}
-
-  H.prototype = G.prototype;
-
-  function I(a, b, e) {
-    this.props = a;
-    this.context = b;
-    this.refs = F;
-    this.updater = e || E;
-  }
-
-  var J = I.prototype = new H();
-  J.constructor = I;
-  objectAssign(J, G.prototype);
-  J.isPureReactComponent = !0;
-  var K = {
-    current: null,
-    currentDispatcher: null
-  },
-      L = Object.prototype.hasOwnProperty,
-      M = {
-    key: !0,
-    ref: !0,
-    __self: !0,
-    __source: !0
-  };
-
-  function N(a, b, e) {
-    var c = void 0,
-        d = {},
-        g = null,
-        h = null;
-    if (null != b) for (c in void 0 !== b.ref && (h = b.ref), void 0 !== b.key && (g = "" + b.key), b) {
-      L.call(b, c) && !M.hasOwnProperty(c) && (d[c] = b[c]);
-    }
-    var f = arguments.length - 2;
-    if (1 === f) d.children = e;else if (1 < f) {
-      for (var l = Array(f), m = 0; m < f; m++) {
-        l[m] = arguments[m + 2];
-      }
-
-      d.children = l;
-    }
-    if (a && a.defaultProps) for (c in f = a.defaultProps, f) {
-      void 0 === d[c] && (d[c] = f[c]);
-    }
-    return {
-      $$typeof: p,
-      type: a,
-      key: g,
-      ref: h,
-      props: d,
-      _owner: K.current
-    };
-  }
-
-  function ba(a, b) {
-    return {
-      $$typeof: p,
-      type: a.type,
-      key: b,
-      ref: a.ref,
-      props: a.props,
-      _owner: a._owner
-    };
-  }
-
-  function O(a) {
-    return "object" === typeof a && null !== a && a.$$typeof === p;
-  }
-
-  function escape$1(a) {
-    var b = {
-      "=": "=0",
-      ":": "=2"
-    };
-    return "$" + ("" + a).replace(/[=:]/g, function (a) {
-      return b[a];
-    });
-  }
-
-  var P = /\/+/g,
-      Q = [];
-
-  function R(a, b, e, c) {
-    if (Q.length) {
-      var d = Q.pop();
-      d.result = a;
-      d.keyPrefix = b;
-      d.func = e;
-      d.context = c;
-      d.count = 0;
-      return d;
-    }
-
-    return {
-      result: a,
-      keyPrefix: b,
-      func: e,
-      context: c,
-      count: 0
-    };
-  }
-
-  function S(a) {
-    a.result = null;
-    a.keyPrefix = null;
-    a.func = null;
-    a.context = null;
-    a.count = 0;
-    10 > Q.length && Q.push(a);
-  }
-
-  function T(a, b, e, c) {
-    var d = typeof a;
-    if ("undefined" === d || "boolean" === d) a = null;
-    var g = !1;
-    if (null === a) g = !0;else switch (d) {
-      case "string":
-      case "number":
-        g = !0;
-        break;
-
-      case "object":
-        switch (a.$$typeof) {
-          case p:
-          case q:
-            g = !0;
-        }
-
-    }
-    if (g) return e(c, a, "" === b ? "." + U(a, 0) : b), 1;
-    g = 0;
-    b = "" === b ? "." : b + ":";
-    if (Array.isArray(a)) for (var h = 0; h < a.length; h++) {
-      d = a[h];
-      var f = b + U(d, h);
-      g += T(d, f, e, c);
-    } else if (null === a || "object" !== typeof a ? f = null : (f = C && a[C] || a["@@iterator"], f = "function" === typeof f ? f : null), "function" === typeof f) for (a = f.call(a), h = 0; !(d = a.next()).done;) {
-      d = d.value, f = b + U(d, h++), g += T(d, f, e, c);
-    } else "object" === d && (e = "" + a, D("31", "[object Object]" === e ? "object with keys {" + Object.keys(a).join(", ") + "}" : e, ""));
-    return g;
-  }
-
-  function V(a, b, e) {
-    return null == a ? 0 : T(a, "", b, e);
-  }
-
-  function U(a, b) {
-    return "object" === typeof a && null !== a && null != a.key ? escape$1(a.key) : b.toString(36);
-  }
-
-  function ca(a, b) {
-    a.func.call(a.context, b, a.count++);
-  }
-
-  function da(a, b, e) {
-    var c = a.result,
-        d = a.keyPrefix;
-    a = a.func.call(a.context, b, a.count++);
-    Array.isArray(a) ? W(a, c, e, function (a) {
-      return a;
-    }) : null != a && (O(a) && (a = ba(a, d + (!a.key || b && b.key === a.key ? "" : ("" + a.key).replace(P, "$&/") + "/") + e)), c.push(a));
-  }
-
-  function W(a, b, e, c, d) {
-    var g = "";
-    null != e && (g = ("" + e).replace(P, "$&/") + "/");
-    b = R(b, g, c, d);
-    V(a, da, b);
-    S(b);
-  }
-
-  var X = {
-    Children: {
-      map: function map(a, b, e) {
-        if (null == a) return a;
-        var c = [];
-        W(a, c, null, b, e);
-        return c;
-      },
-      forEach: function forEach(a, b, e) {
-        if (null == a) return a;
-        b = R(null, null, b, e);
-        V(a, ca, b);
-        S(b);
-      },
-      count: function count(a) {
-        return V(a, function () {
-          return null;
-        }, null);
-      },
-      toArray: function toArray(a) {
-        var b = [];
-        W(a, b, null, function (a) {
-          return a;
-        });
-        return b;
-      },
-      only: function only(a) {
-        O(a) ? void 0 : D("143");
-        return a;
-      }
-    },
-    createRef: function createRef() {
-      return {
-        current: null
-      };
-    },
-    Component: G,
-    PureComponent: I,
-    createContext: function createContext(a, b) {
-      void 0 === b && (b = null);
-      a = {
-        $$typeof: w,
-        _calculateChangedBits: b,
-        _currentValue: a,
-        _currentValue2: a,
-        _threadCount: 0,
-        Provider: null,
-        Consumer: null
-      };
-      a.Provider = {
-        $$typeof: v,
-        _context: a
-      };
-      return a.Consumer = a;
-    },
-    forwardRef: function forwardRef(a) {
-      return {
-        $$typeof: y,
-        render: a
-      };
-    },
-    lazy: function lazy(a) {
-      return {
-        $$typeof: B,
-        _ctor: a,
-        _status: -1,
-        _result: null
-      };
-    },
-    memo: function memo(a, b) {
-      return {
-        $$typeof: A,
-        type: a,
-        compare: void 0 === b ? null : b
-      };
-    },
-    Fragment: r,
-    StrictMode: t,
-    Suspense: z,
-    createElement: N,
-    cloneElement: function cloneElement(a, b, e) {
-      null === a || void 0 === a ? D("267", a) : void 0;
-      var c = void 0,
-          d = objectAssign({}, a.props),
-          g = a.key,
-          h = a.ref,
-          f = a._owner;
-
-      if (null != b) {
-        void 0 !== b.ref && (h = b.ref, f = K.current);
-        void 0 !== b.key && (g = "" + b.key);
-        var l = void 0;
-        a.type && a.type.defaultProps && (l = a.type.defaultProps);
-
-        for (c in b) {
-          L.call(b, c) && !M.hasOwnProperty(c) && (d[c] = void 0 === b[c] && void 0 !== l ? l[c] : b[c]);
-        }
-      }
-
-      c = arguments.length - 2;
-      if (1 === c) d.children = e;else if (1 < c) {
-        l = Array(c);
-
-        for (var m = 0; m < c; m++) {
-          l[m] = arguments[m + 2];
-        }
-
-        d.children = l;
-      }
-      return {
-        $$typeof: p,
-        type: a.type,
-        key: g,
-        ref: h,
-        props: d,
-        _owner: f
-      };
-    },
-    createFactory: function createFactory(a) {
-      var b = N.bind(null, a);
-      b.type = a;
-      return b;
-    },
-    isValidElement: O,
-    version: "16.7.0",
-    unstable_ConcurrentMode: x,
-    unstable_Profiler: u,
-    __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: {
-      ReactCurrentOwner: K,
-      assign: objectAssign
-    }
-  },
-      Y = {
-    default: X
-  },
-      Z = Y && X || Y;
-  var react_production_min = Z.default || Z;
-
-  var react = createCommonjsModule(function (module) {
-
-  {
-    module.exports = react_production_min;
-  }
-  });
-
-  var ROOT_ATTRIBUTE_NAME = "data-reactroot";
-  var uppercasePattern = /([A-Z])/g;
-  var msPattern = /^ms-/;
   var reactElementSymbol = Symbol.for("react.element");
   var isArray = Array.isArray;
   var emptyArray = [];
-  var rxUnescaped = new RegExp(/["'&<>]/);
-
-  function escapeText(text) {
-    if (typeof text === "string") {
-      /* Much faster when there is no unescaped characters */
-      if (!rxUnescaped.test(text)) {
-        return text;
-      }
-
-      var result = text;
-      var start = 0;
-      var i = 0;
-
-      for (; i < text.length; ++i) {
-        switch (text.charCodeAt(i)) {
-          case 34:
-            // "
-            escape = "&quot;";
-            break;
-
-          case 39:
-            // '
-            escape = "&#x27;";
-            break;
-
-          case 38:
-            // &
-            escape = "&amp;";
-            break;
-
-          case 60:
-            // <
-            escape = "&lt;";
-            break;
-
-          case 62:
-            // >
-            escape = "&gt;";
-            break;
-
-          default:
-            continue;
-        }
-
-        if (i > start) {
-          escape = text.slice(start, i) + escape;
-        }
-
-        result = start > 0 ? result + escape : escape;
-        start = i + 1;
-      }
-
-      if (i !== start) {
-        return result + text.slice(start, i);
-      }
-
-      return result;
-    }
-
-    return text.toString();
-  } // TODO: enable again
-
-  function createMarkupForRoot() {
-    return ROOT_ATTRIBUTE_NAME + '=""';
-  }
-
-  function hyphenateStyleName(name) {
-    return name.replace(uppercasePattern, "-$1").toLowerCase().replace(msPattern, "-ms-");
-  }
-
-  function createElementForTesting(type, props) {
-    return {
-      $$typeof: reactElementSymbol,
-      key: null,
-      props: props,
-      ref: null,
-      type: type
-    };
-  }
-
-  function getCurrentContextValue(context, state) {
-    var contextValueStack = state.contextValueStack.get(context);
-
-    if (contextValueStack === undefined) {
-      return context._currentValue;
-    } else {
-      return contextValueStack[contextValueStack.length - 1];
-    }
-  }
-
-  function pushCurrentContextValue(context, value, state) {
-    var contextValueStack = state.contextValueStack.get(context);
-
-    if (contextValueStack === undefined) {
-      state.contextValueStack.set(context, [value]);
-    } else {
-      contextValueStack.push(value);
-    }
-  }
-
-  function popCurrentContextValue(context, state) {
-    var contextValueStack = state.contextValueStack.get(context);
-
-    if (contextValueStack !== undefined) {
-      contextValueStack.pop();
-
-      if (contextValueStack.length === 0) {
-        state.contextValueStack.set(context, undefined);
-      }
-    }
-  }
-
   function convertRootPropsToPropsArray(rootProps, rootPropsShape) {
     var props = [];
 
-    if (rootPropsShape !== null) {
+    if (rootPropsShape !== 0) {
       for (var i = 0, length = rootPropsShape.length; i < length; i++) {
         var propShape = rootPropsShape[i];
         props.push(rootProps[propShape]);
@@ -643,11 +58,9 @@
 
     return props;
   }
-
   function createRootComponent(rootProps, rootPropsShape, usesHooks) {
     return createComponent(convertRootPropsToPropsArray(rootProps, rootPropsShape), usesHooks);
   }
-
   function createComponent(props, usesHooks) {
     return {
       props: props,
@@ -655,100 +68,9 @@
     };
   }
 
-  function createState(props) {
-    return {
-      componentOpcodeCache: new Map(),
-      computeFunctionUsesHooks: false,
-      contextValueStack: new Map(),
-      currentComponent: null,
-      currentElementTag: "",
-      currentElementTagIsOpen: false,
-      currentValue: undefined,
-      elementCloseRenderString: "",
-      elementTagStack: [],
-      elementTagStackIndex: 0,
-      hasMarkedRootElement: false,
-      lastChildWasStyle: false,
-      lastChildWasTextNode: false,
-      propsArray: emptyArray,
-      renderString: "",
-      rootPropsObject: props,
-      styleRenderString: ""
-    };
-  }
-
-  function cloneState(state) {
-    var clonedState = createState(null);
-    clonedState.componentOpcodeCache = state.componentOpcodeCache;
-    clonedState.computeFunctionUsesHooks = state.computeFunctionUsesHooks;
-    clonedState.contextValueStack = state.contextValueStack;
-    clonedState.currentComponent = state.currentComponent;
-    clonedState.currentElementTag = state.currentElementTag;
-    clonedState.currentElementTagIsOpen = state.currentElementTagIsOpen;
-    clonedState.currentValue = state.currentValue;
-    clonedState.elementCloseRenderString = state.elementCloseRenderString;
-    clonedState.elementTagStack = state.elementTagStack;
-    clonedState.elementTagStackIndex = state.elementTagStackIndex;
-    clonedState.hasMarkedRootElement = state.hasMarkedRootElement;
-    clonedState.lastChildWasStyle = state.lastChildWasStyle;
-    clonedState.lastChildWasTextNode = state.lastChildWasTextNode;
-    clonedState.propsArray = state.propsArray;
-    clonedState.renderString = state.renderString;
-    return clonedState;
-  }
-
-  function applyState(targetState, state) {
-    targetState.componentOpcodeCache = state.componentOpcodeCache;
-    targetState.computeFunctionUsesHooks = state.computeFunctionUsesHooks;
-    targetState.contextValueStack = state.contextValueStack;
-    targetState.currentComponent = state.currentComponent;
-    targetState.currentElementTag = state.currentElementTag;
-    targetState.currentElementTagIsOpen = state.currentElementTagIsOpen;
-    targetState.currentValue = state.currentValue;
-    targetState.elementCloseRenderString = state.elementCloseRenderString;
-    targetState.elementTagStack = state.elementTagStack;
-    targetState.elementTagStackIndex = state.elementTagStackIndex;
-    targetState.hasMarkedRootElement = state.hasMarkedRootElement;
-    targetState.lastChildWasStyle = state.lastChildWasStyle;
-    targetState.lastChildWasTextNode = state.lastChildWasTextNode;
-    targetState.propsArray = state.propsArray;
-    targetState.renderString = state.renderString;
-  }
-
-  function isReactNode(node) {
-    return node !== null && node.t !== undefined && node.v !== undefined;
-  }
-  /* eslint-disable-next-line */
-
-
-  var utils = {
-    applyState: applyState,
-    cloneState: cloneState,
-    convertRootPropsToPropsArray: convertRootPropsToPropsArray,
-    createComponent: createComponent,
-    createElementForTesting: createElementForTesting,
-    createMarkupForRoot: createMarkupForRoot,
-    createRootComponent: createRootComponent,
-    createState: createState,
-    emptyArray: emptyArray,
-    escapeText: escapeText,
-    getCurrentContextValue: getCurrentContextValue,
-    hyphenateStyleName: hyphenateStyleName,
-    isArray: isArray,
-    isReactNode: isReactNode,
-    popCurrentContextValue: popCurrentContextValue,
-    pushCurrentContextValue: pushCurrentContextValue,
-    reactElementSymbol: reactElementSymbol
-  };
-
-  var convertRootPropsToPropsArray$1 = utils.convertRootPropsToPropsArray,
-      createComponent$1 = utils.createComponent,
-      createRootComponent$1 = utils.createRootComponent,
-      emptyArray$1 = utils.emptyArray,
-      isArray$1 = utils.isArray,
-      reactElementSymbol$1 = utils.reactElementSymbol;
-
   var rootStates = new Map();
+  var mountOpcodesToUpdateOpcodes = new Map();
+  var mountOpcodesToUnmountOpcodes = new Map();
   var COMPONENT = 0;
   var OPEN_ELEMENT = 6;
   var OPEN_VOID_ELEMENT = 7;
@@ -781,10 +103,14 @@
     parent.removeChild(child);
   }
 
+  function replaceChild(originalNode, replaceNode) {
+    originalNode.parentNode.replaceChild(replaceNode, originalNode);
+  }
+
   function appendChild(parentElementOrFragment, element) {
-    if (isArray$1(parentElementOrFragment)) {
+    if (isArray(parentElementOrFragment)) {
       parentElementOrFragment.push(element);
-    } else if (isArray$1(element)) {
+    } else if (isArray(element)) {
       for (var i = 0, length = element.length; i < length; i++) {
         appendChild(parentElementOrFragment, element[i]);
       }
@@ -804,41 +130,43 @@
       return computeFunction(arr[0], arr[1], arr[2]);
     } else if (arr.length === 4) {
       return computeFunction(arr[0], arr[1], arr[2], arr[3]);
+    } else if (arr.length === 7) {
+      return computeFunction(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
     }
 
     return computeFunction.apply(null, arr);
   }
 
-  function openElement(elem, elemValuePointer, state, workInProgress) {
+  function openElement(elem, state, workInProgress) {
     if (workInProgress.hostNode === null) {
       workInProgress.hostNode = elem;
     }
 
-    workInProgress.values[elemValuePointer] = elem;
-    var stackIndex = state.currentHostNodeStackIndex++;
-    state.currentHostNodeStack[stackIndex] = state.currentHostNode;
+    var currentHostNode = state.currentHostNode;
+
+    if (currentHostNode !== null) {
+      var stackIndex = state.currentHostNodeStackIndex++;
+      state.currentHostNodeStack[stackIndex] = state.currentHostNode;
+    }
+
     state.currentHostNode = elem;
   }
 
-  function renderMountOpcodes(mountOpcodes, parentMountOpcodes, runtimeValues, state, workInProgress) {
+  function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) {
     var opcodesLength = mountOpcodes.length;
-    var updateOpcodes = mountOpcodes[0];
-    var unmountOpcodes = mountOpcodes[1];
-    var shouldCreateOpcodes = updateOpcodes === 0;
+    var updateOpcodes = mountOpcodesToUpdateOpcodes.get(mountOpcodes);
+    var unmountOpcodes = mountOpcodesToUnmountOpcodes.get(mountOpcodes);
+    var topHostNode;
+    var shouldCreateOpcodes = updateOpcodes === undefined;
 
     if (shouldCreateOpcodes === true) {
-      updateOpcodes = mountOpcodes[0] = [];
-      unmountOpcodes = mountOpcodes[1] = [];
-
-      if (parentMountOpcodes !== null) {
-        var parentUpdateOpcodes = parentMountOpcodes[0];
-        var parentUnmountOpcodes = parentMountOpcodes[1];
-        parentUpdateOpcodes.push(updateOpcodes);
-        parentUnmountOpcodes.push(unmountOpcodes);
-      }
+      updateOpcodes = [];
+      unmountOpcodes = [];
+      mountOpcodesToUpdateOpcodes.set(mountOpcodes, updateOpcodes);
+      mountOpcodesToUnmountOpcodes.set(mountOpcodes, unmountOpcodes);
     }
 
-    var index = 2; // Render opcodes from the opcode jump-table
+    var index = 0; // Render opcodes from the opcode jump-table
 
     while (index < opcodesLength) {
       var opcode = mountOpcodes[index];
@@ -870,7 +198,14 @@
           {
             var propName = mountOpcodes[++index];
             var staticPropValue = mountOpcodes[++index];
-            state.currentHostNode.setAttribute(propName, staticPropValue);
+            var currentHostNode = state.currentHostNode;
+
+            if (propName === "id") {
+              currentHostNode.id = staticPropValue;
+            } else {
+              currentHostNode.setAttribute(propName, staticPropValue);
+            }
+
             break;
           }
 
@@ -894,12 +229,12 @@
           {
             var staticTextChild = mountOpcodes[++index];
             var textNode = createTextNode(staticTextChild);
-            var currentHostNode = state.currentHostNode;
+            var _currentHostNode = state.currentHostNode;
 
-            if (currentHostNode === null) {
+            if (_currentHostNode === null) {
               state.currentHostNode = textNode;
             } else {
-              appendChild(currentHostNode, textNode);
+              appendChild(_currentHostNode, textNode);
             }
 
             break;
@@ -919,12 +254,12 @@
 
             var _textNode = createTextNode(dynamicTextChild);
 
-            var _currentHostNode = state.currentHostNode;
+            var _currentHostNode2 = state.currentHostNode;
 
-            if (_currentHostNode === null) {
+            if (_currentHostNode2 === null) {
               state.currentHostNode = _textNode;
             } else {
-              appendChild(_currentHostNode, _textNode);
+              appendChild(_currentHostNode2, _textNode);
             }
 
             break;
@@ -941,13 +276,7 @@
         case OPEN_ELEMENT_DIV:
           {
             var elem = createElement("div");
-            var elemValuePointer = mountOpcodes[++index];
-
-            if (shouldCreateOpcodes === true) {
-              unmountOpcodes.push(9, elemValuePointer);
-            }
-
-            openElement(elem, elemValuePointer, state, workInProgress);
+            openElement(elem, state, workInProgress);
             break;
           }
 
@@ -955,56 +284,46 @@
           {
             var _elem = createElement("span");
 
-            var _elemValuePointer = mountOpcodes[++index];
-
-            if (shouldCreateOpcodes === true) {
-              unmountOpcodes.push(9, _elemValuePointer);
-            }
-
-            openElement(_elem, _elemValuePointer, state, workInProgress);
+            openElement(_elem, state, workInProgress);
             break;
           }
 
         case OPEN_ELEMENT:
           {
             var elementTag = mountOpcodes[++index];
-            var _elemValuePointer2 = mountOpcodes[++index];
 
             var _elem2 = createElement(elementTag);
 
-            if (shouldCreateOpcodes === true) {
-              unmountOpcodes.push(9, _elemValuePointer2);
-            }
-
-            openElement(_elem2, _elemValuePointer2, state, workInProgress);
+            openElement(_elem2, state, workInProgress);
             break;
           }
 
         case CLOSE_ELEMENT:
           {
             var stackIndex = state.currentHostNodeStackIndex;
-            state.currentHostNodeStack[stackIndex] = null;
-            stackIndex = --state.currentHostNodeStackIndex;
-            var parent = state.currentHostNodeStack[stackIndex];
-            appendChild(parent, state.currentHostNode);
-            state.currentHostNode = parent;
+            var _currentHostNode3 = state.currentHostNode;
+            topHostNode = _currentHostNode3;
+
+            if (stackIndex === 0) {
+              state.currentHostNode = null;
+            } else {
+              stackIndex = --state.currentHostNodeStackIndex;
+              var parent = state.currentHostNodeStack[stackIndex];
+              state.currentHostNodeStack[stackIndex] = null;
+              appendChild(parent, _currentHostNode3);
+              state.currentHostNode = parent;
+            }
+
             break;
           }
 
         case OPEN_VOID_ELEMENT:
           {
             var _elementTag = mountOpcodes[++index];
-            var _elemValuePointer3 = mountOpcodes[++index];
 
             var _elem3 = createElement(_elementTag);
 
-            if (shouldCreateOpcodes === true) {
-              unmountOpcodes.push(9, _elemValuePointer3);
-            }
-
-            workInProgress.values[_elemValuePointer3] = _elem3;
-            _elem3._parentNode = state.currentHostNode;
-            state.currentHostNode = _elem3;
+            openElement(_elem3, state, workInProgress);
             break;
           }
 
@@ -1013,86 +332,98 @@
             var templateOpcodes = mountOpcodes[++index];
             var computeValuesPointer = mountOpcodes[++index];
             var computeValues = runtimeValues[computeValuesPointer];
-            renderMountOpcodes(templateOpcodes, mountOpcodes, computeValues, state, workInProgress);
+            renderMountOpcodes(templateOpcodes, computeValues, state, workInProgress);
             break;
           }
 
         case CONDITIONAL:
           {
+            var hostNodeValuePointer = mountOpcodes[++index];
             var conditionValuePointer = mountOpcodes[++index];
             var conditionValue = runtimeValues[conditionValuePointer];
             var consequentMountOpcodes = mountOpcodes[++index];
             var alternateMountOpcodes = mountOpcodes[++index];
+            var hostNode = void 0;
 
             if (shouldCreateOpcodes === true) {
-              updateOpcodes.push(30, conditionValuePointer, consequentMountOpcodes, alternateMountOpcodes);
+              updateOpcodes.push(CONDITIONAL, hostNodeValuePointer, conditionValuePointer, consequentMountOpcodes, alternateMountOpcodes);
             }
 
             if (conditionValue) {
               if (consequentMountOpcodes !== null) {
-                renderMountOpcodes(consequentMountOpcodes, mountOpcodes, runtimeValues, state, workInProgress);
+                hostNode = renderMountOpcodes(consequentMountOpcodes, runtimeValues, state, workInProgress);
               }
-
-              return index;
+            } else {
+              if (alternateMountOpcodes !== null) {
+                hostNode = renderMountOpcodes(alternateMountOpcodes, runtimeValues, state, workInProgress);
+              }
             }
 
-            if (alternateMountOpcodes !== null) {
-              renderMountOpcodes(alternateMountOpcodes, mountOpcodes, runtimeValues, state, workInProgress);
-            }
-
+            workInProgress.values[hostNodeValuePointer] = hostNode;
             break;
           }
 
         case UNCONDITIONAL_TEMPLATE:
           {
             var templateMountOpcodes = mountOpcodes[++index];
-            var templateValuesPointerIndex = mountOpcodes[++index];
             var computeFunction = mountOpcodes[++index];
-
-            if (shouldCreateOpcodes) {
-              updateOpcodes.push(20, templateMountOpcodes, templateValuesPointerIndex, computeFunction);
-            }
-
             var templateRuntimeValues = runtimeValues;
+            var templateValuesPointerIndex = void 0;
 
             if (computeFunction !== null) {
-              var computeFunctionUsesHooks = state.computeFunctionUsesHooks;
-
+              templateValuesPointerIndex = mountOpcodes[++index];
               templateRuntimeValues = callComputeFunctionWithArray(computeFunction, state.currentComponent.props);
+              workInProgress.values[templateValuesPointerIndex] = templateRuntimeValues;
+            }
 
-              if (computeFunctionUsesHooks === true) {
-                // finishHooks();
-                state.computeFunctionUsesHooks = false;
+            if (shouldCreateOpcodes === true) {
+              updateOpcodes.push(UNCONDITIONAL_TEMPLATE, templateMountOpcodes, computeFunction);
+
+              if (templateValuesPointerIndex !== undefined) {
+                updateOpcodes.push(templateValuesPointerIndex);
               }
             }
 
-            workInProgress.values[templateValuesPointerIndex] = templateRuntimeValues;
-            renderMountOpcodes(templateMountOpcodes, mountOpcodes, templateRuntimeValues, state, workInProgress);
-            return;
+            return renderMountOpcodes(templateMountOpcodes, templateRuntimeValues, state, workInProgress);
           }
 
         case MULTI_CONDITIONAL:
           {
             var conditionalSize = mountOpcodes[++index];
+            var _hostNodeValuePointer = mountOpcodes[++index];
+            var caseValuePointer = mountOpcodes[++index];
             var startingIndex = index;
             var conditionalDefaultIndex = conditionalSize - 1;
 
-            for (var conditionalIndex = 0; conditionalIndex < conditionalSize; ++conditionalIndex) {
-              if (conditionalIndex === conditionalDefaultIndex) {
-                var defaultCaseOpcodes = mountOpcodes[++index];
+            if (shouldCreateOpcodes === true) {
+              var _updateOpcodes;
 
-                if (defaultCaseOpcodes !== null) {
-                  renderMountOpcodes(defaultCaseOpcodes, mountOpcodes, runtimeValues, state, workInProgress);
+              var sliceFrom = startingIndex + 1;
+              var sliceTo = sliceFrom + (conditionalSize - 1) * 2 + 1;
+
+              (_updateOpcodes = updateOpcodes).push.apply(_updateOpcodes, [MULTI_CONDITIONAL, conditionalSize, _hostNodeValuePointer, caseValuePointer].concat(mountOpcodes.slice(sliceFrom, sliceTo)));
+            }
+
+            var _hostNode = void 0;
+
+            var conditionalIndex = 0;
+
+            for (; conditionalIndex < conditionalSize; conditionalIndex++) {
+              if (conditionalIndex === conditionalDefaultIndex) {
+                var defaultCaseMountOpcodes = mountOpcodes[++index];
+
+                if (defaultCaseMountOpcodes !== null) {
+                  _hostNode = renderMountOpcodes(defaultCaseMountOpcodes, runtimeValues, state, workInProgress);
                 }
               } else {
                 var caseConditionPointer = mountOpcodes[++index];
                 var caseConditionValue = runtimeValues[caseConditionPointer];
 
-                if (caseConditionValue) {
-                  var caseOpcodes = mountOpcodes[++index];
+                if (caseConditionValue === true) {
+                  var caseMountOpcodes = mountOpcodes[++index];
 
-                  if (caseOpcodes !== null) {
-                    renderMountOpcodes(caseOpcodes, mountOpcodes, runtimeValues, state, workInProgress);
+                  if (caseMountOpcodes !== null) {
+                    _hostNode = renderMountOpcodes(caseMountOpcodes, runtimeValues, state, workInProgress);
                   }
 
                   break;
@@ -1102,34 +433,41 @@
               }
             }
 
+            workInProgress.values[caseValuePointer] = conditionalIndex - 1;
+
+            if (_hostNode !== undefined) {
+              workInProgress.values[_hostNodeValuePointer] = _hostNode;
+            }
+
             index = startingIndex + (conditionalSize - 1) * 2 + 1;
             break;
           }
 
         case COMPONENT:
           {
+            var usesHooks = mountOpcodes[++index];
             var currentComponent = state.currentComponent;
             var rootPropsShape = void 0;
             var previousComponent = currentComponent;
 
             if (currentComponent === null) {
               rootPropsShape = mountOpcodes[++index];
-              currentComponent = state.currentComponent = createRootComponent$1(state.rootPropsObject, rootPropsShape, false);
+              currentComponent = state.currentComponent = createRootComponent(state.rootPropsObject, rootPropsShape, false);
             } else {
-              state.currentComponent = createComponent$1(state.propsArray, false);
+              state.currentComponent = createComponent(state.propsArray, false);
             }
 
             var componentMountOpcodes = mountOpcodes[++index];
-            var componentFiber = createOpcodeFiber(null, []);
+            var componentFiber = new OpcodeFiber(null, []);
 
             if (shouldCreateOpcodes) {
-              updateOpcodes.push(0);
+              updateOpcodes.push(COMPONENT, usesHooks, componentMountOpcodes);
 
               if (rootPropsShape !== undefined) {
                 updateOpcodes.push(rootPropsShape);
               }
 
-              unmountOpcodes.push(0);
+              unmountOpcodes.push(COMPONENT, usesHooks, componentMountOpcodes);
             }
 
             componentFiber.values[0] = currentComponent;
@@ -1143,10 +481,12 @@
 
             var previousValue = state.currentValue;
             state.currentValue = undefined;
-            renderMountOpcodes(componentMountOpcodes, mountOpcodes, runtimeValues, state, componentFiber);
+
+            var _hostNode2 = renderMountOpcodes(componentMountOpcodes, runtimeValues, state, componentFiber);
+
             state.currentValue = previousValue;
             state.currentComponent = previousComponent;
-            return;
+            return _hostNode2;
           }
 
         default:
@@ -1155,12 +495,13 @@
 
       ++index;
     }
+
+    return topHostNode;
   }
 
   function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeValues, state, workInProgress) {
     var opcodesLength = updateOpcodes.length;
-    var index = 0;
-    debugger; // Render opcodes from the opcode jump-table
+    var index = 0; // Render opcodes from the opcode jump-table
 
     while (index < opcodesLength) {
       var opcode = updateOpcodes[index];
@@ -1168,33 +509,116 @@
       switch (opcode) {
         case CONDITIONAL:
           {
+            var hostNodeValuePointer = updateOpcodes[++index];
             var conditionValuePointer = updateOpcodes[++index];
             var previousConditionValue = previousRuntimeValues[conditionValuePointer];
             var nextConditionValue = nextRuntimeValues[conditionValuePointer];
             var consequentMountOpcodes = updateOpcodes[++index];
             var alternateMountOpcodes = updateOpcodes[++index];
             var shouldUpdate = previousConditionValue === nextConditionValue;
+            var nextHostNode = void 0;
 
             if (nextConditionValue) {
               if (consequentMountOpcodes !== null) {
                 if (shouldUpdate) ; else {
                   if (alternateMountOpcodes !== null) {
-                    var alternateUnmountOpcodes = alternateMountOpcodes[1];
-                    renderUnmountOpcodes(alternateUnmountOpcodes, state, workInProgress, false);
+                    var alternateUnmountOpcodes = mountOpcodesToUnmountOpcodes.get(alternateMountOpcodes);
+                    renderUnmountOpcodes(alternateUnmountOpcodes, state, workInProgress, true);
                   }
 
-                  renderMountOpcodes(consequentMountOpcodes, nextRuntimeValues, state, workInProgress);
+                  nextHostNode = renderMountOpcodes(consequentMountOpcodes, nextRuntimeValues, state, workInProgress);
                 }
               }
+            } else {
+              if (alternateMountOpcodes !== null) {
+                if (shouldUpdate) ; else {
+                  if (consequentMountOpcodes !== null) {
+                    var consequentUnmountOpcodes = mountOpcodesToUnmountOpcodes.get(consequentMountOpcodes);
+                    renderUnmountOpcodes(consequentUnmountOpcodes, state, workInProgress, true);
+                  }
 
-              return index;
+                  nextHostNode = renderMountOpcodes(alternateMountOpcodes, nextRuntimeValues, state, workInProgress);
+                }
+              }
             }
 
-            if (alternateMountOpcodes !== null) {
-              if (shouldUpdate) ; else {
-                // debugger;
-                renderMountOpcodes(alternateMountOpcodes, nextRuntimeValues, state, workInProgress);
+            if (nextHostNode !== undefined) {
+              var previousHostNode = workInProgress.values[hostNodeValuePointer];
+              replaceChild(previousHostNode, nextHostNode);
+              workInProgress.values[hostNodeValuePointer] = nextHostNode;
+            }
+
+            break;
+          }
+
+        case MULTI_CONDITIONAL:
+          {
+            var conditionalSize = updateOpcodes[++index];
+            var _hostNodeValuePointer2 = updateOpcodes[++index];
+            var caseValuePointer = updateOpcodes[++index];
+            var startingIndex = index;
+            var conditionalDefaultIndex = conditionalSize - 1;
+            var previousConditionalIndex = workInProgress.values[caseValuePointer];
+            var caseHasChanged = false;
+
+            var _nextHostNode = void 0;
+
+            for (var conditionalIndex = 0; conditionalIndex < conditionalSize; ++conditionalIndex) {
+              if (conditionalIndex === conditionalDefaultIndex) {
+                var defaultCaseMountOpcodes = updateOpcodes[++index];
+
+                if (previousConditionalIndex !== conditionalIndex) {
+                  caseHasChanged = true;
+                }
+
+                if (defaultCaseMountOpcodes !== null) {
+                  if (caseHasChanged === true) {
+                    _nextHostNode = renderMountOpcodes(defaultCaseMountOpcodes, nextRuntimeValues, state, workInProgress);
+                  } else {
+                    var defaultCaseUpdateOpcodes = mountOpcodesToUpdateOpcodes.get(defaultCaseMountOpcodes);
+                    renderUpdateOpcodes(defaultCaseUpdateOpcodes, previousRuntimeValues, nextRuntimeValues, state, workInProgress);
+                  }
+                }
+              } else {
+                var caseConditionPointer = updateOpcodes[++index];
+                var caseConditionValue = nextRuntimeValues[caseConditionPointer];
+
+                if (caseConditionValue === true) {
+                  var caseMountOpcodes = updateOpcodes[++index];
+
+                  if (previousConditionalIndex !== conditionalIndex) {
+                    caseHasChanged = true;
+                  }
+
+                  if (caseMountOpcodes !== null) {
+                    if (caseHasChanged === true) {
+                      _nextHostNode = renderMountOpcodes(caseMountOpcodes, nextRuntimeValues, state, workInProgress);
+                    } else {
+                      var caseUpdateOpcodes = mountOpcodesToUpdateOpcodes.get(caseMountOpcodes);
+                      renderUpdateOpcodes(caseUpdateOpcodes, previousRuntimeValues, nextRuntimeValues, state, workInProgress);
+                    }
+                  }
+
+                  break;
+                }
+
+                ++index;
               }
+            }
+
+            if (caseHasChanged === true) {
+              var previousMountOpcodesPointer = previousConditionalIndex === conditionalDefaultIndex ? startingIndex + 1 + previousConditionalIndex * 2 : startingIndex + 2 + previousConditionalIndex * 2;
+              var previousCaseMountOpcodes = updateOpcodes[previousMountOpcodesPointer];
+              var previousCaseUnmountOpcodes = mountOpcodesToUnmountOpcodes.get(previousCaseMountOpcodes);
+              renderUnmountOpcodes(previousCaseUnmountOpcodes, state, workInProgress, true);
+            }
+
+            index = startingIndex + (conditionalSize - 1) * 2 + 1;
+
+            if (_nextHostNode !== undefined) {
+              var _previousHostNode = workInProgress.values[_hostNodeValuePointer2];
+              replaceChild(_previousHostNode, _nextHostNode);
+              workInProgress.values[_hostNodeValuePointer2] = _nextHostNode;
             }
 
             break;
@@ -1202,30 +626,28 @@
 
         case UNCONDITIONAL_TEMPLATE:
           {
-            var templateUpdateOpcodes = updateOpcodes[++index];
-            var templateValuesPointerIndex = updateOpcodes[++index];
+            var templateMountOpcodes = updateOpcodes[++index];
+            var templateUpdateOpcodes = mountOpcodesToUpdateOpcodes.get(templateMountOpcodes);
             var computeFunction = updateOpcodes[++index];
-            var previousTemplateRuntimeValues = workInProgress.values[templateValuesPointerIndex];
+            var previousTemplateRuntimeValues = previousRuntimeValues;
             var nextTemplateRuntimeValues = nextRuntimeValues;
 
-            if (computeFunction !== null) {
-              var computeFunctionUsesHooks = state.computeFunctionUsesHooks;
-
+            if (computeFunction !== 0) {
+              var templateValuesPointerIndex = updateOpcodes[++index];
               nextTemplateRuntimeValues = callComputeFunctionWithArray(computeFunction, state.currentComponent.props);
-
-              if (computeFunctionUsesHooks === true) {
-                // finishHooks();
-                state.computeFunctionUsesHooks = false;
-              }
+              previousTemplateRuntimeValues = workInProgress.values[templateValuesPointerIndex];
+              workInProgress.values[templateValuesPointerIndex] = nextRuntimeValues;
             }
 
-            workInProgress.values[templateValuesPointerIndex] = nextRuntimeValues;
             renderUpdateOpcodes(templateUpdateOpcodes, previousTemplateRuntimeValues, nextTemplateRuntimeValues, state, workInProgress);
             return;
           }
 
         case COMPONENT:
           {
+            var usesHooks = updateOpcodes[++index];
+            var componentMountOpcodes = updateOpcodes[++index];
+            var componentUpdateOpcodes = mountOpcodesToUpdateOpcodes.get(componentMountOpcodes);
             var currentComponent = state.currentComponent;
             var componentFiber = void 0;
             var previousComponent = currentComponent;
@@ -1239,15 +661,16 @@
 
             if (currentComponent === null) {
               var rootPropsShape = updateOpcodes[++index];
-              nextPropsArray = convertRootPropsToPropsArray$1(state.rootPropsObject, rootPropsShape);
+              nextPropsArray = convertRootPropsToPropsArray(state.rootPropsObject, rootPropsShape);
             } else {
               nextPropsArray = state.propsArray;
             }
 
             component.props = nextPropsArray;
-            var componentUpdateOpcodes = updateOpcodes[++index];
             state.currentComponent = currentComponent = component;
+
             renderUpdateOpcodes(componentUpdateOpcodes, previousRuntimeValues, nextRuntimeValues, state, componentFiber);
+
             state.currentComponent = previousComponent;
             return;
           }
@@ -1275,6 +698,8 @@
 
         case COMPONENT:
           {
+            var usesHooks = unmountOpcodes[++index];
+
             var currentComponent = state.currentComponent;
             var componentFiber = void 0;
             var previousComponent = currentComponent;
@@ -1299,35 +724,31 @@
     }
   }
 
-  function unmountRoot(rootState) {
-    var unmountOpcodes = rootState.unmountOpcodes;
+  function unmountRoot(DOMContainer, rootState) {
+    var unmountOpcodes = mountOpcodesToUnmountOpcodes.get(rootState.mountOpcodes);
     renderUnmountOpcodes(unmountOpcodes, rootState, null, true);
-    removeChild(rootState.currentHostNode, rootState.fiber.hostNode);
+    removeChild(DOMContainer, rootState.fiber.hostNode);
     rootState.fiber = null;
   }
 
-  function createState$1(currentHostNode, mountOpcodes) {
-    return {
-      currentComponent: null,
-      currentHostNode: currentHostNode,
-      currentHostNodeStack: [],
-      currentHostNodeStackIndex: 0,
-      fiber: null,
-      mountOpcodes: mountOpcodes,
-      propsArray: emptyArray$1,
-      rootPropsObject: null
-    };
+  function State(mountOpcodes) {
+    this.currentComponent = null;
+    this.currentHostNode = null;
+    this.currentHostNodeStack = [];
+    this.currentHostNodeStackIndex = 0;
+    this.fiber = null;
+    this.mountOpcodes = mountOpcodes;
+    this.propsArray = emptyArray;
+    this.rootPropsObject = null;
   }
 
-  function createOpcodeFiber(hostNode, values) {
-    return {
-      child: null,
-      hostNode: hostNode,
-      key: null,
-      sibling: null,
-      parent: null,
-      values: values
-    };
+  function OpcodeFiber(hostNode, values) {
+    this.child = null;
+    this.hostNode = null;
+    this.key = null;
+    this.sibling = null;
+    this.parent = null;
+    this.values = values;
   }
 
   function insertChildFiberIntoParentFiber(parent, child) {
@@ -1343,20 +764,22 @@
 
     if (node === null || node === undefined) {
       if (rootState !== undefined) {
-        unmountRoot(rootState);
+        unmountRoot(DOMContainer, rootState);
       }
-    } else if (node.$$typeof === reactElementSymbol$1) {
+    } else if (node.$$typeof === reactElementSymbol) {
       var mountOpcodes = node.type;
       var shouldUpdate = false;
 
       if (rootState === undefined) {
-        rootState = createState$1(DOMContainer, mountOpcodes);
+        rootState = new State(mountOpcodes);
         rootStates.set(DOMContainer, rootState);
       } else {
-        if (rootState.mountOpcodes === mountOpcodes) {
-          shouldUpdate = true;
-        } else if (rootState.fiber !== null) {
-          unmountRoot(rootState);
+        if (rootState.fiber !== null) {
+          if (rootState.mountOpcodes === mountOpcodes) {
+            shouldUpdate = true;
+          } else {
+            unmountRoot(DOMContainer, rootState);
+          }
         }
       }
 
@@ -1364,9 +787,11 @@
       rootState.rootPropsObject = node.props;
 
       if (shouldUpdate === true) {
-        renderUpdateOpcodes(mountOpcodes[0], emptyArray$1, emptyArray$1, rootState, null);
+        var updateOpcodes = mountOpcodesToUpdateOpcodes.get(mountOpcodes);
+        renderUpdateOpcodes(updateOpcodes, emptyArray, emptyArray, rootState, null);
       } else {
-        renderMountOpcodes(mountOpcodes, null, emptyArray$1, rootState, null);
+        var hostNode = renderMountOpcodes(mountOpcodes, emptyArray, rootState, null);
+        appendChild(DOMContainer, hostNode);
       }
     } else {
       throw new Error("render() expects a ReactElement as the first argument");
@@ -1376,24 +801,34 @@
   function render(node, DOMContainer) {
     return renderNodeToRootContainer(node, DOMContainer);
   }
-  /* eslint-disable-next-line */
-
-
-  var render_1 = {
-    render: render
-  };
-  var render_2 = render_1.render;
 
   // DO NOT MODIFY
+  var React$1 = {
+    createElement: function createElement(type, props) {
+      return {
+        $$typeof: reactElementSymbol,
+        key: null,
+        props: props,
+        ref: null,
+        type: type
+      };
+    }
+  };
   var root = document.getElementById("root");
   var props = {
     cond: false,
-    val: "foo"
+    defaultClassName: "default-item"
   };
-
   console.time("Render");
-  render_2(react.createElement(Component, props), root);
-  render_2(react.createElement(Component, props), root);
-  console.timeEnd("Render");
+  render(React$1.createElement(Component, props), root); // render(<Component {...updateProps} />, root);
+  // render(<Component {...props} />, root);
+
+  console.timeEnd("Render"); // const props = {val1: "val1", val2: "val2", val3: "val3", val4: "val4", val5: "val5", val6: "val6", val7: "val7"};
+  // console.time("Render");
+  // for (let i = 0; i < 1000; i++) {
+  //   render(null, root);
+  //   render(<Component {...props} />, root);
+  // }
+  // console.timeEnd("Render");
 
 }));

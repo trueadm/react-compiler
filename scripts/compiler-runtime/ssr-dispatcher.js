@@ -1,6 +1,4 @@
-"use strict";
-
-const React = require("react");
+import React from "react";
 let reactCurrentOwner;
 let dispatcher = null;
 let firstWorkInProgressHook = null;
@@ -89,7 +87,7 @@ function createDispatcher() {
   };
 }
 
-function useHooksDispatcher(func) {
+export function useHooksDispatcher(func) {
   reactCurrentOwner = reactCurrentOwner || getCurrentOwner();
   const prevDispatcher = reactCurrentOwner.currentDispatcher;
   if (dispatcher === null) {
@@ -101,20 +99,13 @@ function useHooksDispatcher(func) {
   return result;
 }
 
-function prepareToUseHooks(componentIdentity) {
+export function prepareToUseHooks(componentIdentity) {
   currentlyRenderingComponent = componentIdentity;
 }
 
-function finishHooks() {
+export function finishHooks() {
   firstWorkInProgressHook = null;
   currentlyRenderingComponent = null;
   isReRender = false;
   workInProgressHook = null;
 }
-
-/* eslint-disable-next-line */
-module.exports = {
-  finishHooks,
-  prepareToUseHooks,
-  useHooksDispatcher,
-};

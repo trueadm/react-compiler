@@ -1,9 +1,10 @@
-var React = require("react");
+import React from "react";
 
-function Component() {
-  return <div>Hello world</div>
+const { useState } = React;
+
+export function Component() {
+  const [value, updateValue] = useState("Hello world");
+  return <div>{value}</div>;
 }
 
 Component.compileRootComponent = true;
-
-module.exports = Component;

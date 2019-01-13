@@ -1,11 +1,21 @@
-var Component = // Component OPCODES
+import React from "react-compiler-runtime";
+const {
+  ["useState"]: useState
+} = React;
+
+function Component_ComputeFunction() {
+  const [value] = useState("Hello world");
+  return [value];
+}
+
+export var Component = // Component OPCODES
 [0 // COMPONENT
-, null // ROOT_PROPS_SHAPE
+, 1 // USES_HOOKS
+, 0 // ROOT_PROPS_SHAPE
 , [20 // UNCONDITIONAL_TEMPLATE
 , [8 // OPEN_ELEMENT_DIV
-, 0 // VALUE_POINTER_INDEX
-, 41 // ELEMENT_STATIC_CHILDREN_VALUE
-, "Hello world", 10 // CLOSE_ELEMENT
-], null // COMPUTE_FUNCTION
+, 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
+, 0, 10 // CLOSE_ELEMENT
+], Component_ComputeFunction // COMPUTE_FUNCTION
+, 1 // VALUE_POINTER_INDEX
 ]];
-module["exports"] = Component;

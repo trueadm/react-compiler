@@ -4,7 +4,7 @@ import traverse from "@babel/traverse";
 import generate from "@babel/generator";
 import { createOpcodesForReactFunctionComponent } from "./react/functions";
 import { removePath } from "./utils";
-import { makeClosureCompilerAdvancedFriendly } from "./transforms";
+import { makeClosureCompilerAdvancedFriendly, replaceReactImportsWithCompilerRuntime } from "./transforms";
 import { validateFunctionComponentUsesDestructuredProps, validateReactElementsHaveAllBeenCompiled } from "./validation";
 import { basename, dirname, join } from "path";
 import { applyDeadCodeElimination } from "./deadcode";
@@ -111,8 +111,10 @@ function createModuleState(moduleFilePath, compilerContext) {
       compilerContext.modules.get(moduleFilePath).needsCompiling = true;
     },
     propTemplateOpcodeCache: new Map(),
+    reconciler: {
+      valueIndex: 1,
+    },
     resolveModuleBindingSync: compilerContext.resolveModuleBindingSync,
-    reconcilerValueIndex: 0,
     runtimeCachedValues: null,
     runtimeConditionals: null,
     runtimeValues: null,
@@ -184,6 +186,7 @@ export function compileEntryModuleFileToDirectory(entryModulePath, options) {
   compileEntryModuleFile(entryModulePath, compilerContext);
   applyDeadCodeEliminationToModules(compilerContext);
   applyPostTransforms(compilerContext);
+  replaceAllReactImportsWithCompilerRuntime(compilerContext);
   writeCompiledModulesToDisk(compilerContext, options);
   validateReactElementsHaveBeenRemoved(compilerContext);
   if (!options.silent) {
@@ -222,6 +225,12 @@ function validateReactElementsHaveBeenRemoved(compilerContext) {
   }
 }
 
+function replaceAllReactImportsWithCompilerRuntime(compilerContext) {
+  for (let [, { ast }] of compilerContext.modules) {
+    replaceReactImportsWithCompilerRuntime(ast);
+  }
+}
+
 function writeCompiledModulesToDisk(compilerContext, options) {
   for (let [moduleFilePath, { ast, needsCompiling, state }] of compilerContext.modules) {
     if (needsCompiling) {
@@ -254,5 +263,6 @@ export function parseAndCompileSource(source) {
   applyPostTransforms(compilerContext);
   addModuleHelpers(ast, moduleState);
   validateReactElementsHaveBeenRemoved(compilerContext);
+  replaceReactImportsWithCompilerRuntime(ast);
   return generate(ast).code;
 }

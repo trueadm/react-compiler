@@ -1,4 +1,5 @@
 import { getProgramPath } from "./utils";
+import traverse from "@babel/traverse";
 import * as t from "@babel/types";
 
 function getTargetBody(path) {
@@ -186,6 +187,17 @@ export function makeClosureCompilerAdvancedFriendly(componentPath) {
       if (node.computed === false && t.isIdentifier(node.key)) {
         node.computed = true;
         node.key = t.stringLiteral(node.key.name);
+      }
+    },
+  });
+}
+
+export function replaceReactImportsWithCompilerRuntime(moduleAst) {
+  traverse(moduleAst, {
+    ImportDeclaration(path) {
+      const node = path.node;
+      if (t.isStringLiteral(node.source) && node.source.value === "react") {
+        node.source.value = "react-compiler-runtime";
       }
     },
   });
