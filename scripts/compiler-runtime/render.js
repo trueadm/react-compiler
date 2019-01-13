@@ -81,14 +81,20 @@ function openElement(elem, elemValuePointer, state, workInProgress) {
   state.currentHostNode = elem;
 }
 
-function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) {
+function renderMountOpcodes(mountOpcodes, parentMountOpcodes, runtimeValues, state, workInProgress) {
   const opcodesLength = mountOpcodes.length;
   let updateOpcodes = mountOpcodes[0];
   let unmountOpcodes = mountOpcodes[1];
   const shouldCreateOpcodes = updateOpcodes === 0;
   if (shouldCreateOpcodes === true) {
-    updateOpcodes = mountOpcodes[0] = [0, 0];
-    unmountOpcodes = mountOpcodes[1] = [0, 0];
+    updateOpcodes = mountOpcodes[0] = [];
+    unmountOpcodes = mountOpcodes[1] = [];
+    if (parentMountOpcodes !== null) {
+      const parentUpdateOpcodes = parentMountOpcodes[0];
+      const parentUnmountOpcodes = parentMountOpcodes[1];
+      parentUpdateOpcodes.push(updateOpcodes);
+      parentUnmountOpcodes.push(unmountOpcodes);
+    }
   }
   let index = 2;
 
@@ -222,7 +228,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
         const templateOpcodes = mountOpcodes[++index];
         const computeValuesPointer = mountOpcodes[++index];
         const computeValues = runtimeValues[computeValuesPointer];
-        renderMountOpcodes(templateOpcodes, computeValues, state, workInProgress);
+        renderMountOpcodes(templateOpcodes, mountOpcodes, computeValues, state, workInProgress);
         break;
       }
       case CONDITIONAL: {
@@ -237,12 +243,12 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
 
         if (conditionValue) {
           if (consequentMountOpcodes !== null) {
-            renderMountOpcodes(consequentMountOpcodes, runtimeValues, state, workInProgress);
+            renderMountOpcodes(consequentMountOpcodes, mountOpcodes, runtimeValues, state, workInProgress);
           }
           return index;
         }
         if (alternateMountOpcodes !== null) {
-          renderMountOpcodes(alternateMountOpcodes, runtimeValues, state, workInProgress);
+          renderMountOpcodes(alternateMountOpcodes, mountOpcodes, runtimeValues, state, workInProgress);
         }
         break;
       }
@@ -268,7 +274,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
           }
         }
         workInProgress.values[templateValuesPointerIndex] = templateRuntimeValues;
-        renderMountOpcodes(templateMountOpcodes, templateRuntimeValues, state, workInProgress);
+        renderMountOpcodes(templateMountOpcodes, mountOpcodes, templateRuntimeValues, state, workInProgress);
         return;
       }
       case MULTI_CONDITIONAL: {
@@ -279,7 +285,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
           if (conditionalIndex === conditionalDefaultIndex) {
             const defaultCaseOpcodes = mountOpcodes[++index];
             if (defaultCaseOpcodes !== null) {
-              renderMountOpcodes(defaultCaseOpcodes, runtimeValues, state, workInProgress);
+              renderMountOpcodes(defaultCaseOpcodes, mountOpcodes, runtimeValues, state, workInProgress);
             }
           } else {
             const caseConditionPointer = mountOpcodes[++index];
@@ -287,7 +293,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
             if (caseConditionValue) {
               const caseOpcodes = mountOpcodes[++index];
               if (caseOpcodes !== null) {
-                renderMountOpcodes(caseOpcodes, runtimeValues, state, workInProgress);
+                renderMountOpcodes(caseOpcodes, mountOpcodes, runtimeValues, state, workInProgress);
               }
               break;
             }
@@ -325,7 +331,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
         }
         const previousValue = state.currentValue;
         state.currentValue = undefined;
-        renderMountOpcodes(componentMountOpcodes, runtimeValues, state, componentFiber);
+        renderMountOpcodes(componentMountOpcodes, mountOpcodes, runtimeValues, state, componentFiber);
         state.currentValue = previousValue;
         state.currentComponent = previousComponent;
         return;
@@ -340,6 +346,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
 function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeValues, state, workInProgress) {
   const opcodesLength = updateOpcodes.length;
   let index = 0;
+  debugger;
 
   // Render opcodes from the opcode jump-table
   while (index < opcodesLength) {
@@ -534,7 +541,7 @@ function renderNodeToRootContainer(node, DOMContainer) {
     if (shouldUpdate === true) {
       renderUpdateOpcodes(mountOpcodes[0], emptyArray, emptyArray, rootState, null);
     } else {
-      renderMountOpcodes(mountOpcodes, emptyArray, rootState, null);
+      renderMountOpcodes(mountOpcodes, null, emptyArray, rootState, null);
     }
   } else {
     throw new Error("render() expects a ReactElement as the first argument");
