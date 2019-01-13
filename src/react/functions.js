@@ -91,6 +91,8 @@ function createOpcodesForTemplateBranches(
       processNodeValueFunc,
     );
     pushOpcodeValue(opcodes, normalizeOpcodes(opcodesForTemplateBranch));
+    const reconcilerValueIndex = state.reconcilerValueIndex++;
+    pushOpcodeValue(opcodes, reconcilerValueIndex, "VALUE_POINTER_INDEX");
     if (!emitComputeFunctionOpcode || isBranchStatic) {
       pushOpcodeValue(opcodes, t.nullLiteral(), "COMPUTE_FUNCTION");
     } else {
@@ -118,6 +120,8 @@ function createOpcodesForTemplateBranches(
         processNodeValueFunc,
       );
       pushOpcodeValue(opcodes, normalizeOpcodes(opcodesForTemplateBranch));
+      const reconcilerValueIndex = state.reconcilerValueIndex++;
+      pushOpcodeValue(opcodes, reconcilerValueIndex, "VALUE_POINTER_INDEX");
       if (!emitComputeFunctionOpcode || isBranchStatic) {
         pushOpcodeValue(opcodes, t.nullLiteral(), "COMPUTE_FUNCTION");
       } else {
@@ -156,6 +160,8 @@ function createOpcodesForTemplateBranches(
           templateBranchIndex++;
         }
       }
+      const reconcilerValueIndex = state.reconcilerValueIndex++;
+      pushOpcodeValue(opcodesTemplate, reconcilerValueIndex, "VALUE_POINTER_INDEX");
       if (!emitComputeFunctionOpcode || isStatic) {
         pushOpcodeValue(opcodesTemplate, t.nullLiteral(), "COMPUTE_FUNCTION");
       } else {

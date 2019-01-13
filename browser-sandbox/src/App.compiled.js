@@ -922,5 +922,6 @@ export var Component = // Component OPCODES
 , 10 // CLOSE_ELEMENT
 , 10 // CLOSE_ELEMENT
 , 10 // CLOSE_ELEMENT
-], Component_ComputeFunction // COMPUTE_FUNCTION
+], 0 // VALUE_POINTER_INDEX
+, Component_ComputeFunction // COMPUTE_FUNCTION
 ]];

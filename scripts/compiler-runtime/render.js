@@ -217,7 +217,6 @@ function renderMountOpcodes(
         workInProgress.values[elemValuePointer] = elem;
         elem._parentNode = state.currentHostNode;
         state.currentHostNode = elem;
-        state.currentHostNodeIsVoidElement = true;
         break;
       }
       case ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL: {
@@ -279,14 +278,11 @@ function renderMountOpcodes(
         const [templateUpdateOpcodes, templateUnmountOpcodes, shouldCreateTemplateOpcodes] = getOpcodesFromMountOpcodes(
           templateMountOpcodes,
         );
+        const templateValuesPointerIndex = mountOpcodes[++index];
         const computeFunction = mountOpcodes[++index];
-        let templateValuesPointerIndex;
 
         if (shouldCreateTemplateOpcodes) {
-          templateValuesPointerIndex = workInProgress.values.length;
-          updateOpcodes.push(20, templateValuesPointerIndex, templateUpdateOpcodes, computeFunction);
-        } else {
-          templateValuesPointerIndex = templateUpdateOpcodes[0];
+          updateOpcodes.push(20, templateUpdateOpcodes, templateValuesPointerIndex, computeFunction);
         }
 
         let templateRuntimeValues = runtimeValues;
@@ -461,8 +457,8 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
         break;
       }
       case UNCONDITIONAL_TEMPLATE: {
-        const templateValuesPointerIndex = updateOpcodes[++index];
         const templateUpdateOpcodes = updateOpcodes[++index];
+        const templateValuesPointerIndex = updateOpcodes[++index];
         const computeFunction = updateOpcodes[++index];
         const previousTemplateRuntimeValues = workInProgress.values[templateValuesPointerIndex];
         let nextTemplateRuntimeValues = nextRuntimeValues;
@@ -577,7 +573,6 @@ function createState(rootPropsObject, currentHostNode, reactElement) {
   return {
     currentComponent: null,
     currentHostNode,
-    currentHostNodeIsVoidElement: false,
     currentHostNodeStack: [],
     currentHostNodeStackIndex: 0,
     fiber: null,

@@ -1,5 +1,3 @@
-import { createTemplateNode } from "react-compiler-runtime";
-
 // props:{x: "Hello world!"}
 var {
   ["Header"]: Header,
@@ -19,16 +17,17 @@ function App_ComputeFunction(x) {
 
 var App = // App OPCODES
 [0 // COMPONENT
-, "App" // DISPLAY_NAME
 , ["x"] // ROOT_PROPS_SHAPE
-, createTemplateNode([20 // UNCONDITIONAL_TEMPLATE
+, [20 // UNCONDITIONAL_TEMPLATE
 , [8 // OPEN_ELEMENT_DIV
+, 0 // VALUE_POINTER_INDEX
 , 29 // REF_COMPONENT
 , Header, 0 // COMPONENT_PROPS_ARRAY
 , 42 // ELEMENT_DYNAMIC_CHILD_VALUE
 , 1, 29 // REF_COMPONENT
 , Footer, 2 // COMPONENT_PROPS_ARRAY
 , 10 // CLOSE_ELEMENT
-], App_ComputeFunction // COMPUTE_FUNCTION
-])];
+], 0 // VALUE_POINTER_INDEX
+, App_ComputeFunction // COMPUTE_FUNCTION
+]];
 module["exports"] = App;

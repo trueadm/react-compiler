@@ -1,5 +1,3 @@
-import { createTemplateNode } from "react-compiler-runtime";
-
 const {
   formatString
 } = require("./utils");
@@ -13,13 +11,14 @@ function Header_ComputeFunction(x) {
 function Header() {
   return (// Header OPCODES
     [0 // COMPONENT
-    , "Header" // DISPLAY_NAME
-    , createTemplateNode([20 // UNCONDITIONAL_TEMPLATE
+    , [20 // UNCONDITIONAL_TEMPLATE
     , [8 // OPEN_ELEMENT_DIV
+    , 0 // VALUE_POINTER_INDEX
     , 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
     , 0, 10 // CLOSE_ELEMENT
-    ], Header_ComputeFunction // COMPUTE_FUNCTION
-    ])]
+    ], 0 // VALUE_POINTER_INDEX
+    , Header_ComputeFunction // COMPUTE_FUNCTION
+    ]]
   );
 }
 
