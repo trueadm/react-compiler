@@ -1,14 +1,11 @@
-import React from "react-compiler-runtime";
-const {
-  ["useState"]: useState
-} = React;
+var React = require("react-compiler-runtime");
 
 function Component_ComputeFunction() {
-  const [value] = useState("Hello world");
+  const [value] = React["useState"]("Hello world");
   return [value];
 }
 
-export var Component = // Component OPCODES
+var Component = // Component OPCODES
 [0 // COMPONENT
 , 1 // USES_HOOKS
 , 0 // ROOT_PROPS_SHAPE
@@ -19,3 +16,4 @@ export var Component = // Component OPCODES
 ], Component_ComputeFunction // COMPUTE_FUNCTION
 , 1 // VALUE_POINTER_INDEX
 ]];
+module["exports"] = Component;

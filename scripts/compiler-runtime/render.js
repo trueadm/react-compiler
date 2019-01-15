@@ -1,6 +1,6 @@
 "use strict";
 
-import { finishHooks, prepareToUseHooks, useHooksDispatcher } from "./dom-dispatcher";
+import { finishHooks, prepareToUseHooks } from "./dom-dispatcher";
 import {
   convertRootPropsToPropsArray,
   createComponent,
@@ -359,7 +359,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
         const previousValue = state.currentValue;
         state.currentValue = undefined;
         if (usesHooks === 1) {
-          prepareToUseHooks(currentComponent);
+          prepareToUseHooks(componentFiber);
         }
         const hostNode = renderMountOpcodes(componentMountOpcodes, runtimeValues, state, componentFiber);
         if (usesHooks === 1) {
@@ -547,7 +547,7 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
         component.props = nextPropsArray;
         state.currentComponent = currentComponent = component;
         if (usesHooks === 1) {
-          prepareToUseHooks(currentComponent);
+          prepareToUseHooks(componentFiber);
         }
         renderUpdateOpcodes(componentUpdateOpcodes, previousRuntimeValues, nextRuntimeValues, state, componentFiber);
         if (usesHooks === 1) {
@@ -620,6 +620,7 @@ function OpcodeFiber(hostNode, values) {
   this.child = null;
   this.hostNode = null;
   this.key = null;
+  this.memoizedState = null;
   this.sibling = null;
   this.parent = null;
   this.values = values;

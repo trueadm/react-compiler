@@ -1,4 +1,4 @@
-import { finishHooks, prepareToUseHooks, useHooksDispatcher } from "./ssr-dispatcher";
+import { finishHooks, prepareToUseHooks } from "./ssr-dispatcher";
 import {
   applyState,
   cloneState,
@@ -766,5 +766,5 @@ function renderNode(node) {
 }
 
 export function renderToString(node) {
-  return useHooksDispatcher(() => renderNode(node));
+  return renderNode(node);
 }

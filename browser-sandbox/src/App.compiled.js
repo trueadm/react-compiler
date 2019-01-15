@@ -1,7 +1,4 @@
-import React from "react-compiler-runtime";
-const {
-  ["useState"]: useState
-} = React;
+import { useState } from "react-compiler-runtime";
 
 function Component_ComputeFunction() {
   const [value] = useState("Hello world");

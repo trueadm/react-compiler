@@ -1,4 +1,4 @@
-import { getProgramPath } from "./utils";
+import { getProgramPath, isCommonJsLikeRequireCall } from "./utils";
 import traverse from "@babel/traverse";
 import * as t from "@babel/types";
 
@@ -198,6 +198,14 @@ export function replaceReactImportsWithCompilerRuntime(moduleAst) {
       const node = path.node;
       if (t.isStringLiteral(node.source) && node.source.value === "react") {
         node.source.value = "react-compiler-runtime";
+      }
+    },
+    CallExpression(path) {
+      if (isCommonJsLikeRequireCall(path)) {
+        const moduleName = path.node.arguments[0].value;
+        if (moduleName === "react") {
+          path.node.arguments[0].value = "react-compiler-runtime";
+        }
       }
     },
   });

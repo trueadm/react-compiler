@@ -1,6 +1,4 @@
-import React from "react";
-
-const { useState } = React;
+import React, { useState } from "react";
 
 export function Component() {
   const [value, updateValue] = useState("Hello world");

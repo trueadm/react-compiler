@@ -1,6 +1,5 @@
-import React from "react";
-let reactCurrentOwner;
-let dispatcher = null;
+import { currentDispatcher } from "./index";
+
 let firstWorkInProgressHook = null;
 let currentlyRenderingComponent = null;
 let isReRender = false;
@@ -11,10 +10,6 @@ function resolveCurrentlyRenderingComponent() {
     throw new Error("Hooks can only be called inside the body of a function component.");
   }
   return currentlyRenderingComponent;
-}
-
-function getCurrentOwner() {
-  return React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner;
 }
 
 function createHook() {
@@ -80,25 +75,6 @@ function useState(initialState) {
   return useReducer(basicStateReducer, initialState);
 }
 
-function createDispatcher() {
-  return {
-    useReducer,
-    useState,
-  };
-}
-
-export function useHooksDispatcher(func) {
-  reactCurrentOwner = reactCurrentOwner || getCurrentOwner();
-  const prevDispatcher = reactCurrentOwner.currentDispatcher;
-  if (dispatcher === null) {
-    dispatcher = createDispatcher();
-  }
-  reactCurrentOwner.currentDispatcher = dispatcher;
-  const result = func();
-  reactCurrentOwner.currentDispatcher = prevDispatcher;
-  return result;
-}
-
 export function prepareToUseHooks(componentIdentity) {
   currentlyRenderingComponent = componentIdentity;
 }
@@ -109,3 +85,10 @@ export function finishHooks() {
   isReRender = false;
   workInProgressHook = null;
 }
+
+const dispatcher = {
+  useReducer,
+  useState,
+};
+
+currentDispatcher.current = dispatcher;
