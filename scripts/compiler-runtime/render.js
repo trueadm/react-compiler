@@ -236,11 +236,15 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
       }
       case ELEMENT_DYNAMIC_CHILD_VALUE: {
         const dynamicTextChildPointer = mountOpcodes[++index];
+        const hostNodeValuePointer = mountOpcodes[++index];
         const dynamicTextChild = runtimeValues[dynamicTextChildPointer];
         const textNode = createTextNode(dynamicTextChild);
         const currentHostNode = state.currentHostNode;
-
+        values[hostNodeValuePointer] = textNode;
         appendChild(currentHostNode, textNode);
+        if (shouldCreateOpcodes === true) {
+          updateOpcodes.push(ELEMENT_DYNAMIC_CHILDREN_VALUE, dynamicTextChildPointer, hostNodeValuePointer);
+        }
         break;
       }
       case ELEMENT_DYNAMIC_CHILDREN_VALUE: {
@@ -637,6 +641,7 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
         renderUpdateOpcodes(componentUpdateOpcodes, previousRuntimeValues, nextRuntimeValues, state, workInProgress);
         break;
       }
+      case ELEMENT_DYNAMIC_CHILD_VALUE:
       case ELEMENT_DYNAMIC_CHILDREN_VALUE: {
         const dynamicTextContentPointer = updateOpcodes[++index];
         const hostNodeValuePointer = updateOpcodes[++index];
