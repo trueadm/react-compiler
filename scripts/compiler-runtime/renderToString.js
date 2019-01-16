@@ -70,9 +70,7 @@ const STATIC_PROP_STYLE = 48;
 const DYNAMIC_PROP_STYLE = 49;
 const STATIC_PROP_UNITLESS_STYLE = 50;
 const DYNAMIC_PROP_UNITLESS_STYLE = 51;
-const STATIC_PROP_KEY = 52;
-const DYNAMIC_PROP_KEY = 53;
-const DYNAMIC_PROP_REF = 54;
+const DYNAMIC_PROP_REF = 52;
 
 const PropFlagPartialTemplate = 1;
 const PropFlagReactEvent = 1 << 1; // starts with on
@@ -367,9 +365,9 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
       }
       case ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE: {
         const arrayPointer = opcodes[++index];
-        const array = runtimeValues[arrayPointer];
         const arrayMapOpcodes = opcodes[++index];
         const arrayMapComputeFunctionPointer = opcodes[++index];
+        const array = runtimeValues[arrayPointer];
         const arrayMapComputeFunction =
           arrayMapComputeFunctionPointer === 0 ? null : runtimeValues[arrayMapComputeFunctionPointer];
 
@@ -760,11 +758,6 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         }
         return;
       }
-      case STATIC_PROP_KEY: {
-        ++index;
-        break;
-      }
-      case DYNAMIC_PROP_KEY:
       case DYNAMIC_PROP_REF:
       default: {
         index += 3;

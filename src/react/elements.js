@@ -207,7 +207,7 @@ function createOpcodesForReactElementHostNodePropValue(
         pushOpcode(opcodes, "STATIC_PROP_VALUE", attributeOpcodes);
       }
     } else if (propNameStr === "key") {
-      pushOpcode(opcodes, "STATIC_PROP_KEY", attributeOpcodes);
+      // pushOpcode(opcodes, "STATIC_PROP_KEY", attributeOpcodes);
     } else if (propNameStr === "ref") {
       throw new Error(
         `The compiler does not support string refs on React Elements at ${getCodeLocation(valueRefPath.node)}`,
@@ -230,7 +230,7 @@ function createOpcodesForReactElementHostNodePropValue(
         state.dynamicHostNodesId.add(hostNodeId);
       }
     } else if (propNameStr === "key") {
-      pushOpcode(opcodes, "DYNAMIC_PROP_KEY", [propInformationLiteral, ...attributeOpcodes]);
+      // pushOpcode(opcodes, "DYNAMIC_PROP_KEY", [propInformationLiteral, ...attributeOpcodes]);
     } else if (propNameStr === "ref") {
       pushOpcode(opcodes, "DYNAMIC_PROP_REF", [propInformationLiteral, ...attributeOpcodes]);
     } else {
@@ -315,6 +315,7 @@ function createOpcodesForReactElementHostNodeChild(hostNodeId, childPath, onlyCh
   if (isArrayMapConstructorTemplate(refChildPath, state)) {
     pushOpcode(opcodes, "ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE");
     createOpcodesForArrayMapTemplate(refChildPath, opcodes, state, componentPath);
+    state.dynamicHostNodesId.add(hostNodeId);
     return;
   }
 
