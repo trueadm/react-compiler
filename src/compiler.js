@@ -106,6 +106,7 @@ function createModuleState(moduleFilePath, compilerContext) {
     externalBindings: new Map(),
     externalPathRefs: new Map(),
     helpers: new Set(),
+    dynamicHostNodesId: new Set(),
     isRootComponent: true,
     needsCompiling() {
       compilerContext.modules.get(moduleFilePath).needsCompiling = true;

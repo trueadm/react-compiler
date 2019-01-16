@@ -140,6 +140,10 @@ function createOpcodesForTemplateBranches(
       } else {
         pushOpcode(opcodesTemplate, "CONDITIONAL_TEMPLATE");
       }
+      const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
+      pushOpcodeValue(opcodesTemplate, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
+      const reconcilerValueIndexForBranchMountOpcodes = state.reconciler.valueIndex++;
+      pushOpcodeValue(opcodesTemplate, reconcilerValueIndexForBranchMountOpcodes, "BRANCH_OPCODES_VALUE_POINTER_INDEX");
       let templateBranchIndex = 0;
       let isStatic = true;
 

@@ -112,7 +112,15 @@ function createOpcodesForArrayMapTemplate(childPath, opcodes, state, componentPa
   }
 }
 
-function createOpcodesForReactElementHostNodePropValue(tagName, valuePath, propNameStr, opcodes, state, componentPath) {
+function createOpcodesForReactElementHostNodePropValue(
+  hostNodeId,
+  tagName,
+  valuePath,
+  propNameStr,
+  opcodes,
+  state,
+  componentPath,
+) {
   markNodeAsDCE(valuePath.node);
   const valueRefPath = getReferenceFromExpression(valuePath, state);
   const typeAnnotation = getTypeAnnotationForExpression(valueRefPath, state);
@@ -123,18 +131,27 @@ function createOpcodesForReactElementHostNodePropValue(tagName, valuePath, propN
     // assertType(valueRefPath, typeAnnotation, true, state, "REACT_NODE") // we need to do this
   ) {
     createOpcodesForMutatedBinding(valueRefPath, opcodes, state, componentPath, (path, pathOpcodes) => {
-      createOpcodesForReactElementHostNodePropValue(tagName, path, propNameStr, pathOpcodes, state, componentPath);
+      createOpcodesForReactElementHostNodePropValue(
+        hostNodeId,
+        tagName,
+        path,
+        propNameStr,
+        pathOpcodes,
+        state,
+        componentPath,
+      );
     });
     return;
   }
 
   if (propNameStr === "style") {
     if (t.isObjectExpression(valueRefPath.node)) {
-      createOpcodesForHostNodeStylesObject(valuePath, valueRefPath, opcodes, state, componentPath);
+      createOpcodesForHostNodeStylesObject(hostNodeId, valuePath, valueRefPath, opcodes, state, componentPath);
       return;
     } else if (t.isIdentifier(valueRefPath.node)) {
       if (t.isObjectTypeAnnotation(typeAnnotation)) {
         createOpcodesForHostNodeStylesIdentifier(
+          hostNodeId,
           typeAnnotation,
           valuePath,
           valueRefPath,
@@ -202,11 +219,15 @@ function createOpcodesForReactElementHostNodePropValue(tagName, valuePath, propN
     const propInformationLiteral = t.numericLiteral(propInformation);
     if (propNameStr === "className" || propNameStr === "class") {
       pushOpcode(opcodes, "DYNAMIC_PROP_CLASS_NAME", [propInformationLiteral, ...attributeOpcodes]);
+      state.dynamicHostNodesId.add(hostNodeId);
     } else if (propNameStr === "value") {
       if (tagName === "textarea") {
         pushOpcode(opcodes, "ELEMENT_DYNAMIC_CHILDREN_VALUE", attributeOpcodes);
+        const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
+        pushOpcodeValue(opcodes, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
       } else {
         pushOpcode(opcodes, "DYNAMIC_PROP_VALUE", [propInformationLiteral, ...attributeOpcodes]);
+        state.dynamicHostNodesId.add(hostNodeId);
       }
     } else if (propNameStr === "key") {
       pushOpcode(opcodes, "DYNAMIC_PROP_KEY", [propInformationLiteral, ...attributeOpcodes]);
@@ -214,11 +235,12 @@ function createOpcodesForReactElementHostNodePropValue(tagName, valuePath, propN
       pushOpcode(opcodes, "DYNAMIC_PROP_REF", [propInformationLiteral, ...attributeOpcodes]);
     } else {
       pushOpcode(opcodes, "DYNAMIC_PROP", [propName, propInformationLiteral, ...attributeOpcodes]);
+      state.dynamicHostNodesId.add(hostNodeId);
     }
   }
 }
 
-function createOpcodesForReactElementHostNodeChild(childPath, onlyChild, opcodes, state, componentPath) {
+function createOpcodesForReactElementHostNodeChild(hostNodeId, childPath, onlyChild, opcodes, state, componentPath) {
   markNodeAsDCE(childPath.node);
   let refChildPath = getReferenceFromExpression(childPath, state);
 
@@ -240,7 +262,7 @@ function createOpcodesForReactElementHostNodeChild(childPath, onlyChild, opcodes
       state,
       componentPath,
       (path, pathOpcodes) => {
-        createOpcodesForReactElementHostNodeChild(path, onlyChild, pathOpcodes, state, componentPath);
+        createOpcodesForReactElementHostNodeChild(hostNodeId, path, onlyChild, pathOpcodes, state, componentPath);
       },
     );
     if (possiblyNull !== null) {
@@ -255,7 +277,14 @@ function createOpcodesForReactElementHostNodeChild(childPath, onlyChild, opcodes
       opcodes,
       state,
       (conditionalPath, conditionalOpcodes) => {
-        createOpcodesForReactElementHostNodeChild(conditionalPath, onlyChild, conditionalOpcodes, state, componentPath);
+        createOpcodesForReactElementHostNodeChild(
+          hostNodeId,
+          conditionalPath,
+          onlyChild,
+          conditionalOpcodes,
+          state,
+          componentPath,
+        );
       },
     );
     return;
@@ -270,7 +299,14 @@ function createOpcodesForReactElementHostNodeChild(childPath, onlyChild, opcodes
       componentPath,
       false,
       (conditionalPath, conditionalOpcodes) => {
-        createOpcodesForReactElementHostNodeChild(conditionalPath, onlyChild, conditionalOpcodes, state, componentPath);
+        createOpcodesForReactElementHostNodeChild(
+          hostNodeId,
+          conditionalPath,
+          onlyChild,
+          conditionalOpcodes,
+          state,
+          componentPath,
+        );
       },
     );
     return;
@@ -287,10 +323,11 @@ function createOpcodesForReactElementHostNodeChild(childPath, onlyChild, opcodes
     const elementsPath = refChildPath.get("elements");
     if (elementsPath.length > 0) {
       if (elementsPath.length === 0) {
-        createOpcodesForReactElementHostNodeChild(elementsPath[0], true, opcodes, state, componentPath);
+        createOpcodesForReactElementHostNodeChild(hostNodeId, elementsPath[0], true, opcodes, state, componentPath);
       } else {
         for (let elementPath of elementsPath) {
           createOpcodesForReactElementHostNodeChild(
+            hostNodeId,
             getReferenceFromExpression(elementPath, state),
             false,
             opcodes,
@@ -338,6 +375,8 @@ function createOpcodesForReactElementHostNodeChild(childPath, onlyChild, opcodes
   }
   if (t.isArrowFunctionExpression(childNode) || t.isFunctionExpression(childNode)) {
     pushOpcode(opcodes, "ELEMENT_DYNAMIC_FUNCTION_CHILD", childOpcodes);
+    const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
+    pushOpcodeValue(opcodes, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
     return;
   }
   // Partial templates from call expressions
@@ -349,6 +388,8 @@ function createOpcodesForReactElementHostNodeChild(childPath, onlyChild, opcodes
     } else {
       pushOpcode(opcodes, "ELEMENT_DYNAMIC_CHILD_TEMPLATE_FROM_FUNC_CALL", extractedOpcodes);
     }
+    const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
+    pushOpcodeValue(opcodes, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
     return;
   }
   // React templates from call expressions within the component
@@ -368,9 +409,12 @@ function createOpcodesForReactElementHostNodeChild(childPath, onlyChild, opcodes
     const refTemplatePropPointer = getRuntimeValueIndex(refChildPath.node, state);
     if (onlyChild) {
       pushOpcode(opcodes, "ELEMENT_DYNAMIC_CHILDREN_REACT_NODE_TEMPLATE", refTemplatePropPointer);
+      state.dynamicHostNodesId.add(hostNodeId);
     } else {
       pushOpcode(opcodes, "ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE", refTemplatePropPointer);
     }
+    const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
+    pushOpcodeValue(opcodes, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
     return;
   }
   // Static or dynamic value
@@ -386,6 +430,8 @@ function createOpcodesForReactElementHostNodeChild(childPath, onlyChild, opcodes
     } else {
       pushOpcode(opcodes, "ELEMENT_DYNAMIC_CHILD_VALUE", childOpcodes);
     }
+    const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
+    pushOpcodeValue(opcodes, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
   }
 }
 
@@ -404,17 +450,19 @@ function createOpcodesForReactCreateElementFragment(args, opcodes, state, compon
 
 function createOpcodesForReactFragment(children, opcodes, state, componentPath) {
   pushOpcode(opcodes, "OPEN_FRAGMENT");
+  const hostNodeId = Symbol();
   if (children.length > 1) {
     for (let i = 0; i < children.length; i++) {
-      createOpcodesForReactElementHostNodeChild(children[i], false, opcodes, state, componentPath);
+      createOpcodesForReactElementHostNodeChild(hostNodeId, children[i], false, opcodes, state, componentPath);
     }
   } else if (children.length === 1) {
-    createOpcodesForReactElementHostNodeChild(children[0], false, opcodes, state, componentPath);
+    createOpcodesForReactElementHostNodeChild(hostNodeId, children[0], false, opcodes, state, componentPath);
   }
   pushOpcode(opcodes, "CLOSE_FRAGMENT");
 }
 
 function createOpcodesForHostNodeStylesIdentifier(
+  hostNodeId,
   typeAnnotation,
   stylePath,
   stylePathRef,
@@ -444,7 +492,7 @@ function createOpcodesForHostNodeStylesIdentifier(
   pushOpcode(opcodes, "CLOSE_PROP_STYLE");
 }
 
-function createOpcodesForHostNodeStylesObject(stylePath, stylePathRef, opcodes, state, componentPath) {
+function createOpcodesForHostNodeStylesObject(hostNodeId, stylePath, stylePathRef, opcodes, state, componentPath) {
   const propertiesPath = stylePathRef.get("properties");
 
   pushOpcode(opcodes, "OPEN_PROP_STYLE");
@@ -1174,8 +1222,17 @@ function createOpcodesForJSXElementType(typePath, attributesPath, childrenPath, 
 
   if (isReferenceReactContextProvider(typePath, state)) {
     const contextObjectRuntimeValueIndex = getContextObjectRuntimeValueIndex(typePath, state);
+    const hostNodeId = Symbol();
     pushOpcode(opcodes, "OPEN_CONTEXT_PROVIDER", contextObjectRuntimeValueIndex);
-    createOpcodesForJSXElementHostComponent(null, attributesPath, childrenPath, opcodes, state, componentPath);
+    createOpcodesForJSXElementHostComponent(
+      hostNodeId,
+      null,
+      attributesPath,
+      childrenPath,
+      opcodes,
+      state,
+      componentPath,
+    );
     pushOpcode(opcodes, "CLOSE_CONTEXT_PROVIDER");
   } else if (isReferenceReactContextConsumer(typePath, state)) {
     createOpcodesForReactContextConsumer(typePath, childrenPath, opcodes, state, componentPath);
@@ -1183,16 +1240,41 @@ function createOpcodesForJSXElementType(typePath, attributesPath, childrenPath, 
     createOpcodesForJSXFragment(childrenPath, opcodes, state, componentPath);
   } else if (isHostComponentType(typePath, state)) {
     const isVoidElement = voidElements.has(typeName);
-    if (typeName === "div") {
-      pushOpcode(opcodes, "OPEN_ELEMENT_DIV");
-    } else if (typeName === "span") {
-      pushOpcode(opcodes, "OPEN_ELEMENT_SPAN");
-    } else if (isVoidElement) {
-      pushOpcode(opcodes, "OPEN_VOID_ELEMENT", typeName);
+    const elementOpcodes = [];
+    const hostNodeId = Symbol();
+    createOpcodesForJSXElementHostComponent(
+      hostNodeId,
+      typeName,
+      attributesPath,
+      childrenPath,
+      elementOpcodes,
+      state,
+      componentPath,
+    );
+    if (state.dynamicHostNodesId.has(hostNodeId)) {
+      if (typeName === "div") {
+        pushOpcode(opcodes, "OPEN_ELEMENT_DIV_WITH_POINTER");
+      } else if (typeName === "span") {
+        pushOpcode(opcodes, "OPEN_ELEMENT_SPAN_WITH_POINTER");
+      } else if (isVoidElement) {
+        pushOpcode(opcodes, "OPEN_VOID_ELEMENT_WITH_POINTER", typeName);
+      } else {
+        pushOpcode(opcodes, "OPEN_ELEMENT_WITH_POINTER", typeName);
+      }
+      const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
+      pushOpcodeValue(opcodes, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
     } else {
-      pushOpcode(opcodes, "OPEN_ELEMENT", typeName);
+      if (typeName === "div") {
+        pushOpcode(opcodes, "OPEN_ELEMENT_DIV");
+      } else if (typeName === "span") {
+        pushOpcode(opcodes, "OPEN_ELEMENT_SPAN");
+      } else if (isVoidElement) {
+        pushOpcode(opcodes, "OPEN_VOID_ELEMENT", typeName);
+      } else {
+        pushOpcode(opcodes, "OPEN_ELEMENT", typeName);
+      }
     }
-    createOpcodesForJSXElementHostComponent(typeName, attributesPath, childrenPath, opcodes, state, componentPath);
+    opcodes.push(...elementOpcodes);
     if (isVoidElement) {
       pushOpcode(opcodes, "CLOSE_VOID_ELEMENT");
     } else {
@@ -1312,7 +1394,15 @@ function getPropsMapFromObjectExpression(propertiesPath) {
   return propsMap;
 }
 
-function createOpcodesForJSXElementHostComponent(tagName, attributesPath, childrenPath, opcodes, state, componentPath) {
+function createOpcodesForJSXElementHostComponent(
+  hostNodeId,
+  tagName,
+  attributesPath,
+  childrenPath,
+  opcodes,
+  state,
+  componentPath,
+) {
   // The following is only for host components (<div />) and
   // context provider components (as we treat them like host components).
   // The following logic is not for composite components (<Component />).
@@ -1323,6 +1413,7 @@ function createOpcodesForJSXElementHostComponent(tagName, attributesPath, childr
     if (tagName === "input") {
       if (propsMap.has("type")) {
         createOpcodesForReactElementHostNodePropValue(
+          hostNodeId,
           tagName,
           propsMap.get("type"),
           "type",
@@ -1336,10 +1427,18 @@ function createOpcodesForJSXElementHostComponent(tagName, attributesPath, childr
     const renderChildren = propsMap.get("children");
     propsMap.delete("children");
     for (let [propName, valuePath] of propsMap) {
-      createOpcodesForReactElementHostNodePropValue(tagName, valuePath, propName, opcodes, state, componentPath);
+      createOpcodesForReactElementHostNodePropValue(
+        hostNodeId,
+        tagName,
+        valuePath,
+        propName,
+        opcodes,
+        state,
+        componentPath,
+      );
     }
     if (renderChildren !== undefined) {
-      createOpcodesForReactElementHostNodeChild(renderChildren, true, opcodes, state, componentPath);
+      createOpcodesForReactElementHostNodeChild(hostNodeId, renderChildren, true, opcodes, state, componentPath);
     }
   }
   const filteredChildrenPath = childrenPath.filter(childPath => {
@@ -1350,14 +1449,21 @@ function createOpcodesForJSXElementHostComponent(tagName, attributesPath, childr
   });
   if (filteredChildrenPath.length > 1) {
     for (let i = 0; i < filteredChildrenPath.length; i++) {
-      createOpcodesForReactElementHostNodeChild(filteredChildrenPath[i], false, opcodes, state, componentPath);
+      createOpcodesForReactElementHostNodeChild(
+        hostNodeId,
+        filteredChildrenPath[i],
+        false,
+        opcodes,
+        state,
+        componentPath,
+      );
     }
   } else if (filteredChildrenPath.length === 1) {
-    createOpcodesForReactElementHostNodeChild(filteredChildrenPath[0], true, opcodes, state, componentPath);
+    createOpcodesForReactElementHostNodeChild(hostNodeId, filteredChildrenPath[0], true, opcodes, state, componentPath);
   }
 }
 
-function createOpcodesForReactCreateElementHostComponent(tagName, args, opcodes, state, componentPath) {
+function createOpcodesForReactCreateElementHostComponent(hostNodeId, tagName, args, opcodes, state, componentPath) {
   if (args.length > 1) {
     const configPath = args[1];
     const configPathRef = getReferenceFromExpression(configPath, state);
@@ -1367,6 +1473,7 @@ function createOpcodesForReactCreateElementHostComponent(tagName, args, opcodes,
       if (tagName === "input") {
         if (propsMap.has("type")) {
           createOpcodesForReactElementHostNodePropValue(
+            hostNodeId,
             tagName,
             propsMap.get("type"),
             "type",
@@ -1380,10 +1487,18 @@ function createOpcodesForReactCreateElementHostComponent(tagName, args, opcodes,
       const renderChildren = propsMap.get("children");
       propsMap.delete("children");
       for (let [propName, valuePath] of propsMap) {
-        createOpcodesForReactElementHostNodePropValue(tagName, valuePath, propName, opcodes, state, componentPath);
+        createOpcodesForReactElementHostNodePropValue(
+          hostNodeId,
+          tagName,
+          valuePath,
+          propName,
+          opcodes,
+          state,
+          componentPath,
+        );
       }
       if (renderChildren !== undefined) {
-        createOpcodesForReactElementHostNodeChild(renderChildren, true, opcodes, state, componentPath);
+        createOpcodesForReactElementHostNodeChild(hostNodeId, renderChildren, true, opcodes, state, componentPath);
       }
     };
 
@@ -1422,10 +1537,10 @@ function createOpcodesForReactCreateElementHostComponent(tagName, args, opcodes,
 
     if (childrenLength > 1) {
       for (let i = 0; i < childrenLength; ++i) {
-        createOpcodesForReactElementHostNodeChild(args[2 + i], false, opcodes, state, componentPath);
+        createOpcodesForReactElementHostNodeChild(hostNodeId, args[2 + i], false, opcodes, state, componentPath);
       }
     } else {
-      createOpcodesForReactElementHostNodeChild(args[2], true, opcodes, state, componentPath);
+      createOpcodesForReactElementHostNodeChild(hostNodeId, args[2], true, opcodes, state, componentPath);
     }
   }
 }
@@ -1435,16 +1550,33 @@ function createOpcodesForReactCreateElementType(typePath, args, opcodes, state, 
     const nameNode = typePath.node;
     const strName = nameNode.value;
     const isVoidElement = voidElements.has(strName);
-    if (strName === "div") {
-      pushOpcode(opcodes, "OPEN_ELEMENT_DIV");
-    } else if (strName === "span") {
-      pushOpcode(opcodes, "OPEN_ELEMENT_SPAN");
-    } else if (isVoidElement) {
-      pushOpcode(opcodes, "OPEN_VOID_ELEMENT", strName);
+    const elementOpcodes = [];
+    const hostNodeId = Symbol();
+    createOpcodesForReactCreateElementHostComponent(hostNodeId, strName, args, elementOpcodes, state, componentPath);
+    if (state.dynamicHostNodesId.has(hostNodeId)) {
+      if (strName === "div") {
+        pushOpcode(opcodes, "OPEN_ELEMENT_DIV_WITH_POINTER");
+      } else if (strName === "span") {
+        pushOpcode(opcodes, "OPEN_ELEMENT_SPAN_WITH_POINTER");
+      } else if (isVoidElement) {
+        pushOpcode(opcodes, "OPEN_VOID_ELEMENT_WITH_POINTER", strName);
+      } else {
+        pushOpcode(opcodes, "OPEN_ELEMENT_WITH_POINTER", strName);
+      }
+      const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
+      pushOpcodeValue(opcodes, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
     } else {
-      pushOpcode(opcodes, "OPEN_ELEMENT", strName);
+      if (strName === "div") {
+        pushOpcode(opcodes, "OPEN_ELEMENT_DIV");
+      } else if (strName === "span") {
+        pushOpcode(opcodes, "OPEN_ELEMENT_SPAN");
+      } else if (isVoidElement) {
+        pushOpcode(opcodes, "OPEN_VOID_ELEMENT", strName);
+      } else {
+        pushOpcode(opcodes, "OPEN_ELEMENT", strName);
+      }
     }
-    createOpcodesForReactCreateElementHostComponent(strName, args, opcodes, state, componentPath);
+    opcodes.push(...elementOpcodes);
     if (isVoidElement) {
       pushOpcode(opcodes, "CLOSE_VOID_ELEMENT");
     } else {
@@ -1489,8 +1621,9 @@ function createOpcodesForReactCreateElementType(typePath, args, opcodes, state, 
 
     if (isReferenceReactContextProvider(typePath, state)) {
       const contextObjectRuntimeValueIndex = getContextObjectRuntimeValueIndex(typePath, state);
+      const hostNodeId = Symbol();
       pushOpcode(opcodes, "OPEN_CONTEXT_PROVIDER", contextObjectRuntimeValueIndex);
-      createOpcodesForReactCreateElementHostComponent(null, args, opcodes, state, componentPath);
+      createOpcodesForReactCreateElementHostComponent(hostNodeId, null, args, opcodes, state, componentPath);
       pushOpcode(opcodes, "CLOSE_CONTEXT_PROVIDER");
       return;
     } else if (isReferenceReactContextConsumer(typePath, state)) {

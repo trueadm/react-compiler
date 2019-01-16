@@ -34,7 +34,12 @@ export default {
       jsnext: true,
       main: true,
     }),
-    commonjs(),
+    commonjs({
+      include: 'node_modules/**',
+      namedExports: {
+        'node_modules/react/index.js': ['useState']
+      },
+    }),
     closure(),
   ],
 };

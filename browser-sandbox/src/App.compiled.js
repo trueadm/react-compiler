@@ -1,18 +1,83 @@
-import { useState } from "react-compiler-runtime";
+import "react-compiler-runtime";
 
-function Component_ComputeFunction() {
-  const [value] = useState("Hello world");
-  return [value];
+function Component_ComputeFunction(val1, val2, val3, val4, val5, val6, val7) {
+  return [val1, val2, val3, val4, val5, val6, val7];
 }
 
 export var Component = // Component OPCODES
-[0 // COMPONENT
-, 1 // USES_HOOKS
-, 0 // ROOT_PROPS_SHAPE
-, [20 // UNCONDITIONAL_TEMPLATE
-, [8 // OPEN_ELEMENT_DIV
-, 43 // ELEMENT_DYNAMIC_CHILDREN_VALUE
-, 0, 10 // CLOSE_ELEMENT
+[10 // COMPONENT
+, 0 // USES_HOOKS
+, ["val1", "val2", "val3", "val4", "val5", "val6", "val7"] // ROOT_PROPS_SHAPE
+, [13 // UNCONDITIONAL_TEMPLATE
+, [2 // OPEN_ELEMENT_DIV
+, 44 // STATIC_PROP_CLASS_NAME
+, "container", 0 // OPEN_ELEMENT
+, "header", 44 // STATIC_PROP_CLASS_NAME
+, "header-bar", 0 // OPEN_ELEMENT
+, "h1", 35 // ELEMENT_DYNAMIC_CHILDREN_VALUE
+, 0, 1 // HOST_NODE_VALUE_POINTER_INDEX
+, 8 // CLOSE_ELEMENT
+, 8 // CLOSE_ELEMENT
+, 0 // OPEN_ELEMENT
+, "section", 44 // STATIC_PROP_CLASS_NAME
+, "section-divider", 2 // OPEN_ELEMENT_DIV
+, 0 // OPEN_ELEMENT
+, "h2", 33 // ELEMENT_STATIC_CHILDREN_VALUE
+, "Sub-section #1", 8 // CLOSE_ELEMENT
+, 2 // OPEN_ELEMENT_DIV
+, 44 // STATIC_PROP_CLASS_NAME
+, "details", 0 // OPEN_ELEMENT
+, "p", 35 // ELEMENT_DYNAMIC_CHILDREN_VALUE
+, 1, 2 // HOST_NODE_VALUE_POINTER_INDEX
+, 8 // CLOSE_ELEMENT
+, 5 // OPEN_ELEMENT_SPAN_WITH_POINTER
+, 4 // HOST_NODE_VALUE_POINTER_INDEX
+, 45 // DYNAMIC_PROP_CLASS_NAME
+, 0, 2, 35 // ELEMENT_DYNAMIC_CHILDREN_VALUE
+, 3, 3 // HOST_NODE_VALUE_POINTER_INDEX
+, 8 // CLOSE_ELEMENT
+, 0 // OPEN_ELEMENT
+, "button", 44 // STATIC_PROP_CLASS_NAME
+, "button", 42 // STATIC_PROP
+, "id", "button1", 33 // ELEMENT_STATIC_CHILDREN_VALUE
+, "Click here!", 8 // CLOSE_ELEMENT
+, 0 // OPEN_ELEMENT
+, "button", 44 // STATIC_PROP_CLASS_NAME
+, "button", 42 // STATIC_PROP
+, "id", "button1", 33 // ELEMENT_STATIC_CHILDREN_VALUE
+, "Click here!", 8 // CLOSE_ELEMENT
+, 8 // CLOSE_ELEMENT
+, 8 // CLOSE_ELEMENT
+, 2 // OPEN_ELEMENT_DIV
+, 0 // OPEN_ELEMENT
+, "h2", 33 // ELEMENT_STATIC_CHILDREN_VALUE
+, "Sub-section #2", 8 // CLOSE_ELEMENT
+, 2 // OPEN_ELEMENT_DIV
+, 44 // STATIC_PROP_CLASS_NAME
+, "details", 0 // OPEN_ELEMENT
+, "p", 35 // ELEMENT_DYNAMIC_CHILDREN_VALUE
+, 4, 5 // HOST_NODE_VALUE_POINTER_INDEX
+, 8 // CLOSE_ELEMENT
+, 5 // OPEN_ELEMENT_SPAN_WITH_POINTER
+, 7 // HOST_NODE_VALUE_POINTER_INDEX
+, 45 // DYNAMIC_PROP_CLASS_NAME
+, 0, 5, 35 // ELEMENT_DYNAMIC_CHILDREN_VALUE
+, 6, 6 // HOST_NODE_VALUE_POINTER_INDEX
+, 8 // CLOSE_ELEMENT
+, 0 // OPEN_ELEMENT
+, "button", 44 // STATIC_PROP_CLASS_NAME
+, "button", 42 // STATIC_PROP
+, "id", "button1", 33 // ELEMENT_STATIC_CHILDREN_VALUE
+, "Click here!", 8 // CLOSE_ELEMENT
+, 0 // OPEN_ELEMENT
+, "button", 44 // STATIC_PROP_CLASS_NAME
+, "button", 42 // STATIC_PROP
+, "id", "button1", 33 // ELEMENT_STATIC_CHILDREN_VALUE
+, "Click here!", 8 // CLOSE_ELEMENT
+, 8 // CLOSE_ELEMENT
+, 8 // CLOSE_ELEMENT
+, 8 // CLOSE_ELEMENT
+, 8 // CLOSE_ELEMENT
 ], Component_ComputeFunction // COMPUTE_FUNCTION
-, 1 // VALUE_POINTER_INDEX
+, 8 // VALUE_POINTER_INDEX
 ]];

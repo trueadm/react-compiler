@@ -18,57 +18,61 @@ import {
 
 const ReactElementNode = Symbol();
 
-const COMPONENT = 0;
-const STATIC_VALUE = 2;
-const DYNAMIC_VALUE = 3;
-const OPEN_ELEMENT = 6;
-const OPEN_VOID_ELEMENT = 7;
-const OPEN_ELEMENT_DIV = 8;
-const OPEN_ELEMENT_SPAN = 9;
-const CLOSE_ELEMENT = 10;
-const CLOSE_VOID_ELEMENT = 11;
-const OPEN_FRAGMENT = 12;
-const CLOSE_FRAGMENT = 13;
-const OPEN_CONTEXT_PROVIDER = 14;
-const CLOSE_CONTEXT_PROVIDER = 15;
-const OPEN_PROP_STYLE = 16;
-const CLOSE_PROP_STYLE = 17;
-const UNCONDITIONAL_TEMPLATE = 20;
-const CONDITIONAL_TEMPLATE = 21;
-const TEMPLATE = 22;
-const TEMPLATE_FROM_FUNC_CALL = 23;
-const REACT_NODE_TEMPLATE_FROM_FUNC_CALL = 24;
-const MULTI_CONDITIONAL = 25;
+const OPEN_ELEMENT = 0;
+const OPEN_ELEMENT_WITH_POINTER = 1;
+const OPEN_ELEMENT_DIV = 2;
+const OPEN_ELEMENT_DIV_WITH_POINTER = 3;
+const OPEN_ELEMENT_SPAN = 4;
+const OPEN_ELEMENT_SPAN_WITH_POINTER = 5;
+const OPEN_VOID_ELEMENT = 6;
+const OPEN_VOID_ELEMENT_WITH_POINTER = 7;
+const CLOSE_ELEMENT = 8;
+const CLOSE_VOID_ELEMENT = 9;
+const COMPONENT = 10;
+const ROOT_STATIC_VALUE = 11;
+const ROOT_DYNAMIC_VALUE = 12;
+const UNCONDITIONAL_TEMPLATE = 13;
+const CONDITIONAL_TEMPLATE = 14;
+const MULTI_CONDITIONAL = 15;
+const CONDITIONAL = 16;
+const OPEN_FRAGMENT = 17;
+const CLOSE_FRAGMENT = 18;
+const OPEN_CONTEXT_PROVIDER = 19;
+const CLOSE_CONTEXT_PROVIDER = 20;
+const OPEN_PROP_STYLE = 21;
+const CLOSE_PROP_STYLE = 22;
+const TEMPLATE = 23;
+const TEMPLATE_FROM_FUNC_CALL = 24;
+const REACT_NODE_TEMPLATE_FROM_FUNC_CALL = 25;
 const CONTEXT_CONSUMER_UNCONDITIONAL_TEMPLATE = 26;
 const CONTEXT_CONSUMER_CONDITIONAL_TEMPLATE = 27;
 const CONTEXT_CONSUMER_TEMPLATE = 28;
 const REF_COMPONENT = 29;
-const CONDITIONAL = 30;
-const LOGICAL_OR = 31;
-const LOGICAL_AND = 32;
-const ELEMENT_STATIC_CHILD_VALUE = 40;
-const ELEMENT_STATIC_CHILDREN_VALUE = 41;
-const ELEMENT_DYNAMIC_CHILD_VALUE = 42;
-const ELEMENT_DYNAMIC_CHILDREN_VALUE = 43;
-const ELEMENT_DYNAMIC_CHILD_TEMPLATE_FROM_FUNC_CALL = 44;
-const ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL = 45;
-const ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE = 46;
-const ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE = 47;
-const ELEMENT_DYNAMIC_CHILDREN_REACT_NODE_TEMPLATE = 48;
-const ELEMENT_DYNAMIC_FUNCTION_CHILD = 49;
-const STATIC_PROP = 60;
-const DYNAMIC_PROP = 61;
-const STATIC_PROP_CLASS_NAME = 62;
-const DYNAMIC_PROP_CLASS_NAME = 63;
-const STATIC_PROP_VALUE = 64;
-const DYNAMIC_PROP_VALUE = 65;
-const STATIC_PROP_STYLE = 66;
-const DYNAMIC_PROP_STYLE = 67;
-const STATIC_PROP_UNITLESS_STYLE = 68;
-const DYNAMIC_PROP_UNITLESS_STYLE = 69;
-const STATIC_PROP_KEY = 70;
-const DYNAMIC_PROP_KEY = 71;
-const DYNAMIC_PROP_REF = 72;
+const LOGICAL_OR = 30;
+const LOGICAL_AND = 31;
+const ELEMENT_STATIC_CHILD_VALUE = 32;
+const ELEMENT_STATIC_CHILDREN_VALUE = 33;
+const ELEMENT_DYNAMIC_CHILD_VALUE = 34;
+const ELEMENT_DYNAMIC_CHILDREN_VALUE = 35;
+const ELEMENT_DYNAMIC_CHILD_TEMPLATE_FROM_FUNC_CALL = 36;
+const ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL = 37;
+const ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE = 38;
+const ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE = 39;
+const ELEMENT_DYNAMIC_CHILDREN_REACT_NODE_TEMPLATE = 40;
+const ELEMENT_DYNAMIC_FUNCTION_CHILD = 41;
+const STATIC_PROP = 42;
+const DYNAMIC_PROP = 43;
+const STATIC_PROP_CLASS_NAME = 44;
+const DYNAMIC_PROP_CLASS_NAME = 45;
+const STATIC_PROP_VALUE = 46;
+const DYNAMIC_PROP_VALUE = 47;
+const STATIC_PROP_STYLE = 48;
+const DYNAMIC_PROP_STYLE = 49;
+const STATIC_PROP_UNITLESS_STYLE = 50;
+const DYNAMIC_PROP_UNITLESS_STYLE = 51;
+const STATIC_PROP_KEY = 52;
+const DYNAMIC_PROP_KEY = 53;
+const DYNAMIC_PROP_REF = 54;
 
 const PropFlagPartialTemplate = 1;
 const PropFlagReactEvent = 1 << 1; // starts with on
@@ -306,6 +310,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
       case ELEMENT_DYNAMIC_CHILD_VALUE: {
         renderElementCloseRenderString(state);
         const dynamicTextChildPointer = opcodes[++index];
+        ++index; // Host node pointer index
         const dynamicTextChild = runtimeValues[dynamicTextChildPointer];
         renderValueToString(dynamicTextChild, state, true);
         break;
@@ -314,6 +319,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         renderElementCloseRenderString(state);
         state.lastChildWasTextNode = false;
         const dynamicTextContentPointer = opcodes[++index];
+        ++index; // Host node pointer index
         const dynamicTextContent = runtimeValues[dynamicTextContentPointer];
         renderValueToString(dynamicTextContent, state, false);
         break;
@@ -321,6 +327,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
       case ELEMENT_DYNAMIC_CHILD_TEMPLATE_FROM_FUNC_CALL: {
         const templateOpcodes = opcodes[++index];
         const computeValuesPointer = opcodes[++index];
+        ++index; // Host node pointer index
         const computeValues = runtimeValues[computeValuesPointer];
         renderOpcodesToString(templateOpcodes, computeValues, state);
         const currentValue = state.currentValue;
@@ -342,6 +349,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
       case ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL: {
         const templateOpcodes = opcodes[++index];
         const computeValuesPointer = opcodes[++index];
+        ++index; // Host node pointer index
         const computeValues = runtimeValues[computeValuesPointer];
         renderOpcodesToString(templateOpcodes, computeValues, state);
         const currentValue = state.currentValue;
@@ -380,6 +388,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
       case ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE: {
         renderElementCloseRenderString(state);
         const reactNodeOrArrayPointer = opcodes[++index];
+        ++index; // Host node pointer index
         const reactNodeOrArray = runtimeValues[reactNodeOrArrayPointer];
         renderReactNodeToString(reactNodeOrArray, true, runtimeValues, state);
         break;
@@ -387,6 +396,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
       case ELEMENT_DYNAMIC_CHILDREN_REACT_NODE_TEMPLATE: {
         renderElementCloseRenderString(state);
         const reactNodeOrArrayPointer = opcodes[++index];
+        ++index; // Host node pointer index
         const reactNodeOrArray = runtimeValues[reactNodeOrArrayPointer];
         state.lastChildWasTextNode = false;
         renderReactNodeToString(reactNodeOrArray, false, runtimeValues, state);
@@ -407,6 +417,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         }
         break;
       }
+      case OPEN_ELEMENT_DIV_WITH_POINTER:
       case OPEN_ELEMENT_DIV: {
         if (state.currentElementTag !== "") {
           state.elementTagStack[state.elementTagStackIndex++] = state.currentElementTag;
@@ -423,8 +434,12 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
           state.elementCloseRenderString += ` ${createMarkupForRoot()}`;
         }
         state.elementCloseRenderString += ">";
+        if (opcode === OPEN_ELEMENT_DIV_WITH_POINTER) {
+          ++index;
+        }
         break;
       }
+      case OPEN_ELEMENT_SPAN_WITH_POINTER:
       case OPEN_ELEMENT_SPAN: {
         if (state.currentElementTag !== "") {
           state.elementTagStack[state.elementTagStackIndex++] = state.currentElementTag;
@@ -441,8 +456,12 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
           state.elementCloseRenderString += ` ${createMarkupForRoot()}`;
         }
         state.elementCloseRenderString += ">";
+        if (opcode === OPEN_ELEMENT_SPAN_WITH_POINTER) {
+          ++index;
+        }
         break;
       }
+      case OPEN_ELEMENT_WITH_POINTER:
       case OPEN_ELEMENT: {
         if (state.currentElementTag !== "") {
           state.elementTagStack[state.elementTagStackIndex++] = state.currentElementTag;
@@ -459,6 +478,9 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
           state.elementCloseRenderString += ` ${createMarkupForRoot()}`;
         }
         state.elementCloseRenderString += ">";
+        if (opcode === OPEN_ELEMENT_WITH_POINTER) {
+          ++index;
+        }
         break;
       }
       case CLOSE_ELEMENT: {
@@ -483,6 +505,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
       case CLOSE_FRAGMENT: {
         break;
       }
+      case OPEN_VOID_ELEMENT_WITH_POINTER:
       case OPEN_VOID_ELEMENT: {
         if (state.currentElementTag !== "") {
           state.elementTagStack[state.elementTagStackIndex++] = state.currentElementTag;
@@ -499,6 +522,9 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
           state.elementCloseRenderString += ` ${createMarkupForRoot()}`;
         }
         state.elementCloseRenderString += "/>";
+        if (opcode === OPEN_VOID_ELEMENT_WITH_POINTER) {
+          ++index;
+        }
         break;
       }
       case CLOSE_VOID_ELEMENT: {
@@ -578,12 +604,14 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         break;
       }
       case CONDITIONAL_TEMPLATE: {
+        ++index; // Host node pointer index
+        ++index; // Barnch opcodes pointer index
         const computeFunction = opcodes[++index];
         let templateRuntimeValues = runtimeValues;
         // TODO try passing individual props if array is small enough, using array spread?
         // Array.prototype.apply is not as fast as normal function calls typically.
         if (computeFunction !== 0) {
-          ++index;
+          ++index; // Values pointer index
           templateRuntimeValues = computeFunction.apply(null, state.currentComponent.props);
           if (templateRuntimeValues === null) {
             return null;
@@ -717,12 +745,12 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         popCurrentContextValue(state.currentElementTag, state);
         break;
       }
-      case STATIC_VALUE: {
+      case ROOT_STATIC_VALUE: {
         const staticValue = opcodes[++index];
         state.currentValue = staticValue;
         return;
       }
-      case DYNAMIC_VALUE: {
+      case ROOT_DYNAMIC_VALUE: {
         const dynamicValuePointer = opcodes[++index];
         let value = runtimeValues[dynamicValuePointer];
         if (isReactNode(value)) {

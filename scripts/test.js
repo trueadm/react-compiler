@@ -10,7 +10,7 @@ import tmp from "tmp";
 import { compiler as ClosureCompiler } from "google-closure-compiler";
 import path from "path";
 import { JSDOM } from "jsdom";
-import { createReactNode, useState } from "./compiler-runtime/index";
+import { createContext, createReactNode, useState } from "./compiler-runtime/index";
 
 process.env.NODE_ENV = "production";
 
@@ -72,6 +72,7 @@ function executeSource(source, needsTransforming) {
       _path => {
         if (_path === "react-compiler-runtime") {
           return {
+            createContext,
             createReactNode,
             useState,
           };
