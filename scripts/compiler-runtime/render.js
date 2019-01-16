@@ -215,7 +215,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
         const dynamicPropValue = runtimeValues[dynamicPropValuePointer];
 
         if (propInformation & PropFlagPartialTemplate) {
-          throw new Error("TODO renderStaticProp");
+          throw new Error("TODO DYNAMIC_PROP");
         } else if (dynamicPropValue !== null && dynamicPropValue !== undefined) {
           state.currentHostNode.setAttribute(propName, dynamicPropValue);
         }
@@ -231,7 +231,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
       }
       case ELEMENT_STATIC_CHILDREN_VALUE: {
         const staticTextContent = mountOpcodes[++index];
-        state.currentHostNode.textContent = staticTextContent;
+        state.currentHostNode.data = staticTextContent;
         break;
       }
       case ELEMENT_DYNAMIC_CHILD_VALUE: {
@@ -247,10 +247,16 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
         const dynamicTextContentPointer = mountOpcodes[++index];
         const hostNodeValuePointer = mountOpcodes[++index];
         const dynamicTextContent = runtimeValues[dynamicTextContentPointer];
-        const textNode = createTextNode(dynamicTextContent);
+        const currentHostNode = state.currentHostNode;
+        let textNode;
 
+        if (dynamicTextContent === null || dynamicTextContent === undefined || dynamicTextContent === "") {
+          textNode = createPlaceholderNode();
+        } else {
+          currentHostNode.textContent = dynamicTextContent;
+          textNode = currentHostNode.firstChild;
+        }
         values[hostNodeValuePointer] = textNode;
-        appendChild(state.currentHostNode, textNode);
         if (shouldCreateOpcodes === true) {
           updateOpcodes.push(ELEMENT_DYNAMIC_CHILDREN_VALUE, dynamicTextContentPointer, hostNodeValuePointer);
         }
