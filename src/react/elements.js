@@ -1423,7 +1423,19 @@ function createOpcodesForJSXElementHostComponent(
           componentPath,
         );
       }
+      // This is all to conform the ReactDOM ordering of props :(
       propsMap.delete("type");
+      const value = propsMap.get("value");
+      const checked = propsMap.get("checked");
+      if (value !== undefined) {
+        propsMap.delete("value");
+        propsMap.set("value", value);
+      }
+      if (checked !== undefined) {
+        propsMap.delete("checked");
+        propsMap.set("checked", checked);
+      }
+    }
     }
     const renderChildren = propsMap.get("children");
     propsMap.delete("children");
@@ -1483,7 +1495,18 @@ function createOpcodesForReactCreateElementHostComponent(hostNodeId, tagName, ar
             componentPath,
           );
         }
+        // This is all to conform the ReactDOM ordering of props :(
         propsMap.delete("type");
+        const value = propsMap.get("value");
+        const checked = propsMap.get("checked");
+        if (value !== undefined) {
+          propsMap.delete("value");
+          propsMap.set("value", value);
+        }
+        if (checked !== undefined) {
+          propsMap.delete("checked");
+          propsMap.set("checked", checked);
+        }
       }
       const renderChildren = propsMap.get("children");
       propsMap.delete("children");

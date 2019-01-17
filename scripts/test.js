@@ -6,6 +6,7 @@ import { performance } from "perf_hooks";
 import chalk from "chalk";
 import { createElementForTesting } from "./compiler-runtime/utils";
 import { renderToString } from "./compiler-runtime/renderToString";
+import { render } from "./compiler-runtime/render";
 import tmp from "tmp";
 import { compiler as ClosureCompiler } from "google-closure-compiler";
 import path from "path";
@@ -20,6 +21,15 @@ const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 const argv = require("minimist")(process.argv.slice(2));
 const ReactDOMServer = require("react-dom/server");
+const ReactDOM = require("react-dom");
+const mode = argv.mode === "dom" ? "dom" : argv.mode === "ssr" ? "ssr" : null;
+
+if (mode === null) {
+  console.log(
+    `Invalid or no "mode" specified for test. Use --mode to specify a mode. Possible values are "ssr" and  "dom".`,
+  );
+  process.exit(1);
+}
 
 /* eslint-disable-next-line */
 global.window = window;
@@ -91,6 +101,60 @@ function executeSource(source, needsTransforming) {
     throw new Error(`Executed code did not assign anything to "module.exports".`);
   }
   return module.exports;
+}
+
+function renderOriginalComponent(component, props) {
+  const root = document.createElement("div");
+  document.body.appendChild(root);
+  /* eslint-disable-next-line */
+  if (global.gc) global.gc();
+  if (benchmarkFlag) {
+    // Run 10 times to warm up cache
+    for (let i = 0; i < 10; i++) {
+      ReactDOM.render(createElementForTesting(component, props), root);
+    }
+  }
+  // Run once again to measure perf
+  const start = performance.now();
+  ReactDOM.render(createElementForTesting(component, props), root);
+  const time = Math.round((performance.now() - start) * 100) / 100;
+  const output = root.innerHTML;
+  ReactDOM.render(null, root);
+  document.body.removeChild(root);
+  root.innerHTML = "";
+  return {
+    output,
+    time,
+  };
+}
+
+function renderCompiledComponent(component, props) {
+  const root = document.createElement("div");
+  document.body.appendChild(root);
+  /* eslint-disable-next-line */
+  if (global.gc) global.gc();
+  if (benchmarkFlag) {
+    // Run 10 times to warm up cache
+    for (let i = 0; i < 10; i++) {
+      render(createElementForTesting(component, props), root);
+    }
+  }
+  // Run once again to measure perf
+  const start = performance.now();
+  render(createElementForTesting(component, props), root);
+  const time = Math.round((performance.now() - start) * 100) / 100;
+  const output = root.innerHTML;
+  render(null, root);
+  document.body.removeChild(root);
+  root.innerHTML = "";
+  return {
+    output: unescapeCompiledOutput(output),
+    time,
+  };
+}
+
+function unescapeCompiledOutput(output) {
+  return output.replace(/\&amp;/g, "&");
 }
 
 function renderOriginalComponentToString(component, props) {
@@ -214,15 +278,27 @@ async function runTest(file, originalSource, compiledSource, minifySources) {
     originalComponent = executeSource(originalSource, true);
     compiledComponent = executeSource(compiledSource, true);
   }
+  let originalComponentOutput, originalComponentTime, compiledComponentOutput, compiledComponentTime;
 
-  let { output: originalComponentOutput, time: originalComponentTime } = renderOriginalComponentToString(
-    originalComponent,
-    props,
-  );
-  let { output: compiledComponentOutput, time: compiledComponentTime } = renderCompiledComponentToString(
-    compiledComponent,
-    props,
-  );
+  if (mode === "ssr") {
+    ({ output: originalComponentOutput, time: originalComponentTime } = renderOriginalComponentToString(
+      originalComponent,
+      props,
+    ));
+    ({ output: compiledComponentOutput, time: compiledComponentTime } = renderCompiledComponentToString(
+      compiledComponent,
+      props,
+    ));
+  } else if (mode === "dom") {
+    ({ output: originalComponentOutput, time: originalComponentTime } = renderOriginalComponent(
+      originalComponent,
+      props,
+    ));
+    ({ output: compiledComponentOutput, time: compiledComponentTime } = renderCompiledComponent(
+      compiledComponent,
+      props,
+    ));
+  }
 
   if (originalComponentOutput !== compiledComponentOutput) {
     console.error(
@@ -373,7 +449,7 @@ async function runModuleTest(indexModulePath, minifyModules) {
   console.log(` ${chalk.green("✔")}  ${chalk.bold.white(moduleTestName)}`);
 }
 
-console.log(chalk.gray("\nRunning tests:\n"));
+console.log(chalk.gray(`\nRunning ${mode} tests:\n`));
 
 let tests = glob.sync("tests/**/*.js", { ignore: "tests/modules/**/*.js" });
 tests = [...tests, ...glob.sync("tests/modules/**/index.js")];

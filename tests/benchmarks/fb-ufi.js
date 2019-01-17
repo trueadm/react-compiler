@@ -1013,7 +1013,7 @@ function UFI2ReactionLink({
         onMouseDown: null,
         onMouseEnter: null,
         onMouseLeave: null,
-        ref: "trigger",
+        ref: null,
         role: "button",
         style: { color: textColor },
         tabIndex: 0,

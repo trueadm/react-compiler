@@ -1,5 +1,3 @@
-import { currentDispatcher } from "./index";
-
 let firstWorkInProgressHook = null;
 let currentlyRenderingComponent = null;
 let isReRender = false;
@@ -86,9 +84,7 @@ export function finishHooks() {
   workInProgressHook = null;
 }
 
-const dispatcher = {
+export const Dispatcher = {
   useReducer,
   useState,
 };
-
-currentDispatcher.current = dispatcher;

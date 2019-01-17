@@ -1,4 +1,5 @@
-import { finishHooks, prepareToUseHooks } from "./ssr-dispatcher";
+import { currentDispatcher } from "./index";
+import { Dispatcher, finishHooks, prepareToUseHooks } from "./ssr-dispatcher";
 import {
   applyState,
   cloneState,
@@ -100,7 +101,7 @@ function renderReactNodeToString(node, isChild, runtimeValues, state) {
   } else if (isReactNode(node)) {
     state.lastChildWasTextNode = false;
     const templateOpcodes = node.t;
-    let templateRuntimeValues = node.v;
+    const templateRuntimeValues = node.v;
     renderOpcodesToString(templateOpcodes, templateRuntimeValues, state);
   } else if (isArray(node)) {
     for (let i = 0, length = node.length; i < length; ++i) {
@@ -540,14 +541,14 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         const consequentOpcodes = opcodes[++index];
 
         if (conditionValue) {
-          if (consequentOpcodes !== null) {
+          if (consequentOpcodes !== 0) {
             renderOpcodesToString(consequentOpcodes, runtimeValues, state);
           }
           ++index;
           break;
         }
         const alternateOpcodes = opcodes[++index];
-        if (alternateOpcodes !== null) {
+        if (alternateOpcodes !== 0) {
           renderOpcodesToString(alternateOpcodes, runtimeValues, state);
         }
         break;
@@ -787,5 +788,9 @@ function renderNode(node) {
 }
 
 export function renderToString(node) {
-  return renderNode(node);
+  const prevDispatcher = currentDispatcher.current;
+  currentDispatcher.current = Dispatcher;
+  const string = renderNode(node);
+  currentDispatcher.current = prevDispatcher;
+  return string;
 }

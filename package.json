@@ -6,7 +6,9 @@
   "scripts": {
     "build": "babel src --out-dir lib --source-maps",
     "watch": "babel src scripts --out-dir lib --watch --source-maps --verbose",
-    "test": "babel-node --expose-gc scripts/test.js",
+    "test-ssr": "babel-node --expose-gc scripts/test.js --mode=ssr",
+    "test-dom": "babel-node --expose-gc scripts/test.js --mode=dom",
+    "test": "yarn test-ssr",
     "sandbox": "node lib/cli.js --entry=sandbox/App.js"
   },
   "author": "Dominic Gannaway",

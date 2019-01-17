@@ -1645,14 +1645,14 @@ function AbstractCheckboxInput59({ x }: { x?: number }) {
       "label",
       { className: "uiInputLabelInput _55sg _kv1" },
       React.createElement("input", {
+        type: "checkbox",
         checked: true,
         disabled: true,
         name: "filterUnpublished",
         value: "on",
+        id: "js_input_label_21",
         onClick: function(): void {},
         className: null,
-        id: "js_input_label_21",
-        type: "checkbox",
       }),
       React.createElement("span", {
         "data-hover": null,
