@@ -18,6 +18,8 @@
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-flow": "^7.0.0",
     "babel-plugin-inferno": "^6.0.4",
+    "cx": "file:../scripts/cx",
+    "fbt": "file:../scripts/fbt",
     "inferno": "^7.0.5",
     "react": "16.8.0-alpha.0",
     "react-compiler-runtime": "file:../scripts/compiler-runtime/",

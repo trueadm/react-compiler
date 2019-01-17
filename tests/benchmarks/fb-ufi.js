@@ -903,12 +903,12 @@ function UFI2ActionLink({
   children: ({ className: string }) => React.Node,
   showIcon: boolean,
 }) {
-  var showIcon = showIcon === undefined ? true : showIcon;
+  var _showIcon = showIcon === undefined ? true : showIcon;
   return React.createElement(
     "span",
     { className: cx("UFI2ActionLink/root") },
     children({
-      className: cx("UFI2ActionLink/link") + (showIcon ? " " + cx("UFI2ActionLink/withIcon") : ""),
+      className: cx("UFI2ActionLink/link") + (_showIcon ? " " + cx("UFI2ActionLink/withIcon") : ""),
     }),
   );
 }

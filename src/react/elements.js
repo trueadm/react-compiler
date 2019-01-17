@@ -1436,7 +1436,6 @@ function createOpcodesForJSXElementHostComponent(
         propsMap.set("checked", checked);
       }
     }
-    }
     const renderChildren = propsMap.get("children");
     propsMap.delete("children");
     for (let [propName, valuePath] of propsMap) {

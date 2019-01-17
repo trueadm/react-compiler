@@ -781,6 +781,9 @@ export function isArrayConstructor(path, state) {
           return true;
         }
       } else {
+        if (isReactObject(objectPathRef, state)) {
+          return false;
+        }
         const args = path.get("arguments");
         if (args.length === 0) {
           return false;
@@ -991,7 +994,7 @@ export function updateImportSyntaxPathToCompiledPath(path, state) {
   }
 }
 
-export function isFbCxRequireCall(pathRef, state) {
+export function isFbCxRequireCall(pathRef) {
   const node = pathRef.node;
   if (t.isCallExpression(node)) {
     if (
@@ -1018,13 +1021,28 @@ export function isFbCxCall(pathRef, state) {
   return false;
 }
 
-export function isFbtRequireCall(pathRef, state) {
+export function isFbtRequireCall(pathRef) {
   const node = pathRef.node;
   if (t.isCallExpression(node)) {
     if (
       isCommonJsLikeRequireCall(pathRef) &&
       t.isStringLiteral(node.arguments[0]) &&
       node.arguments[0].value === "fbt"
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+export function isFbtImportCall(pathRef) {
+  if (t.isImportDefaultSpecifier(pathRef.node)) {
+    const parentPath = pathRef.parentPath;
+
+    if (
+      t.isImportDeclaration(parentPath.node) &&
+      t.isStringLiteral(parentPath.node.source) &&
+      parentPath.node.source.value === "fbt"
     ) {
       return true;
     }
@@ -1039,6 +1057,9 @@ export function isFbtCall(pathRef, state) {
     const calleePathRef = getReferenceFromExpression(calleePath, state);
 
     if (isFbtRequireCall(calleePathRef)) {
+      return true;
+    }
+    if (isFbtImportCall(calleePathRef)) {
       return true;
     }
   }

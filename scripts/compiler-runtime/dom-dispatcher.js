@@ -1,5 +1,3 @@
-import { currentDispatcher } from "./index";
-
 const NoWork = 0;
 
 // These are set right before calling the component.
@@ -342,9 +340,7 @@ function dispatchAction<A>(fiber: Fiber, queue: UpdateQueue<A>, action: A) {
   }
 }
 
-const dispatcher = {
+export const Dispatcher = {
   useReducer,
   useState,
 };
-
-currentDispatcher.current = dispatcher;

@@ -160,12 +160,7 @@ function recursivelyGetReferenceFromObjectOrArrayPatternWithBindingName(ref, bin
 function recursivelyGetReferenceFromExpression(path, state, visitedBindings, errorOnBadIdentifier) {
   const node = path.node;
 
-  if (
-    isFbCxRequireCall(path, state) ||
-    isFbCxCall(path, state) ||
-    isFbtRequireCall(path, state) ||
-    isFbtCall(path, state)
-  ) {
+  if (isFbCxRequireCall(path) || isFbCxCall(path, state) || isFbtRequireCall(path) || isFbtCall(path, state)) {
     return path;
   }
   // Check if this a reference in another file
