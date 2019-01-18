@@ -123,7 +123,7 @@ function renderOriginalComponent(component, props) {
   document.body.removeChild(root);
   root.innerHTML = "";
   return {
-    output,
+    output: unescapeCompiledOutput(output),
     time,
   };
 }
@@ -154,7 +154,11 @@ function renderCompiledComponent(component, props) {
 }
 
 function unescapeCompiledOutput(output) {
-  return output.replace(/\&amp;/g, "&");
+  // Optimize this at some point
+  return output
+    .replace(/\&amp;/g, "&")
+    .replace(/\&lt;/g, "<")
+    .replace(/\&gt;/g, ">");
 }
 
 function renderOriginalComponentToString(component, props) {

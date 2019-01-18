@@ -191,32 +191,21 @@ export function convertRootPropsToPropsArray(rootProps, rootPropsShape) {
   return props;
 }
 
-export function createRootComponent(rootProps, rootPropsShape, usesHooks) {
-  return createComponent(convertRootPropsToPropsArray(rootProps, rootPropsShape), usesHooks);
-}
-
-export function createComponent(props, usesHooks) {
-  return {
-    props,
-    usesHooks,
-  };
-}
-
 export function createState(props) {
   return {
     componentOpcodeCache: new Map(),
     contextValueStack: new Map(),
-    currentComponent: null,
     currentElementTag: "",
     currentElementTagIsOpen: false,
     currentValue: undefined,
     elementCloseRenderString: "",
     elementTagStack: [],
     elementTagStackIndex: 0,
+    fiber: null,
     hasMarkedRootElement: false,
     lastChildWasStyle: false,
     lastChildWasTextNode: false,
-    propsArray: emptyArray,
+    props: emptyArray,
     renderString: "",
     rootPropsObject: props,
     styleRenderString: "",
@@ -227,7 +216,6 @@ export function cloneState(state) {
   const clonedState = createState(null);
   clonedState.componentOpcodeCache = state.componentOpcodeCache;
   clonedState.contextValueStack = state.contextValueStack;
-  clonedState.currentComponent = state.currentComponent;
   clonedState.currentElementTag = state.currentElementTag;
   clonedState.currentElementTagIsOpen = state.currentElementTagIsOpen;
   clonedState.currentValue = state.currentValue;
@@ -237,7 +225,7 @@ export function cloneState(state) {
   clonedState.hasMarkedRootElement = state.hasMarkedRootElement;
   clonedState.lastChildWasStyle = state.lastChildWasStyle;
   clonedState.lastChildWasTextNode = state.lastChildWasTextNode;
-  clonedState.propsArray = state.propsArray;
+  clonedState.props = state.props;
   clonedState.renderString = state.renderString;
   return clonedState;
 }
@@ -245,7 +233,6 @@ export function cloneState(state) {
 export function applyState(targetState, state) {
   targetState.componentOpcodeCache = state.componentOpcodeCache;
   targetState.contextValueStack = state.contextValueStack;
-  targetState.currentComponent = state.currentComponent;
   targetState.currentElementTag = state.currentElementTag;
   targetState.currentElementTagIsOpen = state.currentElementTagIsOpen;
   targetState.currentValue = state.currentValue;
@@ -255,10 +242,33 @@ export function applyState(targetState, state) {
   targetState.hasMarkedRootElement = state.hasMarkedRootElement;
   targetState.lastChildWasStyle = state.lastChildWasStyle;
   targetState.lastChildWasTextNode = state.lastChildWasTextNode;
-  targetState.propsArray = state.propsArray;
+  targetState.props = state.props;
   targetState.renderString = state.renderString;
 }
 
 export function isReactNode(node) {
   return node !== null && node.t !== undefined && node.v !== undefined;
+}
+
+export function createOpcodeFiber(hostNode, memoizedProps, values) {
+  return {
+    alternate: null,
+    child: null,
+    hostNode: null,
+    key: null,
+    memoizedProps,
+    memoizedState: null,
+    sibling: null,
+    parent: null,
+    values: values,
+  };
+}
+
+export function insertChildFiberIntoParentFiber(parent, child) {
+  child.parent = parent;
+  if (parent.child === null) {
+    parent.child = child;
+  } else {
+    // TODO
+  }
 }

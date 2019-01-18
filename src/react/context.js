@@ -1,4 +1,4 @@
-import { pushOpcodeValue } from "../opcodes";
+import { pushOpcodeValue, pushOpcode } from "../opcodes";
 import { getReferenceFromExpression, isDestructuredRef, isIdentifierReferenceConstant } from "../references";
 import {
   getCodeLocation,
@@ -10,6 +10,7 @@ import {
   markNodeAsUsed,
 } from "../utils";
 import { createOpcodesForReactComputeFunction } from "./functions";
+import { normalizeOpcodes } from "../utils";
 import * as t from "@babel/types";
 
 export function createOpcodesForReactContextConsumer(namePath, childrenPath, opcodes, state, componentPath) {
@@ -41,33 +42,26 @@ export function createOpcodesForReactContextConsumer(namePath, childrenPath, opc
       )}.`,
     );
   }
-  const { opcodes: computeFunctionOpcodes, isStatic } = createOpcodesForReactComputeFunction(
-    childrenPathRef,
-    state,
-    false,
-    contextObjectRuntimeValueIndex,
-    null,
-  );
+  const { isStatic, templateOpcodes } = createOpcodesForReactComputeFunction(childrenPathRef, state, false, null);
   if (!isStatic) {
     const parentNode = childrenPathRef.parentPath.node;
+    pushOpcode(opcodes, "CONTEXT_CONSUMER");
+    pushOpcodeValue(opcodes, contextObjectRuntimeValueIndex, "CONTEXT_OBJECT_POINTER_INDEX");
 
     if (t.isJSXExpressionContainer(parentNode) || isReactCreateElement(childrenPathRef.parentPath, state)) {
       const contextConsumerCallbackPointerIndex = getRuntimeValueIndex(childrenPathRef.node, state);
-      // Replace last node of computeFunctionOpcodes with a runtime value pointer to the function
-      computeFunctionOpcodes.pop();
-      pushOpcodeValue(computeFunctionOpcodes, contextConsumerCallbackPointerIndex, "CONTEXT_CONSUMER_COMPUTE_FUNCTION");
+      pushOpcodeValue(opcodes, contextConsumerCallbackPointerIndex, "CONTEXT_CONSUMER_COMPUTE_FUNCTION");
     } else if (t.isVariableDeclarator(parentNode) && t.isIdentifier(parentNode.id)) {
       const cachedNodePointerIndex = getRuntimeValueIndex(parentNode.id, state);
       markNodeAsUsed(parentNode.id);
-      // Replace last node of computeFunctionOpcodes with a runtime value pointer to the function
-      computeFunctionOpcodes.pop();
-      pushOpcodeValue(computeFunctionOpcodes, cachedNodePointerIndex, "CONTEXT_CONSUMER_COMPUTE_FUNCTION");
+      pushOpcodeValue(opcodes, cachedNodePointerIndex, "CONTEXT_CONSUMER_COMPUTE_FUNCTION");
     } else {
       throw new Error("TODO");
     }
+    pushOpcodeValue(opcodes, normalizeOpcodes(templateOpcodes), "CONTEXT_CONSUMER_OPCODES");
+  } else {
+    opcodes.push(...templateOpcodes);
   }
-
-  opcodes.push(...computeFunctionOpcodes);
 }
 
 function isReferenceReactContext(path, state) {

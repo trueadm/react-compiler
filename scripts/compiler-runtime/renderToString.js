@@ -3,13 +3,14 @@ import { Dispatcher, finishHooks, prepareToUseHooks } from "./ssr-dispatcher";
 import {
   applyState,
   cloneState,
-  createComponent,
+  convertRootPropsToPropsArray,
   createMarkupForRoot,
-  createRootComponent,
+  createOpcodeFiber,
   createState,
   emptyArray,
   escapeText,
   getCurrentContextValue,
+  insertChildFiberIntoParentFiber,
   isArray,
   isReactNode,
   popCurrentContextValue,
@@ -32,46 +33,42 @@ const CLOSE_VOID_ELEMENT = 9;
 const COMPONENT = 10;
 const ROOT_STATIC_VALUE = 11;
 const ROOT_DYNAMIC_VALUE = 12;
-const UNCONDITIONAL_TEMPLATE = 13;
-const CONDITIONAL_TEMPLATE = 14;
-const MULTI_CONDITIONAL = 15;
-const CONDITIONAL = 16;
-const OPEN_FRAGMENT = 17;
-const CLOSE_FRAGMENT = 18;
-const OPEN_CONTEXT_PROVIDER = 19;
-const CLOSE_CONTEXT_PROVIDER = 20;
+const CONDITIONAL_TEMPLATE = 13;
+const MULTI_CONDITIONAL = 14;
+const CONDITIONAL = 15;
+const OPEN_FRAGMENT = 16;
+const CLOSE_FRAGMENT = 17;
+const OPEN_CONTEXT_PROVIDER = 18;
+const CLOSE_CONTEXT_PROVIDER = 19;
+const CONTEXT_CONSUMER = 20;
 const OPEN_PROP_STYLE = 21;
 const CLOSE_PROP_STYLE = 22;
-const TEMPLATE = 23;
-const TEMPLATE_FROM_FUNC_CALL = 24;
-const REACT_NODE_TEMPLATE_FROM_FUNC_CALL = 25;
-const CONTEXT_CONSUMER_UNCONDITIONAL_TEMPLATE = 26;
-const CONTEXT_CONSUMER_CONDITIONAL_TEMPLATE = 27;
-const CONTEXT_CONSUMER_TEMPLATE = 28;
-const REF_COMPONENT = 29;
-const LOGICAL_OR = 30;
-const LOGICAL_AND = 31;
-const ELEMENT_STATIC_CHILD_VALUE = 32;
-const ELEMENT_STATIC_CHILDREN_VALUE = 33;
-const ELEMENT_DYNAMIC_CHILD_VALUE = 34;
-const ELEMENT_DYNAMIC_CHILDREN_VALUE = 35;
-const ELEMENT_DYNAMIC_CHILD_TEMPLATE_FROM_FUNC_CALL = 36;
-const ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL = 37;
-const ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE = 38;
-const ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE = 39;
-const ELEMENT_DYNAMIC_CHILDREN_REACT_NODE_TEMPLATE = 40;
-const ELEMENT_DYNAMIC_FUNCTION_CHILD = 41;
-const STATIC_PROP = 42;
-const DYNAMIC_PROP = 43;
-const STATIC_PROP_CLASS_NAME = 44;
-const DYNAMIC_PROP_CLASS_NAME = 45;
-const STATIC_PROP_VALUE = 46;
-const DYNAMIC_PROP_VALUE = 47;
-const STATIC_PROP_STYLE = 48;
-const DYNAMIC_PROP_STYLE = 49;
-const STATIC_PROP_UNITLESS_STYLE = 50;
-const DYNAMIC_PROP_UNITLESS_STYLE = 51;
-const DYNAMIC_PROP_REF = 52;
+const TEMPLATE_FROM_FUNC_CALL = 23;
+const REACT_NODE_TEMPLATE_FROM_FUNC_CALL = 24;
+const REF_COMPONENT = 25;
+const LOGICAL_OR = 26;
+const LOGICAL_AND = 27;
+const ELEMENT_STATIC_CHILD_VALUE = 28;
+const ELEMENT_STATIC_CHILDREN_VALUE = 29;
+const ELEMENT_DYNAMIC_CHILD_VALUE = 30;
+const ELEMENT_DYNAMIC_CHILDREN_VALUE = 31;
+const ELEMENT_DYNAMIC_CHILD_TEMPLATE_FROM_FUNC_CALL = 32;
+const ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL = 33;
+const ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE = 34;
+const ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE = 35;
+const ELEMENT_DYNAMIC_CHILDREN_REACT_NODE_TEMPLATE = 36;
+const ELEMENT_DYNAMIC_FUNCTION_CHILD = 37;
+const STATIC_PROP = 38;
+const DYNAMIC_PROP = 39;
+const STATIC_PROP_CLASS_NAME = 40;
+const DYNAMIC_PROP_CLASS_NAME = 41;
+const STATIC_PROP_VALUE = 42;
+const DYNAMIC_PROP_VALUE = 43;
+const STATIC_PROP_STYLE = 44;
+const DYNAMIC_PROP_STYLE = 45;
+const STATIC_PROP_UNITLESS_STYLE = 46;
+const DYNAMIC_PROP_UNITLESS_STYLE = 47;
+const DYNAMIC_PROP_REF = 48;
 
 const PropFlagPartialTemplate = 1;
 const PropFlagReactEvent = 1 << 1; // starts with on
@@ -86,7 +83,7 @@ const PropFlagReactEvent = 1 << 1; // starts with on
 // const PropFlagXlinkNamespace = 1 << 8;
 // const PropFlagXmlNamespace = 1 << 9;
 
-function renderReactNodeToString(node, isChild, runtimeValues, state) {
+function renderReactNodeToString(node, isChild, runtimeValues, state, currentFiber) {
   if (node === null || node === undefined || typeof node === "boolean") {
     return;
   }
@@ -101,12 +98,15 @@ function renderReactNodeToString(node, isChild, runtimeValues, state) {
   } else if (isReactNode(node)) {
     state.lastChildWasTextNode = false;
     const templateOpcodes = node.t;
-    const templateRuntimeValues = node.v;
-    renderOpcodesToString(templateOpcodes, templateRuntimeValues, state);
+    let templateRuntimeValues = node.v;
+    if (templateRuntimeValues === null) {
+      templateRuntimeValues = emptyArray;
+    }
+    renderOpcodesToString(templateOpcodes, templateRuntimeValues, state, currentFiber);
   } else if (isArray(node)) {
     for (let i = 0, length = node.length; i < length; ++i) {
       const elementNode = node[i];
-      renderReactNodeToString(elementNode, isChild, runtimeValues, state);
+      renderReactNodeToString(elementNode, isChild, runtimeValues, state, currentFiber);
     }
   }
 }
@@ -151,7 +151,7 @@ function renderStyleValue(styleName, styleValue, state) {
   state.styleRenderString += `${delimiter}${styleName}:${styleValue}`;
 }
 
-function renderOpcodesToString(opcodes, runtimeValues, state) {
+function renderOpcodesToString(opcodes, runtimeValues, state, currentFiber) {
   const opcodesLength = opcodes.length;
   let index = 0;
 
@@ -170,15 +170,15 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         } else {
           componentOpcodes = componentOpcodeCache.get(componentOpcodesFunction);
         }
-        const propsArrayValuePointerOrValue = opcodes[++index];
-        let propsArrayValue = null;
-        if (isArray(propsArrayValuePointerOrValue)) {
-          propsArrayValue = propsArrayValuePointerOrValue;
-        } else if (propsArrayValuePointerOrValue !== null) {
-          propsArrayValue = runtimeValues[propsArrayValuePointerOrValue];
+        const propsValuePointerOrValue = opcodes[++index];
+        let propsValue = null;
+        if (isArray(propsValuePointerOrValue)) {
+          propsValue = propsValuePointerOrValue;
+        } else if (propsValuePointerOrValue !== null) {
+          propsValue = runtimeValues[propsValuePointerOrValue];
         }
-        state.propsArray = propsArrayValue;
-        renderOpcodesToString(componentOpcodes, runtimeValues, state);
+        state.props = propsValue;
+        renderOpcodesToString(componentOpcodes, runtimeValues, state, currentFiber);
         break;
       }
       case STATIC_PROP: {
@@ -324,20 +324,22 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         const computeValuesPointer = opcodes[++index];
         ++index; // Host node pointer index
         const computeValues = runtimeValues[computeValuesPointer];
-        renderOpcodesToString(templateOpcodes, computeValues, state);
-        const currentValue = state.currentValue;
+        if (computeValues !== null) {
+          renderOpcodesToString(templateOpcodes, computeValues, state, currentFiber);
+          const currentValue = state.currentValue;
 
-        if (
-          currentValue !== null &&
-          currentValue !== undefined &&
-          typeof currentValue !== "boolean" &&
-          currentValue !== ReactElementNode
-        ) {
-          if (state.lastChildWasTextNode === true) {
-            state.renderString += "<!-- -->";
+          if (
+            currentValue !== null &&
+            currentValue !== undefined &&
+            typeof currentValue !== "boolean" &&
+            currentValue !== ReactElementNode
+          ) {
+            if (state.lastChildWasTextNode === true) {
+              state.renderString += "<!-- -->";
+            }
+            state.renderString += escapeText(currentValue);
+            state.lastChildWasTextNode = true;
           }
-          state.renderString += escapeText(currentValue);
-          state.lastChildWasTextNode = true;
         }
         break;
       }
@@ -346,17 +348,19 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         const computeValuesPointer = opcodes[++index];
         ++index; // Host node pointer index
         const computeValues = runtimeValues[computeValuesPointer];
-        renderOpcodesToString(templateOpcodes, computeValues, state);
-        const currentValue = state.currentValue;
+        if (computeValues !== null) {
+          renderOpcodesToString(templateOpcodes, computeValues, state, currentFiber);
+          const currentValue = state.currentValue;
 
-        state.lastChildWasTextNode = false;
-        if (
-          currentValue !== null &&
-          currentValue !== undefined &&
-          typeof currentValue !== "boolean" &&
-          currentValue !== ReactElementNode
-        ) {
-          state.renderString += escapeText(currentValue);
+          state.lastChildWasTextNode = false;
+          if (
+            currentValue !== null &&
+            currentValue !== undefined &&
+            typeof currentValue !== "boolean" &&
+            currentValue !== ReactElementNode
+          ) {
+            state.renderString += escapeText(currentValue);
+          }
         }
         break;
       }
@@ -376,7 +380,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
           if (arrayMapComputeFunction !== null) {
             templateRuntimeValues = arrayMapComputeFunction(element, i, array);
           }
-          renderOpcodesToString(arrayMapOpcodes, templateRuntimeValues, state);
+          renderOpcodesToString(arrayMapOpcodes, templateRuntimeValues, state, currentFiber);
         }
         break;
       }
@@ -385,7 +389,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         const reactNodeOrArrayPointer = opcodes[++index];
         ++index; // Host node pointer index
         const reactNodeOrArray = runtimeValues[reactNodeOrArrayPointer];
-        renderReactNodeToString(reactNodeOrArray, true, runtimeValues, state);
+        renderReactNodeToString(reactNodeOrArray, true, runtimeValues, state, currentFiber);
         break;
       }
       case ELEMENT_DYNAMIC_CHILDREN_REACT_NODE_TEMPLATE: {
@@ -394,7 +398,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         ++index; // Host node pointer index
         const reactNodeOrArray = runtimeValues[reactNodeOrArrayPointer];
         state.lastChildWasTextNode = false;
-        renderReactNodeToString(reactNodeOrArray, false, runtimeValues, state);
+        renderReactNodeToString(reactNodeOrArray, false, runtimeValues, state, currentFiber);
         break;
       }
       case ELEMENT_DYNAMIC_FUNCTION_CHILD: {
@@ -538,14 +542,14 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
 
         if (conditionValue) {
           if (consequentOpcodes !== 0) {
-            renderOpcodesToString(consequentOpcodes, runtimeValues, state);
+            renderOpcodesToString(consequentOpcodes, runtimeValues, state, currentFiber);
           }
           ++index;
           break;
         }
         const alternateOpcodes = opcodes[++index];
         if (alternateOpcodes !== 0) {
-          renderOpcodesToString(alternateOpcodes, runtimeValues, state);
+          renderOpcodesToString(alternateOpcodes, runtimeValues, state, currentFiber);
         }
         break;
       }
@@ -554,9 +558,9 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         const rightOpcodes = opcodes[++index];
 
         state.currentValue = undefined;
-        renderOpcodesToString(leftOpcodes, runtimeValues, state);
+        renderOpcodesToString(leftOpcodes, runtimeValues, state, currentFiber);
         if (state.currentValue === undefined) {
-          renderOpcodesToString(rightOpcodes, runtimeValues, state);
+          renderOpcodesToString(rightOpcodes, runtimeValues, state, currentFiber);
         }
         break;
       }
@@ -566,49 +570,59 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
 
         state.currentValue = undefined;
         const clonedState = cloneState(state);
-        renderOpcodesToString(leftOpcodes, runtimeValues, state);
+        renderOpcodesToString(leftOpcodes, runtimeValues, state, currentFiber);
         if (state.currentValue !== undefined) {
           applyState(state, clonedState);
-          renderOpcodesToString(rightOpcodes, runtimeValues, state);
+          renderOpcodesToString(rightOpcodes, runtimeValues, state, currentFiber);
         }
         break;
-      }
-      case UNCONDITIONAL_TEMPLATE: {
-        const templateOpcodes = opcodes[++index];
-        renderOpcodesToString(templateOpcodes, runtimeValues, state);
-        return;
       }
       case TEMPLATE_FROM_FUNC_CALL: {
         const templateOpcodes = opcodes[++index];
         const computeValuesPointer = opcodes[++index];
         const computeValues = runtimeValues[computeValuesPointer];
-        renderOpcodesToString(templateOpcodes, computeValues, state);
+        renderOpcodesToString(templateOpcodes, computeValues, state, currentFiber);
         break;
       }
       case REACT_NODE_TEMPLATE_FROM_FUNC_CALL: {
         const reactNodePointer = opcodes[++index];
         const reactNode = runtimeValues[reactNodePointer];
-        renderReactNodeToString(reactNode, false, runtimeValues, state);
+        renderReactNodeToString(reactNode, false, runtimeValues, state, currentFiber);
+        break;
+      }
+      case CONTEXT_CONSUMER: {
+        const reactContextObjectPointer = opcodes[++index];
+        const computeFunctionPointer = opcodes[++index];
+        const contextConsumerOpcodes = opcodes[++index];
+        const computeFunction = runtimeValues[computeFunctionPointer];
+        const reactContextObject = runtimeValues[reactContextObjectPointer];
+        const contextValue = getCurrentContextValue(reactContextObject, state);
+        const contextConsumerRuntimeValues = computeFunction(contextValue);
+        renderOpcodesToString(contextConsumerOpcodes, contextConsumerRuntimeValues, state, currentFiber);
         break;
       }
       case CONDITIONAL_TEMPLATE: {
         ++index; // Host node pointer index
         ++index; // Branch opcodes pointer index
-        let templateRuntimeValues = runtimeValues;
         const conditionBranchOpcodes = opcodes[++index];
+        if (runtimeValues === null) {
+          break;
+        }
+        let templateRuntimeValues = runtimeValues;
+        let branchIndex = 0;
         const conditionBranchOpcodesLength = conditionBranchOpcodes.length;
         const conditionBranchToUseKey = templateRuntimeValues[0];
-        let branchIndex = 0;
 
         while (branchIndex < conditionBranchOpcodesLength) {
           const branchConditionKey = conditionBranchOpcodes[branchIndex];
           if (branchConditionKey === conditionBranchToUseKey) {
             const templateOpcodes = conditionBranchOpcodes[++branchIndex];
-            return renderOpcodesToString(templateOpcodes, templateRuntimeValues, state);
+            renderOpcodesToString(templateOpcodes, templateRuntimeValues, state, currentFiber);
+            break;
           }
           branchIndex += 2;
         }
-        return null;
+        break;
       }
       case MULTI_CONDITIONAL: {
         const conditionalSize = opcodes[++index];
@@ -620,7 +634,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
           if (conditionalIndex === conditionalDefaultIndex) {
             const defaultCaseOpcodes = opcodes[++index];
             if (defaultCaseOpcodes !== null) {
-              renderOpcodesToString(defaultCaseOpcodes, runtimeValues, state);
+              renderOpcodesToString(defaultCaseOpcodes, runtimeValues, state, currentFiber);
             }
           } else {
             const caseConditionPointer = opcodes[++index];
@@ -628,7 +642,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
             if (caseConditionValue) {
               const caseOpcodes = opcodes[++index];
               if (caseOpcodes !== null) {
-                renderOpcodesToString(caseOpcodes, runtimeValues, state);
+                renderOpcodesToString(caseOpcodes, runtimeValues, state, currentFiber);
               }
               break;
             }
@@ -638,67 +652,46 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         index = startingIndex + (conditionalSize - 1) * 2 + 1;
         break;
       }
-      case TEMPLATE: {
-        const templateOpcodes = opcodes[++index];
-        if (runtimeValues === null) {
-          return null;
-        }
-        return renderOpcodesToString(templateOpcodes, runtimeValues, state);
-      }
       case COMPONENT: {
         const usesHooks = opcodes[++index];
-        let currentComponent = state.currentComponent;
-        const previousComponent = currentComponent;
-        if (currentComponent === null) {
+        let props;
+
+        // Handle root component props
+        if (currentFiber === null) {
           const rootPropsShape = opcodes[++index];
-          currentComponent = state.currentComponent = createRootComponent(state.rootPropsObject, rootPropsShape, false);
+          props = convertRootPropsToPropsArray(state.rootPropsObject, rootPropsShape);
         } else {
-          state.currentComponent = createComponent(state.propsArray, false);
+          props = state.props;
         }
         const computeFunction = opcodes[++index];
-        let templateRuntimeValues = runtimeValues;
+        const componentFiber = createOpcodeFiber(null, props, null);
+        let componentRuntimeValues = runtimeValues;
         if (computeFunction !== 0) {
-          ++index; // Value pointer index
           if (usesHooks === 1) {
-            prepareToUseHooks(currentComponent);
+            prepareToUseHooks(componentFiber);
           }
-          templateRuntimeValues = computeFunction.apply(null, state.currentComponent.props);
+          componentRuntimeValues = computeFunction.apply(null, props);
           if (usesHooks === 1) {
-            finishHooks(currentComponent);
+            finishHooks(componentFiber);
           }
         }
-        const creationOpcodes = opcodes[++index];
-        const previousValue = state.currentValue;
-        state.currentValue = undefined;
-        renderOpcodesToString(creationOpcodes, templateRuntimeValues, state);
-        const currentValue = state.currentValue;
-        if (currentValue !== null && currentValue !== undefined && currentValue !== ReactElementNode) {
-          state.renderString += escapeText(currentValue);
+        if (currentFiber === null) {
+          // Root
+          state.fiber = componentFiber;
+        } else {
+          insertChildFiberIntoParentFiber(currentFiber, componentFiber);
         }
-        state.currentValue = previousValue;
-        state.currentComponent = previousComponent;
-        return;
-      }
-      case CONTEXT_CONSUMER_UNCONDITIONAL_TEMPLATE: {
-        const reactContextObjectPointer = opcodes[++index];
-        const templateOpcodes = opcodes[++index];
-        const computeFunctionPointer = opcodes[++index];
-        let templateRuntimeValues = runtimeValues;
-        if (computeFunctionPointer !== null) {
-          const reactContextObject = runtimeValues[reactContextObjectPointer];
-          const contextValue = getCurrentContextValue(reactContextObject, state);
-          const computeFunction = runtimeValues[computeFunctionPointer];
-          templateRuntimeValues = computeFunction(contextValue);
+        if (componentRuntimeValues !== null) {
+          const creationOpcodes = opcodes[++index];
+          const previousValue = state.currentValue;
+          state.currentValue = undefined;
+          renderOpcodesToString(creationOpcodes, componentRuntimeValues, state, componentFiber);
+          const currentValue = state.currentValue;
+          if (currentValue !== null && currentValue !== undefined && currentValue !== ReactElementNode) {
+            state.renderString += escapeText(currentValue);
+          }
+          state.currentValue = previousValue;
         }
-        renderOpcodesToString(templateOpcodes, templateRuntimeValues, state);
-        break;
-      }
-      case CONTEXT_CONSUMER_CONDITIONAL_TEMPLATE: {
-        throw new Error("TODO CONTEXT_CONSUMER_CONDITIONAL_TEMPLATE");
-        break;
-      }
-      case CONTEXT_CONSUMER_TEMPLATE: {
-        throw new Error("TODO CONTEXT_CONSUMER_TEMPLATE");
         break;
       }
       case OPEN_CONTEXT_PROVIDER: {
@@ -731,7 +724,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
         const dynamicValuePointer = opcodes[++index];
         let value = runtimeValues[dynamicValuePointer];
         if (isReactNode(value)) {
-          value = renderReactNodeToString(value, false, runtimeValues, state);
+          value = renderReactNodeToString(value, false, runtimeValues, state, currentFiber);
         } else {
           state.currentValue = value;
         }
@@ -754,7 +747,7 @@ function renderNode(node) {
     const { props, type } = node;
     // We use a constructor for better hidden-class performance
     const state = createState(props);
-    renderOpcodesToString(type, emptyArray, state);
+    renderOpcodesToString(type, emptyArray, state, null);
     const currentValue = state.currentValue;
     if (currentValue !== null && currentValue !== undefined && currentValue !== ReactElementNode) {
       state.renderString += escapeText(currentValue);

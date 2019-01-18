@@ -181,7 +181,6 @@ export function getComponentName(componentPath) {
   if (t.isVariableDeclarator(parentPath.node) && t.isIdentifier(parentPath.node.id)) {
     return parentPath.node.id.name;
   }
-  debugger;
   invariant(false, "TODO");
 }
 
@@ -414,8 +413,8 @@ export function optimizedEscapeAttributeValue(text) {
 }
 
 export function isOpcodesTemplateFromFuncCall(opcodes) {
-  // 24 is TEMPLATE_FROM_FUNC_CALL
-  return opcodes.length > 1 && t.isNumericLiteral(opcodes[0]) && opcodes[0].value === 24;
+  // 23 is TEMPLATE_FROM_FUNC_CALL
+  return opcodes.length > 1 && t.isNumericLiteral(opcodes[0]) && opcodes[0].value === 23;
 }
 
 export function markNodeAsDCE(node) {

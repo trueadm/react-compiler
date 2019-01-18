@@ -36,17 +36,14 @@ let renderPhaseUpdates = null;
 let numberOfReRenders = 0;
 const RE_RENDER_LIMIT = 25;
 
-export function renderWithHooks(
+export function callComputeFunctionWithHooks(
   current: Fiber | null,
-  workInProgress: Fiber,
   Component: any,
   props: any,
   refOrContext: any,
   nextRenderExpirationTime: ExpirationTime,
 ): any {
-  if (!enableHooks) {
-    return Component(props, refOrContext);
-  }
+  // TODO
 }
 
 function resolveCurrentlyRenderingFiber() {

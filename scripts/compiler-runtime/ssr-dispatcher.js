@@ -1,13 +1,13 @@
 let firstWorkInProgressHook = null;
-let currentlyRenderingComponent = null;
+let currentlyRenderingFiber = null;
 let isReRender = false;
 let workInProgressHook = null;
 
-function resolveCurrentlyRenderingComponent() {
-  if (currentlyRenderingComponent === null) {
+function resolveCurrentlyRenderingFiber() {
+  if (currentlyRenderingFiber === null) {
     throw new Error("Hooks can only be called inside the body of a function component.");
   }
-  return currentlyRenderingComponent;
+  return currentlyRenderingFiber;
 }
 
 function createHook() {
@@ -48,7 +48,7 @@ function basicStateReducer(state, action) {
 }
 
 function useReducer(reducer, initialState, initialAction) {
-  currentlyRenderingComponent = resolveCurrentlyRenderingComponent();
+  resolveCurrentlyRenderingFiber();
   workInProgressHook = createWorkInProgressHook();
   if (isReRender) {
     throw new Error("TODO");
@@ -73,13 +73,13 @@ function useState(initialState) {
   return useReducer(basicStateReducer, initialState);
 }
 
-export function prepareToUseHooks(componentIdentity) {
-  currentlyRenderingComponent = componentIdentity;
+export function prepareToUseHooks(currentFiber) {
+  currentlyRenderingFiber = currentFiber;
 }
 
 export function finishHooks() {
   firstWorkInProgressHook = null;
-  currentlyRenderingComponent = null;
+  currentlyRenderingFiber = null;
   isReRender = false;
   workInProgressHook = null;
 }

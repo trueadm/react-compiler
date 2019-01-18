@@ -40,7 +40,7 @@ function createOpcodesForTemplateBranch(
 
   createOpcodesForNode(path, refPath, opcodes, childState, componentPath, true, processNodeValueFunc);
 
-  const isStatic = runtimeValues.size === 0;
+  const isStatic = runtimeValues.size === 0 && templateBranch.isConditional === false;
   // replace branch with values array
   const runtimeValuesArray = [];
   for (let [runtimeValue, { index }] of runtimeValues) {
@@ -72,16 +72,10 @@ function createOpcodesForTemplateBranches(
   computeFunction,
   state,
   functionPath,
-  contextObjectRuntimeValueIndex,
   processNodeValueFunc,
 ) {
   if (templateBranches.length === 1) {
     const templateBranch = templateBranches[0];
-    if (contextObjectRuntimeValueIndex !== null) {
-      pushOpcode(opcodes, "CONTEXT_CONSUMER_UNCONDITIONAL_TEMPLATE", contextObjectRuntimeValueIndex);
-    } else {
-      pushOpcode(opcodes, "UNCONDITIONAL_TEMPLATE");
-    }
     const [opcodesForTemplateBranch, isBranchStatic] = createOpcodesForTemplateBranch(
       templateBranch,
       null,
@@ -89,7 +83,7 @@ function createOpcodesForTemplateBranches(
       functionPath,
       processNodeValueFunc,
     );
-    pushOpcodeValue(opcodes, normalizeOpcodes(opcodesForTemplateBranch));
+    opcodes.push(...opcodesForTemplateBranch);
     return isBranchStatic;
   } else {
     // Check how many non primitive roots we have
@@ -99,11 +93,6 @@ function createOpcodesForTemplateBranches(
       // Optimization path, for where all roots, but one, are primitives. We don't need
       // to use a conditional root return.
       const templateBranch = nonPrimitiveRoots[0];
-      if (contextObjectRuntimeValueIndex !== null) {
-        pushOpcode(opcodes, "CONTEXT_CONSUMER_TEMPLATE", contextObjectRuntimeValueIndex);
-      } else {
-        pushOpcode(opcodes, "TEMPLATE");
-      }
       const [opcodesForTemplateBranch, isBranchStatic] = createOpcodesForTemplateBranch(
         templateBranch,
         null,
@@ -111,16 +100,12 @@ function createOpcodesForTemplateBranches(
         functionPath,
         processNodeValueFunc,
       );
-      pushOpcodeValue(opcodes, normalizeOpcodes(opcodesForTemplateBranch));
+      opcodes.push(...opcodesForTemplateBranch);
       return isBranchStatic;
     } else {
       const opcodesTemplate = [];
       const opcodesForTemplateBranches = [];
-      if (contextObjectRuntimeValueIndex !== null) {
-        pushOpcode(opcodesTemplate, "CONTEXT_CONSUMER_CONDITIONAL_TEMPLATE", contextObjectRuntimeValueIndex);
-      } else {
-        pushOpcode(opcodesTemplate, "CONDITIONAL_TEMPLATE");
-      }
+      pushOpcode(opcodesTemplate, "CONDITIONAL_TEMPLATE");
       const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
       pushOpcodeValue(opcodesTemplate, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
       const reconcilerValueIndexForBranchMountOpcodes = state.reconciler.valueIndex++;
@@ -219,19 +204,16 @@ export function createOpcodesForReactComputeFunction(
     computeFunction,
     childState,
     functionPath,
-    contextObjectRuntimeValueIndex,
     processNodeValueFunc,
   );
 
-  let computeFunctionOpcodes;
+  let computeFunctionOpcodes = null;
   if (isComponentFunction) {
     computeFunctionOpcodes = [];
     if (isStatic) {
       pushOpcodeValue(computeFunctionOpcodes, t.numericLiteral(0), "COMPUTE_FUNCTION");
     } else {
       pushOpcodeValue(computeFunctionOpcodes, t.identifier(getComponentName(functionPath)), "COMPUTE_FUNCTION");
-      const reconcilerValueIndex = state.reconciler.valueIndex++;
-      pushOpcodeValue(computeFunctionOpcodes, reconcilerValueIndex, "VALUE_POINTER_INDEX");
     }
   }
 
