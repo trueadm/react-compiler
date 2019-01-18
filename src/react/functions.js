@@ -72,7 +72,6 @@ function createOpcodesForTemplateBranches(
   computeFunction,
   state,
   functionPath,
-  emitComputeFunctionOpcode,
   contextObjectRuntimeValueIndex,
   processNodeValueFunc,
 ) {
@@ -91,13 +90,6 @@ function createOpcodesForTemplateBranches(
       processNodeValueFunc,
     );
     pushOpcodeValue(opcodes, normalizeOpcodes(opcodesForTemplateBranch));
-    if (!emitComputeFunctionOpcode || isBranchStatic) {
-      pushOpcodeValue(opcodes, t.numericLiteral(0), "COMPUTE_FUNCTION");
-    } else {
-      pushOpcodeValue(opcodes, t.identifier(getComponentName(functionPath)), "COMPUTE_FUNCTION");
-      const reconcilerValueIndex = state.reconciler.valueIndex++;
-      pushOpcodeValue(opcodes, reconcilerValueIndex, "VALUE_POINTER_INDEX");
-    }
     return isBranchStatic;
   } else {
     // Check how many non primitive roots we have
@@ -120,17 +112,6 @@ function createOpcodesForTemplateBranches(
         processNodeValueFunc,
       );
       pushOpcodeValue(opcodes, normalizeOpcodes(opcodesForTemplateBranch));
-      if (!emitComputeFunctionOpcode || isBranchStatic) {
-        pushOpcodeValue(opcodes, t.numericLiteral(0), "COMPUTE_FUNCTION");
-      } else {
-        if (computeFunction.id == null) {
-          throw new Error("TODO");
-        } else {
-          pushOpcodeValue(opcodes, computeFunction.id, "COMPUTE_FUNCTION");
-          const reconcilerValueIndex = state.reconciler.valueIndex++;
-          pushOpcodeValue(opcodes, reconcilerValueIndex, "VALUE_POINTER_INDEX");
-        }
-      }
       return isBranchStatic;
     } else {
       const opcodesTemplate = [];
@@ -164,17 +145,6 @@ function createOpcodesForTemplateBranches(
           templateBranchIndex++;
         }
       }
-      if (!emitComputeFunctionOpcode || isStatic) {
-        pushOpcodeValue(opcodesTemplate, t.numericLiteral(0), "COMPUTE_FUNCTION");
-      } else {
-        if (computeFunction.id == null) {
-          throw new Error("TODO");
-        } else {
-          pushOpcodeValue(opcodesTemplate, computeFunction.id, "COMPUTE_FUNCTION");
-          const reconcilerValueIndex = state.reconciler.valueIndex++;
-          pushOpcodeValue(opcodesTemplate, reconcilerValueIndex, "VALUE_POINTER_INDEX");
-        }
-      }
       if (!isStatic) {
         const mergedOpcodes = [...opcodesTemplate, normalizeOpcodes(opcodesForTemplateBranches)];
         opcodes.push(...mergedOpcodes);
@@ -187,7 +157,7 @@ function createOpcodesForTemplateBranches(
 export function createOpcodesForReactComputeFunction(
   functionPath,
   state,
-  emitComputeFunctionOpcode,
+  isComponentFunction,
   contextObjectRuntimeValueIndex,
   processNodeValueFunc,
 ) {
@@ -195,12 +165,11 @@ export function createOpcodesForReactComputeFunction(
   if (state.computeFunctionCache.has(computeFunction)) {
     return state.computeFunctionCache.get(computeFunction);
   }
-  if (emitComputeFunctionOpcode) {
+  if (isComponentFunction) {
     updateComputeFunctionName(functionPath);
   }
 
   const templateBranches = [];
-  const opcodes = [];
   const runtimeConditionals = new Map();
   const runtimeCachedValues = new Map();
   let previousRootWasConditional = false;
@@ -243,29 +212,43 @@ export function createOpcodesForReactComputeFunction(
       runtimeConditionals,
     },
   };
+  const templateOpcodes = [];
   const isStatic = createOpcodesForTemplateBranches(
     templateBranches,
-    opcodes,
+    templateOpcodes,
     computeFunction,
     childState,
     functionPath,
-    emitComputeFunctionOpcode,
     contextObjectRuntimeValueIndex,
     processNodeValueFunc,
   );
 
+  let computeFunctionOpcodes;
+  if (isComponentFunction) {
+    computeFunctionOpcodes = [];
+    if (isStatic) {
+      pushOpcodeValue(computeFunctionOpcodes, t.numericLiteral(0), "COMPUTE_FUNCTION");
+    } else {
+      pushOpcodeValue(computeFunctionOpcodes, t.identifier(getComponentName(functionPath)), "COMPUTE_FUNCTION");
+      const reconcilerValueIndex = state.reconciler.valueIndex++;
+      pushOpcodeValue(computeFunctionOpcodes, reconcilerValueIndex, "VALUE_POINTER_INDEX");
+    }
+  }
+
   state.computeFunctionCache.set(computeFunction, {
-    opcodes,
-    isStatic,
     cachedOpcodes: null,
+    computeFunctionOpcodes,
+    isStatic,
+    templateOpcodes,
   });
 
   applyCachedRuntimeValues(functionPath, runtimeCachedValues);
 
   return {
-    opcodes,
-    isStatic,
     cachedOpcodes: null,
+    computeFunctionOpcodes,
+    isStatic,
+    templateOpcodes,
   };
 }
 
@@ -318,7 +301,7 @@ export function createOpcodesForReactFunctionComponent(componentPath, state) {
   pushOpcode(opcodes, "COMPONENT");
   pushOpcodeValue(opcodes, doesFunctionComponentUseHooks(componentPath, state) ? 1 : 0, "USES_HOOKS");
 
-  const { opcodes: computeFunctionOpcodes, isStatic } = createOpcodesForReactComputeFunction(
+  const { computeFunctionOpcodes, isStatic, templateOpcodes } = createOpcodesForReactComputeFunction(
     componentPath,
     state,
     true,
@@ -338,7 +321,8 @@ export function createOpcodesForReactFunctionComponent(componentPath, state) {
       pushOpcodeValue(opcodes, t.numericLiteral(0), "ROOT_PROPS_SHAPE");
     }
   }
-  pushOpcodeValue(opcodes, t.arrayExpression(computeFunctionOpcodes));
+  opcodes.push(...computeFunctionOpcodes);
+  pushOpcodeValue(opcodes, t.arrayExpression(templateOpcodes));
 
   const opcodesArray = normalizeOpcodes(opcodes);
   opcodesArray.leadingComments = [{ type: "BlockComment", value: ` ${name} OPCODES` }];

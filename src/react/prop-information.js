@@ -3,16 +3,20 @@ import invariant from "../invariant";
 
 const PropFlagPartialTemplate = 1;
 const PropFlagReactEvent = 1 << 1; // starts with on
-const PropFlagReserved = 1 << 2;
-const PropFlagString = 1 << 3;
-const PropFlagBooleanishString = 1 << 4;
-const PropFlagBoolean = 1 << 5;
-const PropFlagOverloadedBoolean = 1 << 6;
-const PropFlagNumeric = 1 << 6;
-const PropFlagPositiveNumeric = 1 << 7;
-const PropFlagMustUseProperty = 1 << 8;
-const PropFlagXlinkNamespace = 1 << 9;
-const PropFlagXmlNamespace = 1 << 10;
+const PropFlagReactCapturedEvent = 1 << 2;
+const PropFlagReserved = 1 << 3;
+const PropFlagString = 1 << 4;
+const PropFlagBooleanishString = 1 << 5;
+const PropFlagBoolean = 1 << 6;
+const PropFlagOverloadedBoolean = 1 << 7;
+const PropFlagNumeric = 1 << 8;
+const PropFlagPositiveNumeric = 1 << 9;
+const PropFlagMustUseProperty = 1 << 10;
+// const PropFlagXlinkNamespace = 1 << 9;
+// const PropFlagXmlNamespace = 1 << 10;
+
+const EventFlagBubbles = 1;
+const EventFlagTwoPhase = 1 << 1;
 
 const reservedProps = new Set([
   "children",
@@ -213,6 +217,25 @@ export const isUnitlessNumber = new Set([
   "strokeWidth",
 ]);
 
+const eventPropsToEventNames = new Map([
+  [
+    "onClick",
+    {
+      catpuredEvent: false,
+      propNameToUse: "click",
+      eventInformationFlag: EventFlagBubbles | EventFlagTwoPhase,
+    },
+  ],
+  [
+    "onClickCapture",
+    {
+      catpuredEvent: true,
+      propNameToUse: "click",
+      eventInformationFlag: EventFlagBubbles | EventFlagTwoPhase,
+    },
+  ],
+]);
+
 function isReactEvent(name) {
   if (name.length > 2 && (name[0] === "o" || name[0] === "O") && (name[1] === "n" || name[1] === "N")) {
     return true;
@@ -223,12 +246,25 @@ function isReactEvent(name) {
 export function getPropInformation(propName, isPartialTemplate) {
   let propInformationFlag = 0;
   let propNameToUse = propName;
+  let eventInformationFlag = null;
 
   if (isPartialTemplate) {
     propInformationFlag = propInformationFlag | PropFlagPartialTemplate;
   }
   if (isReactEvent(propName)) {
+    const propData = eventPropsToEventNames.get(propNameToUse);
+
     propInformationFlag = propInformationFlag | PropFlagReactEvent;
+    if (propData !== undefined) {
+      eventInformationFlag = propData.eventInformationFlag;
+      propNameToUse = propData.propNameToUse;
+      if (propData.catpuredEvent) {
+        propInformationFlag = propInformationFlag | PropFlagReactCapturedEvent;
+      }
+    } else {
+      eventInformationFlag = 0;
+      propNameToUse = propName;
+    }
   }
   if (reservedProps.has(propName)) {
     propInformationFlag = propInformationFlag | PropFlagReserved;
@@ -262,7 +298,7 @@ export function getPropInformation(propName, isPartialTemplate) {
     propNameToUse = propName.toLowerCase();
   }
 
-  return [propNameToUse, propInformationFlag];
+  return [propNameToUse, propInformationFlag, eventInformationFlag];
 }
 
 export function transformStaticOpcodes(opcodes, propInformation) {

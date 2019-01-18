@@ -134,13 +134,6 @@ function renderValueToString(value, state, isChild) {
   }
 }
 
-function renderDynamicAttributeValue(propName, propInformation, value) {
-  if (propInformation & PropFlagReactEvent) {
-    return "";
-  }
-  return ` ${propName}="${value}"`;
-}
-
 function renderElementCloseRenderString(state) {
   if (state.currentElementTagIsOpen === true) {
     state.renderString += state.elementCloseRenderString;
@@ -205,8 +198,11 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
 
         if (propInformation & PropFlagPartialTemplate) {
           throw new Error("TODO renderStaticProp");
+        } else if (propInformation & PropFlagReactEvent) {
+          ++index; // Event data
+          state.renderString += "";
         } else if (dynamicPropValue !== null && dynamicPropValue !== undefined) {
-          state.renderString += renderDynamicAttributeValue(propName, propInformation, dynamicPropValue);
+          state.renderString += ` ${propName}="${dynamicPropValue}"`;
         }
         break;
       }
@@ -579,14 +575,7 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
       }
       case UNCONDITIONAL_TEMPLATE: {
         const templateOpcodes = opcodes[++index];
-        const computeFunction = opcodes[++index];
-        let templateRuntimeValues = runtimeValues;
-        // TODO try passing individual props if array is small enough, using array spread?
-        // Array.prototype.apply is not as fast as normal function calls typically.
-        if (computeFunction !== 0) {
-          templateRuntimeValues = computeFunction.apply(null, state.currentComponent.props);
-        }
-        renderOpcodesToString(templateOpcodes, templateRuntimeValues, state);
+        renderOpcodesToString(templateOpcodes, runtimeValues, state);
         return;
       }
       case TEMPLATE_FROM_FUNC_CALL: {
@@ -604,18 +593,8 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
       }
       case CONDITIONAL_TEMPLATE: {
         ++index; // Host node pointer index
-        ++index; // Barnch opcodes pointer index
-        const computeFunction = opcodes[++index];
+        ++index; // Branch opcodes pointer index
         let templateRuntimeValues = runtimeValues;
-        // TODO try passing individual props if array is small enough, using array spread?
-        // Array.prototype.apply is not as fast as normal function calls typically.
-        if (computeFunction !== 0) {
-          ++index; // Values pointer index
-          templateRuntimeValues = computeFunction.apply(null, state.currentComponent.props);
-          if (templateRuntimeValues === null) {
-            return null;
-          }
-        }
         const conditionBranchOpcodes = opcodes[++index];
         const conditionBranchOpcodesLength = conditionBranchOpcodes.length;
         const conditionBranchToUseKey = templateRuntimeValues[0];
@@ -661,38 +640,37 @@ function renderOpcodesToString(opcodes, runtimeValues, state) {
       }
       case TEMPLATE: {
         const templateOpcodes = opcodes[++index];
-        const computeFunction = opcodes[++index];
-        let templateRuntimeValuesOrNull;
-        // TODO try passing individual props if array is small enough, using array spread?
-        // Array.prototype.apply is not as fast as normal function calls typically.
-        if (computeFunction !== 0) {
-          templateRuntimeValuesOrNull = computeFunction.apply(null, state.currentComponent.props);
-        }
-        if (templateRuntimeValuesOrNull === null) {
+        if (runtimeValues === null) {
           return null;
         }
-        return renderOpcodesToString(templateOpcodes, templateRuntimeValuesOrNull, state);
+        return renderOpcodesToString(templateOpcodes, runtimeValues, state);
       }
       case COMPONENT: {
+        const usesHooks = opcodes[++index];
         let currentComponent = state.currentComponent;
         const previousComponent = currentComponent;
-        const usesHooks = opcodes[++index];
         if (currentComponent === null) {
           const rootPropsShape = opcodes[++index];
           currentComponent = state.currentComponent = createRootComponent(state.rootPropsObject, rootPropsShape, false);
         } else {
           state.currentComponent = createComponent(state.propsArray, false);
         }
+        const computeFunction = opcodes[++index];
+        let templateRuntimeValues = runtimeValues;
+        if (computeFunction !== 0) {
+          ++index; // Value pointer index
+          if (usesHooks === 1) {
+            prepareToUseHooks(currentComponent);
+          }
+          templateRuntimeValues = computeFunction.apply(null, state.currentComponent.props);
+          if (usesHooks === 1) {
+            finishHooks(currentComponent);
+          }
+        }
         const creationOpcodes = opcodes[++index];
         const previousValue = state.currentValue;
         state.currentValue = undefined;
-        if (usesHooks === 1) {
-          prepareToUseHooks(currentComponent);
-        }
-        renderOpcodesToString(creationOpcodes, runtimeValues, state);
-        if (usesHooks === 1) {
-          finishHooks(currentComponent);
-        }
+        renderOpcodesToString(creationOpcodes, templateRuntimeValues, state);
         const currentValue = state.currentValue;
         if (currentValue !== null && currentValue !== undefined && currentValue !== ReactElementNode) {
           state.renderString += escapeText(currentValue);

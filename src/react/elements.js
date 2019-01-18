@@ -90,16 +90,10 @@ function createOpcodesForArrayMapTemplate(childPath, opcodes, state, componentPa
   }
 
   const mapFunctionPath = getReferenceFromExpression(args[0], state);
-  const { opcodes: arrayMapOpcodes, isStatic } = createOpcodesForReactComputeFunction(
-    mapFunctionPath,
-    state,
-    false,
-    null,
-    null,
-  );
+  const { isStatic, templateOpcodes } = createOpcodesForReactComputeFunction(mapFunctionPath, state, false, null, null);
   const arrayRuntimeValuePointer = getRuntimeValueIndex(arrayPath.node, state);
   pushOpcodeValue(opcodes, arrayRuntimeValuePointer);
-  pushOpcodeValue(opcodes, normalizeOpcodes(arrayMapOpcodes), "ARRAY_MAP_OPCODES");
+  pushOpcodeValue(opcodes, normalizeOpcodes(templateOpcodes), "ARRAY_MAP_OPCODES");
   if (isStatic) {
     pushOpcodeValue(opcodes, t.numericLiteral(0), "ARRAY_MAP_COMPUTE_FUNCTION");
   } else {
@@ -189,7 +183,7 @@ function createOpcodesForReactElementHostNodePropValue(
     attributeOpcodes = extractedOpcodes;
     isPartialTemplate = true;
   }
-  const [propName, propInformation] = getPropInformation(propNameStr, isPartialTemplate);
+  const [propName, propInformation, eventInformation] = getPropInformation(propNameStr, isPartialTemplate);
 
   // Static vs dynamic
   if (!isPartialTemplate && runtimeValueHash === getRuntimeValueHash(state)) {
@@ -234,7 +228,17 @@ function createOpcodesForReactElementHostNodePropValue(
     } else if (propNameStr === "ref") {
       pushOpcode(opcodes, "DYNAMIC_PROP_REF", [propInformationLiteral, ...attributeOpcodes]);
     } else {
-      pushOpcode(opcodes, "DYNAMIC_PROP", [propName, propInformationLiteral, ...attributeOpcodes]);
+      if (eventInformation !== null) {
+        const eventInformationLiteral = t.numericLiteral(eventInformation);
+        pushOpcode(opcodes, "DYNAMIC_PROP", [
+          propName,
+          propInformationLiteral,
+          eventInformationLiteral,
+          ...attributeOpcodes,
+        ]);
+      } else {
+        pushOpcode(opcodes, "DYNAMIC_PROP", [propName, propInformationLiteral, ...attributeOpcodes]);
+      }
       state.dynamicHostNodesId.add(hostNodeId);
     }
   }
@@ -785,14 +789,8 @@ function createPropTemplateForArrayExpression(pathRef, state, componentPath) {
 
 function createPropTemplateForCallExpression(path, pathRef, state, componentPath) {
   const calleePath = getReferenceFromExpression(pathRef.get("callee"), state);
-  const { opcodes: computeFunctionOpcodes, isStatic } = createOpcodesForReactComputeFunction(
-    calleePath,
-    state,
-    false,
-    null,
-    null,
-  );
-  const hoistedOpcodes = hoistOpcodesNode(componentPath, state, normalizeOpcodes(computeFunctionOpcodes));
+  const { isStatic, templateOpcodes } = createOpcodesForReactComputeFunction(calleePath, state, false, null, null);
+  const hoistedOpcodes = hoistOpcodesNode(componentPath, state, normalizeOpcodes(templateOpcodes));
 
   state.helpers.add("createReactNode");
   if (isStatic) {
@@ -811,14 +809,8 @@ function createPropTemplateForFunctionExpression(pathRef, state, componentPath) 
       moveOutFunctionFromTemplate(pathRef);
     }
   }
-  const { opcodes: computeFunctionOpcodes, isStatic } = createOpcodesForReactComputeFunction(
-    pathRef,
-    state,
-    false,
-    null,
-    null,
-  );
-  const hoistedOpcodes = hoistOpcodesNode(componentPath, state, normalizeOpcodes(computeFunctionOpcodes));
+  const { isStatic, templateOpcodes } = createOpcodesForReactComputeFunction(pathRef, state, false, null, null);
+  const hoistedOpcodes = hoistOpcodesNode(componentPath, state, normalizeOpcodes(templateOpcodes));
 
   state.helpers.add("createReactNode");
   if (isStatic) {

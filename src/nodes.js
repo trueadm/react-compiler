@@ -137,19 +137,16 @@ function createOpcodesForCallExpressionReturningTemplateNodes(
     return;
   }
   const name = getComponentName(calleePath);
-  const { opcodes: computeFunctionOpcodes, isStatic, cachedOpcodes } = createOpcodesForReactComputeFunction(
+  const { isStatic, cachedOpcodes, templateOpcodes } = createOpcodesForReactComputeFunction(
     calleePath,
     state,
     false,
     null,
     processNodeValueFunc,
   );
+
   if (isStatic) {
-    // TODO we might want to us a TEMPLATE_FROM_FUNC_CALL if this static computed
-    // function occurs more than once, to remove code size.
-    const extractedOpcodes = computeFunctionOpcodes[1].elements;
-    // We need to account for the first 2 entries being the spaces for update/unmount opcodes arrays
-    opcodes.push(...extractedOpcodes);
+    opcodes.push(...templateOpcodes);
   } else {
     if (state.externalPathRefs.has(calleePath)) {
       const pathRef = state.externalPathRefs.get(calleePath);
@@ -166,10 +163,11 @@ function createOpcodesForCallExpressionReturningTemplateNodes(
       const moduleState = calleePath.moduleState;
       moduleState.needsCompiling();
     }
+    pushOpcode(opcodes, "TEMPLATE_FROM_FUNC_CALL");
     let cachedOpcodesNode;
 
     if (cachedOpcodes === null) {
-      const opcodesArray = normalizeOpcodes(computeFunctionOpcodes);
+      const opcodesArray = normalizeOpcodes(templateOpcodes);
       opcodesArray.leadingComments = [{ type: "BlockComment", value: ` ${name} OPCODES` }];
       const computeFunctionCache = state.computeFunctionCache;
       cachedOpcodesNode = t.identifier("__opcodes__" + (computeFunctionCache.size - 1));
@@ -180,7 +178,7 @@ function createOpcodesForCallExpressionReturningTemplateNodes(
     } else {
       cachedOpcodesNode = cachedOpcodes.node;
     }
-    pushOpcode(opcodes, "TEMPLATE_FROM_FUNC_CALL", cachedOpcodesNode);
+    pushOpcodeValue(opcodes, cachedOpcodesNode, "OPCODES");
     const childNode = childRefPath.node;
     const node = getCachedRuntimeValue(childNode, state);
     const runtimeValuePointer = getRuntimeValueIndex(node, state);

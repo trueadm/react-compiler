@@ -36,20 +36,17 @@ let renderPhaseUpdates = null;
 let numberOfReRenders = 0;
 const RE_RENDER_LIMIT = 25;
 
-export function prepareToUseHooks(workInProgress, nextRenderExpirationTime) {
-  renderExpirationTime = nextRenderExpirationTime;
-  currentlyRenderingFiber = workInProgress;
-  firstCurrentHook = workInProgress.memoizedState;
-}
-
-export function finishHooks() {
-  renderExpirationTime = NoWork;
-  currentlyRenderingFiber = null;
-
-  firstCurrentHook = null;
-  currentHook = null;
-  firstWorkInProgressHook = null;
-  workInProgressHook = null;
+export function renderWithHooks(
+  current: Fiber | null,
+  workInProgress: Fiber,
+  Component: any,
+  props: any,
+  refOrContext: any,
+  nextRenderExpirationTime: ExpirationTime,
+): any {
+  if (!enableHooks) {
+    return Component(props, refOrContext);
+  }
 }
 
 function resolveCurrentlyRenderingFiber() {

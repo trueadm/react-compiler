@@ -181,6 +181,7 @@ export function getComponentName(componentPath) {
   if (t.isVariableDeclarator(parentPath.node) && t.isIdentifier(parentPath.node.id)) {
     return parentPath.node.id.name;
   }
+  debugger;
   invariant(false, "TODO");
 }
 

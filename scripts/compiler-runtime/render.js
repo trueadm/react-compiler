@@ -1,5 +1,5 @@
 import { currentDispatcher } from "./index";
-import { Dispatcher, finishHooks, prepareToUseHooks } from "./dom-dispatcher";
+import { Dispatcher, renderWithHooks } from "./dom-dispatcher";
 import {
   convertRootPropsToPropsArray,
   createComponent,
@@ -14,6 +14,12 @@ const rootStates = new Map();
 const mountOpcodesToUpdateOpcodes = new Map();
 const mountOpcodesToUnmountOpcodes = new Map();
 const componentOpcodeCache = new Map();
+
+// const ELEMENT_NODE = 1;
+const TEXT_NODE = 3;
+// const COMMENT_NODE = 8;
+// const DOCUMENT_NODE = 9;
+// const DOCUMENT_FRAGMENT_NODE = 11;
 
 const OPEN_ELEMENT = 0;
 const OPEN_ELEMENT_WITH_POINTER = 1;
@@ -71,6 +77,13 @@ const DYNAMIC_PROP_REF = 52;
 
 const PropFlagPartialTemplate = 1;
 const PropFlagReactEvent = 1 << 1; // starts with on
+const PropFlagReactCapturedEvent = 1 << 2;
+
+const EventFlagBubbles = 1;
+const EventFlagTwoPhase = 1 << 1;
+
+const hostNodeEventListeners = new WeakMap();
+const hostNodeRegisteredEventCallbacks = new WeakMap();
 
 function createPlaceholderNode() {
   return document.createTextNode("");
@@ -82,6 +95,78 @@ function createElement(tagName) {
 
 function createTextNode(text) {
   return document.createTextNode(text);
+}
+
+function getEventTarget(nativeEvent) {
+  // Fallback to nativeEvent.srcElement for IE9
+  // https://github.com/facebook/react/issues/12506
+  let target = nativeEvent.target || nativeEvent.srcElement || window;
+
+  // Normalize SVG <use> element events #4963
+  if (target.correspondingUseElement) {
+    target = target.correspondingUseElement;
+  }
+
+  // Safari may fire events on text nodes (Node.TEXT_NODE is 3).
+  // @see http://www.quirksmode.org/js/events_properties.html
+  return target.nodeType === TEXT_NODE ? target.parentNode : target;
+}
+
+function listenToEvent(state, eventName, eventInformation) {
+  const rootHostNode = state.fiber.hostNode;
+  let registeredEvents = hostNodeEventListeners.get(rootHostNode);
+
+  if (registeredEvents === undefined) {
+    registeredEvents = new Map();
+    hostNodeEventListeners.set(rootHostNode, registeredEvents);
+  }
+  rootHostNode.addEventListener(
+    eventName,
+    proxyEvent.bind(null, eventName, eventInformation),
+    eventInformation & EventFlagBubbles,
+  );
+}
+
+function proxyEvent(eventName, eventInformation, nativeEvent) {
+  const eventTarget = getEventTarget(nativeEvent);
+  const path = [];
+  let domNode = eventTarget;
+
+  while (domNode !== null) {
+    if (hostNodeRegisteredEventCallbacks.has(domNode)) {
+      path.push(domNode);
+    }
+    domNode = domNode.parentNode;
+  }
+  const pathLength = path.length;
+
+  if (pathLength > 0 && eventInformation & EventFlagTwoPhase) {
+    let i;
+    // eslint-disable-next-line space-in-parens
+    for (i = pathLength; i-- > 0; ) {
+      dispatchEventCallback(eventName + "-captured", path[i], nativeEvent);
+    }
+    for (i = 0; i < pathLength; i++) {
+      dispatchEventCallback(eventName, path[i], nativeEvent);
+    }
+  }
+}
+
+function dispatchEventCallback(dispatchEventName, domNode, nativeEvent) {
+  const registeredEventCallbacks = hostNodeRegisteredEventCallbacks.get(domNode);
+  const eventCallback = registeredEventCallbacks.get(dispatchEventName);
+  if (eventCallback !== undefined) {
+    eventCallback(nativeEvent);
+  }
+}
+
+function registerEventCallbackForHostNode(hostNode, eventName, eventCallback, capturedEvent) {
+  let registeredEventCallbacks = hostNodeRegisteredEventCallbacks.get(hostNode);
+  if (registeredEventCallbacks === undefined) {
+    registeredEventCallbacks = new Map();
+    hostNodeRegisteredEventCallbacks.set(hostNode, registeredEventCallbacks);
+  }
+  registeredEventCallbacks.set(capturedEvent ? eventName + "-captured" : eventName, eventCallback);
 }
 
 function removeChild(parent, child) {
@@ -129,6 +214,9 @@ function callComputeFunctionWithArray(computeFunction, arr) {
 
 function openElement(elem, state, workInProgress) {
   const currentHostNode = state.currentHostNode;
+  if (workInProgress.hostNode === null) {
+    workInProgress.hostNode = elem;
+  }
   if (currentHostNode !== null) {
     const stackIndex = state.currentHostNodeStackIndex++;
     state.currentHostNodeStack[stackIndex] = state.currentHostNode;
@@ -238,13 +326,24 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
       case DYNAMIC_PROP: {
         const propName = mountOpcodes[++index];
         const propInformation = mountOpcodes[++index];
+        let eventInformation;
+
+        if (propInformation & PropFlagReactEvent) {
+          eventInformation = mountOpcodes[++index];
+        }
         const dynamicPropValuePointer = mountOpcodes[++index];
         const dynamicPropValue = runtimeValues[dynamicPropValuePointer];
 
         if (propInformation & PropFlagPartialTemplate) {
           throw new Error("TODO DYNAMIC_PROP");
-        } else if (propInformation & PropFlagReactEvent) {
-          // TODO
+        } else if (eventInformation !== undefined) {
+          listenToEvent(state, propName, eventInformation);
+          registerEventCallbackForHostNode(
+            state.currentHostNode,
+            propName,
+            dynamicPropValue,
+            propInformation & PropFlagReactCapturedEvent,
+          );
         } else if (dynamicPropValue !== null && dynamicPropValue !== undefined) {
           state.currentHostNode.setAttribute(propName, dynamicPropValue);
         }
@@ -654,7 +753,11 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
           state.propsArray = null;
         }
         const componentMountOpcodes = mountOpcodes[++index];
-        const componentFiber = new OpcodeFiber(null, []);
+        const computeFunction = mountOpcodes[++index];
+        if (computeFunction !== 0) {
+          
+        }
+        const componentFiber = createOpcodeFiber(null, []);
         if (shouldCreateOpcodes === true) {
           updateOpcodes.push(COMPONENT, usesHooks, componentMountOpcodes);
           if (rootPropsShape !== undefined) {
@@ -669,12 +772,9 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
         } else {
           insertChildFiberIntoParentFiber(workInProgress, componentFiber);
         }
-        if (usesHooks === 1) {
-          prepareToUseHooks(componentFiber);
-        }
         const hostNode = renderMountOpcodes(componentMountOpcodes, runtimeValues, state, componentFiber);
-        if (usesHooks === 1) {
-          finishHooks();
+        if (workInProgress !== null && workInProgress.hostNode === null) {
+          workInProgress.hostNode = componentFiber.hostNode;
         }
         state.currentComponent = previousComponent;
         return hostNode;
@@ -1079,14 +1179,17 @@ function State(mountOpcodes) {
   this.rootPropsObject = null;
 }
 
-function OpcodeFiber(hostNode, values) {
-  this.child = null;
-  this.hostNode = null;
-  this.key = null;
-  this.memoizedState = null;
-  this.sibling = null;
-  this.parent = null;
-  this.values = values;
+function createOpcodeFiber(hostNode, values) {
+  return {
+    alternate: null,
+    child: null,
+    hostNode: null,
+    key: null,
+    memoizedState: null,
+    sibling: null,
+    parent: null,
+    values: values,
+  };
 }
 
 function insertChildFiberIntoParentFiber(parent, child) {
@@ -1128,7 +1231,6 @@ function renderNodeToRootContainer(node, DOMContainer) {
       renderUpdateOpcodes(updateOpcodes, emptyArray, emptyArray, rootState, null);
     } else {
       const hostNode = renderMountOpcodes(mountOpcodes, emptyArray, rootState, null);
-      rootState.fiber.hostNode = hostNode;
       appendChild(DOMContainer, hostNode);
     }
   } else {

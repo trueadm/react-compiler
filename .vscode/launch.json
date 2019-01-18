@@ -11,8 +11,8 @@
       "program": "${workspaceFolder}/scripts/test.js",
       "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/babel-node",
       "args": [
-        "--mode=dom",
-        "pe-"
+        "--mode=ssr",
+        ""
       ]
     },
     {

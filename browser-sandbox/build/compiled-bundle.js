@@ -1,84 +1,1870 @@
-'use strict';(function(q){"function"===typeof define&&define.amd?define(q):q()})(function(){function q(a,b){return{t:a,v:b||null}}function Ma(a,b){if(!a)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!b||"object"!==typeof b&&"function"!==typeof b?a:b}function Na(a,b){if("function"!==typeof b&&null!==b)throw new TypeError("Super expression must either be null or a function, not "+typeof b);a.prototype=Object.create(b&&b.prototype,{constructor:{value:a,enumerable:!1,
-writable:!0,configurable:!0}});b&&(Object.setPrototypeOf?Object.setPrototypeOf(a,b):a.__proto__=b)}function sa(a,b){if(!(a instanceof b))throw new TypeError("Cannot call a class as a function");}function Oa(){}function T(a){return a.replace(/([.?*+\^$\[\]\\(){}|\-])/g,"\\$1")}function L(a){da[a]||(da[a]=new RegExp(a,"i"));return da[a]}function ea(a,b,c,d,e,g,l){c=c||"";d=d||".";e=e||0;g=g||{primaryGroupSize:3,secondaryGroupSize:3};var h=g.primaryGroupSize||3;g=g.secondaryGroupSize||h;l=l&&l.digits;
-if(void 0===b||null===b)a=a.toString();else if("string"===typeof a)a=ta(a,b);else{b=null==b?0:b;var m=Math.pow(10,b);a=Math.round(a*m)/m;a+="";if(b&&-1===a.indexOf("e-"))for(m=a.indexOf("."),-1==m?(a+=".",m=b):m=b-(a.length-m-1),b=0;b<m;b++)a+="0"}b=a.toString().split(".");a=b[0];b=b[1];if(Math.abs(parseInt(a,10)).toString().length>=e&&(e="$1"+c+"$2$3",h=a.replace(L("(\\d)(\\d{"+(h-0)+"})($|\\D)"),e),h!=a))for(a=h,c="(\\d)(\\d{"+(g-0)+"})("+T(c)+")",c=L(c);(h=a.replace(c,e))!=a;)a=h;l&&(a=ua(a,l),
-b=b&&ua(b,l));c=a;b&&(c+=d+b);return c}function ua(a,b){for(var c="",d=0;d<a.length;++d){var e=b[a.charCodeAt(d)-48];c+=void 0!==e?e:a[d]}return c}function Pa(a,b){return ea(a,b,v.numberDelimiter,v.decimalSeparator,v.minDigitsForThousandsSeparator,v.standardDecimalPatternInfo,v.numberingSystemData)}function ta(a,b){var c=a.indexOf("."),d=-1===c?a:a.slice(0,c);a=-1===c?"":a.slice(c+1);if(b){c=a.slice(0,b);for(var e=0;e<b-a.length;e++)c+="0";b=d+"."+c}else b=d;return b}function Qa(a,b,c){a=a.replace(/^[^\d]*\-/,
-"\u0002");a=a.replace(ob,"");c=c||"";b=T(b);c=T(c);if(!L("^[^\\d]*\\d.*"+b+".*\\d[^\\d]*$").test(a)){b=L("(^[^\\d]*)"+b+"(\\d*[^\\d]*$)");if(b.test(a))return a=a.replace(b,"$1\u0001$2"),fa(a);L("^[^\\d]*[\\d "+T(c)+"]*[^\\d]*$").test(a)||(a="");return fa(a)}c=L("(^[^\\d]*[\\d "+c+"]*)"+b+"(\\d*[^\\d]*$)");a=c.test(a)?a.replace(c,"$1\u0001$2"):"";return fa(a)}function fa(a){a=a.replace(/[^0-9\u0001\u0002]/g,"").replace("\u0001",".").replace("\u0002","-");var b=Number(a);return""===a||isNaN(b)?null:
-b}function ha(a){for(var b=arguments.length,c=Array(1<b?b-1:0),d=1;d<b;d++)c[d-1]=arguments[d];b=c.map(function(a){return String(a)});return a.split("%s").length-1!==b.length?ha("ex args number mismatch: %s",JSON.stringify([a].concat(b))):ha._prefix+JSON.stringify([a].concat(b))+ha._suffix}function pb(a,b){if(!a){if(void 0===b)var c=Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{c=arguments.length;for(var d=
-Array(2<c?c-2:0),e=2;e<c;e++)d[e-2]=arguments[e];c=Error(qb.apply(void 0,[b].concat(d)));c.name="Invariant Violation";c.messageWithParams=[b].concat(d)}c.framesToPop=1;throw c;}}function rb(a,b){if(!b)return a;var c=[];a=a.replace(sb,function(a,d,e){return(a=b[d])&&"object"===("undefined"===typeof a?"undefined":tb(a))?(c.push(a),"\u0017"+e):null===a?"":a+(ia.endsInPunct(a)?"":e)}).split("\u0017").map(ia.applyPhonologicalRules);if(1===a.length)return a[0];for(var d=[a[0]],e=0;e<c.length;e++)d.push(c[e],
-a[e+1]);return d}function n(){}function Ra(a){var b=Oa.getNumberVariationType(a);return 1===a?["_1",b,"*"]:[b,"*"]}function ub(a,b){switch(b){case p.NOT_A_PERSON:return a===va.OBJECT||a===va.REFLEXIVE?p.NOT_A_PERSON:p.UNKNOWN_PLURAL;case p.FEMALE_SINGULAR:case p.FEMALE_SINGULAR_GUESS:return p.FEMALE_SINGULAR;case p.MALE_SINGULAR:case p.MALE_SINGULAR_GUESS:return p.MALE_SINGULAR;case p.MIXED_SINGULAR:case p.FEMALE_PLURAL:case p.MALE_PLURAL:case p.NEUTER_PLURAL:case p.UNKNOWN_PLURAL:return p.UNKNOWN_PLURAL;
-case p.NEUTER_SINGULAR:case p.UNKNOWN_SINGULAR:return a===va.REFLEXIVE?p.NOT_A_PERSON:p.UNKNOWN_PLURAL}return p.NOT_A_PERSON}function r(a){for(var b=a||"",c=arguments.length,d=Array(1<c?c-1:0),e=1;e<c;e++)d[e-1]=arguments[e];c=d.length;for(e=0;e<c;e++){var g=d[e];null!=g&&""!==g&&(b=(b?b+" ":"")+g)}return b}function U(a){for(var b=arguments.length,c=Array(1<b?b-1:0),d=1;d<b;d++)c[d-1]=arguments[d];b=c.map(function(a){return String(a)});return a.split("%s").length-1!==b.length?U("ex args number mismatch: %s",
-JSON.stringify([a].concat(b))):U._prefix+JSON.stringify([a].concat(b))+U._suffix}function N(a,b){if(!a){if(void 0===b)var c=Error("Minified exception occurred; use the non-minified dev environment for the full error message and additional helpful warnings.");else{c=arguments.length;for(var d=Array(2<c?c-2:0),e=2;e<c;e++)d[e-2]=arguments[e];c=Error(vb.apply(void 0,[b].concat(d)));c.name="Invariant Violation";c.messageWithParams=[b].concat(d)}c.framesToPop=1}}function wb(a){return[a]}function xb(){return[10,
-0,[13,[12,0],wb,0]]}function yb(a,b){return[a]}function zb(){return[10,0,[13,[12,0],yb,0]]}function Zb(a,b){return[[a,void 0]]}function Sa(){return[10,0,[13,[29,zb,0],Zb,0]]}function $b(){return[10,0,[13,[11,null],0]]}function ac(a,b){var c,d=a.i18n_reaction_count,e=a.reaction_count;(a=null!=a?null!=a.viewer_current_actor?a.viewer_current_actor.id:a.viewer_current_actor:a)||N(0,"UFI2ReactionsCount: Expected an actor ID");e=null!=e?e.count:e;null!=e||N(0,"UFI2ReactionsCount: Expected a reaction count");
-d||N(0,"UFI2ReactionsCount: Expected an i18n_reaction_count");if(0===e)return null;b=ja.getPrimerProps((c={},c.actorID=a,c.feedbackTargetID=b,c));return[[b.ajaxify,void 0,k("UFI2ReactionsCount/root"),"UFI2ReactionsCount/root",void 0,void 0,b.href,void 0,void 0,[q(bc),q(cc)],void 0,b.rel,"button",void 0,void 0]]}function dc(a){return[a]}function ec(a,b,c,d,e,g,l,h,m,f,w,k,O,n,t,p,q){p=l;w=k;q&&(p=l+O||"");m&&(w=w?w+" nofollow":"nofollow");f&&(w=w?w+" noopener":"noopener");l=p.toString();return[a,b,
-c,g,e,n,t,l,f,w?w+" noopener":"noopener",m,w?w+" nofollow":"nofollow",k,h,d]}function fc(){return[10,0,[13,[1,"a",3,43,"ajaxify",0,0,43,"aria-disabled",0,1,43,"aria-label",0,2,43,"data-testid",0,3,45,0,4,43,"tabindex",8,5,43,"target",0,6,43,"href",0,7,15,3,0,1,8,[43,"rel",0,9],10,[43,"rel",0,11],[43,"rel",0,12],52,0,13,40,14,2,8],ec,4]]}function gc(a,b,c,d,e,g,l,h,m,f,w,k,n,V){b=[h,null];h=b[1];return[[a,c,d,e,g,l,b[0],m,null!=h,null!==h&&"_blank"===V,f,w,b[1],n,V,!1,null!=h]]}function hc(){return[10,
-0,[13,[29,fc,0],gc,0]]}function ic(a,b,c,d,e,g,l,h,m,f,w,n,O,V,t){e=k("abstractButton/root")+(g?" "+k("public/abstractButton/disabled"):"")+(e?" "+k("public/abstractButton/depressed"):"");if(l)return t=g&&"button"===O,r(c,e),[0,[a,void 0,t?!0:void 0,b,[h,w?q(jc,[f]):f,m],r(c,e),d,l,void 0,null,n,void 0,g?-1:V,void 0]];if(t&&"submit"!==t)return c=r(c,e),[1,a,b,d,n,c,g,l,t,h,w,f,m];c=r(c,e);return[2,a,b,d,n,c,g,l,h,w,f,m]}function Ta(){return[10,0,[14,0,1,ic,18,[0,[29,hc,1],1,[1,"button",10,43,"ajaxify",
-0,1,43,"aria-label",0,2,43,"data-testid",0,3,43,"rel",0,4,45,0,5,43,"disabled",32,6,43,"href",0,7,43,"type",0,8,39,9,4,16,5,10,[5,7,44,"accessible_elem",40,11,6,8],[39,11,8],39,12,9,8],2,[1,"button",17,43,"ajaxify",0,1,43,"aria-label",0,2,43,"data-testid",0,3,43,"rel",0,4,45,0,5,43,"disabled",32,6,43,"href",0,7,42,"type","submit",46,"1",39,8,11,16,12,9,[5,14,44,"accessible_elem",40,10,13,8],[39,10,15],39,11,16,8]]]]}function kc(a,b,c,d,e,g){return["block"===d,b,c,e,null,a]}function Ua(){return[10,
-0,[13,[16,0,0,[3,2,45,0,1,43,"data-testid",0,2,43,"tabindex",8,3,39,5,1,8],[5,4,45,0,1,43,"data-testid",0,2,43,"tabindex",8,3,39,5,3,8]],kc,5]]}function lc(a,b,c,d,e,g,l,h){return[[a,b,e,"inline",h,l]]}function mc(a,b,c){var d,e=b.top_reactions;(e=null!=e?e.edges:e)||N(0,"UFI2TopReactions: Expected top reactions");var g=null!=b?null!=b.viewer_current_actor?b.viewer_current_actor.id:b.viewer_current_actor:b;g||N(0,"UFI2TopReactions: Expected an actor ID");if(0===e.length)return null;b=e.slice(0,3);
-a=r(k("UFI2TopReactions/root"),a);return[n._("See who reacted to this",null,(d={},d.hash_key="30H01m",d)),a,b,function(a,b){var d,e,h,l,O,V=null!=a?a.i18n_reaction_count:a,t=null!=a?null!=a.node?a.node.localized_name:a.node:a,p=null!=a?null!=a.node?a.node.reaction_type:a.node:a;var u=ja.getPrimerProps((d={},d.actorID=g,d.feedbackTargetID=c,d.reactionKey="key",d));var r=null===b;d=n._("Loading\u2026",null,(e={},e.hash_key="2Ct2DW",e));n._("{i18nReactionCount} {i18nReactionName}",[n._param("i18nReactionCount",
-V),n._param("i18nReactionName",t)],(h={},h.hash_key="1yBDpL",h));return[[[q(nc,[[u.ajaxify,n._("{i18nReactionCount} {i18nReactionName}",[n._param("i18nReactionCount",V),n._param("i18nReactionName",t)],(l={},l.hash_key="1yBDpL",l)),k("UFI2TopReactions/link"),void 0,void 0,void 0,u.href,void 0,void 0,[q(Va,[[k("UFI2TopReactions/icon"),"16"]])],void 0,u.rel,"button",0===b||r?0:-1,void 0]]),k("UFI2TopReactions/tooltip"),null,(O={},O.feedbackTargetID=c,O.i18nReactionName=t,O.reactionType=p,O),"UFI2TopReactions/tooltip_"+
-p,void 0,q(oc,[[null!=a?null!=a.node?a.node.localized_name:a.node:a],d]),-1]]]}]}function pc(a){return[[a]]}function qc(){return[10,0,[13,[29,xb,0],pc,0]]}function rc(a,b,c){var d=a.comment_count;c=a.reaction_count;var e=a.seen_by_count,g=a.share_count,l=a.video_view_count;e=(null!=e?e.count:e)||0;d=null!=d?d.total_count:d;var h=null!=c?c.count:c;g=null!=g?g.count:g;return!0===a.can_show_seen_by&&0<e||d||h||g||l?[null!=c?c.count:c,[q(sc,[[k("fbFeedStoryUFI/topReactions"),a,b]]),void 0],[q(tc,[[a,
-b]]),void 0]]:null}function uc(a,b){var c;b=void 0===b?!0:b;return[a((c={},c.className=k("UFI2ActionLink/link")+(b?" "+k("UFI2ActionLink/withIcon"):""),c))]}function W(){return[10,0,[13,[4,44,"UFI2ActionLink__root",25,0,8],uc,0]]}function Wa(){return[10,0,[13,[11,null],0]]}function vc(a,b,c,d,e,g,l,h,m,f){return[a,c,d,e,h,m.color,f]}function wc(){return[10,0,[13,[1,"a",0,43,"aria-pressed",0,0,45,0,1,43,"data-testid",0,2,43,"href",0,3,43,"role",0,4,21,49,"color",5,22,43,"tabindex",8,6,8],vc,1]]}function xc(a,
-b,c){var d,e,g=(d={},d.menuShown=!1,d);c=wa.checkReactionKey(null!=c?null!=c.viewer_feedback_reaction_info?c.viewer_feedback_reaction_info.key:c.viewer_feedback_reaction_info:c);var l=void 0;c?(d=xa[c],l=d.color,d=d.display_name):d=xa[P.LIKE].display_name;r(c?k("UFI2ReactionLink/hasReacted"):"",b);return[[!!c,[a,d],r(c?k("UFI2ReactionLink/hasReacted"):"",b),"UFI2ReactionLink","#",void 0,void 0,"button",(e={},e.color=l,e),0],g.menuShown&&Wa]}function yc(a,b){return[r(k("ufiReactionsIcons/root")+("13"===
-b?" "+k("ufiReactionsIcons/13"):"")+("16"===b?" "+k("ufiReactionsIcons/16"):"")+("18"===b?" "+k("ufiReactionsIcons/18"):"")+("48"===b?" "+k("ufiReactionsIcons/48"):"")+("96"===b?" "+k("ufiReactionsIcons/96"):""),a,k("ufiReactions-dorothy-2017-v2/root")+(" "+k("ufiReactions-toto-2017-v2/root")))]}function Xa(){return[10,0,[13,[5,0,45,0,0,33,123,8],yc,1]]}function zc(a,b){var c=wa.checkReactionKey(null!=b?null!=b.viewer_feedback_reaction_info?b.viewer_feedback_reaction_info.key:b.viewer_feedback_reaction_info:
-b),d=void 0,e;if(e=!c)d=null;else if(__cached__14=c&&c!==P.LIKE)d={};return[null!=b?b.can_viewer_react:b,[function(d){d=d.className;r((c===P.LIKE?k("UFI2ReactionActionLink/liked"):"")+(" "+k("UFI2ReactionActionLink/link"))+(c?"":" "+k("UFI2ReactionActionLink/notLiked")),d,a);d=[[e?null:!e&&__cached__14?q(Va,[[k("UFI2ReactionActionLink/inlineUFIIcon"),"18"]]):void 0,r((c===P.LIKE?k("UFI2ReactionActionLink/liked"):"")+(" "+k("UFI2ReactionActionLink/link"))+(c?"":" "+k("UFI2ReactionActionLink/notLiked")),
-d,a),b]];return q(Ac,d)},!d]]}function Bc(a,b,c,d,e,g,l,h,m){return"link"===c?[0,b,l,m,a]:[1,d,b,l,m,a]}function Cc(a,b,c){return[b&&b.can_viewer_comment&&b.is_q_and_a,[function(b){var d,g;b=b.className;r(k("UFI2AnswerActionLink/root"),b,a);n._("Answer",null,(d={},d.hash_key="7wbRt",d));d=[[n._("Answer",null,(g={},g.hash_key="7wbRt",g)),r(k("UFI2AnswerActionLink/root"),b,a),void 0,void 0,void 0,void 0,c,void 0,void 0]];return q(ya,d)},void 0]]}function Dc(a,b,c){return[b&&b.can_viewer_comment,[function(b){var d,
-g;b=b.className;r(k("UFI2CommentActionLink/root"),b,a);n._("Comment",null,(d={},d.hash_key="2MdL3e",d));d=[[n._("Comment",null,(g={},g.hash_key="2MdL3e",g)),r(k("UFI2CommentActionLink/root"),b,a),void 0,void 0,void 0,void 0,c,void 0,void 0]];return q(ya,d)},void 0]]}function Ec(a,b,c,d){var e;b=(e={},e.focusOnInit=!1,e.interacted=!1,e.isLoading=!1,e.misinformationDialogConfirmed=!1,e.openAfterMisinformationConfirmed=!1,e.openOnInit=!1,e).misinformationDialogConfirmed;return d&&d.share_action_link_uri?
-(null!=d?d.misinformation_confirm_dialog_uri:d)&&!b?[0,[function(a){return q(Fc,[[a.className,void 0,void 0,void 0]])},void 0]]:[1,[function(b){b=[r(k("UFI2ShareActionLink/root"),a),[b.className,void 0,!1,void 0]];return q(Gc,b)},void 0]]:null}function Hc(a,b,c,d){var e,g,l;b=(e={},e.href=b,e);e=n._("Share",null,(g={},g.hash_key="gaj3j",g));a=r(k("UFI2ShareActionLink/link"),a);g=b.href;return[(g?g:null)||"#",a,d,n._("Send this to coworkers or post it on your timeline.",null,(l={},l.hash_key="2zccV8",
-l)),e,!0===c,["light",k("UFI2ShareActionLink/spinner"),void 0,!1,"small"]]}function za(){return[10,0,[13,[1,"a",2,43,"href",0,0,45,0,1,42,"data-ft","{ &quot;tn&quot;: &quot;dummy&quot;, &quot;type&quot;: 25 }",43,"rel",0,2,42,"role","button",42,"tabindex",0,43,"title",0,3,34,4,0,16,1,5,[29,Aa,6],0,8],Hc,3]]}function Ic(a,b,c,d,e){var g;c=k("img")+(" "+k("xuiSpinner/root"))+("small"==e?" "+k("xuiSpinner/small"):"")+("large"==e?" "+k("xuiSpinner/large"):"")+("light"==a?" "+k("xuiSpinner/light"):"")+
-("dark"==a?" "+k("xuiSpinner/dark"):"")+(d?" "+k("xuiSpinner/showOnAsync"):"")+(c?" "+k("xuiSpinner/pauseAnimation"):"");a=n._("Loading...",null,(g={},g.hash_key="2pEOeS",g));b=r(b,c);return[[q(Jc,[b,a])]]}function Aa(){return[10,0,[13,[29,Kc,0],Ic,1]]}function Lc(a){return[a]}function Kc(){return[10,0,[13,[12,0],Lc,0]]}function Mc(a,b,c,d,e,g,l){return[[q(Nc,[[c,e,null],[void 0,c],c.is_q_and_a,[void 0,c,null],[void 0,c,null],[void 0,c,e,l]])]]}function Pb(a,b){var c=[];if(0!==b)for(var d=0,e=b.length;d<
-e;d++)c.push(a[b[d]]);return c}function Ya(a,b){if(ka(b))for(var c=0,d=b.length;c<d;c++)Ya(a,b[c]);else a.removeChild(b)}function Ba(a,b){if(ka(a))a.push(b);else if(ka(b))for(var c=0,d=b.length;c<d;c++)Ba(a,b[c]);else a.appendChild(b)}function Ca(a,b){return 0===b.length?a():1===b.length?a(b[0]):2===b.length?a(b[0],b[1]):3===b.length?a(b[0],b[1],b[2]):4===b.length?a(b[0],b[1],b[2],b[3]):7===b.length?a(b[0],b[1],b[2],b[3],b[4],b[5],b[6]):a.apply(null,b)}function Q(a,b,c){null!==b.currentHostNode&&
-(c=b.currentHostNodeStackIndex++,b.currentHostNodeStack[c]=b.currentHostNode);b.currentHostNode=a}function Da(a,b,c){if(null!==a&&void 0!==a&&"boolean"!==typeof a&&"string"!==typeof a&&"number"!==typeof a){if(null!==a&&void 0!==a.t&&void 0!==a.v)return u(a.t,a.v,b,c);if(ka(a)){for(var d=[],e=0,g=a.length;e<g;++e){var l=Da(a[e],b,c);void 0!==l&&d.push(l)}return d}}}function u(a,b,c,d){var e=a.length,g=R.get(a),l=X.get(a),h=void 0===g,m=null===d?null:d.values;!0===h&&(g=[],l=[],R.set(a,g),X.set(a,l));
-for(var f=0;f<e;){switch(a[f]){case 29:var w=a[++f],k=a[++f],n=Ab.get(w);void 0===n?(n=w(),Ab.set(w,n)):n=Ab.get(w);var p=null;ka(k)?p=k:null!==k&&(p=b[k]);c.propsArray=p;var t=u(n,b,c,d);!0===h&&g.push(n,k);break;case 44:var q=a[++f];c.currentHostNode.className=q;break;case 45:var r=a[++f],v=a[++f],E=b[v];if(r&1)throw Error("TODO DYNAMIC_PROP_CLASS_NAME");c.currentHostNode.className=E;!0===h&&g.push(45,r,v);break;case 42:var z=a[++f],A=a[++f],B=c.currentHostNode;"id"===z?B.id=A:B.setAttribute(z,
-A);break;case 43:var F=a[++f],C=a[++f],G=a[++f],x=b[G];if(C&1)throw Error("TODO DYNAMIC_PROP");C&2||null!==x&&void 0!==x&&c.currentHostNode.setAttribute(F,x);break;case 46:var y=a[++f];"string"===typeof y?c.currentHostNode.value=y:c.currentHostNode.setAttribute("value",y);break;case 32:var H=a[++f],I=document.createTextNode(H);Ba(c.currentHostNode,I);break;case 33:var J=a[++f];c.currentHostNode.textContent=J;break;case 34:var D=a[++f],L=a[++f],M=document.createTextNode(b[D]),U=c.currentHostNode;m[L]=
-M;Ba(U,M);!0===h&&g.push(35,D,L);break;case 35:var P=a[++f],S=a[++f],K=b[P],T=c.currentHostNode,N=void 0;null===K||void 0===K||""===K?N=document.createTextNode(""):(T.textContent=K,N=T.firstChild);m[S]=N;!0===h&&g.push(35,P,S);break;case 39:var W=a[++f],Z=a[++f],ba=t=Da(b[W],c,d);m[Z]=ba;break;case 40:var ca=a[++f],ha=a[++f],ja=b[ca];c.lastChildWasTextNode=!1;var la=t=Da(ja,c,d);m[ha]=la;break;case 2:var ma=document.createElement("div");Q(ma,c,d);break;case 4:var na=document.createElement("span");
-Q(na,c,d);break;case 0:var qa=a[++f],sa=document.createElement(qa);Q(sa,c,d);break;case 3:var da=document.createElement("div"),ea=a[++f];Q(da,c,d);m[ea]=da;!0===h&&g.push(3,ea);break;case 5:var fa=document.createElement("span"),ia=a[++f];Q(fa,c,d);m[ia]=fa;!0===h&&g.push(5,ia);break;case 1:var va=a[++f],oa=a[++f],pa=document.createElement(va);Q(pa,c,d);m[oa]=pa;!0===h&&g.push(1,oa);break;case 18:case 9:case 8:var Za=c.currentHostNodeStackIndex,aa=c.currentHostNode;if(0===Za)c.currentHostNode=null;
-else{Za=--c.currentHostNodeStackIndex;var ra=c.currentHostNodeStack[Za];c.currentHostNodeStack[Za]=null;Ba(ra,aa);c.currentHostNode=aa=ra}t=aa;break;case 6:var Ma=a[++f],Na=document.createElement(Ma);Q(Na,c,d);break;case 7:var Oa=a[++f],ta=a[++f],ua=document.createElement(Oa);Q(ua,c,d);m[ta]=ua;!0===h&&g.push(7,ta);break;case 17:Q([],c,d);break;case 37:var Pa=a[++f],Qa=a[++f],Ra=a[++f],Sa=u(Pa,b[Qa],c,d);m[Ra]=Sa;break;case 48:var Ta=a[++f],Ea=a[++f];if(null==Ea||void 0===Ea)break;"number"===typeof Ea&&
-(Ea+="px");c.currentHostNode.style.setProperty(Ta,Ea);break;case 49:var Ua=a[++f],Va=a[++f],Fa=b[Va];if(null==Fa||void 0===Fa)break;"number"===typeof Fa&&(Fa+="px");c.currentHostNode.style.setProperty(Ua,Fa);break;case 50:var Wa=a[++f],Bb=a[++f];if(null==Bb||void 0===Bb)break;c.currentHostNode.style.setProperty(Wa,Bb);break;case 16:var wa=a[++f],xa=a[++f],Xa=b[xa],Cb=a[++f],Db=a[++f],Eb=void 0;!0===h&&g.push(16,wa,xa,Cb,Db);Xa?0!==Cb&&(Eb=u(Cb,b,c,d)):0!==Db&&(Eb=u(Db,b,c,d));t=m[wa]=Eb;break;case 15:var Ga=
-a[++f],ya=a[++f],za=a[++f],Aa=f,Ya=Ga-1;if(!0===h){var Ia,Ja=Aa+1,kb=Ja+2*(Ga-1)+1;(Ia=g).push.apply(Ia,[15,Ga,ya,za].concat(a.slice(Ja,kb)))}for(var Fb=void 0,$a=0;$a<Ga;$a++)if($a===Ya){var Ka=a[++f];null!==Ka&&(Fb=u(Ka,b,c,d))}else{var lb=a[++f];if(!0===b[lb]){var La=a[++f];null!==La&&(Fb=u(La,b,c,d));break}++f}m[za]=$a-1;t=m[ya]=Fb;f=Aa+2*(Ga-1)+1;break;case 24:var mb=a[++f],nb=a[++f];t=u(mb,b[nb],c,d);break;case 25:var ob=a[++f];t=Da(b[ob],c,d);break;case 38:for(var pb=a[++f],qb=a[++f],Qb=a[++f],
-Gb=b[pb],Rb=0===Qb?null:b[Qb],rb=Gb.length,ab=0;ab<rb;++ab){var sb=Gb[ab],Sb=b;null!==Rb&&(Sb=Rb(sb,ab,Gb));u(qb,Sb,c,d)}break;case 13:var Tb=a[++f],Hb=a[++f],Ib=b,bb=void 0;0!==Hb&&(bb=a[++f],Ib=Ca(Hb,c.currentComponent.props),m[bb]=Ib);!0===h&&(g.push(13,Tb,Hb),void 0!==bb&&g.push(bb));return u(Tb,Ib,c,d);case 23:var tb=a[++f],Ub=a[++f],Jb=void 0;0!==Ub&&(Jb=Ca(Ub,c.currentComponent.props));return null===Jb?document.createTextNode(""):u(tb,Jb,c,d);case 14:var Vb=a[++f],Wb=a[++f],Kb=a[++f],Ha=b,
-cb=void 0,db=void 0,eb=void 0;0!==Kb&&(cb=a[++f],Ha=Ca(Kb,c.currentComponent.props),m[cb]=Ha,null===Ha&&(eb=null,db=document.createTextNode("")));var Y=void 0;if(void 0===db){Y=a[++f];for(var ub=Y.length,vb=Ha[0],fb=0;fb<ub;){if(Y[fb]===vb){eb=Y[++fb];db=u(eb,Ha,c,d);break}fb+=2}}!0===h&&(g.push(14,Vb,Wb,Kb),void 0!==cb&&g.push(cb),void 0===Y&&(Y=a[++f]),g.push(Y));m[Wb]=eb;return m[Vb]=db;case 10:var Xb=a[++f],gb=c.currentComponent,hb=void 0,wb=gb;if(null===gb){hb=a[++f];var xb={props:Pb(c.rootPropsObject,
-hb),usesHooks:!1};gb=c.currentComponent=xb}else c.currentComponent={props:c.propsArray,usesHooks:!1},c.propsArray=null;var Lb=a[++f],ib=new Oc(null,[]);!0===h&&(g.push(10,Xb,Lb),void 0!==hb&&g.push(hb),l.push(10,Xb,Lb));ib.values[0]=gb;if(null===d)c.fiber=ib;else{var Mb=d,Yb=ib;Yb.parent=Mb;null===Mb.child&&(Mb.child=Yb)}var yb=u(Lb,b,c,ib);c.currentComponent=wb;return yb;case 12:var zb=a[++f],jb=b[zb];return null!==jb&&void 0!==jb.t&&void 0!==jb.v?Da(jb,c,d):null;case 11:var Nb=a[++f],Ob=void 0;
-if(null===Nb)Ob=document.createTextNode("");else if("string"===typeof Nb)Ob=document.createTextNode(Nb);else throw Error("TODO");return Ob;case 21:case 22:break;default:f+=3;continue}++f}return t}function M(a,b,c,d,e){for(var g=a.length,l=null===e?null:e.values,h=0;h<g;){switch(a[h]){case 29:var m=a[++h];m=R.get(m);var f=a[++h],k=null;ka(f)?k=f:null!==f&&(k=c[f]);d.propsArray=k;M(m,b,c,d,e);break;case 34:case 35:m=a[++h];k=a[++h];f=c[m];k=l[k];b[m]!==f&&(k.nodeValue=f);break;case 45:m=a[++h];f=a[++h];
-k=c[f];if(b[f]!==k){if(m&1)throw Error("TODO DYNAMIC_PROP_CLASS_NAME");d.currentHostNode.className=k}break;case 1:case 7:case 3:case 5:m=a[++h];d.currentHostNode=l[m];break;case 16:m=a[++h];f=a[++h];var n=b[f],p=c[f];f=a[++h];k=a[++h];var q=n===p;n=void 0;p?null===f||q||(null!==k&&(k=X.get(k),S(k,d,e,!0)),n=u(f,c,d,e)):null===k||q||(null!==f&&(f=X.get(f),S(f,d,e,!0)),n=u(k,c,d,e));void 0!==n&&(f=l[m],f.parentNode.replaceChild(n,f),l[m]=n);break;case 15:f=a[++h];m=a[++h];p=a[++h];k=h;n=f-1;q=l[p];
-var t=!1;p=void 0;for(var r=0;r<f;++r)if(r===n){var v=a[++h];q!==r&&(t=!0);null!==v&&(!0===t?p=u(v,c,d,e):(v=R.get(v),M(v,b,c,d,e)))}else{v=a[++h];if(!0===c[v]){h=a[++h];q!==r&&(t=!0);null!==h&&(!0===t?p=u(h,c,d,e):(h=R.get(h),M(h,b,c,d,e)));break}++h}!0===t&&(h=X.get(a[q===n?k+1+2*q:k+2+2*q]),S(h,d,e,!0));h=k+2*(f-1)+1;void 0!==p&&(f=l[m],f.parentNode.replaceChild(p,f),l[m]=p);break;case 13:g=a[++h];g=R.get(g);m=a[++h];f=c;0!==m&&(a=a[++h],f=Ca(m,d.currentComponent.props),b=l[a],l[a]=c);M(g,b,f,
-d,e);return;case 14:g=a[++h];m=a[++h];n=a[++h];f=b;k=c;c=void 0;p=!1;b=void 0;0!==n&&(q=a[++h],k=Ca(n,d.currentComponent.props),f=l[q],l[q]=k,null===k&&null!==f&&(p=!0,b=null,c=document.createTextNode("")));if(void 0===c)for(a=a[++h],h=a.length,n=null===f?null:f[0],q=k[0],t=0;t<h;){r=a[t];if(r===q){r!==n&&(p=!0);b=a[++t];p?c=u(b,k,d,e):(a=R.get(b),M(a,f,k,d,e));break}t+=2}!0===p&&(a=l[m],null!==a&&(a=X.get(a),S(a,d,e,!0)),l[m]=b);void 0!==c&&(d=l[g],d.parentNode.replaceChild(c,d),l[g]=c);return c;
-case 10:++h;l=a[++h];l=R.get(l);f=d.currentComponent;g=void 0;m=f;null===e&&(g=d.fiber);e=g.values[0];null===f?(a=a[++h],a=Pb(d.rootPropsObject,a)):a=d.propsArray;e.props=a;d.currentComponent=e;M(l,b,c,d,g);d.currentComponent=m;return;default:++h}++h}}function S(a,b,c,d){for(var e=a.length,g=0;g<e;){switch(a[g]){case 13:return;case 10:++g;e=void 0;var k=b.currentComponent;null===c&&(e=b.fiber);c=e.values[0];a=a[++g];b.currentComponent=c;S(a,b,e,d);b.currentComponent=k;return;default:++g}++g}}function Ia(a,
-b){var c=X.get(b.mountOpcodes);S(c,b,null,!0);Ya(a,b.fiber.hostNode);b.fiber=null}function Pc(a){this.currentHostNode=this.currentComponent=null;this.currentHostNodeStack=[];this.currentHostNodeStackIndex=0;this.fiber=null;this.mountOpcodes=a;this.propsArray=la;this.rootPropsObject=null}function Oc(a,b){this.parent=this.sibling=this.memoizedState=this.key=this.hostNode=this.child=null;this.values=b}var Ja=function(a){return a&&a.replace(/([^\\])\//g,"$1__")},k=function(a){return"object"===typeof a?
-Object.keys(a).map(function(b){return a[b]?b:""}).map(Ja).join(" "):Array.prototype.map.call(arguments,Ja).join(" ")},ma=function(a){return"object"==typeof a?Object.keys(a).map(function(b){return a[b]?b:""}).map(kb).join(" "):Array.prototype.map.call(arguments,kb).join(" ")},kb=function(a){return a&&a.replace(/([^\\])\//g,"$1__")},tb="function"===typeof Symbol&&"symbol"===typeof("function"===typeof Symbol?Symbol.iterator:"@@iterator")?function(a){return typeof a}:function(a){return a&&"function"===
-typeof Symbol&&a.constructor===Symbol&&a!==("function"===typeof Symbol?Symbol.prototype:"@@prototype")?"symbol":typeof a},Qc={getNumberVariationType:function(a){return 0<=a&&1>=a?268435456:1610612736}};Oa.getNumberVariationType=function(a){return Qc.getNumberVariationType(a)};var Ka={"1_8b0c31a270a324f26d2417a358106611":"override","1_fakeHash1":"This is an override with a {param}","1_fakeHash2":"These are overrides and a {param}","1_fakeHash3":"Override a {param}"},v={decimalSeparator:".",minDigitsForThousandsSeparator:4,
-numberDelimiter:",",standardDecimalPatternInfo:{primaryGroupSize:3,secondaryGroupSize:3},numberingSystemData:null},da={},ob=L("\u0433\u0440\u043d. \u0434\u0435\u043d. \u043b\u0432. \u043c\u0430\u043d. \u0564\u0580. \u062c.\u0645. \u062f.\u0625. \u062f.\u0627. \u062f.\u0628. \u062f.\u062a. \u062f.\u062c. \u062f.\u0639. \u062f.\u0643. \u062f.\u0644. \u062f.\u0645. \u0631.\u0633. \u0631.\u0639. \u0631.\u0642. \u0631.\u064a. \u0644.\u0633. \u0644.\u0644. \u0783. B/. Bs. Fr. kr. L. p. S/.".split(" ").reduce(function(a,
-b,c){return a+(c?"|":"")+"("+T(b)+")"},"")),na={formatNumber:function(a,b){return ea(a,b,"",v.decimalSeparator,v.minDigitsForThousandsSeparator,v.standardDecimalPatternInfo,v.numberingSystemData)},formatNumberRaw:ea,formatNumberWithThousandDelimiters:Pa,formatNumberWithLimitedSigFig:function(a,b,c){var d=Math.floor(Math.log(a)/Math.LN10),e=a;d<c&&(e=a*Math.pow(10,-d+c));a=Math.pow(10,Math.floor(Math.log(e)/Math.LN10)-c+1);e=Math.round(e/a)*a;d<c&&(e/=Math.pow(10,-d+c));return Pa(e,b)},parseNumber:function(a){return Qa(a,
-v.decimalSeparator,v.numberDelimiter)},parseNumberRaw:Qa,truncateLongNumber:ta,getFloatString:function(a,b,c){a=String(a).split(".");b=na.getIntegerString(a[0],b);return 1===a.length?b:b+c+a[1]},getIntegerString:function(a,b){""===b&&(b=",");a=String(a);for(var c=/(\d+)(\d{3})/;c.test(a);)a=a.replace(c,"$1"+b+"$2");return a}},oa=function(){function a(b){sa(this,a);this._contents=b;this._stringValue=null}a.prototype.flattenToArray=function(){return a.flattenToArray(this._contents)};a.prototype.getContents=
-function(){return this._contents};a.prototype.toString=function(){if(null!==this._stringValue)return this._stringValue;for(var b="",c=this.flattenToArray(),d=0;d<c.length;++d){var e=c[d];if("string"===typeof e||e instanceof a)b+=e;else try{JSON.stringify(e).substr(0,250)}catch(g){}}Object.isFrozen(this)||(this._stringValue=b);return b};a.prototype.toJSON=function(){return this.toString()};a.flattenToArray=function(b){for(var c=[],d=0;d<b.length;++d){var e=b[d];Array.isArray(e)?c.push.apply(c,a.flattenToArray(e)):
-e instanceof a?c.push.apply(c,e.flattenToArray()):c.push(e)}return c};return a}();"replace split toLowerCase toUpperCase indexOf charAt charCodeAt substr substring trim lastIndexOf search match slice codePointAt endsWith includes localeCompare normalize repeat startsWith toLocaleLowerCase toLocaleUpperCase trimLeft trimRight link anchor fontcolor fontsize big blink bold fixed italics small strike sub sup contains".split(" ").forEach(function(a){oa.prototype[a]=function(){return this.toString()[a].apply(this,
-arguments)}});var pa="function"===typeof Symbol&&("function"===typeof Symbol?Symbol.for:"@@for")&&("function"===typeof Symbol?Symbol.for:"@@for")("react.element")||60103,lb=function(a){function b(c){sa(this,b);var d=Ma(this,a.call(this,c));d.props={content:c};d.key=null;d.ref=null;return d}Na(b,a);return b}(oa);lb.prototype.type=function(a){return a.content};lb.prototype.$$typeof=pa;var p={NOT_A_PERSON:0,FEMALE_SINGULAR:1,MALE_SINGULAR:2,FEMALE_SINGULAR_GUESS:3,MALE_SINGULAR_GUESS:4,MIXED_SINGULAR:5,
-MIXED_PLURAL:5,NEUTER_SINGULAR:6,UNKNOWN_SINGULAR:7,FEMALE_PLURAL:8,MALE_PLURAL:9,NEUTER_PLURAL:10,UNKNOWN_PLURAL:11,UNKNOWN:0},La=function(a){function b(c,d,e,g){sa(this,b);var k=Ma(this,a.call(this,c));k.props={content:c,inlineMode:d,translation:e,hash:g};k.key=null;k.ref=null;return k}Na(b,a);return b}(oa);La.prototype.type=function(a){var b=a.content,c=a.inlineMode,d=a.translation;a=a.hash;var e=ma("intlInlineMode/normal");a&&("TRANSLATION"===c?e=ma("intlInlineMode/translatable"):"APPROVE"===
-c?e=ma("intlInlineMode/approvable"):"REPORT"===c&&(e=ma("intlInlineMode/reportable")));return{$$typeof:pa,type:"em",key:null,ref:null,props:{className:e,"data-intl-hash":a,"data-intl-translation":d,"data-intl-trid":"",children:b,suppressHydrationWarning:!0},_owner:null}};La.prototype.$$typeof=pa;var qa={},qb=ha,Rc=/[.!?\u3002\uff01\uff1f\u0964\u2026\u0eaf\u1801\u0e2f\uff0e][)"'\u00bb\u0f3b\u0f3d\u2019\u201d\u203a\u3009\u300b\u300d\u300f\u3011\u3015\u3017\u3019\u301b\u301e\u301f\ufd3f\uff07\uff09\uff3d\s]*$/,
-Sc=function(a){var b=a,c=void 0;return function(){!arguments.length||pb(0,"A memoized function cannot be called with arguments");b&&(c=b(),b=null);return c}}(function(){var a=[];for(g in qa.patterns){var b=qa.patterns[g],c;for(c in qa.meta){var d=new RegExp(c.slice(1,-1),"g"),e=qa.meta[c];var g=g.replace(d,e);b=b.replace(d,e)}"javascript"===b&&(b=function(a){return a.slice(1).toLowerCase()});a.push([new RegExp(g.slice(1,-1),"g"),b])}return a}),ia={PUNCT_CHAR_CLASS:"[.!?\u3002\uff01\uff1f\u0964\u2026\u0eaf\u1801\u0e2f\uff0e]",
-endsInPunct:function(a){return"string"!==typeof a?!1:Rc.test(a)},applyPhonologicalRules:function(a){for(var b=Sc(),c=0;c<b.length;c++){var d=b[c];a=a.replace(d[0],d[1])}return a.replace(/\x01/g,"")}},sb=new RegExp("\\{([^}]+)\\}("+ia.PUNCT_CHAR_CLASS+"*)","g"),va={OBJECT:0,POSSESSIVE:1,REFLEXIVE:2,SUBJECT:3},Tc={};n._=function(a,b){var c={},d=a;a.__vcg&&(b=b||[],b.unshift([[805306368,"*"],null]));b&&(d=this._accessTable(a,c,b,0));a=d;Array.isArray(d)&&(a=d[0],d=d[1],b="1_"+d,a=Ka[b]||a,Ka[b]&&n.logQTImpression(d),
-n.logImpression(d));d=Tc[a];b=this._hasKeys(c);if(d&&!b)return d;c=rb(a,c);return c};n._hasKeys=function(a){for(var b in a)return!0;return!1};n._accessTable=function(a,b,c,d){if(d>=c.length)return a;if(null==a)return null;var e=null,g=c[d],k=g[0];if(Array.isArray(k))for(var h=0;h<k.length&&(e=this._accessTable(a[k[h]],b,c,d+1),null==e);++h);else a=null!==k?a[k]:a,e=this._accessTable(a,b,c,d+1);null!=e&&Object.assign(b,g[1]);return e};n._enum=n["enum"]=function(a,b){return[a,null]};n._subject=n.subject=
-function(a){return[[a,"*"],null]};n._param=n.param=function(a,b,c){var d=null,e=!1;c&&(0===c[0]?(d=Ra(1<c.length?c[1]:b),e=!0):1===c[0]&&(d=[c[1],"*"]));c={};c[a]=e&&"number"===typeof b?na.formatNumberWithThousandDelimiters(b):b;return[d,c]};n._plural=n.plural=function(a,b,c){var d=Ra(a),e={};b&&(e[b]="number"===typeof c?na.formatNumberWithThousandDelimiters(c):c||na.formatNumberWithThousandDelimiters(a));return[d,e]};n._pronoun=n.pronoun=function(a,b,c){return[[ub(a,b),"*"],null]};n._name=function(a,
-b,c){c=[c,"*"];var d={};d[a]=b;return[c,d]};n.logImpression=function(a){return a};n.logQTImpression=function(a){return a};var Z,aa,E,z,A,B,F,C,G,x,y,H,I,J,D,K,ra,ba,ca;U._prefix="<![EX[";U._suffix="]]\x3e";var vb=U,cc=[4,44,"UFI2ReactionsCount__sentence foo UFI2ReactionsCount__sentenceWithSocialContext",42,"data-testid","UFI2ReactionsCount/sentenceWithSocialContext",8],bc=[4,42,"aria-hidden",!0,44,"UFI2ReactionsCount__countOnlySentence",8],ja=(Z={},Z.getDialogURI=function(a){return"dialog_uri"},Z.getPageURI=
-function(a){return"page_uri"},Z.getPrimerProps=function(a){var b,c=ja.getPageURI(a);a=ja.getDialogURI(a);return b={},b.ajaxify=a,b.href=c,b.rel="dialog",b},Z),jc=[5,3,44,"accessible_elem",40,0,2,8];Ua.defaultProps=(aa={},aa.display="inline",aa);var nc=[29,Ta,0],Va=[29,Xa,0],oc=[2,29,function(){return[10,0,[13,[2,44,"UFI2ReactionIconTooltipTitle__root",35,0,0,8],dc,1]]},0,34,1,0,8],Uc=[13,[29,function(){return[10,0,[13,[29,Ua,0],lc,0]]},0],0],sc=[29,function(){return[10,0,[23,[5,1,43,"aria-label",
-0,0,45,0,1,42,"role","toolbar",38,2,[13,[24,Uc,0],0],3,8],mc,2]]},0],tc=[29,function(){return[10,0,[23,[29,Ta,0],ac,0]]},0],P=(K={},K.LIKE=1,K.ordering=[1,2,13,11,12,4,5,3,10,7,8,14,15],K.NONE=0,K.reactions={1:(E={},E.class_name="public/ufiReactionsIcons/like",E.color="#4080ff",E.display_name="Like",E.is_deprecated=!1,E.is_visible=!0,E.name="like",E.type=1,E),2:(z={},z.class_name="public/ufiReactionsIcons/love",z.color="#f25268",z.display_name="Love",z.is_deprecated=!1,z.is_visible=!0,z.name="love",
-z.type=2,z),3:(A={},A.class_name="public/ufiReactionsIcons/wow",A.color="#f0ba15",A.display_name="Wow",A.is_deprecated=!1,A.is_visible=!0,A.name="wow",A.type=3,A),4:(B={},B.class_name="public/ufiReactionsIcons/haha",B.color="#f0ba15",B.display_name="Haha",B.is_deprecated=!1,B.is_visible=!0,B.name="haha",B.type=4,B),5:(F={},F.class_name="public/ufiReactionsIcons/yay",F.color="#f0ba15",F.display_name="Yay",F.is_deprecated=!0,F.is_visible=!0,F.name="yay",F.type=5,F),7:(C={},C.class_name="public/ufiReactionsIcons/sorry",
-C.color="#f0ba15",C.display_name="Sad",C.is_deprecated=!1,C.is_visible=!0,C.name="sorry",C.type=7,C),8:(G={},G.class_name="public/ufiReactionsIcons/anger",G.color="#f7714b",G.display_name="Angry",G.is_deprecated=!1,G.is_visible=!0,G.name="anger",G.type=8,G),10:(x={},x.class_name="public/ufiReactionsIcons/confused",x.color="#f0ba15",x.display_name="Confused",x.is_deprecated=!0,x.is_visible=!0,x.name="confused",x.type=10,x),11:(y={},y.class_name="public/ufiReactionsIcons/dorothy",y.color="#7e64c4",
-y.display_name="Thankful",y.is_deprecated=!1,y.is_visible=!0,y.name="dorothy",y.type=11,y),12:(H={},H.class_name="public/ufiReactionsIcons/toto",H.color="#EC7EBD",H.display_name="Pride",H.is_deprecated=!1,H.is_visible=!0,H.name="toto",H.type=12,H),13:(I={},I.class_name=null,I.color="#1d2129",I.display_name="Selfie",I.is_deprecated=!1,I.is_visible=!1,I.name="selfie",I.type=13,I),14:(J={},J.class_name="public/ufiReactionsIcons/flame",J.color="#4080ff",J.display_name="React",J.is_deprecated=!1,J.is_visible=
-!1,J.name="flame",J.type=14,J),15:(D={},D.class_name="public/ufiReactionsIcons/plane",D.color="#4080ff",D.display_name="React",D.is_deprecated=!1,D.is_visible=!1,D.name="plane",D.type=15,D)},K),xa=P.reactions,wa=(ra={},ra.checkReactionKey=function(a){return a&&!P.reactions[a]?0:a||0},ra);Xa.defaultProps=(ba={},ba.className=null,ba.grayscale=!1,ba.size="16",ba);var Ac=[13,[2,44,"UFI2ReactionActionLink__root",42,"data-testid","UFI2ReactionLink/actionLink",29,function(){return[10,0,[13,[17,29,wc,0,16,
-0,1,[29,Wa,null],0,18],xc,1]]},0,8],0],ya=[13,[29,function(){return[10,0,[14,0,1,Bc,9,[0,[1,"a",3,45,0,1,43,"onClick",2,2,43,"aria-pressed",0,3,42,"role","button",35,4,2,8],1,[16,4,1,[5,6,45,0,2,43,"onClick",2,3,43,"aria-pressed",0,4,42,"role","button",35,5,5,8],[3,8,45,0,2,43,"onClick",2,3,43,"aria-pressed",0,4,42,"role","button",35,5,7,8]]]]]},0],0],Fc=[13,[29,za,0],0],Gc=[13,[5,2,45,0,0,29,za,1,8],0],Jc=[5,0,45,0,0,42,"role","progressbar",43,"aria-valuetext",0,1,42,"aria-busy","true",42,"aria-valuemin",
-"0",42,"aria-valuemax","100",8];Aa.defaultProps=(ca={},ca.showOnAsync=!1,ca.size="small",ca.background="light",ca);var Nc=[2,44,"fbFeedStoryUFI__summaryAndActionsContainer",29,function(){return[10,0,[23,[2,44,"fbFeedStoryUFI__feedbackSummary",42,"data-testid","fbFeedStoryUFI/feedbackSummary",16,0,0,[2,44,"fbFeedStoryUFI__reactionsSummary",29,Sa,1,29,Sa,2,8],0,8],rc,1]]},0,2,44,"fbFeedStoryUFI__actionLinks",29,function(){return[10,0,[13,[16,0,0,[29,W,1],[11,null]],zc,1]]},1,16,0,2,[29,function(){return[10,
-0,[13,[16,0,0,[29,W,1],[11,null]],Cc,1]]},3],[29,function(){return[10,0,[13,[16,0,0,[29,W,1],[11,null]],Dc,1]]},4],29,function(){return[10,0,[14,0,1,Ec,3,[0,[29,W,1],1,[29,W,1]]]]},5,8,8],mb=Symbol.for("react.element"),ka=Array.isArray,la=[],nb=new Map,R=new Map,X=new Map,Ab=new Map,Vc=document.getElementById("root");console.time("Render");(function(a,b){var c=nb.get(b);if(null===a||void 0===a)void 0!==c&&Ia(b,c);else if(a.$$typeof===mb){var d=a.type,e=!1;void 0===c?(c=new Pc(d),nb.set(b,c)):null!==
-c.fiber&&(c.mountOpcodes===d?e=!0:Ia(b,c));c.mountOpcodes=d;c.rootPropsObject=a.props;!0===e?(b=R.get(d),M(b,la,la,c,null)):(a=u(d,la,c,null),c.fiber.hostNode=a,Ba(b,a))}else throw Error("render() expects a ReactElement as the first argument");})(function(a,b){return{$$typeof:mb,key:null,props:b,ref:null,type:a}}([10,0,["feedLocation","feedbackSource","preloadedData","queryVariables"],[13,[29,function(){return[10,0,[13,[17,29,qc,0,29,$b,null,18],Mc,1]]},0],function(a,b,c,d){return[[d.contextForFeedback,
-a,c.data.feedback,b,d.feedbackTargetID,d.focusCommentID,c.data.shareable_config]]},1]],{relayQueryID:"1416350251803297",preloadedData:{data:{feedback:{id:"ZmVlZGJhY2s6ODQyNzUwMTE5MDk2MTg0",is_q_and_a:!1,is_eligible_for_real_time_updates:!1,feedback_typers:{friend_count:0,other_count:0},comment_count:{total_count:32},i18n_comment_count:"32",url:"https://facebook.com/testcomments/posts/842750119096184",i18n_reaction_count:"11",important_reactors:{nodes:[]},reaction_count:{count:11},viewer_current_actor:{__typename:"User",
-id:"100001961182163",name:"Dan Abramov",profile_picture:{uri:"https://example.com/1.jpg"}},viewer_feedback_reaction_info:null,can_show_seen_by:!1,seen_by:{count:0,i18n_seen_by_count:null,seen_by_everyone:!1},i18n_share_count:"0",share_count:{count:0},share_fbid:"842750119096184",top_reactions:{edges:[{i18n_reaction_count:"10",node:{localized_name:"Like",reaction_type:"LIKE",id:"1635855486666999",key:1},reaction_count:10},{i18n_reaction_count:"1",node:{localized_name:"Love",reaction_type:"LOVE",id:"1678524932434102",
-key:2},reaction_count:1}]},video_view_count:null,video_view_count_reduced:null,total_video_posts:null,video_post_view_count:null,seen_by_count:{count:0},can_viewer_comment:!0,is_group_q_and_a:!1,display_comments:{after_count:20,before_count:0,count:25,edges:[{node:{id:"Y29tbWVudDo4NDI3NTAxMTkwOTYxODRfODQyNzUwMTcyNDI5NTEy",is_hidden_by_viewer:!1,author:{__typename:"Page",id:"431135680257632",name:"[FB Test Page] Comments Test Page",url:"https://facebook.com/testcomments/",profile_picture:{uri:"https://example.com/2.jpg"}},
-is_author_weak_reference:!1,attachments:[],attached_story:null,body:{delight_ranges:[],ranges:[],text:"Comment",__typename:"TextWithEntities"},comment_menu_items:[{__typename:"CommentMenuItemHide"}],can_viewer_disable_preview:!1,edit_history:{count:0},feedback:{can_viewer_react:!0,id:"ZmVlZGJhY2s6ODQyNzUwMTE5MDk2MTg0Xzg0Mjc1MDE3MjQyOTUxMg==",top_reactions:{edges:[{node:{reaction_type:"LIKE",id:"1635855486666999",key:1},reaction_count:1}]},reactors:{count_reduced:"1",count:1},viewer_current_actor:{__typename:"User",
-id:"100001961182163",name:"Dan Abramov",profile_picture:{uri:"https://example.com/3.jpg"}},viewer_feedback_reaction_info:null,supported_reactions:[{key:1},{key:2},{key:4},{key:3},{key:7},{key:8}],can_viewer_comment:!0,is_group_q_and_a:!1,is_q_and_a:!1,display_comments:{after_count:7,before_count:0,count:7,edges:[],highlighted_comments:[],is_initially_expanded:!1,ordering_mode:"TOPLEVEL",page_info:{end_cursor:null,has_next_page:!0,has_previous_page:!1,start_cursor:null}}},created_time:1427330254,url:"https://facebook.com/testcomments/posts/842750119096184?comment_id=842750172429512",
-__typename:"Comment"},cursor:"AQHResPYuKjRIG6HRAwDw8M2Sw4jnkzse6PZaP2Rz6Mpfp88FivRhkTkJ4uwc8cyJsFM"},{node:{id:"Y29tbWVudDo4NDI3NTAxMTkwOTYxODRfMTA2NzM0MzcyNjYzNjgyMQ==",is_hidden_by_viewer:!1,author:{__typename:"User",id:"1380540005",name:"Jack Gill",url:"https://facebook.com/gill",profile_picture:{uri:"https://example.com/3.jpg"}},is_author_weak_reference:!1,attachments:[],attached_story:null,body:{delight_ranges:[],ranges:[],text:"test tet",__typename:"TextWithEntities"},comment_menu_items:[{__typename:"CommentMenuItemHide"}],
-can_viewer_disable_preview:!1,edit_history:{count:0},feedback:{can_viewer_react:!0,id:"ZmVlZGJhY2s6ODQyNzUwMTE5MDk2MTg0XzEwNjczNDM3MjY2MzY4MjE=",top_reactions:{edges:[]},reactors:{count_reduced:"0",count:0},viewer_current_actor:{__typename:"User",id:"100001961182163",name:"Dan Abramov",profile_picture:{uri:"https://example.com/4.jpg"}},viewer_feedback_reaction_info:null,supported_reactions:[{key:1},{key:2},{key:4},{key:3},{key:7},{key:8}],can_viewer_comment:!0,is_group_q_and_a:!1,is_q_and_a:!1,display_comments:{after_count:0,
-before_count:0,count:0,edges:[],highlighted_comments:[],is_initially_expanded:!1,ordering_mode:"TOPLEVEL",page_info:{end_cursor:null,has_next_page:!1,has_previous_page:!1,start_cursor:null}}},created_time:1466555826,url:"https://facebook.com/testcomments/posts/842750119096184?comment_id=1067343726636821",__typename:"Comment"},cursor:"AQHRWn3XXG0Ef-9VK0e26GWQJsroiMiqsYNIUWq2QJTxBdK40u3c-TIpQ7uqfL77NYJDYqimcsIUMGN1Iekfj4VlUw"}],highlighted_comments:[],is_initially_expanded:!0,ordering_mode:"RANKED_THREADED",
-page_info:{end_cursor:"AQHRg-fcECmhpaDc5A9Mu-oWaIiN_D2uiwaEzkkwFc8hsbApyn2HkyvMSvPOJyQdHvAhyhsB2s20hJWJ0a95RwBTaA",has_next_page:!0,has_previous_page:!1,start_cursor:"AQHRHATKPgbMa7rJ_oFyc4ztjRfDnZHSG1Dxa6nrcGpD1A167lFM0ARsi7rcXAmIDsxX"}},mentions_datasource_js_constructor_args_json:[{maxResults:5,queryData:{context:"topics_limited_autosuggest",viewer:0x5af3855f83d3,filter:["page","user"],include_fans:!1,context_id:0x5af3855f83d3,rsp:"mentions",post_fbid:842750119096184},queryEndpoint:"/ajax/typeahead/search.php",
-bootstrapData:{rsp:"mentions"},enabledLocalCache:!0,enabledMergeUids:!0,disableAllCaches:!1,enforceNewRequestIDUponFetch:!1,bootstrapEndpoints:[{endpoint:"/ajax/typeahead/first_degree.php",data:{context:"mentions",viewer:0x5af3855f83d3,token:"1523978152-7",filter:["page","group","app","event","user"],options:["friends_only","nm"]}}]}],can_viewer_react:!0,supported_reactions:[{key:1},{key:2},{key:4},{key:3},{key:7},{key:8}],reactors:{count:11}},shareable_config:{misinformation_confirm_dialog_uri:null,
-share_action_link_primer_attributes:{rel:"dialog"},share_action_link_uri:"https://facebook.com/ajax/sharer/?s=22&appid=25554907596&id=842750119096184&p%5B0%5D=431135680257632&p%5B1%5D=842750119096184&share_source_type=unknown&feedback_source=1",share_now_menu_uri:"https://facebook.com/share/share_now_menu/?actor_id=100001961182163&app_id=25554907596&dialog_uri=%2Fajax%2Fsharer%2F%3Fs%3D22%26appid%3D25554907596%26id%3D842750119096184%26p%255B0%255D%3D431135680257632%26p%255B1%255D%3D842750119096184%26share_source_type%3Dunknown%26feedback_source%3D1&share_rel=dialog&shareable_id=842750119096184&share_type=22&feedback_source=1&sharer_id=431135680257632&collection_id=98&shared_from_post_id=842750119096184"}}},
-queryVariables:{contextForFeedback:{can_show_seen_state:!1,comment_expand_mode:2,comment_permalink_args:{comment_id:null,reply_comment_id:null},feed_location:159,feedback_referrer:null,feedback_source:1,interesting_comment_fbids:[],is_ad_preview:!1,is_location_from_search:!1,is_story_set:!1,last_seen_time:null,log_ranked_comment_impressions:!1,root_story_id:"S:_I431135680257632:842750119096184",story_location:5,story_render_location:"survey_gallery",target_story_id:"S:_I431135680257632:842750119096184"},
-feedbackTargetID:"842750119096184",focusCommentID:null,shareableStoryContext:{ad_id:null,feed_location:"PERMALINK",feedback_referrer:null,feedback_source:1,outer_story_actor_id:431135680257632,story_caret_menu_button_id:null,story_container_id:null,user_logged_out_in_group_feed:!1},storyID:"S:_I431135680257632:842750119096184",storyLocation:5,scale:3}}),Vc);console.timeEnd("Render")});
+(function (factory) {
+  typeof define === 'function' && define.amd ? define(factory) :
+  factory();
+}(function () { 'use strict';
+
+  var currentDispatcher = {
+    current: null
+  };
+
+  function resolveDispatcher() {
+    var dispatcher = currentDispatcher.current;
+
+    if (dispatcher === null) {
+      throw new Error("Hooks can only be called inside the body of a function component.");
+    }
+
+    return dispatcher;
+  }
+
+  function useState(initialState) {
+    var dispatcher = resolveDispatcher();
+    return dispatcher.useState(initialState);
+  }
+
+  function Component_ComputeFunction() {
+    var __cached__0;
+
+    var _useState = useState(0),
+        count = _useState[0],
+        updateCount = _useState[1];
+
+    __cached__0 = function increment() {
+      updateCount(count + 1);
+    };
+
+    return [count, __cached__0];
+  }
+
+  var Component = // Component OPCODES
+  [10 // COMPONENT
+  , 1 // USES_HOOKS
+  , 0 // ROOT_PROPS_SHAPE
+  , [13 // UNCONDITIONAL_TEMPLATE
+  , [2 // OPEN_ELEMENT_DIV
+  , 0 // OPEN_ELEMENT
+  , "h1", 33 // ELEMENT_STATIC_CHILDREN_VALUE
+  , "This is a counter!", 8 // CLOSE_ELEMENT
+  , 2 // OPEN_ELEMENT_DIV
+  , 0 // OPEN_ELEMENT
+  , "p", 32 // ELEMENT_STATIC_CHILD_VALUE
+  , "The counter is currently at ", 34 // ELEMENT_DYNAMIC_CHILD_VALUE
+  , 0, 1 // HOST_NODE_VALUE_POINTER_INDEX
+  , 8 // CLOSE_ELEMENT
+  , 1 // OPEN_ELEMENT_WITH_POINTER
+  , "button", 2 // HOST_NODE_VALUE_POINTER_INDEX
+  , 43 // DYNAMIC_PROP
+  , "click", 2, 3, 1, 33 // ELEMENT_STATIC_CHILDREN_VALUE
+  , "Increase count", 8 // CLOSE_ELEMENT
+  , 8 // CLOSE_ELEMENT
+  , 8 // CLOSE_ELEMENT
+  ], Component_ComputeFunction // COMPUTE_FUNCTION
+  , 3 // VALUE_POINTER_INDEX
+  ]];
+
+  var NoWork = 0; // These are set right before calling the component.
+
+  var renderExpirationTime = NoWork; // The work-in-progress fiber. I've named it differently to distinguish it from
+  // the work-in-progress hook.
+
+  var currentlyRenderingFiber = null; // Hooks are stored as a linked list on the fiber's memoizedState field. The
+  // current hook list is the list that belongs to the current fiber. The
+  // work-in-progress hook list is a new list that will be added to the
+  // work-in-progress fiber.
+
+  var firstCurrentHook = null;
+  var currentHook = null;
+  var firstWorkInProgressHook = null;
+  var workInProgressHook = null;
+  // end of the current pass. We can't store these updates on the normal queue,
+  // because if the work is aborted, they should be discarded. Because this is
+  // a relatively rare case, we also don't want to add an additional field to
+  // either the hook or queue object types. So we store them in a lazily create
+  // map of queue -> render-phase updates, which are discarded once the component
+  // completes without re-rendering.
+  // Whether the work-in-progress hook is a re-rendered hook
+
+  var isReRender = false; // Whether an update was scheduled during the currently executing render pass.
+
+  var renderPhaseUpdates = null; // Counter to prevent infinite loops.
+  function prepareToUseHooks(workInProgress, nextRenderExpirationTime) {
+    renderExpirationTime = nextRenderExpirationTime;
+    currentlyRenderingFiber = workInProgress;
+    firstCurrentHook = workInProgress.memoizedState;
+  }
+  function finishHooks() {
+    renderExpirationTime = NoWork;
+    currentlyRenderingFiber = null;
+    firstCurrentHook = null;
+    currentHook = null;
+    firstWorkInProgressHook = null;
+    workInProgressHook = null;
+  }
+
+  function resolveCurrentlyRenderingFiber() {
+    if (currentlyRenderingFiber === null) {
+      throw new Error("Hooks can only be called inside the body of a function component.");
+    }
+
+    return currentlyRenderingFiber;
+  }
+
+  function createHook() {
+    return {
+      memoizedState: null,
+      baseState: null,
+      queue: null,
+      baseUpdate: null,
+      next: null
+    };
+  }
+
+  function cloneHook(hook) {
+    return {
+      memoizedState: hook.memoizedState,
+      baseState: hook.baseState,
+      queue: hook.queue,
+      baseUpdate: hook.baseUpdate,
+      next: null
+    };
+  }
+
+  function createWorkInProgressHook() {
+    if (workInProgressHook === null) {
+      // This is the first hook in the list
+      if (firstWorkInProgressHook === null) {
+        isReRender = false;
+        currentHook = firstCurrentHook;
+
+        if (currentHook === null) {
+          // This is a newly mounted hook
+          workInProgressHook = createHook();
+        } else {
+          // Clone the current hook.
+          workInProgressHook = cloneHook(currentHook);
+        }
+
+        firstWorkInProgressHook = workInProgressHook;
+      } else {
+        // There's already a work-in-progress. Reuse it.
+        isReRender = true;
+        currentHook = firstCurrentHook;
+        workInProgressHook = firstWorkInProgressHook;
+      }
+    } else {
+      if (workInProgressHook.next === null) {
+        isReRender = false;
+        var hook;
+
+        if (currentHook === null) {
+          // This is a newly mounted hook
+          hook = createHook();
+        } else {
+          currentHook = currentHook.next;
+
+          if (currentHook === null) {
+            // This is a newly mounted hook
+            hook = createHook();
+          } else {
+            // Clone the current hook.
+            hook = cloneHook(currentHook);
+          }
+        } // Append to the end of the list
+
+
+        workInProgressHook = workInProgressHook.next = hook;
+      } else {
+        // There's already a work-in-progress. Reuse it.
+        isReRender = true;
+        workInProgressHook = workInProgressHook.next;
+        currentHook = currentHook !== null ? currentHook.next : null;
+      }
+    }
+
+    return workInProgressHook;
+  }
+
+  function basicStateReducer(state, action) {
+    return typeof action === "function" ? action(state) : action;
+  }
+
+  function useReducer$1(reducer, initialState, initialAction) {
+    currentlyRenderingFiber = resolveCurrentlyRenderingFiber();
+    workInProgressHook = createWorkInProgressHook();
+    var queue = workInProgressHook.queue;
+
+    if (queue !== null) {
+      // Already have a queue, so this is an update.
+      if (isReRender) {
+        // This is a re-render. Apply the new render phase updates to the previous
+        var _dispatch2 = queue.dispatch;
+
+        if (renderPhaseUpdates !== null) {
+          // Render phase updates are stored in a map of queue -> linked list
+          var firstRenderPhaseUpdate = renderPhaseUpdates.get(queue);
+
+          if (firstRenderPhaseUpdate !== undefined) {
+            renderPhaseUpdates.delete(queue);
+            var newState = workInProgressHook.memoizedState;
+            var update = firstRenderPhaseUpdate;
+
+            do {
+              // Process this render phase update. We don't have to check the
+              // priority because it will always be the same as the current
+              // render's.
+              var action = update.action;
+              newState = reducer(newState, action);
+              update = update.next;
+            } while (update !== null);
+
+            workInProgressHook.memoizedState = newState; // Don't persist the state accumlated from the render phase updates to
+            // the base state unless the queue is empty.
+            // TODO: Not sure if this is the desired semantics, but it's what we
+            // do for gDSFP. I can't remember why.
+
+            if (workInProgressHook.baseUpdate === queue.last) {
+              workInProgressHook.baseState = newState;
+            }
+
+            return [newState, _dispatch2];
+          }
+        }
+
+        return [workInProgressHook.memoizedState, _dispatch2];
+      } // The last update in the entire queue
+
+
+      var last = queue.last; // The last update that is part of the base state.
+
+      var baseUpdate = workInProgressHook.baseUpdate; // Find the first unprocessed update.
+
+      var first;
+
+      if (baseUpdate !== null) {
+        if (last !== null) {
+          // For the first update, the queue is a circular linked list where
+          // `queue.last.next = queue.first`. Once the first update commits, and
+          // the `baseUpdate` is no longer empty, we can unravel the list.
+          last.next = null;
+        }
+
+        first = baseUpdate.next;
+      } else {
+        first = last !== null ? last.next : null;
+      }
+
+      if (first !== null) {
+        var _newState = workInProgressHook.baseState;
+        var newBaseState = null;
+        var newBaseUpdate = null;
+        var prevUpdate = baseUpdate;
+        var _update = first;
+        var didSkip = false;
+
+        do {
+          var updateExpirationTime = _update.expirationTime;
+
+          if (updateExpirationTime < renderExpirationTime) {
+            // Priority is insufficient. Skip this update. If this is the first
+            // skipped update, the previous update/state is the new base
+            // update/state.
+            if (!didSkip) {
+              didSkip = true;
+              newBaseUpdate = prevUpdate;
+              newBaseState = _newState;
+            } // Update the remaining priority in the queue.
+          } else {
+            // Process this update.
+            var _action = _update.action;
+            _newState = reducer(_newState, _action);
+          }
+
+          prevUpdate = _update;
+          _update = _update.next;
+        } while (_update !== null && _update !== first);
+
+        if (!didSkip) {
+          newBaseUpdate = prevUpdate;
+          newBaseState = _newState;
+        }
+
+        workInProgressHook.memoizedState = _newState;
+        workInProgressHook.baseUpdate = newBaseUpdate;
+        workInProgressHook.baseState = newBaseState;
+      }
+
+      var _dispatch = queue.dispatch;
+      return [workInProgressHook.memoizedState, _dispatch];
+    } // There's no existing queue, so this is the initial render.
+
+
+    if (reducer === basicStateReducer) {
+      // Special case for `useState`.
+      if (typeof initialState === "function") {
+        initialState = initialState();
+      }
+    } else if (initialAction !== undefined && initialAction !== null) {
+      initialState = reducer(initialState, initialAction);
+    }
+
+    workInProgressHook.memoizedState = workInProgressHook.baseState = initialState;
+    queue = workInProgressHook.queue = {
+      last: null,
+      dispatch: null
+    };
+    var dispatch = queue.dispatch = dispatchAction.bind(null, currentlyRenderingFiber, queue);
+    return [workInProgressHook.memoizedState, dispatch];
+  }
+
+  function useState$1(initialState) {
+    return useReducer$1(basicStateReducer, // useReducer has a special case to support lazy useState initializers
+    initialState);
+  }
+
+  function requestCurrentTime() {// TODO
+  }
+
+  function computeExpirationForFiber() {// TODO
+  }
+
+  function dispatchAction(fiber, queue, action) {
+
+    var alternate = fiber.alternate;
+
+    if (fiber === currentlyRenderingFiber || alternate !== null && alternate === currentlyRenderingFiber) {
+      var update = {
+        expirationTime: renderExpirationTime,
+        action: action,
+        next: null
+      };
+
+      if (renderPhaseUpdates === null) {
+        renderPhaseUpdates = new Map();
+      }
+
+      var firstRenderPhaseUpdate = renderPhaseUpdates.get(queue);
+
+      if (firstRenderPhaseUpdate === undefined) {
+        renderPhaseUpdates.set(queue, update);
+      } else {
+        // Append the update to the end of the list.
+        var lastRenderPhaseUpdate = firstRenderPhaseUpdate;
+
+        while (lastRenderPhaseUpdate.next !== null) {
+          lastRenderPhaseUpdate = lastRenderPhaseUpdate.next;
+        }
+
+        lastRenderPhaseUpdate.next = update;
+      }
+    } else {
+      var currentTime = requestCurrentTime();
+      var expirationTime = computeExpirationForFiber(currentTime, fiber);
+      var _update2 = {
+        expirationTime: expirationTime,
+        action: action,
+        next: null
+      };
+
+      var last = queue.last;
+
+      if (last === null) {
+        // This is the first update. Create a circular list.
+        _update2.next = _update2;
+      } else {
+        var first = last.next;
+
+        if (first !== null) {
+          // Still circular.
+          _update2.next = first;
+        }
+
+        last.next = _update2;
+      }
+
+      queue.last = _update2;
+    }
+  }
+
+  var Dispatcher = {
+    useReducer: useReducer$1,
+    useState: useState$1
+  };
+
+  var reactElementSymbol = Symbol.for("react.element");
+  var isArray = Array.isArray;
+  var emptyArray = [];
+  function convertRootPropsToPropsArray(rootProps, rootPropsShape) {
+    var props = [];
+
+    if (rootPropsShape !== 0) {
+      for (var i = 0, length = rootPropsShape.length; i < length; i++) {
+        var propShape = rootPropsShape[i];
+        props.push(rootProps[propShape]);
+      }
+    }
+
+    return props;
+  }
+  function createRootComponent(rootProps, rootPropsShape, usesHooks) {
+    return createComponent(convertRootPropsToPropsArray(rootProps, rootPropsShape), usesHooks);
+  }
+  function createComponent(props, usesHooks) {
+    return {
+      props: props,
+      usesHooks: usesHooks
+    };
+  }
+  function isReactNode(node) {
+    return node !== null && node.t !== undefined && node.v !== undefined;
+  }
+
+  var rootStates = new Map();
+  var mountOpcodesToUpdateOpcodes = new Map();
+  var mountOpcodesToUnmountOpcodes = new Map();
+  var componentOpcodeCache = new Map(); // const ELEMENT_NODE = 1;
+
+  var TEXT_NODE = 3; // const COMMENT_NODE = 8;
+  // const DOCUMENT_NODE = 9;
+  // const DOCUMENT_FRAGMENT_NODE = 11;
+
+  var OPEN_ELEMENT = 0;
+  var OPEN_ELEMENT_WITH_POINTER = 1;
+  var OPEN_ELEMENT_DIV = 2;
+  var OPEN_ELEMENT_DIV_WITH_POINTER = 3;
+  var OPEN_ELEMENT_SPAN = 4;
+  var OPEN_ELEMENT_SPAN_WITH_POINTER = 5;
+  var OPEN_VOID_ELEMENT = 6;
+  var OPEN_VOID_ELEMENT_WITH_POINTER = 7;
+  var CLOSE_ELEMENT = 8;
+  var CLOSE_VOID_ELEMENT = 9;
+  var COMPONENT = 10;
+  var ROOT_STATIC_VALUE = 11;
+  var ROOT_DYNAMIC_VALUE = 12;
+  var UNCONDITIONAL_TEMPLATE = 13;
+  var CONDITIONAL_TEMPLATE = 14;
+  var MULTI_CONDITIONAL = 15;
+  var CONDITIONAL = 16;
+  var OPEN_FRAGMENT = 17;
+  var CLOSE_FRAGMENT = 18; // const OPEN_CONTEXT_PROVIDER = 19;
+  // const CLOSE_CONTEXT_PROVIDER = 20;
+
+  var OPEN_PROP_STYLE = 21;
+  var CLOSE_PROP_STYLE = 22;
+  var TEMPLATE = 23;
+  var TEMPLATE_FROM_FUNC_CALL = 24;
+  var REACT_NODE_TEMPLATE_FROM_FUNC_CALL = 25; // const CONTEXT_CONSUMER_UNCONDITIONAL_TEMPLATE = 26;
+  // const CONTEXT_CONSUMER_CONDITIONAL_TEMPLATE = 27;
+  // const CONTEXT_CONSUMER_TEMPLATE = 28;
+
+  var REF_COMPONENT = 29; // const LOGICAL_OR = 30;
+  // const LOGICAL_AND = 31;
+
+  var ELEMENT_STATIC_CHILD_VALUE = 32;
+  var ELEMENT_STATIC_CHILDREN_VALUE = 33;
+  var ELEMENT_DYNAMIC_CHILD_VALUE = 34;
+  var ELEMENT_DYNAMIC_CHILDREN_VALUE = 35; // const ELEMENT_DYNAMIC_CHILD_TEMPLATE_FROM_FUNC_CALL = 36;
+
+  var ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL = 37;
+  var ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE = 38;
+  var ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE = 39;
+  var ELEMENT_DYNAMIC_CHILDREN_REACT_NODE_TEMPLATE = 40; // const ELEMENT_DYNAMIC_FUNCTION_CHILD = 41;
+
+  var STATIC_PROP = 42;
+  var DYNAMIC_PROP = 43;
+  var STATIC_PROP_CLASS_NAME = 44;
+  var DYNAMIC_PROP_CLASS_NAME = 45;
+  var STATIC_PROP_VALUE = 46; // const DYNAMIC_PROP_VALUE = 47;
+
+  var STATIC_PROP_STYLE = 48;
+  var DYNAMIC_PROP_STYLE = 49;
+  var STATIC_PROP_UNITLESS_STYLE = 50; // const DYNAMIC_PROP_UNITLESS_STYLE = 51;
+
+  var DYNAMIC_PROP_REF = 52;
+  var PropFlagPartialTemplate = 1;
+  var PropFlagReactEvent = 1 << 1; // starts with on
+
+  var PropFlagReactCapturedEvent = 1 << 2;
+  var EventFlagBubbles = 1;
+  var EventFlagTwoPhase = 1 << 1;
+  var hostNodeEventListeners = new WeakMap();
+  var hostNodeRegisteredEventCallbacks = new WeakMap();
+
+  function createPlaceholderNode() {
+    return document.createTextNode("");
+  }
+
+  function createElement(tagName) {
+    return document.createElement(tagName);
+  }
+
+  function createTextNode(text) {
+    return document.createTextNode(text);
+  }
+
+  function getEventTarget(nativeEvent) {
+    // Fallback to nativeEvent.srcElement for IE9
+    // https://github.com/facebook/react/issues/12506
+    var target = nativeEvent.target || nativeEvent.srcElement || window; // Normalize SVG <use> element events #4963
+
+    if (target.correspondingUseElement) {
+      target = target.correspondingUseElement;
+    } // Safari may fire events on text nodes (Node.TEXT_NODE is 3).
+    // @see http://www.quirksmode.org/js/events_properties.html
+
+
+    return target.nodeType === TEXT_NODE ? target.parentNode : target;
+  }
+
+  function listenToEvent(state, eventName, eventInformation) {
+    var rootHostNode = state.fiber.hostNode;
+    var registeredEvents = hostNodeEventListeners.get(rootHostNode);
+
+    if (registeredEvents === undefined) {
+      registeredEvents = new Map();
+      hostNodeEventListeners.set(rootHostNode, registeredEvents);
+    }
+
+    rootHostNode.addEventListener(eventName, proxyEvent.bind(null, eventName, eventInformation), eventInformation & EventFlagBubbles);
+  }
+
+  function proxyEvent(eventName, eventInformation, nativeEvent) {
+    var eventTarget = getEventTarget(nativeEvent);
+    var path = [];
+    var domNode = eventTarget;
+
+    while (domNode !== null) {
+      if (hostNodeRegisteredEventCallbacks.has(domNode)) {
+        path.push(domNode);
+      }
+
+      domNode = domNode.parentNode;
+    }
+
+    var pathLength = path.length;
+
+    if (pathLength > 0 && eventInformation & EventFlagTwoPhase) {
+      var i; // eslint-disable-next-line space-in-parens
+
+      for (i = pathLength; i-- > 0;) {
+        dispatchEventCallback(eventName + "-captured", path[i], nativeEvent);
+      }
+
+      for (i = 0; i < pathLength; i++) {
+        dispatchEventCallback(eventName, path[i], nativeEvent);
+      }
+    }
+  }
+
+  function dispatchEventCallback(dispatchEventName, domNode, nativeEvent) {
+    var registeredEventCallbacks = hostNodeRegisteredEventCallbacks.get(domNode);
+    var eventCallback = registeredEventCallbacks.get(dispatchEventName);
+
+    if (eventCallback !== undefined) {
+      eventCallback(nativeEvent);
+    }
+  }
+
+  function registerEventCallbackForHostNode(hostNode, eventName, eventCallback, capturedEvent) {
+    var registeredEventCallbacks = hostNodeRegisteredEventCallbacks.get(hostNode);
+
+    if (registeredEventCallbacks === undefined) {
+      registeredEventCallbacks = new Map();
+      hostNodeRegisteredEventCallbacks.set(hostNode, registeredEventCallbacks);
+    }
+
+    registeredEventCallbacks.set(capturedEvent ? eventName + "-captured" : eventName, eventCallback);
+  }
+
+  function removeChild(parent, child) {
+    if (isArray(child)) {
+      for (var i = 0, length = child.length; i < length; i++) {
+        removeChild(parent, child[i]);
+      }
+    } else {
+      parent.removeChild(child);
+    }
+  }
+
+  function replaceChild(originalNode, replaceNode) {
+    originalNode.parentNode.replaceChild(replaceNode, originalNode);
+  }
+
+  function appendChild(parentElementOrFragment, element) {
+    if (isArray(parentElementOrFragment)) {
+      parentElementOrFragment.push(element);
+    } else if (isArray(element)) {
+      for (var i = 0, length = element.length; i < length; i++) {
+        appendChild(parentElementOrFragment, element[i]);
+      }
+    } else {
+      parentElementOrFragment.appendChild(element);
+    }
+  }
+
+  function callComputeFunctionWithArray(computeFunction, arr) {
+    if (arr.length === 0) {
+      return computeFunction();
+    } else if (arr.length === 1) {
+      return computeFunction(arr[0]);
+    } else if (arr.length === 2) {
+      return computeFunction(arr[0], arr[1]);
+    } else if (arr.length === 3) {
+      return computeFunction(arr[0], arr[1], arr[2]);
+    } else if (arr.length === 4) {
+      return computeFunction(arr[0], arr[1], arr[2], arr[3]);
+    } else if (arr.length === 7) {
+      return computeFunction(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
+    }
+
+    return computeFunction.apply(null, arr);
+  }
+
+  function openElement(elem, state, workInProgress) {
+    var currentHostNode = state.currentHostNode;
+
+    if (workInProgress.hostNode === null) {
+      workInProgress.hostNode = elem;
+    }
+
+    if (currentHostNode !== null) {
+      var stackIndex = state.currentHostNodeStackIndex++;
+      state.currentHostNodeStack[stackIndex] = state.currentHostNode;
+    }
+
+    state.currentHostNode = elem;
+  }
+
+  function renderMountReactNode(node, state, workInProgress) {
+    if (node === null || node === undefined || typeof node === "boolean") {
+      return;
+    }
+
+    if (typeof node === "string" || typeof node === "number") ; else if (isReactNode(node)) {
+      var templateOpcodes = node.t;
+      var templateRuntimeValues = node.v;
+      return renderMountOpcodes(templateOpcodes, templateRuntimeValues, state, workInProgress);
+    } else if (isArray(node)) {
+      var arr = [];
+
+      for (var i = 0, length = node.length; i < length; ++i) {
+        var elementNode = node[i];
+        var hostNode = renderMountReactNode(elementNode, state, workInProgress);
+
+        if (hostNode !== undefined) {
+          arr.push(hostNode);
+        }
+      }
+
+      return arr;
+    }
+  }
+
+  function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) {
+    var opcodesLength = mountOpcodes.length;
+    var updateOpcodes = mountOpcodesToUpdateOpcodes.get(mountOpcodes);
+    var unmountOpcodes = mountOpcodesToUnmountOpcodes.get(mountOpcodes);
+    var topHostNode;
+    var shouldCreateOpcodes = updateOpcodes === undefined;
+    var values = workInProgress === null ? null : workInProgress.values;
+
+    if (shouldCreateOpcodes === true) {
+      updateOpcodes = [];
+      unmountOpcodes = [];
+      mountOpcodesToUpdateOpcodes.set(mountOpcodes, updateOpcodes);
+      mountOpcodesToUnmountOpcodes.set(mountOpcodes, unmountOpcodes);
+    }
+
+    var index = 0; // Render opcodes from the opcode jump-table
+
+    while (index < opcodesLength) {
+      var opcode = mountOpcodes[index];
+
+      switch (opcode) {
+        case REF_COMPONENT:
+          {
+            var componentOpcodesFunction = mountOpcodes[++index];
+            var propsArrayValuePointerOrValue = mountOpcodes[++index];
+            var componentMountOpcodes = componentOpcodeCache.get(componentOpcodesFunction);
+
+            if (componentMountOpcodes === undefined) {
+              componentMountOpcodes = componentOpcodesFunction();
+              componentOpcodeCache.set(componentOpcodesFunction, componentMountOpcodes);
+            } else {
+              componentMountOpcodes = componentOpcodeCache.get(componentOpcodesFunction);
+            }
+
+            var propsArrayValue = null;
+
+            if (isArray(propsArrayValuePointerOrValue)) {
+              propsArrayValue = propsArrayValuePointerOrValue;
+            } else if (propsArrayValuePointerOrValue !== null) {
+              propsArrayValue = runtimeValues[propsArrayValuePointerOrValue];
+            }
+
+            state.propsArray = propsArrayValue;
+            topHostNode = renderMountOpcodes(componentMountOpcodes, runtimeValues, state, workInProgress);
+
+            if (shouldCreateOpcodes === true) {
+              updateOpcodes.push(componentMountOpcodes, propsArrayValuePointerOrValue);
+            }
+
+            break;
+          }
+
+        case STATIC_PROP_CLASS_NAME:
+          {
+            var staticClassName = mountOpcodes[++index];
+            state.currentHostNode.className = staticClassName;
+            break;
+          }
+
+        case DYNAMIC_PROP_CLASS_NAME:
+          {
+            var propInformation = mountOpcodes[++index];
+            var dynamicClassNamePointer = mountOpcodes[++index];
+            var dynamicClassName = runtimeValues[dynamicClassNamePointer];
+
+            if (propInformation & PropFlagPartialTemplate) {
+              throw new Error("TODO DYNAMIC_PROP_CLASS_NAME");
+            } else {
+              state.currentHostNode.className = dynamicClassName;
+            }
+
+            if (shouldCreateOpcodes === true) {
+              updateOpcodes.push(DYNAMIC_PROP_CLASS_NAME, propInformation, dynamicClassNamePointer);
+            }
+
+            break;
+          }
+
+        case STATIC_PROP:
+          {
+            var propName = mountOpcodes[++index];
+            var staticPropValue = mountOpcodes[++index];
+            var currentHostNode = state.currentHostNode;
+
+            if (propName === "id") {
+              currentHostNode.id = staticPropValue;
+            } else {
+              currentHostNode.setAttribute(propName, staticPropValue);
+            }
+
+            break;
+          }
+
+        case DYNAMIC_PROP:
+          {
+            var _propName = mountOpcodes[++index];
+            var _propInformation = mountOpcodes[++index];
+            var eventInformation = void 0;
+
+            if (_propInformation & PropFlagReactEvent) {
+              eventInformation = mountOpcodes[++index];
+            }
+
+            var dynamicPropValuePointer = mountOpcodes[++index];
+            var dynamicPropValue = runtimeValues[dynamicPropValuePointer];
+
+            if (_propInformation & PropFlagPartialTemplate) {
+              throw new Error("TODO DYNAMIC_PROP");
+            } else if (eventInformation !== undefined) {
+              listenToEvent(state, _propName, eventInformation);
+              registerEventCallbackForHostNode(state.currentHostNode, _propName, dynamicPropValue, _propInformation & PropFlagReactCapturedEvent);
+            } else if (dynamicPropValue !== null && dynamicPropValue !== undefined) {
+              state.currentHostNode.setAttribute(_propName, dynamicPropValue);
+            }
+
+            break;
+          }
+
+        case STATIC_PROP_VALUE:
+          {
+            var staticValueProp = mountOpcodes[++index];
+
+            if (typeof staticValueProp === "string") {
+              state.currentHostNode.value = staticValueProp;
+            } else {
+              state.currentHostNode.setAttribute("value", staticValueProp);
+            }
+
+            break;
+          }
+
+        case ELEMENT_STATIC_CHILD_VALUE:
+          {
+            var staticTextChild = mountOpcodes[++index];
+            var textNode = createTextNode(staticTextChild);
+            var _currentHostNode = state.currentHostNode;
+            appendChild(_currentHostNode, textNode);
+            break;
+          }
+
+        case ELEMENT_STATIC_CHILDREN_VALUE:
+          {
+            var staticTextContent = mountOpcodes[++index];
+            state.currentHostNode.textContent = staticTextContent;
+            break;
+          }
+
+        case ELEMENT_DYNAMIC_CHILD_VALUE:
+          {
+            var dynamicTextChildPointer = mountOpcodes[++index];
+            var hostNodeValuePointer = mountOpcodes[++index];
+            var dynamicTextChild = runtimeValues[dynamicTextChildPointer];
+
+            var _textNode = createTextNode(dynamicTextChild);
+
+            var _currentHostNode2 = state.currentHostNode;
+            values[hostNodeValuePointer] = _textNode;
+            appendChild(_currentHostNode2, _textNode);
+
+            if (shouldCreateOpcodes === true) {
+              updateOpcodes.push(ELEMENT_DYNAMIC_CHILDREN_VALUE, dynamicTextChildPointer, hostNodeValuePointer);
+            }
+
+            break;
+          }
+
+        case ELEMENT_DYNAMIC_CHILDREN_VALUE:
+          {
+            var dynamicTextContentPointer = mountOpcodes[++index];
+            var _hostNodeValuePointer = mountOpcodes[++index];
+            var dynamicTextContent = runtimeValues[dynamicTextContentPointer];
+            var _currentHostNode3 = state.currentHostNode;
+
+            var _textNode2 = void 0;
+
+            if (dynamicTextContent === null || dynamicTextContent === undefined || dynamicTextContent === "") {
+              _textNode2 = createPlaceholderNode();
+            } else {
+              _currentHostNode3.textContent = dynamicTextContent;
+              _textNode2 = _currentHostNode3.firstChild;
+            }
+
+            values[_hostNodeValuePointer] = _textNode2;
+
+            if (shouldCreateOpcodes === true) {
+              updateOpcodes.push(ELEMENT_DYNAMIC_CHILDREN_VALUE, dynamicTextContentPointer, _hostNodeValuePointer);
+            }
+
+            break;
+          }
+
+        case ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE:
+          {
+            var reactNodeOrArrayPointer = mountOpcodes[++index];
+            var _hostNodeValuePointer2 = mountOpcodes[++index];
+            var reactNodeOrArray = runtimeValues[reactNodeOrArrayPointer];
+            var hostNode = topHostNode = renderMountReactNode(reactNodeOrArray, state, workInProgress);
+            values[_hostNodeValuePointer2] = hostNode;
+            break;
+          }
+
+        case ELEMENT_DYNAMIC_CHILDREN_REACT_NODE_TEMPLATE:
+          {
+            var _reactNodeOrArrayPointer = mountOpcodes[++index];
+            var _hostNodeValuePointer3 = mountOpcodes[++index];
+            var _reactNodeOrArray = runtimeValues[_reactNodeOrArrayPointer];
+            state.lastChildWasTextNode = false;
+
+            var _hostNode = topHostNode = renderMountReactNode(_reactNodeOrArray, state, workInProgress);
+
+            values[_hostNodeValuePointer3] = _hostNode;
+            break;
+          }
+
+        case OPEN_ELEMENT_DIV:
+          {
+            var elem = createElement("div");
+            openElement(elem, state, workInProgress);
+            break;
+          }
+
+        case OPEN_ELEMENT_SPAN:
+          {
+            var _elem = createElement("span");
+
+            openElement(_elem, state, workInProgress);
+            break;
+          }
+
+        case OPEN_ELEMENT:
+          {
+            var elementTag = mountOpcodes[++index];
+
+            var _elem2 = createElement(elementTag);
+
+            openElement(_elem2, state, workInProgress);
+            break;
+          }
+
+        case OPEN_ELEMENT_DIV_WITH_POINTER:
+          {
+            var _elem3 = createElement("div");
+
+            var elementValuePointer = mountOpcodes[++index];
+            openElement(_elem3, state, workInProgress);
+            values[elementValuePointer] = _elem3;
+
+            if (shouldCreateOpcodes === true) {
+              updateOpcodes.push(OPEN_ELEMENT_DIV_WITH_POINTER, elementValuePointer);
+            }
+
+            break;
+          }
+
+        case OPEN_ELEMENT_SPAN_WITH_POINTER:
+          {
+            var _elem4 = createElement("span");
+
+            var _elementValuePointer = mountOpcodes[++index];
+            openElement(_elem4, state, workInProgress);
+            values[_elementValuePointer] = _elem4;
+
+            if (shouldCreateOpcodes === true) {
+              updateOpcodes.push(OPEN_ELEMENT_SPAN_WITH_POINTER, _elementValuePointer);
+            }
+
+            break;
+          }
+
+        case OPEN_ELEMENT_WITH_POINTER:
+          {
+            var _elementTag = mountOpcodes[++index];
+            var _elementValuePointer2 = mountOpcodes[++index];
+
+            var _elem5 = createElement(_elementTag);
+
+            openElement(_elem5, state, workInProgress);
+            values[_elementValuePointer2] = _elem5;
+
+            if (shouldCreateOpcodes === true) {
+              updateOpcodes.push(OPEN_ELEMENT_WITH_POINTER, _elementValuePointer2);
+            }
+
+            break;
+          }
+
+        case CLOSE_FRAGMENT:
+        case CLOSE_VOID_ELEMENT:
+        case CLOSE_ELEMENT:
+          {
+            var stackIndex = state.currentHostNodeStackIndex;
+            var _currentHostNode4 = state.currentHostNode;
+
+            if (stackIndex === 0) {
+              state.currentHostNode = null;
+            } else {
+              stackIndex = --state.currentHostNodeStackIndex;
+              var parent = state.currentHostNodeStack[stackIndex];
+              state.currentHostNodeStack[stackIndex] = null;
+              appendChild(parent, _currentHostNode4);
+              state.currentHostNode = _currentHostNode4 = parent;
+            }
+
+            topHostNode = _currentHostNode4;
+            break;
+          }
+
+        case OPEN_VOID_ELEMENT:
+          {
+            var _elementTag2 = mountOpcodes[++index];
+
+            var _elem6 = createElement(_elementTag2);
+
+            openElement(_elem6, state, workInProgress);
+            break;
+          }
+
+        case OPEN_VOID_ELEMENT_WITH_POINTER:
+          {
+            var _elementTag3 = mountOpcodes[++index];
+            var _elementValuePointer3 = mountOpcodes[++index];
+
+            var _elem7 = createElement(_elementTag3);
+
+            openElement(_elem7, state, workInProgress);
+            values[_elementValuePointer3] = _elem7;
+
+            if (shouldCreateOpcodes === true) {
+              updateOpcodes.push(OPEN_VOID_ELEMENT_WITH_POINTER, _elementValuePointer3);
+            }
+
+            break;
+          }
+
+        case OPEN_FRAGMENT:
+          {
+            var _hostNode2 = [];
+            openElement(_hostNode2, state, workInProgress);
+            break;
+          }
+
+        case ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL:
+          {
+            var templateOpcodes = mountOpcodes[++index];
+            var computeValuesPointer = mountOpcodes[++index];
+            var _hostNodeValuePointer4 = mountOpcodes[++index];
+            var computeValues = runtimeValues[computeValuesPointer];
+
+            var _hostNode3 = renderMountOpcodes(templateOpcodes, computeValues, state, workInProgress);
+
+            values[_hostNodeValuePointer4] = _hostNode3;
+            break;
+          }
+
+        case STATIC_PROP_STYLE:
+          {
+            var styleName = mountOpcodes[++index];
+            var styleValue = mountOpcodes[++index];
+
+            if (styleValue == null || styleValue === undefined) {
+              break;
+            }
+
+            if (typeof styleValue === "number") {
+              styleValue = styleValue + "px";
+            }
+
+            state.currentHostNode.style.setProperty(styleName, styleValue);
+            break;
+          }
+
+        case DYNAMIC_PROP_STYLE:
+          {
+            var _styleName = mountOpcodes[++index];
+            var styleValuePointer = mountOpcodes[++index];
+            var _styleValue = runtimeValues[styleValuePointer];
+
+            if (_styleValue == null || _styleValue === undefined) {
+              break;
+            }
+
+            if (typeof _styleValue === "number") {
+              _styleValue = _styleValue + "px";
+            }
+
+            state.currentHostNode.style.setProperty(_styleName, _styleValue);
+            break;
+          }
+
+        case STATIC_PROP_UNITLESS_STYLE:
+          {
+            var _styleName2 = mountOpcodes[++index];
+            var _styleValue2 = mountOpcodes[++index];
+
+            if (_styleValue2 == null || _styleValue2 === undefined) {
+              break;
+            }
+
+            state.currentHostNode.style.setProperty(_styleName2, _styleValue2);
+            break;
+          }
+
+        case CONDITIONAL:
+          {
+            var _hostNodeValuePointer5 = mountOpcodes[++index];
+            var conditionValuePointer = mountOpcodes[++index];
+            var conditionValue = runtimeValues[conditionValuePointer];
+            var consequentMountOpcodes = mountOpcodes[++index];
+            var alternateMountOpcodes = mountOpcodes[++index];
+
+            var _hostNode4 = void 0;
+
+            if (shouldCreateOpcodes === true) {
+              updateOpcodes.push(CONDITIONAL, _hostNodeValuePointer5, conditionValuePointer, consequentMountOpcodes, alternateMountOpcodes);
+            }
+
+            if (conditionValue) {
+              if (consequentMountOpcodes !== 0) {
+                _hostNode4 = renderMountOpcodes(consequentMountOpcodes, runtimeValues, state, workInProgress);
+              }
+            } else {
+              if (alternateMountOpcodes !== 0) {
+                _hostNode4 = renderMountOpcodes(alternateMountOpcodes, runtimeValues, state, workInProgress);
+              }
+            }
+
+            topHostNode = values[_hostNodeValuePointer5] = _hostNode4;
+            break;
+          }
+
+        case MULTI_CONDITIONAL:
+          {
+            var conditionalSize = mountOpcodes[++index];
+            var _hostNodeValuePointer6 = mountOpcodes[++index];
+            var caseValuePointer = mountOpcodes[++index];
+            var startingIndex = index;
+            var conditionalDefaultIndex = conditionalSize - 1;
+
+            if (shouldCreateOpcodes === true) {
+              var _updateOpcodes;
+
+              var sliceFrom = startingIndex + 1;
+              var sliceTo = sliceFrom + (conditionalSize - 1) * 2 + 1;
+
+              (_updateOpcodes = updateOpcodes).push.apply(_updateOpcodes, [MULTI_CONDITIONAL, conditionalSize, _hostNodeValuePointer6, caseValuePointer].concat(mountOpcodes.slice(sliceFrom, sliceTo)));
+            }
+
+            var _hostNode5 = void 0;
+
+            var conditionalIndex = 0;
+
+            for (; conditionalIndex < conditionalSize; conditionalIndex++) {
+              if (conditionalIndex === conditionalDefaultIndex) {
+                var defaultCaseMountOpcodes = mountOpcodes[++index];
+
+                if (defaultCaseMountOpcodes !== null) {
+                  _hostNode5 = renderMountOpcodes(defaultCaseMountOpcodes, runtimeValues, state, workInProgress);
+                }
+              } else {
+                var caseConditionPointer = mountOpcodes[++index];
+                var caseConditionValue = runtimeValues[caseConditionPointer];
+
+                if (caseConditionValue === true) {
+                  var caseMountOpcodes = mountOpcodes[++index];
+
+                  if (caseMountOpcodes !== null) {
+                    _hostNode5 = renderMountOpcodes(caseMountOpcodes, runtimeValues, state, workInProgress);
+                  }
+
+                  break;
+                }
+
+                ++index;
+              }
+            }
+
+            values[caseValuePointer] = conditionalIndex - 1;
+            topHostNode = values[_hostNodeValuePointer6] = _hostNode5;
+            index = startingIndex + (conditionalSize - 1) * 2 + 1;
+            break;
+          }
+
+        case TEMPLATE_FROM_FUNC_CALL:
+          {
+            var templateMountOpcodes = mountOpcodes[++index];
+            var _computeValuesPointer = mountOpcodes[++index];
+            var _computeValues = runtimeValues[_computeValuesPointer];
+            topHostNode = renderMountOpcodes(templateMountOpcodes, _computeValues, state, workInProgress);
+            break;
+          }
+
+        case REACT_NODE_TEMPLATE_FROM_FUNC_CALL:
+          {
+            var reactNodePointer = mountOpcodes[++index];
+            var reactNode = runtimeValues[reactNodePointer];
+            topHostNode = renderMountReactNode(reactNode, state, workInProgress);
+            break;
+          }
+
+        case ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE:
+          {
+            var arrayPointer = mountOpcodes[++index];
+            var arrayMapOpcodes = mountOpcodes[++index];
+            var arrayMapComputeFunctionPointer = mountOpcodes[++index];
+            var array = runtimeValues[arrayPointer];
+            var arrayMapComputeFunction = arrayMapComputeFunctionPointer === 0 ? null : runtimeValues[arrayMapComputeFunctionPointer];
+            var arrayLength = array.length;
+
+            for (var i = 0; i < arrayLength; ++i) {
+              var element = array[i];
+              var templateRuntimeValues = runtimeValues;
+
+              if (arrayMapComputeFunction !== null) {
+                templateRuntimeValues = arrayMapComputeFunction(element, i, array);
+              }
+
+              renderMountOpcodes(arrayMapOpcodes, templateRuntimeValues, state, workInProgress);
+            }
+
+            break;
+          }
+
+        case UNCONDITIONAL_TEMPLATE:
+          {
+            var _templateMountOpcodes = mountOpcodes[++index];
+            var computeFunction = mountOpcodes[++index];
+            var _templateRuntimeValues = runtimeValues;
+            var templateValuesPointerIndex = void 0;
+
+            if (computeFunction !== 0) {
+              templateValuesPointerIndex = mountOpcodes[++index];
+              _templateRuntimeValues = callComputeFunctionWithArray(computeFunction, state.currentComponent.props);
+              values[templateValuesPointerIndex] = _templateRuntimeValues;
+            }
+
+            if (shouldCreateOpcodes === true) {
+              updateOpcodes.push(UNCONDITIONAL_TEMPLATE, _templateMountOpcodes, computeFunction);
+
+              if (templateValuesPointerIndex !== undefined) {
+                updateOpcodes.push(templateValuesPointerIndex);
+              }
+            }
+
+            return renderMountOpcodes(_templateMountOpcodes, _templateRuntimeValues, state, workInProgress);
+          }
+
+        case TEMPLATE:
+          {
+            var _templateMountOpcodes2 = mountOpcodes[++index];
+            var _computeFunction = mountOpcodes[++index];
+            var templateRuntimeValuesOrNull = void 0;
+
+            if (_computeFunction !== 0) {
+              templateRuntimeValuesOrNull = callComputeFunctionWithArray(_computeFunction, state.currentComponent.props);
+            }
+
+            if (templateRuntimeValuesOrNull === null) {
+              return createPlaceholderNode();
+            }
+
+            return renderMountOpcodes(_templateMountOpcodes2, templateRuntimeValuesOrNull, state, workInProgress);
+          }
+
+        case CONDITIONAL_TEMPLATE:
+          {
+            var _hostNodeValuePointer7 = mountOpcodes[++index];
+            var branchMountOpcodesPointer = mountOpcodes[++index];
+            var _computeFunction2 = mountOpcodes[++index];
+            var _templateRuntimeValues2 = runtimeValues;
+
+            var _templateValuesPointerIndex = void 0;
+
+            var _hostNode6 = void 0;
+
+            var _templateMountOpcodes3 = void 0;
+
+            if (_computeFunction2 !== 0) {
+              _templateValuesPointerIndex = mountOpcodes[++index];
+              _templateRuntimeValues2 = callComputeFunctionWithArray(_computeFunction2, state.currentComponent.props);
+              values[_templateValuesPointerIndex] = _templateRuntimeValues2;
+
+              if (_templateRuntimeValues2 === null) {
+                _templateMountOpcodes3 = null;
+                _hostNode6 = createPlaceholderNode();
+              }
+            }
+
+            var conditionBranchOpcodes = void 0;
+
+            if (_hostNode6 === undefined) {
+              conditionBranchOpcodes = mountOpcodes[++index];
+              var conditionBranchOpcodesLength = conditionBranchOpcodes.length;
+              var conditionBranchToUseKey = _templateRuntimeValues2[0];
+              var branchIndex = 0;
+
+              while (branchIndex < conditionBranchOpcodesLength) {
+                var branchConditionKey = conditionBranchOpcodes[branchIndex];
+
+                if (branchConditionKey === conditionBranchToUseKey) {
+                  _templateMountOpcodes3 = conditionBranchOpcodes[++branchIndex];
+                  _hostNode6 = renderMountOpcodes(_templateMountOpcodes3, _templateRuntimeValues2, state, workInProgress);
+                  break;
+                }
+
+                branchIndex += 2;
+              }
+            }
+
+            if (shouldCreateOpcodes === true) {
+              updateOpcodes.push(CONDITIONAL_TEMPLATE, _hostNodeValuePointer7, branchMountOpcodesPointer, _computeFunction2);
+
+              if (_templateValuesPointerIndex !== undefined) {
+                updateOpcodes.push(_templateValuesPointerIndex);
+              }
+
+              if (conditionBranchOpcodes === undefined) {
+                conditionBranchOpcodes = mountOpcodes[++index];
+              }
+
+              updateOpcodes.push(conditionBranchOpcodes);
+            }
+
+            values[branchMountOpcodesPointer] = _templateMountOpcodes3;
+            values[_hostNodeValuePointer7] = _hostNode6;
+            return _hostNode6;
+          }
+
+        case COMPONENT:
+          {
+            var usesHooks = mountOpcodes[++index];
+            var currentComponent = state.currentComponent;
+            var rootPropsShape = void 0;
+            var previousComponent = currentComponent;
+
+            if (currentComponent === null) {
+              rootPropsShape = mountOpcodes[++index];
+              currentComponent = state.currentComponent = createRootComponent(state.rootPropsObject, rootPropsShape, false);
+            } else {
+              state.currentComponent = createComponent(state.propsArray, false);
+              state.propsArray = null;
+            }
+
+            var _componentMountOpcodes = mountOpcodes[++index];
+            var componentFiber = createOpcodeFiber(null, []);
+
+            if (shouldCreateOpcodes === true) {
+              updateOpcodes.push(COMPONENT, usesHooks, _componentMountOpcodes);
+
+              if (rootPropsShape !== undefined) {
+                updateOpcodes.push(rootPropsShape);
+              }
+
+              unmountOpcodes.push(COMPONENT, usesHooks, _componentMountOpcodes);
+            }
+
+            componentFiber.values[0] = currentComponent;
+
+            if (workInProgress === null) {
+              // Root
+              state.fiber = componentFiber;
+            } else {
+              insertChildFiberIntoParentFiber(workInProgress, componentFiber);
+            }
+
+            if (usesHooks === 1) {
+              prepareToUseHooks(componentFiber);
+            }
+
+            var _hostNode7 = renderMountOpcodes(_componentMountOpcodes, runtimeValues, state, componentFiber);
+
+            if (workInProgress !== null && workInProgress.hostNode === null) {
+              workInProgress.hostNode = componentFiber.hostNode;
+            }
+
+            if (usesHooks === 1) {
+              finishHooks();
+            }
+
+            state.currentComponent = previousComponent;
+            return _hostNode7;
+          }
+
+        case ROOT_DYNAMIC_VALUE:
+          {
+            var dynamicValuePointer = mountOpcodes[++index];
+            var value = runtimeValues[dynamicValuePointer];
+
+            if (isReactNode(value)) {
+              return renderMountReactNode(value, state, workInProgress);
+            }
+
+            return null;
+          }
+
+        case ROOT_STATIC_VALUE:
+          {
+            var staticValue = mountOpcodes[++index];
+
+            var _hostNode8 = void 0;
+
+            if (staticValue === null) {
+              _hostNode8 = createPlaceholderNode();
+            } else if (typeof staticValue === "string") {
+              _hostNode8 = createTextNode(staticValue);
+            } else {
+              throw new Error("TODO");
+            }
+
+            return _hostNode8;
+          }
+
+        case OPEN_PROP_STYLE:
+        case CLOSE_PROP_STYLE:
+          break;
+
+        case DYNAMIC_PROP_REF:
+        default:
+          index += 3;
+          continue;
+      }
+
+      ++index;
+    }
+
+    return topHostNode;
+  }
+
+  function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeValues, state, workInProgress) {
+    var opcodesLength = updateOpcodes.length;
+    var values = workInProgress === null ? null : workInProgress.values;
+    var index = 0; // Render opcodes from the opcode jump-table
+
+    while (index < opcodesLength) {
+      var opcode = updateOpcodes[index];
+
+      switch (opcode) {
+        case REF_COMPONENT:
+          {
+            var componentMountOpcodes = updateOpcodes[++index];
+            var componentUpdateOpcodes = mountOpcodesToUpdateOpcodes.get(componentMountOpcodes);
+            var propsArrayValuePointerOrValue = updateOpcodes[++index];
+            var propsArrayValue = null;
+
+            if (isArray(propsArrayValuePointerOrValue)) {
+              propsArrayValue = propsArrayValuePointerOrValue;
+            } else if (propsArrayValuePointerOrValue !== null) {
+              propsArrayValue = nextRuntimeValues[propsArrayValuePointerOrValue];
+            }
+
+            state.propsArray = propsArrayValue;
+            renderUpdateOpcodes(componentUpdateOpcodes, previousRuntimeValues, nextRuntimeValues, state, workInProgress);
+            break;
+          }
+
+        case ELEMENT_DYNAMIC_CHILD_VALUE:
+        case ELEMENT_DYNAMIC_CHILDREN_VALUE:
+          {
+            var dynamicTextContentPointer = updateOpcodes[++index];
+            var hostNodeValuePointer = updateOpcodes[++index];
+            var previousDynamicTextContent = previousRuntimeValues[dynamicTextContentPointer];
+            var nextDynamicTextContent = nextRuntimeValues[dynamicTextContentPointer];
+            var textNode = values[hostNodeValuePointer];
+
+            if (previousDynamicTextContent !== nextDynamicTextContent) {
+              textNode.nodeValue = nextDynamicTextContent;
+            }
+
+            break;
+          }
+
+        case DYNAMIC_PROP_CLASS_NAME:
+          {
+            var propInformation = updateOpcodes[++index];
+            var dynamicClassNamePointer = updateOpcodes[++index];
+            var previousDynamicClassName = previousRuntimeValues[dynamicClassNamePointer];
+            var nextDynamicClassName = nextRuntimeValues[dynamicClassNamePointer];
+
+            if (previousDynamicClassName !== nextDynamicClassName) {
+              if (propInformation & PropFlagPartialTemplate) {
+                throw new Error("TODO DYNAMIC_PROP_CLASS_NAME");
+              } else {
+                state.currentHostNode.className = nextDynamicClassName;
+              }
+            }
+
+            break;
+          }
+
+        case OPEN_ELEMENT_WITH_POINTER:
+        case OPEN_VOID_ELEMENT_WITH_POINTER:
+        case OPEN_ELEMENT_DIV_WITH_POINTER:
+        case OPEN_ELEMENT_SPAN_WITH_POINTER:
+          {
+            var elementValuePointer = updateOpcodes[++index];
+            state.currentHostNode = values[elementValuePointer];
+            break;
+          }
+
+        case CONDITIONAL:
+          {
+            var _hostNodeValuePointer8 = updateOpcodes[++index];
+            var conditionValuePointer = updateOpcodes[++index];
+            var previousConditionValue = previousRuntimeValues[conditionValuePointer];
+            var nextConditionValue = nextRuntimeValues[conditionValuePointer];
+            var consequentMountOpcodes = updateOpcodes[++index];
+            var alternateMountOpcodes = updateOpcodes[++index];
+            var shouldUpdate = previousConditionValue === nextConditionValue;
+            var nextHostNode = void 0;
+
+            if (nextConditionValue) {
+              if (consequentMountOpcodes !== null) {
+                if (shouldUpdate) ; else {
+                  if (alternateMountOpcodes !== null) {
+                    var alternateUnmountOpcodes = mountOpcodesToUnmountOpcodes.get(alternateMountOpcodes);
+                    renderUnmountOpcodes(alternateUnmountOpcodes, state, workInProgress, true);
+                  }
+
+                  nextHostNode = renderMountOpcodes(consequentMountOpcodes, nextRuntimeValues, state, workInProgress);
+                }
+              }
+            } else {
+              if (alternateMountOpcodes !== null) {
+                if (shouldUpdate) ; else {
+                  if (consequentMountOpcodes !== null) {
+                    var consequentUnmountOpcodes = mountOpcodesToUnmountOpcodes.get(consequentMountOpcodes);
+                    renderUnmountOpcodes(consequentUnmountOpcodes, state, workInProgress, true);
+                  }
+
+                  nextHostNode = renderMountOpcodes(alternateMountOpcodes, nextRuntimeValues, state, workInProgress);
+                }
+              }
+            }
+
+            if (nextHostNode !== undefined) {
+              var previousHostNode = values[_hostNodeValuePointer8];
+              replaceChild(previousHostNode, nextHostNode);
+              values[_hostNodeValuePointer8] = nextHostNode;
+            }
+
+            break;
+          }
+
+        case MULTI_CONDITIONAL:
+          {
+            var conditionalSize = updateOpcodes[++index];
+            var _hostNodeValuePointer9 = updateOpcodes[++index];
+            var caseValuePointer = updateOpcodes[++index];
+            var startingIndex = index;
+            var conditionalDefaultIndex = conditionalSize - 1;
+            var previousConditionalIndex = values[caseValuePointer];
+            var caseHasChanged = false;
+
+            var _nextHostNode = void 0;
+
+            for (var conditionalIndex = 0; conditionalIndex < conditionalSize; ++conditionalIndex) {
+              if (conditionalIndex === conditionalDefaultIndex) {
+                var defaultCaseMountOpcodes = updateOpcodes[++index];
+
+                if (previousConditionalIndex !== conditionalIndex) {
+                  caseHasChanged = true;
+                }
+
+                if (defaultCaseMountOpcodes !== null) {
+                  if (caseHasChanged === true) {
+                    _nextHostNode = renderMountOpcodes(defaultCaseMountOpcodes, nextRuntimeValues, state, workInProgress);
+                  } else {
+                    var defaultCaseUpdateOpcodes = mountOpcodesToUpdateOpcodes.get(defaultCaseMountOpcodes);
+                    renderUpdateOpcodes(defaultCaseUpdateOpcodes, previousRuntimeValues, nextRuntimeValues, state, workInProgress);
+                  }
+                }
+              } else {
+                var caseConditionPointer = updateOpcodes[++index];
+                var caseConditionValue = nextRuntimeValues[caseConditionPointer];
+
+                if (caseConditionValue === true) {
+                  var caseMountOpcodes = updateOpcodes[++index];
+
+                  if (previousConditionalIndex !== conditionalIndex) {
+                    caseHasChanged = true;
+                  }
+
+                  if (caseMountOpcodes !== null) {
+                    if (caseHasChanged === true) {
+                      _nextHostNode = renderMountOpcodes(caseMountOpcodes, nextRuntimeValues, state, workInProgress);
+                    } else {
+                      var caseUpdateOpcodes = mountOpcodesToUpdateOpcodes.get(caseMountOpcodes);
+                      renderUpdateOpcodes(caseUpdateOpcodes, previousRuntimeValues, nextRuntimeValues, state, workInProgress);
+                    }
+                  }
+
+                  break;
+                }
+
+                ++index;
+              }
+            }
+
+            if (caseHasChanged === true) {
+              var previousMountOpcodesPointer = previousConditionalIndex === conditionalDefaultIndex ? startingIndex + 1 + previousConditionalIndex * 2 : startingIndex + 2 + previousConditionalIndex * 2;
+              var previousCaseMountOpcodes = updateOpcodes[previousMountOpcodesPointer];
+              var previousCaseUnmountOpcodes = mountOpcodesToUnmountOpcodes.get(previousCaseMountOpcodes);
+              renderUnmountOpcodes(previousCaseUnmountOpcodes, state, workInProgress, true);
+            }
+
+            index = startingIndex + (conditionalSize - 1) * 2 + 1;
+
+            if (_nextHostNode !== undefined) {
+              var _previousHostNode = values[_hostNodeValuePointer9];
+              replaceChild(_previousHostNode, _nextHostNode);
+              values[_hostNodeValuePointer9] = _nextHostNode;
+            }
+
+            break;
+          }
+
+        case UNCONDITIONAL_TEMPLATE:
+          {
+            var templateMountOpcodes = updateOpcodes[++index];
+            var templateUpdateOpcodes = mountOpcodesToUpdateOpcodes.get(templateMountOpcodes);
+            var computeFunction = updateOpcodes[++index];
+            var previousTemplateRuntimeValues = previousRuntimeValues;
+            var nextTemplateRuntimeValues = nextRuntimeValues;
+
+            if (computeFunction !== 0) {
+              var templateValuesPointerIndex = updateOpcodes[++index];
+              nextTemplateRuntimeValues = callComputeFunctionWithArray(computeFunction, state.currentComponent.props);
+              previousTemplateRuntimeValues = values[templateValuesPointerIndex];
+              values[templateValuesPointerIndex] = nextRuntimeValues;
+            }
+
+            renderUpdateOpcodes(templateUpdateOpcodes, previousTemplateRuntimeValues, nextTemplateRuntimeValues, state, workInProgress);
+            return;
+          }
+
+        case CONDITIONAL_TEMPLATE:
+          {
+            var _hostNodeValuePointer10 = updateOpcodes[++index];
+            var branchMountOpcodesPointer = updateOpcodes[++index];
+            var _computeFunction3 = updateOpcodes[++index];
+            var _previousTemplateRuntimeValues = previousRuntimeValues;
+            var _nextTemplateRuntimeValues = nextRuntimeValues;
+
+            var _templateValuesPointerIndex2 = void 0;
+
+            var _nextHostNode2 = void 0;
+
+            var branchHasChanged = false;
+            var nextTemplateMountOpcodes = void 0;
+
+            if (_computeFunction3 !== 0) {
+              _templateValuesPointerIndex2 = updateOpcodes[++index];
+              _nextTemplateRuntimeValues = callComputeFunctionWithArray(_computeFunction3, state.currentComponent.props);
+              _previousTemplateRuntimeValues = values[_templateValuesPointerIndex2];
+              values[_templateValuesPointerIndex2] = _nextTemplateRuntimeValues;
+
+              if (_nextTemplateRuntimeValues === null && _previousTemplateRuntimeValues !== null) {
+                branchHasChanged = true;
+                nextTemplateMountOpcodes = null;
+                _nextHostNode2 = createPlaceholderNode();
+              }
+            }
+
+            if (_nextHostNode2 === undefined) {
+              var conditionBranchOpcodes = updateOpcodes[++index];
+              var conditionBranchOpcodesLength = conditionBranchOpcodes.length;
+              var previousConditionBranchToUseKey = _previousTemplateRuntimeValues === null ? null : _previousTemplateRuntimeValues[0];
+              var nextConditionBranchToUseKey = _nextTemplateRuntimeValues[0];
+              var branchIndex = 0;
+
+              while (branchIndex < conditionBranchOpcodesLength) {
+                var branchConditionKey = conditionBranchOpcodes[branchIndex];
+
+                if (branchConditionKey === nextConditionBranchToUseKey) {
+                  if (branchConditionKey !== previousConditionBranchToUseKey) {
+                    branchHasChanged = true;
+                  }
+
+                  nextTemplateMountOpcodes = conditionBranchOpcodes[++branchIndex];
+
+                  if (branchHasChanged) {
+                    _nextHostNode2 = renderMountOpcodes(nextTemplateMountOpcodes, _nextTemplateRuntimeValues, state, workInProgress);
+                  } else {
+                    var _templateUpdateOpcodes = mountOpcodesToUpdateOpcodes.get(nextTemplateMountOpcodes);
+
+                    renderUpdateOpcodes(_templateUpdateOpcodes, _previousTemplateRuntimeValues, _nextTemplateRuntimeValues, state, workInProgress);
+                  }
+
+                  break;
+                }
+
+                branchIndex += 2;
+              }
+            }
+
+            if (branchHasChanged === true) {
+              var previousTemplateMountOpcodes = values[branchMountOpcodesPointer];
+
+              if (previousTemplateMountOpcodes !== null) {
+                var previousBranchUnmountOpcodes = mountOpcodesToUnmountOpcodes.get(previousTemplateMountOpcodes);
+                renderUnmountOpcodes(previousBranchUnmountOpcodes, state, workInProgress, true);
+              }
+
+              values[branchMountOpcodesPointer] = nextTemplateMountOpcodes;
+            }
+
+            if (_nextHostNode2 !== undefined) {
+              var _previousHostNode2 = values[_hostNodeValuePointer10];
+              replaceChild(_previousHostNode2, _nextHostNode2);
+              values[_hostNodeValuePointer10] = _nextHostNode2;
+            }
+
+            return _nextHostNode2;
+          }
+
+        case COMPONENT:
+          {
+            var usesHooks = updateOpcodes[++index];
+            var _componentMountOpcodes2 = updateOpcodes[++index];
+
+            var _componentUpdateOpcodes = mountOpcodesToUpdateOpcodes.get(_componentMountOpcodes2);
+
+            var currentComponent = state.currentComponent;
+            var componentFiber = void 0;
+            var previousComponent = currentComponent;
+
+            if (workInProgress === null) {
+              componentFiber = state.fiber;
+            }
+
+            var component = componentFiber.values[0];
+            var nextPropsArray = void 0;
+
+            if (currentComponent === null) {
+              var rootPropsShape = updateOpcodes[++index];
+              nextPropsArray = convertRootPropsToPropsArray(state.rootPropsObject, rootPropsShape);
+            } else {
+              nextPropsArray = state.propsArray;
+            }
+
+            component.props = nextPropsArray;
+            state.currentComponent = currentComponent = component;
+
+            if (usesHooks === 1) {
+              prepareToUseHooks(componentFiber);
+            }
+
+            renderUpdateOpcodes(_componentUpdateOpcodes, previousRuntimeValues, nextRuntimeValues, state, componentFiber);
+
+            if (usesHooks === 1) {
+              finishHooks(currentComponent);
+            }
+
+            state.currentComponent = previousComponent;
+            return;
+          }
+
+        default:
+          ++index;
+      }
+
+      ++index;
+    }
+  }
+
+  function renderUnmountOpcodes(unmountOpcodes, state, workInProgress, skipHostNodeRemoval) {
+    var opcodesLength = unmountOpcodes.length;
+    var index = 0; // Render opcodes from the opcode jump-table
+
+    while (index < opcodesLength) {
+      var opcode = unmountOpcodes[index];
+
+      switch (opcode) {
+        case UNCONDITIONAL_TEMPLATE:
+          {
+            return;
+          }
+
+        case COMPONENT:
+          {
+            var usesHooks = unmountOpcodes[++index];
+
+            var currentComponent = state.currentComponent;
+            var componentFiber = void 0;
+            var previousComponent = currentComponent;
+
+            if (workInProgress === null) {
+              componentFiber = state.fiber;
+            }
+
+            var component = componentFiber.values[0];
+            var componentUnmountOpcodes = unmountOpcodes[++index];
+            state.currentComponent = currentComponent = component;
+            renderUnmountOpcodes(componentUnmountOpcodes, state, componentFiber, skipHostNodeRemoval);
+            state.currentComponent = previousComponent;
+            return;
+          }
+
+        default:
+          ++index;
+      }
+
+      ++index;
+    }
+  }
+
+  function unmountRoot(DOMContainer, rootState) {
+    var unmountOpcodes = mountOpcodesToUnmountOpcodes.get(rootState.mountOpcodes);
+    renderUnmountOpcodes(unmountOpcodes, rootState, null, true);
+    removeChild(DOMContainer, rootState.fiber.hostNode);
+    rootState.fiber = null;
+  }
+
+  function State(mountOpcodes) {
+    this.currentComponent = null;
+    this.currentHostNode = null;
+    this.currentHostNodeStack = [];
+    this.currentHostNodeStackIndex = 0;
+    this.fiber = null;
+    this.mountOpcodes = mountOpcodes;
+    this.propsArray = emptyArray;
+    this.rootPropsObject = null;
+  }
+
+  function createOpcodeFiber(hostNode, values) {
+    return {
+      child: null,
+      hostNode: null,
+      key: null,
+      memoizedState: null,
+      sibling: null,
+      parent: null,
+      values: values
+    };
+  }
+
+  function insertChildFiberIntoParentFiber(parent, child) {
+    child.parent = parent;
+
+    if (parent.child === null) {
+      parent.child = child;
+    }
+  }
+
+  function renderNodeToRootContainer(node, DOMContainer) {
+    var rootState = rootStates.get(DOMContainer);
+
+    if (node === null || node === undefined) {
+      if (rootState !== undefined) {
+        unmountRoot(DOMContainer, rootState);
+      }
+    } else if (node.$$typeof === reactElementSymbol) {
+      var mountOpcodes = node.type;
+      var shouldUpdate = false;
+
+      if (rootState === undefined) {
+        rootState = new State(mountOpcodes);
+        rootStates.set(DOMContainer, rootState);
+      } else {
+        if (rootState.fiber !== null) {
+          if (rootState.mountOpcodes === mountOpcodes) {
+            shouldUpdate = true;
+          } else {
+            unmountRoot(DOMContainer, rootState);
+          }
+        }
+      }
+
+      rootState.mountOpcodes = mountOpcodes;
+      rootState.rootPropsObject = node.props;
+
+      if (shouldUpdate === true) {
+        var updateOpcodes = mountOpcodesToUpdateOpcodes.get(mountOpcodes);
+        renderUpdateOpcodes(updateOpcodes, emptyArray, emptyArray, rootState, null);
+      } else {
+        var hostNode = renderMountOpcodes(mountOpcodes, emptyArray, rootState, null);
+        appendChild(DOMContainer, hostNode);
+      }
+    } else {
+      throw new Error("render() expects a ReactElement as the first argument");
+    }
+  }
+
+  function render(node, DOMContainer) {
+    var prevDispatcher = currentDispatcher.current;
+    currentDispatcher.current = Dispatcher;
+    var returnNode = renderNodeToRootContainer(node, DOMContainer);
+    currentDispatcher.current = prevDispatcher;
+    return returnNode;
+  }
+
+  // DO NOT MODIFY
+  var React = {
+    createElement: function createElement(type, props) {
+      return {
+        $$typeof: reactElementSymbol,
+        key: null,
+        props: props,
+        ref: null,
+        type: type
+      };
+    }
+  };
+  var root = document.getElementById("root");
+  var props = {};
+  console.time("Render");
+  render(React.createElement(Component, props), root);
+  console.timeEnd("Render");
+
+}));
