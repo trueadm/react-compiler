@@ -108,15 +108,15 @@ function getEventTarget(nativeEvent) {
   return target.nodeType === TEXT_NODE ? target.parentNode : target;
 }
 
-function listenToEvent(state, eventName, eventInformation) {
-  const rootHostNode = state.fiber.hostNode;
-  let registeredEvents = hostNodeEventListeners.get(rootHostNode);
+function listenToEvent(eventName, eventInformation) {
+  // TOOD make it not listen on document, rather the component root host node
+  let registeredEvents = hostNodeEventListeners.get(document);
 
   if (registeredEvents === undefined) {
     registeredEvents = new Map();
-    hostNodeEventListeners.set(rootHostNode, registeredEvents);
+    hostNodeEventListeners.set(document, registeredEvents);
   }
-  rootHostNode.addEventListener(
+  document.addEventListener(
     eventName,
     proxyEvent.bind(null, eventName, eventInformation),
     eventInformation & EventFlagBubbles,
@@ -217,6 +217,10 @@ function openElement(elem, state, currentFiber) {
   const currentHostNode = state.currentHostNode;
   if (currentFiber.hostNode === null) {
     currentFiber.hostNode = elem;
+    const parent = currentFiber.parent;
+    if (parent !== null && parent.hostNode === null) {
+      parent.hostNode = elem;
+    }
   }
   if (currentHostNode !== null) {
     const stackIndex = state.currentHostNodeStackIndex++;
@@ -242,7 +246,7 @@ function joinArrayTextContent(textContent) {
   return joinedTextContent;
 }
 
-function renderMountReactNode(node, state, workInProgress) {
+function renderMountReactNode(node, state, currentFiber) {
   if (node === null || node === undefined || typeof node === "boolean") {
     return;
   }
@@ -251,12 +255,12 @@ function renderMountReactNode(node, state, workInProgress) {
   } else if (isReactNode(node)) {
     const templateOpcodes = node.t;
     const templateRuntimeValues = node.v;
-    return renderMountOpcodes(templateOpcodes, templateRuntimeValues, state, workInProgress);
+    return renderMountOpcodes(templateOpcodes, templateRuntimeValues, state, currentFiber);
   } else if (isArray(node)) {
     const arr = [];
     for (let i = 0, length = node.length; i < length; ++i) {
       const elementNode = node[i];
-      const hostNode = renderMountReactNode(elementNode, state, workInProgress);
+      const hostNode = renderMountReactNode(elementNode, state, currentFiber);
       if (hostNode !== undefined) {
         arr.push(hostNode);
       }
@@ -265,13 +269,13 @@ function renderMountReactNode(node, state, workInProgress) {
   }
 }
 
-function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) {
+function renderMountOpcodes(mountOpcodes, runtimeValues, state, currentFiber) {
   const opcodesLength = mountOpcodes.length;
   let updateOpcodes = mountOpcodesToUpdateOpcodes.get(mountOpcodes);
   let unmountOpcodes = mountOpcodesToUnmountOpcodes.get(mountOpcodes);
   let topHostNode;
   const shouldCreateOpcodes = updateOpcodes === undefined;
-  const values = workInProgress === null ? null : workInProgress.values;
+  const values = currentFiber === null ? null : currentFiber.values;
 
   if (shouldCreateOpcodes === true) {
     updateOpcodes = [];
@@ -304,7 +308,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
           props = runtimeValues[propsValuePointerOrValue];
         }
         state.props = props;
-        topHostNode = renderMountOpcodes(componentMountOpcodes, runtimeValues, state, workInProgress);
+        topHostNode = renderMountOpcodes(componentMountOpcodes, runtimeValues, state, currentFiber);
         if (shouldCreateOpcodes === true) {
           updateOpcodes.push(componentMountOpcodes, propsValuePointerOrValue);
         }
@@ -355,7 +359,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
         if (propInformation & PropFlagPartialTemplate) {
           throw new Error("TODO DYNAMIC_PROP");
         } else if (eventInformation !== undefined) {
-          listenToEvent(state, propName, eventInformation);
+          listenToEvent(propName, eventInformation);
           registerEventCallbackForHostNode(
             state.currentHostNode,
             propName,
@@ -441,7 +445,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
         const reactNodeOrArrayPointer = mountOpcodes[++index];
         const hostNodeValuePointer = mountOpcodes[++index];
         const reactNodeOrArray = runtimeValues[reactNodeOrArrayPointer];
-        const hostNode = (topHostNode = renderMountReactNode(reactNodeOrArray, state, workInProgress));
+        const hostNode = (topHostNode = renderMountReactNode(reactNodeOrArray, state, currentFiber));
         values[hostNodeValuePointer] = hostNode;
         break;
       }
@@ -450,30 +454,30 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
         const hostNodeValuePointer = mountOpcodes[++index];
         const reactNodeOrArray = runtimeValues[reactNodeOrArrayPointer];
         state.lastChildWasTextNode = false;
-        const hostNode = (topHostNode = renderMountReactNode(reactNodeOrArray, state, workInProgress));
+        const hostNode = (topHostNode = renderMountReactNode(reactNodeOrArray, state, currentFiber));
         values[hostNodeValuePointer] = hostNode;
         break;
       }
       case OPEN_ELEMENT_DIV: {
         const elem = createElement("div");
-        openElement(elem, state, workInProgress);
+        openElement(elem, state, currentFiber);
         break;
       }
       case OPEN_ELEMENT_SPAN: {
         const elem = createElement("span");
-        openElement(elem, state, workInProgress);
+        openElement(elem, state, currentFiber);
         break;
       }
       case OPEN_ELEMENT: {
         const elementTag = mountOpcodes[++index];
         const elem = createElement(elementTag);
-        openElement(elem, state, workInProgress);
+        openElement(elem, state, currentFiber);
         break;
       }
       case OPEN_ELEMENT_DIV_WITH_POINTER: {
         const elem = createElement("div");
         const elementValuePointer = mountOpcodes[++index];
-        openElement(elem, state, workInProgress);
+        openElement(elem, state, currentFiber);
         values[elementValuePointer] = elem;
         if (shouldCreateOpcodes === true) {
           updateOpcodes.push(OPEN_ELEMENT_DIV_WITH_POINTER, elementValuePointer);
@@ -483,7 +487,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
       case OPEN_ELEMENT_SPAN_WITH_POINTER: {
         const elem = createElement("span");
         const elementValuePointer = mountOpcodes[++index];
-        openElement(elem, state, workInProgress);
+        openElement(elem, state, currentFiber);
         values[elementValuePointer] = elem;
         if (shouldCreateOpcodes === true) {
           updateOpcodes.push(OPEN_ELEMENT_SPAN_WITH_POINTER, elementValuePointer);
@@ -494,7 +498,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
         const elementTag = mountOpcodes[++index];
         const elementValuePointer = mountOpcodes[++index];
         const elem = createElement(elementTag);
-        openElement(elem, state, workInProgress);
+        openElement(elem, state, currentFiber);
         values[elementValuePointer] = elem;
         if (shouldCreateOpcodes === true) {
           updateOpcodes.push(OPEN_ELEMENT_WITH_POINTER, elementValuePointer);
@@ -521,14 +525,14 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
       case OPEN_VOID_ELEMENT: {
         const elementTag = mountOpcodes[++index];
         const elem = createElement(elementTag);
-        openElement(elem, state, workInProgress);
+        openElement(elem, state, currentFiber);
         break;
       }
       case OPEN_VOID_ELEMENT_WITH_POINTER: {
         const elementTag = mountOpcodes[++index];
         const elementValuePointer = mountOpcodes[++index];
         const elem = createElement(elementTag);
-        openElement(elem, state, workInProgress);
+        openElement(elem, state, currentFiber);
         values[elementValuePointer] = elem;
         if (shouldCreateOpcodes === true) {
           updateOpcodes.push(OPEN_VOID_ELEMENT_WITH_POINTER, elementValuePointer);
@@ -537,7 +541,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
       }
       case OPEN_FRAGMENT: {
         const hostNode = [];
-        openElement(hostNode, state, workInProgress);
+        openElement(hostNode, state, currentFiber);
         break;
       }
       case ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL: {
@@ -547,7 +551,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
         const computeValues = runtimeValues[computeValuesPointer];
         let hostNode;
         if (computeValues !== null) {
-          hostNode = renderMountOpcodes(templateOpcodes, computeValues, state, workInProgress);
+          hostNode = renderMountOpcodes(templateOpcodes, computeValues, state, currentFiber);
         } else {
           hostNode = createPlaceholderNode();
         }
@@ -611,11 +615,11 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
 
         if (conditionValue) {
           if (consequentMountOpcodes !== 0) {
-            hostNode = renderMountOpcodes(consequentMountOpcodes, runtimeValues, state, workInProgress);
+            hostNode = renderMountOpcodes(consequentMountOpcodes, runtimeValues, state, currentFiber);
           }
         } else {
           if (alternateMountOpcodes !== 0) {
-            hostNode = renderMountOpcodes(alternateMountOpcodes, runtimeValues, state, workInProgress);
+            hostNode = renderMountOpcodes(alternateMountOpcodes, runtimeValues, state, currentFiber);
           }
         }
         topHostNode = values[hostNodeValuePointer] = hostNode;
@@ -645,7 +649,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
             const defaultCaseMountOpcodes = mountOpcodes[++index];
 
             if (defaultCaseMountOpcodes !== null) {
-              hostNode = renderMountOpcodes(defaultCaseMountOpcodes, runtimeValues, state, workInProgress);
+              hostNode = renderMountOpcodes(defaultCaseMountOpcodes, runtimeValues, state, currentFiber);
             }
           } else {
             const caseConditionPointer = mountOpcodes[++index];
@@ -654,7 +658,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
             if (caseConditionValue === true) {
               const caseMountOpcodes = mountOpcodes[++index];
               if (caseMountOpcodes !== null) {
-                hostNode = renderMountOpcodes(caseMountOpcodes, runtimeValues, state, workInProgress);
+                hostNode = renderMountOpcodes(caseMountOpcodes, runtimeValues, state, currentFiber);
               }
               break;
             }
@@ -670,13 +674,13 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
         const templateMountOpcodes = mountOpcodes[++index];
         const computeValuesPointer = mountOpcodes[++index];
         const computeValues = runtimeValues[computeValuesPointer];
-        topHostNode = renderMountOpcodes(templateMountOpcodes, computeValues, state, workInProgress);
+        topHostNode = renderMountOpcodes(templateMountOpcodes, computeValues, state, currentFiber);
         break;
       }
       case REACT_NODE_TEMPLATE_FROM_FUNC_CALL: {
         const reactNodePointer = mountOpcodes[++index];
         const reactNode = runtimeValues[reactNodePointer];
-        topHostNode = renderMountReactNode(reactNode, state, workInProgress);
+        topHostNode = renderMountReactNode(reactNode, state, currentFiber);
         break;
       }
       case ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE: {
@@ -695,7 +699,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
           if (arrayMapComputeFunction !== null) {
             templateRuntimeValues = arrayMapComputeFunction(element, i, array);
           }
-          renderMountOpcodes(arrayMapOpcodes, templateRuntimeValues, state, workInProgress);
+          renderMountOpcodes(arrayMapOpcodes, templateRuntimeValues, state, currentFiber);
         }
         break;
       }
@@ -718,7 +722,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
             const branchConditionKey = conditionBranchOpcodes[branchIndex];
             if (branchConditionKey === conditionBranchToUseKey) {
               templateMountOpcodes = conditionBranchOpcodes[++branchIndex];
-              hostNode = renderMountOpcodes(templateMountOpcodes, templateRuntimeValues, state, workInProgress);
+              hostNode = renderMountOpcodes(templateMountOpcodes, templateRuntimeValues, state, currentFiber);
               break;
             }
             branchIndex += 2;
@@ -744,7 +748,7 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
         let props;
 
         // Handle root component props
-        if (workInProgress === null) {
+        if (currentFiber === null) {
           rootPropsShape = mountOpcodes[++index];
           props = convertRootPropsToPropsArray(state.rootPropsObject, rootPropsShape);
         } else {
@@ -771,11 +775,11 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
           }
           unmountOpcodes.push(COMPONENT, usesHooks, componentMountOpcodes);
         }
-        if (workInProgress === null) {
+        if (currentFiber === null) {
           // Root
           state.fiber = componentFiber;
         } else {
-          insertChildFiberIntoParentFiber(workInProgress, componentFiber);
+          insertChildFiberIntoParentFiber(currentFiber, componentFiber);
         }
         let hostNode;
         if (componentRuntimeValues !== null) {
@@ -784,16 +788,13 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
           hostNode = createPlaceholderNode();
           componentFiber.hostNode = hostNode;
         }
-        if (workInProgress !== null && workInProgress.hostNode === null) {
-          workInProgress.hostNode = componentFiber.hostNode;
-        }
         return hostNode;
       }
       case ROOT_DYNAMIC_VALUE: {
         const dynamicValuePointer = mountOpcodes[++index];
         let value = runtimeValues[dynamicValuePointer];
         if (isReactNode(value)) {
-          return renderMountReactNode(value, state, workInProgress);
+          return renderMountReactNode(value, state, currentFiber);
         } else {
           // TODO
         }
@@ -824,9 +825,9 @@ function renderMountOpcodes(mountOpcodes, runtimeValues, state, workInProgress) 
   return topHostNode;
 }
 
-function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeValues, state, workInProgress) {
+function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeValues, state, currentFiber) {
   const opcodesLength = updateOpcodes.length;
-  const values = workInProgress === null ? null : workInProgress.values;
+  const values = currentFiber === null ? null : currentFiber.values;
   let index = 0;
 
   // Render opcodes from the opcode jump-table
@@ -846,7 +847,7 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
           propsArrayValue = propsArrayValuePointerOrValue;
         }
         state.propsArray = propsArrayValue;
-        renderUpdateOpcodes(componentUpdateOpcodes, previousRuntimeValues, nextRuntimeValues, state, workInProgress);
+        renderUpdateOpcodes(componentUpdateOpcodes, previousRuntimeValues, nextRuntimeValues, state, currentFiber);
         break;
       }
       case ELEMENT_DYNAMIC_CHILD_VALUE:
@@ -902,9 +903,9 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
             } else {
               if (alternateMountOpcodes !== null) {
                 let alternateUnmountOpcodes = mountOpcodesToUnmountOpcodes.get(alternateMountOpcodes);
-                renderUnmountOpcodes(alternateUnmountOpcodes, state, workInProgress, true);
+                renderUnmountOpcodes(alternateUnmountOpcodes, state, currentFiber, true);
               }
-              nextHostNode = renderMountOpcodes(consequentMountOpcodes, nextRuntimeValues, state, workInProgress);
+              nextHostNode = renderMountOpcodes(consequentMountOpcodes, nextRuntimeValues, state, currentFiber);
             }
           }
         } else {
@@ -914,9 +915,9 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
             } else {
               if (consequentMountOpcodes !== null) {
                 let consequentUnmountOpcodes = mountOpcodesToUnmountOpcodes.get(consequentMountOpcodes);
-                renderUnmountOpcodes(consequentUnmountOpcodes, state, workInProgress, true);
+                renderUnmountOpcodes(consequentUnmountOpcodes, state, currentFiber, true);
               }
-              nextHostNode = renderMountOpcodes(alternateMountOpcodes, nextRuntimeValues, state, workInProgress);
+              nextHostNode = renderMountOpcodes(alternateMountOpcodes, nextRuntimeValues, state, currentFiber);
             }
           }
         }
@@ -946,7 +947,7 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
             }
             if (defaultCaseMountOpcodes !== null) {
               if (caseHasChanged === true) {
-                nextHostNode = renderMountOpcodes(defaultCaseMountOpcodes, nextRuntimeValues, state, workInProgress);
+                nextHostNode = renderMountOpcodes(defaultCaseMountOpcodes, nextRuntimeValues, state, currentFiber);
               } else {
                 const defaultCaseUpdateOpcodes = mountOpcodesToUpdateOpcodes.get(defaultCaseMountOpcodes);
                 renderUpdateOpcodes(
@@ -954,7 +955,7 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
                   previousRuntimeValues,
                   nextRuntimeValues,
                   state,
-                  workInProgress,
+                  currentFiber,
                 );
               }
             }
@@ -969,16 +970,10 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
               }
               if (caseMountOpcodes !== null) {
                 if (caseHasChanged === true) {
-                  nextHostNode = renderMountOpcodes(caseMountOpcodes, nextRuntimeValues, state, workInProgress);
+                  nextHostNode = renderMountOpcodes(caseMountOpcodes, nextRuntimeValues, state, currentFiber);
                 } else {
                   const caseUpdateOpcodes = mountOpcodesToUpdateOpcodes.get(caseMountOpcodes);
-                  renderUpdateOpcodes(
-                    caseUpdateOpcodes,
-                    previousRuntimeValues,
-                    nextRuntimeValues,
-                    state,
-                    workInProgress,
-                  );
+                  renderUpdateOpcodes(caseUpdateOpcodes, previousRuntimeValues, nextRuntimeValues, state, currentFiber);
                 }
               }
               break;
@@ -993,7 +988,7 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
               : startingIndex + 2 + previousConditionalIndex * 2;
           const previousCaseMountOpcodes = updateOpcodes[previousMountOpcodesPointer];
           const previousCaseUnmountOpcodes = mountOpcodesToUnmountOpcodes.get(previousCaseMountOpcodes);
-          renderUnmountOpcodes(previousCaseUnmountOpcodes, state, workInProgress, true);
+          renderUnmountOpcodes(previousCaseUnmountOpcodes, state, currentFiber, true);
         }
         index = startingIndex + (conditionalSize - 1) * 2 + 1;
         if (nextHostNode !== undefined) {
@@ -1020,7 +1015,7 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
       //     previousTemplateRuntimeValues,
       //     nextTemplateRuntimeValues,
       //     state,
-      //     workInProgress,
+      //     currentFiber,
       //   );
       //   return;
       // }
@@ -1066,7 +1061,7 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
                   nextTemplateMountOpcodes,
                   nextTemplateRuntimeValues,
                   state,
-                  workInProgress,
+                  currentFiber,
                 );
               } else {
                 const templateUpdateOpcodes = mountOpcodesToUpdateOpcodes.get(nextTemplateMountOpcodes);
@@ -1075,7 +1070,7 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
                   previousTemplateRuntimeValues,
                   nextTemplateRuntimeValues,
                   state,
-                  workInProgress,
+                  currentFiber,
                 );
               }
               break;
@@ -1087,7 +1082,7 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
           const previousTemplateMountOpcodes = values[branchMountOpcodesPointer];
           if (previousTemplateMountOpcodes !== null) {
             const previousBranchUnmountOpcodes = mountOpcodesToUnmountOpcodes.get(previousTemplateMountOpcodes);
-            renderUnmountOpcodes(previousBranchUnmountOpcodes, state, workInProgress, true);
+            renderUnmountOpcodes(previousBranchUnmountOpcodes, state, currentFiber, true);
           }
           values[branchMountOpcodesPointer] = nextTemplateMountOpcodes;
         }
@@ -1105,7 +1100,7 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
         let currentComponent = state.currentComponent;
         let componentFiber;
         const previousComponent = currentComponent;
-        if (workInProgress === null) {
+        if (currentFiber === null) {
           componentFiber = state.fiber;
         }
         let component = componentFiber.values[0];
@@ -1136,7 +1131,7 @@ function renderUpdateOpcodes(updateOpcodes, previousRuntimeValues, nextRuntimeVa
   }
 }
 
-function renderUnmountOpcodes(unmountOpcodes, state, workInProgress, skipHostNodeRemoval) {
+function renderUnmountOpcodes(unmountOpcodes, state, currentFiber, skipHostNodeRemoval) {
   const opcodesLength = unmountOpcodes.length;
   let index = 0;
 
@@ -1151,7 +1146,7 @@ function renderUnmountOpcodes(unmountOpcodes, state, workInProgress, skipHostNod
         let currentComponent = state.currentComponent;
         let componentFiber;
         const previousComponent = currentComponent;
-        if (workInProgress === null) {
+        if (currentFiber === null) {
           componentFiber = state.fiber;
         }
         const component = componentFiber.values[0];
@@ -1175,14 +1170,16 @@ function unmountRoot(DOMContainer, rootState) {
   rootState.fiber = null;
 }
 
-function State(mountOpcodes) {
-  this.currentHostNode = null;
-  this.currentHostNodeStack = [];
-  this.currentHostNodeStackIndex = 0;
-  this.fiber = null;
-  this.mountOpcodes = mountOpcodes;
-  this.propsArray = null;
-  this.rootPropsObject = null;
+function createState(mountOpcodes) {
+  return {
+    currentHostNode: null,
+    currentHostNodeStack: [],
+    currentHostNodeStackIndex: 0,
+    fiber: null,
+    mountOpcodes: mountOpcodes,
+    propsArray: null,
+    rootPropsObject: null,
+  };
 }
 
 function renderNodeToRootContainer(node, DOMContainer) {
@@ -1197,7 +1194,7 @@ function renderNodeToRootContainer(node, DOMContainer) {
     let shouldUpdate = false;
 
     if (rootState === undefined) {
-      rootState = new State(mountOpcodes);
+      rootState = createState(mountOpcodes);
       rootStates.set(DOMContainer, rootState);
     } else {
       if (rootState.fiber !== null) {

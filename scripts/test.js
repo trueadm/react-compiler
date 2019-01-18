@@ -112,6 +112,7 @@ function renderOriginalComponent(component, props) {
     // Run 10 times to warm up cache
     for (let i = 0; i < 10; i++) {
       ReactDOM.render(createElementForTesting(component, props), root);
+      ReactDOM.render(null, root);
     }
   }
   // Run once again to measure perf
@@ -137,6 +138,7 @@ function renderCompiledComponent(component, props) {
     // Run 10 times to warm up cache
     for (let i = 0; i < 10; i++) {
       render(createElementForTesting(component, props), root);
+      render(null, root);
     }
   }
   // Run once again to measure perf
@@ -156,7 +158,7 @@ function renderCompiledComponent(component, props) {
 function unescapeCompiledOutput(output) {
   // Optimize this at some point
   return output
-    .replace(/\&amp;/g, "&")
+    .replace(/(\&amp;amp;|\&amp;)/g, "&")
     .replace(/\&lt;/g, "<")
     .replace(/\&gt;/g, ">");
 }
@@ -276,8 +278,6 @@ async function runTest(file, originalSource, compiledSource, minifySources) {
     compiledSize = _compiledSize;
     originalComponent = executeSource(minifiedOriginalSource, false);
     compiledComponent = executeSource(minifiedCompiledSource, false);
-    console.log(minifiedOriginalSource);
-    console.log(minifiedCompiledSource);
   } else {
     originalComponent = executeSource(originalSource, true);
     compiledComponent = executeSource(compiledSource, true);

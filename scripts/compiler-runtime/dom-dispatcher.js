@@ -43,6 +43,8 @@ export function callComputeFunctionWithHooks(
   refOrContext: any,
   nextRenderExpirationTime: ExpirationTime,
 ): any {
+  componentUpdateQueue;
+  didScheduleRenderPhaseUpdate;
   // TODO
 }
 
