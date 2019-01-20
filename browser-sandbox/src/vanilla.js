@@ -29,6 +29,16 @@
     element.style.setProperty(styleName, value);
   }
 
+  function timeAge(time) {
+    const now = new Date().getTime() / 1000;
+    const minutes = (now - time) / 60;
+  
+    if (minutes < 60) {
+      return Math.round(minutes) + " minutes ago";
+    }
+    return Math.round(minutes / 60) + " hours ago";
+  }
+  
   function getHostUrl(url) {
     return (url + "")
       .replace("https://", "")
@@ -160,6 +170,44 @@
     }
     appendChild(tr1, td3);
     const tr2 = createElement("tr");
+    const td4 = createElement("td");
+    setAttr(td4, "colSpan", 2);
+    appendChild(tr2, td4);
+    const td5 = createElement("td");
+    td5.className = "subtext";
+    const span2 = createElement("span");
+    span2.className = "score";
+    span2.textContent = `${story.score} points`;
+    appendChild(td5, span2);
+    const textNode4 = createTextNode(" by ");
+    appendChild(td5, textNode4);
+    const a4 = createElement("a");
+    setAttr(a4, "href", "#");
+    a4.className = "hnuser";
+    a4.textContent = story.by;
+    appendChild(td5, a4);
+    const textNode5 = createTextNode(" ");
+    appendChild(td5, textNode5);
+    const span3 = createElement("span");
+    span3.className = "age";
+    const a5 = createElement("a");
+    setAttr(a5, "href", "#");
+    a5.textContent = timeAge(story.time);
+    appendChild(span3, a5);
+    appendChild(td5, span3);
+    const textNode6 = createTextNode(" | ");
+    appendChild(td5, textNode6);
+    const a6 = createElement("a");
+    setAttr(a6, "href", "#");
+    a6.textContent = "hide";
+    appendChild(td5, a6);
+    const textNode7 = createTextNode(" | ");
+    appendChild(td5, textNode7);
+    const a7 = createElement("a");
+    setAttr(a7, "href", "#");
+    a7.textContent = `${story.descendants || 0} comments`;
+    appendChild(td5, a7);
+    appendChild(tr2, td5);
     frag.push(tr2);
     const tr3 = createElement("tr");
     setStyle(tr3, "height", "5px");
@@ -1391,5 +1439,5 @@
   const start = performance.now();
   const node = Component(props);
   root.appendChild(node);
-  alert(performance.now() - start);
+  console.log(performance.now() - start);
 })();
