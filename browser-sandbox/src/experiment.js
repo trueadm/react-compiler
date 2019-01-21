@@ -2,16 +2,7 @@
   "use strict";
 
   const isArray = Array.isArray;
-  const rootStates = new Map();
   const reactElementSymbol = Symbol.for("react.element");
-
-  function createState(rootTemplateNode) {
-    return {
-      fiber: null,
-      rootTemplateNode,
-    };
-  }
-
 
   const CREATION_PHASE = 0;
   const UPDATE_PHASE = 1;
@@ -39,24 +30,12 @@
     currentHostNode = elem;
   }
 
-  function popElement() {
-    if (currentHostNodeStackIndex === 0) {
-      currentHostNode = null;
-    } else {
-      --currentHostNodeStackIndex;
-      const parent = currentHostNodeStack[currentHostNodeStackIndex];
-      currentHostNodeStack[currentHostNodeStackIndex] = null;
-      appendChild(parent, currentHostNode);
-      currentHostNode = parent;
-    }
-  }
-
   function openFragment() {
     pushElement([]);
   }
 
   function closeFragment() {
-    popElement();
+    closeElement();
   }
 
   function openElement(tagName) {
@@ -80,11 +59,19 @@
   }
 
   function closeElement() {
-    popElement();
+    if (currentHostNodeStackIndex === 0) {
+      currentHostNode = null;
+    } else {
+      --currentHostNodeStackIndex;
+      const parent = currentHostNodeStack[currentHostNodeStackIndex];
+      currentHostNodeStack[currentHostNodeStackIndex] = null;
+      appendChild(parent, currentHostNode);
+      currentHostNode = parent;
+    }
   }
 
   function closeVoidElement() {
-    popElement();
+    closeElement();
   }
 
   function conditional(hostNodeStoreIndex, conditionalValueIndex, consequentTemplateFunction, alternateTemplateFunction) {
@@ -140,21 +127,13 @@
   function staticProp(propName, staticPropValue) {
     if (propName === "id") {
       currentHostNode.id = staticPropValue;
-    } else {
-      currentHostNode.setAttribute(propName, staticPropValue);
+      return;
     }
+    currentHostNode.setAttribute(propName, staticPropValue);
   }
 
   function staticPropClassName(staticPropClassNameValue) {
     currentHostNode.className = staticPropClassNameValue;
-  }
-
-  function openPropStyle() {
-
-  }
-
-  function closePropStyle() {
-    
   }
 
   function staticPropStyle(styleName, styleValue) {
@@ -199,21 +178,34 @@
     componentTemplateFunction(currentPhase);
   }
 
+  const roots = [];
+
+  function getRoot(DOMContainer) {
+    const rootsLength = roots.length;
+    if (rootsLength > 0) {
+      for (let i = 0; i < rootsLength; i++) {
+        if (root.container === DOMContainer) {
+          return root;
+        }
+      }
+    }
+    return null;
+  }
+
   function renderNodeToRootContainer(node, DOMContainer) {
-    let rootState = rootStates.get(DOMContainer);
+    const previousTemplateNode = getRoot(DOMContainer);
   
     if (node === null || node === undefined) {
-      if (rootState !== undefined) {
-        // unmountRoot(DOMContainer, rootState);
-      }
+      // if (rootState !== undefined) {
+      //   // unmountRoot(DOMContainer, rootState);
+      // }
     } else if (node.$$typeof === reactElementSymbol) {
-      const rootTemplateNode = node.type;
-      const rootPropsShape = rootTemplateNode.p;
-      const rootTemplate = rootTemplateNode.t;
+      const nextRootTemplateNode = node.type;
+      const rootPropsShape = nextRootTemplateNode.p;
+      const rootTemplate = nextRootTemplateNode.t;
   
-      if (rootState === undefined) {
-        rootState = createState(rootTemplateNode);
-        rootStates.set(DOMContainer, rootState);
+      if (previousTemplateNode === undefined) {
+        roots.push(nextRootTemplateNode);
       } else {
         // TODO
       }
@@ -221,7 +213,7 @@
       currentPhase = CREATION_PHASE;
       rootTemplate(currentPhase);
       appendChild(DOMContainer, currentFiber.hostNode);
-      rootState.fiber = currentFiber;
+      nextRootTemplateNode.f = currentFiber;
       currentFiber = null;
       currentHostNode = null;
       currentProps = null;
@@ -322,39 +314,29 @@
 
   function HeaderBar_TemplateFunction(mode) {
     openElement('tr');
-      openPropStyle();
-        staticPropStyle('background-color', '#222');
-      closePropStyle();
+      staticPropStyle('background-color', '#222');
       openElement('table');
         staticProp('width', '100%');
         staticProp('cellPadding', 0);
         staticProp('cellSpacing', 0);
-        openPropStyle();
-          staticPropStyle('padding', '4px');
-        closePropStyle();
+        staticPropStyle('padding', '4px');
         openElement('tbody');
           openElement('tr');
             openElement('td');
-              openPropStyle();
-                staticPropStyle('width', '18px');
-                staticPropStyle('padding-right', '4px');
-              closePropStyle();
+              staticPropStyle('width', '18px');
+              staticPropStyle('padding-right', '4px');
               openElement('a');
                 staticProp('href', '#');
                 openVoidElement('img');
                   staticProp('src', 'logo.png');
                   staticProp('width', 16);
                   staticProp('height', 16);
-                  openPropStyle();
-                    staticPropStyle('border', '1px solid #00d8ff');
-                  closePropStyle();
+                  staticPropStyle('border', '1px solid #00d8ff');
                 closeVoidElement();
               closeElement();
             closeElement();
             openElement('td');
-              openPropStyle();
-                staticPropUnitlessStyle('line-height', '12pt');
-              closePropStyle();
+              staticPropUnitlessStyle('line-height', '12pt');
               staticProp('height', 10);
               openElement('span');
                 staticPropClassName('pagetop');
@@ -422,10 +404,8 @@
       openElement('tr');
         staticPropClassName('athing');
         openElement('td');
-          openPropStyle();
-            staticPropStyle('vertical-align', 'top');
-            staticPropStyle('text-align', 'right');
-          closePropStyle();
+          staticPropStyle('vertical-align', 'top');
+          staticPropStyle('text-align', 'right');
           staticPropClassName('title');
           openElementSpan();
             staticPropClassName('rank');
@@ -434,9 +414,7 @@
         closeElement();
         openElement('td');
           staticPropClassName('votelinks');
-          openPropStyle();
-            staticPropStyle('vertical-align', 'top');
-          closePropStyle();
+          staticPropStyle('vertical-align', 'top');
           openElement('center');
             openElement('a');
               staticProp('href', '#');
@@ -494,9 +472,7 @@
         closeElement();
       closeElement();
       openElement('tr');
-        openPropStyle();
-          staticPropStyle('height', 5);
-        closePropStyle();
+        staticPropStyle('height', 5);
         staticPropClassName('spacer');
       closeElement();
     closeFragment();
@@ -561,9 +537,7 @@
         staticProp('cellPadding', 0);
         staticProp('cellSpacing', 0);
         staticProp('width', '85%');
-        openPropStyle();
           staticPropStyle('background-color', '#f6f6ef');
-        closePropStyle();
         openElement('tbody');
           refComponent(HeaderBar, null);
           openElement('tr');
@@ -582,8 +556,9 @@
   }
 
   const Component = {
-    t: Component_TemplateFunction,
+    f: null,
     p: ['stories'],
+    t: Component_TemplateFunction,
   };
 
   const props = {
@@ -1781,6 +1756,9 @@
 
   const start = performance.now();
   render(React.createElement(Component, props), root);
-  console.log(performance.now() - start);
+  const end = performance.now();
+  setTimeout(() => {
+    alert(end - start)
+  }, 100);
 
 })();

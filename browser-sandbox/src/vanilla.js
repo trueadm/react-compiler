@@ -1439,5 +1439,8 @@
   const start = performance.now();
   const node = Component(props);
   root.appendChild(node);
-  console.log(performance.now() - start);
+  const end = performance.now();
+  setTimeout(() => {
+    alert(end - start)
+  }, 100);
 })();
