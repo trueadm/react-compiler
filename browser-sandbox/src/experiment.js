@@ -211,8 +211,8 @@
       }
       currentProps = convertRootPropsToPropsArray(node.props, rootPropsShape);
       currentPhase = CREATION_PHASE;
+      currentHostNode = DOMContainer;
       rootTemplate(currentPhase);
-      appendChild(DOMContainer, currentFiber.hostNode);
       nextRootTemplateNode.f = currentFiber;
       currentFiber = null;
       currentHostNode = null;
@@ -1757,8 +1757,8 @@
   const start = performance.now();
   render(React.createElement(Component, props), root);
   const end = performance.now();
-  setTimeout(() => {
-    alert(end - start)
-  }, 100);
+  // setTimeout(() => {
+  //   alert(end - start)
+  // }, 100);
 
 })();
