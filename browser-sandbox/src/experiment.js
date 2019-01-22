@@ -3,16 +3,19 @@
 
   const isArray = Array.isArray;
   const reactElementSymbol = Symbol.for("react.element");
-
   const CREATION_PHASE = 0;
   const UPDATE_PHASE = 1;
-  const UNMOUNT_PHASE = 2;
 
-  let currentPhase = 0;
   let currentHostNode = null;
   let currentFiber = null;
   let currentProps = null;
-  let currentRuntimeValues = null;
+  let currentPhase = CREATION_PHASE;
+  let previousRuntimeValues = null;
+  let nextRuntimeValues = null;
+
+  const COMPONENT_USES_PROPS = 1;
+  const COMPONENT_USES_HOOKS = 1 << 1;
+  const COMPONENT_IS_ROOT = 1 << 2;
 
   function pushElement(elem) {
     if (currentFiber.hostNode === null) {
@@ -37,135 +40,203 @@
   }
 
   function openElement(tagName) {
-    const elem = createElement(tagName);
-    pushElement(elem);
-  }
-
-  function openElementSpan() {
-    const elem = createElement("span");
-    pushElement(elem);
-  }
-
-  function openElementDiv() {
-    const elem = createElement("div");
-    pushElement(elem);
-  }
-
-  function openVoidElement(tagName) {
-    const elem = createElement(tagName);
-    pushElement(elem);
+    if (currentPhase === CREATION_PHASE) {
+      const elem = createElement(tagName);
+      pushElement(elem);
+    }
   }
 
   function closeElement() {
-    currentHostNode = currentHostNode.parentNode;
+    if (currentPhase === CREATION_PHASE) {
+      currentHostNode = currentHostNode.parentNode;
+    }
   }
 
-  function closeVoidElement() {
-    closeElement();
+  function insertChildFiberIntoParentFiber(parent, child) {
+    child.parent = parent;
+    const firstChild = parent.child;
+    if (firstChild === null) {
+      parent.child = child;
+    } else {
+      let prevChild = firstChild;
+      while (prevChild !== null) {
+        const nextSibling = prevChild.sibling;
+        if (nextSibling === null) {
+          prevChild.sibling = child;
+          return;
+        }
+        prevChild = nextSibling;
+      }
+    }
   }
 
   function conditional(hostNodeStoreIndex, conditionalValueIndex, consequentTemplateFunction, alternateTemplateFunction) {
-    const conditionValue = currentRuntimeValues[conditionalValueIndex];
+    if (currentPhase === CREATION_PHASE) {
+      const conditionValue = nextRuntimeValues[conditionalValueIndex];
 
-    if (conditionValue) {
-      if (consequentTemplateFunction !== null) {
-        consequentTemplateFunction(currentPhase);
-      }
-    } else {
-      if (alternateTemplateFunction !== null) {
-        alternateTemplateFunction(currentPhase);
+      if (conditionValue) {
+        if (consequentTemplateFunction !== null) {
+          consequentTemplateFunction();
+        }
+      } else {
+        if (alternateTemplateFunction !== null) {
+          alternateTemplateFunction();
+        }
       }
     }
   }
 
   function elementDynamicChildrenArrayMapTemplate(arrayValueIndex, arrayMapComputeFunctionValueIndex, arrayMapTemplateFunction) {
-    const previousRuntimeValues = currentRuntimeValues;
-    const array = currentRuntimeValues[arrayValueIndex];
-    const arrayMapComputeFunction =
-      arrayMapComputeFunctionValueIndex === 0 ? null : currentRuntimeValues[arrayMapComputeFunctionValueIndex];
-    
-    const arrayLength = array.length;
-    for (let i = 0; i < arrayLength; ++i) {
-      const element = array[i];
-      if (arrayMapComputeFunction !== null) {
-        currentRuntimeValues = arrayMapComputeFunction(element, i, array);
+    const _nextRuntimeValues = nextRuntimeValues;
+    const parentFiber = currentFiber;
+    const nextArray = nextRuntimeValues[arrayValueIndex];
+    const nextArrayMapComputeFunction =
+      arrayMapComputeFunctionValueIndex === 0 ? null : nextRuntimeValues[arrayMapComputeFunctionValueIndex];
+
+    if (currentPhase === CREATION_PHASE) {
+      const arrayLength = nextArray.length;
+      for (let i = 0; i < arrayLength; ++i) {
+        const element = nextArray[i];
+        if (nextArrayMapComputeFunction !== null) {
+          nextRuntimeValues = nextArrayMapComputeFunction(element, i, nextArray);
+        } else {
+          nextRuntimeValues = null;
+        }
+        currentFiber = createOpcodeFiber(nextRuntimeValues);
+        insertChildFiberIntoParentFiber(parentFiber, currentFiber);
+        arrayMapTemplateFunction();
       }
-      arrayMapTemplateFunction(currentPhase);
+    } else {
+      const _previousRuntimeValues = previousRuntimeValues;
+      let childFiber = parentFiber.child;
+      previousRuntimeValues = nextRuntimeValues;
+      // TOOD make this actually work with dynamic lists
+      const arrayLength = nextArray.length;
+      for (let i = 0; i < arrayLength; ++i) {
+        const element = nextArray[i];
+        currentFiber = childFiber;
+        if (nextArrayMapComputeFunction !== null) {
+          previousRuntimeValues = currentFiber.values;
+          nextRuntimeValues = nextArrayMapComputeFunction(element, i, nextArray);
+          currentFiber.values = nextRuntimeValues;
+        }
+        arrayMapTemplateFunction();
+        childFiber = childFiber.sibling;
+      }
+      previousRuntimeValues = _previousRuntimeValues;
     }
-    currentRuntimeValues = currentRuntimeValues;
+    currentFiber = parentFiber;
+    nextRuntimeValues = _nextRuntimeValues;
   }
 
   function elementStaticChildrenValue(childrenValue) {
-    currentHostNode.textContent = childrenValue;
+    if (currentPhase === CREATION_PHASE) {
+      currentHostNode.textContent = childrenValue;
+    }
   }
 
   function elementStaticChildValue(childValue) {
-    const textNode = createTextNode(childValue);
-    appendChild(currentHostNode, textNode);
-  }
-
-  function elementDynamicChildrenValue(childrenValueIndex, hostNodeStoreIndex) {
-    const dynamicChildrenValue = currentRuntimeValues[childrenValueIndex];
-    if (dynamicChildrenValue !== null && dynamicChildrenValue !== undefined && typeof dynamicChildrenValue !== "boolean") {
-      currentHostNode.textContent = dynamicChildrenValue;
-    } else {
-      const textNode = createPlaceholder();
+    if (currentPhase === CREATION_PHASE) {
+      const textNode = createTextNode(childValue);
       appendChild(currentHostNode, textNode);
     }
   }
 
-  function staticProp(propName, staticPropValue) {
-    if (propName === "id") {
-      currentHostNode.id = staticPropValue;
-      return;
+  function elementDynamicChildrenValue(childrenValueIndex, hostNodeStoreIndex) {
+    const nextChildrenValue = nextRuntimeValues[childrenValueIndex];
+    if (currentPhase === CREATION_PHASE) {
+      if (nextChildrenValue !== null && nextChildrenValue !== undefined && typeof nextChildrenValue !== "boolean") {
+        currentHostNode.textContent = nextChildrenValue;
+      } else {
+        const textNode = createPlaceholder();
+        appendChild(currentHostNode, textNode);
+      }
+    } else {
+      const previousChildrenValue = previousRuntimeValues[childrenValueIndex];
+      if (previousChildrenValue !== nextChildrenValue) {
+        currentHostNode.firstChild.nodeValue = nextChildrenValue;
+      }
     }
-    currentHostNode.setAttribute(propName, staticPropValue);
+  }
+
+  function staticProp(propName, staticPropValue) {
+    if (currentPhase === CREATION_PHASE) {
+      if (propName === "id") {
+        currentHostNode.id = staticPropValue;
+        return;
+      }
+      currentHostNode.setAttribute(propName, staticPropValue);
+    }
   }
 
   function staticPropClassName(staticPropClassNameValue) {
-    currentHostNode.className = staticPropClassNameValue;
+    if (currentPhase === CREATION_PHASE) {
+      currentHostNode.className = staticPropClassNameValue;
+    }
   }
 
   function staticPropStyle(styleName, styleValue) {
-    if (styleValue == null || styleValue === undefined) {
-      return;
+    if (currentPhase === CREATION_PHASE) {
+      if (styleValue == null || styleValue === undefined) {
+        return;
+      }
+      if (typeof styleValue === "number") {
+        styleValue = `${styleValue}px`;
+      }
+      currentHostNode.style.setProperty(styleName, styleValue);
     }
-    if (typeof styleValue === "number") {
-      styleValue = `${styleValue}px`;
-    }
-    currentHostNode.style.setProperty(styleName, styleValue);
   }
 
   function staticPropUnitlessStyle(styleName, styleValue) {
-    if (styleValue == null || styleValue === undefined) {
-      return;
+    if (currentPhase === CREATION_PHASE) {
+      if (styleValue == null || styleValue === undefined) {
+        return;
+      }
+      currentHostNode.style.setProperty(styleName, styleValue);
     }
-    currentHostNode.style.setProperty(styleName, styleValue);
   }
 
-  function createComponent(usesState, templateFunction, computeFunction) {
-    const previousRuntimeValues = currentRuntimeValues;
-    if (computeFunction !== null) {
-      currentRuntimeValues = callComputeFunctionWithArray(computeFunction, currentProps);
-    }
-    const componentFiber = createOpcodeFiber(currentProps, currentRuntimeValues);
-    if (currentFiber === null) {
-      currentFiber = componentFiber;
-    }
-    templateFunction(currentPhase);
-    currentRuntimeValues = previousRuntimeValues;
-    currentFiber = componentFiber;
-  }
-
-  function refComponent(componentTemplateFunction, propsValueIndexOrValue) {
-    if (propsValueIndexOrValue === null) {
-      currentProps = null;
-    } else if (typeof propsValueIndexOrValue === "number") {
-      currentProps = currentRuntimeValues[propsValueIndexOrValue];
+  function component(flags, templateFunction, computeFunction, propsValueIndexOrValue) {
+    const _nextRuntimeValues = nextRuntimeValues;
+    const _previousRuntimeValues = previousRuntimeValues;
+    const parentFiber = currentFiber;
+    const componentIsRoot = (flags & COMPONENT_IS_ROOT) > 0;
+    let props;
+    if ((flags & COMPONENT_USES_PROPS) > 0) {
+      if (componentIsRoot) {
+        props = currentProps;
+        currentProps = null;
+      } else {
+        if (typeof propsValueIndexOrValue === "number") {
+          props = nextRuntimeValues[propsValueIndexOrValue];
+        } else {
+          props = propsValueIndexOrValue;
+        }
+      }
+      nextRuntimeValues = callComputeFunctionWithArray(computeFunction, props);
+      if (currentPhase === CREATION_PHASE) {
+        currentFiber = createOpcodeFiber(nextRuntimeValues);
+        currentFiber.memoizedProps = props;
+        if (!componentIsRoot) {
+          insertChildFiberIntoParentFiber(parentFiber, currentFiber);
+        }
+      } else {
+        if (!componentIsRoot) {
+          currentFiber = parentFiber.child;
+        }
+        previousRuntimeValues = currentFiber.values;
+        currentFiber.values = nextRuntimeValues;
+      }
     } else {
-      currentProps = propsValueIndexOrValue;
+      props = null;
+      nextRuntimeValues = null;
     }
-    componentTemplateFunction(currentPhase);
+    templateFunction();
+    nextRuntimeValues = _nextRuntimeValues;
+    previousRuntimeValues = _previousRuntimeValues;
+    if (!componentIsRoot) {
+      currentFiber = parentFiber;
+    }
   }
 
   const roots = [];
@@ -174,12 +245,19 @@
     const rootsLength = roots.length;
     if (rootsLength > 0) {
       for (let i = 0; i < rootsLength; i++) {
-        if (root.container === DOMContainer) {
+        if (roots[i].h === DOMContainer) {
           return root;
         }
       }
     }
     return null;
+  }
+
+  function renderTemplateWithPhase(phase, template) {
+    const previousPhase = currentPhase;
+    currentPhase = phase;
+    template();
+    currentPhase = previousPhase;
   }
 
   function renderNodeToRootContainer(node, DOMContainer) {
@@ -193,16 +271,19 @@
       const nextRootTemplateNode = node.type;
       const rootPropsShape = nextRootTemplateNode.p;
       const rootTemplate = nextRootTemplateNode.t;
+      let phase;
   
-      if (previousTemplateNode === undefined) {
+      if (previousTemplateNode === null) {
+        phase = CREATION_PHASE;
         roots.push(nextRootTemplateNode);
+        nextRootTemplateNode.h = DOMContainer;
       } else {
-        // TODO
+        phase = UPDATE_PHASE;
+        currentFiber = nextRootTemplateNode.f;
       }
       currentProps = convertRootPropsToPropsArray(node.props, rootPropsShape);
-      currentPhase = CREATION_PHASE;
       currentHostNode = DOMContainer;
-      rootTemplate(currentPhase);
+      renderTemplateWithPhase(phase, rootTemplate);
       nextRootTemplateNode.f = currentFiber;
       currentFiber = null;
       currentHostNode = null;
@@ -212,17 +293,26 @@
     }
   }
 
-  function createOpcodeFiber(memoizedProps, values) {
+  function createOpcodeFiber(values) {
     return {
       alternate: null,
       child: null,
       hostNode: null,
       key: null,
-      memoizedProps,
-      memoizedState: null,
+      memoizedProps: null, // Only used by components
+      memoizedState: null, // Stores hooks and refs
       sibling: null,
       parent: null,
       values: values,
+    };
+  }
+
+  function createRoot(p, t) {
+    return {
+      f: null,
+      h: null,
+      p,
+      t,
     };
   }
 
@@ -294,7 +384,7 @@
     return (url + "")["replace"]("https://", "")["replace"]("http://", "")["split"]("/")[0];
   }
 
-  function HeaderBar_TemplateFunction(mode) {
+  function HeaderBar_TemplateFunction() {
     openElement('tr');
       staticPropStyle('background-color', '#222');
       openElement('table');
@@ -309,12 +399,12 @@
               staticPropStyle('padding-right', '4px');
               openElement('a');
                 staticProp('href', '#');
-                openVoidElement('img');
+                openElement('img');
                   staticProp('src', 'logo.png');
                   staticProp('width', 16);
                   staticProp('height', 16);
                   staticPropStyle('border', '1px solid #00d8ff');
-                closeVoidElement();
+                closeElement();
               closeElement();
             closeElement();
             openElement('td');
@@ -363,14 +453,8 @@
     closeElement();
   }
 
-  function HeaderBar(mode) {
-    if (mode === 0) {
-      createComponent(0, HeaderBar_TemplateFunction, null);
-    }
-  }
-
   function Story_Conditional_Consequent_TemplateFunction() {
-    openElementSpan();
+    openElement('span');
       staticPropClassName('sitebit comhead');
       elementStaticChildValue(" (");
       openElement('a')
@@ -389,7 +473,7 @@
           staticPropStyle('vertical-align', 'top');
           staticPropStyle('text-align', 'right');
           staticPropClassName('title');
-          openElementSpan();
+          openElement('span');
             staticPropClassName('rank');
             elementDynamicChildrenValue(0, 0);
           closeElement();
@@ -400,7 +484,7 @@
           openElement('center');
             openElement('a');
               staticProp('href', '#');
-              openElementDiv();
+              openElement('div');
                 staticPropClassName('votearrow');
                 staticProp('title', 'upvote');
               closeElement();
@@ -423,7 +507,7 @@
         closeElement();
         openElement('td');
           staticPropClassName('subtext');
-          openElementSpan();
+          openElement('span');
             staticPropClassName('score');
             elementDynamicChildrenValue(4, 4);
           closeElement();
@@ -434,7 +518,7 @@
             elementDynamicChildrenValue(5, 5);
           closeElement();
           elementStaticChildValue(" ");
-          openElementSpan();
+          openElement('span');
             staticPropClassName('age');
             openElement('a');
               staticProp('href', '#');
@@ -470,19 +554,11 @@
     return [`${rank}.`, story["title"], story["url"], __cached__0, `${story["score"]} points`, story["by"], __cached__1, `${story["descendants"] || 0} comments`];
   }
 
-  function Story(mode) {
-    if (mode === 0) {
-      createComponent(0, Story_TemplateFunction, Story_ComputeFunction);
-    }
+  function StoryList_MapTemplateFunction() {
+    component(1, Story_TemplateFunction, Story_ComputeFunction, 0);
   }
 
-  function StoryList_MapTemplateFunction(mode) {
-    if (mode === 0) {
-      refComponent(Story, 0);
-    }
-  }
-
-  function StoryList_TemplateFunction(mode) {
+  function StoryList_TemplateFunction() {
     openElement('tr');
       openElement('td');
         openElement('table');
@@ -501,17 +577,11 @@
     return [stories, (story, i) => [[++i, story]]];
   }
 
-  function StoryList(mode) {
-    if (mode === 0) {
-      createComponent(0, StoryList_TemplateFunction, StoryList_ComputeFunction);
-    }
-  }
-
   function App_ComputeFunction(stories) {
     return [[stories]];
   }
 
-  function App_TemplateFunction(mode) {
+  function App_TemplateFunction() {
     openElement('center');
       openElement('table');
         staticProp('id', 'hnmain');
@@ -521,27 +591,21 @@
         staticProp('width', '85%');
           staticPropStyle('background-color', '#f6f6ef');
         openElement('tbody');
-          refComponent(HeaderBar, null);
+          component(0, HeaderBar_TemplateFunction);
           openElement('tr');
             staticProp('height', '10');
           closeElement();
-          refComponent(StoryList, 0);
+          component(1, StoryList_TemplateFunction, StoryList_ComputeFunction, 0);
         closeElement();
       closeElement();
     closeElement();
   }
 
-  function Component_TemplateFunction(mode) {
-    if (mode === 0) {
-      createComponent(0, App_TemplateFunction, App_ComputeFunction);
-    }
+  function Component_TemplateFunction() {
+    component(5, App_TemplateFunction, App_ComputeFunction);
   }
 
-  const Component = {
-    f: null,
-    p: ['stories'],
-    t: Component_TemplateFunction,
-  };
+  const Component = createRoot(['stories'], Component_TemplateFunction);
 
   const props = {
     "stories": [
@@ -1736,11 +1800,16 @@
     }
   }
 
-  const start = performance.now();
-  render(React.createElement(Component, props), root);
-  const end = performance.now();
+  function renderBenchmark() {
+    const start = performance.now();
+    render(React.createElement(Component, props), root);
+    return performance.now() - start;
+  }
+
+  const initialRenderTime = renderBenchmark();
   setTimeout(() => {
-    alert(end - start)
+    const updateRenderTime = renderBenchmark();
+    alert(`Initial: ${initialRenderTime} Update: ${updateRenderTime}`)
   }, 100);
 
 })();
