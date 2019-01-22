@@ -54,20 +54,11 @@
 
   function insertChildFiberIntoParentFiber(parent, child) {
     child.parent = parent;
-    const firstChild = parent.child;
-    if (firstChild === null) {
-      parent.child = child;
-    } else {
-      let prevChild = firstChild;
-      while (prevChild !== null) {
-        const nextSibling = prevChild.sibling;
-        if (nextSibling === null) {
-          prevChild.sibling = child;
-          return;
-        }
-        prevChild = nextSibling;
-      }
+    let children = parent.children;
+    if (children === null) {
+      children = parent.children = [];
     }
+    children.push(child);
   }
 
   function conditional(hostNodeStoreIndex, conditionalValueIndex, consequentTemplateFunction, alternateTemplateFunction) {
@@ -86,7 +77,7 @@
     }
   }
 
-  function elementDynamicChildrenArrayMapTemplate(arrayValueIndex, arrayMapComputeFunctionValueIndex, arrayMapTemplateFunction) {
+  function elementDynamicChildrenArrayMapTemplate(arrayValueIndex, arrayMapComputeFunctionValueIndex, arrayMapTemplateFunction, fiberPosition) {
     const _nextRuntimeValues = nextRuntimeValues;
     const parentFiber = currentFiber;
     const nextArray = nextRuntimeValues[arrayValueIndex];
@@ -94,6 +85,9 @@
       arrayMapComputeFunctionValueIndex === 0 ? null : nextRuntimeValues[arrayMapComputeFunctionValueIndex];
 
     if (currentPhase === CREATION_PHASE) {
+      const arrayMapFiber = createOpcodeFiber(null);
+      insertChildFiberIntoParentFiber(parentFiber, arrayMapFiber);
+      const keyMap = arrayMapFiber.keyMap = new Map();
       const arrayLength = nextArray.length;
       for (let i = 0; i < arrayLength; ++i) {
         const element = nextArray[i];
@@ -102,26 +96,27 @@
         } else {
           nextRuntimeValues = null;
         }
+        const key = nextRuntimeValues[0];
         currentFiber = createOpcodeFiber(nextRuntimeValues);
-        insertChildFiberIntoParentFiber(parentFiber, currentFiber);
+        currentFiber.key = key;
+        keyMap.set(key, i);
+        insertChildFiberIntoParentFiber(arrayMapFiber, currentFiber);
         arrayMapTemplateFunction();
       }
     } else {
+      const arrayMapFiber = parentFiber.children[fiberPosition];
       const _previousRuntimeValues = previousRuntimeValues;
-      let childFiber = parentFiber.child;
       previousRuntimeValues = nextRuntimeValues;
-      // TOOD make this actually work with dynamic lists
       const arrayLength = nextArray.length;
       for (let i = 0; i < arrayLength; ++i) {
         const element = nextArray[i];
-        currentFiber = childFiber;
+        currentFiber = arrayMapFiber.children[i];
         if (nextArrayMapComputeFunction !== null) {
           previousRuntimeValues = currentFiber.values;
           nextRuntimeValues = nextArrayMapComputeFunction(element, i, nextArray);
           currentFiber.values = nextRuntimeValues;
         }
         arrayMapTemplateFunction();
-        childFiber = childFiber.sibling;
       }
       previousRuntimeValues = _previousRuntimeValues;
     }
@@ -196,7 +191,7 @@
     }
   }
 
-  function component(flags, templateFunction, computeFunction, propsValueIndexOrValue) {
+  function component(flags, templateFunction, computeFunction, fiberPosition, propsValueIndexOrValue) {
     const _nextRuntimeValues = nextRuntimeValues;
     const _previousRuntimeValues = previousRuntimeValues;
     const parentFiber = currentFiber;
@@ -214,22 +209,22 @@
         }
       }
       nextRuntimeValues = callComputeFunctionWithArray(computeFunction, props);
-      if (currentPhase === CREATION_PHASE) {
-        currentFiber = createOpcodeFiber(nextRuntimeValues);
-        currentFiber.memoizedProps = props;
-        if (!componentIsRoot) {
-          insertChildFiberIntoParentFiber(parentFiber, currentFiber);
-        }
-      } else {
-        if (!componentIsRoot) {
-          currentFiber = parentFiber.child;
-        }
-        previousRuntimeValues = currentFiber.values;
-        currentFiber.values = nextRuntimeValues;
-      }
     } else {
       props = null;
       nextRuntimeValues = null;
+    }
+    if (currentPhase === CREATION_PHASE) {
+      currentFiber = createOpcodeFiber(nextRuntimeValues);
+      currentFiber.memoizedProps = props;
+      if (!componentIsRoot) {
+        insertChildFiberIntoParentFiber(parentFiber, currentFiber);
+      }
+    } else {
+      if (!componentIsRoot) {
+        currentFiber = parentFiber.children[fiberPosition];
+      }
+      previousRuntimeValues = currentFiber.values;
+      currentFiber.values = nextRuntimeValues;
     }
     templateFunction();
     nextRuntimeValues = _nextRuntimeValues;
@@ -296,12 +291,13 @@
   function createOpcodeFiber(values) {
     return {
       alternate: null,
-      child: null,
+      children: null,
+      dynamicHostNodes: null,
       hostNode: null,
       key: null,
+      keyMap: null,
       memoizedProps: null, // Only used by components
       memoizedState: null, // Stores hooks and refs
-      sibling: null,
       parent: null,
       values: values,
     };
@@ -555,7 +551,7 @@
   }
 
   function StoryList_MapTemplateFunction() {
-    component(1, Story_TemplateFunction, Story_ComputeFunction, 0);
+    component(1, Story_TemplateFunction, Story_ComputeFunction, 0, 0);
   }
 
   function StoryList_TemplateFunction() {
@@ -566,7 +562,7 @@
           staticProp('cellSpacing', 0);
           staticProp('classList', 'itemlist');
           openElement('tbody');
-            elementDynamicChildrenArrayMapTemplate(0, 1, StoryList_MapTemplateFunction);
+            elementDynamicChildrenArrayMapTemplate(0, 1, StoryList_MapTemplateFunction, 0);
           closeElement();
         closeElement();
       closeElement();
@@ -591,11 +587,11 @@
         staticProp('width', '85%');
           staticPropStyle('background-color', '#f6f6ef');
         openElement('tbody');
-          component(0, HeaderBar_TemplateFunction);
+          component(0, HeaderBar_TemplateFunction, null, 0);
           openElement('tr');
             staticProp('height', '10');
           closeElement();
-          component(1, StoryList_TemplateFunction, StoryList_ComputeFunction, 0);
+          component(1, StoryList_TemplateFunction, StoryList_ComputeFunction, 1, 0);
         closeElement();
       closeElement();
     closeElement();
