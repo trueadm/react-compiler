@@ -11,10 +11,8 @@
   let currentPhase = 0;
   let currentHostNode = null;
   let currentFiber = null;
-  let currentHostNodeStackIndex = 0;
   let currentProps = null;
   let currentRuntimeValues = null;
-  const currentHostNodeStack = [];
 
   function pushElement(elem) {
     if (currentFiber.hostNode === null) {
@@ -25,17 +23,17 @@
       }
     }
     if (currentHostNode !== null) {
-      currentHostNodeStack[currentHostNodeStackIndex++] = currentHostNode;
+      appendChild(currentHostNode, elem);
     }
     currentHostNode = elem;
   }
 
   function openFragment() {
-    pushElement([]);
+    // pushElement([]);
   }
 
   function closeFragment() {
-    closeElement();
+    // closeElement();
   }
 
   function openElement(tagName) {
@@ -59,15 +57,7 @@
   }
 
   function closeElement() {
-    if (currentHostNodeStackIndex === 0) {
-      currentHostNode = null;
-    } else {
-      --currentHostNodeStackIndex;
-      const parent = currentHostNodeStack[currentHostNodeStackIndex];
-      currentHostNodeStack[currentHostNodeStackIndex] = null;
-      appendChild(parent, currentHostNode);
-      currentHostNode = parent;
-    }
+    currentHostNode = currentHostNode.parentNode;
   }
 
   function closeVoidElement() {
@@ -269,16 +259,8 @@
     }
   }
 
-  function appendChild(parentElementOrFragment, element) {
-    if (isArray(parentElementOrFragment)) {
-      parentElementOrFragment.push(element);
-    } else if (isArray(element)) {
-      for (let i = 0, length = element.length; i < length; i++) {
-        appendChild(parentElementOrFragment, element[i]);
-      }
-    } else {
-      parentElementOrFragment.appendChild(element);
-    }
+  function appendChild(parent, element) {
+    parent.appendChild(element);
   }
 
   function createElement(tagName) {
@@ -1757,8 +1739,8 @@
   const start = performance.now();
   render(React.createElement(Component, props), root);
   const end = performance.now();
-  // setTimeout(() => {
-  //   alert(end - start)
-  // }, 100);
+  setTimeout(() => {
+    alert(end - start)
+  }, 100);
 
 })();
