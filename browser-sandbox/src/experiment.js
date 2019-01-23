@@ -1,10 +1,10 @@
 (function() {
   "use strict";
 
-  const isArray = Array.isArray;
   const reactElementSymbol = Symbol.for("react.element");
   const CREATION_PHASE = 0;
   const UPDATE_PHASE = 1;
+  const _ = void 0;
 
   let currentFiber = null;
   let currentProps = null;
@@ -20,18 +20,34 @@
     return children;
   }
 
-  function element(tagName, children, staticProps, staticStyles, dynamicProps) {
+  function isArray(x) {
+    return x.constructor === Array;
+  }
+
+  function element(tagName, staticProps, dynamicProps, children) {
     if (currentPhase === CREATION_PHASE) {
       const elem = createElement(tagName);
-      if (staticProps !== undefined) {
+      if (staticProps !== _) {
         for (let i = 0, length = staticProps.length; i < length; i += 2) {
           const propName = staticProps[i];
           const propValue = staticProps[i + 1];
 
-          if (propName === "textContent") {
-            elem.textContent = propValue;
-          } else if (propName === "className") {
+          if (propName === "className") {
             elem.className = propValue;
+          } else if (propName === "style") {
+            const style = elem.style;
+            for (let x = 0, length = propValue.length; x < length; x += 2) {
+              const styleName = propValue[x];
+              let styleValue = propValue[x + 1];
+    
+              if (styleValue == null || styleValue === undefined) {
+                continue;
+              }
+              if (typeof styleValue === "number") {
+                styleValue = `${styleValue}px`;
+              }
+              style.setProperty(styleName, styleValue);
+            }
           } else if (propName === "id") {
             elem.id = propValue;
           } else {
@@ -39,15 +55,13 @@
           }
         }
       }
-      if (dynamicProps !== undefined) {
+      if (dynamicProps !== _) {
         for (let i = 0, length = dynamicProps.length; i < length; i += 2) {
           const propName = dynamicProps[i];
           const propValueIndex = dynamicProps[i + 1];
           const propValue = nextRuntimeValues[propValueIndex];
 
-          if (propName === "textContent") {
-            elem.textContent = propValue;
-          } else if (propName === "className") {
+          if (propName === "className") {
             elem.className = propValue;
           } else if (propName === "id") {
             elem.id = propValue;
@@ -56,31 +70,24 @@
           }
         }
       }
-      if (staticStyles !== undefined) {
-        const style = elem.style;
-        for (let i = 0, length = staticStyles.length; i < length; i += 2) {
-          const styleName = staticStyles[i];
-          let styleValue = staticStyles[i + 1];
-
-          if (styleValue == null || styleValue === undefined) {
-            continue;
-          }
-          if (typeof styleValue === "number") {
-            styleValue = `${styleValue}px`;
-          }
-          style.setProperty(styleName, styleValue);
-        }
-      }
-      if (children !== undefined) {
-        for (let i = 0, length = children.length; i < length; ++i) {
-          const child = children[i];
-          if (isArray(child)) {
-            for (let i = 0, length = child.length; i < length; ++i) {
-              appendChild(elem, child[i]);
+      if (children !== _) {
+        if (typeof children === "string") {
+          elem.textContent = children;
+        } else if (typeof children === "number") {
+          elem.textContent = nextRuntimeValues[children];
+        } else if (isArray(children)) {
+          for (let i = 0, length = children.length; i < length; ++i) {
+            const child = children[i];
+            if (isArray(child)) {
+              for (let i = 0, length = child.length; i < length; ++i) {
+                appendChild(elem, child[i]);
+              }
+            } else {
+              appendChild(elem, children[i]);
             }
-          } else {
-            appendChild(elem, children[i]);
           }
+        } else {
+          appendChild(elem, children);
         }
       }
       return elem;
@@ -422,73 +429,61 @@
     return (url + "")["replace"]("https://", "")["replace"]("http://", "")["split"]("/")[0];
   }
 
-  const arr31 = ['background-color', '#222']
-  const arr32 = ['width', '100%', 'cellPadding', 0, 'cellSpacing', 0]
-  const arr33 = ['padding', '4px']
-  const arr34 = ['width', '18px', 'padding-right', '4px']
+  const arr31 = ['style', ['background-color', '#222']];
+  const arr32 = ['width', '100%', 'cellpadding', 0, 'cellspacing', 0, 'style', ['padding', '4px']];
+  const arr34 = ['style', ['width', '18px', 'padding-right', '4px']];
   const arr35 = ['href', '#']
-  const arr36 = ['src', 'logo.png', 'width', 16, 'height', 16]
-  const arr37 = ['border', '1px solid #00d8ff']
-  const arr38 = ['line-height', '12pt']
-  const arr39 = ['height', 10]
+  const arr36 = ['src', 'logo.png', 'width', 16, 'height', 16, 'style', ['border', '1px solid #00d8ff']]
+  const arr39 = ['height', 10, 'style', ['line-height', '12pt']]
   const arr40 = ['className', 'pagetop']
-  const arr41 = ['className', 'hnname', 'textContent', 'React HN Benchmark']
-  const arr42 = ['href', '#', 'textContent', 'new']
-  const arr43 = ['href', '#', 'textContent', 'comments']
-  const arr44 = ['href', '#', 'textContent', 'show']
-  const arr45 = ['href', '#', 'textContent', 'ask']
-  const arr46 = ['href', '#', 'textContent', 'jobs']
-  const arr47 = ['href', '#', 'textContent', 'submit']
+  const arr41 = ['className', 'hnname']
 
   function HeaderBar_TemplateFunction() {
-    return element('tr', [
-      element('table', [
-        element('tbody', [
-          element('tr', [
-            element('td', [
-              element('a', [
-                element('img', void 0, arr36, arr37)
-              ], arr35)
-            ], void 0, arr34),
-            element('td', [
-              element('span', [
-                element('b', void 0, arr41),
-                element('a', void 0, arr42),
+    return element('tr', arr31, _, 
+      element('table', arr32, _,
+        element('tbody', _, _,
+          element('tr', _, _, [
+            element('td', arr34, _,
+              element('a', arr35, _,
+                element('img', arr36, _, _)
+              )
+            ),
+            element('td', arr39, _,
+              element('span', arr40, _, [
+                element('b', arr41, _, 'React HN Benchmark'),
+                element('a', arr35, _, 'new'),
                 text(' | '),
-                element('a', void 0, arr43),
+                element('a', arr35, _, 'comments'),
                 text(' | '),
-                element('a', void 0, arr44),
+                element('a', arr35, _, 'show'),
                 text(' | '),
-                element('a', void 0, arr45),
+                element('a', arr35, _, 'ask'),
                 text(' | '),
-                element('a', void 0, arr46),
+                element('a', arr35, _, 'jobs'),
                 text(' | '),
-                element('a', void 0, arr47),
-              ], arr40),
-            ], arr39, arr38),
+                element('a', arr35, _, 'submit'),
+              ])
+            )
           ])
-        ])
-      ], arr32, arr33)
-    ], void 0, arr31);
+        )
+      )
+    );
   }
 
   const arr23 = ['className', 'sitebit comhead'];
-  const arr24 = ['href', '#'];
-  const arr25 = ['textContent', 3];
 
   function Story_Conditional_Consequent_TemplateFunction() {
-    return element('span', [
+    return element('span', arr23, _, [
       text(' ('),
-      element('a', void 0, arr24, void 0, arr25),
+      element('a', arr35, _, 3),
       text(')'),
-    ], arr23);
+    ]);
   }
 
   const arr3 = ['className', 'athing'];
-  const arr4 = ['className', 'title'];
-  const arr5 = ['className', 'rank'];
+  const arr4 = ['className', 'title', 'style', ['vertical-align', 'top', 'text-align', 'right']];
+  const arr5 = ['className', 'rank', 'style', ['vertical-align', 'top']];
   const arr6 = ['className', 'votelinks'];
-  const arr7 = ['href', '#'];
   const arr8 = ['className', 'votearrow', 'title', 'upvote'];
   const arr9 = ['href', '#', 'className', 'storylink'];
   const arr10 = ['colSpan', 2];
@@ -496,53 +491,45 @@
   const arr12 = ['className', 'score'];
   const arr13 = ['href', '#', 'className', 'hnuser'];
   const arr14 = ['className', 'age'];
-  const arr15 = ['className', 'spacer'];
-  const arr16 = ['vertical-align', 'top', 'text-align', 'right'];
-  const arr19 = ['textContent', 0]
-  const arr20 = ['vertical-align', 'top'];
-  const arr21 = ['height', 5];
-  const arr22 = ['textContent', 1]
-  const arr26 = ['textContent', 4]
-  const arr27 = ['textContent', 5]
-  const arr28 = ['textContent', 6]
-  const arr29 = ['href', '#', 'textContent', 'hide']
-  const arr30 = ['textContent', 7]
+  const arr15 = ['className', 'spacer', 'style', ['height', 5]];
+  const arr16 = ['className', 'title'];
+  const arr29 = ['href', '#']
 
   function Story_TemplateFunction() {
     return fragment([
-      element('tr', [
-        element('td', [
-          element('span', void 0, arr5, void 0, arr19)
-        ], arr4, arr16),
-        element('td', [
-          element('center', [
-            element('a', [
-              element('div', void 0, arr8),
-            ], arr7)
-          ])
-        ], arr5, arr20),
-        element('td', [
-          element('a', void 0, arr9, void 0, arr22),
-          conditional(2, 2, Story_Conditional_Consequent_TemplateFunction, null)
-        ], arr4),
-      ], arr3),
-      element('tr', [
-        element('td', void 0, arr10),
-        element('td', [
-          element('span', void 0, arr12, void 0, arr26),
-          text(' by '),
-          element('a', void 0, arr13, void 0, arr27),
-          text(' '),
-          element('span', [
-            element('a', void 0, arr7, void 0, arr28)
-          ], arr14),
-          text(' | '),
-          element('a', void 0, arr29),
-          text(' | '),
-          element('a', void 0, arr7, void 0, arr30),
-        ], arr11),
+      element('tr', arr3, _, [
+        element('td', arr4, _,
+          element('span', arr6, _, 0)
+        ),
+        element('td', arr5, _,
+          element('center', _, _,
+            element('a', arr35, _,
+              element('div', arr8, _, _)
+            )
+          )
+        ),
+        element('td', arr16, _, [
+          element('a', arr9, _, 1),
+          conditional(2, 2, Story_Conditional_Consequent_TemplateFunction, null),
+        ]),
       ]),
-      element('tr', void 0, arr15, arr21)
+      element('tr', _, _, [
+        element('td', arr10, _, _),
+        element('td', arr11, _, [
+          element('span', arr12, _, 4),
+          text(' by '),
+          element('a', arr13, _, 5),
+          text(' '),
+          element('span', arr14, _,
+            element('a', arr35, _, 6)
+          ),
+          text(' | '),
+          element('a', arr29, _, 'hide'),
+          text(' | '),
+          element('a', arr35, _, 7),
+        ])
+      ]),
+      element('tr', arr15, _, _)
     ]);
   }
 
@@ -560,18 +547,18 @@
     return component(1, Story_TemplateFunction, Story_ComputeFunction, 0, 0);
   }
 
-  const arr18 = ['cellPadding', 0, 'cellSpacing', 0, 'classList', 'itemlist']
+  const arr18 = ['cellpadding', 0, 'cellspacing', 0, 'classlist', 'itemlist']
 
   function StoryList_TemplateFunction() {
-    return element('tr', [
-      element('td', [
-        element('table', [
-          element('tbody',
+    return element('tr', _, _,
+      element('td', _, _,
+        element('table', arr18, _, 
+          element('tbody', _, _,
             elementDynamicChildrenArrayMapTemplate(0, 1, StoryList_MapTemplateFunction, 0)
           )
-        ], arr18)
-      ])
-    ]);
+        )
+      )
+    )
   }
 
   function StoryList_ComputeFunction(stories) {
@@ -582,24 +569,23 @@
     return [[stories]];
   }
 
-  const arr1 = ['id', 'hnmain', 'border', 0, 'cellPadding', 0, 'cellSpacing', 0, 'width', '85%']
-  const arr2 = ['height', '10']
-  const arr17 = ['background-color', '#f6f6ef'];
+  const arr1 = ['id', 'hnmain', 'border', 0, 'cellpadding', 0, 'cellspacing', 0, 'width', '85%', 'style', ['background-color', '#f6f6ef']];
+  const arr2 = ['height', '10'];
 
   function App_TemplateFunction() {
-    return element('center', [
-      element('table', [
-        element('tbody', [
-          component(0, HeaderBar_TemplateFunction, null, 0),
-          element('tr', void 0, arr2),
+    return element('center', _, _,
+      element('table', arr1, _,
+        element('tbody', _, _, [
+          component(0, HeaderBar_TemplateFunction, _, 0),
+          element('tr', arr2, _, _),
           component(1, StoryList_TemplateFunction, StoryList_ComputeFunction, 1, 0),
         ])
-      ], arr1, arr17),
-    ]);
+      )
+    )
   }
 
   function Component_TemplateFunction() {
-    return component(5, App_TemplateFunction, App_ComputeFunction);
+    return component(5, App_TemplateFunction, App_ComputeFunction, _, _);
   }
 
   const Component = createRoot(['stories'], Component_TemplateFunction);
