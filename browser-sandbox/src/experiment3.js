@@ -2,19 +2,22 @@
   "use strict";
 
   const reactElementSymbol = Symbol.for("react.element");
-  const CREATION_PHASE = 0;
-  const UPDATE_PHASE = 1;
   const _ = void 0;
 
-  let currentFiber = null;
-  let currentProps = null;
-  let currentPhase = CREATION_PHASE;
-  let previousRuntimeValues = null;
-  let nextRuntimeValues = null;
-
-  const COMPONENT_USES_PROPS = 1;
-  const COMPONENT_USES_HOOKS = 1 << 1;
-  const COMPONENT_IS_ROOT = 1 << 2;
+  const COMPONENT = 1;
+  const FRAGMENT = 1 << 2;
+  const ELEMENT = 1 << 3;
+  const TEXT = 1 << 4;
+  const PROP = 1 << 5;
+  const STYLE = 1 << 6;
+  const CONDITION = 1 << 7;
+  const ARRAY_MAP = 1 << 8;
+  
+  const IS_STATIC = 1 << 9;
+  const IS_ROOT = 1 << 10;
+  const HAS_PROPS = 1 << 11;
+  const HAS_CHILD = 1 << 12;
+  const HAS_CHILDREN = 1 << 13;
 
   function fragment(children) {
     return children;
@@ -24,82 +27,41 @@
     return x.constructor === Array;
   }
 
-  function createStaticProps(elem, staticProps) {
-    for (let i = 0, length = staticProps.length; i < length; i += 2) {
-      const propName = staticProps[i];
-      const propValue = staticProps[i + 1];
+  const rootFibers = [];
 
-      if (propName === "className") {
-        elem.className = propValue;
-      } else if (propName === "style") {
-        const style = elem.style;
-        for (let x = 0, length = propValue.length; x < length; x += 2) {
-          const styleName = propValue[x];
-          let styleValue = propValue[x + 1];
-
-          if (styleValue == null || styleValue === undefined) {
-            continue;
-          }
-          if (typeof styleValue === "number") {
-            styleValue = `${styleValue}px`;
-          }
-          style.setProperty(styleName, styleValue);
-        }
-      } else if (propName === "id") {
-        elem.id = propValue;
-      } else {
-        elem.setAttribute(propName, propValue);
-      }
-    }
-  }
-
-  function createDynamicProps(elem, dynamicProps) {
-    for (let i = 0, length = dynamicProps.length; i < length; i += 2) {
-      const propName = dynamicProps[i];
-      const propValueIndex = dynamicProps[i + 1];
-      const propValue = nextRuntimeValues[propValueIndex];
-
-      if (propName === "className") {
-        elem.className = propValue;
-      } else if (propName === "id") {
-        elem.id = propValue;
-      } else {
-        elem.setAttribute(propName, propValue);
-      }
-    }
-  }
-
-  function element(tagName, staticProps, dynamicProps, children) {
-    if (currentPhase === CREATION_PHASE) {
-      const elem = createElement(tagName);
-      if (staticProps !== _) {
-        createStaticProps(elem, staticProps)
-      }
-      if (dynamicProps !== _) {
-        createDynamicProps(elem, dynamicProps);
-      }
-      if (children !== _) {
-        if (typeof children === "string") {
-          elem.textContent = children;
-        } else if (typeof children === "number") {
-          elem.textContent = nextRuntimeValues[children];
-        } else if (isArray(children)) {
-          for (let i = 0, length = children.length; i < length; ++i) {
-            const child = children[i];
-            if (isArray(child)) {
-              for (let i = 0, length = child.length; i < length; ++i) {
-                appendChild(elem, child[i]);
-              }
-            } else {
-              appendChild(elem, children[i]);
-            }
-          }
-        } else {
-          appendChild(elem, children);
+  function getRoot(DOMContainer) {
+    const rootsLength = rootFibers.length;
+    if (rootsLength > 0) {
+      for (let i = 0; i < rootsLength; i++) {
+        if (rootFibers[i].stateNode === DOMContainer) {
+          return root;
         }
       }
-      return elem;
     }
+    return null;
+  }
+
+  function addRoot(rootFiber, DOMContainer) {
+    rootFibers.push(rootFiber);
+  }
+
+  function createElement(tag) {
+    return document.createElement(tag);
+  }
+
+  function appendChild(parent, element) {
+    parent.appendChild(element);
+  }
+
+  function createFiber(templateNode, values) {
+    return {
+      children: null,
+      parent: null,
+      props: null,
+      stateNode: null,
+      templateNode,
+      values,
+    };
   }
 
   function insertChildFiberIntoParentFiber(parent, child) {
@@ -111,215 +73,15 @@
     children.push(child);
   }
 
-  function conditional(hostNodeStoreIndex, conditionalValueIndex, consequentTemplateFunction, alternateTemplateFunction) {
-    if (currentPhase === CREATION_PHASE) {
-      const conditionValue = nextRuntimeValues[conditionalValueIndex];
-
-      if (conditionValue) {
-        if (consequentTemplateFunction !== null) {
-          return consequentTemplateFunction();
-        } else {
-          return createPlaceholder();
-        }
-      } else {
-        if (alternateTemplateFunction !== null) {
-          return alternateTemplateFunction();
-        } else {
-          return createPlaceholder();
-        }
-      }
-    }
-  }
-
-  function elementDynamicChildrenArrayMapTemplate(arrayValueIndex, arrayMapComputeFunctionValueIndex, arrayMapTemplateFunction, fiberPosition) {
-    const _nextRuntimeValues = nextRuntimeValues;
-    const parentFiber = currentFiber;
-    const nextArray = nextRuntimeValues[arrayValueIndex];
-    const nextArrayMapComputeFunction =
-      arrayMapComputeFunctionValueIndex === 0 ? null : nextRuntimeValues[arrayMapComputeFunctionValueIndex];
-    let hostNodes;
-
-    if (currentPhase === CREATION_PHASE) {
-      const arrayMapFiber = createOpcodeFiber(null);
-      insertChildFiberIntoParentFiber(parentFiber, arrayMapFiber);
-      const keyMap = arrayMapFiber.keyMap = new Map();
-      const arrayLength = nextArray.length;
-      hostNodes = [];
-      for (let i = 0; i < arrayLength; ++i) {
-        const element = nextArray[i];
-        if (nextArrayMapComputeFunction !== null) {
-          nextRuntimeValues = nextArrayMapComputeFunction(element, i, nextArray);
-        } else {
-          nextRuntimeValues = null;
-        }
-        const key = nextRuntimeValues[0];
-        currentFiber = createOpcodeFiber(nextRuntimeValues);
-        currentFiber.key = key;
-        keyMap.set(key, i);
-        insertChildFiberIntoParentFiber(arrayMapFiber, currentFiber);
-        const hostNode = arrayMapTemplateFunction();
-        hostNodes.push(hostNode);
-      }
-    } else {
-      const arrayMapFiber = parentFiber.children[fiberPosition];
-      const arrayMapFiberChildren = arrayMapFiber.children;
-      const _previousRuntimeValues = previousRuntimeValues;
-      previousRuntimeValues = nextRuntimeValues;
-      const arrayLength = nextArray.length;
-      debugger;
-      for (let i = 0; i < arrayLength; ++i) {
-        const element = nextArray[i];
-        currentFiber = arrayMapFiberChildren[i];
-        if (nextArrayMapComputeFunction !== null) {
-          previousRuntimeValues = currentFiber.values;
-          nextRuntimeValues = nextArrayMapComputeFunction(element, i, nextArray);
-          currentFiber.values = nextRuntimeValues;
-        }
-        arrayMapTemplateFunction();
-      }
-      previousRuntimeValues = _previousRuntimeValues;
-    }
-    currentFiber = parentFiber;
-    nextRuntimeValues = _nextRuntimeValues;
-    return hostNodes;
-  }
-
-  function text(childValue) {
-    if (currentPhase === CREATION_PHASE) {
-      const textNode = createTextNode(childValue);
-      return textNode;
-    }
-  }
-
-  function component(flags, templateFunction, computeFunction, fiberPosition, propsValueIndexOrValue) {
-    const _nextRuntimeValues = nextRuntimeValues;
-    const _previousRuntimeValues = previousRuntimeValues;
-    const parentFiber = currentFiber;
-    const componentIsRoot = (flags & COMPONENT_IS_ROOT) !== 0;
-    let props;
-    if ((flags & COMPONENT_USES_PROPS) !== 0) {
-      if (componentIsRoot) {
-        props = currentProps;
-        currentProps = null;
-      } else {
-        if (typeof propsValueIndexOrValue === "number") {
-          props = nextRuntimeValues[propsValueIndexOrValue];
-        } else {
-          props = propsValueIndexOrValue;
-        }
-      }
-      nextRuntimeValues = callComputeFunctionWithArray(computeFunction, props);
-    } else {
-      props = null;
-      nextRuntimeValues = null;
-    }
-    if (currentPhase === CREATION_PHASE) {
-      currentFiber = createOpcodeFiber(nextRuntimeValues);
-      currentFiber.memoizedProps = props;
-      if (!componentIsRoot) {
-        insertChildFiberIntoParentFiber(parentFiber, currentFiber);
-      }
-    } else {
-      if (!componentIsRoot) {
-        currentFiber = parentFiber.children[fiberPosition];
-      }
-      previousRuntimeValues = currentFiber.values;
-      currentFiber.values = nextRuntimeValues;
-    }
-    const hostNode = templateFunction();
-    nextRuntimeValues = _nextRuntimeValues;
-    previousRuntimeValues = _previousRuntimeValues;
-    if (!componentIsRoot) {
-      currentFiber = parentFiber;
-    }
-    return hostNode;
-  }
-
-  const roots = [];
-
-  function getRoot(DOMContainer) {
-    const rootsLength = roots.length;
-    if (rootsLength > 0) {
-      for (let i = 0; i < rootsLength; i++) {
-        if (roots[i].h === DOMContainer) {
-          return root;
-        }
-      }
-    }
-    return null;
-  }
-
-  function renderTemplateWithPhase(phase, template) {
-    const previousPhase = currentPhase;
-    currentPhase = phase;
-    const hostNode = template();
-    currentPhase = previousPhase;
-    return hostNode;
-  }
-
-  function renderNodeToRootContainer(node, DOMContainer) {
-    const previousTemplateNode = getRoot(DOMContainer);
-  
-    if (node === null || node === undefined) {
-      // if (rootState !== undefined) {
-      //   // unmountRoot(DOMContainer, rootState);
-      // }
-    } else if (node.$$typeof === reactElementSymbol) {
-      const nextRootTemplateNode = node.type;
-      const rootPropsShape = nextRootTemplateNode.p;
-      const rootTemplate = nextRootTemplateNode.t;
-  
-      currentProps = convertRootPropsToPropsArray(node.props, rootPropsShape);
-      if (previousTemplateNode === null) {
-        roots.push(nextRootTemplateNode);
-        nextRootTemplateNode.h = DOMContainer;
-        const hostNode = renderTemplateWithPhase(CREATION_PHASE, rootTemplate);
-        appendChild(DOMContainer, hostNode);
-      } else {
-        currentFiber = nextRootTemplateNode.f;
-        renderTemplateWithPhase(UPDATE_PHASE, rootTemplate);
-      }
-      nextRootTemplateNode.f = currentFiber;
-      currentFiber = null;
-      currentProps = null;
-    } else {
-      throw new Error("render() expects a ReactElement as the first argument");
-    }
-  }
-
-  function createOpcodeFiber(values) {
+  function createNode(f, a, b, c, d, e) {
     return {
-      alternate: null,
-      children: null,
-      dynamicHostNodes: null,
-      hostNode: null,
-      key: null,
-      keyMap: null,
-      memoizedProps: null, // Only used by components
-      memoizedState: null, // Stores hooks and refs
-      parent: null,
-      values: values,
+      a,
+      b,
+      c,
+      d,
+      e,
+      f,
     };
-  }
-
-  function createRoot(p, t) {
-    return {
-      f: null,
-      h: null,
-      p,
-      t,
-    };
-  }
-
-  function convertRootPropsToPropsArray(rootProps, rootPropsShape) {
-    const props = [];
-    if (rootPropsShape !== 0) {
-      for (let i = 0, length = rootPropsShape.length; i < length; i++) {
-        let propShape = rootPropsShape[i];
-        props.push(rootProps[propShape]);
-      }
-    }
-    return props;
   }
 
   function callComputeFunctionWithArray(computeFunction, arr) {
@@ -344,171 +106,121 @@
     }
   }
 
-  function appendChild(parent, element) {
-    parent.appendChild(element);
-  }
-
-  function createElement(tagName) {
-    return document.createElement(tagName);
-  }
-
-  function createTextNode(text) {
-    return document.createTextNode(text);
-  }
-
-  function createPlaceholder() {
-    return createTextNode("");
-  }
-
-  function render(node, DOMContainer) {
-    return renderNodeToRootContainer(node, DOMContainer);
-  }
-
-  function timeAge(time) {
-    const now = new Date()["getTime"]() / 1000;
-    const minutes = (now - time) / 60;
-  
-    if (minutes < 60) {
-      return Math["round"](minutes) + " minutes ago";
+  function convertRootPropsToPropsArray(rootProps, rootComponentPropsShape) {
+    if (rootComponentPropsShape !== _) {
+      const props = [];
+      for (let i = 0, length = rootComponentPropsShape.length; i < length; i++) {
+        let propShape = rootComponentPropsShape[i];
+        props.push(rootProps[propShape]);
+      }
+      return props;
     }
+    return null;
+  }
+
+  function mountDOMFromComponentTemplate(templateFlags, parentDOMElement, componentTemplate, fiber, runtimeValues) {
+    const computeFunction = componentTemplate.a;
+    const childTemplateNode = componentTemplate.c;
+    const isStatic = (templateFlags & IS_STATIC) !== 0;
+    let componentProps = null;
+
+    if ((templateFlags & IS_ROOT) !== 0) {
+      const rootComponentPropsShape = componentTemplate.b;
+      componentProps = convertRootPropsToPropsArray(fiber.props, rootComponentPropsShape);
+    } else if (isStatic === false) {
+      const componentPropsValueIndex = componentTemplate.d;
+      componentProps = runtimeValues[componentPropsValueIndex];
+    }
+    let componentRuntimeValues = null;
+    if (isStatic === false) {
+      componentRuntimeValues = callComputeFunctionWithArray(computeFunction, componentProps);
+    }
+    const componentFiber = createFiber(componentTemplate, componentRuntimeValues);
+    insertChildFiberIntoParentFiber(fiber, componentFiber);
+    const childFiber = mountDOMFromTemplate(parentDOMElement, childTemplateNode, componentFiber, componentRuntimeValues);
+    return componentFiber;
+  }
+
+  function mountDOMFromElementTemplate(templateFlags, parentDOMElement, elementTemplate, fiber, runtimeValues) {
+    const tag = elementTemplate.a;
+    const DOMElement = createElement(tag);
+    const children = elementTemplate.c;
+
+    if ((templateFlags & HAS_CHILD) !==0) {
+      mountDOMFromTemplate(DOMElement, children, fiber, runtimeValues);
+    } else if ((templateFlags & HAS_CHILDREN) !==0) {
+      for (let i = 0, length = children.length; i < length; ++i) {
+        mountDOMFromTemplate(DOMElement, children[i], fiber, runtimeValues);
+      }
+    }
+
+    if (parentDOMElement !== null) {
+      appendChild(parentDOMElement, DOMElement);
+    }
+    return DOMElement;
+  }
+
+  function mountDOMFromArrayMapTemplate(templateFlags, parentDOMElement, arrayMapTemplate, fiber, runtimeValues) {
+    const arrayValueIndex = arrayMapTemplate.a;
+    const arrayMapComputeFunctionValueIndex = arrayMapTemplate.b;
+    const arrayMapTemplateNode = arrayMapTemplate.c;
+    const array = runtimeValues[arrayValueIndex];
+    const arrayMapComputeFunction = runtimeValues[arrayMapComputeFunctionValueIndex];
+    const arrayLength = array.length;
+
+    if (arrayLength > 0) {
+      for (let i = 0; i < arrayLength; ++i) {
+        const element = array[i];
+        let elementRuntimeValues;
+
+        if (arrayMapComputeFunction !== null) {
+          elementRuntimeValues = arrayMapComputeFunction(element, i, array);
+        } else {
+          elementRuntimeValues = null;
+        }
+        mountDOMFromTemplate(parentDOMElement, arrayMapTemplateNode, fiber, elementRuntimeValues);
+      }
+    }
+  }
+
+  function mountDOMFromTemplate(parentDOMElement, templateNode, fiber, runtimeValues) {
+    const templateFlags = templateNode.f;
+    if ((templateFlags & COMPONENT) !==0) {
+      return mountDOMFromComponentTemplate(templateFlags, parentDOMElement, templateNode, fiber, runtimeValues);
+    } else if ((templateFlags & ELEMENT) !==0) {
+      return mountDOMFromElementTemplate(templateFlags, parentDOMElement, templateNode, fiber, runtimeValues);
+    } else if ((templateFlags & ARRAY_MAP) !==0) {
+      return mountDOMFromArrayMapTemplate(templateFlags, parentDOMElement, templateNode, fiber, runtimeValues);
+    }
+  }
+
+  function renderNodeToRootContainer(input, DOMContainer) {
+    let rootFiber = getRoot(DOMContainer);
   
-    return Math["round"](minutes / 60) + " hours ago";
-  }
+    if (input === null || input === undefined) {
+      // if (rootFiber !== undefined) {
+      //   // unmountRoot(DOMContainer, rootState);
+      // }
+    } else if (input.$$typeof === reactElementSymbol) {
+      const templateNode = input.type;
+      const inputProps = input.props;
   
-  function getHostUrl(url) {
-    return (url + "")["replace"]("https://", "")["replace"]("http://", "")["split"]("/")[0];
+      if (rootFiber === null) {
+        rootFiber = createFiber(null, null);
+        rootFiber.stateNode = DOMContainer;
+        rootFiber.props = inputProps;
+        addRoot(rootFiber);
+        mountDOMFromTemplate(DOMContainer, templateNode, rootFiber, null);
+      } else {
+        // TODO update
+      }
+    } else {
+      throw new Error("render() expects a ReactElement as the first argument");
+    }
   }
 
-  const arr31 = ['style', ['background-color', '#222']];
-  const arr32 = ['width', '100%', 'cellpadding', 0, 'cellspacing', 0, 'style', ['padding', '4px']];
-  const arr34 = ['style', ['width', '18px', 'padding-right', '4px']];
-  const arr35 = ['href', '#']
-  const arr36 = ['src', 'logo.png', 'width', 16, 'height', 16, 'style', ['border', '1px solid #00d8ff']]
-  const arr39 = ['height', 10, 'style', ['line-height', '12pt']]
-  const arr40 = ['className', 'pagetop']
-  const arr41 = ['className', 'hnname']
-
-  function HeaderBar_TemplateFunction() {
-    return element('tr', arr31, _, 
-      element('table', arr32, _,
-        element('tbody', _, _,
-          element('tr', _, _, [
-            element('td', arr34, _,
-              element('a', arr35, _,
-                element('img', arr36, _, _)
-              )
-            ),
-            element('td', arr39, _,
-              element('span', arr40, _, [
-                element('b', arr41, _, 'React HN Benchmark'),
-                element('a', arr35, _, 'new'),
-                text(' | '),
-                element('a', arr35, _, 'comments'),
-                text(' | '),
-                element('a', arr35, _, 'show'),
-                text(' | '),
-                element('a', arr35, _, 'ask'),
-                text(' | '),
-                element('a', arr35, _, 'jobs'),
-                text(' | '),
-                element('a', arr35, _, 'submit'),
-              ])
-            )
-          ])
-        )
-      )
-    );
-  }
-
-  const arr23 = ['className', 'sitebit comhead'];
-
-  function Story_Conditional_Consequent_TemplateFunction() {
-    return element('span', arr23, _, [
-      text(' ('),
-      element('a', arr35, _, 3),
-      text(')'),
-    ]);
-  }
-
-  const arr3 = ['className', 'athing'];
-  const arr4 = ['className', 'title', 'style', ['vertical-align', 'top', 'text-align', 'right']];
-  const arr5 = ['className', 'rank', 'style', ['vertical-align', 'top']];
-  const arr6 = ['className', 'votelinks'];
-  const arr8 = ['className', 'votearrow', 'title', 'upvote'];
-  const arr9 = ['href', '#', 'className', 'storylink'];
-  const arr10 = ['colSpan', 2];
-  const arr11 = ['className', 'subtext'];
-  const arr12 = ['className', 'score'];
-  const arr13 = ['href', '#', 'className', 'hnuser'];
-  const arr14 = ['className', 'age'];
-  const arr15 = ['className', 'spacer', 'style', ['height', 5]];
-  const arr16 = ['className', 'title'];
-  const arr29 = ['href', '#']
-
-  function Story_TemplateFunction() {
-    return fragment([
-      element('tr', arr3, _, [
-        element('td', arr4, _,
-          element('span', arr6, _, 0)
-        ),
-        element('td', arr5, _,
-          element('center', _, _,
-            element('a', arr35, _,
-              element('div', arr8, _, _)
-            )
-          )
-        ),
-        element('td', arr16, _, [
-          element('a', arr9, _, 1),
-          conditional(2, 2, Story_Conditional_Consequent_TemplateFunction, null),
-        ]),
-      ]),
-      element('tr', _, _, [
-        element('td', arr10, _, _),
-        element('td', arr11, _, [
-          element('span', arr12, _, 4),
-          text(' by '),
-          element('a', arr13, _, 5),
-          text(' '),
-          element('span', arr14, _,
-            element('a', arr35, _, 6)
-          ),
-          text(' | '),
-          element('a', arr29, _, 'hide'),
-          text(' | '),
-          element('a', arr35, _, 7),
-        ])
-      ]),
-      element('tr', arr15, _, _)
-    ]);
-  }
-
-  function Story_ComputeFunction(rank, story) {
-    var __cached__1;
-
-    var __cached__0;
-
-    __cached__1 = timeAge(story["time"]);
-    __cached__0 = getHostUrl(story["url"]);
-    return [`${rank}.`, story["title"], story["url"], __cached__0, `${story["score"]} points`, story["by"], __cached__1, `${story["descendants"] || 0} comments`];
-  }
-
-  function StoryList_MapTemplateFunction() {
-    return component(1, Story_TemplateFunction, Story_ComputeFunction, 0, 0);
-  }
-
-  const arr18 = ['cellpadding', 0, 'cellspacing', 0, 'classlist', 'itemlist']
-
-  function StoryList_TemplateFunction() {
-    return element('tr', _, _,
-      element('td', _, _,
-        element('table', arr18, _, 
-          element('tbody', _, _,
-            elementDynamicChildrenArrayMapTemplate(0, 1, StoryList_MapTemplateFunction, 0)
-          )
-        )
-      )
-    )
+  function render(input, DOMContainer) {
+    return renderNodeToRootContainer(input, DOMContainer);
   }
 
   function StoryList_ComputeFunction(stories) {
@@ -519,26 +231,39 @@
     return [[stories]];
   }
 
-  const arr1 = ['id', 'hnmain', 'border', 0, 'cellpadding', 0, 'cellspacing', 0, 'width', '85%', 'style', ['background-color', '#f6f6ef']];
-  const arr2 = ['height', '10'];
-
-  function App_TemplateFunction() {
-    return element('center', _, _,
-      element('table', arr1, _,
-        element('tbody', _, _, [
-          component(0, HeaderBar_TemplateFunction, _, 0, 0),
-          element('tr', arr2, _, _),
-          component(1, StoryList_TemplateFunction, StoryList_ComputeFunction, 1, 0),
+  const Component = createNode(COMPONENT | IS_ROOT, App_ComputeFunction, ["stories"],
+    createNode(ELEMENT | IS_STATIC | HAS_CHILD, "center", _,
+      createNode(ELEMENT | HAS_PROPS | IS_STATIC | HAS_CHILD, "table", [
+        createNode(PROP | IS_STATIC, "border", 0),
+        createNode(PROP | IS_STATIC, "cellpadding", 0),
+        createNode(PROP | IS_STATIC, "cellspacing", 0),
+        createNode(PROP | IS_STATIC, "width", "85%"),
+        createNode(STYLE | IS_STATIC, "background-color", "#f6f6ef"),
+      ],
+        createNode(ELEMENT | IS_STATIC | HAS_CHILDREN, "tbody", _, [
+          createNode(COMPONENT | IS_STATIC, _, _,
+            createNode(ELEMENT, "tr")
+          ),
+          createNode(ELEMENT, "tr"),
+          createNode(COMPONENT, StoryList_ComputeFunction, 0,
+            createNode(ELEMENT | IS_STATIC | HAS_CHILD, "tr", _,
+              createNode(ELEMENT | IS_STATIC | HAS_CHILD, "td", _,
+                createNode(ELEMENT | IS_STATIC | HAS_PROPS | HAS_CHILD, "table", [
+                  createNode(PROP | IS_STATIC, "cellpadding", 0),
+                  createNode(PROP | IS_STATIC, "cellspacing", 0),
+                  createNode(PROP | IS_STATIC, "classlist", "itemlist"),
+                ],
+                  createNode(ARRAY_MAP, 0, 1,
+                    createNode(ELEMENT, "tr")
+                  ),
+                )
+              )
+            )
+          , 0),
         ])
       )
     )
-  }
-
-  function Component_TemplateFunction() {
-    return component(5, App_TemplateFunction, App_ComputeFunction, 0, 0);
-  }
-
-  const Component = createRoot(['stories'], Component_TemplateFunction);
+  );
 
   const props = {
     "stories": [
@@ -1742,7 +1467,7 @@
   const initialRenderTime = renderBenchmark();
   setTimeout(() => {
     const updateRenderTime = renderBenchmark();
-    alert(`Initial: ${initialRenderTime} Update: ${updateRenderTime}`)
+    console.log(`Initial: ${initialRenderTime} Update: ${updateRenderTime}`)
   }, 100);
 
 })();
