@@ -24,51 +24,59 @@
     return x.constructor === Array;
   }
 
+  function createStaticProps(elem, staticProps) {
+    for (let i = 0, length = staticProps.length; i < length; i += 2) {
+      const propName = staticProps[i];
+      const propValue = staticProps[i + 1];
+
+      if (propName === "className") {
+        elem.className = propValue;
+      } else if (propName === "style") {
+        const style = elem.style;
+        for (let x = 0, length = propValue.length; x < length; x += 2) {
+          const styleName = propValue[x];
+          let styleValue = propValue[x + 1];
+
+          if (styleValue == null || styleValue === undefined) {
+            continue;
+          }
+          if (typeof styleValue === "number") {
+            styleValue = `${styleValue}px`;
+          }
+          style.setProperty(styleName, styleValue);
+        }
+      } else if (propName === "id") {
+        elem.id = propValue;
+      } else {
+        elem.setAttribute(propName, propValue);
+      }
+    }
+  }
+
+  function createDynamicProps(elem, dynamicProps) {
+    for (let i = 0, length = dynamicProps.length; i < length; i += 2) {
+      const propName = dynamicProps[i];
+      const propValueIndex = dynamicProps[i + 1];
+      const propValue = nextRuntimeValues[propValueIndex];
+
+      if (propName === "className") {
+        elem.className = propValue;
+      } else if (propName === "id") {
+        elem.id = propValue;
+      } else {
+        elem.setAttribute(propName, propValue);
+      }
+    }
+  }
+
   function element(tagName, staticProps, dynamicProps, children) {
     if (currentPhase === CREATION_PHASE) {
       const elem = createElement(tagName);
       if (staticProps !== _) {
-        for (let i = 0, length = staticProps.length; i < length; i += 2) {
-          const propName = staticProps[i];
-          const propValue = staticProps[i + 1];
-
-          if (propName === "className") {
-            elem.className = propValue;
-          } else if (propName === "style") {
-            const style = elem.style;
-            for (let x = 0, length = propValue.length; x < length; x += 2) {
-              const styleName = propValue[x];
-              let styleValue = propValue[x + 1];
-    
-              if (styleValue == null || styleValue === undefined) {
-                continue;
-              }
-              if (typeof styleValue === "number") {
-                styleValue = `${styleValue}px`;
-              }
-              style.setProperty(styleName, styleValue);
-            }
-          } else if (propName === "id") {
-            elem.id = propValue;
-          } else {
-            elem.setAttribute(propName, propValue);
-          }
-        }
+        createStaticProps(elem, staticProps)
       }
       if (dynamicProps !== _) {
-        for (let i = 0, length = dynamicProps.length; i < length; i += 2) {
-          const propName = dynamicProps[i];
-          const propValueIndex = dynamicProps[i + 1];
-          const propValue = nextRuntimeValues[propValueIndex];
-
-          if (propName === "className") {
-            elem.className = propValue;
-          } else if (propName === "id") {
-            elem.id = propValue;
-          } else {
-            elem.setAttribute(propName, propValue);
-          }
-        }
+        createDynamicProps(elem, dynamicProps);
       }
       if (children !== _) {
         if (typeof children === "string") {
