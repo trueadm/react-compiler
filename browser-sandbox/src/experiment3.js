@@ -4,20 +4,23 @@
   const reactElementSymbol = Symbol.for("react.element");
   const _ = void 0;
 
+  // Main nodes
+  const ROOT_COMPONENT = 0;
   const COMPONENT = 1;
-  const FRAGMENT = 1 << 2;
-  const ELEMENT = 1 << 3;
-  const TEXT = 1 << 4;
-  const PROP = 1 << 5;
-  const STYLE = 1 << 6;
-  const CONDITION = 1 << 7;
-  const ARRAY_MAP = 1 << 8;
+  const ELEMENT = 2;
+  const TEXT = 3;
+  const FRAGMENT = 4;
+  const CONDITIONAL = 5;
+  const ARRAY_MAP = 6;
   
-  const IS_STATIC = 1 << 9;
-  const IS_ROOT = 1 << 10;
-  const HAS_PROPS = 1 << 11;
-  const HAS_CHILD = 1 << 12;
-  const HAS_CHILDREN = 1 << 13;
+  const HAS_STATIC_PROPS = 1;
+  const HAS_DYNAMIC_PROPS = 1 << 2;
+  const HAS_CHILD = 1 << 3;
+  const HAS_CHILDREN = 1 << 4;
+  const HAS_STATIC_TEXT_CONTENT = 1 << 5;
+  const HAS_DYNAMIC_TEXT_CONTENT = 1 << 6;
+  const IS_STATIC = 1 << 7;
+  const IS_SVG = 1 << 8;
 
   function fragment(children) {
     return children;
@@ -27,26 +30,18 @@
     return x.constructor === Array;
   }
 
-  const rootFibers = [];
-
-  function getRoot(DOMContainer) {
-    const rootsLength = rootFibers.length;
-    if (rootsLength > 0) {
-      for (let i = 0; i < rootsLength; i++) {
-        if (rootFibers[i].stateNode === DOMContainer) {
-          return root;
-        }
-      }
-    }
-    return null;
-  }
-
-  function addRoot(rootFiber, DOMContainer) {
-    rootFibers.push(rootFiber);
-  }
+  const rootFibers = new Map();
 
   function createElement(tag) {
     return document.createElement(tag);
+  }
+
+  function createTextNode(text) {
+    return document.createTextNode(text);
+  }
+
+  function removeChild(parent, child) {
+    parent.removeChild(child);
   }
 
   function appendChild(parent, element) {
@@ -56,9 +51,11 @@
   function createFiber(templateNode, values) {
     return {
       children: null,
+      childIndex: 0,
+      key: null,
       parent: null,
       props: null,
-      stateNode: null,
+      hostNode: null,
       templateNode,
       values,
     };
@@ -73,14 +70,14 @@
     children.push(child);
   }
 
-  function createNode(f, a, b, c, d, e) {
+  function createNode(t, f, a, b, c, d) {
     return {
       a,
       b,
       c,
       d,
-      e,
       f,
+      t,
     };
   }
 
@@ -109,7 +106,7 @@
   function convertRootPropsToPropsArray(rootProps, rootComponentPropsShape) {
     if (rootComponentPropsShape !== _) {
       const props = [];
-      for (let i = 0, length = rootComponentPropsShape.length; i < length; i++) {
+      for (let i = 0, length = rootComponentPropsShape.length; i < length; ++i) {
         let propShape = rootComponentPropsShape[i];
         props.push(rootProps[propShape]);
       }
@@ -118,17 +115,18 @@
     return null;
   }
 
-  function mountDOMFromComponentTemplate(templateFlags, parentDOMElement, componentTemplate, fiber, runtimeValues) {
+  function mountDOMFromComponentTemplate(isRoot, parentDOMElement, componentTemplate, fiber, runtimeValues) {
+    const templateFlags = componentTemplate.f;
     const computeFunction = componentTemplate.a;
     const childTemplateNode = componentTemplate.c;
     const isStatic = (templateFlags & IS_STATIC) !== 0;
     let componentProps = null;
 
-    if ((templateFlags & IS_ROOT) !== 0) {
+    if (isRoot === true) {
       const rootComponentPropsShape = componentTemplate.b;
       componentProps = convertRootPropsToPropsArray(fiber.props, rootComponentPropsShape);
     } else if (isStatic === false) {
-      const componentPropsValueIndex = componentTemplate.d;
+      const componentPropsValueIndex = componentTemplate.b;
       componentProps = runtimeValues[componentPropsValueIndex];
     }
     let componentRuntimeValues = null;
@@ -137,21 +135,80 @@
     }
     const componentFiber = createFiber(componentTemplate, componentRuntimeValues);
     insertChildFiberIntoParentFiber(fiber, componentFiber);
-    const childFiber = mountDOMFromTemplate(parentDOMElement, childTemplateNode, componentFiber, componentRuntimeValues);
+    const childFiberOrHostNode = mountDOMFromTemplate(parentDOMElement, childTemplateNode, componentFiber, componentRuntimeValues);
+    componentFiber.hostNode = childFiberOrHostNode;
     return componentFiber;
   }
 
-  function mountDOMFromElementTemplate(templateFlags, parentDOMElement, elementTemplate, fiber, runtimeValues) {
+  function updateDOMFromComponentTemplate(isRoot, componentTemplate, fiber, runtimeValues) {
+    const templateFlags = componentTemplate.f;
+    const computeFunction = componentTemplate.a;
+    const childTemplateNode = componentTemplate.c;
+    const isStatic = (templateFlags & IS_STATIC) !== 0;
+    let componentProps = null;
+
+    if (isRoot === true) {
+      const rootComponentPropsShape = componentTemplate.b;
+      componentProps = convertRootPropsToPropsArray(fiber.props, rootComponentPropsShape);
+    } else if (isStatic === false) {
+      const componentPropsValueIndex = componentTemplate.b;
+      componentProps = runtimeValues[componentPropsValueIndex];
+    }
+    const componentFiber = fiber.children[fiber.childIndex++];
+    const previousComponentRuntimeValues = componentFiber.values;
+    let nextComponentRuntimeValues = null;
+    if (isStatic === false) {
+      nextComponentRuntimeValues = callComputeFunctionWithArray(computeFunction, componentProps);
+    }
+    componentFiber.values = nextComponentRuntimeValues;
+    updateDOMFromTemplate(childTemplateNode, componentFiber, previousComponentRuntimeValues, nextComponentRuntimeValues);
+    componentFiber.childIndex = 0;
+  }
+
+  function setInitialElementPropsFromTemplate(props, DOMElement, fiber, runtimeValues) {
+    const propsLength = props.length;
+
+    for (let i = 0; i < propsLength; i += 2) {
+      const propName = props[i];
+      const propValue = props[i + 1];
+
+      if (propName === "className") {
+        DOMElement.className = propValue;
+      } else if (propName === "id") {
+        DOMElement.id = propValue;
+      } else if (propName === "style") {
+        const DOMElementStyle = DOMElement.style;
+        for (let x = 0, length = propValue.length; x < length; x += 2) {
+          const styleName = propValue[x];
+          const styleValue = propValue[x + 1];
+          DOMElementStyle.setProperty(styleName, styleValue);
+        }
+      } else {
+        DOMElement.setAttribute(propName, propValue);
+      }
+    }
+  }
+
+  function mountDOMFromElementTemplate(parentDOMElement, elementTemplate, fiber, runtimeValues) {
+    const templateFlags = elementTemplate.f;
     const tag = elementTemplate.a;
     const DOMElement = createElement(tag);
     const children = elementTemplate.c;
 
-    if ((templateFlags & HAS_CHILD) !==0) {
+    if ((templateFlags & HAS_STATIC_PROPS) !== 0) {
+      setInitialElementPropsFromTemplate(elementTemplate.b, DOMElement, fiber, runtimeValues);
+    }
+
+    if ((templateFlags & HAS_CHILD) !== 0) {
       mountDOMFromTemplate(DOMElement, children, fiber, runtimeValues);
-    } else if ((templateFlags & HAS_CHILDREN) !==0) {
+    } else if ((templateFlags & HAS_CHILDREN) !== 0) {
       for (let i = 0, length = children.length; i < length; ++i) {
         mountDOMFromTemplate(DOMElement, children[i], fiber, runtimeValues);
       }
+    } else if ((templateFlags & HAS_DYNAMIC_TEXT_CONTENT) !== 0) {
+      DOMElement.textContent = runtimeValues[children];
+    } else if ((templateFlags & HAS_STATIC_TEXT_CONTENT) !== 0) {
+      DOMElement.textContent = children;
     }
 
     if (parentDOMElement !== null) {
@@ -160,13 +217,37 @@
     return DOMElement;
   }
 
-  function mountDOMFromArrayMapTemplate(templateFlags, parentDOMElement, arrayMapTemplate, fiber, runtimeValues) {
+  function updateDOMFromElementTemplate(elementTemplate, fiber, previousRuntimeValues, nextComponentRuntimeValues) {
+    const templateFlags = elementTemplate.f;
+    const children = elementTemplate.c;
+
+    if ((templateFlags & IS_STATIC) !== 0) {
+      return;
+    }
+    if ((templateFlags & HAS_CHILD) !== 0) {
+      updateDOMFromTemplate(children, fiber, previousRuntimeValues, nextComponentRuntimeValues);
+    } else if ((templateFlags & HAS_CHILDREN) !== 0) {
+      for (let i = 0, length = children.length; i < length; ++i) {
+        updateDOMFromTemplate(children[i], fiber, previousRuntimeValues, nextComponentRuntimeValues);
+      }
+    } else if ((templateFlags & HAS_DYNAMIC_TEXT_CONTENT) !== 0) {
+      const previousTextContent = previousRuntimeValues[children];
+      const nextTextContent = nextComponentRuntimeValues[children];
+      if (previousTextContent !== nextTextContent) {
+        // TODO
+      }
+    }
+  }
+
+  function mountDOMFromArrayMapTemplate(parentDOMElement, arrayMapTemplate, fiber, runtimeValues) {
     const arrayValueIndex = arrayMapTemplate.a;
     const arrayMapComputeFunctionValueIndex = arrayMapTemplate.b;
     const arrayMapTemplateNode = arrayMapTemplate.c;
     const array = runtimeValues[arrayValueIndex];
     const arrayMapComputeFunction = runtimeValues[arrayMapComputeFunctionValueIndex];
     const arrayLength = array.length;
+    const arrayMapFiber = createFiber(arrayMapTemplate, null);
+    insertChildFiberIntoParentFiber(fiber, arrayMapFiber);
 
     if (arrayLength > 0) {
       for (let i = 0; i < arrayLength; ++i) {
@@ -178,41 +259,183 @@
         } else {
           elementRuntimeValues = null;
         }
-        mountDOMFromTemplate(parentDOMElement, arrayMapTemplateNode, fiber, elementRuntimeValues);
+        const elementFiber = createFiber(arrayMapTemplateNode, elementRuntimeValues);
+        insertChildFiberIntoParentFiber(arrayMapFiber, elementFiber);
+        mountDOMFromTemplate(parentDOMElement, arrayMapTemplateNode, elementFiber, elementRuntimeValues);
       }
     }
   }
 
+  function updateDOMFromArrayMapTemplate(arrayMapTemplate, fiber, previousRuntimeValues, nextRuntimeValues) {
+    const arrayValueIndex = arrayMapTemplate.a;
+    const arrayMapComputeFunctionValueIndex = arrayMapTemplate.b;
+    const arrayMapTemplateNode = arrayMapTemplate.c;
+    const nextArray = nextRuntimeValues[arrayValueIndex];
+    const nextArrayMapComputeFunction = nextRuntimeValues[arrayMapComputeFunctionValueIndex];
+    const nextArrayLength = nextArray.length;
+    const arrayMapFiber = fiber.children[fiber.childIndex++];
+    const arrayMapFiberChildren = arrayMapFiber.children;
+    
+    if (nextArrayLength > 0) {
+      for (let i = 0; i < nextArrayLength; ++i) {
+        const element = nextArray[i];
+        let nextElementRuntimeValues;
+
+        if (nextArrayMapComputeFunction !== null) {
+          nextElementRuntimeValues = nextArrayMapComputeFunction(element, i, nextArray);
+        } else {
+          nextElementRuntimeValues = null;
+        }
+        const elementFiber = arrayMapFiberChildren[i];
+        const previousElementRuntimeValues = elementFiber.values;
+        elementFiber.values = nextElementRuntimeValues;
+        updateDOMFromTemplate(arrayMapTemplateNode, elementFiber, previousElementRuntimeValues, nextElementRuntimeValues);
+        elementFiber.childIndex = 0;
+      }
+    }
+  }
+
+  function mountDOMFromFragmentTemplate(parentDOMElement, fragmentTemplate, fiber, runtimeValues) {
+    const children = fragmentTemplate.a;
+    const childrenLength = children.length;
+
+    if (childrenLength > 0) {
+      for (let i = 0; i < childrenLength; ++i) {
+        mountDOMFromTemplate(parentDOMElement, children[i], fiber, runtimeValues);
+      }
+    }
+    return children;
+  }
+
+  function updateDOMFromFragmentTemplate(fragmentTemplate, fiber, previousRuntimeValues, nextRuntimeValues) {
+    const children = fragmentTemplate.a;
+    const childrenLength = children.length;
+
+    if (childrenLength > 0) {
+      for (let i = 0; i < childrenLength; ++i) {
+        updateDOMFromTemplate(children[i], fiber, previousRuntimeValues, nextRuntimeValues);
+      }
+    }
+  }
+
+  function mountDOMFromConditionalTemplate(parentDOMElement, conditionTemplate, fiber, runtimeValues) {
+    const conditionalValueIndex = conditionTemplate.a;
+    const conditionValue = runtimeValues[conditionalValueIndex];
+
+    if (conditionValue) {
+      const consequentTemplate = conditionTemplate.b;
+      if (consequentTemplate !== _) {
+        mountDOMFromTemplate(parentDOMElement, consequentTemplate, fiber, runtimeValues);
+      }
+    } else {
+      const alternateTemplate = conditionTemplate.c;
+      if (alternateTemplate !== _) {
+        mountDOMFromTemplate(parentDOMElement, alternateTemplate, fiber, runtimeValues);
+      }
+    }
+  }
+
+  function updateDOMFromConditionalTemplate(conditionTemplate, fiber, previousRuntimeValues, nextRuntimeValues) {
+    const conditionalValueIndex = conditionTemplate.a;
+    const previousConditionValue = previousRuntimeValues[conditionalValueIndex];
+    const nextConditionValue = nextRuntimeValues[conditionalValueIndex];
+
+    if (previousConditionValue !== nextConditionValue) {
+      // TODO
+    }
+  }
+
+  function mountDOMFromTextTemplate(parentDOMElement, textTemplate, fiber, runtimeValues) {
+    const templateFlags = textTemplate.f;
+    const isStatic = (templateFlags & IS_STATIC) !== 0;
+    const text = isStatic === true ? textTemplate.a : runtimeValues[textTemplate.a];
+    const DOMTextNode = createTextNode(text);
+    if (parentDOMElement !== null) {
+      appendChild(parentDOMElement, DOMTextNode);
+    }
+    return DOMTextNode;
+  }
+
+  function updateDOMFromTextTemplate(textTemplate, fiber, previousRuntimeValues, nextRuntimeValues) {
+    const templateFlags = textTemplate.f;
+    if ((templateFlags & IS_STATIC) !== 0) {
+      return;
+    }
+    const previousText = previousRuntimeValues[textTemplate.a];
+    const nextText = nextRuntimeValues[textTemplate.a];
+    
+    if (previousText !== nextText) {
+      // TODO
+    }
+  }
+
   function mountDOMFromTemplate(parentDOMElement, templateNode, fiber, runtimeValues) {
-    const templateFlags = templateNode.f;
-    if ((templateFlags & COMPONENT) !==0) {
-      return mountDOMFromComponentTemplate(templateFlags, parentDOMElement, templateNode, fiber, runtimeValues);
-    } else if ((templateFlags & ELEMENT) !==0) {
-      return mountDOMFromElementTemplate(templateFlags, parentDOMElement, templateNode, fiber, runtimeValues);
-    } else if ((templateFlags & ARRAY_MAP) !==0) {
-      return mountDOMFromArrayMapTemplate(templateFlags, parentDOMElement, templateNode, fiber, runtimeValues);
+    const templateType = templateNode.t;
+    switch (templateType) {
+      case ROOT_COMPONENT:
+        return mountDOMFromComponentTemplate(true, parentDOMElement, templateNode, fiber, runtimeValues);
+      case COMPONENT:
+        return mountDOMFromComponentTemplate(false, parentDOMElement, templateNode, fiber, runtimeValues);
+      case ELEMENT:
+        return mountDOMFromElementTemplate(parentDOMElement, templateNode, fiber, runtimeValues);
+      case TEXT:
+        return mountDOMFromTextTemplate(parentDOMElement, templateNode, fiber, runtimeValues);
+      case FRAGMENT:
+        return mountDOMFromFragmentTemplate(parentDOMElement, templateNode, fiber, runtimeValues);
+      case CONDITIONAL:
+        return mountDOMFromConditionalTemplate(parentDOMElement, templateNode, fiber, runtimeValues);
+      case ARRAY_MAP:
+        return mountDOMFromArrayMapTemplate(parentDOMElement, templateNode, fiber, runtimeValues);
+      default:
+        throw new Error("Should never happen");
+    }
+  }
+
+  function updateDOMFromTemplate(templateNode, fiber, previousRuntimeValues, nextRuntimeValues) {
+    const templateType = templateNode.t;
+    switch (templateType) {
+      case ROOT_COMPONENT:
+        return updateDOMFromComponentTemplate(true, templateNode, fiber, previousRuntimeValues, nextRuntimeValues);
+      case COMPONENT:
+        return updateDOMFromComponentTemplate(false, templateNode, fiber, previousRuntimeValues, nextRuntimeValues);
+      case ELEMENT:
+        return updateDOMFromElementTemplate(templateNode, fiber, previousRuntimeValues, nextRuntimeValues);
+      case TEXT:
+        return updateDOMFromTextTemplate(templateNode, fiber, previousRuntimeValues, nextRuntimeValues);
+      case FRAGMENT:
+        return updateDOMFromFragmentTemplate(templateNode, fiber, previousRuntimeValues, nextRuntimeValues);
+      case CONDITIONAL:
+        return updateDOMFromConditionalTemplate(templateNode, fiber, previousRuntimeValues, nextRuntimeValues);
+      case ARRAY_MAP:
+        return updateDOMFromArrayMapTemplate(templateNode, fiber, previousRuntimeValues, nextRuntimeValues);
+      default:
+        throw new Error("Should never happen");
     }
   }
 
   function renderNodeToRootContainer(input, DOMContainer) {
-    let rootFiber = getRoot(DOMContainer);
+    let rootFiber = rootFibers.get(DOMContainer);
   
     if (input === null || input === undefined) {
-      // if (rootFiber !== undefined) {
-      //   // unmountRoot(DOMContainer, rootState);
-      // }
+      if (rootFiber !== undefined) {
+        const childFiber = rootFiber.children[0];
+        removeChild(DOMContainer, childFiber.hostNode);
+        rootFibers.delete(DOMContainer);
+      }
     } else if (input.$$typeof === reactElementSymbol) {
       const templateNode = input.type;
       const inputProps = input.props;
   
-      if (rootFiber === null) {
+      if (rootFiber === undefined) {
         rootFiber = createFiber(null, null);
-        rootFiber.stateNode = DOMContainer;
+        rootFiber.hostNode = DOMContainer;
         rootFiber.props = inputProps;
-        addRoot(rootFiber);
+        rootFibers.set(DOMContainer, rootFiber);
         mountDOMFromTemplate(DOMContainer, templateNode, rootFiber, null);
       } else {
-        // TODO update
+        rootFiber.props = inputProps;
+        updateDOMFromTemplate(templateNode, rootFiber, null, null);
+        rootFiber.childIndex = 0;
       }
     } else {
       throw new Error("render() expects a ReactElement as the first argument");
@@ -223,6 +446,31 @@
     return renderNodeToRootContainer(input, DOMContainer);
   }
 
+  function timeAge(time) {
+    const now = new Date()["getTime"]() / 1000;
+    const minutes = (now - time) / 60;
+  
+    if (minutes < 60) {
+      return Math["round"](minutes) + " minutes ago";
+    }
+  
+    return Math["round"](minutes / 60) + " hours ago";
+  }
+  
+  function getHostUrl(url) {
+    return (url + "")["replace"]("https://", "")["replace"]("http://", "")["split"]("/")[0];
+  }
+
+  function Story_ComputeFunction(rank, story) {
+    var __cached__1;
+
+    var __cached__0;
+
+    __cached__1 = timeAge(story["time"]);
+    __cached__0 = getHostUrl(story["url"]);
+    return [`${rank}.`, story["title"], story["url"], __cached__0, `${story["score"]} points`, story["by"], __cached__1, `${story["descendants"] || 0} comments`];
+  }
+
   function StoryList_ComputeFunction(stories) {
     return [stories, (story, i) => [[++i, story]]];
   }
@@ -231,35 +479,188 @@
     return [[stories]];
   }
 
-  const Component = createNode(COMPONENT | IS_ROOT, App_ComputeFunction, ["stories"],
-    createNode(ELEMENT | IS_STATIC | HAS_CHILD, "center", _,
-      createNode(ELEMENT | HAS_PROPS | IS_STATIC | HAS_CHILD, "table", [
-        createNode(PROP | IS_STATIC, "border", 0),
-        createNode(PROP | IS_STATIC, "cellpadding", 0),
-        createNode(PROP | IS_STATIC, "cellspacing", 0),
-        createNode(PROP | IS_STATIC, "width", "85%"),
-        createNode(STYLE | IS_STATIC, "background-color", "#f6f6ef"),
+  const Component = createNode(ROOT_COMPONENT, 0, App_ComputeFunction, ["stories"],
+    createNode(ELEMENT, HAS_CHILD, "center", _,
+      createNode(ELEMENT, HAS_STATIC_PROPS | HAS_CHILD, "table", [
+        "border", 0,
+        "cellpadding", 0,
+        "cellspacing", 0,
+        "width", "85%",
+        "style", ["background-color", "#f6f6ef"]
       ],
-        createNode(ELEMENT | IS_STATIC | HAS_CHILDREN, "tbody", _, [
-          createNode(COMPONENT | IS_STATIC, _, _,
-            createNode(ELEMENT, "tr")
+        createNode(ELEMENT, HAS_CHILDREN, "tbody", _, [
+          createNode(COMPONENT, IS_STATIC | HAS_CHILD, _, _,
+            createNode(ELEMENT, IS_STATIC | HAS_STATIC_PROPS | HAS_CHILD, "tr", [
+              "style", ["background-color", "#222"],
+            ],
+              createNode(ELEMENT, IS_STATIC | HAS_CHILD | HAS_STATIC_PROPS, "table", [
+                "cellpadding", 0,
+                "cellspacing", 0,
+                "width", "100%",
+                "style", ["padding", "4px"],
+              ],
+                createNode(ELEMENT, IS_STATIC | HAS_CHILDREN, "tbody", _, [
+                  createNode(ELEMENT, IS_STATIC | HAS_STATIC_PROPS | HAS_CHILD, "td", [
+                    "width", 4,
+                    "style", ["padding-right", "4px"],
+                  ],
+                    createNode(ELEMENT, HAS_CHILD | HAS_STATIC_PROPS | IS_STATIC, "a", [
+                      "href", "#",
+                    ],
+                      createNode(ELEMENT, HAS_STATIC_PROPS | IS_STATIC, "img", [
+                        "src", "logo.png",
+                        "width", 16,
+                        "height", 16,
+                        "style", ["border", "1px solid #00d8ff"],
+                      ])
+                    )
+                  ),
+                  createNode(ELEMENT, IS_STATIC | HAS_STATIC_PROPS | HAS_CHILD, "td", [
+                    "height", 10,
+                    "style", ["line-height", "12pt"],
+                  ],
+                    createNode(ELEMENT, IS_STATIC | HAS_CHILDREN | HAS_STATIC_PROPS, "span", [
+                      "className", "pagetop"
+                    ], [
+                      createNode(ELEMENT, IS_STATIC | HAS_STATIC_TEXT_CONTENT | HAS_STATIC_PROPS, "b", [
+                        "className", "hnname",
+                      ], "React HN Benchmark"),
+                      createNode(ELEMENT, HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
+                        "href", "#",
+                      ], "new"),
+                      createNode(TEXT, IS_STATIC, " | "),
+                      createNode(ELEMENT, HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
+                        "href", "#",
+                      ], "comments"),
+                      createNode(TEXT, IS_STATIC, " | "),
+                      createNode(ELEMENT, HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
+                        "href", "#",
+                      ], "show"),
+                      createNode(TEXT, IS_STATIC, " | "),
+                      createNode(ELEMENT, HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
+                        "href", "#",
+                      ], "ask"),
+                      createNode(TEXT, IS_STATIC, " | "),
+                      createNode(ELEMENT, HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
+                        "href", "#",
+                      ], "jobs"),
+                      createNode(TEXT, IS_STATIC, " | "),
+                      createNode(ELEMENT, HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
+                        "href", "#",
+                      ], "submit"),
+                    ])
+                  ),
+                ])
+              )
+            )
           ),
-          createNode(ELEMENT, "tr"),
-          createNode(COMPONENT, StoryList_ComputeFunction, 0,
-            createNode(ELEMENT | IS_STATIC | HAS_CHILD, "tr", _,
-              createNode(ELEMENT | IS_STATIC | HAS_CHILD, "td", _,
-                createNode(ELEMENT | IS_STATIC | HAS_PROPS | HAS_CHILD, "table", [
-                  createNode(PROP | IS_STATIC, "cellpadding", 0),
-                  createNode(PROP | IS_STATIC, "cellspacing", 0),
-                  createNode(PROP | IS_STATIC, "classlist", "itemlist"),
+          createNode(ELEMENT, HAS_STATIC_PROPS | IS_STATIC, "tr", [
+            "height", 10
+          ]),
+          createNode(COMPONENT, 0, StoryList_ComputeFunction, 0,
+            createNode(ELEMENT, HAS_CHILD, "tr", _,
+              createNode(ELEMENT, HAS_CHILD, "td", _,
+                createNode(ELEMENT, HAS_STATIC_PROPS | HAS_CHILD, "table", [
+                  "cellpadding", 0,
+                  "cellspacing", 0,
+                  "classlist", "itemlist",
                 ],
-                  createNode(ARRAY_MAP, 0, 1,
-                    createNode(ELEMENT, "tr")
+                  createNode(ELEMENT, HAS_CHILD, "tbody", _,
+                    createNode(ARRAY_MAP, 0, 0, 1,
+                      createNode(COMPONENT, 0, Story_ComputeFunction, 0,
+                        createNode(FRAGMENT, 0, [
+                          createNode(ELEMENT, HAS_STATIC_PROPS | HAS_CHILDREN, "tr", [
+                            "className", "athing"
+                          ], [
+                            createNode(ELEMENT, HAS_STATIC_PROPS | HAS_CHILD, "td", [
+                              "vertical-align", "top",
+                              "className", "title",
+                              "style", ["text-align", "right"],
+                            ],
+                              createNode(ELEMENT, HAS_DYNAMIC_TEXT_CONTENT | HAS_STATIC_PROPS, "span", [
+                                "className", "rank",
+                              ], 0)
+                            ),
+                            createNode(ELEMENT, HAS_STATIC_PROPS | HAS_CHILD | IS_STATIC, "td", [
+                              "className", "votelinks",
+                              "vertical-align", "top",
+                            ],
+                              createNode(ELEMENT, HAS_CHILD | IS_STATIC, "center", _,
+                                createNode(ELEMENT, HAS_CHILD | HAS_STATIC_PROPS | IS_STATIC, "a", [
+                                  "href", "#"
+                                ],
+                                  createNode(ELEMENT, HAS_STATIC_PROPS | IS_STATIC, "div", [
+                                    "className", "votearrow",
+                                    "title", "upvote",
+                                  ])
+                                )
+                              )
+                            ),
+                            createNode(ELEMENT, HAS_STATIC_PROPS | HAS_CHILDREN, "td", [
+                              "className", "title",
+                            ], [
+                              createNode(ELEMENT, HAS_STATIC_PROPS | HAS_DYNAMIC_TEXT_CONTENT, "a", [
+                                "href", "#",
+                                "className", "storylink",
+                              ], 1),
+                              createNode(CONDITIONAL, 0, 2,
+                                createNode(ELEMENT, HAS_CHILDREN | HAS_STATIC_PROPS, "span", [
+                                  "className", "sitebit comhead",
+                                ], [
+                                  createNode(TEXT, IS_STATIC, " ("),
+                                  createNode(ELEMENT, HAS_STATIC_PROPS | HAS_DYNAMIC_TEXT_CONTENT, "a", [
+                                    "href", "#",
+                                  ], 3),
+                                  createNode(TEXT, IS_STATIC, ")"),
+                                ])
+                              , _),
+                            ])
+                          ]),
+                          createNode(ELEMENT, HAS_CHILDREN, "tr", _, [
+                            createNode(ELEMENT, IS_STATIC | HAS_STATIC_PROPS, "td", [
+                              "colspan", 2,
+                            ]),
+                            createNode(ELEMENT, IS_STATIC | HAS_CHILDREN | HAS_STATIC_PROPS, "td", [
+                              "className", "subtext",
+                            ], [
+                              createNode(ELEMENT, HAS_DYNAMIC_TEXT_CONTENT | HAS_STATIC_PROPS, "span", [
+                                "className", "score",
+                              ], 4),
+                              createNode(TEXT, IS_STATIC, " by "),
+                              createNode(ELEMENT, HAS_DYNAMIC_TEXT_CONTENT | HAS_STATIC_PROPS, "a", [
+                                "href", "#",
+                                "className", "hnuser",
+                              ], 5),
+                              createNode(TEXT, IS_STATIC, " "),
+                              createNode(ELEMENT, HAS_CHILD | HAS_STATIC_PROPS, "span", [
+                                "className", "age",
+                              ],
+                                createNode(ELEMENT, HAS_DYNAMIC_TEXT_CONTENT | HAS_STATIC_PROPS, "a", [
+                                  "href", "#",
+                                ], 6),
+                              ),
+                              createNode(TEXT, IS_STATIC, " | "),
+                              createNode(ELEMENT, HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
+                                "href", "#",
+                              ], "hide"),
+                              createNode(TEXT, IS_STATIC, " | "),
+                              createNode(ELEMENT, HAS_DYNAMIC_TEXT_CONTENT | HAS_STATIC_PROPS, "a", [
+                                "href", "#",
+                              ], 7),
+                            ]),
+                          ]),
+                          createNode(ELEMENT, HAS_STATIC_PROPS | IS_STATIC, "tr", [
+                            "className", "spacer",
+                            "style",  ["height", "5px"],
+                          ]),
+                        ]),
+                      )
+                    )
                   ),
                 )
               )
             )
-          , 0),
+          ),
         ])
       )
     )
@@ -1459,15 +1860,18 @@
   }
 
   function renderBenchmark() {
-    const start = performance.now();
+    render(null, root);
     render(React.createElement(Component, props), root);
-    return performance.now() - start;
   }
 
-  const initialRenderTime = renderBenchmark();
+  
   setTimeout(() => {
-    const updateRenderTime = renderBenchmark();
-    console.log(`Initial: ${initialRenderTime} Update: ${updateRenderTime}`)
+    const start = performance.now();
+    for (let i = 0; i < 1; i++) {
+      renderBenchmark()
+    }
+    const end = performance.now() - start;
+    alert(end)
   }, 100);
 
 })();

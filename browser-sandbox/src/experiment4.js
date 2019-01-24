@@ -36,7 +36,7 @@
   }
 
   function closeFragment() {
-    // closeElement();
+    // op(1);
   }
 
   function openElement(tagName) {
@@ -195,9 +195,9 @@
     const _nextRuntimeValues = nextRuntimeValues;
     const _previousRuntimeValues = previousRuntimeValues;
     const parentFiber = currentFiber;
-    const componentIsRoot = (flags & COMPONENT_IS_ROOT) > 0;
+    const componentIsRoot = (flags & COMPONENT_IS_ROOT) !== 0;
     let props;
-    if ((flags & COMPONENT_USES_PROPS) > 0) {
+    if ((flags & COMPONENT_USES_PROPS) !== 0) {
       if (componentIsRoot) {
         props = currentProps;
         currentProps = null;
@@ -382,164 +382,211 @@
     return (url + "")["replace"]("https://", "")["replace"]("http://", "")["split"]("/")[0];
   }
 
+  function op(f, a, b, c, d, e) {
+    switch (f) {
+      case 0:
+        openElement(a);
+        break;
+      case 1:
+        closeElement(1);
+        break;
+      case 2:
+        openFragment();
+        break;
+      case 3:
+        closeFragment();
+        break;
+      case 4:
+        staticProp(a, b);
+        break;
+      case 5:
+        staticPropStyle(a, b);
+        break;
+      case 6:
+        staticPropUnitlessStyle(a, b);
+        break;
+      case 7:
+        staticPropClassName(a ,b);
+        break;
+      case 8:
+        elementStaticChildrenValue(a);
+        break;
+      case 9:
+        elementStaticChildValue(a);
+        break;
+      case 10:
+        conditional(a, b, c, d);
+        break;
+      case 11:
+        elementDynamicChildrenValue(a, b);
+        break;
+      case 12:
+        component(a, b, c, d, e);
+        break;
+      case 13:
+        elementDynamicChildrenArrayMapTemplate(a, b, c, d);
+        break;
+    }
+  }
+
   function HeaderBar_TemplateFunction() {
-    openElement('tr');
-      staticPropStyle('background-color', '#222');
-      openElement('table');
-        staticProp('width', '100%');
-        staticProp('cellPadding', 0);
-        staticProp('cellSpacing', 0);
-        staticPropStyle('padding', '4px');
-        openElement('tbody');
-          openElement('tr');
-            openElement('td');
-              staticPropStyle('width', '18px');
-              staticPropStyle('padding-right', '4px');
-              openElement('a');
-                staticProp('href', '#');
-                openElement('img');
-                  staticProp('src', 'logo.png');
-                  staticProp('width', 16);
-                  staticProp('height', 16);
-                  staticPropStyle('border', '1px solid #00d8ff');
-                closeElement();
-              closeElement();
-            closeElement();
-            openElement('td');
-              staticPropUnitlessStyle('line-height', '12pt');
-              staticProp('height', 10);
-              openElement('span');
-                staticPropClassName('pagetop');
-                openElement('b');
-                  staticPropClassName('hnname');
-                  elementStaticChildrenValue('React HN Benchmark')
-                closeElement();
-                openElement('a');
-                  staticProp('href', '#');
-                  elementStaticChildrenValue('new')
-                closeElement();
-                elementStaticChildValue(' | ');
-                openElement('a');
-                  staticProp('href', '#');
-                  elementStaticChildrenValue('comments')
-                closeElement();
-                elementStaticChildValue(' | ');
-                openElement('a');
-                  staticProp('href', '#');
-                  elementStaticChildrenValue('show')
-                closeElement();
-                elementStaticChildValue(' | ');
-                openElement('a');
-                  staticProp('href', '#');
-                  elementStaticChildrenValue('ask')
-                closeElement();
-                elementStaticChildValue(' | ');
-                openElement('a');
-                  staticProp('href', '#');
-                  elementStaticChildrenValue('jobs')
-                closeElement();
-                elementStaticChildValue(' | ');
-                openElement('a');
-                  staticProp('href', '#');
-                  elementStaticChildrenValue('submit')
-                closeElement();
-              closeElement();
-            closeElement();
-          closeElement();
-        closeElement();
-      closeElement();
-    closeElement();
+    op(0, 'tr');
+      op(5, 'background-color', '#222');
+      op(0, 'table');
+        op(4, 'width', '100%');
+        op(4, 'cellPadding', 0);
+        op(4, 'cellSpacing', 0);
+        op(5, 'padding', '4px');
+        op(0, 'tbody');
+          op(0, 'tr');
+            op(0, 'td');
+              op(5, 'width', '18px');
+              op(5, 'padding-right', '4px');
+              op(0, 'a');
+                op(4, 'href', '#');
+                op(0, 'img');
+                  op(4, 'src', 'logo.png');
+                  op(4, 'width', 16);
+                  op(4, 'height', 16);
+                  op(5, 'border', '1px solid #00d8ff');
+                op(1);
+              op(1);
+            op(1);
+            op(0, 'td');
+              op(6, 'line-height', '12pt');
+              op(4, 'height', 10);
+              op(0, 'span');
+                op(7, 'pagetop');
+                op(0, 'b');
+                  op(7, 'hnname');
+                  op(8, 'React HN Benchmark')
+                op(1);
+                op(0, 'a');
+                  op(4, 'href', '#');
+                  op(8, 'new')
+                op(1);
+                op(9, ' | ');
+                op(0, 'a');
+                  op(4, 'href', '#');
+                  op(8, 'comments')
+                op(1);
+                op(9, ' | ');
+                op(0, 'a');
+                  op(4, 'href', '#');
+                  op(8, 'show')
+                op(1);
+                op(9, ' | ');
+                op(0, 'a');
+                  op(4, 'href', '#');
+                  op(8, 'ask')
+                op(1);
+                op(9, ' | ');
+                op(0, 'a');
+                  op(4, 'href', '#');
+                  op(8, 'jobs')
+                op(1);
+                op(9, ' | ');
+                op(0, 'a');
+                  op(4, 'href', '#');
+                  op(8, 'submit')
+                op(1);
+              op(1);
+            op(1);
+          op(1);
+        op(1);
+      op(1);
+    op(1);
   }
 
   function Story_Conditional_Consequent_TemplateFunction() {
-    openElement('span');
-      staticPropClassName('sitebit comhead');
-      elementStaticChildValue(" (");
-      openElement('a')
-        staticProp('href', '#');
-        elementDynamicChildrenValue(3, 3);
-      closeElement();
-      elementStaticChildValue(")");
-    closeElement();
+    op(0, 'span');
+      op(7, 'sitebit comhead');
+      op(9, " (");
+      op(0, 'a')
+        op(4, 'href', '#');
+        op(11, 3, 3);
+      op(1);
+      op(9, ")");
+    op(1);
   }
 
   function Story_TemplateFunction() {
-    openFragment();
-      openElement('tr');
-        staticPropClassName('athing');
-        openElement('td');
-          staticPropStyle('vertical-align', 'top');
-          staticPropStyle('text-align', 'right');
-          staticPropClassName('title');
-          openElement('span');
-            staticPropClassName('rank');
-            elementDynamicChildrenValue(0, 0);
-          closeElement();
-        closeElement();
-        openElement('td');
-          staticPropClassName('votelinks');
-          staticPropStyle('vertical-align', 'top');
-          openElement('center');
-            openElement('a');
-              staticProp('href', '#');
-              openElement('div');
-                staticPropClassName('votearrow');
-                staticProp('title', 'upvote');
-              closeElement();
-            closeElement();
-          closeElement();
-        closeElement();
-        openElement('td');
-          staticPropClassName('title');
-          openElement('a');
-            staticProp('href', '#');
-            staticPropClassName('storylink');
-            elementDynamicChildrenValue(1, 1);
-          closeElement();
-          conditional(2, 2, Story_Conditional_Consequent_TemplateFunction, null);
-        closeElement();
-      closeElement();
-      openElement('tr');
-        openElement('td');
-          staticProp('colSpan', 2);
-        closeElement();
-        openElement('td');
-          staticPropClassName('subtext');
-          openElement('span');
-            staticPropClassName('score');
-            elementDynamicChildrenValue(4, 4);
-          closeElement();
-          elementStaticChildValue(" by ");
-          openElement('a');
-            staticProp('href', '#');
-            staticPropClassName('hnuser');
-            elementDynamicChildrenValue(5, 5);
-          closeElement();
-          elementStaticChildValue(" ");
-          openElement('span');
-            staticPropClassName('age');
-            openElement('a');
-              staticProp('href', '#');
-              elementDynamicChildrenValue(6, 6);
-            closeElement();
-          closeElement();
-          elementStaticChildValue(" | ");
-          openElement('a');
-            staticProp('href', '#');
-            elementStaticChildValue('hide');
-          closeElement();
-          elementStaticChildValue(" | ");
-          openElement('a');
-            staticProp('href', '#');
-            elementDynamicChildrenValue(7, 7);
-          closeElement();
-        closeElement();
-      closeElement();
-      openElement('tr');
-        staticPropStyle('height', 5);
-        staticPropClassName('spacer');
-      closeElement();
-    closeFragment();
+    op(2);
+      op(0, 'tr');
+        op(7, 'athing');
+        op(0, 'td');
+          op(5, 'vertical-align', 'top');
+          op(5, 'text-align', 'right');
+          op(7, 'title');
+          op(0, 'span');
+            op(7, 'rank');
+            op(11, 0, 0);
+          op(1);
+        op(1);
+        op(0, 'td');
+          op(7, 'votelinks');
+          op(5, 'vertical-align', 'top');
+          op(0, 'center');
+            op(0, 'a');
+              op(4, 'href', '#');
+              op(0, 'div');
+                op(7, 'votearrow');
+                op(4, 'title', 'upvote');
+              op(1);
+            op(1);
+          op(1);
+        op(1);
+        op(0, 'td');
+          op(7, 'title');
+          op(0, 'a');
+            op(4, 'href', '#');
+            op(7, 'storylink');
+            op(11, 1, 1);
+          op(1);
+          op(10, 2, 2, Story_Conditional_Consequent_TemplateFunction, null);
+        op(1);
+      op(1);
+      op(0, 'tr');
+        op(0, 'td');
+          op(4, 'colSpan', 2);
+        op(1);
+        op(0, 'td');
+          op(7, 'subtext');
+          op(0, 'span');
+            op(7, 'score');
+            op(11, 4, 4);
+          op(1);
+          op(9, " by ");
+          op(0, 'a');
+            op(4, 'href', '#');
+            op(7, 'hnuser');
+            op(11, 5, 5);
+          op(1);
+          op(9, " ");
+          op(0, 'span');
+            op(7, 'age');
+            op(0, 'a');
+              op(4, 'href', '#');
+              op(11, 6, 6);
+            op(1);
+          op(1);
+          op(9, " | ");
+          op(0, 'a');
+            op(4, 'href', '#');
+            op(9, 'hide');
+          op(1);
+          op(9, " | ");
+          op(0, 'a');
+            op(4, 'href', '#');
+            op(11, 7, 7);
+          op(1);
+        op(1);
+      op(1);
+      op(0, 'tr');
+        op(5, 'height', 5);
+        op(7, 'spacer');
+      op(1);
+    op(3);
   }
 
   function Story_ComputeFunction(rank, story) {
@@ -553,22 +600,22 @@
   }
 
   function StoryList_MapTemplateFunction() {
-    component(1, Story_TemplateFunction, Story_ComputeFunction, 0, 0);
+    op(12, 1, Story_TemplateFunction, Story_ComputeFunction, 0, 0);
   }
 
   function StoryList_TemplateFunction() {
-    openElement('tr');
-      openElement('td');
-        openElement('table');
-          staticProp('cellPadding', 0);
-          staticProp('cellSpacing', 0);
-          staticProp('classList', 'itemlist');
-          openElement('tbody');
-            elementDynamicChildrenArrayMapTemplate(0, 1, StoryList_MapTemplateFunction, 0);
-          closeElement();
-        closeElement();
-      closeElement();
-    closeElement();
+    op(0, 'tr');
+      op(0, 'td');
+        op(0, 'table');
+          op(4, 'cellPadding', 0);
+          op(4, 'cellSpacing', 0);
+          op(4, 'classList', 'itemlist');
+          op(0, 'tbody');
+            op(13, 0, 1, StoryList_MapTemplateFunction, 0);
+          op(1);
+        op(1);
+      op(1);
+    op(1);
   }
 
   function StoryList_ComputeFunction(stories) {
@@ -580,27 +627,27 @@
   }
 
   function App_TemplateFunction() {
-    openElement('center');
-      openElement('table');
-        staticProp('id', 'hnmain');
-        staticProp('border', 0);
-        staticProp('cellPadding', 0);
-        staticProp('cellSpacing', 0);
-        staticProp('width', '85%');
-          staticPropStyle('background-color', '#f6f6ef');
-        openElement('tbody');
-          component(0, HeaderBar_TemplateFunction, null, 0);
-          openElement('tr');
-            staticProp('height', '10');
-          closeElement();
-          component(1, StoryList_TemplateFunction, StoryList_ComputeFunction, 1, 0);
-        closeElement();
-      closeElement();
-    closeElement();
+    op(0, 'center');
+      op(0, 'table');
+        op(4, 'id', 'hnmain');
+        op(4, 'border', 0);
+        op(4, 'cellPadding', 0);
+        op(4, 'cellSpacing', 0);
+        op(4, 'width', '85%');
+          op(5, 'background-color', '#f6f6ef');
+        op(0, 'tbody');
+          op(12, 0, HeaderBar_TemplateFunction, null, 0);
+          op(0, 'tr');
+            op(4, 'height', '10');
+          op(1);
+          op(12, 1, StoryList_TemplateFunction, StoryList_ComputeFunction, 1, 0);
+        op(1);
+      op(1);
+    op(1);
   }
 
   function Component_TemplateFunction() {
-    component(5, App_TemplateFunction, App_ComputeFunction);
+    op(12, 5, App_TemplateFunction, App_ComputeFunction);
   }
 
   const Component = createRoot(['stories'], Component_TemplateFunction);

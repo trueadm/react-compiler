@@ -166,7 +166,6 @@
       const _previousRuntimeValues = previousRuntimeValues;
       previousRuntimeValues = nextRuntimeValues;
       const arrayLength = nextArray.length;
-      debugger;
       for (let i = 0; i < arrayLength; ++i) {
         const element = nextArray[i];
         currentFiber = arrayMapFiberChildren[i];
@@ -227,6 +226,7 @@
       currentFiber.values = nextRuntimeValues;
     }
     const hostNode = templateFunction();
+    currentFiber.hostNode = hostNode;
     nextRuntimeValues = _nextRuntimeValues;
     previousRuntimeValues = _previousRuntimeValues;
     if (!componentIsRoot) {
@@ -235,13 +235,14 @@
     return hostNode;
   }
 
-  const roots = [];
+  let roots = [];
 
   function getRoot(DOMContainer) {
     const rootsLength = roots.length;
     if (rootsLength > 0) {
       for (let i = 0; i < rootsLength; i++) {
-        if (roots[i].h === DOMContainer) {
+        const root = roots[i];
+        if (root.h === DOMContainer) {
           return root;
         }
       }
@@ -261,9 +262,10 @@
     const previousTemplateNode = getRoot(DOMContainer);
   
     if (node === null || node === undefined) {
-      // if (rootState !== undefined) {
-      //   // unmountRoot(DOMContainer, rootState);
-      // }
+      if (previousTemplateNode !== null) {
+        DOMContainer.removeChild(previousTemplateNode.f.hostNode);
+        roots = [];
+      }
     } else if (node.$$typeof === reactElementSymbol) {
       const nextRootTemplateNode = node.type;
       const rootPropsShape = nextRootTemplateNode.p;
@@ -1734,15 +1736,16 @@
   }
 
   function renderBenchmark() {
-    const start = performance.now();
+    render(null, root);
     render(React.createElement(Component, props), root);
-    return performance.now() - start;
   }
 
-  const initialRenderTime = renderBenchmark();
   setTimeout(() => {
-    const updateRenderTime = renderBenchmark();
-    alert(`Initial: ${initialRenderTime} Update: ${updateRenderTime}`)
+    const start = performance.now();
+    for (let i = 0; i < 1; i++) {
+      renderBenchmark()
+    }
+    const end = performance.now() - start;
+    alert(end)
   }, 100);
-
 })();
