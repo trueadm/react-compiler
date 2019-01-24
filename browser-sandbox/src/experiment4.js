@@ -1852,7 +1852,7 @@
   
   setTimeout(() => {
     const start = performance.now();
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 1; i++) {
       renderBenchmark()
     }
     const end = performance.now() - start;
