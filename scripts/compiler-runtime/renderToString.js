@@ -848,6 +848,16 @@ function renderTemplateFunctionCallTemplateToString(templateFunctionCallTemplate
   return renderTemplateToString(functionCallTemplateNode, functionCallValues, isOnlyChild, state);
 }
 
+function renderFragmentTemplateToString(fragmentTemplate, values, isOnlyChild, state) {
+  const fragment = fragmentTemplate[1];
+  let fragmentString = "";
+
+  for (let i = 0, length = fragment.length; i < length; ++i) {
+    fragmentString += renderTemplateToString(fragment[i], values, false, state);
+  }
+  return fragmentString;
+}
+
 function renderTemplateToString(templateNode, values, isOnlyChild, state) {
   const templateTypeAndFlags = templateNode[0];
   const templateType = templateTypeAndFlags & 0x3f;
@@ -876,8 +886,7 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
     case TEXT:
       return renderTextTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
     case FRAGMENT:
-      // return mountDOMFromFragmentTemplate(parentDOMElement, templateNode, fiber, runtimeValues);
-      return null;
+      return renderFragmentTemplateToString(templateNode, values, isOnlyChild, state);
     case CONDITIONAL:
       return renderConditionalTemplateToString(templateNode, values, isOnlyChild, state);
     case TEMPLATE_FUNCTION_CALL:

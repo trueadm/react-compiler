@@ -29,8 +29,8 @@ import {
   ConditionalTemplateNode,
   DynamicTextTemplateNode,
   DynamicValueTemplateNode,
+  FragmentTemplateNode,
   MultiConditionalTemplateNode,
-  NonKeyedArrayTemplateNode,
   StaticTextTemplateNode,
   TemplateFunctionCallTemplateNode,
 } from "./templates";
@@ -76,7 +76,7 @@ function compileArrayExpression(path, refPath, state, componentPath, isRoot, pro
   if (children.length === 1) {
     return children[0];
   }
-  return new NonKeyedArrayTemplateNode(children);
+  return new FragmentTemplateNode(children);
 }
 
 function compileCallExpression(path, refPath, state, componentPath, isRoot, processNodeValueFunc) {
