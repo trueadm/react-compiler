@@ -8,6 +8,7 @@ export const FRAGMENT = 4;
 export const CONDITIONAL = 5;
 export const TEMPLATE_FUNCTION_CALL = 6;
 export const MULTI_CONDITIONAL = 7;
+export const NON_KEYED_ARRAY = 8;
 
 export const HAS_STATIC_PROPS = 1 << 6;
 export const HAS_DYNAMIC_PROPS = 1 << 7;
@@ -124,6 +125,8 @@ export class HostComponentTemplateNode {
       } else if (child instanceof DynamicTextTemplateNode) {
         flag |= HAS_DYNAMIC_TEXT_CONTENT;
         childrenASTNode = t.numericLiteral(child.valueIndex);
+      } else if (child instanceof NonKeyedArrayTemplateNode) {
+        debugger;
       } else {
         flag |= HAS_CHILD;
         childrenASTNode = child.toAST();
@@ -132,7 +135,11 @@ export class HostComponentTemplateNode {
       flag |= HAS_CHILDREN;
       const childrenASTNodes = [];
       for (let child of this.children) {
-        childrenASTNodes.push(child.toAST());
+        if (child instanceof NonKeyedArrayTemplateNode) {
+          debugger;
+        } else {
+          childrenASTNodes.push(child.toAST());
+        }
       }
       childrenASTNode = t.arrayExpression(childrenASTNodes);
     }
@@ -228,13 +235,16 @@ export class MultiConditionalTemplateNode {
   }
 }
 
-export class NonKeyedChildrenTemplateNode {
+export class NonKeyedArrayTemplateNode {
   constructor(children) {
     this.children = children;
   }
 
   toAST() {
-    debugger;
+    return t.arrayExpression([
+      t.numericLiteral(NON_KEYED_ARRAY),
+      t.arrayExpression(this.children.map(child => child.toAST())),
+    ]);
   }
 }
 

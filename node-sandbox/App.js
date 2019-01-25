@@ -1,59 +1,44 @@
-// props:{cond: true, cond2: true, cond3: true, cond4: false, defaultClassName: "default-item", id: "dynamic-id"}
+// props:{var: "This should show up!", bar: "123", cond: true, cond2: true, defaultClassName: "default-item"}
 
 var React = require("react");
 
-function getLiBody(bodyText: string): React.Node {
-  return <span>{bodyText}</span>;
-}
-
-function getLiBody2(bodyText: string, cond: boolean): string | React.Node {
-  return cond ? <span>{bodyText}</span> : "No wrapping element!";
-}
-
-function getClassName(className: string, cond2: boolean): string | null {
-  return cond2 ? className : null;
+function foo(bar): React.Node {
+  return [<span key="1">Hello world</span>, <div key="2">{bar + ""}</div>];
 }
 
 function Component({
   cond,
   cond2,
-  cond3,
-  cond4,
   defaultClassName,
-  id
+  bar
 }: {
   cond: boolean,
   cond2: boolean,
-  cond3: boolean,
-  cond4: boolean,
   defaultClassName: string,
-  id: string
+  bar: string
 }) {
   let children = [
     <li key="default" className={defaultClassName}>
-      {getLiBody("Default item")}
+      Default item
     </li>
   ];
 
+  let elements;
+
+  if (typeof cond2 !== undefined) {
+    elements = foo(bar);
+  }
+
   if (cond) {
     children = [
-      <li
-        key="generic"
-        className={
-          cond3
-            ? getClassName("generic-item", cond2)
-            : getClassName("generic-item2", cond2)
-        }
-      >
-        {getLiBody("Generic item")}
-        {getLiBody2("Generic item", cond4)}
-        {getLiBody2("Generic item", true)}
+      <li key="generic" className={"generic-item"}>
+        {elements}
       </li>
     ];
   }
 
   return (
-    <ul id={id + "-conntected"} className={"list"}>
+    <ul id="list-view" className={"list"}>
       {children}
     </ul>
   );

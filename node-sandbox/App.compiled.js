@@ -1,37 +1,23 @@
-// props:{cond: true, cond2: true, cond3: true, cond4: false, defaultClassName: "default-item", id: "dynamic-id"}
-function getLiBody(bodyText: string): React.Node {
-  return [bodyText];
+// props:{var: "This should show up!", bar: "123", cond: true, cond2: true, defaultClassName: "default-item"}
+function foo(bar): React.Node {
+  return [bar + ""];
 }
 
-function getLiBody2(bodyText: string, cond: boolean): string | React.Node {
-  return [cond, bodyText];
-}
-
-function getClassName(className: string, cond2: boolean): string | null {
-  return cond2 ? className : null;
-}
-
-function Component_ComputeFunction(cond, cond2, cond3, cond4, defaultClassName, id) {
-  var __cached__4;
+function Component_ComputeFunction(bar, cond, cond2, defaultClassName) {
+  var __cached__1;
 
   var __cached__0;
 
-  __cached__4 = getLiBody("Default item");
-
-  if (__cached__0 = cond) {
-    var __cached__3;
-
+  if (__cached__1 = typeof cond2 !== undefined) {
     var __cached__2;
 
-    var __cached__1;
-
-    __cached__1 = getLiBody("Generic item");
-    __cached__2 = getLiBody2("Generic item", cond4);
-    __cached__3 = getLiBody2("Generic item", true);
+    __cached__2 = foo(bar);
   }
 
-  return [id + "-conntected", __cached__0, cond3 ? getClassName("generic-item", cond2) : getClassName("generic-item2", cond2), __cached__1, __cached__2, __cached__3, defaultClassName, __cached__4];
+  if (__cached__0 = cond) {}
+
+  return [__cached__0, __cached__1, __cached__2, defaultClassName];
 }
 
-var Component = [0, ["cond", "cond2", "cond3", "cond4", "defaultClassName", "id"], Component_ComputeFunction, [450, "ul", ["className", "list"], ["id", 0], [7, [1, [642, "li", ["className", 2], [[6, [2050, "span", 0], 3], [6, [5, 0, [2050, "span", 1], [4099, "No wrapping element!"]], 4], [6, [5, 0, [2050, "span", 1], [4099, "No wrapping element!"]], 5]]], null, [386, "li", ["className", 6], [6, [2050, "span", 0], 7]]]]]];
+var Component = [0, ["bar", "cond", "cond2", "defaultClassName"], Component_ComputeFunction, [322, "ul", ["id", "list-view", "className", "list"], [7, [0, [322, "li", ["className", "generic-item"], [7, [1, [6, [8, [[1026, "span", "Hello world"], [2050, "div", 0]]], 2]]]], null, [1154, "li", ["className", 3], "Default item"]]]]];
 module["exports"] = Component;

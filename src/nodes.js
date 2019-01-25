@@ -30,7 +30,7 @@ import {
   DynamicTextTemplateNode,
   DynamicValueTemplateNode,
   MultiConditionalTemplateNode,
-  NonKeyedChildrenTemplateNode,
+  NonKeyedArrayTemplateNode,
   StaticTextTemplateNode,
   TemplateFunctionCallTemplateNode,
 } from "./templates";
@@ -76,7 +76,7 @@ function compileArrayExpression(path, refPath, state, componentPath, isRoot, pro
   if (children.length === 1) {
     return children[0];
   }
-  return new NonKeyedChildrenTemplateNode(children);
+  return new NonKeyedArrayTemplateNode(children);
 }
 
 function compileCallExpression(path, refPath, state, componentPath, isRoot, processNodeValueFunc) {
