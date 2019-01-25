@@ -1,4 +1,3 @@
-const ROOT_ATTRIBUTE_NAME = "data-reactroot";
 const uppercasePattern = /([A-Z])/g;
 const msPattern = /^ms-/;
 export const reactElementSymbol = Symbol.for("react.element");
@@ -128,10 +127,6 @@ function optimizedEscapeAttributeValue(text) {
   return text.toString();
 }
 
-export function createMarkupForRoot() {
-  return ROOT_ATTRIBUTE_NAME + '=""';
-}
-
 export function hyphenateStyleName(name) {
   return name
     .replace(uppercasePattern, "-$1")
@@ -191,84 +186,28 @@ export function convertRootPropsToPropsArray(rootProps, rootPropsShape) {
   return props;
 }
 
-export function createState(props) {
-  return {
-    componentOpcodeCache: new Map(),
-    contextValueStack: new Map(),
-    currentElementTag: "",
-    currentElementTagIsOpen: false,
-    currentValue: undefined,
-    elementCloseRenderString: "",
-    elementTagStack: [],
-    elementTagStackIndex: 0,
-    fiber: null,
-    hasMarkedRootElement: false,
-    lastChildWasStyle: false,
-    lastChildWasTextNode: false,
-    props: emptyArray,
-    renderString: "",
-    rootPropsObject: props,
-    styleRenderString: "",
-  };
-}
-
-export function cloneState(state) {
-  const clonedState = createState(null);
-  clonedState.componentOpcodeCache = state.componentOpcodeCache;
-  clonedState.contextValueStack = state.contextValueStack;
-  clonedState.currentElementTag = state.currentElementTag;
-  clonedState.currentElementTagIsOpen = state.currentElementTagIsOpen;
-  clonedState.currentValue = state.currentValue;
-  clonedState.elementCloseRenderString = state.elementCloseRenderString;
-  clonedState.elementTagStack = state.elementTagStack;
-  clonedState.elementTagStackIndex = state.elementTagStackIndex;
-  clonedState.hasMarkedRootElement = state.hasMarkedRootElement;
-  clonedState.lastChildWasStyle = state.lastChildWasStyle;
-  clonedState.lastChildWasTextNode = state.lastChildWasTextNode;
-  clonedState.props = state.props;
-  clonedState.renderString = state.renderString;
-  return clonedState;
-}
-
-export function applyState(targetState, state) {
-  targetState.componentOpcodeCache = state.componentOpcodeCache;
-  targetState.contextValueStack = state.contextValueStack;
-  targetState.currentElementTag = state.currentElementTag;
-  targetState.currentElementTagIsOpen = state.currentElementTagIsOpen;
-  targetState.currentValue = state.currentValue;
-  targetState.elementCloseRenderString = state.elementCloseRenderString;
-  targetState.elementTagStack = state.elementTagStack;
-  targetState.elementTagStackIndex = state.elementTagStackIndex;
-  targetState.hasMarkedRootElement = state.hasMarkedRootElement;
-  targetState.lastChildWasStyle = state.lastChildWasStyle;
-  targetState.lastChildWasTextNode = state.lastChildWasTextNode;
-  targetState.props = state.props;
-  targetState.renderString = state.renderString;
-}
-
 export function isReactNode(node) {
   return node !== null && node.t !== undefined && node.v !== undefined;
 }
 
-export function createOpcodeFiber(hostNode, memoizedProps, values) {
-  return {
-    alternate: null,
-    child: null,
-    hostNode: null,
-    key: null,
-    memoizedProps,
-    memoizedState: null,
-    sibling: null,
-    parent: null,
-    values: values,
-  };
-}
-
-export function insertChildFiberIntoParentFiber(parent, child) {
-  child.parent = parent;
-  if (parent.child === null) {
-    parent.child = child;
-  } else {
-    // TODO
+export function callComputeFunctionWithArray(computeFunction, arr) {
+  if (arr === null) {
+    return computeFunction();
+  }
+  switch (arr.length) {
+    case 0:
+      return computeFunction();
+    case 1:
+      return computeFunction(arr[0]);
+    case 2:
+      return computeFunction(arr[0], arr[1]);
+    case 3:
+      return computeFunction(arr[0], arr[1], arr[2]);
+    case 4:
+      return computeFunction(arr[0], arr[1], arr[2], arr[3]);
+    case 7:
+      return computeFunction(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
+    default:
+      return computeFunction.apply(null, arr);
   }
 }

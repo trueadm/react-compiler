@@ -100,29 +100,28 @@
     return null;
   }
 
-  function mountDOMFromComponentTemplate(isRoot, parentDOMElement, templateTypeAndFlags, componentTemplate, fiber, runtimeValues) {
+  function mountDOMFromComponentTemplate(isRoot, parentDOMElement, templateTypeAndFlags, componentTemplate, fiber, values) {
     const templateFlags = templateTypeAndFlags & ~0x3f;
-    const isStatic = (templateFlags & IS_STATIC) !== 0;
     let hostNode;
 
-    if (isStatic === false) {
+    if ((templateFlags & IS_STATIC) === 0) {
       let componentProps = null;
       const componentPropsValueIndexOrPropsShape = componentTemplate[1];
       if (isRoot === true) {
         componentProps = convertRootPropsToPropsArray(fiber.props, componentPropsValueIndexOrPropsShape);
       } else {
-        componentProps = runtimeValues[componentPropsValueIndexOrPropsShape];
+        componentProps = values[componentPropsValueIndexOrPropsShape];
       }
       const computeFunction = componentTemplate[2];
-      const componentRuntimeValues = callComputeFunctionWithArray(computeFunction, componentProps);
-      const componentFiber = createFiber(componentTemplate, componentRuntimeValues);
+      const componentValues = callComputeFunctionWithArray(computeFunction, componentProps);
+      const componentFiber = createFiber(componentTemplate, componentValues);
       insertChildFiberIntoParentFiber(fiber, componentFiber);
       const childTemplateNode = componentTemplate[3];
-      hostNode = mountDOMFromTemplate(parentDOMElement, childTemplateNode, componentFiber, componentRuntimeValues);
+      hostNode = mountDOMFromTemplate(parentDOMElement, childTemplateNode, componentFiber, componentValues);
       componentFiber.hostNode = hostNode;
     } else {
       const childTemplateNode = componentTemplate[1];
-      hostNode = mountDOMFromTemplate(parentDOMElement, childTemplateNode, fiber, runtimeValues);
+      hostNode = mountDOMFromTemplate(parentDOMElement, childTemplateNode, fiber, values);
     }
     return hostNode;
   }
@@ -208,7 +207,7 @@
     return DOMElement;
   }
 
-  function updateDOMFromElementTemplate(templateTypeAndFlags, elementTemplate, fiber, previousRuntimeValues, nextComponentRuntimeValues) {
+  function updateDOMFromElementTemplate(templateTypeAndFlags, elementTemplate, fiber, previousValues, nextRuntimeValues) {
     const templateFlags = templateTypeAndFlags & ~0x3f;
 
     if ((templateFlags & IS_STATIC) !== 0) {
@@ -221,16 +220,16 @@
 
     if ((templateFlags & HAS_CHILD) !== 0) {
       const child = elementTemplate[childrenTemplateIndex];
-      updateDOMFromTemplate(child, fiber, previousRuntimeValues, nextComponentRuntimeValues);
+      updateDOMFromTemplate(child, fiber, previousValues, nextRuntimeValues);
     } else if ((templateFlags & HAS_CHILDREN) !== 0) {
       const children = elementTemplate[childrenTemplateIndex];
       for (let i = 0, length = children.length; i < length; ++i) {
-        updateDOMFromTemplate(children[i], fiber, previousRuntimeValues, nextComponentRuntimeValues);
+        updateDOMFromTemplate(children[i], fiber, previousValues, nextRuntimeValues);
       }
     } else if ((templateFlags & HAS_DYNAMIC_TEXT_CONTENT) !== 0) {
       const textContentValueIndex = elementTemplate[childrenTemplateIndex];
-      const previousTextContent = previousRuntimeValues[textContentValueIndex];
-      const nextTextContent = nextComponentRuntimeValues[textContentValueIndex];
+      const previousTextContent = previousValues[textContentValueIndex];
+      const nextTextContent = nextRuntimeValues[textContentValueIndex];
       if (previousTextContent !== nextTextContent) {
         // TODO
       }
@@ -431,16 +430,16 @@
       }
     } else if (input.$$typeof === reactElementSymbol) {
       const templateNode = input.type;
-      const inputProps = input.props;
+      const props = input.props;
   
       if (rootFiber === undefined) {
         rootFiber = createFiber(null, null);
         rootFiber.hostNode = DOMContainer;
-        rootFiber.props = inputProps;
+        rootFiber.props = props;
         rootFibers.set(DOMContainer, rootFiber);
         mountDOMFromTemplate(DOMContainer, templateNode, rootFiber, null);
       } else {
-        rootFiber.props = inputProps;
+        rootFiber.props = props;
         updateDOMFromTemplate(templateNode, rootFiber, null, null);
         rootFiber.childIndex = 0;
       }

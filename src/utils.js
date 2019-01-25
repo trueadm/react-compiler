@@ -412,11 +412,6 @@ export function optimizedEscapeAttributeValue(text) {
   return text.toString();
 }
 
-export function isOpcodesTemplateFromFuncCall(opcodes) {
-  // 23 is TEMPLATE_FROM_FUNC_CALL
-  return opcodes.length > 1 && t.isNumericLiteral(opcodes[0]) && opcodes[0].value === 23;
-}
-
 export function markNodeAsDCE(node) {
   if (node == null) {
     return;

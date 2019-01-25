@@ -1,12 +1,9 @@
 import { currentDispatcher } from "./index";
 import { Dispatcher, finishHooks, prepareToUseHooks } from "./ssr-dispatcher";
 import {
-  applyState,
-  cloneState,
+  callComputeFunctionWithArray,
   convertRootPropsToPropsArray,
   createMarkupForRoot,
-  createOpcodeFiber,
-  createState,
   emptyArray,
   escapeText,
   getCurrentContextValue,
@@ -18,70 +15,24 @@ import {
   reactElementSymbol,
 } from "./utils";
 
-const ReactElementNode = Symbol();
+export const ROOT_COMPONENT = 0;
+export const COMPONENT = 1;
+export const HOST_COMPONENT = 2;
+export const TEXT = 3;
+export const FRAGMENT = 4;
+export const CONDITIONAL = 5;
+export const TEMPLATE_FUNCTION_CALL = 6;
+export const MULTI_CONDITIONAL = 7;
 
-const OPEN_ELEMENT = 0;
-const OPEN_ELEMENT_WITH_POINTER = 1;
-const OPEN_ELEMENT_DIV = 2;
-const OPEN_ELEMENT_DIV_WITH_POINTER = 3;
-const OPEN_ELEMENT_SPAN = 4;
-const OPEN_ELEMENT_SPAN_WITH_POINTER = 5;
-const OPEN_VOID_ELEMENT = 6;
-const OPEN_VOID_ELEMENT_WITH_POINTER = 7;
-const CLOSE_ELEMENT = 8;
-const CLOSE_VOID_ELEMENT = 9;
-const COMPONENT = 10;
-const ROOT_STATIC_VALUE = 11;
-const ROOT_DYNAMIC_VALUE = 12;
-const CONDITIONAL_TEMPLATE = 13;
-const MULTI_CONDITIONAL = 14;
-const CONDITIONAL = 15;
-const OPEN_FRAGMENT = 16;
-const CLOSE_FRAGMENT = 17;
-const OPEN_CONTEXT_PROVIDER = 18;
-const CLOSE_CONTEXT_PROVIDER = 19;
-const CONTEXT_CONSUMER = 20;
-const OPEN_PROP_STYLE = 21;
-const CLOSE_PROP_STYLE = 22;
-const TEMPLATE_FROM_FUNC_CALL = 23;
-const REACT_NODE_TEMPLATE_FROM_FUNC_CALL = 24;
-const REF_COMPONENT = 25;
-const LOGICAL_OR = 26;
-const LOGICAL_AND = 27;
-const ELEMENT_STATIC_CHILD_VALUE = 28;
-const ELEMENT_STATIC_CHILDREN_VALUE = 29;
-const ELEMENT_DYNAMIC_CHILD_VALUE = 30;
-const ELEMENT_DYNAMIC_CHILDREN_VALUE = 31;
-const ELEMENT_DYNAMIC_CHILD_TEMPLATE_FROM_FUNC_CALL = 32;
-const ELEMENT_DYNAMIC_CHILDREN_TEMPLATE_FROM_FUNC_CALL = 33;
-const ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE = 34;
-const ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE = 35;
-const ELEMENT_DYNAMIC_CHILDREN_REACT_NODE_TEMPLATE = 36;
-const ELEMENT_DYNAMIC_FUNCTION_CHILD = 37;
-const STATIC_PROP = 38;
-const DYNAMIC_PROP = 39;
-const STATIC_PROP_CLASS_NAME = 40;
-const DYNAMIC_PROP_CLASS_NAME = 41;
-const STATIC_PROP_VALUE = 42;
-const DYNAMIC_PROP_VALUE = 43;
-const STATIC_PROP_STYLE = 44;
-const DYNAMIC_PROP_STYLE = 45;
-const STATIC_PROP_UNITLESS_STYLE = 46;
-const DYNAMIC_PROP_UNITLESS_STYLE = 47;
-const DYNAMIC_PROP_REF = 48;
-
-const PropFlagPartialTemplate = 1;
-const PropFlagReactEvent = 1 << 1; // starts with on
-// TODO support the below flags:
-// const PropFlagReserved = 1 << 2;
-// const PropFlagString = 1 << 3;
-// const PropFlagBooleanishString = 1 << 4;
-// const PropFlagBoolean = 1 << 5;
-// const PropFlagOverloadedBoolean = 1 << 6;
-// const PropFlagNumeric = 1 << 6;
-// const PropFlagPositiveNumeric = 1 << 7;
-// const PropFlagXlinkNamespace = 1 << 8;
-// const PropFlagXmlNamespace = 1 << 9;
+export const HAS_STATIC_PROPS = 1 << 6;
+export const HAS_DYNAMIC_PROPS = 1 << 7;
+export const HAS_CHILD = 1 << 8;
+export const HAS_CHILDREN = 1 << 9;
+export const HAS_STATIC_TEXT_CONTENT = 1 << 10;
+export const HAS_DYNAMIC_TEXT_CONTENT = 1 << 11;
+export const IS_STATIC = 1 << 12;
+export const IS_SVG = 1 << 13;
+export const IS_VOID = 1 << 14;
 
 function renderReactNodeToString(node, isChild, runtimeValues, state, currentFiber) {
   if (node === null || node === undefined || typeof node === "boolean") {
@@ -740,19 +691,193 @@ function renderOpcodesToString(opcodes, runtimeValues, state, currentFiber) {
   }
 }
 
-function renderNode(node) {
-  if (node === null || node === undefined) {
-    return "";
-  } else if (node.$$typeof === reactElementSymbol) {
-    const { props, type } = node;
-    // We use a constructor for better hidden-class performance
-    const state = createState(props);
-    renderOpcodesToString(type, emptyArray, state, null);
-    const currentValue = state.currentValue;
-    if (currentValue !== null && currentValue !== undefined && currentValue !== ReactElementNode) {
-      state.renderString += escapeText(currentValue);
+function renderFunctionComponentTemplateToString(
+  isRoot,
+  templateTypeAndFlags,
+  componentTemplate,
+  values,
+  isOnlyChild,
+  state,
+) {
+  const templateFlags = templateTypeAndFlags & ~0x3f;
+
+  if ((templateFlags & IS_STATIC) === 0) {
+    let componentProps = null;
+    const componentPropsValueIndexOrPropsShape = componentTemplate[1];
+    if (isRoot === true) {
+      componentProps = convertRootPropsToPropsArray(state.rootProps, componentPropsValueIndexOrPropsShape);
+    } else {
+      componentProps = values[componentPropsValueIndexOrPropsShape];
     }
-    return state.renderString;
+    const computeFunction = componentTemplate[2];
+    const componentValues = callComputeFunctionWithArray(computeFunction, componentProps);
+    const childTemplateNode = componentTemplate[3];
+    return renderTemplateToString(childTemplateNode, componentValues, isOnlyChild, state);
+  }
+  const childTemplateNode = componentTemplate[1];
+  return renderTemplateToString(childTemplateNode, values, isOnlyChild, state);
+}
+
+function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponentTemplate, values, isOnlyChild, state) {
+  const templateFlags = templateTypeAndFlags & ~0x3f;
+  const tagName = hostComponentTemplate[1];
+  let childrenTemplateIndex = 2;
+  let inner = "";
+  let styles = "";
+  let children = "";
+
+  if ((templateFlags & HAS_STATIC_PROPS) !== 0) {
+    const staticProps = hostComponentTemplate[childrenTemplateIndex++];
+
+    for (let i = 0, length = staticProps.length; i < length; i += 2) {
+      let propName = staticProps[i];
+      const staticPropValue = staticProps[i + 1];
+
+      if (staticPropValue !== null && staticPropValue !== undefined) {
+        if (propName === "className") {
+          propName = "class";
+        } else if (propName === "style") {
+          // TODO
+          continue;
+        }
+        inner += ` ${propName}="${staticPropValue}"`;
+      }
+    }
+  }
+  if ((templateFlags & HAS_DYNAMIC_PROPS) !== 0) {
+    const dynamicProps = hostComponentTemplate[childrenTemplateIndex++];
+
+    for (let i = 0, length = dynamicProps.length; i < length; i += 2) {
+      let propName = dynamicProps[i];
+      const dynamicPropValueIndex = dynamicProps[i + 1];
+      const dynamicPropValue = values[dynamicPropValueIndex];
+
+      if (dynamicPropValue !== null && dynamicPropValue !== undefined) {
+        if (propName === "className") {
+          propName = "class";
+        } else if (propName === "style") {
+          // TODO
+          continue;
+        }
+        inner += ` ${propName}="${dynamicPropValue}"`;
+      }
+    }
+  }
+  if (state.hasCreatedMarkupForRoot === false) {
+    state.hasCreatedMarkupForRoot = true;
+    inner += ' data-reactroot=""';
+  }
+  state.lastChildWasText = false;
+  if ((templateFlags & IS_VOID) !== 0) {
+    return `<${tagName}${styles}${inner}/>`;
+  }
+
+  if ((templateFlags & HAS_DYNAMIC_TEXT_CONTENT) !== 0) {
+    const textContentValueIndex = hostComponentTemplate[childrenTemplateIndex];
+    children = escapeText(values[textContentValueIndex]);
+  } else if ((templateFlags & HAS_STATIC_TEXT_CONTENT) !== 0) {
+    children = hostComponentTemplate[childrenTemplateIndex];
+  } else if ((templateFlags & HAS_CHILD) !== 0) {
+    const child = hostComponentTemplate[childrenTemplateIndex];
+    children += renderTemplateToString(child, values, true, state);
+  } else if ((templateFlags & HAS_CHILDREN) !== 0) {
+    const childrenTemplateNodes = hostComponentTemplate[childrenTemplateIndex];
+    for (let i = 0, length = childrenTemplateNodes.length; i < length; ++i) {
+      children += renderTemplateToString(childrenTemplateNodes[i], values, false, state);
+    }
+  }
+  return `<${tagName}${styles}${inner}>${children}</${tagName}>`;
+}
+
+function renderTextTemplateToString(templateTypeAndFlags, textTemplate, values, isOnlyChild, state) {
+  const templateFlags = templateTypeAndFlags & ~0x3f;
+  const isStatic = (templateFlags & IS_STATIC) !== 0;
+  const text = isStatic === true ? textTemplate[1] : escapeText(values[textTemplate[1]]);
+  const lastChildWasText = state.lastChildWasText;
+
+  if (isOnlyChild === false) {
+    state.lastChildWasText = true;
+    if (lastChildWasText === true) {
+      return `<!-- -->${text}`;
+    }
+  }
+  return text;
+}
+
+function renderMultiConditionalTemplateToString(multiConditionalTemplate, values, isOnlyChild, state) {
+  const conditions = multiConditionalTemplate[1];
+
+  for (let i = 0, length = conditions.length; i < length; i += 2) {
+    const conditionValueIndexOrNull = conditions[i];
+
+    if (conditionValueIndexOrNull === null) {
+      const conditionTemplateNode = conditions[i + 1];
+      return renderTemplateToString(conditionTemplateNode, values, isOnlyChild, state);
+    }
+    const conditionValue = values[conditionValueIndexOrNull];
+
+    if (conditionValue) {
+      const conditionTemplateNode = conditions[i + 1];
+      return renderTemplateToString(conditionTemplateNode, values, isOnlyChild, state);
+    }
+  }
+}
+
+function renderTemplateToString(templateNode, values, isOnlyChild, state) {
+  const templateTypeAndFlags = templateNode[0];
+  const templateType = templateTypeAndFlags & 0x3f;
+
+  switch (templateType) {
+    case ROOT_COMPONENT:
+      return renderFunctionComponentTemplateToString(
+        true,
+        templateTypeAndFlags,
+        templateNode,
+        values,
+        isOnlyChild,
+        state,
+      );
+    case COMPONENT:
+      return renderFunctionComponentTemplateToString(
+        false,
+        templateTypeAndFlags,
+        templateNode,
+        values,
+        isOnlyChild,
+        state,
+      );
+    case HOST_COMPONENT:
+      return renderHostComponentTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
+    case TEXT:
+      return renderTextTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
+    case FRAGMENT:
+      // return mountDOMFromFragmentTemplate(parentDOMElement, templateNode, fiber, runtimeValues);
+      return null;
+    case CONDITIONAL:
+      // return mountDOMFromConditionalTemplate(parentDOMElement, templateNode, fiber, runtimeValues);
+      return null;
+    case MULTI_CONDITIONAL:
+      return renderMultiConditionalTemplateToString(templateNode, values, isOnlyChild, state);
+    default:
+      throw new Error("Should never happen");
+  }
+}
+
+function createState(rootProps) {
+  return {
+    hasCreatedMarkupForRoot: false,
+    lastChildWasText: false,
+    rootProps,
+  };
+}
+
+function renderNode(input) {
+  if (input === null || input === undefined) {
+    return "";
+  } else if (input.$$typeof === reactElementSymbol) {
+    const templateNode = input.type;
+    const state = createState(input.props);
+    return renderTemplateToString(templateNode, null, true, state);
   } else {
     throw new Error("renderToString() expects a ReactElement as the only argument");
   }

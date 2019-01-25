@@ -79,6 +79,9 @@ function recursivelyGetReferenceFromConstantIdentifier(path, state, visitedBindi
     const bindingPath = binding.path;
     const bindingNode = bindingPath.node;
 
+    if (bindingNode === null) {
+      return path;
+    }
     if (t.isObjectPattern(bindingNode)) {
       const propertiesPath = bindingPath.get("properties");
       for (let i = 0; i < bindingNode.properties.length; i++) {

@@ -18,7 +18,7 @@ module.exports = function(api) {
 
   // Default
   return {
-    include: [/node_modules/, /scripts/],
+    include: [/node_modules/, /scripts/, /src/],
     ignore: [],
     presets: [
       [

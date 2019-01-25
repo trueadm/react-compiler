@@ -2,7 +2,7 @@ import fs from "fs";
 import { parse } from "@babel/parser";
 import traverse from "@babel/traverse";
 import generate from "@babel/generator";
-import { createOpcodesForReactFunctionComponent } from "./react/functions";
+import { compileReactFunctionComponent } from "./react/components";
 import { removePath } from "./utils";
 import { makeClosureCompilerAdvancedFriendly, replaceReactImportsWithCompilerRuntime } from "./transforms";
 import { validateFunctionComponentUsesDestructuredProps, validateReactElementsHaveAllBeenCompiled } from "./validation";
@@ -66,7 +66,7 @@ function checkIfIdHasFlag(id, path, compilerContext, moduleFilePath) {
       validateFunctionComponentUsesDestructuredProps(path);
       const moduleState = compilerContext.modules.get(moduleFilePath).state;
       moduleState.needsCompiling();
-      createOpcodesForReactFunctionComponent(path, moduleState);
+      compileReactFunctionComponent(path, moduleState);
       makeClosureCompilerAdvancedFriendly(path);
     }
   }
@@ -112,9 +112,6 @@ function createModuleState(moduleFilePath, compilerContext) {
       compilerContext.modules.get(moduleFilePath).needsCompiling = true;
     },
     propTemplateOpcodeCache: new Map(),
-    reconciler: {
-      valueIndex: 1,
-    },
     resolveModuleBindingSync: compilerContext.resolveModuleBindingSync,
     runtimeCachedValues: null,
     runtimeConditionals: null,

@@ -4,7 +4,6 @@ import { getBindingPathRef, getReferenceFromExpression } from "./references";
 import {
   getAllPathsFromMutatedBinding,
   getCachedRuntimeValue,
-  getComponentName,
   getPathConditions,
   getRuntimeValueIndex,
   isCommonJsLikeRequireCall,
@@ -21,71 +20,72 @@ import {
   updateCommonJSLikeRequireCallPathToCompiledPath,
   updateImportSyntaxPathToCompiledPath,
 } from "./utils";
-import {
-  createOpcodesForJSXElement,
-  createOpcodesForJSXFragment,
-  createOpcodesForReactCreateElement,
-} from "./react/elements";
+import { compileJSXElement, createOpcodesForJSXFragment, compileReactCreateElement } from "./react/elements";
 import invariant from "./invariant";
-import { createOpcodesForReactComputeFunction } from "./react/functions";
+import { compileReactComputeFunction } from "./react/functions";
 import { validateArgumentsDoNotContainTemplateNodes } from "./validation";
 import * as t from "@babel/types";
+import {
+  DynamicTextTemplateNode,
+  DynamicValueTemplateNode,
+  MultiConditionalTemplateNode,
+  NonKeyedChildrenTemplateNode,
+  RootDynamicValueTemplateNode,
+  RootStaticValueTemplateNode,
+  StaticTextTemplateNode,
+  TemplateFunctionCallTemplateNode,
+} from "./templates";
 
-export function createOpcodesForMutatedBinding(childPath, opcodes, state, componentPath, callback) {
+export function compileMutatedBinding(childPath, state, componentPath, isRoot) {
   const { paths, binding } = getAllPathsFromMutatedBinding(childPath, state);
   if (paths.length === 0) {
     return null;
   }
-  pushOpcode(opcodes, "MULTI_CONDITIONAL");
-  pushOpcodeValue(opcodes, paths.length + 1, "MULTI_CONDITIONAL_SIZE");
-  const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
-  pushOpcodeValue(opcodes, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
-  const reconcilerValueIndexForCase = state.reconciler.valueIndex++;
-  pushOpcodeValue(opcodes, reconcilerValueIndexForCase, "CASE_VALUE_POINTER_INDEX");
+  const templateNode = new MultiConditionalTemplateNode();
   // Given that mutliple conditions might evalaute to true, we reverse the conditions.
   // This means the last condition we hit the evaluates to true is the one we use. The default
   // should always be the last case, so we add that on after all the paths are dealt with.
   paths.reverse();
   for (let { pathConditions, path } of paths) {
     const joinedPathConditionsNode = joinPathConditions(pathConditions, state);
-    const conditionalValuePointer = getRuntimeValueIndex(joinedPathConditionsNode, state);
-    pushOpcodeValue(opcodes, conditionalValuePointer);
-    const pathOpcodes = [];
-    callback(path, pathOpcodes);
-    pushOpcodeValue(opcodes, normalizeOpcodes(pathOpcodes));
+    const valueIndex = getRuntimeValueIndex(joinedPathConditionsNode, state);
+    const conditionTemplateNode = compileNode(path, path, state, componentPath, isRoot, null);
+    templateNode.conditions.push({ isDefault: false, valueIndex, conditionTemplateNode });
   }
   const node = binding.path.node;
   if (t.isVariableDeclarator(node)) {
     if (node.init !== null) {
       const elsePath = binding.path.get("init");
-      const pathOpcodes = [];
-      callback(elsePath, pathOpcodes);
-      pushOpcodeValue(opcodes, normalizeOpcodes(pathOpcodes));
-    } else {
-      pushOpcodeValue(opcodes, t.numericLiteral(0));
+      const conditionTemplateNode = compileNode(elsePath, elsePath, state, componentPath, isRoot, null);
+      templateNode.conditions.push({ isDefault: true, valueIndex: null, conditionTemplateNode });
     }
   } else {
     // TODO
     throw new Error("TODO");
   }
+  return templateNode;
 }
 
-function createOpcodesForArrayExpression(path, refPath, opcodes, state, componentPath, isRoot, processNodeValueFunc) {
+function compileArrayExpression(path, refPath, state, componentPath, isRoot, processNodeValueFunc) {
+  const children = [];
   const elementsPath = refPath.get("elements");
   if (elementsPath.length > 0) {
     for (let elementPath of elementsPath) {
-      createOpcodesForNode(elementPath, elementPath, opcodes, state, componentPath, false, processNodeValueFunc);
+      children.push(compileNode(elementPath, elementPath, state, componentPath, false, processNodeValueFunc));
     }
   }
+  if (children.length === 1) {
+    return children[0];
+  }
+  return new NonKeyedChildrenTemplateNode(children);
 }
 
-function createOpcodesForCallExpression(path, refPath, opcodes, state, componentPath, isRoot, processNodeValueFunc) {
+function compileCallExpression(path, refPath, state, componentPath, isRoot, processNodeValueFunc) {
   if (isReactCreateElement(path, state)) {
-    createOpcodesForReactCreateElement(refPath, opcodes, state, componentPath);
-    return;
+    return compileReactCreateElement(refPath, state, componentPath);
   }
   if (isFbCxCall(path, state)) {
-    return;
+    return null;
   }
   // Check if any of the nodes passed as arguments contain template nodes
   validateArgumentsDoNotContainTemplateNodes(path, refPath, state);
@@ -95,16 +95,14 @@ function createOpcodesForCallExpression(path, refPath, opcodes, state, component
     moveOutCallExpressionFromTemplate(path, refPath, state);
   }
   if (assertType(path, getTypeAnnotationForExpression(refPath, state), true, state, "REACT_NODE")) {
-    createOpcodesForCallExpressionReturningTemplateNodes(
+    return compileCallExpressionReturningTemplateNodes(
       path,
       refPath,
-      opcodes,
       state,
       componentPath,
       isRoot,
       processNodeValueFunc,
     );
-    return;
   }
   const pathConditions = getPathConditions(componentPath, refPath, state);
   let node = refPath.node;
@@ -114,16 +112,15 @@ function createOpcodesForCallExpression(path, refPath, opcodes, state, component
   // TODO check if the condtion is used more than once?
   const runtimeValuePointer = getRuntimeValueIndex(node, state);
   if (isRoot) {
-    pushOpcode(opcodes, "ROOT_DYNAMIC_VALUE", runtimeValuePointer);
+    return new RootDynamicValueTemplateNode(runtimeValuePointer);
   } else {
-    pushOpcodeValue(opcodes, runtimeValuePointer);
+    return new DynamicValueTemplateNode(runtimeValuePointer);
   }
 }
 
-function createOpcodesForCallExpressionReturningTemplateNodes(
+function compileCallExpressionReturningTemplateNodes(
   childPath,
   childRefPath,
-  opcodes,
   state,
   componentPath,
   isRoot,
@@ -131,22 +128,16 @@ function createOpcodesForCallExpressionReturningTemplateNodes(
 ) {
   const calleePath = getReferenceFromExpression(childRefPath.get("callee"), state);
   if (t.isIdentifier(calleePath.node) || t.isMemberExpression(calleePath.node)) {
+    debugger;
     const cachedNode = getCachedRuntimeValue(childRefPath.node, state);
     const runtimeValuePointer = getRuntimeValueIndex(cachedNode, state);
     pushOpcode(opcodes, "REACT_NODE_TEMPLATE_FROM_FUNC_CALL", runtimeValuePointer);
     return;
   }
-  const name = getComponentName(calleePath);
-  const { isStatic, cachedOpcodes, templateOpcodes } = createOpcodesForReactComputeFunction(
-    calleePath,
-    state,
-    false,
-    null,
-    processNodeValueFunc,
-  );
+  const { isStatic, templateNode } = compileReactComputeFunction(calleePath, state, false, null, processNodeValueFunc);
 
   if (isStatic) {
-    opcodes.push(...templateOpcodes);
+    return templateNode;
   } else {
     if (state.externalPathRefs.has(calleePath)) {
       const pathRef = state.externalPathRefs.get(calleePath);
@@ -163,26 +154,10 @@ function createOpcodesForCallExpressionReturningTemplateNodes(
       const moduleState = calleePath.moduleState;
       moduleState.needsCompiling();
     }
-    pushOpcode(opcodes, "TEMPLATE_FROM_FUNC_CALL");
-    let cachedOpcodesNode;
-
-    if (cachedOpcodes === null) {
-      const opcodesArray = normalizeOpcodes(templateOpcodes);
-      opcodesArray.leadingComments = [{ type: "BlockComment", value: ` ${name} OPCODES` }];
-      const computeFunctionCache = state.computeFunctionCache;
-      cachedOpcodesNode = t.identifier("__opcodes__" + (computeFunctionCache.size - 1));
-      computeFunctionCache.get(calleePath.node).cachedOpcodes = {
-        node: cachedOpcodesNode,
-        opcodesArray,
-      };
-    } else {
-      cachedOpcodesNode = cachedOpcodes.node;
-    }
-    pushOpcodeValue(opcodes, cachedOpcodesNode, "OPCODES");
     const childNode = childRefPath.node;
     const node = getCachedRuntimeValue(childNode, state);
-    const runtimeValuePointer = getRuntimeValueIndex(node, state);
-    pushOpcodeValue(opcodes, runtimeValuePointer, "COMPUTE_VALUES");
+    const computeFunctionValueIndex = getRuntimeValueIndex(node, state);
+    return new TemplateFunctionCallTemplateNode(templateNode, computeFunctionValueIndex);
   }
 }
 
@@ -237,21 +212,21 @@ export function createOpcodesForLogicalExpressionTemplate(path, opcodes, state, 
   pushOpcodeValue(opcodes, normalizeOpcodes(rightOpcodes), "LOGICAL_RIGHT");
 }
 
-function createOpcodesForString(string, opcodes, isRoot, processNodeValueFunc) {
+function compileString(string, isRoot, processNodeValueFunc) {
   if (processNodeValueFunc !== null) {
     string = processNodeValueFunc(string);
   }
   if (string === null) {
-    return;
+    return null;
   }
   if (isRoot) {
     throw new Error("TODO");
   } else {
-    pushOpcodeValue(opcodes, string);
+    return new StaticTextTemplateNode(string);
   }
 }
 
-export function createOpcodesForNode(path, refPath, opcodes, state, componentPath, isRoot, processNodeValueFunc) {
+export function compileNode(path, refPath, state, componentPath, isRoot, processNodeValueFunc) {
   let node = refPath.node;
 
   if (t.isArrowFunctionExpression(node) || t.isFunctionExpression(node)) {
@@ -263,18 +238,18 @@ export function createOpcodesForNode(path, refPath, opcodes, state, componentPat
       node = getCachedRuntimeValue(node, state);
     }
     // TODO check if the condtion is used more than once?
-    const runtimeValuePointer = getRuntimeValueIndex(node, state);
-    pushOpcodeValue(opcodes, runtimeValuePointer);
+    const valueIndex = getRuntimeValueIndex(node, state);
+    return new DynamicValueTemplateNode(valueIndex);
   } else if (t.isArrayExpression(node)) {
-    createOpcodesForArrayExpression(path, refPath, opcodes, state, componentPath, isRoot, processNodeValueFunc);
+    return compileArrayExpression(path, refPath, state, componentPath, isRoot, processNodeValueFunc);
   } else if (t.isCallExpression(node)) {
-    createOpcodesForCallExpression(path, refPath, opcodes, state, componentPath, isRoot, processNodeValueFunc);
+    return compileCallExpression(path, refPath, state, componentPath, isRoot, processNodeValueFunc);
   } else if (t.isJSXElement(node)) {
-    createOpcodesForJSXElement(refPath, opcodes, state, componentPath);
+    return compileJSXElement(refPath, state, componentPath);
   } else if (t.isJSXFragment(node)) {
     createOpcodesForJSXFragment(refPath.get("children"), opcodes, state, componentPath);
   } else if (typeof node === "string") {
-    createOpcodesForString(node, opcodes, isRoot, processNodeValueFunc);
+    return compileString(node, isRoot, processNodeValueFunc);
   } else if (t.isJSXText(node) || isPrimitive(node)) {
     const parentNode = refPath.parentPath.node;
     // This string isn't constant
@@ -286,23 +261,22 @@ export function createOpcodesForNode(path, refPath, opcodes, state, componentPat
       const binding = getBindingPathRef(path, bindingName, state);
       const runtimeValuePointer = getRuntimeValueIndex(binding.identifier, state);
       if (isRoot) {
-        pushOpcode(opcodes, "ROOT_DYNAMIC_VALUE", runtimeValuePointer);
+        return new RootDynamicValueTemplateNode(runtimeValuePointer);
       } else {
-        pushOpcodeValue(opcodes, runtimeValuePointer);
+        return new DynamicTextTemplateNode(runtimeValuePointer);
       }
       return;
     }
     if (t.isNullLiteral(node)) {
       if (isRoot) {
-        pushOpcode(opcodes, "ROOT_STATIC_VALUE", t.nullLiteral());
+        return new RootStaticValueTemplateNode(null);
       } else {
         if (processNodeValueFunc !== null) {
-          pushOpcodeValue(opcodes, processNodeValueFunc(node));
+          return new StaticTextTemplateNode(processNodeValueFunc(node));
         } else {
-          pushOpcodeValue(opcodes, node);
+          return new StaticTextTemplateNode(node.value);
         }
       }
-      return;
     }
     let text = node.value;
     if (processNodeValueFunc !== null) {
@@ -310,11 +284,12 @@ export function createOpcodesForNode(path, refPath, opcodes, state, componentPat
     }
     if (text !== null) {
       if (isRoot) {
-        pushOpcode(opcodes, "ROOT_STATIC_VALUE", text);
+        return new RootStaticValueTemplateNode(text);
       } else {
-        pushOpcodeValue(opcodes, text);
+        return new StaticTextTemplateNode(text);
       }
     }
+    return null;
   } else if (t.isConditionalExpression(node) && pathContainsReactElement(refPath, state)) {
     createOpcodesForConditionalExpressionTemplate(refPath, opcodes, state, (conditionalPath, conditionalOpcodes) => {
       createOpcodesForNode(
@@ -358,14 +333,14 @@ export function createOpcodesForNode(path, refPath, opcodes, state, componentPat
     t.isObjectExpression(node)
   ) {
     if (t.isIdentifier(node) && node.name === "undefined") {
-      pushOpcodeValue(opcodes, t.identifier("undefined"));
-      return;
+      throw new Error("Should we really be doing this?");
+      return null;
     }
     const runtimeValuePointer = getRuntimeValueIndex(node, state);
     if (isRoot) {
-      pushOpcode(opcodes, "ROOT_DYNAMIC_VALUE", runtimeValuePointer);
+      return new RootDynamicValueTemplateNode(runtimeValuePointer);
     } else {
-      pushOpcodeValue(opcodes, runtimeValuePointer);
+      return new DynamicValueTemplateNode(runtimeValuePointer);
     }
   } else if (t.isFunctionDeclaration(node)) {
     const cachedNode = getCachedRuntimeValue(node, state);
@@ -386,9 +361,16 @@ export function createOpcodesForNode(path, refPath, opcodes, state, componentPat
     } else {
       for (let i = 0; i < node.quasis.length; i++) {
         const quasi = node.quasis[i];
+        const templateNodes = [];
 
         if (t.isTemplateElement(quasi)) {
-          createOpcodesForString(quasi.value.raw, opcodes, false, processNodeValueFunc);
+          templateNodes.push(compileString(quasi.value.raw, false, processNodeValueFunc));
+        } else {
+          throw new Error("TODO");
+        }
+
+        if (templateNodes.length === 1) {
+          return templateNodes[0];
         } else {
           throw new Error("TODO");
         }
@@ -402,16 +384,10 @@ export function createOpcodesForNode(path, refPath, opcodes, state, componentPat
     const rightExpression = getReferenceFromExpression(rightPath, state);
     // If they are primitive, concat them together
     if (isPrimitive(leftExpression.node) && isPrimitive(rightExpression.node)) {
-      createOpcodesForString(
-        leftExpression.node.value + rightExpression.node.value,
-        opcodes,
-        isRoot,
-        processNodeValueFunc,
-      );
-      return;
+      return compileString(leftExpression.node.value + rightExpression.node.value, isRoot, processNodeValueFunc);
     }
     const runtimeValuePointer = getRuntimeValueIndex(node, state);
-    pushOpcodeValue(opcodes, runtimeValuePointer);
+    return new DynamicValueTemplateNode(runtimeValuePointer);
   } else {
     throw new Error("TODO: found Babel node type that hasn't beed added to createOpcodesForNode");
   }

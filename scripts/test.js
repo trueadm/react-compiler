@@ -308,7 +308,7 @@ async function runTest(file, originalSource, compiledSource, minifySources) {
     console.error(
       ` ${chalk.red(
         "✖",
-      )}  ${file}\n\nReceived:\n\n${compiledComponentOutput}\n\nExpected:\n\n${originalComponentOutput}\n\nComponent Opcodes:\n\n${JSON.stringify(
+      )}  ${file}\n\nReceived:\n\n${compiledComponentOutput}\n\nExpected:\n\n${originalComponentOutput}\n\nComponent Template:\n\n${JSON.stringify(
         compiledComponent,
       )}`,
     );
@@ -444,7 +444,7 @@ async function runModuleTest(indexModulePath, minifyModules) {
     console.error(
       ` ${chalk.red(
         "✖",
-      )}  ${moduleTestName}\n\nReceived:\n\n${compiledComponentOutput}\n\nExpected:\n\n${originalComponentOutput}\n\nComponent Opcodes:\n\n${JSON.stringify(
+      )}  ${moduleTestName}\n\nReceived:\n\n${compiledComponentOutput}\n\nExpected:\n\n${originalComponentOutput}\n\nComponent Template:\n\n${JSON.stringify(
         compiledComponent,
       )}`,
     );

@@ -1,29 +1,11 @@
-import { pushOpcode, pushOpcodeValue } from "../opcodes";
-import { getBindingPathRef, getReferenceFromExpression } from "../references";
-import {
-  emptyObject,
-  getComponentName,
-  getShapeOfPropsObject,
-  isPrimitive,
-  isReactHook,
-  isRootPathConditional,
-  markNodeAsUsed,
-  normalizeOpcodes,
-} from "../utils";
-import { getTypeAnnotationForExpression } from "../annotations";
+import { getReferenceFromExpression } from "../references";
+import { emptyObject, getComponentName, isPrimitive, isRootPathConditional, normalizeOpcodes } from "../utils";
 import { applyCachedRuntimeValues } from "../transforms";
-import { createOpcodesForNode } from "../nodes";
+import { compileNode } from "../nodes";
 import invariant from "../invariant";
 import * as t from "@babel/types";
 
-function createOpcodesForTemplateBranch(
-  templateBranch,
-  templateBranchIndex,
-  state,
-  componentPath,
-  processNodeValueFunc,
-) {
-  const opcodes = [];
+function compileTemplateBranch(templateBranch, templateBranchIndex, state, componentPath, processNodeValueFunc) {
   const runtimeValues = new Map();
   if (templateBranchIndex !== null) {
     runtimeValues.set(t.numericLiteral(templateBranchIndex), {
@@ -37,10 +19,9 @@ function createOpcodesForTemplateBranch(
   const path = isExplicitReturn ? templateBranch.path.get("argument") : templateBranch.path;
   const refPath = getReferenceFromExpression(path, state);
   const originalPathNode = path.node;
-
-  createOpcodesForNode(path, refPath, opcodes, childState, componentPath, true, processNodeValueFunc);
-
+  const templateNode = compileNode(path, refPath, childState, componentPath, true, processNodeValueFunc);
   const isStatic = runtimeValues.size === 0 && templateBranch.isConditional === false;
+  templateNode.isStatic = isStatic;
   // replace branch with values array
   const runtimeValuesArray = [];
   for (let [runtimeValue, { index }] of runtimeValues) {
@@ -63,28 +44,13 @@ function createOpcodesForTemplateBranch(
       throw new Error("TODO");
     }
   }
-  return [opcodes, isStatic];
+  return templateNode;
 }
 
-function createOpcodesForTemplateBranches(
-  templateBranches,
-  opcodes,
-  computeFunction,
-  state,
-  functionPath,
-  processNodeValueFunc,
-) {
+function compileTemplateBranches(templateBranches, computeFunction, state, functionPath, processNodeValueFunc) {
   if (templateBranches.length === 1) {
     const templateBranch = templateBranches[0];
-    const [opcodesForTemplateBranch, isBranchStatic] = createOpcodesForTemplateBranch(
-      templateBranch,
-      null,
-      state,
-      functionPath,
-      processNodeValueFunc,
-    );
-    opcodes.push(...opcodesForTemplateBranch);
-    return isBranchStatic;
+    return compileTemplateBranch(templateBranch, null, state, functionPath, processNodeValueFunc);
   } else {
     // Check how many non primitive roots we have
     const nonPrimitiveRoots = templateBranches.filter(branch => !branch.isPrimitive);
@@ -139,7 +105,7 @@ function createOpcodesForTemplateBranches(
   }
 }
 
-export function createOpcodesForReactComputeFunction(
+export function compileReactComputeFunction(
   functionPath,
   state,
   isComponentFunction,
@@ -197,132 +163,35 @@ export function createOpcodesForReactComputeFunction(
       runtimeConditionals,
     },
   };
-  const templateOpcodes = [];
-  const isStatic = createOpcodesForTemplateBranches(
+  const templateNode = compileTemplateBranches(
     templateBranches,
-    templateOpcodes,
     computeFunction,
     childState,
     functionPath,
     processNodeValueFunc,
   );
+  const isStatic = templateNode.isStatic;
 
-  let computeFunctionOpcodes = null;
+  let computeFunctionRef = null;
   if (isComponentFunction) {
-    computeFunctionOpcodes = [];
-    if (isStatic) {
-      pushOpcodeValue(computeFunctionOpcodes, t.numericLiteral(0), "COMPUTE_FUNCTION");
-    } else {
-      pushOpcodeValue(computeFunctionOpcodes, t.identifier(getComponentName(functionPath)), "COMPUTE_FUNCTION");
+    if (!isStatic) {
+      computeFunctionRef = getComponentName(functionPath);
     }
   }
 
   state.computeFunctionCache.set(computeFunction, {
-    cachedOpcodes: null,
-    computeFunctionOpcodes,
+    computeFunctionRef,
     isStatic,
-    templateOpcodes,
+    templateNode,
   });
 
   applyCachedRuntimeValues(functionPath, runtimeCachedValues);
 
   return {
-    cachedOpcodes: null,
-    computeFunctionOpcodes,
+    computeFunctionRef,
     isStatic,
-    templateOpcodes,
+    templateNode,
   };
-}
-
-function getDefaultPropsObjectExpressionPath(binding, state) {
-  if (binding !== undefined) {
-    for (let referencePath of binding.referencePaths) {
-      let parentPath = referencePath.parentPath;
-
-      if (
-        t.isMemberExpression(parentPath.node) &&
-        t.isIdentifier(parentPath.node.property) &&
-        parentPath.node.property.name === "defaultProps"
-      ) {
-        parentPath = parentPath.parentPath;
-        if (t.isAssignmentExpression(parentPath.node)) {
-          const rightPath = parentPath.get("right");
-          const rightPathRef = getReferenceFromExpression(rightPath, state);
-          if (t.isObjectExpression(rightPathRef.node)) {
-            return rightPathRef;
-          }
-        }
-      }
-    }
-  } else {
-    throw new Error("TODO");
-  }
-  return null;
-}
-
-export function createOpcodesForReactFunctionComponent(componentPath, state) {
-  const computeFunction = componentPath.node;
-  const name = getComponentName(componentPath);
-  const functionKind = componentPath.scope.getBinding(name).kind;
-  const binding = getBindingPathRef(componentPath, name, state);
-  const shapeOfPropsObject = getShapeOfPropsObject(componentPath, state);
-  const typeAnnotation = getTypeAnnotationForExpression(componentPath, state, false);
-  const defaultProps = getDefaultPropsObjectExpressionPath(binding, state);
-  const result = {
-    componentPath,
-    computeFunction,
-    defaultProps,
-    functionKind,
-    isStatic: false,
-    shapeOfPropsObject,
-    typeAnnotation,
-  };
-  state.compiledComponentCache.set(name, result);
-  const opcodes = [];
-
-  pushOpcode(opcodes, "COMPONENT");
-  pushOpcodeValue(opcodes, doesFunctionComponentUseHooks(componentPath, state) ? 1 : 0, "USES_HOOKS");
-
-  const { computeFunctionOpcodes, isStatic, templateOpcodes } = createOpcodesForReactComputeFunction(
-    componentPath,
-    state,
-    true,
-    null,
-    null,
-  );
-  result.isStatic = isStatic;
-
-  if (state.isRootComponent) {
-    if (shapeOfPropsObject !== null) {
-      pushOpcodeValue(
-        opcodes,
-        t.arrayExpression(shapeOfPropsObject.map(a => t.stringLiteral(a.value))),
-        "ROOT_PROPS_SHAPE",
-      );
-    } else {
-      pushOpcodeValue(opcodes, t.numericLiteral(0), "ROOT_PROPS_SHAPE");
-    }
-  }
-  opcodes.push(...computeFunctionOpcodes);
-  pushOpcodeValue(opcodes, t.arrayExpression(templateOpcodes));
-
-  const opcodesArray = normalizeOpcodes(opcodes);
-  opcodesArray.leadingComments = [{ type: "BlockComment", value: ` ${name} OPCODES` }];
-
-  insertComputFunctionCachedOpcodes(componentPath, state);
-
-  // Re-write function props as arguments
-  rewriteArgumentsForComputeFunction(computeFunction, shapeOfPropsObject);
-  // Re-write the function as a compute function with opcodes emitted
-  convertFunctionComponentToComputeFunctionAndEmitOpcodes(
-    componentPath,
-    computeFunction,
-    isStatic,
-    name,
-    opcodesArray,
-    state.isRootComponent,
-  );
-  return result;
 }
 
 function insertComputFunctionCachedOpcodes(componentPath, state) {
@@ -354,110 +223,6 @@ function updateComputeFunctionName(functionPath) {
     const parentPath = functionPath.parentPath;
     if (t.isVariableDeclarator(parentPath.node) && t.isIdentifier(parentPath.node.id)) {
       parentPath.node.id.name = `${name}_ComputeFunction`;
-    } else {
-      invariant(false, "TODO");
-    }
-  }
-}
-
-function rewriteArgumentsForComputeFunction(computeFunction, shapeOfPropsObject) {
-  const params = computeFunction.params;
-
-  if (params.length > 0 && t.isObjectPattern(params[0])) {
-    computeFunction.params = shapeOfPropsObject.map(a => t.identifier(a.value));
-  }
-}
-
-function doesFunctionComponentUseHooks(componentPath, state) {
-  let usesHooks = false;
-  componentPath.traverse({
-    CallExpression(path) {
-      if (isReactHook(path, state)) {
-        markNodeAsUsed(path.node);
-        usesHooks = true;
-      }
-    },
-  });
-  return usesHooks;
-}
-
-function convertFunctionComponentToComputeFunctionAndEmitOpcodes(
-  componentPath,
-  computeFunction,
-  isStatic,
-  name,
-  opcodesArray,
-  isRootComponent,
-) {
-  if (t.isFunctionDeclaration(computeFunction)) {
-    const identifier = t.identifier(name);
-    markNodeAsUsed(identifier);
-    if (isRootComponent) {
-      if (isStatic) {
-        componentPath.replaceWith(t.variableDeclaration("var", [t.variableDeclarator(identifier, opcodesArray)]));
-      } else {
-        const opcodesArrayDeclaration = t.variableDeclaration("var", [t.variableDeclarator(identifier, opcodesArray)]);
-        if (
-          t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
-          t.isExportNamedDeclaration(componentPath.parentPath.node)
-        ) {
-          const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
-            ? t.exportDefaultDeclaration(opcodesArrayDeclaration)
-            : t.exportNamedDeclaration(opcodesArrayDeclaration, []);
-          componentPath.parentPath.replaceWithMultiple([computeFunction, exportNode]);
-        } else {
-          componentPath.replaceWithMultiple([computeFunction, opcodesArrayDeclaration]);
-        }
-      }
-    } else {
-      const arrayWrapperFunction = t.functionDeclaration(
-        identifier,
-        [],
-        t.blockStatement([t.returnStatement(opcodesArray)]),
-      );
-      if (isStatic) {
-        componentPath.replaceWith(arrayWrapperFunction);
-      } else {
-        if (
-          t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
-          t.isExportNamedDeclaration(componentPath.parentPath.node)
-        ) {
-          const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
-            ? t.exportDefaultDeclaration(arrayWrapperFunction)
-            : t.exportNamedDeclaration(arrayWrapperFunction, []);
-          componentPath.parentPath.replaceWithMultiple([computeFunction, exportNode]);
-        } else {
-          componentPath.replaceWithMultiple([computeFunction, arrayWrapperFunction]);
-        }
-      }
-    }
-  } else {
-    const parentPath = componentPath.parentPath;
-
-    if (t.isVariableDeclarator(parentPath.node) && t.isIdentifier(parentPath.node.id)) {
-      markNodeAsUsed(parentPath.node.id);
-      const identifier = t.identifier(name);
-      markNodeAsUsed(identifier);
-
-      if (isRootComponent) {
-        if (isStatic) {
-          parentPath.node.id.name = name;
-          componentPath.replaceWith(opcodesArray);
-        } else {
-          parentPath.replaceWithMultiple([parentPath.node, t.variableDeclarator(identifier, opcodesArray)]);
-        }
-      } else {
-        const arrayWrapperFunction = t.variableDeclarator(
-          identifier,
-          t.functionExpression(null, [], t.blockStatement([t.returnStatement(opcodesArray)])),
-        );
-        if (isStatic) {
-          parentPath.node.id.name = name;
-          componentPath.replaceWith(arrayWrapperFunction);
-        } else {
-          parentPath.replaceWithMultiple([parentPath.node, arrayWrapperFunction]);
-        }
-      }
     } else {
       invariant(false, "TODO");
     }
