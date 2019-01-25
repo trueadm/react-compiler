@@ -823,6 +823,24 @@ function renderMultiConditionalTemplateToString(multiConditionalTemplate, values
   }
 }
 
+function renderConditionalTemplateToString(conditionalTemplate, values, isOnlyChild, state) {
+  const conditionalValueIndex = conditionalTemplate[1];
+  const conditionalValue = values[conditionalValueIndex];
+
+  if (conditionalValue) {
+    const consequentTemplate = conditionalTemplate[2];
+    if (consequentTemplate !== null) {
+      return renderTemplateToString(consequentTemplate, values, isOnlyChild, state);
+    }
+  } else {
+    const alternateTemplate = conditionalTemplate[3];
+    if (alternateTemplate !== null) {
+      return renderTemplateToString(alternateTemplate, values, isOnlyChild, state);
+    }
+  }
+  return "";
+}
+
 function renderTemplateFunctionCallTemplateToString(templateFunctionCallTemplate, values, isOnlyChild, state) {
   const functionCallTemplateNode = templateFunctionCallTemplate[1];
   const functionCallValuesIndex = templateFunctionCallTemplate[2];
@@ -861,8 +879,7 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
       // return mountDOMFromFragmentTemplate(parentDOMElement, templateNode, fiber, runtimeValues);
       return null;
     case CONDITIONAL:
-      // return mountDOMFromConditionalTemplate(parentDOMElement, templateNode, fiber, runtimeValues);
-      return null;
+      return renderConditionalTemplateToString(templateNode, values, isOnlyChild, state);
     case TEMPLATE_FUNCTION_CALL:
       return renderTemplateFunctionCallTemplateToString(templateNode, values, isOnlyChild, state);
     case MULTI_CONDITIONAL:

@@ -12,7 +12,7 @@
       "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/babel-node",
       "args": [
         "--mode=ssr",
-        "basic5.js"
+        "basic9.js"
       ]
     },
     {
