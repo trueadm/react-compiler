@@ -51,6 +51,9 @@
       if (staticProps !== undefined) {
         setInitialElementProps(staticProps, DOMElement);
       }
+      if (currentFiber.hostNode === null) {
+        currentFiber.hostNode = DOMElement;
+      }
       const parentDOMElement = currentDOMElement;
       if (textContentOrValueIndex !== undefined) {
         if (typeof textContentOrValueIndex === "string") {
@@ -145,7 +148,7 @@
     }
   }
 
-  let roots = new Map();
+  let rootFibers = new Map();
 
   function renderTemplateFunctionWith(template, phase, fiber, DOMElement, nextValues) {
     const _Phase = currentPhase;
@@ -164,10 +167,14 @@
   }
 
   function renderNodeToRootContainer(node, DOMContainer) {
-    let rootFiber = roots.get(DOMContainer);
+    let rootFiber = rootFibers.get(DOMContainer);
   
     if (node === null || node === undefined) {
-      
+      if (rootFiber !== undefined) {
+        const childFiber = rootFiber.children[0];
+        removeChild(DOMContainer, childFiber.hostNode);
+        rootFibers.delete(DOMContainer);
+      }
     } else if (node.$$typeof === reactElementSymbol) {
       const type = node.type;
       const props = node.props;
@@ -177,7 +184,7 @@
         if (rootFiber === undefined) {
           rootFiber = createFiber();
           rootFiber.props = props;
-          roots.set(DOMContainer, rootFiber);
+          rootFibers.set(DOMContainer, rootFiber);
         }
         renderTemplateFunctionWith(rootTemplateFunction, CREATION_PHASE, rootFiber, DOMContainer, null);
       }
@@ -189,6 +196,7 @@
   function createFiber() {
     return {
       children: null,
+      hostNode: null,
       parent: null,
       props: null,
       values: null,
@@ -230,6 +238,10 @@
 
   function appendChild(parent, element) {
     parent.appendChild(element);
+  }
+
+  function removeChild(parent, child) {
+    parent.removeChild(child);
   }
 
   function createElement(tagName) {
@@ -436,7 +448,7 @@
       close();
       openElement('tr', arr29);
       close();
-    close();
+    // close();
   }
 
   function Story_ComputeFunction(rank, story) {
