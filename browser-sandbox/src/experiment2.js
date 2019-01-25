@@ -387,8 +387,8 @@
       staticPropStyle('background-color', '#222');
       openElement('table');
         staticProp('width', '100%');
-        staticProp('cellPadding', 0);
-        staticProp('cellSpacing', 0);
+        staticProp('cellpadding', 0);
+        staticProp('cellspacing', 0);
         staticPropStyle('padding', '4px');
         openElement('tbody');
           openElement('tr');
@@ -1805,7 +1805,7 @@
 
   setTimeout(() => {
     const start = performance.now();
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 10; i++) {
       renderBenchmark()
     }
     const end = performance.now() - start;

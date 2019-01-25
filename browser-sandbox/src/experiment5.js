@@ -149,7 +149,7 @@
     componentFiber.childIndex = 0;
   }
 
-  function setInitialElementPropsFromTemplate(props, DOMElement, fiber, runtimeValues) {
+  function setInitialElementPropsFromTemplate(props, DOMElement) {
     const propsLength = props.length;
 
     for (let i = 0; i < propsLength; i += 2) {
@@ -181,7 +181,7 @@
 
     if ((templateFlags & HAS_STATIC_PROPS) !== 0) {
       childrenTemplateIndex = 3;
-      setInitialElementPropsFromTemplate(elementTemplate[2], DOMElement, fiber, runtimeValues);
+      setInitialElementPropsFromTemplate(elementTemplate[2], DOMElement);
     }
 
     if ((templateFlags & HAS_CHILD) !== 0) {
@@ -505,58 +505,59 @@
                 "width", "100%",
                 "style", ["padding", "4px"],
               ],
-                [ELEMENT | IS_STATIC | HAS_CHILDREN, "tbody", [
-                  [ELEMENT | IS_STATIC | HAS_STATIC_PROPS | HAS_CHILD, "td", [
-                    "width", 4,
-                    "style", ["width", "18px", "padding-right", "4px"],
-                  ],
-                    [ELEMENT | HAS_CHILD | HAS_STATIC_PROPS | IS_STATIC, "a", [
-                      "href", "#",
+                [ELEMENT | IS_STATIC | HAS_CHILD, "tbody",
+                  [ELEMENT | IS_STATIC | HAS_CHILDREN, "tr", [
+                    [ELEMENT | IS_STATIC | HAS_STATIC_PROPS | HAS_CHILD, "td", [
+                      "style", ["width", "18px", "padding-right", "4px"],
                     ],
-                      [ELEMENT | HAS_STATIC_PROPS | IS_STATIC, "img", [
-                        "src", "logo.png",
-                        "width", 16,
-                        "height", 16,
-                        "style", ["border", "1px solid #00d8ff"],
+                      [ELEMENT | HAS_CHILD | HAS_STATIC_PROPS | IS_STATIC, "a", [
+                        "href", "#",
+                      ],
+                        [ELEMENT | HAS_STATIC_PROPS | IS_STATIC, "img", [
+                          "src", "logo.png",
+                          "width", 16,
+                          "height", 16,
+                          "style", ["border", "1px solid #00d8ff"],
+                        ]]
+                      ]
+                    ],
+                    [ELEMENT | IS_STATIC | HAS_STATIC_PROPS | HAS_CHILD, "td", [
+                      "height", 10,
+                      "style", ["line-height", "12pt"],
+                    ],
+                      [ELEMENT | IS_STATIC | HAS_CHILDREN | HAS_STATIC_PROPS, "span", [
+                        "className", "pagetop"
+                      ], [
+                        [ELEMENT | IS_STATIC | HAS_STATIC_TEXT_CONTENT | HAS_STATIC_PROPS, "b", [
+                          "className", "hnname",
+                        ], "React HN Benchmark"],
+                        [ELEMENT | HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
+                          "href", "#",
+                        ], "new"],
+                        [TEXT | IS_STATIC, " | "],
+                        [ELEMENT | HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
+                          "href", "#",
+                        ], "comments"],
+                        [TEXT | IS_STATIC, " | "],
+                        [ELEMENT | HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
+                          "href", "#",
+                        ], "show"],
+                        [TEXT | IS_STATIC, " | "],
+                        [ELEMENT | HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
+                          "href", "#",
+                        ], "ask"],
+                        [TEXT | IS_STATIC, " | "],
+                        [ELEMENT | HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
+                          "href", "#",
+                        ], "jobs"],
+                        [TEXT | IS_STATIC, " | "],
+                        [ELEMENT | HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
+                          "href", "#",
+                        ], "submit"],
                       ]]
-                    ]
-                  ],
-                  [ELEMENT | IS_STATIC | HAS_STATIC_PROPS | HAS_CHILD, "td", [
-                    "height", 10,
-                    "style", ["line-height", "12pt"],
-                  ],
-                    [ELEMENT | IS_STATIC | HAS_CHILDREN | HAS_STATIC_PROPS, "span", [
-                      "className", "pagetop"
-                    ], [
-                      [ELEMENT | IS_STATIC | HAS_STATIC_TEXT_CONTENT | HAS_STATIC_PROPS, "b", [
-                        "className", "hnname",
-                      ], "React HN Benchmark"],
-                      [ELEMENT | HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
-                        "href", "#",
-                      ], "new"],
-                      [TEXT | IS_STATIC, " | "],
-                      [ELEMENT | HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
-                        "href", "#",
-                      ], "comments"],
-                      [TEXT | IS_STATIC, " | "],
-                      [ELEMENT | HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
-                        "href", "#",
-                      ], "show"],
-                      [TEXT | IS_STATIC, " | "],
-                      [ELEMENT | HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
-                        "href", "#",
-                      ], "ask"],
-                      [TEXT | IS_STATIC, " | "],
-                      [ELEMENT | HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
-                        "href", "#",
-                      ], "jobs"],
-                      [TEXT | IS_STATIC, " | "],
-                      [ELEMENT | HAS_STATIC_TEXT_CONTENT | IS_STATIC | HAS_STATIC_PROPS, "a", [
-                        "href", "#",
-                      ], "submit"],
-                    ]]
-                  ],
-                ]]
+                    ],
+                  ]]
+                ]
               ]
             ]
           ],
@@ -1871,7 +1872,7 @@
   
   setTimeout(() => {
     const start = performance.now();
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 10; i++) {
       renderBenchmark()
     }
     const end = performance.now() - start;
