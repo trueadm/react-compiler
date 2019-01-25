@@ -3,6 +3,8 @@
 
   const _ = void 0;
   const isArray = Array.isArray;
+
+  
   const reactElementSymbol = Symbol.for("react.element");
   const CREATION_PHASE = 0;
   const UPDATE_PHASE = 1;
@@ -17,9 +19,9 @@
   let currentLastValues = null;
   let currentNextValues = null;
 
-  function openFragment() {
-    // pushElement([]);
-  }
+  const ReactCurrentRenderer = {
+    current: null,
+  };
 
   function setInitialElementProps(props, DOMElement) {
     const propsLength = props.length;
@@ -45,37 +47,137 @@
     }
   }
 
-  function openElement(tagName, staticProps, textContentOrValueIndex) {
-    if (currentPhase === CREATION_PHASE) {
-      const DOMElement = createElement(tagName);
-      if (staticProps !== undefined) {
-        setInitialElementProps(staticProps, DOMElement);
-      }
-      if (currentFiber.hostNode === null) {
-        currentFiber.hostNode = DOMElement;
-      }
-      const parentDOMElement = currentDOMElement;
-      if (textContentOrValueIndex !== undefined) {
-        if (typeof textContentOrValueIndex === "string") {
-          DOMElement.textContent = textContentOrValueIndex;
+  const DOMRenderer = {
+    openFragment() {
+      // pushElement([]);
+    },
+    openElement(tagName, staticProps, textContentOrValueIndex) {
+      if (currentPhase === CREATION_PHASE) {
+        const DOMElement = createElement(tagName);
+        if (staticProps !== undefined) {
+          setInitialElementProps(staticProps, DOMElement);
+        }
+        if (currentFiber.hostNode === null) {
+          currentFiber.hostNode = DOMElement;
+        }
+        const parentDOMElement = currentDOMElement;
+        if (textContentOrValueIndex !== undefined) {
+          if (typeof textContentOrValueIndex === "string") {
+            DOMElement.textContent = textContentOrValueIndex;
+          } else {
+            DOMElement.textContent = currentNextValues[textContentOrValueIndex];
+          }
         } else {
-          DOMElement.textContent = currentNextValues[textContentOrValueIndex];
+          currentDOMElement = DOMElement;
+        }
+        appendChild(parentDOMElement, DOMElement);
+      } else {
+        if (textContentOrValueIndex !== undefined) {
+          if (typeof textContentOrValueIndex !== "string") {
+            const lastTextContent = currentLastValues[textContentOrValueIndex];
+            const nextTextContent = currentNextValues[textContentOrValueIndex];
+
+            if (lastTextContent !== nextTextContent) {
+              // TODO
+            }
+          }
+        }
+      }
+    },
+    staticText(text) {
+      if (currentPhase === CREATION_PHASE) {
+        const DOMTextNode = createTextNode(text);
+        appendChild(currentDOMElement, DOMTextNode);
+      }
+    },
+    close() {
+      if (currentPhase === CREATION_PHASE) {
+        currentDOMElement = currentDOMElement.parentNode;
+      }
+    },
+    conditional(conditionalValueIndex, consequentTemplateFunction, alternateTemplateFunction) {
+      if (currentPhase === CREATION_PHASE) {
+        const conditionValue = currentNextValues[conditionalValueIndex];
+  
+        if (conditionValue) {
+          if (consequentTemplateFunction !== undefined) {
+            consequentTemplateFunction();
+          }
+        } else {
+          if (alternateTemplateFunction !== undefined) {
+            alternateTemplateFunction();
+          }
+        }
+      }
+    },
+    arrayMap(arrayValueIndex, arrayMapComputeFunctionValueIndex, arrayMapTemplateFunction) {
+      const nextArray = currentNextValues[arrayValueIndex];
+      const nextArrayMapComputeFunction = currentNextValues[arrayMapComputeFunctionValueIndex];
+      const nextArrayLength = nextArray.length;
+  
+      if (currentPhase === CREATION_PHASE) {
+        const arrayMapFiber = createFiber();
+        insertChildFiberIntoParentFiber(currentFiber, arrayMapFiber);
+  
+        for (let i = 0; i < nextArrayLength; ++i) {
+          const element = nextArray[i];
+          const elementValues = nextArrayMapComputeFunction(element, i, nextArray);
+          const elementFiber = createFiber();
+          insertChildFiberIntoParentFiber(arrayMapFiber, elementFiber);
+          elementFiber.values = elementValues;
+          renderTemplateFunctionWith(arrayMapTemplateFunction, CREATION_PHASE, elementFiber, currentDOMElement, _, elementValues);
         }
       } else {
-        currentDOMElement = DOMElement;
+        const arrayMapFiber = currentFiber.children[currentFiber.childIndex++];
+        const arrayMapFiberChildren = arrayMapFiber.children;
+
+        for (let i = 0; i < nextArrayLength; ++i) {
+          const element = nextArray[i];
+          const nextElementValues = nextArrayMapComputeFunction(element, i, nextArray);
+          const elementFiber = arrayMapFiberChildren[i];
+          const lastElementValues = elementFiber.values;
+          elementFiber.values = nextElementValues;
+          renderTemplateFunctionWith(arrayMapTemplateFunction, UPDATE_PHASE, elementFiber, currentDOMElement, lastElementValues, nextElementValues);
+          elementFiber.childIndex = 0;
+        }
       }
-      appendChild(parentDOMElement, DOMElement);
-    }
-  }
-
-  function staticText(text) {
-    const DOMTextNode = createTextNode(text);
-    appendChild(currentDOMElement, DOMTextNode);
-  }
-
-  function close() {
-    if (currentPhase === CREATION_PHASE) {
-      currentDOMElement = currentDOMElement.parentNode;
+    },
+    component(flags, templateFunction, computeFunction, propsOrPropsIndex) {
+      if (currentPhase === CREATION_PHASE) {
+        if ((flags & STATIC_COMPONENT) === 0) {
+          let componentProps = null;
+  
+          if ((flags & ROOT_COMPONENT) !== 0) {
+            componentProps = convertRootPropsToPropsArray(currentFiber.props, propsOrPropsIndex);
+          } else {
+            componentProps = currentNextValues[propsOrPropsIndex];
+          }
+          const componentFiber = createFiber();
+          insertChildFiberIntoParentFiber(currentFiber, componentFiber);
+          const componentValues = callComputeFunctionWithArray(computeFunction, componentProps);
+          componentFiber.values = componentValues;
+          renderTemplateFunctionWith(templateFunction, CREATION_PHASE, componentFiber, currentDOMElement, _, componentValues);
+        } else {
+          renderTemplateFunctionWith(templateFunction, CREATION_PHASE, currentFiber, currentDOMElement, _, currentNextValues);
+        }
+      } else if (currentPhase === UPDATE_PHASE) {
+        if ((flags & STATIC_COMPONENT) !== 0) {
+          return;
+        }
+        let componentProps = null;
+  
+        if ((flags & ROOT_COMPONENT) !== 0) {
+          componentProps = convertRootPropsToPropsArray(currentFiber.props, propsOrPropsIndex);
+        } else {
+          componentProps = currentNextValues[propsOrPropsIndex];
+        }
+        const componentFiber = currentFiber.children[currentFiber.childIndex++];
+        const lastComponentValues = componentFiber.values;
+        const nextComponentValues = callComputeFunctionWithArray(computeFunction, componentProps);
+        componentFiber.values = nextComponentValues;
+        renderTemplateFunctionWith(templateFunction, UPDATE_PHASE, componentFiber, currentDOMElement, lastComponentValues, nextComponentValues);
+        componentFiber.childIndex = 0;
+      }
     }
   }
 
@@ -88,81 +190,24 @@
     children.push(child);
   }
 
-  function conditional(conditionalValueIndex, consequentTemplateFunction, alternateTemplateFunction) {
-    if (currentPhase === CREATION_PHASE) {
-      const conditionValue = currentNextValues[conditionalValueIndex];
-
-      if (conditionValue) {
-        if (consequentTemplateFunction !== undefined) {
-          consequentTemplateFunction();
-        }
-      } else {
-        if (alternateTemplateFunction !== undefined) {
-          alternateTemplateFunction();
-        }
-      }
-    }
-  }
-
-  function arrayMap(arrayValueIndex, arrayMapComputeFunctionValueIndex, arrayMapTemplateFunction) {
-    const nextArray = currentNextValues[arrayValueIndex];
-    const nextArrayMapComputeFunction = currentNextValues[arrayMapComputeFunctionValueIndex];
-    const nextArrayLength = nextArray.length;
-
-    if (currentPhase === CREATION_PHASE) {
-      const arrayMapFiber = createFiber();
-      insertChildFiberIntoParentFiber(currentFiber, arrayMapFiber);
-
-      for (let i = 0; i < nextArrayLength; ++i) {
-        const element = nextArray[i];
-        const elementValues = nextArrayMapComputeFunction(element, i, nextArray);
-        const elementFiber = createFiber();
-        insertChildFiberIntoParentFiber(arrayMapFiber, elementFiber);
-        elementFiber.values = elementValues;
-        renderTemplateFunctionWith(arrayMapTemplateFunction, CREATION_PHASE, currentFiber, currentDOMElement, elementValues);
-      }
-    } else {
-
-    }
-
-  }
-
-  function component(flags, templateFunction, computeFunction, propsOrPropsIndex) {
-    if (currentPhase === CREATION_PHASE) {
-      if ((flags & STATIC_COMPONENT) === 0) {
-        let componentProps = null;
-
-        if ((flags & ROOT_COMPONENT) !== 0) {
-          componentProps = convertRootPropsToPropsArray(currentFiber.props, propsOrPropsIndex);
-        } else {
-          componentProps = currentNextValues[propsOrPropsIndex];
-        }
-        const componentFiber = createFiber();
-        insertChildFiberIntoParentFiber(currentFiber, componentFiber);
-        const componentValues = callComputeFunctionWithArray(computeFunction, componentProps);
-        componentFiber.values = componentValues;
-        renderTemplateFunctionWith(templateFunction, CREATION_PHASE, componentFiber, currentDOMElement, componentValues);
-      } else {
-        renderTemplateFunctionWith(templateFunction, CREATION_PHASE, currentFiber, currentDOMElement, currentNextValues);
-      }
-    }
-  }
-
   let rootFibers = new Map();
 
-  function renderTemplateFunctionWith(template, phase, fiber, DOMElement, nextValues) {
+  function renderTemplateFunctionWith(template, phase, fiber, DOMElement, lastValues, nextValues) {
     const _Phase = currentPhase;
     const _Fiber = currentFiber;
     const _DOMElement = DOMElement;
+    const _lastValues = lastValues;
     const _nextValues = nextValues;
     currentPhase = phase;
     currentFiber = fiber;
     currentDOMElement = DOMElement;
+    currentLastValues = lastValues;
     currentNextValues = nextValues;
     template();
     currentPhase = _Phase;
     currentFiber = _Fiber;
     currentDOMElement = _DOMElement;
+    currentLastValues = _lastValues;
     currentNextValues = _nextValues;
   }
 
@@ -185,8 +230,12 @@
           rootFiber = createFiber();
           rootFiber.props = props;
           rootFibers.set(DOMContainer, rootFiber);
+          renderTemplateFunctionWith(rootTemplateFunction, CREATION_PHASE, rootFiber, DOMContainer, _, _);
+        } else {
+          rootFiber.props = props;
+          renderTemplateFunctionWith(rootTemplateFunction, UPDATE_PHASE, rootFiber, DOMContainer, _, _);
+          rootFiber.childIndex = 0;
         }
-        renderTemplateFunctionWith(rootTemplateFunction, CREATION_PHASE, rootFiber, DOMContainer, null);
       }
     } else {
       throw new Error("render() expects a ReactElement as the first argument");
@@ -195,6 +244,7 @@
 
   function createFiber() {
     return {
+      childIndex: 0,
       children: null,
       hostNode: null,
       parent: null,
@@ -257,7 +307,38 @@
   }
 
   function render(node, DOMContainer) {
+    const previousRenderer = ReactCurrentRenderer.current;
+    ReactCurrentRenderer.current = DOMRenderer;
     renderNodeToRootContainer(node, DOMContainer);
+    ReactCurrentRenderer.current = previousRenderer;
+  }
+
+  function openElement(a, b, c) {
+    ReactCurrentRenderer.current.openElement(a, b, c);
+  }
+
+  function openFragment() {
+    ReactCurrentRenderer.current.openFragment();
+  }
+
+  function close(a, b, c) {
+    ReactCurrentRenderer.current.close();
+  }
+
+  function staticText(a) {
+    ReactCurrentRenderer.current.staticText(a);
+  }
+
+  function arrayMap(a, b, c) {
+    ReactCurrentRenderer.current.arrayMap(a, b, c);
+  }
+
+  function conditional(a, b, c) {
+    ReactCurrentRenderer.current.conditional(a, b, c);
+  }
+
+  function component(a, b, c, d) {
+    ReactCurrentRenderer.current.component(a, b, c, d);
   }
 
   function timeAge(time) {

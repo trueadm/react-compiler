@@ -46,8 +46,8 @@
 
   function createFiber(templateNode, values) {
     return {
-      children: null,
       childIndex: 0,
+      children: null,
       key: null,
       parent: null,
       props: null,
@@ -184,15 +184,7 @@
       setInitialElementPropsFromTemplate(elementTemplate[2], DOMElement);
     }
 
-    if ((templateFlags & HAS_CHILD) !== 0) {
-      const child = elementTemplate[childrenTemplateIndex];
-      mountDOMFromTemplate(DOMElement, child, fiber, runtimeValues);
-    } else if ((templateFlags & HAS_CHILDREN) !== 0) {
-      const children = elementTemplate[childrenTemplateIndex];
-      for (let i = 0, length = children.length; i < length; ++i) {
-        mountDOMFromTemplate(DOMElement, children[i], fiber, runtimeValues);
-      }
-    } else if ((templateFlags & HAS_DYNAMIC_TEXT_CONTENT) !== 0) {
+    if ((templateFlags & HAS_DYNAMIC_TEXT_CONTENT) !== 0) {
       const textContentValueIndex = elementTemplate[childrenTemplateIndex];
       DOMElement.textContent = runtimeValues[textContentValueIndex];
     } else if ((templateFlags & HAS_STATIC_TEXT_CONTENT) !== 0) {
@@ -202,6 +194,16 @@
 
     if (parentDOMElement !== null) {
       appendChild(parentDOMElement, DOMElement);
+    }
+
+    if ((templateFlags & HAS_CHILD) !== 0) {
+      const child = elementTemplate[childrenTemplateIndex];
+      mountDOMFromTemplate(DOMElement, child, fiber, runtimeValues);
+    } else if ((templateFlags & HAS_CHILDREN) !== 0) {
+      const children = elementTemplate[childrenTemplateIndex];
+      for (let i = 0, length = children.length; i < length; ++i) {
+        mountDOMFromTemplate(DOMElement, children[i], fiber, runtimeValues);
+      }
     }
     return DOMElement;
   }
