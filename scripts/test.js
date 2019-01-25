@@ -12,6 +12,7 @@ import { compiler as ClosureCompiler } from "google-closure-compiler";
 import path from "path";
 import { JSDOM } from "jsdom";
 import { createContext, createReactNode, useState } from "./compiler-runtime/index";
+import { parse } from "simple-html-dom-parser";
 
 process.env.NODE_ENV = "production";
 
@@ -260,6 +261,62 @@ async function minifyTestSource(src, compilation_level) {
   return { output: minifiedSrc, size: getBytes(minifiedSrc) };
 }
 
+function assertNode(a, b) {
+  if (a.type === b.type) {
+    if (a.type === "document") {
+      if (a.children.length !== b.children.length) {
+        return false;
+      }
+      for (let i = 0; i < a.children.length; i++) {
+        const assertion = assertNode(a.children[i], b.children[i]);
+        if (!assertion) {
+          return false;
+        }
+      }
+    } else if (a.type === "tag") {
+      if (a.attr !== null) {
+        if (b.attr !== null) {
+          for (let key in a.attr) {
+            if (a.attr[key] !== b.attr[key]) {
+              return false;
+            }
+          }
+        } else {
+          return false;
+        }
+      } else if (b.attr !== null) {
+        return false;
+      }
+      if (a.children.length !== b.children.length) {
+        return false;
+      }
+      for (let i = 0; i < a.children.length; i++) {
+        const assertion = assertNode(a.children[i], b.children[i]);
+        if (!assertion) {
+          return false;
+        }
+      }
+    } else if (a.type === "text") {
+      if (a.data !== b.data) {
+        return false;
+      }
+    } else if (a.type === "comment") {
+      if (a.data !== b.data) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+
+function assertDOMStructureEquals(a, b) {
+  const aNode = parse(a);
+  const bNode = parse(b);
+
+  return assertNode(aNode, bNode);
+}
+
 async function runTest(file, originalSource, compiledSource, minifySources) {
   const props = await evaluatePropsFromSourceComments(originalSource);
   let originalComponent;
@@ -304,7 +361,7 @@ async function runTest(file, originalSource, compiledSource, minifySources) {
     ));
   }
 
-  if (originalComponentOutput !== compiledComponentOutput) {
+  if (!assertDOMStructureEquals(originalComponentOutput, compiledComponentOutput)) {
     console.error(
       ` ${chalk.red(
         "✖",

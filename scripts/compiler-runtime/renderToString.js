@@ -823,6 +823,13 @@ function renderMultiConditionalTemplateToString(multiConditionalTemplate, values
   }
 }
 
+function renderTemplateFunctionCallTemplateToString(templateFunctionCallTemplate, values, isOnlyChild, state) {
+  const functionCallTemplateNode = templateFunctionCallTemplate[1];
+  const functionCallValuesIndex = templateFunctionCallTemplate[2];
+  const functionCallValues = values[functionCallValuesIndex];
+  return renderTemplateToString(functionCallTemplateNode, functionCallValues, isOnlyChild, state);
+}
+
 function renderTemplateToString(templateNode, values, isOnlyChild, state) {
   const templateTypeAndFlags = templateNode[0];
   const templateType = templateTypeAndFlags & 0x3f;
@@ -856,6 +863,8 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
     case CONDITIONAL:
       // return mountDOMFromConditionalTemplate(parentDOMElement, templateNode, fiber, runtimeValues);
       return null;
+    case TEMPLATE_FUNCTION_CALL:
+      return renderTemplateFunctionCallTemplateToString(templateNode, values, isOnlyChild, state);
     case MULTI_CONDITIONAL:
       return renderMultiConditionalTemplateToString(templateNode, values, isOnlyChild, state);
     default:

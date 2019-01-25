@@ -48,6 +48,7 @@
     "react": "^16.7.0-alpha.0",
     "react-compiler-runtime": "file:scripts/compiler-runtime",
     "react-dom": "^16.7.0-alpha.0",
+    "simple-html-dom-parser": "^1.1.2",
     "tmp": "^0.0.33"
   }
 }

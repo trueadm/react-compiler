@@ -1970,6 +1970,11 @@ html-encoding-sniffer@^1.0.2:
   dependencies:
     whatwg-encoding "^1.0.1"
 
+html-parser@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/html-parser/-/html-parser-0.9.0.tgz#66bd8ec254a72cb2c5f93da77a68fe64ca096c3f"
+  integrity sha1-Zr2OwlSnLLLF+T2nemj+ZMoJbD8=
+
 http-signature@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/http-signature/-/http-signature-1.2.0.tgz#9aecd925114772f3d95b65a60abb8f7c18fbace1"
@@ -3227,6 +3232,13 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
   integrity sha1-tf3AjxKH6hF4Yo5BXiUTK3NkbG0=
+
+simple-html-dom-parser@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/simple-html-dom-parser/-/simple-html-dom-parser-1.1.2.tgz#ee465119e20c6cf1f0c86e8ded498c65934cd4fb"
+  integrity sha1-7kZRGeIMbPHwyG6N7UmMZZNM1Ps=
+  dependencies:
+    html-parser "^0.9.0"
 
 slash@^2.0.0:
   version "2.0.0"
