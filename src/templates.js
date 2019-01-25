@@ -19,6 +19,19 @@ export const IS_STATIC = 1 << 12;
 export const IS_SVG = 1 << 13;
 export const IS_VOID = 1 << 14;
 
+function valueToBabelNode(value) {
+  if (typeof value === "boolean") {
+    return t.booleanLiteral(value);
+  } else if (typeof value === "number") {
+    return t.numericLiteral(value);
+  } else if (typeof value === "string") {
+    return t.stringLiteral(value);
+  } else if (value === null) {
+    return t.nullLiteral();
+  }
+  throw new Error("TODO");
+}
+
 export class ComponentTemplateNode {
   constructor(
     componentPath,
@@ -90,7 +103,7 @@ export class HostComponentTemplateNode {
       flag |= HAS_STATIC_PROPS;
       const staticPropASTNodes = [];
       for (let [propName, propValue] of this.staticProps) {
-        staticPropASTNodes.push(t.stringLiteral(propName), t.stringLiteral(propValue));
+        staticPropASTNodes.push(t.stringLiteral(propName), valueToBabelNode(propValue));
       }
       staticPropsASTNode = t.arrayExpression(staticPropASTNodes);
     }
@@ -160,19 +173,9 @@ export class DynamicTextTemplateNode {
   }
 }
 
-export class RootStaticValueTemplateNode {
+export class StaticValueTemplateNode {
   constructor(value) {
     this.value = value;
-  }
-
-  toAST() {
-    debugger;
-  }
-}
-
-export class RootDynamicValueTemplateNode {
-  constructor(valueIndex) {
-    this.valueIndex = valueIndex;
   }
 
   toAST() {
@@ -232,5 +235,22 @@ export class NonKeyedChildrenTemplateNode {
 
   toAST() {
     debugger;
+  }
+}
+
+export class ConditionalTemplateNode {
+  constructor(valueIndex, alternateTemplateNode, consequentTemplateNode) {
+    this.valueIndex = valueIndex;
+    this.alternateTemplateNode = alternateTemplateNode;
+    this.consequentTemplateNode = consequentTemplateNode;
+  }
+
+  toAST() {
+    return t.arrayExpression([
+      t.numericLiteral(CONDITIONAL),
+      t.numericLiteral(this.valueIndex),
+      this.alternateTemplateNode.toAST(),
+      this.consequentTemplateNode.toAST(),
+    ]);
   }
 }
