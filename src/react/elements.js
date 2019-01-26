@@ -1069,6 +1069,9 @@ function compileCompositeComponent(path, componentName, attributesPath, children
     // We can remove the component entirely and just inline the template into the existing tree
     return templateNode;
   }
+  if (externalModuleState !== undefined) {
+    // Create REF
+  }
   // Check if compontent was from an external module, if so, we need to REF it like we did before
   // otherwise we just inline the logic
 
