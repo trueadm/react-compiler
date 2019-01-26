@@ -49,7 +49,8 @@ import {
   compileNode,
 } from "../nodes";
 import { dangerousStyleValue, hyphenateStyleName } from "./style";
-import { createOpcodesForReactFunctionComponent, createOpcodesForReactComputeFunction } from "./functions";
+import { compileReactFunctionComponent } from "./components";
+import { createOpcodesForReactComputeFunction } from "./functions";
 import { getPropInformation, isUnitlessNumber, transformStaticOpcodes } from "./prop-information";
 import { validateArgumentsDoNotContainTemplateNodes, validateParamsDoNotConflictOuterScope } from "../validation";
 import invariant from "../invariant";
@@ -118,25 +119,6 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
   markNodeAsDCE(valuePath.node);
   const valueRefPath = getReferenceFromExpression(valuePath, state);
   const typeAnnotation = getTypeAnnotationForExpression(valueRefPath, state);
-
-  if (
-    t.isIdentifier(valueRefPath.node) &&
-    !isIdentifierReferenceConstant(valueRefPath, state)
-    // assertType(valueRefPath, typeAnnotation, true, state, "REACT_NODE") // we need to do this
-  ) {
-    createOpcodesForMutatedBinding(valueRefPath, opcodes, state, componentPath, (path, pathOpcodes) => {
-      createOpcodesForReactElementHostNodePropValue(
-        hostNodeId,
-        tagName,
-        path,
-        propNameStr,
-        pathOpcodes,
-        state,
-        componentPath,
-      );
-    });
-    return;
-  }
 
   if (propNameStr === "style") {
     if (t.isObjectExpression(valueRefPath.node)) {
@@ -1033,18 +1015,10 @@ function createPropsArrayForCompositeComponent(
   };
 }
 
-function createOpcodesForCompositeComponent(
-  path,
-  componentName,
-  attributesPath,
-  childrenPath,
-  opcodes,
-  state,
-  componentPath,
-) {
+function compileCompositeComponent(path, componentName, attributesPath, childrenPath, state, componentPath) {
   const binding = getBindingPathRef(path, componentName, state);
   const compiledComponentCache = state.compiledComponentCache;
-  let result;
+  let componentTemplateNode;
   let externalModuleState;
 
   // Change the require call to be that of the compiled
@@ -1064,7 +1038,8 @@ function createOpcodesForCompositeComponent(
     externalModuleState.isRootComponent = false;
   }
   if (compiledComponentCache.has(componentName)) {
-    result = compiledComponentCache.get(componentName);
+    // TODO re-add this logic
+    // componentTemplateNode = compiledComponentCache.get(componentName);
   } else {
     if (binding === undefined) {
       throw new Error(
@@ -1085,44 +1060,50 @@ function createOpcodesForCompositeComponent(
     const childState = externalModuleState || {
       ...state,
       ...{ isRootComponent: false },
-      ...{ reconciler: { valueIndex: 0 } },
     };
-    result = createOpcodesForReactFunctionComponent(compositeComponentPath, childState);
+    componentTemplateNode = compileReactFunctionComponent(compositeComponentPath, childState);
   }
-  const { defaultProps, isStatic, shapeOfPropsObject } = result;
+  const { defaultProps, isStatic, shapeOfPropsObject, templateNode } = componentTemplateNode;
 
-  const componentNameIdentifier = t.identifier(componentName);
-  markNodeAsUsed(componentNameIdentifier);
-  pushOpcode(opcodes, "REF_COMPONENT", componentNameIdentifier);
   if (isStatic) {
-    if (Array.isArray(attributesPath)) {
-      for (let attributePath of attributesPath) {
-        markNodeAsDCE(attributePath.node);
-      }
-    }
-    if (Array.isArray(childrenPath)) {
-      for (let childPath of childrenPath) {
-        markNodeAsDCE(childPath.node);
-      }
-    }
-    pushOpcodeValue(opcodes, t.nullLiteral(), "COMPONENT_PROPS_ARRAY");
-  } else {
-    const { propsArray, canInlineArray } = createPropsArrayForCompositeComponent(
-      path,
-      attributesPath,
-      childrenPath,
-      shapeOfPropsObject,
-      defaultProps,
-      state,
-      componentPath,
-    );
-    if (canInlineArray) {
-      pushOpcodeValue(opcodes, t.arrayExpression(propsArray), "COMPONENT_PROPS_ARRAY");
-    } else {
-      const propsArrayValuePointer = getRuntimeValueIndexForPropsArray(propsArray, state);
-      pushOpcodeValue(opcodes, propsArrayValuePointer, "COMPONENT_PROPS_ARRAY");
-    }
+    // We can remove the component entirely and just inline the template into the existing tree
+    return templateNode;
   }
+  // Check if compontent was from an external module, if so, we need to REF it like we did before
+  // otherwise we just inline the logic
+
+  // const componentNameIdentifier = t.identifier(componentName);
+  // markNodeAsUsed(componentNameIdentifier);
+  // pushOpcode(opcodes, "REF_COMPONENT", componentNameIdentifier);
+  // if (isStatic) {
+  //   if (Array.isArray(attributesPath)) {
+  //     for (let attributePath of attributesPath) {
+  //       markNodeAsDCE(attributePath.node);
+  //     }
+  //   }
+  //   if (Array.isArray(childrenPath)) {
+  //     for (let childPath of childrenPath) {
+  //       markNodeAsDCE(childPath.node);
+  //     }
+  //   }
+  //   pushOpcodeValue(opcodes, t.nullLiteral(), "COMPONENT_PROPS_ARRAY");
+  // } else {
+  //   const { propsArray, canInlineArray } = createPropsArrayForCompositeComponent(
+  //     path,
+  //     attributesPath,
+  //     childrenPath,
+  //     shapeOfPropsObject,
+  //     defaultProps,
+  //     state,
+  //     componentPath,
+  //   );
+  //   if (canInlineArray) {
+  //     pushOpcodeValue(opcodes, t.arrayExpression(propsArray), "COMPONENT_PROPS_ARRAY");
+  //   } else {
+  //     const propsArrayValuePointer = getRuntimeValueIndexForPropsArray(propsArray, state);
+  //     pushOpcodeValue(opcodes, propsArrayValuePointer, "COMPONENT_PROPS_ARRAY");
+  //   }
+  // }
 }
 
 export function compileJSXElement(path, state, componentPath) {
@@ -1204,15 +1185,7 @@ function compileJSXElementType(typePath, attributesPath, childrenPath, state, co
         invariant(false, "TODO");
       }
     }
-    createOpcodesForCompositeComponent(
-      typePath,
-      componentName,
-      attributesPath,
-      childrenPath,
-      opcodes,
-      state,
-      componentPath,
-    );
+    return compileCompositeComponent(typePath, componentName, attributesPath, childrenPath, state, componentPath);
   }
 }
 
@@ -1443,15 +1416,7 @@ function compileReactCreateElementType(typePath, args, state, componentPath) {
       invariant(false, "TODO");
     }
 
-    createOpcodesForCompositeComponent(
-      typePath,
-      componentName,
-      attributesPath,
-      childrenPath,
-      opcodes,
-      state,
-      componentPath,
-    );
+    return compileCompositeComponent(typePath, componentName, attributesPath, childrenPath, state, componentPath);
   }
 }
 
