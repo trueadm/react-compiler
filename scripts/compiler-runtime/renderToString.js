@@ -23,7 +23,7 @@ export const FRAGMENT = 4;
 export const CONDITIONAL = 5;
 export const TEMPLATE_FUNCTION_CALL = 6;
 export const MULTI_CONDITIONAL = 7;
-export const DYNAMIC_TEXT_ARRAY = 9;
+export const TEXT_ARRAY = 9;
 
 export const HAS_STATIC_PROPS = 1 << 6;
 export const HAS_DYNAMIC_PROPS = 1 << 7;
@@ -707,7 +707,9 @@ function renderFunctionComponentTemplateToString(
     let componentProps = null;
     const componentPropsValueIndexOrPropsShape = componentTemplate[1];
     if (isRoot === true) {
-      componentProps = convertRootPropsToPropsArray(state.rootProps, componentPropsValueIndexOrPropsShape);
+      if (componentPropsValueIndexOrPropsShape !== 0) {
+        componentProps = convertRootPropsToPropsArray(state.rootProps, componentPropsValueIndexOrPropsShape);
+      }
     } else {
       componentProps = values[componentPropsValueIndexOrPropsShape];
     }
@@ -828,6 +830,13 @@ function renderTextTemplateToString(templateTypeAndFlags, textTemplate, values, 
   return text;
 }
 
+function renderTextArrayTemplateToString(templateTypeAndFlags, textTemplate, values, isOnlyChild, state) {
+  const templateFlags = templateTypeAndFlags & ~0x3f;
+  const isStatic = (templateFlags & IS_STATIC) !== 0;
+  const textArray = isStatic === true ? textTemplate[1] : values[textTemplate[1]];
+  return renderTextArrayToString(textArray, state);
+}
+
 function renderMultiConditionalTemplateToString(multiConditionalTemplate, values, isOnlyChild, state) {
   const conditions = multiConditionalTemplate[1];
 
@@ -917,6 +926,8 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
       return renderTemplateFunctionCallTemplateToString(templateNode, values, isOnlyChild, state);
     case MULTI_CONDITIONAL:
       return renderMultiConditionalTemplateToString(templateNode, values, isOnlyChild, state);
+    case TEXT_ARRAY:
+      return renderTextArrayTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
     default:
       throw new Error("Should never happen");
   }

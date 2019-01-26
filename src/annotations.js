@@ -202,7 +202,7 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
     }
 
     if (!failed) {
-      return currentAnnotation;
+      return t.arrayTypeAnnotation(currentAnnotation);
     }
   } else if (t.isObjectPattern(node) || t.isObjectExpression(node)) {
     const annotation = path.getTypeAnnotation();
@@ -470,6 +470,26 @@ export function assertType(path, assetType, hasOneOf, state, ...types) {
             }
           }
           return hasOneOf ? false : true;
+        }
+        break;
+      case "ArrayTypeAnnotation":
+        if (hasOneOf) {
+          if (typesSet.has("ARRAY")) {
+            return true;
+          }
+        } else if (!typesSet.has("ARRAY")) {
+          return false;
+        }
+        if (assetType.elementType != null) {
+          const assertion = assertType(path, assetType.elementType, hasOneOf, state, ...types);
+
+          if (hasOneOf) {
+            if (assertion) {
+              return true;
+            }
+          } else if (!assertion) {
+            return false;
+          }
         }
         break;
       case "UnionTypeAnnotation":

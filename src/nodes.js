@@ -290,20 +290,12 @@ export function compileNode(path, refPath, state, componentPath, isRoot) {
     return new DynamicValueTemplateNode(runtimeValuePointer);
   } else if (t.isFunctionDeclaration(node)) {
     const cachedNode = getCachedRuntimeValue(node, state);
-    const runtimeValuePointer = getRuntimeValueIndex(cachedNode, state);
-    if (isRoot) {
-      pushOpcode(opcodes, "ROOT_DYNAMIC_VALUE", runtimeValuePointer);
-    } else {
-      pushOpcodeValue(opcodes, runtimeValuePointer);
-    }
+    const valueIndex = getRuntimeValueIndex(cachedNode, state);
+    return new DynamicValueTemplateNode(valueIndex);
   } else if (t.isTemplateLiteral(node)) {
     if (node.expressions.length > 0) {
-      const runtimeValuePointer = getRuntimeValueIndex(node, state);
-      if (isRoot) {
-        pushOpcode(opcodes, "ROOT_DYNAMIC_VALUE", runtimeValuePointer);
-      } else {
-        pushOpcodeValue(opcodes, runtimeValuePointer);
-      }
+      const valueIndex = getRuntimeValueIndex(node, state);
+      return new DynamicValueTemplateNode(valueIndex);
     } else {
       for (let i = 0; i < node.quasis.length; i++) {
         const quasi = node.quasis[i];

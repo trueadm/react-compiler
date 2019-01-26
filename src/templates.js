@@ -8,7 +8,7 @@ export const FRAGMENT = 4;
 export const CONDITIONAL = 5;
 export const TEMPLATE_FUNCTION_CALL = 6;
 export const MULTI_CONDITIONAL = 7;
-export const DYNAMIC_TEXT_ARRAY = 9;
+export const TEXT_ARRAY = 9;
 
 export const HAS_STATIC_PROPS = 1 << 6;
 export const HAS_DYNAMIC_PROPS = 1 << 7;
@@ -67,7 +67,11 @@ export class ComponentTemplateNode {
     // TODO: Maybe change to hex if less bytes?
     ASTNode.push(t.numericLiteral(flag));
     if (!this.isStatic) {
-      ASTNode.push(t.arrayExpression(this.shapeOfPropsObject.map(a => t.stringLiteral(a.value))));
+      if (this.shapeOfPropsObject === null) {
+        ASTNode.push(t.numericLiteral(0));
+      } else {
+        ASTNode.push(t.arrayExpression(this.shapeOfPropsObject.map(a => t.stringLiteral(a.value))));
+      }
       ASTNode.push(t.identifier(this.computeFunctionRef));
     }
     if (this.templateNode !== null) {
@@ -182,12 +186,13 @@ export class DynamicTextArrayTemplateNode {
   }
 
   toAST() {
-    return t.arrayExpression([t.numericLiteral(DYNAMIC_TEXT_ARRAY), t.numericLiteral(this.valueIndex)]);
+    return t.arrayExpression([t.numericLiteral(TEXT_ARRAY), t.numericLiteral(this.valueIndex)]);
   }
 }
 
 export class DynamicTextTemplateNode {
   constructor(valueIndex) {
+    debugger;
     this.valueIndex = valueIndex;
   }
 
