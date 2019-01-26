@@ -779,7 +779,7 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
           // TODO
           continue;
         }
-        inner += ` ${propName}="${dynamicPropValue}"`;
+        inner += ` ${propName}="${escapeText(dynamicPropValue)}"`;
       }
     }
   }
