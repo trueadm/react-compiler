@@ -8,7 +8,6 @@ import {
 } from "../references";
 import {
   emptyObject,
-  escapeText,
   getAllPathsFromMutatedBinding,
   getCachedRuntimeValue,
   getCodeLocation,
@@ -57,11 +56,14 @@ import invariant from "../invariant";
 import * as t from "@babel/types";
 import { createOpcodesForCxMockCall } from "../mocks/cx";
 import {
+  DynamicTextArrayTemplateNode,
   DynamicTextTemplateNode,
   DynamicValueTemplateNode,
   HostComponentTemplateNode,
   StaticTextTemplateNode,
+  StaticValueTemplateNode,
   TemplateFunctionCallTemplateNode,
+  FragmentTemplateNode,
 } from "../templates";
 
 const emptyPlaceholderNode = t.nullLiteral();
@@ -161,16 +163,7 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
   if (isFbCxCall(valuePath, state)) {
     createOpcodesForCxMockCall(valueRefPath, attributeOpcodes, state);
   } else {
-    propTemplateNode = compileNode(valuePath, valueRefPath, state, componentPath, false, value => {
-      if (t.isStringLiteral(value)) {
-        return escapeText(value.value);
-      } else if (t.isNumericLiteral(value)) {
-        return value.value;
-      } else if (typeof value === "string") {
-        return escapeText(value);
-      }
-      return value;
-    });
+    propTemplateNode = compileNode(valuePath, valueRefPath, state, componentPath, false);
   }
   let isPartialTemplate = false;
   // If there are no opcodes then early continue.
@@ -195,7 +188,10 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
     }
     if (propTemplateNode instanceof StaticTextTemplateNode) {
       templateNode.staticProps.push([propName, propTemplateNode.text]);
+    } else if (propTemplateNode instanceof StaticValueTemplateNode) {
+      templateNode.staticProps.push([propName, propTemplateNode.value]);
     } else {
+      debugger;
       invariant(false, "TODO");
     }
   } else {
@@ -311,24 +307,7 @@ function compileHostCompoentChildren(templateNode, childPath, onlyChild, state, 
     return;
   }
 
-  const childTemplateNode = compileNode(childPath, refChildPath, state, componentPath, false, value => {
-    if (t.isStringLiteral(value)) {
-      const text = handleWhiteSpace(value.value + "");
-      if (text === "") {
-        return null;
-      }
-      return escapeText(text);
-    } else if (t.isNumericLiteral(value)) {
-      return value.value;
-    } else if (typeof value === "string") {
-      const text = handleWhiteSpace(value + "");
-      if (text === "") {
-        return null;
-      }
-      return escapeText(text);
-    }
-    return value;
-  });
+  const childTemplateNode = compileNode(childPath, refChildPath, state, componentPath, false);
 
   // If there are no opcodes then early return.
   if (childTemplateNode === null) {
@@ -380,53 +359,47 @@ function compileHostCompoentChildren(templateNode, childPath, onlyChild, state, 
     return;
   }
   if (childTemplateNode instanceof DynamicValueTemplateNode) {
+    // Non-array
     if (assertType(childPath, typeAnnotation, false, state, "NULL", "NUMBER", "STRING", "VOID", "BOOLEAN")) {
       templateNode.children.push(new DynamicTextTemplateNode(childTemplateNode.valueIndex));
       return;
     }
+    // Array
+    if (assertType(childPath, typeAnnotation, false, state, "ARRAY", "NULL", "NUMBER", "STRING", "VOID", "BOOLEAN")) {
+      templateNode.children.push(new DynamicTextArrayTemplateNode(childTemplateNode.valueIndex));
+      return;
+    }
   }
-  // // Static or dynamic value
-  // if (runtimeValueHash === getRuntimeValueHash(state)) {
-  //   if (onlyChild) {
-  //     pushOpcode(opcodes, "ELEMENT_STATIC_CHILDREN_VALUE", childOpcodes);
-  //   } else {
-  //     pushOpcode(opcodes, "ELEMENT_STATIC_CHILD_VALUE", childOpcodes);
-  //   }
-  // } else {
-  //   if (onlyChild) {
-  //     pushOpcode(opcodes, "ELEMENT_DYNAMIC_CHILDREN_VALUE", childOpcodes);
-  //   } else {
-  //     pushOpcode(opcodes, "ELEMENT_DYNAMIC_CHILD_VALUE", childOpcodes);
-  //   }
-  //   const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
-  //   pushOpcodeValue(opcodes, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
-  // }
 }
 
-export function createOpcodesForJSXFragment(childrenPath, opcodes, state, componentPath) {
-  createOpcodesForReactFragment(childrenPath, opcodes, state, componentPath);
+export function compileJSXFragment(childrenPath, state, componentPath, isRoot) {
+  return compileReactFragment(childrenPath, state, componentPath, isRoot);
 }
 
-function createOpcodesForReactCreateElementFragment(args, opcodes, state, componentPath) {
+function compiledReactCreateElementFragment(args, state, componentPath, isRoot) {
   let children = null;
   markNodeAsDCE(args[0].node);
   if (args.length > 2) {
     children = args.slice(2);
   }
-  createOpcodesForReactFragment(children, opcodes, state, componentPath);
+  return compileReactFragment(children, state, componentPath, isRoot);
 }
 
-function createOpcodesForReactFragment(children, opcodes, state, componentPath) {
-  pushOpcode(opcodes, "OPEN_FRAGMENT");
-  const hostNodeId = Symbol();
-  if (children.length > 1) {
-    for (let i = 0; i < children.length; i++) {
-      createOpcodesForReactElementHostNodeChild(hostNodeId, children[i], false, opcodes, state, componentPath);
+function compileReactFragment(children, state, componentPath, isRoot) {
+  const fragment = [];
+  for (let i = 0; i < children.length; i++) {
+    const child = children[i];
+    const childTemplateNode = compileNode(child, child, state, componentPath, isRoot);
+
+    if (childTemplateNode !== null) {
+      if (childTemplateNode instanceof FragmentTemplateNode) {
+        fragment.push(...childTemplateNode.children);
+      } else {
+        fragment.push(childTemplateNode);
+      }
     }
-  } else if (children.length === 1) {
-    createOpcodesForReactElementHostNodeChild(hostNodeId, children[0], false, opcodes, state, componentPath);
   }
-  pushOpcode(opcodes, "CLOSE_FRAGMENT");
+  return new FragmentTemplateNode(fragment);
 }
 
 function createOpcodesForHostNodeStylesIdentifier(
@@ -1194,7 +1167,7 @@ function compileJSXElementType(typePath, attributesPath, childrenPath, state, co
   } else if (isReferenceReactContextConsumer(typePath, state)) {
     createOpcodesForReactContextConsumer(typePath, childrenPath, opcodes, state, componentPath);
   } else if (isReactFragment(typePath, state)) {
-    createOpcodesForJSXFragment(childrenPath, opcodes, state, componentPath);
+    return compiledReactCreateElementFragment(childrenPath, state, componentPath, null, null);
   } else if (isHostComponentType(typePath, state)) {
     const isVoidElement = voidElements.has(typeName);
     const templateNode = new HostComponentTemplateNode(typeName, isVoidElement);
@@ -1321,24 +1294,6 @@ function compileJSXElementHostComponent(templateNode, tagName, attributesPath, c
 
   if (attributesPath.length > 0) {
     const propsMap = getPropsMapFromJSXElementAttributes(attributesPath, state);
-
-    if (tagName === "input") {
-      if (propsMap.has("type")) {
-        compileHostComponentPropValue(templateNode, tagName, propsMap.get("type"), "type", state, componentPath);
-      }
-      // This is all to conform the ReactDOM ordering of props :(
-      propsMap.delete("type");
-      const value = propsMap.get("value");
-      const checked = propsMap.get("checked");
-      if (value !== undefined) {
-        propsMap.delete("value");
-        propsMap.set("value", value);
-      }
-      if (checked !== undefined) {
-        propsMap.delete("checked");
-        propsMap.set("checked", checked);
-      }
-    }
     const renderChildren = propsMap.get("children");
     propsMap.delete("children");
     for (let [propName, valuePath] of propsMap) {
@@ -1370,23 +1325,6 @@ function compileReactCreateElementHostComponent(templateNode, tagName, args, sta
     const configNode = configPathRef.node;
 
     const createOpcodesGivenPropsMap = propsMap => {
-      if (tagName === "input") {
-        if (propsMap.has("type")) {
-          compileHostComponentPropValue(templateNode, tagName, propsMap.get("type"), "type", state, componentPath);
-        }
-        // This is all to conform the ReactDOM ordering of props :(
-        propsMap.delete("type");
-        const value = propsMap.get("value");
-        const checked = propsMap.get("checked");
-        if (value !== undefined) {
-          propsMap.delete("value");
-          propsMap.set("value", value);
-        }
-        if (checked !== undefined) {
-          propsMap.delete("checked");
-          propsMap.set("checked", checked);
-        }
-      }
       const renderChildren = propsMap.get("children");
       propsMap.delete("children");
       for (let [propName, valuePath] of propsMap) {
@@ -1500,8 +1438,7 @@ function compileReactCreateElementType(typePath, args, state, componentPath) {
     } else if (t.isFunctionDeclaration(typePath.node)) {
       componentName = typePath.node.id.name;
     } else if (isReactFragment(typePath, state)) {
-      createOpcodesForReactCreateElementFragment(args, opcodes, state, componentPath);
-      return;
+      return compiledReactCreateElementFragment(args, state, componentPath);
     } else {
       invariant(false, "TODO");
     }

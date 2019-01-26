@@ -1,9 +1,9 @@
-// props:{var: "This should show up!", bar: "123", cond: true, cond2: true, defaultClassName: "default-item"}
+// props:{bar: "123", cond: true, cond2: true, defaultClassName: "default-item"}
 
 var React = require("react");
 
-function foo(bar): React.Node {
-  return [<span key="1">Hello world</span>, <div key="2">{bar + ""}</div>];
+function foo(bar): Array<string | null | boolean | void> {
+  return [123, 456, 789, null, false, true, undefined];
 }
 
 function Component({
@@ -18,8 +18,8 @@ function Component({
   bar: string
 }) {
   let children = [
-    <li key="default" className={defaultClassName}>
-      Default item
+    <li key="default" className={undefined}>
+      {null}
     </li>
   ];
 
@@ -31,14 +31,14 @@ function Component({
 
   if (cond) {
     children = [
-      <li key="generic" className={"generic-item"}>
+      <li key="generic" className={""}>
         {elements}
       </li>
     ];
   }
 
   return (
-    <ul id="list-view" className={"list"}>
+    <ul id="list-view" className={null}>
       {children}
     </ul>
   );

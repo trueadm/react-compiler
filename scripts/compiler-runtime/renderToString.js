@@ -23,6 +23,7 @@ export const FRAGMENT = 4;
 export const CONDITIONAL = 5;
 export const TEMPLATE_FUNCTION_CALL = 6;
 export const MULTI_CONDITIONAL = 7;
+export const DYNAMIC_TEXT_ARRAY = 9;
 
 export const HAS_STATIC_PROPS = 1 << 6;
 export const HAS_DYNAMIC_PROPS = 1 << 7;
@@ -30,9 +31,10 @@ export const HAS_CHILD = 1 << 8;
 export const HAS_CHILDREN = 1 << 9;
 export const HAS_STATIC_TEXT_CONTENT = 1 << 10;
 export const HAS_DYNAMIC_TEXT_CONTENT = 1 << 11;
-export const IS_STATIC = 1 << 12;
-export const IS_SVG = 1 << 13;
-export const IS_VOID = 1 << 14;
+export const HAS_DYNAMIC_TEXT_ARRAY_CONTENT = 1 << 12;
+export const IS_STATIC = 1 << 13;
+export const IS_SVG = 1 << 14;
+export const IS_VOID = 1 << 15;
 
 function renderReactNodeToString(node, isChild, runtimeValues, state, currentFiber) {
   if (node === null || node === undefined || typeof node === "boolean") {
@@ -718,6 +720,24 @@ function renderFunctionComponentTemplateToString(
   return renderTemplateToString(childTemplateNode, values, isOnlyChild, state);
 }
 
+function renderTextArrayToString(textArray, state) {
+  const childrenTextArrayLength = textArray.length;
+  let renderString = "";
+  for (let i = 0; i < childrenTextArrayLength; ++i) {
+    const childText = textArray[i];
+    if (childText !== null && childText !== undefined && typeof childText !== "boolean") {
+      const lastChildWasText = state.lastChildWasText;
+      state.lastChildWasText = true;
+      if (lastChildWasText === true) {
+        renderString += `<!-- -->${escapeText(childText)}`;
+      } else {
+        renderString += escapeText(childText);
+      }
+    }
+  }
+  return renderString;
+}
+
 function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponentTemplate, values, isOnlyChild, state) {
   const templateFlags = templateTypeAndFlags & ~0x3f;
   const tagName = hostComponentTemplate[1];
@@ -785,6 +805,10 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
     for (let i = 0, length = childrenTemplateNodes.length; i < length; ++i) {
       children += renderTemplateToString(childrenTemplateNodes[i], values, false, state);
     }
+  } else if ((templateFlags & HAS_DYNAMIC_TEXT_ARRAY_CONTENT) !== 0) {
+    const textChildrenArrayValueIndex = hostComponentTemplate[childrenTemplateIndex];
+    const textChildrenArray = values[textChildrenArrayValueIndex];
+    children += renderTextArrayToString(textChildrenArray, state);
   }
   return `<${tagName}${styles}${inner}>${children}</${tagName}>`;
 }

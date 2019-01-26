@@ -8,6 +8,7 @@ export const FRAGMENT = 4;
 export const CONDITIONAL = 5;
 export const TEMPLATE_FUNCTION_CALL = 6;
 export const MULTI_CONDITIONAL = 7;
+export const DYNAMIC_TEXT_ARRAY = 9;
 
 export const HAS_STATIC_PROPS = 1 << 6;
 export const HAS_DYNAMIC_PROPS = 1 << 7;
@@ -15,9 +16,10 @@ export const HAS_CHILD = 1 << 8;
 export const HAS_CHILDREN = 1 << 9;
 export const HAS_STATIC_TEXT_CONTENT = 1 << 10;
 export const HAS_DYNAMIC_TEXT_CONTENT = 1 << 11;
-export const IS_STATIC = 1 << 12;
-export const IS_SVG = 1 << 13;
-export const IS_VOID = 1 << 14;
+export const HAS_DYNAMIC_TEXT_ARRAY_CONTENT = 1 << 12;
+export const IS_STATIC = 1 << 13;
+export const IS_SVG = 1 << 14;
+export const IS_VOID = 1 << 15;
 
 function valueToBabelNode(value) {
   if (typeof value === "boolean") {
@@ -28,6 +30,8 @@ function valueToBabelNode(value) {
     return t.stringLiteral(value);
   } else if (value === null) {
     return t.nullLiteral();
+  } else if (value === undefined) {
+    return t.unaryExpression("void", t.numericLiteral(0));
   }
   throw new Error("TODO");
 }
@@ -126,6 +130,9 @@ export class HostComponentTemplateNode {
         childrenASTNode = t.numericLiteral(child.valueIndex);
       } else if (child instanceof FragmentTemplateNode) {
         debugger;
+      } else if (child instanceof DynamicTextArrayTemplateNode) {
+        flag |= HAS_DYNAMIC_TEXT_ARRAY_CONTENT;
+        childrenASTNode = t.numericLiteral(child.valueIndex);
       } else {
         flag |= HAS_CHILD;
         childrenASTNode = child.toAST();
@@ -166,6 +173,16 @@ export class StaticTextTemplateNode {
 
   toAST() {
     return t.arrayExpression([t.numericLiteral(TEXT | IS_STATIC), t.stringLiteral(this.text + "")]);
+  }
+}
+
+export class DynamicTextArrayTemplateNode {
+  constructor(valueIndex) {
+    this.valueIndex = valueIndex;
+  }
+
+  toAST() {
+    return t.arrayExpression([t.numericLiteral(DYNAMIC_TEXT_ARRAY), t.numericLiteral(this.valueIndex)]);
   }
 }
 
