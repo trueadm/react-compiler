@@ -57,6 +57,7 @@ import invariant from "../invariant";
 import * as t from "@babel/types";
 import { createOpcodesForCxMockCall } from "../mocks/cx";
 import {
+  DynamicReactNode,
   DynamicTextArrayTemplateNode,
   DynamicTextTemplateNode,
   DynamicValueTemplateNode,
@@ -66,7 +67,6 @@ import {
   StaticValueTemplateNode,
   TemplateFunctionCallTemplateNode,
   FragmentTemplateNode,
-  ComponentTemplateNode,
 } from "../templates";
 
 const emptyPlaceholderNode = t.nullLiteral();
@@ -199,7 +199,7 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
   }
 }
 
-function compileHostCompoentChildren(templateNode, childPath, onlyChild, state, componentPath) {
+function compileHostComponentChildren(templateNode, childPath, state, componentPath) {
   markNodeAsDCE(childPath.node);
   let refChildPath = getReferenceFromExpression(childPath, state);
 
@@ -275,13 +275,12 @@ function compileHostCompoentChildren(templateNode, childPath, onlyChild, state, 
     const elementsPath = refChildPath.get("elements");
     if (elementsPath.length > 0) {
       if (elementsPath.length === 0) {
-        compileHostCompoentChildren(templateNode, elementsPath[0], true, state, componentPath);
+        compileHostComponentChildren(templateNode, elementsPath[0], state, componentPath);
       } else {
         for (let elementPath of elementsPath) {
-          compileHostCompoentChildren(
+          compileHostComponentChildren(
             templateNode,
             getReferenceFromExpression(elementPath, state),
-            false,
             state,
             componentPath,
           );
@@ -327,15 +326,8 @@ function compileHostCompoentChildren(templateNode, childPath, onlyChild, state, 
         )}`,
       );
     }
-    const refTemplatePropPointer = getRuntimeValueIndex(refChildPath.node, state);
-    if (onlyChild) {
-      pushOpcode(opcodes, "ELEMENT_DYNAMIC_CHILDREN_REACT_NODE_TEMPLATE", refTemplatePropPointer);
-      state.dynamicHostNodesId.add(hostNodeId);
-    } else {
-      pushOpcode(opcodes, "ELEMENT_DYNAMIC_CHILD_REACT_NODE_TEMPLATE", refTemplatePropPointer);
-    }
-    const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
-    pushOpcodeValue(opcodes, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
+    const reactNodeValueIndex = getRuntimeValueIndex(refChildPath.node, state);
+    templateNode.children.push(new DynamicReactNode(reactNodeValueIndex));
     return;
   }
   if (childTemplateNode instanceof DynamicValueTemplateNode) {
@@ -578,24 +570,20 @@ function createPropTemplateFromJSXElement(path, state, componentPath) {
 }
 
 function createPropTemplateFromReactCreateElement(path, state, componentPath) {
-  const opcodes = [];
   const runtimeValues = new Map();
   const childState = { ...state, ...{ runtimeValues } };
-
-  createOpcodesForReactCreateElement(path, opcodes, childState, componentPath);
-
-  const hoistedOpcodes = hoistOpcodesNode(componentPath, state, normalizeOpcodes(opcodes));
+  const templateNode = compileReactCreateElement(path, childState, componentPath);
 
   state.helpers.add("createReactNode");
   if (runtimeValues.size === 0) {
-    return [t.callExpression(t.identifier("createReactNode"), [hoistedOpcodes]), true];
+    return [t.callExpression(t.identifier("createReactNode"), [templateNode.toAST()]), true];
   } else {
     const runtimeValuesArray = [];
     for (let [runtimeValue, { index }] of runtimeValues) {
       runtimeValuesArray[index] = runtimeValue;
     }
     return [
-      t.callExpression(t.identifier("createReactNode"), [hoistedOpcodes, t.arrayExpression(runtimeValuesArray)]),
+      t.callExpression(t.identifier("createReactNode"), [templateNode.toAST(), t.arrayExpression(runtimeValuesArray)]),
       false,
     ];
   }
@@ -1089,7 +1077,7 @@ function compileCompositeComponent(path, componentName, attributesPath, children
   let propsArrayASTNode = t.arrayExpression(propsArray);
 
   if (!canInlineArray) {
-    propsArrayASTNode = getRuntimeValueIndexForPropsArray(propsArrayASTNode, state);
+    propsArrayASTNode = t.numericLiteral(getRuntimeValueIndexForPropsArray(propsArrayASTNode, state));
   }
   return new ReferenceComponentTemplateNode(componentName, componentTemplateNode, propsArrayASTNode);
 }
@@ -1261,7 +1249,7 @@ function compileJSXElementHostComponent(templateNode, tagName, attributesPath, c
       compileHostComponentPropValue(templateNode, tagName, valuePath, propName, state, componentPath);
     }
     if (renderChildren !== undefined) {
-      compileHostCompoentChildren(templateNode, renderChildren, true, state, componentPath);
+      compileHostComponentChildren(templateNode, renderChildren, state, componentPath);
     }
   }
   const filteredChildrenPath = childrenPath.filter(childPath => {
@@ -1272,10 +1260,10 @@ function compileJSXElementHostComponent(templateNode, tagName, attributesPath, c
   });
   if (filteredChildrenPath.length > 1) {
     for (let i = 0; i < filteredChildrenPath.length; i++) {
-      compileHostCompoentChildren(templateNode, filteredChildrenPath[i], false, state, componentPath);
+      compileHostComponentChildren(templateNode, filteredChildrenPath[i], state, componentPath);
     }
   } else if (filteredChildrenPath.length === 1) {
-    compileHostCompoentChildren(templateNode, filteredChildrenPath[0], true, state, componentPath);
+    compileHostComponentChildren(templateNode, filteredChildrenPath[0], state, componentPath);
   }
 }
 
@@ -1292,7 +1280,7 @@ function compileReactCreateElementHostComponent(templateNode, tagName, args, sta
         compileHostComponentPropValue(templateNode, tagName, valuePath, propName, state, componentPath);
       }
       if (renderChildren !== undefined) {
-        compileHostCompoentChildren(templateNode, renderChildren, true, state, componentPath);
+        compileHostComponentChildren(templateNode, renderChildren, state, componentPath);
       }
     };
 
@@ -1331,10 +1319,10 @@ function compileReactCreateElementHostComponent(templateNode, tagName, args, sta
 
     if (childrenLength > 1) {
       for (let i = 0; i < childrenLength; ++i) {
-        compileHostCompoentChildren(templateNode, args[2 + i], false, state, componentPath);
+        compileHostComponentChildren(templateNode, args[2 + i], state, componentPath);
       }
     } else {
-      compileHostCompoentChildren(templateNode, args[2], true, state, componentPath);
+      compileHostComponentChildren(templateNode, args[2], state, componentPath);
     }
   }
 }

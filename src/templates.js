@@ -11,6 +11,7 @@ export const TEMPLATE_FUNCTION_CALL = 6;
 export const MULTI_CONDITIONAL = 7;
 export const TEXT_ARRAY = 9;
 export const REFERENCE_COMPONENT = 10;
+export const REACT_NODE = 11;
 
 export const HAS_STATIC_PROPS = 1 << 6;
 export const HAS_DYNAMIC_PROPS = 1 << 7;
@@ -104,6 +105,26 @@ export class ReferenceComponentTemplateNode {
     }
 
     return t.arrayExpression([t.numericLiteral(flags), componentRefIdentifier, this.propsArrayASTNode]);
+  }
+}
+
+export class StaticReactNode {
+  constructor() {
+    // TODO
+  }
+
+  toAST() {
+    debugger;
+  }
+}
+
+export class DynamicReactNode {
+  constructor(valueIndex) {
+    this.valueIndex = valueIndex;
+  }
+
+  toAST() {
+    debugger;
   }
 }
 
