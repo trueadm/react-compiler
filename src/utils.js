@@ -526,12 +526,11 @@ export function getRuntimeValueIndex(node, state) {
   return runtimeValuePointer;
 }
 
-export function getRuntimeValueIndexForPropsArray(propsArray, state) {
+export function getRuntimeValueIndexForPropsArray(propsArrayASTNode, state) {
   const runtimeValues = state.runtimeValues;
-  const node = t.arrayExpression(propsArray);
   const runtimeValuePointer = runtimeValues.size;
-  markNodeAsUsed(node);
-  runtimeValues.set(node, { index: runtimeValuePointer, references: 1 });
+  markNodeAsUsed(propsArrayASTNode);
+  runtimeValues.set(propsArrayASTNode, { index: runtimeValuePointer, references: 1 });
   return runtimeValuePointer;
 }
 

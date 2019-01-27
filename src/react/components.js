@@ -40,7 +40,8 @@ export function compileReactFunctionComponent(componentPath, state) {
 
   // Re-write function props as arguments
   rewriteArgumentsForReactFunctionComponent(computeFunction, shapeOfPropsObject);
-  // // Re-write the function as a compute function with opcodes emitted
+
+  // Re-write the function as a compute function with opcodes emitted
   convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
     componentTemplateNode,
     componentPath,
@@ -60,49 +61,49 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
   name,
   isRootComponent,
 ) {
+  const templateAST = componentTemplateNode.toAST();
   if (t.isFunctionDeclaration(computeFunction)) {
     const identifier = t.identifier(name);
     markNodeAsUsed(identifier);
-    const templateAST = componentTemplateNode.toAST();
-    if (isRootComponent) {
-      if (isStatic) {
-        componentPath.replaceWith(t.variableDeclaration("var", [t.variableDeclarator(identifier, templateAST)]));
-      } else {
-        const opcodesArrayDeclaration = t.variableDeclaration("var", [t.variableDeclarator(identifier, templateAST)]);
-        if (
-          t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
-          t.isExportNamedDeclaration(componentPath.parentPath.node)
-        ) {
-          const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
-            ? t.exportDefaultDeclaration(opcodesArrayDeclaration)
-            : t.exportNamedDeclaration(opcodesArrayDeclaration, []);
-          componentPath.parentPath.replaceWithMultiple([computeFunction, exportNode]);
-        } else {
-          componentPath.replaceWithMultiple([computeFunction, opcodesArrayDeclaration]);
-        }
-      }
+    // if (isRootComponent) {
+    if (isStatic) {
+      componentPath.replaceWith(t.variableDeclaration("var", [t.variableDeclarator(identifier, templateAST)]));
     } else {
-      const arrayWrapperFunction = t.functionDeclaration(
-        identifier,
-        [],
-        t.blockStatement([t.returnStatement(templateAST)]),
-      );
-      if (isStatic) {
-        componentPath.replaceWith(arrayWrapperFunction);
+      const opcodesArrayDeclaration = t.variableDeclaration("var", [t.variableDeclarator(identifier, templateAST)]);
+      if (
+        t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
+        t.isExportNamedDeclaration(componentPath.parentPath.node)
+      ) {
+        const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
+          ? t.exportDefaultDeclaration(opcodesArrayDeclaration)
+          : t.exportNamedDeclaration(opcodesArrayDeclaration, []);
+        componentPath.parentPath.replaceWithMultiple([computeFunction, exportNode]);
       } else {
-        if (
-          t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
-          t.isExportNamedDeclaration(componentPath.parentPath.node)
-        ) {
-          const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
-            ? t.exportDefaultDeclaration(arrayWrapperFunction)
-            : t.exportNamedDeclaration(arrayWrapperFunction, []);
-          componentPath.parentPath.replaceWithMultiple([computeFunction, exportNode]);
-        } else {
-          componentPath.replaceWithMultiple([computeFunction, arrayWrapperFunction]);
-        }
+        componentPath.replaceWithMultiple([computeFunction, opcodesArrayDeclaration]);
       }
     }
+    // } else {
+    //   const arrayWrapperFunction = t.functionDeclaration(
+    //     identifier,
+    //     [],
+    //     t.blockStatement([t.returnStatement(templateAST)]),
+    //   );
+    //   if (isStatic) {
+    //     componentPath.replaceWith(arrayWrapperFunction);
+    //   } else {
+    //     if (
+    //       t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
+    //       t.isExportNamedDeclaration(componentPath.parentPath.node)
+    //     ) {
+    //       const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
+    //         ? t.exportDefaultDeclaration(arrayWrapperFunction)
+    //         : t.exportNamedDeclaration(arrayWrapperFunction, []);
+    //       componentPath.parentPath.replaceWithMultiple([computeFunction, exportNode]);
+    //     } else {
+    //       componentPath.replaceWithMultiple([computeFunction, arrayWrapperFunction]);
+    //     }
+    //   }
+    // }
   } else {
     const parentPath = componentPath.parentPath;
 
@@ -111,25 +112,25 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
       const identifier = t.identifier(name);
       markNodeAsUsed(identifier);
 
-      if (isRootComponent) {
-        if (isStatic) {
-          parentPath.node.id.name = name;
-          componentPath.replaceWith(opcodesArray);
-        } else {
-          parentPath.replaceWithMultiple([parentPath.node, t.variableDeclarator(identifier, opcodesArray)]);
-        }
+      // if (isRootComponent) {
+      if (isStatic) {
+        parentPath.node.id.name = name;
+        componentPath.replaceWith(templateAST);
       } else {
-        const arrayWrapperFunction = t.variableDeclarator(
-          identifier,
-          t.functionExpression(null, [], t.blockStatement([t.returnStatement(opcodesArray)])),
-        );
-        if (isStatic) {
-          parentPath.node.id.name = name;
-          componentPath.replaceWith(arrayWrapperFunction);
-        } else {
-          parentPath.replaceWithMultiple([parentPath.node, arrayWrapperFunction]);
-        }
+        parentPath.replaceWithMultiple([parentPath.node, t.variableDeclarator(identifier, templateAST)]);
       }
+      // } else {
+      //   const arrayWrapperFunction = t.variableDeclarator(
+      //     identifier,
+      //     t.functionExpression(null, [], t.blockStatement([t.returnStatement(opcodesArray)])),
+      //   );
+      //   if (isStatic) {
+      //     parentPath.node.id.name = name;
+      //     componentPath.replaceWith(arrayWrapperFunction);
+      //   } else {
+      //     parentPath.replaceWithMultiple([parentPath.node, arrayWrapperFunction]);
+      //   }
+      // }
     } else {
       invariant(false, "TODO");
     }

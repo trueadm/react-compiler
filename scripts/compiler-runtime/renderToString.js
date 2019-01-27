@@ -24,6 +24,7 @@ export const CONDITIONAL = 5;
 export const TEMPLATE_FUNCTION_CALL = 6;
 export const MULTI_CONDITIONAL = 7;
 export const TEXT_ARRAY = 9;
+export const REFERENCE_COMPONENT = 10;
 
 export const HAS_STATIC_PROPS = 1 << 6;
 export const HAS_DYNAMIC_PROPS = 1 << 7;
@@ -705,17 +706,23 @@ function renderFunctionComponentTemplateToString(
 
   if ((templateFlags & IS_STATIC) === 0) {
     let componentProps = null;
-    const componentPropsValueIndexOrPropsShape = componentTemplate[1];
+    let computeFunction;
+    let childTemplateNode;
+
     if (isRoot === true) {
-      if (componentPropsValueIndexOrPropsShape !== 0) {
-        componentProps = convertRootPropsToPropsArray(state.rootProps, componentPropsValueIndexOrPropsShape);
+      const rootComponentPropsShape = componentTemplate[1];
+      computeFunction = componentTemplate[2];
+      childTemplateNode = componentTemplate[3];
+      if (rootComponentPropsShape !== 0) {
+        componentProps = convertRootPropsToPropsArray(state.rootProps, rootComponentPropsShape);
       }
     } else {
-      componentProps = values[componentPropsValueIndexOrPropsShape];
+      // This always means that the parent was a reference component template node
+      componentProps = values;
+      computeFunction = componentTemplate[1];
+      childTemplateNode = componentTemplate[2];
     }
-    const computeFunction = componentTemplate[2];
     const componentValues = callComputeFunctionWithArray(computeFunction, componentProps);
-    const childTemplateNode = componentTemplate[3];
     return renderTemplateToString(childTemplateNode, componentValues, isOnlyChild, state);
   }
   const childTemplateNode = componentTemplate[1];
@@ -738,6 +745,26 @@ function renderTextArrayToString(textArray, state) {
     }
   }
   return renderString;
+}
+
+function renderReferenceComponentTemplateToString(
+  templateTypeAndFlags,
+  referenceComponentTemplate,
+  values,
+  isOnlyChild,
+  state,
+) {
+  const templateFlags = templateTypeAndFlags & ~0x3f;
+  const componentTemplateNode = referenceComponentTemplate[1];
+  let props;
+
+  if ((templateFlags & HAS_STATIC_PROPS) !== 0) {
+    props = referenceComponentTemplate[2];
+  } else {
+    const propsValueIndex = referenceComponentTemplate[2];
+    props = values[propsValueIndex];
+  }
+  return renderTemplateToString(componentTemplateNode, props, isOnlyChild, state);
 }
 
 function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponentTemplate, values, isOnlyChild, state) {
@@ -928,6 +955,8 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
       return renderMultiConditionalTemplateToString(templateNode, values, isOnlyChild, state);
     case TEXT_ARRAY:
       return renderTextArrayTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
+    case REFERENCE_COMPONENT:
+      return renderReferenceComponentTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
     default:
       throw new Error("Should never happen");
   }

@@ -97,13 +97,7 @@ function compileCallExpression(path, refPath, state, componentPath, isRoot) {
     moveOutCallExpressionFromTemplate(path, refPath, state);
   }
   if (assertType(path, getTypeAnnotationForExpression(refPath, state), true, state, "REACT_NODE")) {
-    return compileCallExpressionReturningTemplateNodes(
-      path,
-      refPath,
-      state,
-      componentPath,
-      isRoot,
-    );
+    return compileCallExpressionReturningTemplateNodes(path, refPath, state, componentPath, isRoot);
   }
   const pathConditions = getPathConditions(componentPath, refPath, state);
   let node = refPath.node;
@@ -115,13 +109,7 @@ function compileCallExpression(path, refPath, state, componentPath, isRoot) {
   return new DynamicValueTemplateNode(runtimeValuePointer);
 }
 
-function compileCallExpressionReturningTemplateNodes(
-  childPath,
-  childRefPath,
-  state,
-  componentPath,
-  isRoot,
-) {
+function compileCallExpressionReturningTemplateNodes(childPath, childRefPath, state, componentPath, isRoot) {
   const calleePath = getReferenceFromExpression(childRefPath.get("callee"), state);
   if (t.isIdentifier(calleePath.node) || t.isMemberExpression(calleePath.node)) {
     debugger;
@@ -262,14 +250,7 @@ export function compileNode(path, refPath, state, componentPath, isRoot) {
       componentPath,
       isRoot,
       (conditionalPath, conditionalOpcodes) => {
-        createOpcodesForNode(
-          conditionalPath,
-          conditionalPath,
-          conditionalOpcodes,
-          state,
-          componentPath,
-          isRoot,
-        );
+        createOpcodesForNode(conditionalPath, conditionalPath, conditionalOpcodes, state, componentPath, isRoot);
       },
     );
   } else if (

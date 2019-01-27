@@ -13,8 +13,8 @@ import {
   getCodeLocation,
   getComponentName,
   getRuntimeValueHash,
-  getRuntimeValueIndex,
   getRuntimeValueIndexForPropsArray,
+  getRuntimeValueIndex,
   handleWhiteSpace,
   isArrayMapConstructorTemplate,
   isCommonJsLikeRequireCall,
@@ -51,7 +51,7 @@ import {
 import { dangerousStyleValue, hyphenateStyleName } from "./style";
 import { compileReactFunctionComponent } from "./components";
 import { createOpcodesForReactComputeFunction } from "./functions";
-import { getPropInformation, isUnitlessNumber, transformStaticOpcodes } from "./prop-information";
+import { getPropInformation, isUnitlessNumber } from "./prop-information";
 import { validateArgumentsDoNotContainTemplateNodes, validateParamsDoNotConflictOuterScope } from "../validation";
 import invariant from "../invariant";
 import * as t from "@babel/types";
@@ -61,10 +61,12 @@ import {
   DynamicTextTemplateNode,
   DynamicValueTemplateNode,
   HostComponentTemplateNode,
+  ReferenceComponentTemplateNode,
   StaticTextTemplateNode,
   StaticValueTemplateNode,
   TemplateFunctionCallTemplateNode,
   FragmentTemplateNode,
+  ComponentTemplateNode,
 } from "../templates";
 
 const emptyPlaceholderNode = t.nullLiteral();
@@ -299,7 +301,8 @@ function compileHostCompoentChildren(templateNode, childPath, onlyChild, state, 
     childTemplateNode instanceof HostComponentTemplateNode ||
     childTemplateNode instanceof StaticTextTemplateNode ||
     childTemplateNode instanceof DynamicTextTemplateNode ||
-    childTemplateNode instanceof TemplateFunctionCallTemplateNode
+    childTemplateNode instanceof TemplateFunctionCallTemplateNode ||
+    childTemplateNode instanceof ReferenceComponentTemplateNode
   ) {
     templateNode.children.push(childTemplateNode);
     return;
@@ -313,11 +316,6 @@ function compileHostCompoentChildren(templateNode, childPath, onlyChild, state, 
     pushOpcode(opcodes, "ELEMENT_DYNAMIC_FUNCTION_CHILD", childOpcodes);
     const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
     pushOpcodeValue(opcodes, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
-    return;
-  }
-  // React templates from call expressions within the component
-  if (assertType(childPath, typeAnnotation, true, state, "REACT_NODE") && t.isCallExpression(childNode)) {
-    opcodes.push(...childOpcodes);
     return;
   }
   // React templates from incoming props
@@ -1067,46 +1065,33 @@ function compileCompositeComponent(path, componentName, attributesPath, children
 
   if (isStatic) {
     // We can remove the component entirely and just inline the template into the existing tree
+    if (Array.isArray(attributesPath)) {
+      for (let attributePath of attributesPath) {
+        markNodeAsDCE(attributePath.node);
+      }
+    }
+    if (Array.isArray(childrenPath)) {
+      for (let childPath of childrenPath) {
+        markNodeAsDCE(childPath.node);
+      }
+    }
     return templateNode;
   }
-  if (externalModuleState !== undefined) {
-    // Create REF
-  }
-  // Check if compontent was from an external module, if so, we need to REF it like we did before
-  // otherwise we just inline the logic
+  const { propsArray, canInlineArray } = createPropsArrayForCompositeComponent(
+    path,
+    attributesPath,
+    childrenPath,
+    shapeOfPropsObject,
+    defaultProps,
+    state,
+    componentPath,
+  );
+  let propsArrayASTNode = t.arrayExpression(propsArray);
 
-  // const componentNameIdentifier = t.identifier(componentName);
-  // markNodeAsUsed(componentNameIdentifier);
-  // pushOpcode(opcodes, "REF_COMPONENT", componentNameIdentifier);
-  // if (isStatic) {
-  //   if (Array.isArray(attributesPath)) {
-  //     for (let attributePath of attributesPath) {
-  //       markNodeAsDCE(attributePath.node);
-  //     }
-  //   }
-  //   if (Array.isArray(childrenPath)) {
-  //     for (let childPath of childrenPath) {
-  //       markNodeAsDCE(childPath.node);
-  //     }
-  //   }
-  //   pushOpcodeValue(opcodes, t.nullLiteral(), "COMPONENT_PROPS_ARRAY");
-  // } else {
-  //   const { propsArray, canInlineArray } = createPropsArrayForCompositeComponent(
-  //     path,
-  //     attributesPath,
-  //     childrenPath,
-  //     shapeOfPropsObject,
-  //     defaultProps,
-  //     state,
-  //     componentPath,
-  //   );
-  //   if (canInlineArray) {
-  //     pushOpcodeValue(opcodes, t.arrayExpression(propsArray), "COMPONENT_PROPS_ARRAY");
-  //   } else {
-  //     const propsArrayValuePointer = getRuntimeValueIndexForPropsArray(propsArray, state);
-  //     pushOpcodeValue(opcodes, propsArrayValuePointer, "COMPONENT_PROPS_ARRAY");
-  //   }
-  // }
+  if (!canInlineArray) {
+    propsArrayASTNode = getRuntimeValueIndexForPropsArray(propsArrayASTNode, state);
+  }
+  return new ReferenceComponentTemplateNode(componentName, componentTemplateNode, propsArrayASTNode);
 }
 
 export function compileJSXElement(path, state, componentPath) {
@@ -1438,7 +1423,6 @@ export function compileReactCreateElement(path, state, componentPath) {
   const typePath = args[0];
 
   const templateNode = compileReactCreateElementType(typePath, args, state, componentPath);
-
   if (t.isBlockStatement(path.node)) {
     const body = path.get("body");
     const returnStatement = body[body.length - 1];

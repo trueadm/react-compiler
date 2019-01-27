@@ -1,4 +1,5 @@
 import * as t from "@babel/types";
+import { markNodeAsUsed } from "./utils";
 
 export const ROOT_COMPONENT = 0;
 export const COMPONENT = 1;
@@ -9,6 +10,7 @@ export const CONDITIONAL = 5;
 export const TEMPLATE_FUNCTION_CALL = 6;
 export const MULTI_CONDITIONAL = 7;
 export const TEXT_ARRAY = 9;
+export const REFERENCE_COMPONENT = 10;
 
 export const HAS_STATIC_PROPS = 1 << 6;
 export const HAS_DYNAMIC_PROPS = 1 << 7;
@@ -56,6 +58,8 @@ export class ComponentTemplateNode {
     this.functionKind = functionKind;
     this.typeAnnotation = typeAnnotation;
     this.shapeOfPropsObject = shapeOfPropsObject;
+    this.propsArray = null;
+    this.propsValueIndex = null;
   }
 
   toAST() {
@@ -67,10 +71,12 @@ export class ComponentTemplateNode {
     // TODO: Maybe change to hex if less bytes?
     ASTNode.push(t.numericLiteral(flag));
     if (!this.isStatic) {
-      if (this.shapeOfPropsObject === null) {
-        ASTNode.push(t.numericLiteral(0));
-      } else {
-        ASTNode.push(t.arrayExpression(this.shapeOfPropsObject.map(a => t.stringLiteral(a.value))));
+      if (this.isRootComponent) {
+        if (this.shapeOfPropsObject === null) {
+          ASTNode.push(t.numericLiteral(0));
+        } else {
+          ASTNode.push(t.arrayExpression(this.shapeOfPropsObject.map(a => t.stringLiteral(a.value))));
+        }
       }
       ASTNode.push(t.identifier(this.computeFunctionRef));
     }
@@ -78,6 +84,26 @@ export class ComponentTemplateNode {
       ASTNode.push(this.templateNode.toAST());
     }
     return t.arrayExpression(ASTNode);
+  }
+}
+
+export class ReferenceComponentTemplateNode {
+  constructor(componentRefName, componentTemplateNode, propsArrayASTNode) {
+    this.componentTemplateNode = componentTemplateNode;
+    this.componentRefName = componentRefName;
+    this.propsArrayASTNode = propsArrayASTNode;
+  }
+
+  toAST() {
+    const componentRefIdentifier = t.identifier(this.componentRefName);
+    markNodeAsUsed(componentRefIdentifier);
+    let flags = REFERENCE_COMPONENT;
+
+    if (t.isArrayExpression(this.propsArrayASTNode)) {
+      flags |= HAS_STATIC_PROPS;
+    }
+
+    return t.arrayExpression([t.numericLiteral(flags), componentRefIdentifier, this.propsArrayASTNode]);
   }
 }
 
@@ -192,7 +218,6 @@ export class DynamicTextArrayTemplateNode {
 
 export class DynamicTextTemplateNode {
   constructor(valueIndex) {
-    debugger;
     this.valueIndex = valueIndex;
   }
 
