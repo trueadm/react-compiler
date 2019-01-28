@@ -11,7 +11,8 @@ export const TEMPLATE_FUNCTION_CALL = 6;
 export const MULTI_CONDITIONAL = 7;
 export const TEXT_ARRAY = 9;
 export const REFERENCE_COMPONENT = 10;
-export const REACT_NODE = 11;
+export const VNODE = 11;
+export const REFERENCE_VNODE = 12;
 
 export const HAS_STATIC_PROPS = 1 << 6;
 export const HAS_DYNAMIC_PROPS = 1 << 7;
@@ -118,13 +119,13 @@ export class StaticReactNode {
   }
 }
 
-export class DynamicReactNode {
+export class ReferenceVNode {
   constructor(valueIndex) {
     this.valueIndex = valueIndex;
   }
 
   toAST() {
-    debugger;
+    return t.arrayExpression([t.numericLiteral(REFERENCE_VNODE), t.numericLiteral(this.valueIndex)]);
   }
 }
 

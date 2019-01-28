@@ -54,8 +54,9 @@ export function createContext(defaultValue, calculateChangedBits) {
   return context;
 }
 
-export function createReactNode(t, v) {
+export function createReactNode(t, v, k) {
   return {
+    k: k === undefined ? null : k,
     t,
     v: v || null,
   };

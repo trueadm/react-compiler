@@ -57,12 +57,12 @@ import invariant from "../invariant";
 import * as t from "@babel/types";
 import { createOpcodesForCxMockCall } from "../mocks/cx";
 import {
-  DynamicReactNode,
   DynamicTextArrayTemplateNode,
   DynamicTextTemplateNode,
   DynamicValueTemplateNode,
   HostComponentTemplateNode,
   ReferenceComponentTemplateNode,
+  ReferenceVNode,
   StaticTextTemplateNode,
   StaticValueTemplateNode,
   TemplateFunctionCallTemplateNode,
@@ -327,7 +327,7 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
       );
     }
     const reactNodeValueIndex = getRuntimeValueIndex(refChildPath.node, state);
-    templateNode.children.push(new DynamicReactNode(reactNodeValueIndex));
+    templateNode.children.push(new ReferenceVNode(reactNodeValueIndex));
     return;
   }
   if (childTemplateNode instanceof DynamicValueTemplateNode) {
@@ -546,24 +546,20 @@ function hoistOpcodesNode(componentPath, state, opcodesNode) {
 }
 
 function createPropTemplateFromJSXElement(path, state, componentPath) {
-  const opcodes = [];
   const runtimeValues = new Map();
   const childState = { ...state, ...{ runtimeValues } };
-
-  createOpcodesForJSXElement(path, opcodes, childState, componentPath);
-
-  const hoistedOpcodes = hoistOpcodesNode(componentPath, state, normalizeOpcodes(opcodes));
+  const templateNode = compileJSXElement(path, childState, componentPath);
 
   state.helpers.add("createReactNode");
   if (runtimeValues.size === 0) {
-    return [t.callExpression(t.identifier("createReactNode"), [hoistedOpcodes]), true];
+    return [t.callExpression(t.identifier("createReactNode"), [templateNode.toAST()]), true];
   } else {
     const runtimeValuesArray = [];
     for (let [runtimeValue, { index }] of runtimeValues) {
       runtimeValuesArray[index] = runtimeValue;
     }
     return [
-      t.callExpression(t.identifier("createReactNode"), [hoistedOpcodes, t.arrayExpression(runtimeValuesArray)]),
+      t.callExpression(t.identifier("createReactNode"), [templateNode.toAST(), t.arrayExpression(runtimeValuesArray)]),
       false,
     ];
   }

@@ -25,6 +25,8 @@ export const TEMPLATE_FUNCTION_CALL = 6;
 export const MULTI_CONDITIONAL = 7;
 export const TEXT_ARRAY = 9;
 export const REFERENCE_COMPONENT = 10;
+export const VNODE = 11;
+export const REFERENCE_VNODE = 12;
 
 export const HAS_STATIC_PROPS = 1 << 6;
 export const HAS_DYNAMIC_PROPS = 1 << 7;
@@ -908,6 +910,12 @@ function renderTemplateFunctionCallTemplateToString(templateFunctionCallTemplate
   return renderTemplateToString(functionCallTemplateNode, functionCallValues, isOnlyChild, state);
 }
 
+function renderReferenceVNodeTemplateToString(referenceVNode, values, isOnlyChild, state) {
+  const vNodeValueIndex = referenceVNode[1];
+  const vNode = values[vNodeValueIndex];
+  return renderVNodeToString(vNode, isOnlyChild, state);
+}
+
 function renderFragmentTemplateToString(fragmentTemplate, values, isOnlyChild, state) {
   const fragment = fragmentTemplate[1];
   let fragmentString = "";
@@ -916,6 +924,18 @@ function renderFragmentTemplateToString(fragmentTemplate, values, isOnlyChild, s
     fragmentString += renderTemplateToString(fragment[i], values, false, state);
   }
   return fragmentString;
+}
+
+function renderVNodeToString(vNode, isOnlyChild, state) {
+  if (vNode === undefined || vNode === null) {
+    return "";
+  }
+  const templateNode = vNode.t;
+  let values = vNode.v;
+  if (values !== null) {
+    // TODO
+  }
+  return renderTemplateToString(templateNode, values, isOnlyChild, state);
 }
 
 function renderTemplateToString(templateNode, values, isOnlyChild, state) {
@@ -957,6 +977,8 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
       return renderTextArrayTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
     case REFERENCE_COMPONENT:
       return renderReferenceComponentTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
+    case REFERENCE_VNODE:
+      return renderReferenceVNodeTemplateToString(templateNode, values, isOnlyChild, state);
     default:
       throw new Error("Should never happen");
   }
