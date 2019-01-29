@@ -927,15 +927,26 @@ function renderFragmentTemplateToString(fragmentTemplate, values, isOnlyChild, s
 }
 
 function renderVNodeToString(vNode, isOnlyChild, state) {
-  if (vNode === undefined || vNode === null) {
+  if (vNode === undefined || vNode === null || typeof vNode === "boolean") {
     return "";
   }
-  const templateNode = vNode.t;
-  let values = vNode.v;
-  if (values !== null) {
-    // TODO
+  if (typeof vNode === "string" || typeof vNode === "number") {
+    return escapeText(vNode);
   }
-  return renderTemplateToString(templateNode, values, isOnlyChild, state);
+  if (isArray(vNode)) {
+    let str = "";
+    for (let i = 0, length = vNode.length; i < length; ++i) {
+      str += renderVNodeToString(vNode[i], false, state);
+    }
+    return str;
+  } else {
+    const templateNode = vNode.t;
+    let values = vNode.v;
+    if (values !== null) {
+      // TODO
+    }
+    return renderTemplateToString(templateNode, values, isOnlyChild, state);
+  }
 }
 
 function renderTemplateToString(templateNode, values, isOnlyChild, state) {
