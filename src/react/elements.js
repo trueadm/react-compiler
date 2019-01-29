@@ -124,8 +124,7 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
 
   if (propNameStr === "style") {
     if (t.isObjectExpression(valueRefPath.node)) {
-      createOpcodesForHostNodeStylesObject(hostNodeId, valuePath, valueRefPath, opcodes, state, componentPath);
-      return;
+      compileHostComponentStylesObject(templateNode, valuePath, valueRefPath, state, componentPath);
     } else if (t.isIdentifier(valueRefPath.node)) {
       if (t.isObjectTypeAnnotation(typeAnnotation)) {
         createOpcodesForHostNodeStylesIdentifier(
@@ -140,6 +139,7 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
         return;
       }
     }
+    return;
   }
   const runtimeValueHash = getRuntimeValueHash(state);
   let propTemplateNode;
@@ -405,12 +405,10 @@ function createOpcodesForHostNodeStylesIdentifier(
   pushOpcode(opcodes, "CLOSE_PROP_STYLE");
 }
 
-function createOpcodesForHostNodeStylesObject(hostNodeId, stylePath, stylePathRef, opcodes, state, componentPath) {
+function compileHostComponentStylesObject(templateNode, stylePath, stylePathRef, state, componentPath) {
   const propertiesPath = stylePathRef.get("properties");
 
-  pushOpcode(opcodes, "OPEN_PROP_STYLE");
   for (let propertyPath of propertiesPath) {
-    const propertyOpcodes = [];
     const node = propertyPath.node;
 
     if (!t.isObjectProperty(node)) {
@@ -430,36 +428,32 @@ function createOpcodesForHostNodeStylesObject(hostNodeId, stylePath, stylePathRe
     const propertyValueRef = getReferenceFromExpression(propertyValue, state);
     const runtimeValueHash = getRuntimeValueHash(state);
 
-    createOpcodesForNode(propertyValue, propertyValueRef, propertyOpcodes, state, componentPath, false, value => {
-      if (t.isStringLiteral(value) || t.isNumericLiteral(value) || t.isBooleanLiteral(value)) {
-        const isCustomProperty = styleName.indexOf("--") === 0;
-        const styleValue = dangerousStyleValue(styleName.value, value.value, isCustomProperty);
-
-        return t.stringLiteral(styleValue);
-      } else if (t.isNullLiteral(value) || (t.isUnaryExpression(value) && value.operator === "void")) {
-        return value;
-      } else {
-        return dangerousStyleValue(styleName, value, false);
-      }
-    });
+    const styleTemplateNode = compileNode(propertyValue, propertyValueRef, state, componentPath, false);
     const hyphenatedStyleName = hyphenateStyleName(styleName);
+    const isUnitless = isUnitlessNumber.has(styleName);
 
     // Static vs Dynamic style
-    if (isUnitlessNumber.has(styleName)) {
-      if (runtimeValueHash === getRuntimeValueHash(state)) {
-        pushOpcode(opcodes, "STATIC_PROP_UNITLESS_STYLE", [hyphenatedStyleName, ...propertyOpcodes]);
+    if (runtimeValueHash === getRuntimeValueHash(state)) {
+      if (styleTemplateNode instanceof StaticTextTemplateNode) {
+        templateNode.staticStyles.push([hyphenatedStyleName, styleTemplateNode.text + isUnitless ? "px" : ""]);
+      } else if (styleTemplateNode instanceof StaticValueTemplateNode) {
+        templateNode.staticStyles.push([hyphenatedStyleName, styleTemplateNode.value + isUnitless ? "px" : ""]);
       } else {
-        pushOpcode(opcodes, "DYNAMIC_PROP_UNITLESS_STYLE", [hyphenatedStyleName, ...propertyOpcodes]);
+        invariant(false, "TODO");
       }
+      templateNode.staticStyles.push(hyphenatedStyleName);
     } else {
-      if (runtimeValueHash === getRuntimeValueHash(state)) {
-        pushOpcode(opcodes, "STATIC_PROP_STYLE", [hyphenatedStyleName, ...propertyOpcodes]);
+      // TODO handle unitless
+      if (
+        styleTemplateNode instanceof DynamicTextTemplateNode ||
+        styleTemplateNode instanceof DynamicValueTemplateNode
+      ) {
+        templateNode.dynamicProps.push([hyphenatedStyleName, styleTemplateNode.valueIndex]);
       } else {
-        pushOpcode(opcodes, "DYNAMIC_PROP_STYLE", [hyphenatedStyleName, ...propertyOpcodes]);
+        invariant(false, "TODO");
       }
     }
   }
-  pushOpcode(opcodes, "CLOSE_PROP_STYLE");
 }
 
 function canInlineNode(path, state) {

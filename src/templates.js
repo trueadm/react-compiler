@@ -135,6 +135,8 @@ export class HostComponentTemplateNode {
     this.isVoidElement = isVoidElement;
     this.staticProps = [];
     this.dynamicProps = [];
+    this.staticStyles = [];
+    this.dynamicStyles = [];
     this.children = [];
     this.isStatic = false;
   }
