@@ -41,6 +41,7 @@ export const HAS_DYNAMIC_TEXT_ARRAY_CONTENT = 1 << 14;
 export const IS_STATIC = 1 << 15;
 export const IS_SVG = 1 << 16;
 export const IS_VOID = 1 << 17;
+export const HAS_HOOKS = 1 << 18;
 
 function renderReactNodeToString(node, isChild, runtimeValues, state, currentFiber) {
   if (node === null || node === undefined || typeof node === "boolean") {
@@ -727,7 +728,18 @@ function renderFunctionComponentTemplateToString(
       computeFunction = componentTemplate[1];
       childTemplateNode = componentTemplate[2];
     }
+    const hasHooks = (templateFlags & HAS_HOOKS) !== 0;
+
+    if (hasHooks === true) {
+      prepareToUseHooks(computeFunction);
+    }
     const componentValues = callComputeFunctionWithArray(computeFunction, componentProps);
+    if (hasHooks === true) {
+      finishHooks(computeFunction);
+    }
+    if (componentValues === null) {
+      return "";
+    }
     return renderTemplateToString(childTemplateNode, componentValues, isOnlyChild, state);
   }
   const childTemplateNode = componentTemplate[1];

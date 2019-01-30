@@ -27,6 +27,7 @@ export const HAS_DYNAMIC_TEXT_ARRAY_CONTENT = 1 << 14;
 export const IS_STATIC = 1 << 15;
 export const IS_SVG = 1 << 16;
 export const IS_VOID = 1 << 17;
+export const HAS_HOOKS = 1 << 18;
 
 function valueToBabelNode(value) {
   if (typeof value === "boolean") {
@@ -72,6 +73,9 @@ export class ComponentTemplateNode {
     let flag = this.isRootComponent ? ROOT_COMPONENT : COMPONENT;
     if (this.isStatic) {
       flag |= IS_STATIC;
+    }
+    if (this.usesHooks) {
+      flag |= HAS_HOOKS;
     }
     // TODO: Maybe change to hex if less bytes?
     ASTNode.push(t.numericLiteral(flag));
@@ -318,6 +322,17 @@ export class MultiConditionalTemplateNode {
       conditionsASTNodes.push(conditionTemplateNode.toAST());
     }
     return t.arrayExpression([t.numericLiteral(MULTI_CONDITIONAL), t.arrayExpression(conditionsASTNodes)]);
+  }
+}
+
+export class MultiReturnConditionalTemplateNode {
+  constructor() {
+    this.conditions = [];
+    this.isStatic = false;
+  }
+
+  toAST() {
+    debugger;
   }
 }
 

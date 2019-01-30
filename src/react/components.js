@@ -25,13 +25,7 @@ export function compileReactFunctionComponent(componentPath, state) {
     shapeOfPropsObject,
   );
 
-  const { computeFunctionRef, isStatic, templateNode } = compileReactComputeFunction(
-    componentPath,
-    state,
-    true,
-    null,
-    null,
-  );
+  const { computeFunctionRef, isStatic, templateNode } = compileReactComputeFunction(componentPath, state, true, null);
   componentTemplateNode.isStatic = isStatic;
   componentTemplateNode.computeFunctionRef = computeFunctionRef;
   componentTemplateNode.templateNode = templateNode;

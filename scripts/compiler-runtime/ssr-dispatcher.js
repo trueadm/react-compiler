@@ -1,13 +1,13 @@
 let firstWorkInProgressHook = null;
-let currentlyRenderingFiber = null;
+let currentlyRenderingComputeFunction = null;
 let isReRender = false;
 let workInProgressHook = null;
 
 function resolveCurrentlyRenderingFiber() {
-  if (currentlyRenderingFiber === null) {
+  if (currentlyRenderingComputeFunction === null) {
     throw new Error("Hooks can only be called inside the body of a function component.");
   }
-  return currentlyRenderingFiber;
+  return currentlyRenderingComputeFunction;
 }
 
 function createHook() {
@@ -73,13 +73,13 @@ function useState(initialState) {
   return useReducer(basicStateReducer, initialState);
 }
 
-export function prepareToUseHooks(currentFiber) {
-  currentlyRenderingFiber = currentFiber;
+export function prepareToUseHooks(currentComputeFunction) {
+  currentlyRenderingComputeFunction = currentComputeFunction;
 }
 
 export function finishHooks() {
   firstWorkInProgressHook = null;
-  currentlyRenderingFiber = null;
+  currentlyRenderingComputeFunction = null;
   isReRender = false;
   workInProgressHook = null;
 }

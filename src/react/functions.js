@@ -2,10 +2,11 @@ import { getReferenceFromExpression } from "../references";
 import { emptyObject, getComponentName, isPrimitive, isRootPathConditional, normalizeOpcodes } from "../utils";
 import { applyCachedRuntimeValues } from "../transforms";
 import { compileNode } from "../nodes";
+import { MultiReturnConditionalTemplateNode } from "../templates";
 import invariant from "../invariant";
 import * as t from "@babel/types";
 
-function compileTemplateBranch(templateBranch, templateBranchIndex, state, componentPath, processNodeValueFunc) {
+function compileTemplateBranch(templateBranch, templateBranchIndex, state, componentPath) {
   const runtimeValues = new Map();
   if (templateBranchIndex !== null) {
     runtimeValues.set(t.numericLiteral(templateBranchIndex), {
@@ -19,7 +20,7 @@ function compileTemplateBranch(templateBranch, templateBranchIndex, state, compo
   const path = isExplicitReturn ? templateBranch.path.get("argument") : templateBranch.path;
   const refPath = getReferenceFromExpression(path, state);
   const originalPathNode = path.node;
-  const templateNode = compileNode(path, refPath, childState, componentPath, true, processNodeValueFunc);
+  const templateNode = compileNode(path, refPath, childState, componentPath, true);
   const isStatic = runtimeValues.size === 0 && templateBranch.isConditional === false;
   templateNode.isStatic = isStatic;
   // replace branch with values array
@@ -47,10 +48,10 @@ function compileTemplateBranch(templateBranch, templateBranchIndex, state, compo
   return templateNode;
 }
 
-function compileTemplateBranches(templateBranches, computeFunction, state, functionPath, processNodeValueFunc) {
+function compileTemplateBranches(templateBranches, computeFunction, state, functionPath) {
   if (templateBranches.length === 1) {
     const templateBranch = templateBranches[0];
-    return compileTemplateBranch(templateBranch, null, state, functionPath, processNodeValueFunc);
+    return compileTemplateBranch(templateBranch, null, state, functionPath);
   } else {
     // Check how many non primitive roots we have
     const nonPrimitiveRoots = templateBranches.filter(branch => !branch.isPrimitive);
@@ -59,59 +60,37 @@ function compileTemplateBranches(templateBranches, computeFunction, state, funct
       // Optimization path, for where all roots, but one, are primitives. We don't need
       // to use a conditional root return.
       const templateBranch = nonPrimitiveRoots[0];
-      const [opcodesForTemplateBranch, isBranchStatic] = createOpcodesForTemplateBranch(
-        templateBranch,
-        null,
-        state,
-        functionPath,
-        processNodeValueFunc,
-      );
-      opcodes.push(...opcodesForTemplateBranch);
-      return isBranchStatic;
+      const templateBranchTemplateNode = compileTemplateBranch(templateBranch, null, state, functionPath);
+      return templateBranchTemplateNode;
     } else {
-      const opcodesTemplate = [];
-      const opcodesForTemplateBranches = [];
-      pushOpcode(opcodesTemplate, "CONDITIONAL_TEMPLATE");
-      const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
-      pushOpcodeValue(opcodesTemplate, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
-      const reconcilerValueIndexForBranchMountOpcodes = state.reconciler.valueIndex++;
-      pushOpcodeValue(opcodesTemplate, reconcilerValueIndexForBranchMountOpcodes, "BRANCH_OPCODES_VALUE_POINTER_INDEX");
+      const multiConditionalTemplateNode = new MultiReturnConditionalTemplateNode();
       let templateBranchIndex = 0;
       let isStatic = true;
 
       for (let templateBranch of templateBranches) {
         if (!templateBranch.isPrimitive) {
-          pushOpcodeValue(opcodesForTemplateBranches, templateBranchIndex, "CONDITIONAL_ROOT_INDEX");
-          const [opcodesForTemplateBranch, isBranchStatic] = createOpcodesForTemplateBranch(
+          const templateBranchTemplateNode = compileTemplateBranch(
             templateBranch,
             templateBranchIndex,
             state,
             functionPath,
-            processNodeValueFunc,
           );
-          if (!isBranchStatic) {
+          if (!templateBranch.isStatic) {
             isStatic = false;
           }
-          pushOpcodeValue(opcodesForTemplateBranches, normalizeOpcodes(opcodesForTemplateBranch));
+          multiConditionalTemplateNode.conditions.push([templateBranchIndex, templateBranchTemplateNode]);
           templateBranchIndex++;
         }
       }
-      if (!isStatic) {
-        const mergedOpcodes = [...opcodesTemplate, normalizeOpcodes(opcodesForTemplateBranches)];
-        opcodes.push(...mergedOpcodes);
+      if (isStatic) {
+        multiConditionalTemplateNode.isStatic = true;
       }
-      return isStatic;
+      return multiConditionalTemplateNode;
     }
   }
 }
 
-export function compileReactComputeFunction(
-  functionPath,
-  state,
-  isComponentFunction,
-  contextObjectRuntimeValueIndex,
-  processNodeValueFunc,
-) {
+export function compileReactComputeFunction(functionPath, state, isComponentFunction, contextObjectRuntimeValueIndex) {
   const computeFunction = functionPath.node;
   if (state.computeFunctionCache.has(computeFunction)) {
     return state.computeFunctionCache.get(computeFunction);
@@ -163,13 +142,7 @@ export function compileReactComputeFunction(
       runtimeConditionals,
     },
   };
-  const templateNode = compileTemplateBranches(
-    templateBranches,
-    computeFunction,
-    childState,
-    functionPath,
-    processNodeValueFunc,
-  );
+  const templateNode = compileTemplateBranches(templateBranches, computeFunction, childState, functionPath);
   const isStatic = templateNode.isStatic;
 
   let computeFunctionRef = null;
