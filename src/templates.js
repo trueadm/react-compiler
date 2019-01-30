@@ -5,10 +5,11 @@ export const ROOT_COMPONENT = 0;
 export const COMPONENT = 1;
 export const HOST_COMPONENT = 2;
 export const TEXT = 3;
-export const FRAGMENT = 4;
-export const CONDITIONAL = 5;
-export const TEMPLATE_FUNCTION_CALL = 6;
-export const MULTI_CONDITIONAL = 7;
+export const VALUE = 4;
+export const FRAGMENT = 5;
+export const CONDITIONAL = 6;
+export const TEMPLATE_FUNCTION_CALL = 7;
+export const MULTI_CONDITIONAL = 8;
 export const TEXT_ARRAY = 9;
 export const REFERENCE_COMPONENT = 10;
 export const VNODE = 11;
@@ -16,14 +17,16 @@ export const REFERENCE_VNODE = 12;
 
 export const HAS_STATIC_PROPS = 1 << 6;
 export const HAS_DYNAMIC_PROPS = 1 << 7;
-export const HAS_CHILD = 1 << 8;
-export const HAS_CHILDREN = 1 << 9;
-export const HAS_STATIC_TEXT_CONTENT = 1 << 10;
-export const HAS_DYNAMIC_TEXT_CONTENT = 1 << 11;
-export const HAS_DYNAMIC_TEXT_ARRAY_CONTENT = 1 << 12;
-export const IS_STATIC = 1 << 13;
-export const IS_SVG = 1 << 14;
-export const IS_VOID = 1 << 15;
+export const HAS_STATIC_STYLES = 1 << 8;
+export const HAS_DYNAMIC_STYLES = 1 << 9;
+export const HAS_CHILD = 1 << 10;
+export const HAS_CHILDREN = 1 << 11;
+export const HAS_STATIC_TEXT_CONTENT = 1 << 12;
+export const HAS_DYNAMIC_TEXT_CONTENT = 1 << 13;
+export const HAS_DYNAMIC_TEXT_ARRAY_CONTENT = 1 << 14;
+export const IS_STATIC = 1 << 15;
+export const IS_SVG = 1 << 16;
+export const IS_VOID = 1 << 17;
 
 function valueToBabelNode(value) {
   if (typeof value === "boolean") {
@@ -145,10 +148,12 @@ export class HostComponentTemplateNode {
     const ASTNode = [];
     const hasStaticProps = this.staticProps.length !== 0;
     const hasDynamicProps = this.dynamicProps.length !== 0;
+    const hasStaticStyles = this.staticStyles.length !== 0;
     const childrenLength = this.children.length;
     let flag = HOST_COMPONENT;
     let staticPropsASTNode = null;
     let dynamicPropsASTNode = null;
+    let staticStylesASTNode = null;
     let childrenASTNode = null;
 
     if (this.isStatic) {
@@ -164,6 +169,14 @@ export class HostComponentTemplateNode {
         staticPropASTNodes.push(t.stringLiteral(propName), valueToBabelNode(propValue));
       }
       staticPropsASTNode = t.arrayExpression(staticPropASTNodes);
+    }
+    if (hasStaticStyles) {
+      flag |= HAS_STATIC_STYLES;
+      const staticStylesASTNodes = [];
+      for (let [propName, propValue] of this.staticStyles) {
+        staticStylesASTNodes.push(t.stringLiteral(propName), valueToBabelNode(propValue));
+      }
+      staticStylesASTNode = t.arrayExpression(staticStylesASTNodes);
     }
     if (hasDynamicProps) {
       flag |= HAS_DYNAMIC_PROPS;
@@ -209,6 +222,9 @@ export class HostComponentTemplateNode {
 
     if (staticPropsASTNode !== null) {
       ASTNode.push(staticPropsASTNode);
+    }
+    if (staticStylesASTNode !== null) {
+      ASTNode.push(staticStylesASTNode);
     }
     if (dynamicPropsASTNode !== null) {
       ASTNode.push(dynamicPropsASTNode);
@@ -256,7 +272,7 @@ export class StaticValueTemplateNode {
   }
 
   toAST() {
-    debugger;
+    return t.arrayExpression([t.numericLiteral(VALUE | IS_STATIC), valueToBabelNode(this.value)]);
   }
 }
 

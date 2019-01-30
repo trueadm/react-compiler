@@ -2,8 +2,14 @@ var React = require("react");
 
 function Component() {
   return (
-    <div style={null}>
-      <div style={{ color: "red", backgroundColor: "black" }}>Hello world</div>
+    <div>
+      <div>Hello</div>
+      <br />
+      <span>world</span>
+      Random text!
+      {"More text!"}
+      {123}
+      <custom-element>123</custom-element>
     </div>
   );
 }

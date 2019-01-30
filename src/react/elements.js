@@ -296,6 +296,14 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
   if (childTemplateNode === null) {
     return;
   }
+  if (childTemplateNode instanceof StaticValueTemplateNode) {
+    const value = childTemplateNode.value;
+
+    if (typeof value === "string" || typeof value === "number") {
+      templateNode.children.push(new StaticTextTemplateNode(value));
+    }
+    return;
+  }
   if (
     childTemplateNode instanceof HostComponentTemplateNode ||
     childTemplateNode instanceof StaticTextTemplateNode ||
@@ -435,20 +443,24 @@ function compileHostComponentStylesObject(templateNode, stylePath, stylePathRef,
     // Static vs Dynamic style
     if (runtimeValueHash === getRuntimeValueHash(state)) {
       if (styleTemplateNode instanceof StaticTextTemplateNode) {
-        templateNode.staticStyles.push([hyphenatedStyleName, styleTemplateNode.text + isUnitless ? "px" : ""]);
+        templateNode.staticStyles.push([hyphenatedStyleName, styleTemplateNode.text]);
       } else if (styleTemplateNode instanceof StaticValueTemplateNode) {
-        templateNode.staticStyles.push([hyphenatedStyleName, styleTemplateNode.value + isUnitless ? "px" : ""]);
+        let value = styleTemplateNode.value;
+
+        if (typeof value === "number" && !isUnitless) {
+          value = `${value}px`;
+        }
+        templateNode.staticStyles.push([hyphenatedStyleName, value]);
       } else {
         invariant(false, "TODO");
       }
-      templateNode.staticStyles.push(hyphenatedStyleName);
     } else {
       // TODO handle unitless
       if (
         styleTemplateNode instanceof DynamicTextTemplateNode ||
         styleTemplateNode instanceof DynamicValueTemplateNode
       ) {
-        templateNode.dynamicProps.push([hyphenatedStyleName, styleTemplateNode.valueIndex]);
+        templateNode.dynamicStyles.push([hyphenatedStyleName, styleTemplateNode.valueIndex]);
       } else {
         invariant(false, "TODO");
       }

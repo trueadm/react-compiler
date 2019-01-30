@@ -1,2 +1,2 @@
-var Component = [8192, [8450, "div", [1026, "div", "Hello world"]]];
+var Component = [32768, [34818, "div", [[4098, "div", "Hello"], [131074, "br"], [4098, "span", "world"], [32771, "Random text!"], [32771, "More text!"], [4098, "custom-element", "123"]]]];
 module["exports"] = Component;
