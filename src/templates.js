@@ -14,6 +14,7 @@ export const TEXT_ARRAY = 9;
 export const REFERENCE_COMPONENT = 10;
 export const VNODE = 11;
 export const REFERENCE_VNODE = 12;
+export const MULTI_RETURN_CONDITIONAL = 13;
 
 export const HAS_STATIC_PROPS = 1 << 6;
 export const HAS_DYNAMIC_PROPS = 1 << 7;
@@ -332,7 +333,11 @@ export class MultiReturnConditionalTemplateNode {
   }
 
   toAST() {
-    debugger;
+    const multiReturnASTNodes = [t.numericLiteral(MULTI_RETURN_CONDITIONAL)];
+    for (let [valueIndex, templateNode] of this.conditions) {
+      multiReturnASTNodes.push(t.numericLiteral(valueIndex), templateNode.toAST());
+    }
+    return t.arrayExpression(multiReturnASTNodes);
   }
 }
 
