@@ -265,6 +265,7 @@ function assertNode(a, b) {
   if (a.type === b.type) {
     if (a.type === "document") {
       if (a.children.length !== b.children.length) {
+        debugger;
         return false;
       }
       for (let i = 0; i < a.children.length; i++) {
@@ -278,6 +279,13 @@ function assertNode(a, b) {
         if (b.attr !== null) {
           for (let key in a.attr) {
             if (a.attr[key] !== b.attr[key]) {
+              debugger;
+              return false;
+            }
+          }
+          for (let key in b.attr) {
+            if (a.attr[key] !== b.attr[key]) {
+              debugger;
               return false;
             }
           }
@@ -298,10 +306,12 @@ function assertNode(a, b) {
       }
     } else if (a.type === "text") {
       if (a.data !== b.data) {
+        debugger;
         return false;
       }
     } else if (a.type === "comment") {
       if (a.data !== b.data) {
+        debugger;
         return false;
       }
     }

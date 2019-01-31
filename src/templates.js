@@ -129,6 +129,7 @@ export class StaticReactNode {
 
 export class ReferenceVNode {
   constructor(valueIndex) {
+    debugger;
     this.valueIndex = valueIndex;
   }
 
@@ -186,8 +187,12 @@ export class HostComponentTemplateNode {
     if (hasDynamicProps) {
       flag |= HAS_DYNAMIC_PROPS;
       const dynamicPropASTNodes = [];
-      for (let [propName, valueIndex] of this.dynamicProps) {
-        dynamicPropASTNodes.push(t.stringLiteral(propName), t.numericLiteral(valueIndex));
+      for (let [propName, propInformation, valueIndex] of this.dynamicProps) {
+        dynamicPropASTNodes.push(
+          t.stringLiteral(propName),
+          t.numericLiteral(propInformation),
+          t.numericLiteral(valueIndex),
+        );
       }
       dynamicPropsASTNode = t.arrayExpression(dynamicPropASTNodes);
     }
@@ -334,8 +339,8 @@ export class MultiReturnConditionalTemplateNode {
 
   toAST() {
     const multiReturnASTNodes = [t.numericLiteral(MULTI_RETURN_CONDITIONAL)];
-    for (let [valueIndex, templateNode] of this.conditions) {
-      multiReturnASTNodes.push(t.numericLiteral(valueIndex), templateNode.toAST());
+    for (let [branchIndex, templateNode] of this.conditions) {
+      multiReturnASTNodes.push(t.numericLiteral(branchIndex), templateNode.toAST());
     }
     return t.arrayExpression(multiReturnASTNodes);
   }

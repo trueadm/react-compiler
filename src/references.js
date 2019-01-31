@@ -321,6 +321,7 @@ function recursivelyGetReferenceFromExpression(path, state, visitedBindings, err
     // TODO: handle this properly
     return path;
   } else {
+    debugger;
     throw new Error("TODO");
   }
 }

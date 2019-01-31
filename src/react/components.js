@@ -24,6 +24,7 @@ export function compileReactFunctionComponent(componentPath, state) {
     typeAnnotation,
     shapeOfPropsObject,
   );
+  state.compiledComponentCache.set(name, componentTemplateNode);
 
   const { computeFunctionRef, isStatic, templateNode } = compileReactComputeFunction(componentPath, state, true, null);
   componentTemplateNode.isStatic = isStatic;
@@ -59,46 +60,55 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
   if (t.isFunctionDeclaration(computeFunction)) {
     const identifier = t.identifier(name);
     markNodeAsUsed(identifier);
-    // if (isRootComponent) {
-    if (isStatic) {
-      componentPath.replaceWith(t.variableDeclaration("var", [t.variableDeclarator(identifier, templateAST)]));
-    } else {
-      const opcodesArrayDeclaration = t.variableDeclaration("var", [t.variableDeclarator(identifier, templateAST)]);
-      if (
-        t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
-        t.isExportNamedDeclaration(componentPath.parentPath.node)
-      ) {
-        const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
-          ? t.exportDefaultDeclaration(opcodesArrayDeclaration)
-          : t.exportNamedDeclaration(opcodesArrayDeclaration, []);
-        componentPath.parentPath.replaceWithMultiple([computeFunction, exportNode]);
+    if (isRootComponent) {
+      if (isStatic) {
+        componentPath.replaceWith(t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]));
       } else {
-        componentPath.replaceWithMultiple([computeFunction, opcodesArrayDeclaration]);
+        const opcodesArrayDeclaration = t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]);
+        if (
+          t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
+          t.isExportNamedDeclaration(componentPath.parentPath.node)
+        ) {
+          const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
+            ? t.exportDefaultDeclaration(opcodesArrayDeclaration)
+            : t.exportNamedDeclaration(opcodesArrayDeclaration, []);
+          componentPath.parentPath.replaceWithMultiple([computeFunction, exportNode]);
+        } else {
+          componentPath.replaceWithMultiple([computeFunction, opcodesArrayDeclaration]);
+        }
+      }
+    } else {
+      const lazyIdentifier = t.identifier("__cached__" + name);
+      markNodeAsUsed(lazyIdentifier);
+      const lazyDeclaration = t.variableDeclaration("let", [t.variableDeclarator(lazyIdentifier)]);
+      const arrayWrapperFunction = t.functionDeclaration(
+        identifier,
+        [],
+        t.blockStatement([
+          t.returnStatement(
+            t.logicalExpression("||", lazyIdentifier, t.assignmentExpression("=", lazyIdentifier, templateAST)),
+          ),
+        ]),
+      );
+
+      if (isStatic) {
+        componentPath.replaceWithMultiple([lazyDeclaration, arrayWrapperFunction]);
+      } else {
+        if (
+          t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
+          t.isExportNamedDeclaration(componentPath.parentPath.node)
+        ) {
+          const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
+            ? t.exportDefaultDeclaration(arrayWrapperFunction)
+            : t.exportNamedDeclaration(arrayWrapperFunction, []);
+          componentPath.parentPath.replaceWithMultiple([computeFunction, lazyDeclaration, exportNode]);
+        } else {
+          componentPath.replaceWithMultiple([computeFunction, lazyDeclaration, arrayWrapperFunction]);
+        }
       }
     }
-    // } else {
-    //   const arrayWrapperFunction = t.functionDeclaration(
-    //     identifier,
-    //     [],
-    //     t.blockStatement([t.returnStatement(templateAST)]),
-    //   );
-    //   if (isStatic) {
-    //     componentPath.replaceWith(arrayWrapperFunction);
-    //   } else {
-    //     if (
-    //       t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
-    //       t.isExportNamedDeclaration(componentPath.parentPath.node)
-    //     ) {
-    //       const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
-    //         ? t.exportDefaultDeclaration(arrayWrapperFunction)
-    //         : t.exportNamedDeclaration(arrayWrapperFunction, []);
-    //       componentPath.parentPath.replaceWithMultiple([computeFunction, exportNode]);
-    //     } else {
-    //       componentPath.replaceWithMultiple([computeFunction, arrayWrapperFunction]);
-    //     }
-    //   }
-    // }
   } else {
+    debugger;
     const parentPath = componentPath.parentPath;
 
     if (t.isVariableDeclarator(parentPath.node) && t.isIdentifier(parentPath.node.id)) {

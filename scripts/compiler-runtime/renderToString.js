@@ -44,6 +44,8 @@ export const IS_SVG = 1 << 16;
 export const IS_VOID = 1 << 17;
 export const HAS_HOOKS = 1 << 18;
 
+const PROP_IS_EVENT = 1;
+
 function renderReactNodeToString(node, isChild, runtimeValues, state, currentFiber) {
   if (node === null || node === undefined || typeof node === "boolean") {
     return;
@@ -773,7 +775,8 @@ function renderReferenceComponentTemplateToString(
   state,
 ) {
   const templateFlags = templateTypeAndFlags & ~0x3f;
-  const componentTemplateNode = referenceComponentTemplate[1];
+  const componentTemplateNodeLazyFunc = referenceComponentTemplate[1];
+  const componentTemplateNode = componentTemplateNodeLazyFunc();
   let props;
 
   if ((templateFlags & HAS_STATIC_PROPS) !== 0) {
@@ -799,12 +802,12 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
 
     for (let i = 0, length = staticProps.length; i < length; i += 2) {
       let propName = staticProps[i];
-      const staticPropValue = staticProps[i + 1];
+      let staticPropValue = staticProps[i + 1];
       if (propName === "className") {
         propName = "class";
-      } else if (propName === "style") {
-        // TODO
-        continue;
+      }
+      if (typeof staticPropValue === "boolean") {
+        staticPropValue = "";
       }
       inner += ` ${propName}="${staticPropValue}"`;
     }
@@ -822,20 +825,25 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
   if ((templateFlags & HAS_DYNAMIC_PROPS) !== 0) {
     const dynamicProps = hostComponentTemplate[childrenTemplateIndex++];
 
-    for (let i = 0, length = dynamicProps.length; i < length; i += 2) {
+    for (let i = 0, length = dynamicProps.length; i < length; i += 3) {
       let propName = dynamicProps[i];
       const dynamicPropValueIndex = dynamicProps[i + 1];
+      const dynamicPropFlags = dynamicProps[i + 1];
       const dynamicPropValue = values[dynamicPropValueIndex];
 
-      if (dynamicPropValue !== null && dynamicPropValue !== undefined) {
-        if (propName === "className") {
-          propName = "class";
-        } else if (propName === "style") {
-          // TODO
-          continue;
-        }
-        inner += ` ${propName}="${escapeText(dynamicPropValue)}"`;
+      if ((dynamicPropFlags & PROP_IS_EVENT) !== 0) {
+        continue;
       }
+      if (dynamicPropValue === null || dynamicPropValue === undefined) {
+        continue;
+      }
+      if (propName === "className") {
+        propName = "class";
+      } else if (propName === "style") {
+        // TODO
+        continue;
+      }
+      inner += ` ${propName}="${escapeText(dynamicPropValue)}"`;
     }
   }
   if (styles !== "") {
@@ -884,6 +892,17 @@ function renderTextTemplateToString(templateTypeAndFlags, textTemplate, values, 
     }
   }
   return text;
+}
+
+function renderValueTemplateToString(templateTypeAndFlags, textTemplate, values, isOnlyChild, state) {
+  const templateFlags = templateTypeAndFlags & ~0x3f;
+  const isStatic = (templateFlags & IS_STATIC) !== 0;
+  const value = isStatic === true ? textTemplate[1] : escapeText(values[textTemplate[1]]);
+
+  if (value === null || value === undefined) {
+    return "";
+  }
+  throw new Error("TODO renderValueTemplateToString");
 }
 
 function renderTextArrayTemplateToString(templateTypeAndFlags, textTemplate, values, isOnlyChild, state) {
@@ -976,6 +995,19 @@ function renderVNodeToString(vNode, isOnlyChild, state) {
   }
 }
 
+function renderMultiReturnConditionalTemplateToString(templateNode, values, isOnlyChild, state) {
+  const conditionBranchToUseKey = values[0];
+
+  for (let i = 1; i < templateNode.length; i += 2) {
+    const branchIndex = templateNode[i];
+
+    if (branchIndex === conditionBranchToUseKey) {
+      const branchTemplateNode = templateNode[i + 1];
+      return renderTemplateToString(branchTemplateNode, values, isOnlyChild, state);
+    }
+  }
+}
+
 function renderTemplateToString(templateNode, values, isOnlyChild, state) {
   const templateTypeAndFlags = templateNode[0];
   const templateType = templateTypeAndFlags & 0x3f;
@@ -1003,6 +1035,8 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
       return renderHostComponentTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
     case TEXT:
       return renderTextTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
+    case VALUE:
+      return renderValueTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
     case FRAGMENT:
       return renderFragmentTemplateToString(templateNode, values, isOnlyChild, state);
     case CONDITIONAL:
@@ -1017,6 +1051,8 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
       return renderReferenceComponentTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
     case REFERENCE_VNODE:
       return renderReferenceVNodeTemplateToString(templateNode, values, isOnlyChild, state);
+    case MULTI_RETURN_CONDITIONAL:
+      return renderMultiReturnConditionalTemplateToString(templateNode, values, isOnlyChild, state);
     default:
       throw new Error("Should never happen");
   }

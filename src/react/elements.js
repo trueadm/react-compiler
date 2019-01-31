@@ -67,6 +67,7 @@ import {
   StaticValueTemplateNode,
   TemplateFunctionCallTemplateNode,
   FragmentTemplateNode,
+  MultiReturnConditionalTemplateNode,
 } from "../templates";
 
 const emptyPlaceholderNode = t.nullLiteral();
@@ -145,6 +146,8 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
   let propTemplateNode;
 
   if (isFbCxCall(valuePath, state)) {
+    debugger;
+    // Need to change this
     createOpcodesForCxMockCall(valueRefPath, attributeOpcodes, state);
   } else {
     propTemplateNode = compileNode(valuePath, valueRefPath, state, componentPath, false);
@@ -154,7 +157,7 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
   if (t.isCallExpression(valueRefPath.node) && propTemplateNode instanceof TemplateFunctionCallTemplateNode) {
     isPartialTemplate = true;
   }
-  const [propName, propInformation, eventInformation] = getPropInformation(propNameStr, isPartialTemplate);
+  const [propName, propInformation] = getPropInformation(propNameStr, isPartialTemplate);
 
   // Static vs dynamic
   if (!isPartialTemplate && runtimeValueHash === getRuntimeValueHash(state)) {
@@ -173,7 +176,9 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
     if (propTemplateNode instanceof StaticTextTemplateNode) {
       templateNode.staticProps.push([propName, propTemplateNode.text]);
     } else if (propTemplateNode instanceof StaticValueTemplateNode) {
-      templateNode.staticProps.push([propName, propTemplateNode.value]);
+      if (propTemplateNode.value !== undefined && propTemplateNode.value !== null) {
+        templateNode.staticProps.push([propName, propTemplateNode.value]);
+      }
     } else {
       debugger;
       invariant(false, "TODO");
@@ -192,7 +197,7 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
       return;
     }
     if (propTemplateNode instanceof DynamicTextTemplateNode || propTemplateNode instanceof DynamicValueTemplateNode) {
-      templateNode.dynamicProps.push([propName, propTemplateNode.valueIndex]);
+      templateNode.dynamicProps.push([propName, propInformation, propTemplateNode.valueIndex]);
     } else {
       invariant(false, "TODO");
     }
@@ -300,7 +305,7 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
     const value = childTemplateNode.value;
 
     if (typeof value === "string" || typeof value === "number") {
-      templateNode.children.push(new StaticTextTemplateNode(value));
+      templateNode.children.push(new StaticTextTemplateNode(value + ""));
     }
     return;
   }
@@ -309,7 +314,8 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
     childTemplateNode instanceof StaticTextTemplateNode ||
     childTemplateNode instanceof DynamicTextTemplateNode ||
     childTemplateNode instanceof TemplateFunctionCallTemplateNode ||
-    childTemplateNode instanceof ReferenceComponentTemplateNode
+    childTemplateNode instanceof ReferenceComponentTemplateNode ||
+    childTemplateNode instanceof MultiReturnConditionalTemplateNode
   ) {
     templateNode.children.push(childTemplateNode);
     return;
@@ -1026,8 +1032,7 @@ function compileCompositeComponent(path, componentName, attributesPath, children
     externalModuleState.isRootComponent = false;
   }
   if (compiledComponentCache.has(componentName)) {
-    // TODO re-add this logic
-    // componentTemplateNode = compiledComponentCache.get(componentName);
+    componentTemplateNode = compiledComponentCache.get(componentName);
   } else {
     if (binding === undefined) {
       throw new Error(

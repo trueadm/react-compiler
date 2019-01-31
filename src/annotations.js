@@ -201,9 +201,10 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
       }
     }
 
-    if (!failed) {
+    if (!failed && currentAnnotation !== undefined) {
       return t.arrayTypeAnnotation(currentAnnotation);
     }
+    return t.arrayTypeAnnotation(t.anyTypeAnnotation());
   } else if (t.isObjectPattern(node) || t.isObjectExpression(node)) {
     const annotation = path.getTypeAnnotation();
 

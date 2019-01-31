@@ -1,5 +1,5 @@
 import { getReferenceFromExpression } from "../references";
-import { emptyObject, getComponentName, isPrimitive, isRootPathConditional, normalizeOpcodes } from "../utils";
+import { emptyObject, getComponentName, isPrimitive, isRootPathConditional } from "../utils";
 import { applyCachedRuntimeValues } from "../transforms";
 import { compileNode } from "../nodes";
 import { MultiReturnConditionalTemplateNode } from "../templates";

@@ -1,22 +1,7 @@
 import * as t from "@babel/types";
 import invariant from "../invariant";
 
-const PropFlagPartialTemplate = 1;
-const PropFlagReactEvent = 1 << 1; // starts with on
-const PropFlagReactCapturedEvent = 1 << 2;
-const PropFlagReserved = 1 << 3;
-const PropFlagString = 1 << 4;
-const PropFlagBooleanishString = 1 << 5;
-const PropFlagBoolean = 1 << 6;
-const PropFlagOverloadedBoolean = 1 << 7;
-const PropFlagNumeric = 1 << 8;
-const PropFlagPositiveNumeric = 1 << 9;
-const PropFlagMustUseProperty = 1 << 10;
-// const PropFlagXlinkNamespace = 1 << 9;
-// const PropFlagXmlNamespace = 1 << 10;
-
-const EventFlagBubbles = 1;
-const EventFlagTwoPhase = 1 << 1;
+const PROP_IS_EVENT = 1;
 
 const reservedProps = new Set([
   "children",
@@ -223,7 +208,7 @@ const eventPropsToEventNames = new Map([
     {
       catpuredEvent: false,
       propNameToUse: "click",
-      eventInformationFlag: EventFlagBubbles | EventFlagTwoPhase,
+      // eventInformationFlag: EventFlagBubbles | EventFlagTwoPhase,
     },
   ],
   [
@@ -231,7 +216,7 @@ const eventPropsToEventNames = new Map([
     {
       catpuredEvent: true,
       propNameToUse: "click",
-      eventInformationFlag: EventFlagBubbles | EventFlagTwoPhase,
+      // eventInformationFlag: EventFlagBubbles | EventFlagTwoPhase,
     },
   ],
 ]);
@@ -246,59 +231,59 @@ function isReactEvent(name) {
 export function getPropInformation(propName, isPartialTemplate) {
   let propInformationFlag = 0;
   let propNameToUse = propName;
-  let eventInformationFlag = null;
 
   if (isPartialTemplate) {
-    propInformationFlag = propInformationFlag | PropFlagPartialTemplate;
+    debugger;
+    // TODO
+    // propInformationFlag = propInformationFlag | PropFlagPartialTemplate;
   }
   if (isReactEvent(propName)) {
     const propData = eventPropsToEventNames.get(propNameToUse);
 
-    propInformationFlag = propInformationFlag | PropFlagReactEvent;
+    propInformationFlag = propInformationFlag | PROP_IS_EVENT;
     if (propData !== undefined) {
-      eventInformationFlag = propData.eventInformationFlag;
+      // const eventInformationFlag = propData.eventInformationFlag || 0;
       propNameToUse = propData.propNameToUse;
       if (propData.catpuredEvent) {
-        propInformationFlag = propInformationFlag | PropFlagReactCapturedEvent;
+        // propInformationFlag = propInformationFlag | PropFlagReactCapturedEvent | eventInformationFlag;
       }
     } else {
-      eventInformationFlag = 0;
       propNameToUse = propName;
     }
   }
   if (reservedProps.has(propName)) {
-    propInformationFlag = propInformationFlag | PropFlagReserved;
+    // propInformationFlag = propInformationFlag | PropFlagReserved;
   }
   if (mustUsePropertyProps.has(propName)) {
-    propInformationFlag = propInformationFlag | PropFlagMustUseProperty;
+    // propInformationFlag = propInformationFlag | PropFlagMustUseProperty;
   }
   if (booleanishStringProps.has(propName)) {
-    propInformationFlag = propInformationFlag | PropFlagBooleanishString;
+    // propInformationFlag = propInformationFlag | PropFlagBooleanishString;
   }
   if (booleanProps.has(propName)) {
-    propInformationFlag = propInformationFlag | PropFlagBoolean;
+    // propInformationFlag = propInformationFlag | PropFlagBoolean;
   }
   if (overloadedBooleanProps.has(propName)) {
-    propInformationFlag = propInformationFlag | PropFlagOverloadedBoolean;
+    // propInformationFlag = propInformationFlag | PropFlagOverloadedBoolean;
   }
   if (numericProps.has(propName)) {
-    propInformationFlag = propInformationFlag | PropFlagNumeric;
+    // propInformationFlag = propInformationFlag | PropFlagNumeric;
   }
   if (positiveNumericProps.has(propName)) {
-    propInformationFlag = propInformationFlag | PropFlagPositiveNumeric;
+    // propInformationFlag = propInformationFlag | PropFlagPositiveNumeric;
   }
   if (stringProps.has(propName)) {
     propNameToUse = stringProps.get(propName);
-    propInformationFlag = propInformationFlag | PropFlagString;
+    // propInformationFlag = propInformationFlag | PropFlagString;
   }
   if (svgStringProps.has(propName)) {
-    propInformationFlag = propInformationFlag | PropFlagString;
+    // propInformationFlag = propInformationFlag | PropFlagString;
   }
   if (lowerCaseProps.has(propName)) {
     propNameToUse = propName.toLowerCase();
   }
 
-  return [propNameToUse, propInformationFlag, eventInformationFlag];
+  return [propNameToUse, propInformationFlag];
 }
 
 export function transformStaticOpcodes(opcodes, propInformation) {
