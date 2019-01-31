@@ -293,9 +293,11 @@ function assertNode(a, b) {
           return false;
         }
       } else if (b.attr !== null) {
+        debugger;
         return false;
       }
       if (a.children.length !== b.children.length) {
+        debugger;
         return false;
       }
       for (let i = 0; i < a.children.length; i++) {

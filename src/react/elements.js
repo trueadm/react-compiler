@@ -67,7 +67,6 @@ import {
   StaticValueTemplateNode,
   TemplateFunctionCallTemplateNode,
   FragmentTemplateNode,
-  MultiReturnConditionalTemplateNode,
 } from "../templates";
 
 const emptyPlaceholderNode = t.nullLiteral();
@@ -174,10 +173,10 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
       return;
     }
     if (propTemplateNode instanceof StaticTextTemplateNode) {
-      templateNode.staticProps.push([propName, propTemplateNode.text]);
+      templateNode.staticProps.push([propName, propInformation, propTemplateNode.text]);
     } else if (propTemplateNode instanceof StaticValueTemplateNode) {
       if (propTemplateNode.value !== undefined && propTemplateNode.value !== null) {
-        templateNode.staticProps.push([propName, propTemplateNode.value]);
+        templateNode.staticProps.push([propName, propInformation, propTemplateNode.value]);
       }
     } else {
       debugger;
@@ -314,8 +313,7 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
     childTemplateNode instanceof StaticTextTemplateNode ||
     childTemplateNode instanceof DynamicTextTemplateNode ||
     childTemplateNode instanceof TemplateFunctionCallTemplateNode ||
-    childTemplateNode instanceof ReferenceComponentTemplateNode ||
-    childTemplateNode instanceof MultiReturnConditionalTemplateNode
+    childTemplateNode instanceof ReferenceComponentTemplateNode
   ) {
     templateNode.children.push(childTemplateNode);
     return;
@@ -371,10 +369,17 @@ function compiledReactCreateElementFragment(args, state, componentPath, isRoot) 
   return compileReactFragment(children, state, componentPath, isRoot);
 }
 
-function compileReactFragment(children, state, componentPath, isRoot) {
+function compileReactFragment(childrenPath, state, componentPath, isRoot) {
   const fragment = [];
-  for (let i = 0; i < children.length; i++) {
-    const child = children[i];
+  const filteredChildrenPath = childrenPath.filter(childPath => {
+    if (t.isJSXText(childPath.node) && handleWhiteSpace(childPath.node.value) === "") {
+      return false;
+    }
+    return true;
+  });
+
+  for (let i = 0; i < filteredChildrenPath.length; i++) {
+    const child = filteredChildrenPath[i];
     const childTemplateNode = compileNode(child, child, state, componentPath, isRoot);
 
     if (childTemplateNode !== null) {
@@ -453,7 +458,7 @@ function compileHostComponentStylesObject(templateNode, stylePath, stylePathRef,
       } else if (styleTemplateNode instanceof StaticValueTemplateNode) {
         let value = styleTemplateNode.value;
 
-        if (typeof value === "number" && !isUnitless) {
+        if (typeof value === "number" && !isUnitless && value !== 0) {
           value = `${value}px`;
         }
         templateNode.staticStyles.push([hyphenatedStyleName, value]);

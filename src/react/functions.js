@@ -5,6 +5,7 @@ import { compileNode } from "../nodes";
 import { MultiReturnConditionalTemplateNode } from "../templates";
 import invariant from "../invariant";
 import * as t from "@babel/types";
+import { StaticValueTemplateNode } from "../../lib/templates";
 
 function compileTemplateBranch(templateBranch, templateBranchIndex, state, componentPath) {
   const runtimeValues = new Map();
@@ -83,7 +84,7 @@ function compileTemplateBranches(templateBranches, computeFunction, state, funct
         }
       }
       if (isStatic) {
-        multiConditionalTemplateNode.isStatic = true;
+        return new StaticValueTemplateNode(null);
       }
       return multiConditionalTemplateNode;
     }

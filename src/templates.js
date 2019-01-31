@@ -119,6 +119,7 @@ export class ReferenceComponentTemplateNode {
 
 export class StaticReactNode {
   constructor() {
+    this.isStatic = true;
     // TODO
   }
 
@@ -171,8 +172,12 @@ export class HostComponentTemplateNode {
     if (hasStaticProps) {
       flag |= HAS_STATIC_PROPS;
       const staticPropASTNodes = [];
-      for (let [propName, propValue] of this.staticProps) {
-        staticPropASTNodes.push(t.stringLiteral(propName), valueToBabelNode(propValue));
+      for (let [propName, propInformation, propValue] of this.staticProps) {
+        staticPropASTNodes.push(
+          t.stringLiteral(propName),
+          t.numericLiteral(propInformation),
+          valueToBabelNode(propValue),
+        );
       }
       staticPropsASTNode = t.arrayExpression(staticPropASTNodes);
     }
@@ -210,6 +215,9 @@ export class HostComponentTemplateNode {
       } else if (child instanceof DynamicTextArrayTemplateNode) {
         flag |= HAS_DYNAMIC_TEXT_ARRAY_CONTENT;
         childrenASTNode = t.numericLiteral(child.valueIndex);
+      } else if (child instanceof StaticValueTemplateNode) {
+        // Should not happen
+        debugger;
       } else {
         flag |= HAS_CHILD;
         childrenASTNode = child.toAST();
@@ -219,6 +227,9 @@ export class HostComponentTemplateNode {
       const childrenASTNodes = [];
       for (let child of this.children) {
         if (child instanceof FragmentTemplateNode) {
+          debugger;
+        } else if (child instanceof StaticValueTemplateNode) {
+          // Should not happen
           debugger;
         } else {
           childrenASTNodes.push(child.toAST());
@@ -248,6 +259,7 @@ export class HostComponentTemplateNode {
 
 export class StaticTextTemplateNode {
   constructor(text) {
+    this.isStatic = true;
     this.text = text;
   }
 
@@ -278,6 +290,7 @@ export class DynamicTextTemplateNode {
 
 export class StaticValueTemplateNode {
   constructor(value) {
+    this.isStatic = true;
     this.value = value;
   }
 

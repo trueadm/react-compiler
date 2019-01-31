@@ -45,6 +45,8 @@ export const IS_VOID = 1 << 17;
 export const HAS_HOOKS = 1 << 18;
 
 const PROP_IS_EVENT = 1;
+const PROP_IS_BOOLEAN = 2;
+const PROP_IS_POSITIVE_NUMBER = 3;
 
 function renderReactNodeToString(node, isChild, runtimeValues, state, currentFiber) {
   if (node === null || node === undefined || typeof node === "boolean") {
@@ -788,6 +790,26 @@ function renderReferenceComponentTemplateToString(
   return renderTemplateToString(componentTemplateNode, props, isOnlyChild, state);
 }
 
+function renderPropValue(propFlags, value) {
+  if (value === null) {
+    return;
+  }
+  if ((propFlags & PROP_IS_BOOLEAN) !== 0) {
+    if (value === true) {
+      return "";
+    } else {
+      return;
+    }
+  } else if ((propFlags & PROP_IS_POSITIVE_NUMBER) !== 0) {
+    if (isNaN(value) || value < 1) {
+      return;
+    }
+  } else if ((propFlags & PROP_IS_EVENT) !== 0) {
+    return;
+  }
+  return value;
+}
+
 function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponentTemplate, values, isOnlyChild, state) {
   const templateFlags = templateTypeAndFlags & ~0x3f;
   const tagName = hostComponentTemplate[1];
@@ -800,15 +822,17 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
   if ((templateFlags & HAS_STATIC_PROPS) !== 0) {
     const staticProps = hostComponentTemplate[childrenTemplateIndex++];
 
-    for (let i = 0, length = staticProps.length; i < length; i += 2) {
+    for (let i = 0, length = staticProps.length; i < length; i += 3) {
       let propName = staticProps[i];
-      let staticPropValue = staticProps[i + 1];
+      const staticPropFlags = staticProps[i + 1];
+      const staticPropValue = renderPropValue(staticPropFlags, staticProps[i + 2]);
+      if (staticPropValue === undefined) {
+        continue;
+      }
       if (propName === "className") {
         propName = "class";
       }
-      if (typeof staticPropValue === "boolean") {
-        staticPropValue = "";
-      }
+
       inner += ` ${propName}="${staticPropValue}"`;
     }
   }
@@ -827,21 +851,14 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
 
     for (let i = 0, length = dynamicProps.length; i < length; i += 3) {
       let propName = dynamicProps[i];
-      const dynamicPropValueIndex = dynamicProps[i + 1];
       const dynamicPropFlags = dynamicProps[i + 1];
-      const dynamicPropValue = values[dynamicPropValueIndex];
-
-      if ((dynamicPropFlags & PROP_IS_EVENT) !== 0) {
-        continue;
-      }
-      if (dynamicPropValue === null || dynamicPropValue === undefined) {
+      const dynamicPropValueIndex = dynamicProps[i + 2];
+      const dynamicPropValue = renderPropValue(dynamicPropFlags, values[dynamicPropValueIndex]);
+      if (dynamicPropValue === undefined) {
         continue;
       }
       if (propName === "className") {
         propName = "class";
-      } else if (propName === "style") {
-        // TODO
-        continue;
       }
       inner += ` ${propName}="${escapeText(dynamicPropValue)}"`;
     }
@@ -966,6 +983,9 @@ function renderFragmentTemplateToString(fragmentTemplate, values, isOnlyChild, s
   const fragment = fragmentTemplate[1];
   let fragmentString = "";
 
+  if (state.hasCreatedMarkupForRoot === false) {
+    state.hasCreatedMarkupForRoot = true;
+  }
   for (let i = 0, length = fragment.length; i < length; ++i) {
     fragmentString += renderTemplateToString(fragment[i], values, false, state);
   }

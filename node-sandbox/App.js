@@ -269,7 +269,7 @@ function AbstractLink1({ x }: { x?: number }) {
         type: null,
         title: "Remove",
         "data-hover": undefined,
-        "data-tooltip-align": undefined,
+        "data-tooltip-alignh": undefined,
         "data-tooltip-content": undefined,
         disabled: null,
         label: null,

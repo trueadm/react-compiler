@@ -2,6 +2,8 @@ import * as t from "@babel/types";
 import invariant from "../invariant";
 
 const PROP_IS_EVENT = 1;
+const PROP_IS_BOOLEAN = 2;
+const PROP_IS_POSITIVE_NUMBER = 3;
 
 const reservedProps = new Set([
   "children",
@@ -261,7 +263,7 @@ export function getPropInformation(propName, isPartialTemplate) {
     // propInformationFlag = propInformationFlag | PropFlagBooleanishString;
   }
   if (booleanProps.has(propName)) {
-    // propInformationFlag = propInformationFlag | PropFlagBoolean;
+    propInformationFlag = propInformationFlag | PROP_IS_BOOLEAN;
   }
   if (overloadedBooleanProps.has(propName)) {
     // propInformationFlag = propInformationFlag | PropFlagOverloadedBoolean;
@@ -270,14 +272,14 @@ export function getPropInformation(propName, isPartialTemplate) {
     // propInformationFlag = propInformationFlag | PropFlagNumeric;
   }
   if (positiveNumericProps.has(propName)) {
-    // propInformationFlag = propInformationFlag | PropFlagPositiveNumeric;
+    propInformationFlag = propInformationFlag | PROP_IS_POSITIVE_NUMBER;
   }
   if (stringProps.has(propName)) {
     propNameToUse = stringProps.get(propName);
     // propInformationFlag = propInformationFlag | PropFlagString;
   }
   if (svgStringProps.has(propName)) {
-    // propInformationFlag = propInformationFlag | PropFlagString;
+    //propInformationFlag = propInformationFlag | PropFlagString;
   }
   if (lowerCaseProps.has(propName)) {
     propNameToUse = propName.toLowerCase();
