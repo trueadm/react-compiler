@@ -263,15 +263,6 @@ export function joinPathConditions(pathConditions, state) {
   return joinedCondition;
 }
 
-export function normalizeOpcodes(opcodes) {
-  if (opcodes.length === 0) {
-    return t.numericLiteral(0);
-  } else if (opcodes.length === 1 && t.isNullLiteral(opcodes[0])) {
-    return t.numericLiteral(0);
-  }
-  return t.arrayExpression(opcodes);
-}
-
 export function getCachedRuntimeValue(node, state) {
   const runtimeCachedValues = state.runtimeCachedValues;
   let cachedRuntimeValue = runtimeCachedValues.get(node);

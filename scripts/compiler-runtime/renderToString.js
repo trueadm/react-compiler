@@ -10,6 +10,7 @@ import {
   insertChildFiberIntoParentFiber,
   isArray,
   isReactNode,
+  isUnitlessNumber,
   popCurrentContextValue,
   pushCurrentContextValue,
   reactElementSymbol,
@@ -854,6 +855,7 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
       const dynamicPropFlags = dynamicProps[i + 1];
       const dynamicPropValueIndex = dynamicProps[i + 2];
       const dynamicPropValue = renderPropValue(dynamicPropFlags, values[dynamicPropValueIndex]);
+
       if (dynamicPropValue === undefined) {
         continue;
       }
@@ -861,6 +863,27 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
         propName = "class";
       }
       inner += ` ${propName}="${escapeText(dynamicPropValue)}"`;
+    }
+  }
+  if ((templateFlags & HAS_DYNAMIC_STYLES) !== 0) {
+    const dynamicStyles = hostComponentTemplate[childrenTemplateIndex++];
+
+    for (let i = 0, length = dynamicStyles.length; i < length; i += 2) {
+      let styleName = dynamicStyles[i];
+      const dynamicStyleValueIndex = dynamicStyles[i + 1];
+      let dynamicStyleValue = values[dynamicStyleValueIndex];
+
+      if (dynamicStyleValue === null || dynamicStyleValue === undefined) {
+        continue;
+      }
+      if (typeof dynamicStyleValue === "boolean") {
+        dynamicStyleValue = "";
+      }
+      if (typeof dynamicStyleValue === "number" && dynamicStyleValue !== 0 && !isUnitlessNumber.has(styleName)) {
+        dynamicStyleValue = `${dynamicStyleValue}px`;
+      }
+      styles += `${lastChildWasStyle ? ";" : ""}${styleName}:${dynamicStyleValue}`;
+      lastChildWasStyle = true;
     }
   }
   if (styles !== "") {

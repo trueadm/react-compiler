@@ -110,11 +110,9 @@ function renderOriginalComponent(component, props) {
   /* eslint-disable-next-line */
   if (global.gc) global.gc();
   if (benchmarkFlag) {
-    // Run 10 times to warm up cache
-    for (let i = 0; i < 10; i++) {
-      ReactDOM.render(createElementForTesting(component, props), root);
-      ReactDOM.render(null, root);
-    }
+    // Run once to warm up cache
+    ReactDOM.render(createElementForTesting(component, props), root);
+    ReactDOM.render(null, root);
   }
   // Run once again to measure perf
   const start = performance.now();
@@ -136,11 +134,9 @@ function renderCompiledComponent(component, props) {
   /* eslint-disable-next-line */
   if (global.gc) global.gc();
   if (benchmarkFlag) {
-    // Run 10 times to warm up cache
-    for (let i = 0; i < 10; i++) {
-      render(createElementForTesting(component, props), root);
-      render(null, root);
-    }
+    // Run once to warm up cache
+    render(createElementForTesting(component, props), root);
+    render(null, root);
   }
   // Run once again to measure perf
   const start = performance.now();
@@ -168,10 +164,8 @@ function renderOriginalComponentToString(component, props) {
   /* eslint-disable-next-line */
   if (global.gc) global.gc();
   if (benchmarkFlag) {
-    // Run 10 times to warm up cache
-    for (let i = 0; i < 10; i++) {
-      ReactDOMServer.renderToString(createElementForTesting(component, props));
-    }
+    // Run once to warm up cache
+    ReactDOMServer.renderToString(createElementForTesting(component, props));
   }
   // Run once again to measure perf
   const start = performance.now();
@@ -187,10 +181,8 @@ function renderCompiledComponentToString(component, props) {
   /* eslint-disable-next-line */
   if (global.gc) global.gc();
   if (benchmarkFlag) {
-    // Run 10 times to warm up cache
-    for (let i = 0; i < 10; i++) {
-      renderToString(createElementForTesting(component, props));
-    }
+    // Run once to warm up cache
+    renderToString(createElementForTesting(component, props));
   }
   // Run once again to measure perf
   const start = performance.now();
@@ -400,12 +392,18 @@ async function runTest(file, originalSource, compiledSource, minifySources) {
     if (compiledComponentTime === 0) {
       compiledComponentTime = 0.004;
     }
+    const timeDifferenceAbsolute =
+      compiledComponentTime <= originalComponentTime
+        ? originalComponentTime - compiledComponentTime
+        : compiledComponentTime - originalComponentTime;
     let timeDifference =
       compiledComponentTime < originalComponentTime
         ? Math.round((originalComponentTime / compiledComponentTime) * 10) / 10
         : Math.round((compiledComponentTime / originalComponentTime) * 10) / 10;
     const timeDifferenceStr =
-      compiledComponentTime <= originalComponentTime
+      timeDifferenceAbsolute < 1
+        ? ""
+        : compiledComponentTime <= originalComponentTime
         ? chalk.green(`${timeDifference}x faster`)
         : chalk.red(`${timeDifference}x slower`);
 

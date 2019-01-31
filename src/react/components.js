@@ -43,7 +43,7 @@ export function compileReactFunctionComponent(componentPath, state) {
     computeFunction,
     isStatic,
     name,
-    state.isRootComponent,
+    state,
   );
   return componentTemplateNode;
 }
@@ -54,59 +54,37 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
   computeFunction,
   isStatic,
   name,
-  isRootComponent,
+  state,
+  dependencies,
 ) {
   const templateAST = componentTemplateNode.toAST();
   if (t.isFunctionDeclaration(computeFunction)) {
     const identifier = t.identifier(name);
     markNodeAsUsed(identifier);
-    if (isRootComponent) {
-      if (isStatic) {
-        componentPath.replaceWith(t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]));
-      } else {
-        const opcodesArrayDeclaration = t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]);
-        if (
-          t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
-          t.isExportNamedDeclaration(componentPath.parentPath.node)
-        ) {
-          const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
-            ? t.exportDefaultDeclaration(opcodesArrayDeclaration)
-            : t.exportNamedDeclaration(opcodesArrayDeclaration, []);
-          componentPath.parentPath.replaceWithMultiple([computeFunction, exportNode]);
-        } else {
-          componentPath.replaceWithMultiple([computeFunction, opcodesArrayDeclaration]);
-        }
-      }
-    } else {
-      const lazyIdentifier = t.identifier("__cached__" + name);
-      markNodeAsUsed(lazyIdentifier);
-      const lazyDeclaration = t.variableDeclaration("let", [t.variableDeclarator(lazyIdentifier)]);
-      const arrayWrapperFunction = t.functionDeclaration(
-        identifier,
-        [],
-        t.blockStatement([
-          t.returnStatement(
-            t.logicalExpression("||", lazyIdentifier, t.assignmentExpression("=", lazyIdentifier, templateAST)),
-          ),
-        ]),
-      );
+    let insertPath;
 
-      if (isStatic) {
-        componentPath.replaceWithMultiple([lazyDeclaration, arrayWrapperFunction]);
+    if (isStatic) {
+      componentPath.replaceWith(t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]));
+    } else {
+      const templateDeclaration = t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]);
+      if (
+        t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
+        t.isExportNamedDeclaration(componentPath.parentPath.node)
+      ) {
+        const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
+          ? t.exportDefaultDeclaration(templateDeclaration)
+          : t.exportNamedDeclaration(templateDeclaration, []);
+        const parentPath = componentPath.parentPath;
+        parentPath.replaceWith(exportNode);
+        computeFunction.insertBefore(parentPath);
+        insertPath = parentPath;
       } else {
-        if (
-          t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
-          t.isExportNamedDeclaration(componentPath.parentPath.node)
-        ) {
-          const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
-            ? t.exportDefaultDeclaration(arrayWrapperFunction)
-            : t.exportNamedDeclaration(arrayWrapperFunction, []);
-          componentPath.parentPath.replaceWithMultiple([computeFunction, lazyDeclaration, exportNode]);
-        } else {
-          componentPath.replaceWithMultiple([computeFunction, lazyDeclaration, arrayWrapperFunction]);
-        }
+        componentPath.replaceWith(templateDeclaration);
+        computeFunction.insertBefore(componentPath);
+        insertPath = componentPath;
       }
     }
+    return insertPath;
   } else {
     debugger;
     const parentPath = componentPath.parentPath;

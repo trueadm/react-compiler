@@ -156,11 +156,13 @@ export class HostComponentTemplateNode {
     const hasStaticProps = this.staticProps.length !== 0;
     const hasDynamicProps = this.dynamicProps.length !== 0;
     const hasStaticStyles = this.staticStyles.length !== 0;
+    const hasDynamicStyles = this.dynamicStyles.length !== 0;
     const childrenLength = this.children.length;
     let flag = HOST_COMPONENT;
     let staticPropsASTNode = null;
     let dynamicPropsASTNode = null;
     let staticStylesASTNode = null;
+    let dynamicStylesASTNode = null;
     let childrenASTNode = null;
 
     if (this.isStatic) {
@@ -184,8 +186,8 @@ export class HostComponentTemplateNode {
     if (hasStaticStyles) {
       flag |= HAS_STATIC_STYLES;
       const staticStylesASTNodes = [];
-      for (let [propName, propValue] of this.staticStyles) {
-        staticStylesASTNodes.push(t.stringLiteral(propName), valueToBabelNode(propValue));
+      for (let [styleName, propValue] of this.staticStyles) {
+        staticStylesASTNodes.push(t.stringLiteral(styleName), valueToBabelNode(propValue));
       }
       staticStylesASTNode = t.arrayExpression(staticStylesASTNodes);
     }
@@ -200,6 +202,14 @@ export class HostComponentTemplateNode {
         );
       }
       dynamicPropsASTNode = t.arrayExpression(dynamicPropASTNodes);
+    }
+    if (hasDynamicStyles) {
+      flag |= HAS_DYNAMIC_STYLES;
+      const dynamicStylesASTNodes = [];
+      for (let [styleName, valueIndex] of this.dynamicStyles) {
+        dynamicStylesASTNodes.push(t.stringLiteral(styleName), t.numericLiteral(valueIndex));
+      }
+      dynamicStylesASTNode = t.arrayExpression(dynamicStylesASTNodes);
     }
     if (childrenLength === 1) {
       const child = this.children[0];
@@ -249,6 +259,9 @@ export class HostComponentTemplateNode {
     }
     if (dynamicPropsASTNode !== null) {
       ASTNode.push(dynamicPropsASTNode);
+    }
+    if (dynamicStylesASTNode !== null) {
+      ASTNode.push(dynamicStylesASTNode);
     }
     if (childrenASTNode !== null) {
       ASTNode.push(childrenASTNode);

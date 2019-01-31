@@ -127,16 +127,14 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
       compileHostComponentStylesObject(templateNode, valuePath, valueRefPath, state, componentPath);
     } else if (t.isIdentifier(valueRefPath.node)) {
       if (t.isObjectTypeAnnotation(typeAnnotation)) {
-        createOpcodesForHostNodeStylesIdentifier(
-          hostNodeId,
+        compileHostComponentStylesIdentifier(
+          templateNode,
           typeAnnotation,
           valuePath,
           valueRefPath,
-          opcodes,
           state,
           componentPath,
         );
-        return;
       }
     }
     return;
@@ -393,16 +391,14 @@ function compileReactFragment(childrenPath, state, componentPath, isRoot) {
   return new FragmentTemplateNode(fragment);
 }
 
-function createOpcodesForHostNodeStylesIdentifier(
-  hostNodeId,
+function compileHostComponentStylesIdentifier(
+  templateNode,
   typeAnnotation,
   stylePath,
   stylePathRef,
-  opcodes,
   state,
   componentPath,
 ) {
-  pushOpcode(opcodes, "OPEN_PROP_STYLE");
   for (let typeProperty of typeAnnotation.properties) {
     if (!t.isObjectTypeProperty(typeProperty)) {
       invariant(false, "TODO");
@@ -417,11 +413,8 @@ function createOpcodesForHostNodeStylesIdentifier(
     }
     const hyphenatedStyleName = hyphenateStyleName(styleName);
     const runtimeValuePointer = getRuntimeValueIndex(t.memberExpression(stylePathRef.node, key), state);
-
-    pushOpcode(opcodes, "DYNAMIC_PROP_STYLE", hyphenatedStyleName);
-    pushOpcodeValue(opcodes, runtimeValuePointer);
+    templateNode.dynamicStyles.push([hyphenatedStyleName, runtimeValuePointer]);
   }
-  pushOpcode(opcodes, "CLOSE_PROP_STYLE");
 }
 
 function compileHostComponentStylesObject(templateNode, stylePath, stylePathRef, state, componentPath) {
@@ -458,6 +451,12 @@ function compileHostComponentStylesObject(templateNode, stylePath, stylePathRef,
       } else if (styleTemplateNode instanceof StaticValueTemplateNode) {
         let value = styleTemplateNode.value;
 
+        if (value === null || value === undefined) {
+          continue;
+        }
+        if (typeof value === "boolean") {
+          value = "";
+        }
         if (typeof value === "number" && !isUnitless && value !== 0) {
           value = `${value}px`;
         }

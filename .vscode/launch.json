@@ -12,7 +12,7 @@
       "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/babel-node",
       "args": [
         "--mode=ssr",
-        "basic11"
+        "style4"
       ]
     },
     {
