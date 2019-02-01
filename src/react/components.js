@@ -36,7 +36,7 @@ export function compileReactFunctionComponent(componentPath, state) {
 
   if (!isRootComponent) {
     state.componentTemplateNode = previousComponentTemplateNode;
-    if (!isStatic) {
+    if (!isStatic && previousComponentTemplateNode !== null) {
       previousComponentTemplateNode.childComponents.push(componentTemplateNode);
     }
   }
@@ -72,7 +72,10 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
     markNodeAsUsed(identifier);
 
     if (isStatic) {
-      componentPath.replaceWith(t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]));
+      const templateDeclaration = t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]);
+      componentPath.replaceWith(templateDeclaration);
+      componentTemplateNode.insertionPath = componentPath;
+      componentTemplateNode.insertionNode = templateDeclaration;
     } else {
       const templateDeclaration = t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]);
       componentTemplateNode.insertionNode = templateDeclaration;
@@ -87,14 +90,15 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
         parentPath.replaceWith(exportNode);
         parentPath.insertBefore(computeFunction);
         componentTemplateNode.insertionPath = parentPath;
-        if (!state.isRootComponent) {
+        if (state.componentTemplateNode !== null && !state.isRootComponent) {
           parentPath.remove();
         }
       } else {
         componentPath.replaceWith(templateDeclaration);
         componentPath.insertBefore(computeFunction);
         componentTemplateNode.insertionPath = componentPath;
-        if (!state.isRootComponent) {
+        if (state.componentTemplateNode !== null && !state.isRootComponent) {
+          debugger;
           componentPath.remove();
         }
       }

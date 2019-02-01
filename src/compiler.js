@@ -68,6 +68,7 @@ function checkIfIdHasFlag(id, path, compilerContext, moduleFilePath) {
       moduleState.needsCompiling();
       compileReactFunctionComponent(path, moduleState);
       orderComponentTemplateDeclarations(path, moduleState);
+      moduleState.componentTemplateNode = null;
       makeClosureCompilerAdvancedFriendly(path);
     }
   }
