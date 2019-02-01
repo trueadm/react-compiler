@@ -1003,6 +1003,9 @@ function renderTemplateFunctionCallTemplateToString(templateFunctionCallTemplate
   const functionCallTemplateNode = templateFunctionCallTemplate[1];
   const functionCallValuesIndex = templateFunctionCallTemplate[2];
   const functionCallValues = values[functionCallValuesIndex];
+  if (functionCallValues === null) {
+    return "";
+  }
   return renderTemplateToString(functionCallTemplateNode, functionCallValues, isOnlyChild, state);
 }
 

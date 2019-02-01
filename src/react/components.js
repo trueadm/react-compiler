@@ -3,6 +3,7 @@ import { getComponentName, getShapeOfPropsObject, isReactHook, markNodeAsUsed } 
 import { compileReactComputeFunction } from "./functions";
 import { getTypeAnnotationForExpression } from "../annotations";
 import { ComponentTemplateNode } from "../templates";
+import invariant from "../invariant";
 import * as t from "@babel/types";
 
 export function compileReactFunctionComponent(componentPath, state) {
@@ -77,15 +78,18 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
       componentTemplateNode.insertionPath = componentPath;
       componentTemplateNode.insertionNode = templateDeclaration;
     } else {
-      const templateDeclaration = t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]);
-      componentTemplateNode.insertionNode = templateDeclaration;
       if (
-        t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
-        t.isExportNamedDeclaration(componentPath.parentPath.node)
+        t.isExportDefaultDeclaration(componentPath.parentPath) ||
+        t.isExportNamedDeclaration(componentPath.parentPath)
       ) {
-        const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath.node)
-          ? t.exportDefaultDeclaration(templateDeclaration)
-          : t.exportNamedDeclaration(templateDeclaration, []);
+        const exportNode = t.isExportDefaultDeclaration(componentPath.parentPath)
+          ? t.exportDefaultDeclaration(templateAST)
+          : t.exportNamedDeclaration(
+              t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]),
+              [],
+            );
+        componentTemplateNode.insertionNode = exportNode;
+
         const parentPath = componentPath.parentPath;
         parentPath.replaceWith(exportNode);
         parentPath.insertBefore(computeFunction);
@@ -94,11 +98,12 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
           parentPath.remove();
         }
       } else {
+        const templateDeclaration = t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]);
+        componentTemplateNode.insertionNode = templateDeclaration;
         componentPath.replaceWith(templateDeclaration);
         componentPath.insertBefore(computeFunction);
         componentTemplateNode.insertionPath = componentPath;
         if (state.componentTemplateNode !== null && !state.isRootComponent) {
-          debugger;
           componentPath.remove();
         }
       }

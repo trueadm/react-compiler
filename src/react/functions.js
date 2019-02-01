@@ -58,11 +58,8 @@ function compileTemplateBranches(templateBranches, computeFunction, state, funct
     const nonPrimitiveRoots = templateBranches.filter(branch => !branch.isPrimitive);
 
     if (nonPrimitiveRoots.length === 1) {
-      // Optimization path, for where all roots, but one, are primitives. We don't need
-      // to use a conditional root return.
       const templateBranch = nonPrimitiveRoots[0];
-      const templateBranchTemplateNode = compileTemplateBranch(templateBranch, null, state, functionPath);
-      return templateBranchTemplateNode;
+      return compileTemplateBranch(templateBranch, null, state, functionPath);
     } else {
       const multiConditionalTemplateNode = new MultiReturnConditionalTemplateNode();
       let templateBranchIndex = 0;
