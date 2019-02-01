@@ -163,11 +163,6 @@ function unescapeCompiledOutput(output) {
 function renderOriginalComponentToString(component, props) {
   /* eslint-disable-next-line */
   if (global.gc) global.gc();
-  if (benchmarkFlag) {
-    // Run once to warm up cache
-    ReactDOMServer.renderToString(createElementForTesting(component, props));
-  }
-  // Run once again to measure perf
   const start = performance.now();
   const output = ReactDOMServer.renderToString(createElementForTesting(component, props));
   const time = Math.round((performance.now() - start) * 100) / 100;
@@ -180,11 +175,6 @@ function renderOriginalComponentToString(component, props) {
 function renderCompiledComponentToString(component, props) {
   /* eslint-disable-next-line */
   if (global.gc) global.gc();
-  if (benchmarkFlag) {
-    // Run once to warm up cache
-    renderToString(createElementForTesting(component, props));
-  }
-  // Run once again to measure perf
   const start = performance.now();
   const output = renderToString(createElementForTesting(component, props));
   const time = Math.round((performance.now() - start) * 100) / 100;

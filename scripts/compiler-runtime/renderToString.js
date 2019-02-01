@@ -49,6 +49,8 @@ const PROP_IS_EVENT = 1;
 const PROP_IS_BOOLEAN = 2;
 const PROP_IS_POSITIVE_NUMBER = 3;
 
+const componentTemplateCache = new Map();
+
 function renderReactNodeToString(node, isChild, runtimeValues, state, currentFiber) {
   if (node === null || node === undefined || typeof node === "boolean") {
     return;
@@ -781,7 +783,12 @@ function renderReferenceComponentTemplateToString(
   const componentTemplateNodeOrFunc = referenceComponentTemplate[1];
   let componentTemplateNode = componentTemplateNodeOrFunc;
   if (typeof componentTemplateNodeOrFunc === "function") {
-    componentTemplateNode = componentTemplateNodeOrFunc();
+    componentTemplateNode = componentTemplateCache.get(componentTemplateNodeOrFunc);
+
+    if (componentTemplateNode === undefined) {
+      componentTemplateNode = componentTemplateNodeOrFunc();
+      componentTemplateCache.set(componentTemplateNodeOrFunc, componentTemplateNode);
+    }
   }
   let props;
 
