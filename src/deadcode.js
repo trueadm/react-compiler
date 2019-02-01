@@ -75,6 +75,7 @@ export function applyDeadCodeElimination(moduleAst, moduleState) {
         }
         const filteredReferencePaths = binding.referencePaths.filter(p => filterReferencePaths(p, moduleState));
         if (filteredReferencePaths.length === 0) {
+          node.toBeRemoved = true;
           // Exclude object pattern for now
           if (!t.isObjectPattern(binding.path.node)) {
             traverse(moduleAst, {

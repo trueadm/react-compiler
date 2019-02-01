@@ -23,14 +23,15 @@ export const TEXT = 3;
 export const VALUE = 4;
 export const FRAGMENT = 5;
 export const CONDITIONAL = 6;
-export const TEMPLATE_FUNCTION_CALL = 7;
-export const MULTI_CONDITIONAL = 8;
-export const TEXT_ARRAY = 9;
-export const REFERENCE_COMPONENT = 10;
-export const VNODE = 11;
-export const REFERENCE_VNODE = 12;
-export const MULTI_RETURN_CONDITIONAL = 13;
-export const VNODE_COLLECTION = 14;
+export const LOGICAL = 7;
+export const TEMPLATE_FUNCTION_CALL = 8;
+export const MULTI_CONDITIONAL = 9;
+export const TEXT_ARRAY = 10;
+export const REFERENCE_COMPONENT = 11;
+export const VNODE = 12;
+export const REFERENCE_VNODE = 13;
+export const MULTI_RETURN_CONDITIONAL = 14;
+export const VNODE_COLLECTION = 15;
 
 // Elements
 export const HAS_STATIC_PROPS = 1 << 6;
@@ -957,8 +958,12 @@ function renderValueTemplateToString(templateTypeAndFlags, textTemplate, values,
   const isStatic = (templateFlags & IS_STATIC) !== 0;
   const value = isStatic === true ? textTemplate[1] : escapeText(values[textTemplate[1]]);
 
-  if (value === null || value === undefined) {
+  if (value === null || value === undefined || typeof value === "boolean") {
     return "";
+  } else if (typeof value === "string") {
+    return value;
+  } else if (typeof value === "number") {
+    return value + "";
   }
   throw new Error("TODO renderValueTemplateToString");
 }

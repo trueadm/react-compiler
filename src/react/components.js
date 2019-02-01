@@ -1,5 +1,5 @@
 import { getBindingPathRef, getReferenceFromExpression } from "../references";
-import { getComponentName, getShapeOfPropsObject, isReactHook, markNodeAsUsed } from "../utils";
+import { getComponentName, getShapeOfPropsObject, isReactHook, markNodeAsUsed, removePath } from "../utils";
 import { compileReactComputeFunction } from "./functions";
 import { getTypeAnnotationForExpression } from "../annotations";
 import { ComponentTemplateNode } from "../templates";
@@ -27,6 +27,12 @@ export function compileReactFunctionComponent(componentPath, state) {
     shapeOfPropsObject,
   );
   state.compiledComponentCache.set(name, componentTemplateNode);
+  // Remove the defaultProsp assignment, as it's compiled away
+  if (defaultProps !== null) {
+    state.applyPostTransform(() => {
+      removePath(defaultProps.parentPath);
+    });
+  }
 
   const previousComponentTemplateNode = state.componentTemplateNode;
   state.componentTemplateNode = componentTemplateNode;

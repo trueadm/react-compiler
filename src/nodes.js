@@ -32,6 +32,7 @@ import {
   DynamicTextTemplateNode,
   DynamicValueTemplateNode,
   FragmentTemplateNode,
+  LogicalTemplateNode,
   MultiConditionalTemplateNode,
   StaticTextTemplateNode,
   TemplateFunctionCallTemplateNode,
@@ -170,24 +171,15 @@ export function compileConditionalExpressionTemplate(path, state, componentPath,
   return new ConditionalTemplateNode(valueIndex, consequentTemplateNode, alternateTemplateNode);
 }
 
-export function createOpcodesForLogicalExpressionTemplate(path, opcodes, state, componentPath, isRoot, callback) {
+export function compileLogicalExpressionTemplate(path, state, componentPath, isRoot) {
   const operator = path.node.operator;
-  if (operator === "||") {
-    pushOpcode(opcodes, "LOGICAL_OR");
-  } else {
-    pushOpcode(opcodes, "LOGICAL_AND");
-  }
-  const leftOpcodes = [];
   const leftPath = path.get("left");
   const leftPathRef = getReferenceFromExpression(leftPath, state);
-  callback(leftPathRef, leftOpcodes);
-  pushOpcodeValue(opcodes, normalizeOpcodes(leftOpcodes), "LOGICAL_LEFT");
-
-  const rightOpcodes = [];
+  const leftTemplateNode = compileNode(leftPath, leftPathRef, state, componentPath, isRoot);
   const rightPath = path.get("right");
-  const rightPathhRef = getReferenceFromExpression(rightPath, state);
-  callback(rightPathhRef, rightOpcodes);
-  pushOpcodeValue(opcodes, normalizeOpcodes(rightOpcodes), "LOGICAL_RIGHT");
+  const rightPathRef = getReferenceFromExpression(rightPath, state);
+  const rightTemplateNode = compileNode(rightPath, rightPathRef, state, componentPath, isRoot);
+  return new LogicalTemplateNode(operator, leftTemplateNode, rightTemplateNode);
 }
 
 function compileString(string) {
@@ -244,16 +236,7 @@ export function compileNode(path, refPath, state, componentPath, isRoot) {
   } else if (t.isConditionalExpression(node) && pathContainsReactElement(refPath, state)) {
     return compileConditionalExpressionTemplate(refPath, state, componentPath, isRoot);
   } else if (t.isLogicalExpression(node) && pathContainsReactElement(refPath, state)) {
-    createOpcodesForLogicalExpressionTemplate(
-      refPath,
-      opcodes,
-      state,
-      componentPath,
-      isRoot,
-      (conditionalPath, conditionalOpcodes) => {
-        createOpcodesForNode(conditionalPath, conditionalPath, conditionalOpcodes, state, componentPath, isRoot);
-      },
-    );
+    return compileLogicalExpressionTemplate(refPath, state, componentPath, isRoot);
   } else if (
     t.isIdentifier(node) ||
     t.isMemberExpression(node) ||

@@ -83,6 +83,10 @@ export function removePath(path) {
 }
 
 export function pathContainsReactElement(path, state) {
+  const typeAnnotation = getTypeAnnotationForExpression(path, state);
+  if (assertType(path, typeAnnotation, true, state, "REACT_NODE")) {
+    return true;
+  }
   let containsJSXElement = false;
   path.traverse({
     JSXElement() {

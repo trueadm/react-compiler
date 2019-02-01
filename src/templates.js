@@ -1,4 +1,5 @@
 import * as t from "@babel/types";
+import invariant from "./invariant";
 import { markNodeAsUsed } from "./utils";
 
 export const ROOT_COMPONENT = 0;
@@ -8,14 +9,15 @@ export const TEXT = 3;
 export const VALUE = 4;
 export const FRAGMENT = 5;
 export const CONDITIONAL = 6;
-export const TEMPLATE_FUNCTION_CALL = 7;
-export const MULTI_CONDITIONAL = 8;
-export const TEXT_ARRAY = 9;
-export const REFERENCE_COMPONENT = 10;
-export const VNODE = 11;
-export const REFERENCE_VNODE = 12;
-export const MULTI_RETURN_CONDITIONAL = 13;
-export const VNODE_COLLECTION = 14;
+export const LOGICAL = 7;
+export const TEMPLATE_FUNCTION_CALL = 8;
+export const MULTI_CONDITIONAL = 9;
+export const TEXT_ARRAY = 10;
+export const REFERENCE_COMPONENT = 11;
+export const VNODE = 12;
+export const REFERENCE_VNODE = 13;
+export const MULTI_RETURN_CONDITIONAL = 14;
+export const VNODE_COLLECTION = 15;
 
 // Elements
 export const HAS_STATIC_PROPS = 1 << 6;
@@ -36,6 +38,10 @@ export const HAS_HOOKS = 1 << 6;
 
 // Collection
 export const HAS_KEYS = 1 << 6;
+
+// Logical
+export const LOGICAL_AND = 1 << 6;
+export const LOGICAL_OR = 1 << 7;
 
 function valueToBabelNode(value) {
   if (typeof value === "boolean") {
@@ -140,7 +146,6 @@ export class ReferenceComponentTemplateNode {
 
 export class ReferenceVNode {
   constructor(valueIndex) {
-    debugger;
     this.valueIndex = valueIndex;
   }
 
@@ -353,7 +358,7 @@ export class DynamicValueTemplateNode {
   }
 
   toAST() {
-    debugger;
+    return t.arrayExpression([t.numericLiteral(VALUE), t.numericLiteral(this.valueIndex)]);
   }
 }
 
@@ -443,6 +448,26 @@ export class ConditionalTemplateNode {
       this.alternateTemplateNode.toAST(),
       this.consequentTemplateNode.toAST(),
     ]);
+  }
+}
+
+export class LogicalTemplateNode {
+  constructor(operator, leftTemplateNode, rightTemplateNode) {
+    this.operator = operator;
+    this.leftTemplateNode = leftTemplateNode;
+    this.rightTemplateNode = rightTemplateNode;
+  }
+
+  toAST() {
+    let flags = LOGICAL;
+    if (this.operator === "||") {
+      flags |= LOGICAL_OR;
+    } else if (this.operator === "&&") {
+      flags |= LOGICAL_AND;
+    } else {
+      invariant(false, "Unsupported LogicalTemplateNode operator");
+    }
+    return t.arrayExpression([t.numericLiteral(flags), this.leftTemplateNode.toAST(), this.rightTemplateNode.toAST()]);
   }
 }
 
