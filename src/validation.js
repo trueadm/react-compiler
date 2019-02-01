@@ -90,7 +90,7 @@ export function validateReactElementsHaveAllBeenCompiled(moduleAst, state) {
       );
     },
     CallExpression(path) {
-      if (t.isIdentifier(path.node.callee) && path.node.callee.name === "createReactNode") {
+      if (t.isIdentifier(path.node.callee) && path.node.callee.name === "createVNode") {
         return;
       }
       if (isReactCreateElement(path, state)) {

@@ -42,31 +42,28 @@ import {
   isReferenceReactContextProvider,
 } from "./context";
 import { createOpcodesForReactContextConsumer } from "./context";
-import {
-  createOpcodesForConditionalExpressionTemplate,
-  createOpcodesForLogicalExpressionTemplate,
-  compileMutatedBinding,
-  compileNode,
-} from "../nodes";
-import { dangerousStyleValue, hyphenateStyleName } from "./style";
+import { compileMutatedBinding, compileNode } from "../nodes";
+import { hyphenateStyleName } from "./style";
 import { compileReactFunctionComponent } from "./components";
-import { createOpcodesForReactComputeFunction } from "./functions";
+import { compileReactComputeFunction } from "./functions";
 import { getPropInformation, isUnitlessNumber } from "./prop-information";
 import { validateArgumentsDoNotContainTemplateNodes, validateParamsDoNotConflictOuterScope } from "../validation";
 import invariant from "../invariant";
 import * as t from "@babel/types";
 import { createOpcodesForCxMockCall } from "../mocks/cx";
 import {
+  ConditionalTemplateNode,
   DynamicTextArrayTemplateNode,
   DynamicTextTemplateNode,
   DynamicValueTemplateNode,
+  FragmentTemplateNode,
   HostComponentTemplateNode,
   ReferenceComponentTemplateNode,
   ReferenceVNode,
   StaticTextTemplateNode,
   StaticValueTemplateNode,
   TemplateFunctionCallTemplateNode,
-  FragmentTemplateNode,
+  VNodeCollectionTemplateNode,
 } from "../templates";
 
 const emptyPlaceholderNode = t.nullLiteral();
@@ -89,32 +86,18 @@ const voidElements = new Set([
   "wbr",
 ]);
 
-function createOpcodesForArrayMapTemplate(childPath, opcodes, state, componentPath) {
+function compileArrayMapTemplate(childPath, state, componentPath) {
   const args = childPath.get("arguments");
   const calleePath = childPath.get("callee");
-  let arrayPath;
 
-  if (t.isMemberExpression(calleePath.node)) {
-    arrayPath = calleePath.get("object");
-  } else {
+  if (!t.isMemberExpression(calleePath.node)) {
     invariant(false, "TODO");
   }
-
   const mapFunctionPath = getReferenceFromExpression(args[0], state);
-  const { isStatic, templateOpcodes } = createOpcodesForReactComputeFunction(mapFunctionPath, state, false, null, null);
-  const arrayRuntimeValuePointer = getRuntimeValueIndex(arrayPath.node, state);
-  pushOpcodeValue(opcodes, arrayRuntimeValuePointer);
-  pushOpcodeValue(opcodes, normalizeOpcodes(templateOpcodes), "ARRAY_MAP_OPCODES");
-  if (isStatic) {
-    pushOpcodeValue(opcodes, t.numericLiteral(0), "ARRAY_MAP_COMPUTE_FUNCTION");
-  } else {
-    let nodeToReference = mapFunctionPath.node;
-    if (t.isFunctionDeclaration(nodeToReference)) {
-      nodeToReference = nodeToReference.id;
-    }
-    const mapFunctionValuePointer = getRuntimeValueIndex(nodeToReference, state);
-    pushOpcodeValue(opcodes, mapFunctionValuePointer, "ARRAY_MAP_COMPUTE_FUNCTION");
-  }
+  // Compiles the array map function to return vNodes
+  const { templateNode } = compileReactComputeFunction(mapFunctionPath, state, false, null, true);
+  const vNodeCollectionValueIndex = getRuntimeValueIndex(childPath.node, state);
+  return new VNodeCollectionTemplateNode(vNodeCollectionValueIndex, templateNode);
 }
 
 function compileHostComponentPropValue(templateNode, tagName, valuePath, propNameStr, state, componentPath) {
@@ -138,6 +121,14 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
       }
     }
     return;
+  } else if (propNameStr === "ref") {
+    // TODO
+    return;
+  } else if (propNameStr === "key") {
+    const keyASTNode = valueRefPath.node;
+    markNodeAsUsed(keyASTNode);
+    templateNode.keyASTNode = keyASTNode;
+    return;
   }
   const runtimeValueHash = getRuntimeValueHash(state);
   let propTemplateNode;
@@ -158,14 +149,6 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
 
   // Static vs dynamic
   if (!isPartialTemplate && runtimeValueHash === getRuntimeValueHash(state)) {
-    if (propNameStr === "key") {
-      // TODO
-      return;
-    }
-    if (propNameStr === "ref") {
-      // TODO
-      return;
-    }
     if (propNameStr === "value" && tagName === "textarea") {
       templateNode.children.push(propTemplateNode);
       return;
@@ -181,14 +164,6 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
       invariant(false, "TODO");
     }
   } else {
-    if (propNameStr === "key") {
-      // TODO
-      return;
-    }
-    if (propNameStr === "ref") {
-      // TODO
-      return;
-    }
     if (propNameStr === "value" && tagName === "textarea") {
       templateNode.children.push(propTemplateNode);
       return;
@@ -223,52 +198,9 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
     }
   }
 
-  if (t.isConditionalExpression(childNode) && assertType(childPath, typeAnnotation, true, state, "REACT_NODE")) {
-    markNodeAsDCE(childNode);
-    createOpcodesForConditionalExpressionTemplate(
-      refChildPath,
-      opcodes,
-      state,
-      (conditionalPath, conditionalOpcodes) => {
-        createOpcodesForReactElementHostNodeChild(
-          hostNodeId,
-          conditionalPath,
-          onlyChild,
-          conditionalOpcodes,
-          state,
-          componentPath,
-        );
-      },
-    );
-    return;
-  }
-
-  if (t.isLogicalExpression(childNode) && assertType(childPath, typeAnnotation, true, state, "REACT_NODE")) {
-    markNodeAsDCE(childNode);
-    createOpcodesForLogicalExpressionTemplate(
-      refChildPath,
-      opcodes,
-      state,
-      componentPath,
-      false,
-      (conditionalPath, conditionalOpcodes) => {
-        createOpcodesForReactElementHostNodeChild(
-          hostNodeId,
-          conditionalPath,
-          onlyChild,
-          conditionalOpcodes,
-          state,
-          componentPath,
-        );
-      },
-    );
-    return;
-  }
-
   if (isArrayMapConstructorTemplate(refChildPath, state)) {
-    pushOpcode(opcodes, "ELEMENT_DYNAMIC_CHILDREN_ARRAY_MAP_TEMPLATE");
-    createOpcodesForArrayMapTemplate(refChildPath, opcodes, state, componentPath);
-    state.dynamicHostNodesId.add(hostNodeId);
+    const childArrayCollection = compileArrayMapTemplate(refChildPath, state, componentPath);
+    templateNode.children.push(childArrayCollection);
     return;
   }
 
@@ -311,7 +243,8 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
     childTemplateNode instanceof StaticTextTemplateNode ||
     childTemplateNode instanceof DynamicTextTemplateNode ||
     childTemplateNode instanceof TemplateFunctionCallTemplateNode ||
-    childTemplateNode instanceof ReferenceComponentTemplateNode
+    childTemplateNode instanceof ReferenceComponentTemplateNode ||
+    childTemplateNode instanceof ConditionalTemplateNode
   ) {
     templateNode.children.push(childTemplateNode);
     return;
@@ -354,20 +287,41 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
   }
 }
 
-export function compileJSXFragment(childrenPath, state, componentPath, isRoot) {
-  return compileReactFragment(childrenPath, state, componentPath, isRoot);
+export function compileJSXFragment(childrenPath, attributesPath, state, componentPath, isRoot) {
+  let keyASTNode = t.nullLiteral();
+  if (attributesPath.length > 0) {
+    const propsMap = getPropsMapFromJSXElementAttributes(attributesPath, state);
+    if (propsMap.has("key")) {
+      keyASTNode = propsMap.get("key").get("expression").node;
+    }
+  }
+  return compileReactFragment(childrenPath, keyASTNode, state, componentPath, isRoot);
 }
 
 function compiledReactCreateElementFragment(args, state, componentPath, isRoot) {
   let children = null;
+  let attributes = null;
+  let keyASTNode = t.nullLiteral();
+
   markNodeAsDCE(args[0].node);
+  if (args.length > 1) {
+    attributes = args[1];
+  }
   if (args.length > 2) {
     children = args.slice(2);
   }
-  return compileReactFragment(children, state, componentPath, isRoot);
+  if (t.isObjectExpression(attributes)) {
+    const propsMap = getPropsMapFromObjectExpression(attributes.get("properties"));
+    if (propsMap.has("key")) {
+      keyASTNode = propsMap.get("key").node;
+    }
+  } else if (!t.isNullLiteral(attributes)) {
+    invariant(false, "TODO");
+  }
+  return compileReactFragment(children, keyASTNode, state, componentPath, isRoot);
 }
 
-function compileReactFragment(childrenPath, state, componentPath, isRoot) {
+function compileReactFragment(childrenPath, keyASTNode, state, componentPath, isRoot) {
   const fragment = [];
   const filteredChildrenPath = childrenPath.filter(childPath => {
     if (t.isJSXText(childPath.node) && handleWhiteSpace(childPath.node.value) === "") {
@@ -388,7 +342,7 @@ function compileReactFragment(childrenPath, state, componentPath, isRoot) {
       }
     }
   }
-  return new FragmentTemplateNode(fragment);
+  return new FragmentTemplateNode(fragment, keyASTNode);
 }
 
 function compileHostComponentStylesIdentifier(
@@ -566,16 +520,16 @@ function createPropTemplateFromJSXElement(path, state, componentPath) {
   const childState = { ...state, ...{ runtimeValues } };
   const templateNode = compileJSXElement(path, childState, componentPath);
 
-  state.helpers.add("createReactNode");
+  state.helpers.add("createVNode");
   if (runtimeValues.size === 0) {
-    return [t.callExpression(t.identifier("createReactNode"), [templateNode.toAST()]), true];
+    return [t.callExpression(t.identifier("createVNode"), [templateNode.toAST()]), true];
   } else {
     const runtimeValuesArray = [];
     for (let [runtimeValue, { index }] of runtimeValues) {
       runtimeValuesArray[index] = runtimeValue;
     }
     return [
-      t.callExpression(t.identifier("createReactNode"), [templateNode.toAST(), t.arrayExpression(runtimeValuesArray)]),
+      t.callExpression(t.identifier("createVNode"), [templateNode.toAST(), t.arrayExpression(runtimeValuesArray)]),
       false,
     ];
   }
@@ -586,16 +540,16 @@ function createPropTemplateFromReactCreateElement(path, state, componentPath) {
   const childState = { ...state, ...{ runtimeValues } };
   const templateNode = compileReactCreateElement(path, childState, componentPath);
 
-  state.helpers.add("createReactNode");
+  state.helpers.add("createVNode");
   if (runtimeValues.size === 0) {
-    return [t.callExpression(t.identifier("createReactNode"), [templateNode.toAST()]), true];
+    return [t.callExpression(t.identifier("createVNode"), [templateNode.toAST()]), true];
   } else {
     const runtimeValuesArray = [];
     for (let [runtimeValue, { index }] of runtimeValues) {
       runtimeValuesArray[index] = runtimeValue;
     }
     return [
-      t.callExpression(t.identifier("createReactNode"), [templateNode.toAST(), t.arrayExpression(runtimeValuesArray)]),
+      t.callExpression(t.identifier("createVNode"), [templateNode.toAST(), t.arrayExpression(runtimeValuesArray)]),
       false,
     ];
   }
@@ -708,12 +662,12 @@ function createPropTemplateForCallExpression(path, pathRef, state, componentPath
   const { isStatic, templateOpcodes } = createOpcodesForReactComputeFunction(calleePath, state, false, null, null);
   const hoistedOpcodes = hoistOpcodesNode(componentPath, state, normalizeOpcodes(templateOpcodes));
 
-  state.helpers.add("createReactNode");
+  state.helpers.add("createVNode");
   if (isStatic) {
-    const node = t.callExpression(t.identifier("createReactNode"), [hoistedOpcodes]);
+    const node = t.callExpression(t.identifier("createVNode"), [hoistedOpcodes]);
     return { node, canInline: true };
   }
-  const node = t.callExpression(t.identifier("createReactNode"), [hoistedOpcodes, pathRef.node]);
+  const node = t.callExpression(t.identifier("createVNode"), [hoistedOpcodes, pathRef.node]);
   return { node, canInline: true };
 }
 
@@ -728,9 +682,9 @@ function createPropTemplateForFunctionExpression(pathRef, state, componentPath) 
   const { isStatic, templateOpcodes } = createOpcodesForReactComputeFunction(pathRef, state, false, null, null);
   const hoistedOpcodes = hoistOpcodesNode(componentPath, state, normalizeOpcodes(templateOpcodes));
 
-  state.helpers.add("createReactNode");
+  state.helpers.add("createVNode");
   if (isStatic) {
-    const funcNode = t.arrowFunctionExpression([], t.callExpression(t.identifier("createReactNode"), [hoistedOpcodes]));
+    const funcNode = t.arrowFunctionExpression([], t.callExpression(t.identifier("createVNode"), [hoistedOpcodes]));
     return { node: funcNode, canInline: true };
   } else {
     const params = pathRef.node.params;
@@ -738,7 +692,7 @@ function createPropTemplateForFunctionExpression(pathRef, state, componentPath) 
     pathRef.node.params = [];
     const funcNode = t.arrowFunctionExpression(
       params,
-      t.callExpression(t.identifier("createReactNode"), [hoistedOpcodes, t.callExpression(pathRef.node, [])]),
+      t.callExpression(t.identifier("createVNode"), [hoistedOpcodes, t.callExpression(pathRef.node, [])]),
     );
     return { node: funcNode, canInline: false };
   }
@@ -989,6 +943,7 @@ function createPropsArrayForCompositeComponent(
   componentPath,
 ) {
   let canInlineArray = true;
+  let keyASTNode = t.nullLiteral();
   const propsArray = [];
 
   for (let propShape of shapeOfPropsObject) {
@@ -1001,6 +956,10 @@ function createPropsArrayForCompositeComponent(
       state,
       componentPath,
     );
+    if (propName === "key") {
+      keyASTNode = node;
+      continue;
+    }
     if (!canInline) {
       canInlineArray = false;
     }
@@ -1008,6 +967,7 @@ function createPropsArrayForCompositeComponent(
   }
 
   return {
+    keyASTNode,
     canInlineArray,
     propsArray,
   };
@@ -1079,7 +1039,7 @@ function compileCompositeComponent(path, componentName, attributesPath, children
     }
     return templateNode;
   }
-  const { propsArray, canInlineArray } = createPropsArrayForCompositeComponent(
+  const { keyASTNode, propsArray, canInlineArray } = createPropsArrayForCompositeComponent(
     path,
     attributesPath,
     childrenPath,
@@ -1093,7 +1053,7 @@ function compileCompositeComponent(path, componentName, attributesPath, children
   if (!canInlineArray) {
     propsArrayASTNode = t.numericLiteral(getRuntimeValueIndexForPropsArray(propsArrayASTNode, state));
   }
-  return new ReferenceComponentTemplateNode(componentName, componentTemplateNode, propsArrayASTNode);
+  return new ReferenceComponentTemplateNode(componentName, componentTemplateNode, propsArrayASTNode, keyASTNode);
 }
 
 export function compileJSXElement(path, state, componentPath) {
@@ -1138,7 +1098,7 @@ function compileJSXElementType(typePath, attributesPath, childrenPath, state, co
   } else if (isReferenceReactContextConsumer(typePath, state)) {
     createOpcodesForReactContextConsumer(typePath, childrenPath, opcodes, state, componentPath);
   } else if (isReactFragment(typePath, state)) {
-    return compiledReactCreateElementFragment(childrenPath, state, componentPath, null, null);
+    return compileJSXFragment(childrenPath, attributesPath, state, componentPath, false);
   } else if (isHostComponentType(typePath, state)) {
     const isVoidElement = voidElements.has(typeName);
     const templateNode = new HostComponentTemplateNode(typeName, isVoidElement);
@@ -1287,7 +1247,7 @@ function compileReactCreateElementHostComponent(templateNode, tagName, args, sta
     const configPathRef = getReferenceFromExpression(configPath, state);
     const configNode = configPathRef.node;
 
-    const createOpcodesGivenPropsMap = propsMap => {
+    const compilePropsGivenMap = propsMap => {
       const renderChildren = propsMap.get("children");
       propsMap.delete("children");
       for (let [propName, valuePath] of propsMap) {
@@ -1304,7 +1264,7 @@ function compileReactCreateElementHostComponent(templateNode, tagName, args, sta
       const propertiesPath = configPathRef.get("properties");
       const propsMap = getPropsMapFromObjectExpression(propertiesPath);
 
-      createOpcodesGivenPropsMap(propsMap);
+      compilePropsGivenMap(propsMap);
     } else if (t.isCallExpression(configNode)) {
       if (isObjectAssignCall(configPathRef, state)) {
         const objectAssignArgs = configPathRef.get("arguments");
@@ -1320,7 +1280,7 @@ function compileReactCreateElementHostComponent(templateNode, tagName, args, sta
             invariant(false, "TODO");
           }
         }
-        createOpcodesGivenPropsMap(propsMap);
+        compilePropsGivenMap(propsMap);
       } else {
         invariant(false, "TODO");
       }

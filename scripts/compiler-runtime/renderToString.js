@@ -30,7 +30,9 @@ export const REFERENCE_COMPONENT = 10;
 export const VNODE = 11;
 export const REFERENCE_VNODE = 12;
 export const MULTI_RETURN_CONDITIONAL = 13;
+export const VNODE_COLLECTION = 14;
 
+// Elements
 export const HAS_STATIC_PROPS = 1 << 6;
 export const HAS_DYNAMIC_PROPS = 1 << 7;
 export const HAS_STATIC_STYLES = 1 << 8;
@@ -43,7 +45,12 @@ export const HAS_DYNAMIC_TEXT_ARRAY_CONTENT = 1 << 14;
 export const IS_STATIC = 1 << 15;
 export const IS_SVG = 1 << 16;
 export const IS_VOID = 1 << 17;
-export const HAS_HOOKS = 1 << 18;
+
+// Components
+export const HAS_HOOKS = 1 << 6;
+
+// Collection
+export const HAS_KEYS = 1 << 6;
 
 const PROP_IS_EVENT = 1;
 const PROP_IS_BOOLEAN = 2;
@@ -824,6 +831,7 @@ function renderPropValue(propFlags, value) {
 function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponentTemplate, values, isOnlyChild, state) {
   const templateFlags = templateTypeAndFlags & ~0x3f;
   const tagName = hostComponentTemplate[1];
+
   let childrenTemplateIndex = 2;
   let inner = "";
   let styles = "";
@@ -960,6 +968,18 @@ function renderTextArrayTemplateToString(templateTypeAndFlags, textTemplate, val
   const isStatic = (templateFlags & IS_STATIC) !== 0;
   const textArray = isStatic === true ? textTemplate[1] : values[textTemplate[1]];
   return renderTextArrayToString(textArray, state);
+}
+
+function renderVNodeCollectionTemplateToString(vNodeCollectionTemplate, values, isOnlyChild, state) {
+  const vNodeCollectionValueIndex = vNodeCollectionTemplate[1];
+  const vNodeCollection = values[vNodeCollectionValueIndex];
+  const vNodeCollectionLength = vNodeCollection.length;
+
+  let collectionString = "";
+  for (let i = 0; i < vNodeCollectionLength; ++i) {
+    collectionString += renderVNodeToString(vNodeCollection[i], false, state);
+  }
+  return collectionString;
 }
 
 function renderMultiConditionalTemplateToString(multiConditionalTemplate, values, isOnlyChild, state) {
@@ -1109,6 +1129,8 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
       return renderReferenceVNodeTemplateToString(templateNode, values, isOnlyChild, state);
     case MULTI_RETURN_CONDITIONAL:
       return renderMultiReturnConditionalTemplateToString(templateNode, values, isOnlyChild, state);
+    case VNODE_COLLECTION:
+      return renderVNodeCollectionTemplateToString(templateNode, values, isOnlyChild, state);
     default:
       throw new Error("Should never happen");
   }

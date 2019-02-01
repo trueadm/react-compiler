@@ -15,7 +15,9 @@ export const REFERENCE_COMPONENT = 10;
 export const VNODE = 11;
 export const REFERENCE_VNODE = 12;
 export const MULTI_RETURN_CONDITIONAL = 13;
+export const VNODE_COLLECTION = 14;
 
+// Elements
 export const HAS_STATIC_PROPS = 1 << 6;
 export const HAS_DYNAMIC_PROPS = 1 << 7;
 export const HAS_STATIC_STYLES = 1 << 8;
@@ -28,7 +30,12 @@ export const HAS_DYNAMIC_TEXT_ARRAY_CONTENT = 1 << 14;
 export const IS_STATIC = 1 << 15;
 export const IS_SVG = 1 << 16;
 export const IS_VOID = 1 << 17;
-export const HAS_HOOKS = 1 << 18;
+
+// Components
+export const HAS_HOOKS = 1 << 6;
+
+// Collection
+export const HAS_KEYS = 1 << 6;
 
 function valueToBabelNode(value) {
   if (typeof value === "boolean") {
@@ -74,6 +81,10 @@ export class ComponentTemplateNode {
     this.insertionPath = null;
   }
 
+  getKeyASTNode() {
+    debugger;
+  }
+
   toAST() {
     const ASTNode = [];
     let flag = this.isRootComponent ? ROOT_COMPONENT : COMPONENT;
@@ -103,10 +114,15 @@ export class ComponentTemplateNode {
 }
 
 export class ReferenceComponentTemplateNode {
-  constructor(componentRefName, componentTemplateNode, propsArrayASTNode) {
+  constructor(componentRefName, componentTemplateNode, propsArrayASTNode, keyASTNode) {
     this.componentTemplateNode = componentTemplateNode;
     this.componentRefName = componentRefName;
     this.propsArrayASTNode = propsArrayASTNode;
+    this.keyASTNode = keyASTNode;
+  }
+
+  getKeyASTNode() {
+    return this.keyASTNode;
   }
 
   toAST() {
@@ -122,21 +138,14 @@ export class ReferenceComponentTemplateNode {
   }
 }
 
-export class StaticReactNode {
-  constructor() {
-    this.isStatic = true;
-    // TODO
-  }
-
-  toAST() {
-    debugger;
-  }
-}
-
 export class ReferenceVNode {
   constructor(valueIndex) {
     debugger;
     this.valueIndex = valueIndex;
+  }
+
+  getKeyASTNode() {
+    debugger;
   }
 
   toAST() {
@@ -154,6 +163,11 @@ export class HostComponentTemplateNode {
     this.dynamicStyles = [];
     this.children = [];
     this.isStatic = false;
+    this.keyASTNode = null;
+  }
+
+  getKeyASTNode() {
+    return this.keyASTNode === null ? t.nullLiteral() : this.keyASTNode;
   }
 
   toAST() {
@@ -281,6 +295,10 @@ export class StaticTextTemplateNode {
     this.text = text;
   }
 
+  getKeyASTNode() {
+    debugger;
+  }
+
   toAST() {
     return t.arrayExpression([t.numericLiteral(TEXT | IS_STATIC), t.stringLiteral(this.text + "")]);
   }
@@ -301,6 +319,10 @@ export class DynamicTextTemplateNode {
     this.valueIndex = valueIndex;
   }
 
+  getKeyASTNode() {
+    debugger;
+  }
+
   toAST() {
     return t.arrayExpression([t.numericLiteral(TEXT), t.numericLiteral(this.valueIndex)]);
   }
@@ -310,6 +332,10 @@ export class StaticValueTemplateNode {
   constructor(value) {
     this.isStatic = true;
     this.value = value;
+  }
+
+  getKeyASTNode() {
+    debugger;
   }
 
   toAST() {
@@ -322,6 +348,10 @@ export class DynamicValueTemplateNode {
     this.valueIndex = valueIndex;
   }
 
+  getKeyASTNode() {
+    debugger;
+  }
+
   toAST() {
     debugger;
   }
@@ -331,6 +361,10 @@ export class TemplateFunctionCallTemplateNode {
   constructor(templateNode, computeFunctionValueIndex) {
     this.templateNode = templateNode;
     this.computeFunctionValueIndex = computeFunctionValueIndex;
+  }
+
+  getKeyASTNode() {
+    debugger;
   }
 
   toAST() {
@@ -378,8 +412,13 @@ export class MultiReturnConditionalTemplateNode {
 }
 
 export class FragmentTemplateNode {
-  constructor(children) {
+  constructor(children, keyASTNode) {
     this.children = children;
+    this.keyASTNode = keyASTNode;
+  }
+
+  getKeyASTNode() {
+    return this.keyASTNode;
   }
 
   toAST() {
@@ -404,5 +443,25 @@ export class ConditionalTemplateNode {
       this.alternateTemplateNode.toAST(),
       this.consequentTemplateNode.toAST(),
     ]);
+  }
+}
+
+export class VNodeCollectionTemplateNode {
+  constructor(valueIndex, templateNode) {
+    this.valueIndex = valueIndex;
+    this.templateNode = templateNode;
+  }
+
+  getKeyASTNode() {
+    return this.templateNode.getKeyASTNode();
+  }
+
+  toAST() {
+    let flags = VNODE_COLLECTION;
+
+    if (!t.isNullLiteral(this.getKeyASTNode())) {
+      flags |= HAS_KEYS;
+    }
+    return t.arrayExpression([t.numericLiteral(flags), t.numericLiteral(this.valueIndex)]);
   }
 }

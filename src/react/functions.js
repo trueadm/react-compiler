@@ -2,12 +2,31 @@ import { getReferenceFromExpression } from "../references";
 import { emptyObject, getComponentName, isPrimitive, isRootPathConditional } from "../utils";
 import { applyCachedRuntimeValues } from "../transforms";
 import { compileNode } from "../nodes";
-import { MultiReturnConditionalTemplateNode } from "../templates";
+import { MultiReturnConditionalTemplateNode, StaticValueTemplateNode } from "../templates";
 import invariant from "../invariant";
 import * as t from "@babel/types";
-import { StaticValueTemplateNode } from "../../lib/templates";
 
-function compileTemplateBranch(templateBranch, templateBranchIndex, state, componentPath) {
+function replaceTemplateReturn(path, originalPathNode, replacement) {
+  if (!path.removed) {
+    if (path.node === originalPathNode || path.node === emptyObject) {
+      path.replaceWith(replacement);
+    } else if (t.isBlockStatement(path.node)) {
+      for (let blockNode of path.node.body) {
+        if (
+          t.isReturnStatement(blockNode) &&
+          (blockNode.argument === originalPathNode || blockNode.argument === emptyObject)
+        ) {
+          blockNode.argument = replacement;
+          break;
+        }
+      }
+    } else {
+      throw new Error("TODO");
+    }
+  }
+}
+
+function compileTemplateBranch(templateBranch, templateBranchIndex, state, componentPath, compileToVNode) {
   const runtimeValues = new Map();
   if (templateBranchIndex !== null) {
     runtimeValues.set(t.numericLiteral(templateBranchIndex), {
@@ -29,37 +48,32 @@ function compileTemplateBranch(templateBranch, templateBranchIndex, state, compo
   for (let [runtimeValue, { index }] of runtimeValues) {
     runtimeValuesArray[index] = runtimeValue;
   }
-  if (!path.removed) {
-    if (path.node === originalPathNode || path.node === emptyObject) {
-      path.replaceWith(t.arrayExpression(runtimeValuesArray));
-    } else if (t.isBlockStatement(path.node)) {
-      for (let blockNode of path.node.body) {
-        if (
-          t.isReturnStatement(blockNode) &&
-          (blockNode.argument === originalPathNode || blockNode.argument === emptyObject)
-        ) {
-          blockNode.argument = t.arrayExpression(runtimeValuesArray);
-          break;
-        }
-      }
-    } else {
-      throw new Error("TODO");
-    }
+  const runtimeValuesArrayAST = t.arrayExpression(runtimeValuesArray);
+  if (compileToVNode) {
+    state.helpers.add("createVNode");
+    const vNodeAST = t.callExpression(t.identifier("createVNode"), [
+      templateNode.toAST(),
+      runtimeValuesArrayAST,
+      templateNode.getKeyASTNode(),
+    ]);
+    replaceTemplateReturn(path, originalPathNode, vNodeAST);
+  } else {
+    replaceTemplateReturn(path, originalPathNode, runtimeValuesArrayAST);
   }
   return templateNode;
 }
 
-function compileTemplateBranches(templateBranches, computeFunction, state, functionPath) {
+function compileTemplateBranches(templateBranches, computeFunction, state, functionPath, compileToVNode) {
   if (templateBranches.length === 1) {
     const templateBranch = templateBranches[0];
-    return compileTemplateBranch(templateBranch, null, state, functionPath);
+    return compileTemplateBranch(templateBranch, null, state, functionPath, compileToVNode);
   } else {
     // Check how many non primitive roots we have
     const nonPrimitiveRoots = templateBranches.filter(branch => !branch.isPrimitive);
 
     if (nonPrimitiveRoots.length === 1) {
       const templateBranch = nonPrimitiveRoots[0];
-      return compileTemplateBranch(templateBranch, null, state, functionPath);
+      return compileTemplateBranch(templateBranch, null, state, functionPath, compileToVNode);
     } else {
       const multiConditionalTemplateNode = new MultiReturnConditionalTemplateNode();
       let templateBranchIndex = 0;
@@ -72,6 +86,7 @@ function compileTemplateBranches(templateBranches, computeFunction, state, funct
             templateBranchIndex,
             state,
             functionPath,
+            compileToVNode,
           );
           if (!templateBranch.isStatic) {
             isStatic = false;
@@ -88,7 +103,13 @@ function compileTemplateBranches(templateBranches, computeFunction, state, funct
   }
 }
 
-export function compileReactComputeFunction(functionPath, state, isComponentFunction, contextObjectRuntimeValueIndex) {
+export function compileReactComputeFunction(
+  functionPath,
+  state,
+  isComponentFunction,
+  contextObjectValueIndex,
+  compileToVNode,
+) {
   const computeFunction = functionPath.node;
   if (state.computeFunctionCache.has(computeFunction)) {
     return state.computeFunctionCache.get(computeFunction);
@@ -140,7 +161,13 @@ export function compileReactComputeFunction(functionPath, state, isComponentFunc
       runtimeConditionals,
     },
   };
-  const templateNode = compileTemplateBranches(templateBranches, computeFunction, childState, functionPath);
+  const templateNode = compileTemplateBranches(
+    templateBranches,
+    computeFunction,
+    childState,
+    functionPath,
+    compileToVNode,
+  );
   const isStatic = templateNode.isStatic;
 
   let computeFunctionRef = null;
@@ -151,6 +178,7 @@ export function compileReactComputeFunction(functionPath, state, isComponentFunc
   }
 
   state.computeFunctionCache.set(computeFunction, {
+    compileToVNode,
     computeFunctionRef,
     isStatic,
     templateNode,
@@ -159,6 +187,7 @@ export function compileReactComputeFunction(functionPath, state, isComponentFunc
   applyCachedRuntimeValues(functionPath, runtimeCachedValues);
 
   return {
+    compileToVNode,
     computeFunctionRef,
     isStatic,
     templateNode,

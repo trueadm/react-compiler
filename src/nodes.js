@@ -118,7 +118,7 @@ function compileCallExpressionReturningTemplateNodes(childPath, childRefPath, st
     pushOpcode(opcodes, "REACT_NODE_TEMPLATE_FROM_FUNC_CALL", runtimeValuePointer);
     return;
   }
-  const { isStatic, templateNode } = compileReactComputeFunction(calleePath, state, false, null);
+  const { isStatic, templateNode } = compileReactComputeFunction(calleePath, state, false, null, false);
 
   if (isStatic) {
     return templateNode;
@@ -218,7 +218,8 @@ export function compileNode(path, refPath, state, componentPath, isRoot) {
   } else if (t.isJSXElement(node)) {
     return compileJSXElement(refPath, state, componentPath);
   } else if (t.isJSXFragment(node)) {
-    return compileJSXFragment(refPath.get("children"), state, componentPath, isRoot);
+    const attributesPath = refPath.get("openingFragment").get("attributes");
+    return compileJSXFragment(refPath.get("children"), attributesPath, state, componentPath, isRoot);
   } else if (typeof node === "string") {
     return compileString(node);
   } else if (t.isJSXText(node) || isPrimitive(node)) {

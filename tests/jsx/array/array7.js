@@ -11,7 +11,7 @@ function Component({ items }: { items: Array<number> }) {
       {items.map(
         (item: number): React.Node => (
           <React.Fragment key={item}>
-            <Component2 >The item is {item}</Component2>
+            <Component2>The item is {item}</Component2>
             <Component2>The item is {item}</Component2>
           </React.Fragment>
         ),

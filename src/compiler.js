@@ -259,10 +259,10 @@ function applyPostTransforms(compilerContext) {
 function addModuleHelpers(ast, moduleState) {
   const helpers = moduleState.helpers;
 
-  if (helpers.has("createReactNode")) {
+  if (helpers.has("createVNode")) {
     ast.program.body.unshift(
       t.importDeclaration(
-        [t.importSpecifier(t.identifier("createReactNode"), t.identifier("createReactNode"))],
+        [t.importSpecifier(t.identifier("createVNode"), t.identifier("createVNode"))],
         t.stringLiteral("react-compiler-runtime"),
       ),
     );

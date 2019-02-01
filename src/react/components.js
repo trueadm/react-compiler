@@ -30,7 +30,13 @@ export function compileReactFunctionComponent(componentPath, state) {
 
   const previousComponentTemplateNode = state.componentTemplateNode;
   state.componentTemplateNode = componentTemplateNode;
-  const { computeFunctionRef, isStatic, templateNode } = compileReactComputeFunction(componentPath, state, true, null);
+  const { computeFunctionRef, isStatic, templateNode } = compileReactComputeFunction(
+    componentPath,
+    state,
+    true,
+    null,
+    false,
+  );
   componentTemplateNode.isStatic = isStatic;
   componentTemplateNode.computeFunctionRef = computeFunctionRef;
   componentTemplateNode.templateNode = templateNode;
@@ -70,7 +76,6 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
   const templateAST = componentTemplateNode.toAST();
   if (t.isFunctionDeclaration(computeFunction)) {
     const identifier = t.identifier(name);
-    markNodeAsUsed(identifier);
 
     if (isStatic) {
       const templateDeclaration = t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]);
@@ -78,6 +83,7 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
       componentTemplateNode.insertionPath = componentPath;
       componentTemplateNode.insertionNode = templateDeclaration;
     } else {
+      markNodeAsUsed(identifier);
       if (
         t.isExportDefaultDeclaration(componentPath.parentPath) ||
         t.isExportNamedDeclaration(componentPath.parentPath)

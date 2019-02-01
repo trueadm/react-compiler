@@ -11,7 +11,7 @@ import tmp from "tmp";
 import { compiler as ClosureCompiler } from "google-closure-compiler";
 import path from "path";
 import { JSDOM } from "jsdom";
-import { createContext, createReactNode, useState } from "./compiler-runtime/index";
+import { createContext, createVNode, useState } from "./compiler-runtime/index";
 import { parse } from "simple-html-dom-parser";
 
 process.env.NODE_ENV = "production";
@@ -44,7 +44,7 @@ let filterTests = Array.isArray(argv._) && argv._.length > 0 ? argv._[0] : null;
 function transformSource(source) {
   source = source.replace(
     /import {\W.*} from "react-compiler-runtime";/g,
-    `const { "createReactNode": createReactNode } = require("react-compiler-runtime");`,
+    `const { "createVNode": createVNode } = require("react-compiler-runtime");`,
   );
   return transform(source, {
     configFile: false,
@@ -84,7 +84,7 @@ function executeSource(source, needsTransforming) {
         if (_path === "react-compiler-runtime") {
           return {
             createContext,
-            createReactNode,
+            createVNode,
             useState,
           };
         }
