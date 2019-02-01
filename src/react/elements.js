@@ -58,6 +58,7 @@ import {
   DynamicValueTemplateNode,
   FragmentTemplateNode,
   HostComponentTemplateNode,
+  LogicalTemplateNode,
   ReferenceComponentTemplateNode,
   ReferenceVNode,
   StaticTextTemplateNode,
@@ -244,7 +245,8 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
     childTemplateNode instanceof DynamicTextTemplateNode ||
     childTemplateNode instanceof TemplateFunctionCallTemplateNode ||
     childTemplateNode instanceof ReferenceComponentTemplateNode ||
-    childTemplateNode instanceof ConditionalTemplateNode
+    childTemplateNode instanceof ConditionalTemplateNode ||
+    childTemplateNode instanceof LogicalTemplateNode
   ) {
     templateNode.children.push(childTemplateNode);
     return;
