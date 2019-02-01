@@ -1,6 +1,5 @@
-import { pushOpcode, pushOpcodeValue } from "./opcodes";
 import { assertType, getTypeAnnotationForExpression } from "./annotations";
-import { getBindingPathRef, getReferenceFromExpression } from "./references";
+import { getBindingPathRef, getReferenceFromExpression, isIdentifierReferenceConstant } from "./references";
 import {
   escapeText,
   getAllPathsFromMutatedBinding,
@@ -17,7 +16,6 @@ import {
   markNodeAsUsed,
   moveOutCallExpressionFromTemplate,
   moveOutFunctionFromTemplate,
-  normalizeOpcodes,
   pathContainsReactElement,
   updateCommonJSLikeRequireCallPathToCompiledPath,
   updateImportSyntaxPathToCompiledPath,
@@ -176,6 +174,7 @@ export function compileLogicalExpressionTemplate(path, state, componentPath, isR
   const leftPath = path.get("left");
   const leftPathRef = getReferenceFromExpression(leftPath, state);
   const leftTemplateNode = compileNode(leftPath, leftPathRef, state, componentPath, isRoot);
+  debugger;
   const rightPath = path.get("right");
   const rightPathRef = getReferenceFromExpression(rightPath, state);
   const rightTemplateNode = compileNode(rightPath, rightPathRef, state, componentPath, isRoot);
@@ -190,9 +189,16 @@ function compileString(string) {
 }
 
 export function compileNode(path, refPath, state, componentPath, isRoot) {
+  const typeAnnotation = getTypeAnnotationForExpression(refPath, state);
   let node = refPath.node;
 
-  if (t.isArrowFunctionExpression(node) || t.isFunctionExpression(node)) {
+  if (
+    t.isIdentifier(node) &&
+    !isIdentifierReferenceConstant(refPath, state) &&
+    assertType(refPath, typeAnnotation, true, state, "REACT_NODE")
+  ) {
+    debugger;
+  } else if (t.isArrowFunctionExpression(node) || t.isFunctionExpression(node)) {
     if (isNodeWithinReactElementTemplate(refPath, state)) {
       moveOutFunctionFromTemplate(refPath);
     }

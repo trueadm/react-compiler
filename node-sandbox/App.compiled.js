@@ -1,7 +1,13 @@
-function Component2_ComputeFunction(x, y, z) {
-  return [z, x, y];
+// props:{cond: true, x: 123}
+function Component_ComputeFunction(cond, x) {
+  var otherVal;
+
+  if (cond) {
+    otherVal = <span>456</span>;
+  }
+
+  return [otherVal, x];
 }
 
-const Component2 = [1, Component2_ComputeFunction, [2050, "header", [[8322, "div", ["className", 0, 0], 1], [8322, "span", ["className", 0, 0], 2]]]];
-const Component = [32768, [33794, "div", [74, Component2, ["over-ride x", "over-ride y", "default-class"]]]];
+const Component = [0, ["cond", "x"], Component_ComputeFunction, [2050, "div", [[135, [4, 0], [4, 1]], [32771, "123"]]]];
 module["exports"] = Component;
