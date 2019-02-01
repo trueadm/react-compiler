@@ -1031,7 +1031,7 @@ function renderConditionalTemplateToString(conditionalTemplate, values, isOnlyCh
       return renderTemplateToString(alternateTemplate, values, isOnlyChild, state);
     }
   }
-  return "";
+  throw new Error("This shouldn\t happen?");
 }
 
 function renderLogicalTemplateToString(templateTypeAndFlags, logicalTemplate, values, isOnlyChild, state) {
