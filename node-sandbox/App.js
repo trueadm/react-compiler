@@ -1,14 +1,20 @@
-// props:{cond: true, x: 123}
+// props:{val: "hello world"}
 var React = require("react");
 
-function Component({x, cond}: {x: string, cond: boolean}) {
-  var otherVal;
+function Component2({ children }: { children: Array<string | React.Node> }) {
+  return React.createElement("span", null, "The child is ", children);
+}
 
-  if (cond) {
-    otherVal = <span>456</span>;
-  }
+function getChildren(val: string): string {
+  return val;
+}
 
-  return <div>{otherVal || x}123</div>
+function getChildren2(): React.Node {
+  return React.createElement("span", null, "Hello world");
+}
+
+function Component({ val }: { val: string }) {
+  return React.createElement("div", null, React.createElement(Component2, null, getChildren(val), getChildren2()));
 }
 
 Component.compileRootComponent = true;

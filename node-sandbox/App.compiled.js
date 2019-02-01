@@ -1,11 +1,24 @@
-// props:{cond: true, x: 123}
-function Component_ComputeFunction(cond, x) {
-  var __cached__0;
+import { createVNode } from "react-compiler-runtime";
 
-  if (__cached__0 = cond) {}
-
-  return [__cached__0, x];
+// props:{val: "hello world"}
+function Component2_ComputeFunction(children) {
+  return [children];
 }
 
-const Component = [0, ["cond", "x"], Component_ComputeFunction, [2050, "div", [[135, [9, [0, [4098, "span", "456"]]], [4, 1]], [32771, "123"]]]];
+function getChildren(val: string): string {
+  return val;
+}
+
+function getChildren2(): React.Node {
+  return [];
+}
+
+function Component_ComputeFunction(val) {
+  getChildren2();
+  getChildren(val);
+  return [[[getChildren(val), createVNode([36866, "span", "Hello world"])]]];
+}
+
+const Component2 = [1, Component2_ComputeFunction, [2050, "span", [[32771, "The child is "], [13, 0]]]];
+const Component = [0, ["val"], Component_ComputeFunction, [1026, "div", [11, Component2, 0]]];
 module["exports"] = Component;

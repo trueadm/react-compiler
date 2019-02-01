@@ -1036,18 +1036,21 @@ function renderConditionalTemplateToString(conditionalTemplate, values, isOnlyCh
 
 function renderLogicalTemplateToString(templateTypeAndFlags, logicalTemplate, values, isOnlyChild, state) {
   const templateFlags = templateTypeAndFlags & ~0x3f;
+  const leftTemplateNode = logicalTemplate[1];
+  const leftTemplateValue = renderTemplateToString(leftTemplateNode, values, isOnlyChild, state);
 
   if ((templateFlags & LOGICAL_OR) !== 0) {
-    const leftTemplateNode = logicalTemplate[1];
-    const leftTemplateValue = renderTemplateToString(leftTemplateNode, values, isOnlyChild, state);
-
     if (leftTemplateValue !== undefined) {
       return leftTemplateValue;
     }
     const rightTemplateNode = logicalTemplate[2];
     return renderTemplateToString(rightTemplateNode, values, isOnlyChild, state);
   } else if ((templateFlags & LOGICAL_AND) !== 0) {
-    debugger;
+    if (leftTemplateValue === undefined) {
+      return "";
+    }
+    const rightTemplateNode = logicalTemplate[2];
+    return renderTemplateToString(rightTemplateNode, values, isOnlyChild, state);
   }
 }
 
@@ -1085,12 +1088,19 @@ function renderVNodeToString(vNode, isOnlyChild, state) {
     return "";
   }
   if (typeof vNode === "string" || typeof vNode === "number") {
+    if (isOnlyChild) {
+      const lastChildWasText = state.lastChildWasText;
+      state.lastChildWasText = true;
+      if (lastChildWasText === true) {
+        return `<!-- -->${escapeText(vNode)}`;
+      }
+    }
     return escapeText(vNode);
   }
   if (isArray(vNode)) {
     let str = "";
     for (let i = 0, length = vNode.length; i < length; ++i) {
-      str += renderVNodeToString(vNode[i], false, state);
+      str += renderVNodeToString(vNode[i], true, state);
     }
     return str;
   } else {

@@ -661,15 +661,14 @@ function createPropTemplateForArrayExpression(pathRef, state, componentPath) {
 
 function createPropTemplateForCallExpression(path, pathRef, state, componentPath) {
   const calleePath = getReferenceFromExpression(pathRef.get("callee"), state);
-  const { isStatic, templateOpcodes } = createOpcodesForReactComputeFunction(calleePath, state, false, null, null);
-  const hoistedOpcodes = hoistOpcodesNode(componentPath, state, normalizeOpcodes(templateOpcodes));
+  const { isStatic, templateNode } = compileReactComputeFunction(calleePath, state, false, null, false);
 
   state.helpers.add("createVNode");
   if (isStatic) {
-    const node = t.callExpression(t.identifier("createVNode"), [hoistedOpcodes]);
+    const node = t.callExpression(t.identifier("createVNode"), [templateNode.toAST()]);
     return { node, canInline: true };
   }
-  const node = t.callExpression(t.identifier("createVNode"), [hoistedOpcodes, pathRef.node]);
+  const node = t.callExpression(t.identifier("createVNode"), [templateNode.toAST(), pathRef.node]);
   return { node, canInline: true };
 }
 
