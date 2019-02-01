@@ -16,6 +16,7 @@ export function compileReactFunctionComponent(componentPath, state) {
   const componentUsesHooks = doesFunctionComponentUseHooks(componentPath, state);
   const isRootComponent = state.isRootComponent;
   const componentTemplateNode = new ComponentTemplateNode(
+    name,
     componentPath,
     isRootComponent,
     componentUsesHooks,
@@ -26,10 +27,19 @@ export function compileReactFunctionComponent(componentPath, state) {
   );
   state.compiledComponentCache.set(name, componentTemplateNode);
 
+  const previousComponentTemplateNode = state.componentTemplateNode;
+  state.componentTemplateNode = componentTemplateNode;
   const { computeFunctionRef, isStatic, templateNode } = compileReactComputeFunction(componentPath, state, true, null);
   componentTemplateNode.isStatic = isStatic;
   componentTemplateNode.computeFunctionRef = computeFunctionRef;
   componentTemplateNode.templateNode = templateNode;
+
+  if (!isRootComponent) {
+    state.componentTemplateNode = previousComponentTemplateNode;
+    if (!isStatic) {
+      previousComponentTemplateNode.childComponents.push(componentTemplateNode);
+    }
+  }
 
   // insertComputFunctionCachedOpcodes(componentPath, state);
 
@@ -55,18 +65,17 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
   isStatic,
   name,
   state,
-  dependencies,
 ) {
   const templateAST = componentTemplateNode.toAST();
   if (t.isFunctionDeclaration(computeFunction)) {
     const identifier = t.identifier(name);
     markNodeAsUsed(identifier);
-    let insertPath;
 
     if (isStatic) {
       componentPath.replaceWith(t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]));
     } else {
       const templateDeclaration = t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]);
+      componentTemplateNode.insertionNode = templateDeclaration;
       if (
         t.isExportDefaultDeclaration(componentPath.parentPath.node) ||
         t.isExportNamedDeclaration(componentPath.parentPath.node)
@@ -76,15 +85,20 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
           : t.exportNamedDeclaration(templateDeclaration, []);
         const parentPath = componentPath.parentPath;
         parentPath.replaceWith(exportNode);
-        computeFunction.insertBefore(parentPath);
-        insertPath = parentPath;
+        parentPath.insertBefore(computeFunction);
+        componentTemplateNode.insertionPath = parentPath;
+        if (!state.isRootComponent) {
+          parentPath.remove();
+        }
       } else {
         componentPath.replaceWith(templateDeclaration);
-        computeFunction.insertBefore(componentPath);
-        insertPath = componentPath;
+        componentPath.insertBefore(computeFunction);
+        componentTemplateNode.insertionPath = componentPath;
+        if (!state.isRootComponent) {
+          componentPath.remove();
+        }
       }
     }
-    return insertPath;
   } else {
     debugger;
     const parentPath = componentPath.parentPath;

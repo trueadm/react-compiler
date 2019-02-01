@@ -47,6 +47,7 @@ function valueToBabelNode(value) {
 
 export class ComponentTemplateNode {
   constructor(
+    name,
     componentPath,
     isRootComponent,
     usesHooks,
@@ -55,7 +56,9 @@ export class ComponentTemplateNode {
     typeAnnotation,
     shapeOfPropsObject,
   ) {
+    this.name = name;
     this.componentPath = componentPath;
+    this.insertPath = null;
     this.isStatic = false;
     this.computeFunctionRef = null;
     this.templateNode = null;
@@ -67,6 +70,8 @@ export class ComponentTemplateNode {
     this.shapeOfPropsObject = shapeOfPropsObject;
     this.propsArray = null;
     this.propsValueIndex = null;
+    this.childComponents = [];
+    this.insertionPath = null;
   }
 
   toAST() {

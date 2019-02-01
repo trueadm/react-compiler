@@ -67,8 +67,64 @@ function checkIfIdHasFlag(id, path, compilerContext, moduleFilePath) {
       const moduleState = compilerContext.modules.get(moduleFilePath).state;
       moduleState.needsCompiling();
       compileReactFunctionComponent(path, moduleState);
+      orderComponentTemplateDeclarations(path, moduleState);
       makeClosureCompilerAdvancedFriendly(path);
     }
+  }
+}
+
+function visitComponentAndPopulateInsertionMap(component, modulePath, insertionMap, depth) {
+  const insertionPath = component.insertionPath;
+  const insertionNode = component.insertionNode;
+
+  if (insertionPath.parentPath === modulePath) {
+    if (insertionMap.has(component)) {
+      const insertionEntry = insertionMap.get(component);
+      if (insertionEntry.cyclic) {
+        return;
+      }
+      if (insertionEntry.visits > 10) {
+        insertionEntry.cyclic = true;
+        return;
+      }
+      if (depth > insertionEntry.depth) {
+        insertionEntry.depth = depth;
+      }
+      insertionEntry.visits++;
+    } else {
+      insertionMap.set(component, { cyclic: false, depth, insertionNode, visits: 1 });
+    }
+  }
+  for (let child of component.childComponents) {
+    visitComponentAndPopulateInsertionMap(child, modulePath, insertionMap, depth + 1);
+  }
+}
+
+function orderComponentTemplateDeclarations(path, state) {
+  const rootComponentTemplateNode = state.componentTemplateNode;
+  const rootInsertionPath = rootComponentTemplateNode.insertionPath;
+  const modulePath = rootInsertionPath.parentPath;
+  const insertionMap = new Map();
+
+  visitComponentAndPopulateInsertionMap(rootComponentTemplateNode, modulePath, insertionMap, 0);
+  const componentOrdering = [];
+  for (let [, { cyclic, depth, insertionNode }] of insertionMap) {
+    let node = insertionNode;
+    if (cyclic) {
+      if (t.isVariableDeclaration(node)) {
+        const id = node.declarations[0].id;
+        const template = node.declarations[0].init;
+        node = t.functionDeclaration(id, [], t.blockStatement([t.returnStatement(template)]));
+      } else {
+        invariant(false, "TODO");
+      }
+    }
+    componentOrdering.splice(depth, 0, node);
+  }
+  let i = componentOrdering.length;
+  while (i-- > 1) {
+    const insertionNode = componentOrdering[i];
+    rootInsertionPath.insertBefore(insertionNode);
   }
 }
 
@@ -98,6 +154,7 @@ function createModuleState(moduleFilePath, compilerContext) {
     computeFunctionCache: new Map(),
     compiledComponentCache: new Map(),
     componentPath: null,
+    componentTemplateNode: null,
     counters: {
       hoistedOpcodes: 0,
       runtimeCachedValues: 0,

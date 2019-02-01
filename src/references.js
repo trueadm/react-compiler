@@ -55,6 +55,9 @@ export function isIdentifierReferenceConstant(path, state, errorOnBadIdentifier 
   if (globalBindings.has(node.name)) {
     return true;
   }
+  if (state.compiledComponentCache.has(node.name)) {
+    return true;
+  }
   const binding = getBindingPathRef(path, node.name, state);
   if (binding === undefined) {
     if (!errorOnBadIdentifier) {

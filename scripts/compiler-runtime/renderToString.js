@@ -778,8 +778,11 @@ function renderReferenceComponentTemplateToString(
   state,
 ) {
   const templateFlags = templateTypeAndFlags & ~0x3f;
-  const componentTemplateNodeLazyFunc = referenceComponentTemplate[1];
-  const componentTemplateNode = componentTemplateNodeLazyFunc();
+  const componentTemplateNodeOrFunc = referenceComponentTemplate[1];
+  let componentTemplateNode = componentTemplateNodeOrFunc;
+  if (typeof componentTemplateNodeOrFunc === "function") {
+    componentTemplateNode = componentTemplateNodeOrFunc();
+  }
   let props;
 
   if ((templateFlags & HAS_STATIC_PROPS) !== 0) {

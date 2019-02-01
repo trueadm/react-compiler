@@ -1037,6 +1037,9 @@ function compileCompositeComponent(path, componentName, attributesPath, children
   }
   if (compiledComponentCache.has(componentName)) {
     componentTemplateNode = compiledComponentCache.get(componentName);
+    if (!componentTemplateNode.isStatic) {
+      state.componentTemplateNode.childComponents.push(componentTemplateNode);
+    }
   } else {
     if (binding === undefined) {
       throw new Error(
