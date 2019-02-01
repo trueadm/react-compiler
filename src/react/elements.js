@@ -192,7 +192,7 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
     !isIdentifierReferenceConstant(refChildPath, state) &&
     assertType(childPath, typeAnnotation, true, state, "REACT_NODE")
   ) {
-    const childTemplateNode = compileMutatedBinding(refChildPath, state, componentPath, false, null);
+    const childTemplateNode = compileMutatedBinding(refChildPath, state, componentPath, false);
     if (childTemplateNode !== null) {
       templateNode.children.push(childTemplateNode);
       return;

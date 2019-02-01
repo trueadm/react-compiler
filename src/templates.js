@@ -460,6 +460,7 @@ export class LogicalTemplateNode {
 
   toAST() {
     let flags = LOGICAL;
+
     if (this.operator === "||") {
       flags |= LOGICAL_OR;
     } else if (this.operator === "&&") {

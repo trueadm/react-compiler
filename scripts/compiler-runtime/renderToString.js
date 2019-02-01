@@ -53,6 +53,10 @@ export const HAS_HOOKS = 1 << 6;
 // Collection
 export const HAS_KEYS = 1 << 6;
 
+// Logical
+export const LOGICAL_AND = 1 << 6;
+export const LOGICAL_OR = 1 << 7;
+
 const PROP_IS_EVENT = 1;
 const PROP_IS_BOOLEAN = 2;
 const PROP_IS_POSITIVE_NUMBER = 3;
@@ -960,9 +964,15 @@ function renderValueTemplateToString(templateTypeAndFlags, textTemplate, values,
 
   if (value === null || value === undefined || typeof value === "boolean") {
     return "";
-  } else if (typeof value === "string") {
-    return value;
-  } else if (typeof value === "number") {
+  } else if (typeof value === "string" || typeof value === "number") {
+    const lastChildWasText = state.lastChildWasText;
+
+    if (isOnlyChild === false) {
+      state.lastChildWasText = true;
+      if (lastChildWasText === true) {
+        return `<!-- -->${value}`;
+      }
+    }
     return value + "";
   }
   throw new Error("TODO renderValueTemplateToString");
@@ -1022,6 +1032,23 @@ function renderConditionalTemplateToString(conditionalTemplate, values, isOnlyCh
     }
   }
   return "";
+}
+
+function renderLogicalTemplateToString(templateTypeAndFlags, logicalTemplate, values, isOnlyChild, state) {
+  const templateFlags = templateTypeAndFlags & ~0x3f;
+
+  if ((templateFlags & LOGICAL_OR) !== 0) {
+    const leftTemplateNode = logicalTemplate[1];
+    const leftTemplateValue = renderTemplateToString(leftTemplateNode, values, isOnlyChild, state);
+
+    if (leftTemplateValue !== undefined) {
+      return leftTemplateValue;
+    }
+    const rightTemplateNode = logicalTemplate[2];
+    return renderTemplateToString(rightTemplateNode, values, isOnlyChild, state);
+  } else if ((templateFlags & LOGICAL_AND) !== 0) {
+    debugger;
+  }
 }
 
 function renderTemplateFunctionCallTemplateToString(templateFunctionCallTemplate, values, isOnlyChild, state) {
@@ -1122,6 +1149,8 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
       return renderFragmentTemplateToString(templateNode, values, isOnlyChild, state);
     case CONDITIONAL:
       return renderConditionalTemplateToString(templateNode, values, isOnlyChild, state);
+    case LOGICAL:
+      return renderLogicalTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
     case TEMPLATE_FUNCTION_CALL:
       return renderTemplateFunctionCallTemplateToString(templateNode, values, isOnlyChild, state);
     case MULTI_CONDITIONAL:

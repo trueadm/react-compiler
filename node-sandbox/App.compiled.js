@@ -1,13 +1,11 @@
 // props:{cond: true, x: 123}
 function Component_ComputeFunction(cond, x) {
-  var otherVal;
+  var __cached__0;
 
-  if (cond) {
-    otherVal = <span>456</span>;
-  }
+  if (__cached__0 = cond) {}
 
-  return [otherVal, x];
+  return [__cached__0, x];
 }
 
-const Component = [0, ["cond", "x"], Component_ComputeFunction, [2050, "div", [[135, [4, 0], [4, 1]], [32771, "123"]]]];
+const Component = [0, ["cond", "x"], Component_ComputeFunction, [2050, "div", [[135, [9, [0, [4098, "span", "456"]]], [4, 1]], [32771, "123"]]]];
 module["exports"] = Component;

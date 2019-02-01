@@ -174,7 +174,6 @@ export function compileLogicalExpressionTemplate(path, state, componentPath, isR
   const leftPath = path.get("left");
   const leftPathRef = getReferenceFromExpression(leftPath, state);
   const leftTemplateNode = compileNode(leftPath, leftPathRef, state, componentPath, isRoot);
-  debugger;
   const rightPath = path.get("right");
   const rightPathRef = getReferenceFromExpression(rightPath, state);
   const rightTemplateNode = compileNode(rightPath, rightPathRef, state, componentPath, isRoot);
@@ -197,7 +196,7 @@ export function compileNode(path, refPath, state, componentPath, isRoot) {
     !isIdentifierReferenceConstant(refPath, state) &&
     assertType(refPath, typeAnnotation, true, state, "REACT_NODE")
   ) {
-    debugger;
+    return compileMutatedBinding(refPath, state, componentPath, false);
   } else if (t.isArrowFunctionExpression(node) || t.isFunctionExpression(node)) {
     if (isNodeWithinReactElementTemplate(refPath, state)) {
       moveOutFunctionFromTemplate(refPath);
