@@ -131,13 +131,20 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
       if (isStatic) {
         parentPath.node.id.name = name;
         componentPath.replaceWith(templateAST);
+        componentTemplateNode.insertionPath = componentPath;
+        if (state.componentTemplateNode !== null && !state.isRootComponent) {
+          componentPath.remove();
+        }
       } else {
-        componentPath.replaceWith(t.variableDeclarator(identifier, templateAST));
-        componentPath.insertBefore(computeFunction);
-      }
-      componentTemplateNode.insertionPath = componentPath;
-      if (state.componentTemplateNode !== null && !state.isRootComponent) {
-        componentPath.remove();
+        const templateDeclaration = t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]);
+        const declarationPath = parentPath.parentPath;
+        declarationPath.replaceWith(templateDeclaration);
+        declarationPath.insertBefore(parentPath.node);
+        componentTemplateNode.insertionPath = declarationPath;
+        componentTemplateNode.insertionNode = templateDeclaration;
+        if (state.componentTemplateNode !== null && !state.isRootComponent) {
+          declarationPath.remove();
+        }
       }
     } else {
       invariant(false, "TODO");
