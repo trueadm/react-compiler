@@ -121,7 +121,6 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
       }
     }
   } else {
-    debugger;
     const parentPath = componentPath.parentPath;
 
     if (t.isVariableDeclarator(parentPath.node) && t.isIdentifier(parentPath.node.id)) {
@@ -129,25 +128,17 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
       const identifier = t.identifier(name);
       markNodeAsUsed(identifier);
 
-      // if (isRootComponent) {
       if (isStatic) {
         parentPath.node.id.name = name;
         componentPath.replaceWith(templateAST);
       } else {
-        parentPath.replaceWithMultiple([parentPath.node, t.variableDeclarator(identifier, templateAST)]);
+        componentPath.replaceWith(t.variableDeclarator(identifier, templateAST));
+        componentPath.insertBefore(computeFunction);
       }
-      // } else {
-      //   const arrayWrapperFunction = t.variableDeclarator(
-      //     identifier,
-      //     t.functionExpression(null, [], t.blockStatement([t.returnStatement(opcodesArray)])),
-      //   );
-      //   if (isStatic) {
-      //     parentPath.node.id.name = name;
-      //     componentPath.replaceWith(arrayWrapperFunction);
-      //   } else {
-      //     parentPath.replaceWithMultiple([parentPath.node, arrayWrapperFunction]);
-      //   }
-      // }
+      componentTemplateNode.insertionPath = componentPath;
+      if (state.componentTemplateNode !== null && !state.isRootComponent) {
+        componentPath.remove();
+      }
     } else {
       invariant(false, "TODO");
     }
