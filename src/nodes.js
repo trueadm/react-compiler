@@ -35,6 +35,7 @@ import {
   StaticTextTemplateNode,
   TemplateFunctionCallTemplateNode,
   StaticValueTemplateNode,
+  VNodeFunctionCallTemplateNode,
 } from "./templates";
 
 export function compileMutatedBinding(childPath, state, componentPath, isRoot) {
@@ -111,11 +112,9 @@ function compileCallExpression(path, refPath, state, componentPath, isRoot) {
 function compileCallExpressionReturningTemplateNodes(childPath, childRefPath, state, componentPath, isRoot) {
   const calleePath = getReferenceFromExpression(childRefPath.get("callee"), state);
   if (t.isIdentifier(calleePath.node) || t.isMemberExpression(calleePath.node)) {
-    debugger;
     const cachedNode = getCachedRuntimeValue(childRefPath.node, state);
     const runtimeValuePointer = getRuntimeValueIndex(cachedNode, state);
-    pushOpcode(opcodes, "REACT_NODE_TEMPLATE_FROM_FUNC_CALL", runtimeValuePointer);
-    return;
+    return new VNodeFunctionCallTemplateNode(runtimeValuePointer);
   }
   const { isStatic, templateNode } = compileReactComputeFunction(calleePath, state, false, null, false);
 

@@ -25,13 +25,14 @@ export const FRAGMENT = 5;
 export const CONDITIONAL = 6;
 export const LOGICAL = 7;
 export const TEMPLATE_FUNCTION_CALL = 8;
-export const MULTI_CONDITIONAL = 9;
-export const TEXT_ARRAY = 10;
-export const REFERENCE_COMPONENT = 11;
-export const VNODE = 12;
-export const REFERENCE_VNODE = 13;
-export const MULTI_RETURN_CONDITIONAL = 14;
-export const VNODE_COLLECTION = 15;
+export const VNODE_FUNCTION_CALL = 9;
+export const MULTI_CONDITIONAL = 10;
+export const TEXT_ARRAY = 11;
+export const REFERENCE_COMPONENT = 12;
+export const VNODE = 13;
+export const REFERENCE_VNODE = 14;
+export const MULTI_RETURN_CONDITIONAL = 15;
+export const VNODE_COLLECTION = 16;
 
 // Elements
 export const HAS_STATIC_PROPS = 1 << 6;

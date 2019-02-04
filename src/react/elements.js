@@ -50,7 +50,7 @@ import { getPropInformation, isUnitlessNumber } from "./prop-information";
 import { validateArgumentsDoNotContainTemplateNodes, validateParamsDoNotConflictOuterScope } from "../validation";
 import invariant from "../invariant";
 import * as t from "@babel/types";
-import { createOpcodesForCxMockCall } from "../mocks/cx";
+import { compileCxMockCall } from "../mocks/cx";
 import {
   ConditionalTemplateNode,
   DynamicTextArrayTemplateNode,
@@ -135,9 +135,7 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
   let propTemplateNode;
 
   if (isFbCxCall(valuePath, state)) {
-    debugger;
-    // Need to change this
-    createOpcodesForCxMockCall(valueRefPath, attributeOpcodes, state);
+    propTemplateNode = compileCxMockCall(valueRefPath, state);
   } else {
     propTemplateNode = compileNode(valuePath, valueRefPath, state, componentPath, false);
   }
@@ -334,7 +332,8 @@ function compileReactFragment(childrenPath, keyASTNode, state, componentPath, is
 
   for (let i = 0; i < filteredChildrenPath.length; i++) {
     const child = filteredChildrenPath[i];
-    const childTemplateNode = compileNode(child, child, state, componentPath, isRoot);
+    const childRef = getReferenceFromExpression(child, state);
+    const childTemplateNode = compileNode(child, childRef, state, componentPath, isRoot);
 
     if (childTemplateNode !== null) {
       if (childTemplateNode instanceof FragmentTemplateNode) {
@@ -680,12 +679,14 @@ function createPropTemplateForFunctionExpression(pathRef, state, componentPath) 
       moveOutFunctionFromTemplate(pathRef);
     }
   }
-  const { isStatic, templateOpcodes } = createOpcodesForReactComputeFunction(pathRef, state, false, null, null);
-  const hoistedOpcodes = hoistOpcodesNode(componentPath, state, normalizeOpcodes(templateOpcodes));
+  const { isStatic, templateNode } = compileReactComputeFunction(pathRef, state, false, null, false);
 
   state.helpers.add("createVNode");
   if (isStatic) {
-    const funcNode = t.arrowFunctionExpression([], t.callExpression(t.identifier("createVNode"), [hoistedOpcodes]));
+    const funcNode = t.arrowFunctionExpression(
+      [],
+      t.callExpression(t.identifier("createVNode"), [templateNode.toAST()]),
+    );
     return { node: funcNode, canInline: true };
   } else {
     const params = pathRef.node.params;
@@ -693,7 +694,7 @@ function createPropTemplateForFunctionExpression(pathRef, state, componentPath) 
     pathRef.node.params = [];
     const funcNode = t.arrowFunctionExpression(
       params,
-      t.callExpression(t.identifier("createVNode"), [hoistedOpcodes, t.callExpression(pathRef.node, [])]),
+      t.callExpression(t.identifier("createVNode"), [templateNode.toAST(), t.callExpression(pathRef.node, [])]),
     );
     return { node: funcNode, canInline: false };
   }
@@ -1108,22 +1109,9 @@ function compileJSXElementType(typePath, attributesPath, childrenPath, state, co
   } else if (isConditionalComponentType(typePath, state)) {
     const typePathRef = getReferenceFromExpression(typePath, state);
     if (t.isConditionalExpression(typePathRef.node)) {
-      createOpcodesForConditionalExpressionTemplate(
-        typePathRef,
-        opcodes,
-        state,
-        (conditionalPath, conditionalOpcodes) => {
-          createOpcodesForJSXElementType(
-            conditionalPath,
-            attributesPath,
-            childrenPath,
-            conditionalOpcodes,
-            state,
-            componentPath,
-          );
-        },
+      return compileForksOfConditionalReactElementType(typePathRef, state, forkedTypePath =>
+        compileJSXElementType(forkedTypePath, attributesPath, childrenPath, state, componentPath),
       );
-      return;
     }
     invariant(false, "TODO");
   } else {
@@ -1302,6 +1290,31 @@ function compileReactCreateElementHostComponent(templateNode, tagName, args, sta
   }
 }
 
+function compileForksOfConditionalReactElementType(typePath, state, fork) {
+  const testPath = getReferenceFromExpression(typePath.get("test"), state);
+  const test = testPath.node;
+  let runtimeConditionalIndex;
+
+  const runtimeConditionals = state.runtimeConditionals;
+  if (runtimeConditionals.has(test)) {
+    runtimeConditionalIndex = runtimeConditionals.get(test);
+  } else {
+    runtimeConditionalIndex = runtimeConditionals.size;
+    runtimeConditionals.set(test, runtimeConditionalIndex);
+  }
+  const valueIndex = getRuntimeValueIndex(test, state);
+
+  const consequentPath = typePath.get("consequent");
+  const consequentPathRef = getReferenceFromExpression(consequentPath, state);
+  const consequentTemplateNode = fork(consequentPathRef);
+
+  const alternatePath = typePath.get("alternate");
+  const alternatePathRef = getReferenceFromExpression(alternatePath, state);
+  const alternateTemplateNode = fork(alternatePathRef);
+
+  return new ConditionalTemplateNode(valueIndex, consequentTemplateNode, alternateTemplateNode);
+}
+
 function compileReactCreateElementType(typePath, args, state, componentPath) {
   if (isHostComponentType(typePath, state)) {
     const nameNode = typePath.node;
@@ -1313,15 +1326,9 @@ function compileReactCreateElementType(typePath, args, state, componentPath) {
   } else if (isConditionalComponentType(typePath, state)) {
     const typePathRef = getReferenceFromExpression(typePath, state);
     if (t.isConditionalExpression(typePathRef.node)) {
-      createOpcodesForConditionalExpressionTemplate(
-        typePathRef,
-        opcodes,
-        state,
-        (conditionalPath, conditionalOpcodes) => {
-          createOpcodesForReactCreateElementType(conditionalPath, args, conditionalOpcodes, state, componentPath);
-        },
+      return compileForksOfConditionalReactElementType(typePathRef, state, forkedTypePath =>
+        compileReactCreateElementType(forkedTypePath, args, state, componentPath),
       );
-      return;
     }
     invariant(false, "TODO");
   } else {
