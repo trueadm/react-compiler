@@ -45,7 +45,7 @@ import { compileMutatedBinding, compileNode } from "../nodes";
 import { hyphenateStyleName } from "./style";
 import { compileReactFunctionComponent } from "./components";
 import { compileReactComputeFunction } from "./functions";
-import { getPropInformation, isUnitlessNumber, PROP_IS_VNODE } from "./prop-information";
+import { getPropInformation, isUnitlessNumber } from "./prop-information";
 import { validateArgumentsDoNotContainTemplateNodes, validateParamsDoNotConflictOuterScope } from "../validation";
 import invariant from "../invariant";
 import * as t from "@babel/types";
@@ -64,7 +64,6 @@ import {
   StaticValueTemplateNode,
   TemplateFunctionCallTemplateNode,
   VNodeCollectionTemplateNode,
-  VNodeFunctionCallTemplateNode,
 } from "../templates";
 
 const emptyPlaceholderNode = t.nullLiteral();
@@ -169,9 +168,6 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
     }
     if (propTemplateNode instanceof DynamicTextTemplateNode || propTemplateNode instanceof DynamicValueTemplateNode) {
       templateNode.dynamicProps.push([propName, propInformation, propTemplateNode.valueIndex]);
-    } else if (propTemplateNode instanceof ReferenceVNode) {
-      debugger;
-      templateNode.dynamicProps.push([propName, propInformation | PROP_IS_VNODE, propTemplateNode.valueIndex]);
     } else {
       invariant(false, "TODO");
     }
@@ -245,7 +241,7 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
     childTemplateNode instanceof StaticTextTemplateNode ||
     childTemplateNode instanceof DynamicTextTemplateNode ||
     childTemplateNode instanceof TemplateFunctionCallTemplateNode ||
-    childTemplateNode instanceof VNodeFunctionCallTemplateNode ||
+    childTemplateNode instanceof ReferenceVNode ||
     childTemplateNode instanceof ReferenceComponentTemplateNode ||
     childTemplateNode instanceof ConditionalTemplateNode ||
     childTemplateNode instanceof LogicalTemplateNode

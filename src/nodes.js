@@ -35,7 +35,6 @@ import {
   StaticTextTemplateNode,
   TemplateFunctionCallTemplateNode,
   StaticValueTemplateNode,
-  VNodeFunctionCallTemplateNode,
   ReferenceVNode,
 } from "./templates";
 
@@ -115,7 +114,7 @@ function compileCallExpressionReturningTemplateNodes(childPath, childRefPath, st
   if (t.isIdentifier(calleePath.node) || t.isMemberExpression(calleePath.node)) {
     const cachedNode = getCachedRuntimeValue(childRefPath.node, state);
     const runtimeValuePointer = getRuntimeValueIndex(cachedNode, state);
-    return new VNodeFunctionCallTemplateNode(runtimeValuePointer);
+    return new ReferenceVNode(runtimeValuePointer);
   }
   const { isStatic, templateNode } = compileReactComputeFunction(calleePath, state, false, null, false);
 

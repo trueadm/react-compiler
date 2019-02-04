@@ -25,14 +25,13 @@ export const FRAGMENT = 5;
 export const CONDITIONAL = 6;
 export const LOGICAL = 7;
 export const TEMPLATE_FUNCTION_CALL = 8;
-export const VNODE_FUNCTION_CALL = 9;
-export const MULTI_CONDITIONAL = 10;
-export const TEXT_ARRAY = 11;
-export const REFERENCE_COMPONENT = 12;
-export const VNODE = 13;
-export const REFERENCE_VNODE = 14;
-export const MULTI_RETURN_CONDITIONAL = 15;
-export const VNODE_COLLECTION = 16;
+export const MULTI_CONDITIONAL = 9;
+export const TEXT_ARRAY = 10;
+export const REFERENCE_COMPONENT = 11;
+export const VNODE = 12;
+export const REFERENCE_VNODE = 13;
+export const MULTI_RETURN_CONDITIONAL = 14;
+export const VNODE_COLLECTION = 15;
 
 // Elements
 export const HAS_STATIC_PROPS = 1 << 6;
@@ -61,7 +60,6 @@ export const LOGICAL_OR = 1 << 7;
 export const PROP_IS_EVENT = 1;
 export const PROP_IS_BOOLEAN = 1 << 1;
 export const PROP_IS_POSITIVE_NUMBER = 1 << 2;
-export const PROP_IS_VNODE = 1 << 3;
 
 const componentTemplateCache = new Map();
 
@@ -819,9 +817,6 @@ function renderPropValue(propFlags, value) {
   if (value === null) {
     return;
   }
-  if ((propFlags & PROP_IS_VNODE) !== 0) {
-    debugger;
-  }
   if ((propFlags & PROP_IS_BOOLEAN) !== 0) {
     if (value === true) {
       return "";
@@ -1168,9 +1163,6 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
       return renderLogicalTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
     case TEMPLATE_FUNCTION_CALL:
       return renderTemplateFunctionCallTemplateToString(templateNode, values, isOnlyChild, state);
-    case VNODE_FUNCTION_CALL:
-      debugger;
-      return
     case MULTI_CONDITIONAL:
       return renderMultiConditionalTemplateToString(templateNode, values, isOnlyChild, state);
     case TEXT_ARRAY:

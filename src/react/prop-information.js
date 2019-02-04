@@ -4,7 +4,6 @@ import invariant from "../invariant";
 export const PROP_IS_EVENT = 1;
 export const PROP_IS_BOOLEAN = 1 << 1;
 export const PROP_IS_POSITIVE_NUMBER = 1 << 2;
-export const PROP_IS_VNODE = 1 << 3;
 
 const reservedProps = new Set([
   "children",
