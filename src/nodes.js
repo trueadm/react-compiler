@@ -36,6 +36,7 @@ import {
   TemplateFunctionCallTemplateNode,
   StaticValueTemplateNode,
   VNodeFunctionCallTemplateNode,
+  ReferenceVNode,
 } from "./templates";
 
 export function compileMutatedBinding(childPath, state, componentPath, isRoot) {
@@ -187,15 +188,15 @@ function compileString(string) {
 }
 
 export function compileNode(path, refPath, state, componentPath, isRoot) {
-  const typeAnnotation = getTypeAnnotationForExpression(refPath, state);
   let node = refPath.node;
 
-  if (
-    t.isIdentifier(node) &&
-    !isIdentifierReferenceConstant(refPath, state) &&
-    assertType(refPath, typeAnnotation, true, state, "REACT_NODE")
-  ) {
-    return compileMutatedBinding(refPath, state, componentPath, false);
+  if (t.isIdentifier(node) && pathContainsReactElement(refPath, state)) {
+    if (isIdentifierReferenceConstant(refPath, state)) {
+      const runtimeValueIndex = getRuntimeValueIndex(node, state);
+      return new ReferenceVNode(runtimeValueIndex);
+    } else {
+      return compileMutatedBinding(refPath, state, componentPath, false);
+    }
   } else if (t.isArrowFunctionExpression(node) || t.isFunctionExpression(node)) {
     if (isNodeWithinReactElementTemplate(refPath, state)) {
       moveOutFunctionFromTemplate(refPath);

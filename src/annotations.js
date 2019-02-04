@@ -99,7 +99,7 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
     if (binding !== undefined && binding.path !== path) {
       const bindingPath = binding.path;
       const bindingNode = bindingPath.node;
-      const typeForIdentifier = getTypeAnnotationForExpression(bindingPath, state, false);
+      let typeForIdentifier = getTypeAnnotationForExpression(bindingPath, state, false);
       // Might be a type in another module
       if (t.isAnyTypeAnnotation(typeForIdentifier)) {
         let bindingPathRef = getReferenceFromExpression(bindingPath, state, true, bindingName);
@@ -141,7 +141,7 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
 
           if (t.isIdentifier(typePropertyKey) && node.name === typePropertyKey.name) {
             return typeProperty.value;
-          } else if (t.isStringLiteral(typePropertyKey) && node.name === typePropertyKey.value) {
+          } else if (t.isStringLiteral(typePropertyKey) && node.name === typePropertyKey.value.replace(/-/g, "_")) {
             return typeProperty.value;
           }
         }

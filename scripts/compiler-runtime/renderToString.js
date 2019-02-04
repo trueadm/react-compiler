@@ -58,9 +58,10 @@ export const HAS_KEYS = 1 << 6;
 export const LOGICAL_AND = 1 << 6;
 export const LOGICAL_OR = 1 << 7;
 
-const PROP_IS_EVENT = 1;
-const PROP_IS_BOOLEAN = 2;
-const PROP_IS_POSITIVE_NUMBER = 3;
+export const PROP_IS_EVENT = 1;
+export const PROP_IS_BOOLEAN = 1 << 1;
+export const PROP_IS_POSITIVE_NUMBER = 1 << 2;
+export const PROP_IS_VNODE = 1 << 3;
 
 const componentTemplateCache = new Map();
 
@@ -818,6 +819,9 @@ function renderPropValue(propFlags, value) {
   if (value === null) {
     return;
   }
+  if ((propFlags & PROP_IS_VNODE) !== 0) {
+    debugger;
+  }
   if ((propFlags & PROP_IS_BOOLEAN) !== 0) {
     if (value === true) {
       return "";
@@ -1164,6 +1168,9 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
       return renderLogicalTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
     case TEMPLATE_FUNCTION_CALL:
       return renderTemplateFunctionCallTemplateToString(templateNode, values, isOnlyChild, state);
+    case VNODE_FUNCTION_CALL:
+      debugger;
+      return
     case MULTI_CONDITIONAL:
       return renderMultiConditionalTemplateToString(templateNode, values, isOnlyChild, state);
     case TEXT_ARRAY:
