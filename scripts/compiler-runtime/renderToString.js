@@ -945,9 +945,15 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
 function renderTextTemplateToString(templateTypeAndFlags, textTemplate, values, isOnlyChild, state) {
   const templateFlags = templateTypeAndFlags & ~0x3f;
   const isStatic = (templateFlags & IS_STATIC) !== 0;
-  const text = isStatic === true ? textTemplate[1] : escapeText(values[textTemplate[1]]);
+  let text = isStatic === true ? textTemplate[1] : values[textTemplate[1]];
   const lastChildWasText = state.lastChildWasText;
 
+  if (text === null || text === undefined) {
+    return "";
+  }
+  if (isStatic === false) {
+    text = escapeText(text);
+  }
   if (isOnlyChild === false) {
     state.lastChildWasText = true;
     if (lastChildWasText === true) {

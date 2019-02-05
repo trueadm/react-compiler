@@ -83,7 +83,7 @@ function compileArrayExpression(path, refPath, state, componentPath, isRoot) {
 }
 
 function compileCallExpression(path, refPath, state, componentPath, isRoot) {
-  if (isReactCreateElement(path, state)) {
+  if (isReactCreateElement(refPath, state)) {
     return compileReactCreateElement(refPath, state, componentPath);
   }
   if (isFbCxCall(path, state)) {

@@ -117,6 +117,9 @@ export function compileReactComputeFunction(
   if (isComponentFunction) {
     updateComputeFunctionName(functionPath);
   }
+  if (functionPath.node.id && functionPath.node.id.name === "foobar2") {
+    debugger;
+  }
 
   const templateBranches = [];
   const runtimeConditionals = new Map();
