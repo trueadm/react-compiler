@@ -68,10 +68,11 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
   }
   if (t.isMemberExpression(node)) {
     const objectPath = path.get("object");
+    // BELOW: this shouldn't be an array
+    debugger;
     let objectType = getTypeAnnotationForExpression(objectPath, state, errorOnMissingType);
     if (t.isGenericTypeAnnotation(objectType)) {
       const typeAlias = getTypeAlias(path, objectType, state);
-
       if (typeAlias !== null) {
         objectType = typeAlias.right;
       }

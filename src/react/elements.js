@@ -284,6 +284,7 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
       templateNode.children.push(new DynamicTextArrayTemplateNode(childTemplateNode.valueIndex));
       return;
     }
+    invariant(false, "This should never happen!");
   }
 }
 
@@ -1104,6 +1105,9 @@ function compileJSXElementType(typePath, attributesPath, childrenPath, state, co
   } else if (isHostComponentType(typePath, state)) {
     const isVoidElement = voidElements.has(typeName);
     const templateNode = new HostComponentTemplateNode(typeName, isVoidElement);
+    if (typeName === "foo") {
+      debugger;
+    }
     compileJSXElementHostComponent(templateNode, typeName, attributesPath, childrenPath, state, componentPath);
     return templateNode;
   } else if (isConditionalComponentType(typePath, state)) {
