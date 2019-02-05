@@ -692,7 +692,6 @@ function createPropTemplateForFunctionExpression(pathRef, state, componentPath) 
     const params = pathRef.node.params;
     validateParamsDoNotConflictOuterScope(params, componentPath, pathRef, state);
     pathRef.node.params = [];
-    throw new Error("LOL")
     const funcNode = t.arrowFunctionExpression(
       params,
       t.callExpression(t.identifier("createVNode"), [templateNode.toAST(), t.callExpression(pathRef.node, [])]),

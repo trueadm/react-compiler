@@ -274,6 +274,7 @@ export function getCachedRuntimeValue(node, state) {
   if (cachedRuntimeValue === undefined) {
     const runtimeCachedValueIndex = runtimeCachedValues.size;
     const cachedNode = t.identifier("__cached__" + state.counters.runtimeCachedValues++);
+    markNodeAsUsed(cachedNode);
     runtimeCachedValues.set(node, {
       index: runtimeCachedValueIndex,
       node: cachedNode,

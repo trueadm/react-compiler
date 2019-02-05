@@ -48,6 +48,20 @@ export function applyDeadCodeElimination(moduleAst, moduleState) {
   for (let i = 0; i < deadCodePasses; i++) {
     // Second pass, remove unused identifiers and convert member expressions to computed
     traverse(moduleAst, {
+      FunctionExpression(path) {
+        // Remove dangling expressions that aren't referenced or used by anything.
+        // This can occur because of the logic in createPropTemplateForFunctionExpression
+        if (
+          path.node.id === null &&
+          t.isExpressionStatement(path.parentPath) &&
+          t.isBlockStatement(path.parentPath.parentPath)
+        ) {
+          removePath(path);
+        }
+        if (path.node && path.node.id === null && path.node.canDCE) {
+          removePath(path);
+        }
+      },
       Identifier(path) {
         const node = path.node;
 
@@ -60,7 +74,7 @@ export function applyDeadCodeElimination(moduleAst, moduleState) {
         }
         if (moduleState.externalBindings.has(node.name)) {
           return;
-        }
+        
         const binding = path.scope.getBinding(node.name);
         if (binding === undefined) {
           return;

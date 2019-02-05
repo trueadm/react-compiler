@@ -261,7 +261,7 @@ function UFI2ReactionsCount({ feedback, feedbackTargetID }: { feedback: Feedback
         ),
       ],
 
-      onClick: this.$UFI2ReactionsCount_onClick,
+      onClick: null,
       role: "button",
     }),
   );
