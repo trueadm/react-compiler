@@ -474,6 +474,16 @@ function canInlineNode(path, state) {
   return false;
 }
 
+function referenceVNodeTemplateNode(templateNode, state) {
+  const templateAST = templateNode.toAST();
+  const id = state.counters.vNodeTemplateIndex++;
+  const identifier = t.identifier("__vnode_tpl_" + id);
+  markNodeAsUsed(identifier);
+  const templateDeclaration = t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]);
+  state.componentTemplateNode.referencedInsertionNodes.push(templateDeclaration);
+  return identifier;
+}
+
 function createPropTemplateFromJSXElement(path, state, componentPath) {
   const runtimeValues = new Map();
   const childState = { ...state, ...{ runtimeValues } };
@@ -481,14 +491,17 @@ function createPropTemplateFromJSXElement(path, state, componentPath) {
 
   state.helpers.add("createVNode");
   if (runtimeValues.size === 0) {
-    return [t.callExpression(t.identifier("createVNode"), [templateNode.toAST()]), true];
+    return [t.callExpression(t.identifier("createVNode"), [referenceVNodeTemplateNode(templateNode, state)]), true];
   } else {
     const runtimeValuesArray = [];
     for (let [runtimeValue, { index }] of runtimeValues) {
       runtimeValuesArray[index] = runtimeValue;
     }
     return [
-      t.callExpression(t.identifier("createVNode"), [templateNode.toAST(), t.arrayExpression(runtimeValuesArray)]),
+      t.callExpression(t.identifier("createVNode"), [
+        referenceVNodeTemplateNode(templateNode, state),
+        t.arrayExpression(runtimeValuesArray),
+      ]),
       false,
     ];
   }
@@ -501,14 +514,17 @@ function createPropTemplateFromReactCreateElement(path, state, componentPath) {
 
   state.helpers.add("createVNode");
   if (runtimeValues.size === 0) {
-    return [t.callExpression(t.identifier("createVNode"), [templateNode.toAST()]), true];
+    return [t.callExpression(t.identifier("createVNode"), [referenceVNodeTemplateNode(templateNode, state)]), true];
   } else {
     const runtimeValuesArray = [];
     for (let [runtimeValue, { index }] of runtimeValues) {
       runtimeValuesArray[index] = runtimeValue;
     }
     return [
-      t.callExpression(t.identifier("createVNode"), [templateNode.toAST(), t.arrayExpression(runtimeValuesArray)]),
+      t.callExpression(t.identifier("createVNode"), [
+        referenceVNodeTemplateNode(templateNode, state),
+        t.arrayExpression(runtimeValuesArray),
+      ]),
       false,
     ];
   }
@@ -622,10 +638,13 @@ function createPropTemplateForCallExpression(path, pathRef, state, componentPath
 
   state.helpers.add("createVNode");
   if (isStatic) {
-    const node = t.callExpression(t.identifier("createVNode"), [templateNode.toAST()]);
+    const node = t.callExpression(t.identifier("createVNode"), [referenceVNodeTemplateNode(templateNode, state)]);
     return { node, canInline: true };
   }
-  const node = t.callExpression(t.identifier("createVNode"), [templateNode.toAST(), pathRef.node]);
+  const node = t.callExpression(t.identifier("createVNode"), [
+    referenceVNodeTemplateNode(templateNode, state),
+    pathRef.node,
+  ]);
   return { node, canInline: true };
 }
 
@@ -643,7 +662,7 @@ function createPropTemplateForFunctionExpression(pathRef, state, componentPath) 
   if (isStatic) {
     const funcNode = t.arrowFunctionExpression(
       [],
-      t.callExpression(t.identifier("createVNode"), [templateNode.toAST()]),
+      t.callExpression(t.identifier("createVNode"), [referenceVNodeTemplateNode(templateNode, state)]),
     );
     return { node: funcNode, canInline: true };
   } else {
@@ -652,7 +671,10 @@ function createPropTemplateForFunctionExpression(pathRef, state, componentPath) 
     pathRef.node.params = [];
     const funcNode = t.arrowFunctionExpression(
       params,
-      t.callExpression(t.identifier("createVNode"), [templateNode.toAST(), t.callExpression(pathRef.node, [])]),
+      t.callExpression(t.identifier("createVNode"), [
+        referenceVNodeTemplateNode(templateNode, state),
+        t.callExpression(pathRef.node, []),
+      ]),
     );
     return { node: funcNode, canInline: false };
   }

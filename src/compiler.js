@@ -77,6 +77,7 @@ function checkIfIdHasFlag(id, path, compilerContext, moduleFilePath) {
 function visitComponentAndPopulateInsertionMap(component, modulePath, insertionMap, depth) {
   const insertionPath = component.insertionPath;
   const insertionNode = component.insertionNode;
+  const referencedInsertionNodes = component.referencedInsertionNodes;
 
   if (insertionPath.parentPath === modulePath) {
     if (insertionMap.has(component)) {
@@ -93,7 +94,7 @@ function visitComponentAndPopulateInsertionMap(component, modulePath, insertionM
       }
       insertionEntry.visits++;
     } else {
-      insertionMap.set(component, { cyclic: false, depth, insertionNode, visits: 1 });
+      insertionMap.set(component, { cyclic: false, depth, insertionNode, referencedInsertionNodes, visits: 1 });
     }
   }
   for (let child of component.childComponents) {
@@ -109,7 +110,8 @@ function orderComponentTemplateDeclarations(path, state) {
 
   visitComponentAndPopulateInsertionMap(rootComponentTemplateNode, modulePath, insertionMap, 0);
   const componentOrdering = [];
-  for (let [, { cyclic, depth, insertionNode }] of insertionMap) {
+  const componentReferences = [];
+  for (let [, { cyclic, depth, insertionNode, referencedInsertionNodes }] of insertionMap) {
     let node = insertionNode;
     if (cyclic) {
       if (t.isVariableDeclaration(node)) {
@@ -121,11 +123,18 @@ function orderComponentTemplateDeclarations(path, state) {
       }
     }
     componentOrdering.splice(depth, 0, node);
+    componentReferences.push(...referencedInsertionNodes);
   }
   let i = componentOrdering.length;
-  while (i-- > 1) {
+  while (i-- > -1) {
     const insertionNode = componentOrdering[i];
+    if (rootInsertionPath.node === insertionNode) {
+      continue;
+    }
     rootInsertionPath.insertBefore(insertionNode);
+  }
+  for (let componentReference of componentReferences) {
+    rootInsertionPath.insertBefore(componentReference);
   }
 }
 
@@ -157,7 +166,7 @@ function createModuleState(moduleFilePath, compilerContext) {
     componentPath: null,
     componentTemplateNode: null,
     counters: {
-      hoistedOpcodes: 0,
+      vNodeTemplateIndex: 0,
       runtimeCachedValues: 0,
     },
     currentModulePath: moduleFilePath,
@@ -169,7 +178,6 @@ function createModuleState(moduleFilePath, compilerContext) {
     needsCompiling() {
       compilerContext.modules.get(moduleFilePath).needsCompiling = true;
     },
-    propTemplateOpcodeCache: new Map(),
     resolveModuleBindingSync: compilerContext.resolveModuleBindingSync,
     runtimeCachedValues: null,
     runtimeConditionals: null,

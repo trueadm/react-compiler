@@ -73,7 +73,6 @@ export class ComponentTemplateNode {
   ) {
     this.name = name;
     this.componentPath = componentPath;
-    this.insertPath = null;
     this.isStatic = false;
     this.computeFunctionRef = null;
     this.templateNode = null;
@@ -87,6 +86,8 @@ export class ComponentTemplateNode {
     this.propsValueIndex = null;
     this.childComponents = [];
     this.insertionPath = null;
+    this.insertionNode = null;
+    this.referencedInsertionNodes = [];
   }
 
   getKeyASTNode() {

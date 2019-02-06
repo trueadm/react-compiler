@@ -188,26 +188,6 @@ export function compileReactComputeFunction(functionPath, state, isComponentFunc
   };
 }
 
-// function insertComputFunctionCachedOpcodes(componentPath, state) {
-//   const computeFunctionCache = state.computeFunctionCache;
-//   if (computeFunctionCache.size > 0) {
-//     const declarators = [];
-//     for (let [, { cachedOpcodes }] of computeFunctionCache) {
-//       if (cachedOpcodes !== null) {
-//         const { node, opcodesArray } = cachedOpcodes;
-//         if (cachedOpcodes.inserted) {
-//           continue;
-//         }
-//         cachedOpcodes.inserted = true;
-//         declarators.push(t.variableDeclarator(node, opcodesArray));
-//       }
-//     }
-//     if (declarators.length > 0) {
-//       componentPath.insertBefore(t.variableDeclaration("var", declarators));
-//     }
-//   }
-// }
-
 function updateComputeFunctionName(functionPath) {
   const name = getComponentName(functionPath);
   // Change compute function name
