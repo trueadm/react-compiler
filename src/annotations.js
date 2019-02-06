@@ -69,7 +69,6 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
   if (t.isMemberExpression(node)) {
     const objectPath = path.get("object");
     // BELOW: this shouldn't be an array
-    debugger;
     let objectType = getTypeAnnotationForExpression(objectPath, state, errorOnMissingType);
     if (t.isGenericTypeAnnotation(objectType)) {
       const typeAlias = getTypeAlias(path, objectType, state);
@@ -86,6 +85,17 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
         if (t.isIdentifier(property) && t.isIdentifier(typePropertyKey) && property.name === typePropertyKey.name) {
           return typeProperty.value;
         }
+      }
+    }
+    if (t.isGenericTypeAnnotation(objectType) && t.isIdentifier(objectType.id) && objectType.id.name === "Array") {
+      if (objectType.typeParameters.params.length === 1) {
+        if (node.computed) {
+          return objectType.typeParameters.params[0];
+        } else {
+          invariant(false, "TODO");
+        }
+      } else {
+        invariant(false, "TODO");
       }
     }
     return objectType;

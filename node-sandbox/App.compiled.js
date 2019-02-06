@@ -35,5 +35,5 @@ function App_ComputeFunction(colors) {
   return [__cached__0, selectedColor["name"]];
 }
 
-const App = [0, ["colors"], App_ComputeFunction, [2114, "div", ["className", 0, "colors"], [[4098, "h1", "Choose your favorite color:"], [1090, "div", ["className", 0, "colors"], [8, [14, 0, [1026, "ul", [79, 1]], 1, [4098, "div", "No colors!"]], 0]], [2050, "div", [[32771, "You chose:"], [66, "div", ["className", 0, "chosen-color"]]]]]]];
+const App = [0, ["colors"], App_ComputeFunction, [2114, "div", ["className", 0, "colors"], [[4098, "h1", "Choose your favorite color:"], [1090, "div", ["className", 0, "colors"], [8, [14, 0, [1026, "ul", [79, 1]], 1, [4098, "div", "No colors!"]], 0]], [2050, "div", [[32771, "You chose:"], [8258, "foo", ["className", 0, "chosen-color"], 1]]]]]];
 module["exports"] = App;

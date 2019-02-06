@@ -487,36 +487,6 @@ function getTopLevelPathFromComponentPath(path) {
   return { key: lastPathKey, path: parentPath };
 }
 
-function hoistOpcodesNode(componentPath, state, opcodesNode) {
-  const hash = JSON.stringify(opcodesNode);
-  const propTemplateOpcodeCache = state.propTemplateOpcodeCache;
-
-  if (propTemplateOpcodeCache.has(hash)) {
-    return propTemplateOpcodeCache.get(hash);
-  }
-  const identifier = t.identifier("__hoisted__opcodes__" + state.counters.hoistedOpcodes++);
-  markNodeAsUsed(identifier);
-  let hoistDepth = 0;
-  let currentPath = componentPath;
-
-  while (hoistDepth++ < 3) {
-    let { key, path } = getTopLevelPathFromComponentPath(currentPath);
-    if (t.isProgram(path.node)) {
-      const body = path.node.body;
-      body.splice(key, 0, t.variableDeclaration("var", [t.variableDeclarator(identifier, opcodesNode)]));
-      break;
-    } else {
-      currentPath = path;
-      if (hoistDepth > 1) {
-        invariant(false, "TODO");
-      }
-    }
-  }
-
-  propTemplateOpcodeCache.set(hash, identifier);
-  return identifier;
-}
-
 function createPropTemplateFromJSXElement(path, state, componentPath) {
   const runtimeValues = new Map();
   const childState = { ...state, ...{ runtimeValues } };
@@ -1105,9 +1075,6 @@ function compileJSXElementType(typePath, attributesPath, childrenPath, state, co
   } else if (isHostComponentType(typePath, state)) {
     const isVoidElement = voidElements.has(typeName);
     const templateNode = new HostComponentTemplateNode(typeName, isVoidElement);
-    if (typeName === "foo") {
-      debugger;
-    }
     compileJSXElementHostComponent(templateNode, typeName, attributesPath, childrenPath, state, componentPath);
     return templateNode;
   } else if (isConditionalComponentType(typePath, state)) {
