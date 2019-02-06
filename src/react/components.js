@@ -36,13 +36,7 @@ export function compileReactFunctionComponent(componentPath, state) {
 
   const previousComponentTemplateNode = state.componentTemplateNode;
   state.componentTemplateNode = componentTemplateNode;
-  const { computeFunctionRef, isStatic, templateNode } = compileReactComputeFunction(
-    componentPath,
-    state,
-    true,
-    null,
-    false,
-  );
+  const { computeFunctionRef, isStatic, templateNode } = compileReactComputeFunction(componentPath, state, true, false);
   componentTemplateNode.isStatic = isStatic;
   componentTemplateNode.computeFunctionRef = computeFunctionRef;
   componentTemplateNode.templateNode = templateNode;

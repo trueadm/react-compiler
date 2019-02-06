@@ -556,12 +556,6 @@ function UFI2ReactionActionLink_ComputeFunction(className, feedback) {
     icon = {};
   }
 
-  (function (): React.Node {
-    var actionLinkClassName = _ref3["className"];
-    joinClasses((reactionKey === UFIReactionTypes["LIKE"] ? cx("UFI2ReactionActionLink/liked") : "") + (" " + cx("UFI2ReactionActionLink/link")) + (!reactionKey ? " " + cx("UFI2ReactionActionLink/notLiked") : ""), actionLinkClassName, className);
-    return [[__cached__11 ? null : !__cached__11 && __cached__12 ? createVNode([11, UFIReactionIcon, 0], [[cx("UFI2ReactionActionLink/inlineUFIIcon"), "18"]]) : void 0, joinClasses((reactionKey === UFIReactionTypes["LIKE"] ? cx("UFI2ReactionActionLink/liked") : "") + (" " + cx("UFI2ReactionActionLink/link")) + (!reactionKey ? " " + cx("UFI2ReactionActionLink/notLiked") : ""), actionLinkClassName, className), feedback]];
-  });
-
   return [feedback != null ? feedback["can_viewer_react"] : feedback, [(_ref3: {
     className: string
   }) => createVNode([1090, "div", ["className", 0, "UFI2ReactionActionLink__root", "data-testid", 0, "UFI2ReactionLink/actionLink"], [11, UFI2ReactionLink, 0]], function (): React.Node {
@@ -580,17 +574,6 @@ function ShimButton_ComputeFunction(children, className, form, inline, keyActiva
 }
 
 function UFI2AnswerActionLink_ComputeFunction(className, feedback, onClick) {
-  (function (): React.Node {
-    var actionLinkClassName = _ref["className"];
-    joinClasses(cx("UFI2AnswerActionLink/root"), actionLinkClassName, className);
-    fbt["_"]("Answer", null, {
-      ["hash_key"]: "7wbRt"
-    });
-    return [[fbt["_"]("Answer", null, {
-      ["hash_key"]: "7wbRt"
-    }), joinClasses(cx("UFI2AnswerActionLink/root"), actionLinkClassName, className), void 0, void 0, void 0, void 0, onClick, void 0, void 0]];
-  });
-
   return [feedback && feedback["can_viewer_comment"] && feedback["is_q_and_a"], [(_ref: {
     className: string
   }) => createVNode([11, ShimButton, 0], function (): React.Node {
@@ -606,17 +589,6 @@ function UFI2AnswerActionLink_ComputeFunction(className, feedback, onClick) {
 }
 
 function UFI2CommentActionLink_ComputeFunction(className, feedback, onClick) {
-  (function (): React.Node {
-    var actionLinkClassName = _ref["className"];
-    joinClasses(cx("UFI2CommentActionLink/root"), actionLinkClassName, className);
-    fbt["_"]("Comment", null, {
-      ["hash_key"]: "2MdL3e"
-    });
-    return [[fbt["_"]("Comment", null, {
-      ["hash_key"]: "2MdL3e"
-    }), joinClasses(cx("UFI2CommentActionLink/root"), actionLinkClassName, className), void 0, void 0, void 0, void 0, onClick, void 0, void 0]];
-  });
-
   return [feedback && feedback["can_viewer_comment"], [(_ref: {
     className: string
   }) => createVNode([11, ShimButton, 0], function (): React.Node {
@@ -651,10 +623,6 @@ function UFI2ShareActionLink_ComputeFunction(className, feedback, feedbackTarget
   var misinformationConfirmDialogURI = shareableConfig != null ? shareableConfig["misinformation_confirm_dialog_uri"] : shareableConfig;
 
   if (misinformationConfirmDialogURI && !misinformationDialogConfirmed) {
-    (function (): React.Node {
-      return [[_ref7["className"], void 0, void 0, void 0]];
-    });
-
     return [0, [(_ref7: {
       className: string
     }) => createVNode([11, ShareLink, 0], function (): React.Node {
@@ -663,13 +631,6 @@ function UFI2ShareActionLink_ComputeFunction(className, feedback, feedbackTarget
   }
 
   if (actorID) {}
-
-  (function (): React.Node {
-    var __cached__17;
-
-    __cached__17 = joinClasses(cx("UFI2ShareActionLink/root"), className);
-    return [__cached__17, [_ref9["className"], void 0, false, void 0]];
-  });
 
   return [1, [(_ref9: {
     className: string

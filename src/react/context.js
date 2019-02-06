@@ -1,4 +1,3 @@
-import { pushOpcodeValue, pushOpcode } from "../opcodes";
 import { getReferenceFromExpression, isDestructuredRef, isIdentifierReferenceConstant } from "../references";
 import {
   getCodeLocation,
@@ -9,11 +8,11 @@ import {
   isReactObject,
   markNodeAsUsed,
 } from "../utils";
-import { createOpcodesForReactComputeFunction } from "./functions";
-import { normalizeOpcodes } from "../utils";
+import { compileReactComputeFunction } from "./functions";
 import * as t from "@babel/types";
+import { ContextConsumerTemplateNode } from "../templates";
 
-export function createOpcodesForReactContextConsumer(namePath, childrenPath, opcodes, state, componentPath) {
+export function compileReactContextConsumer(namePath, childrenPath, state, componentPath) {
   const filteredChildrenPath = childrenPath.filter(childPath => {
     if (t.isJSXText(childPath.node) && handleWhiteSpace(childPath.node.value) === "") {
       return false;
@@ -25,7 +24,7 @@ export function createOpcodesForReactContextConsumer(namePath, childrenPath, opc
       `Compiler failed to find a single child function for <Context.Consumer> at ${getCodeLocation(childrenPath.node)}`,
     );
   }
-  const contextObjectRuntimeValueIndex = getContextObjectRuntimeValueIndex(namePath, state);
+  const contextObjectValueIndex = getContextObjectRuntimeValueIndex(namePath, state);
   const childrenPathRef = getReferenceFromExpression(filteredChildrenPath[0], state);
 
   if (t.isIdentifier(childrenPathRef.node) && !isIdentifierReferenceConstant(childrenPathRef, state)) {
@@ -42,26 +41,22 @@ export function createOpcodesForReactContextConsumer(namePath, childrenPath, opc
       )}.`,
     );
   }
-  const { isStatic, templateOpcodes } = createOpcodesForReactComputeFunction(childrenPathRef, state, false, null);
+  const { isStatic, templateNode } = compileReactComputeFunction(childrenPathRef, state, false, false);
   if (!isStatic) {
     const parentNode = childrenPathRef.parentPath.node;
-    pushOpcode(opcodes, "CONTEXT_CONSUMER");
-    pushOpcodeValue(opcodes, contextObjectRuntimeValueIndex, "CONTEXT_OBJECT_POINTER_INDEX");
+    let computeFunctionValueIndex;
 
     if (t.isJSXExpressionContainer(parentNode) || isReactCreateElement(childrenPathRef.parentPath, state)) {
-      const contextConsumerCallbackPointerIndex = getRuntimeValueIndex(childrenPathRef.node, state);
-      pushOpcodeValue(opcodes, contextConsumerCallbackPointerIndex, "CONTEXT_CONSUMER_COMPUTE_FUNCTION");
+      computeFunctionValueIndex = getRuntimeValueIndex(childrenPathRef.node, state);
     } else if (t.isVariableDeclarator(parentNode) && t.isIdentifier(parentNode.id)) {
-      const cachedNodePointerIndex = getRuntimeValueIndex(parentNode.id, state);
+      computeFunctionValueIndex = getRuntimeValueIndex(parentNode.id, state);
       markNodeAsUsed(parentNode.id);
-      pushOpcodeValue(opcodes, cachedNodePointerIndex, "CONTEXT_CONSUMER_COMPUTE_FUNCTION");
     } else {
       throw new Error("TODO");
     }
-    pushOpcodeValue(opcodes, normalizeOpcodes(templateOpcodes), "CONTEXT_CONSUMER_OPCODES");
-  } else {
-    opcodes.push(...templateOpcodes);
+    return new ContextConsumerTemplateNode(contextObjectValueIndex, templateNode, computeFunctionValueIndex);
   }
+  return templateNode;
 }
 
 function isReferenceReactContext(path, state) {

@@ -116,7 +116,7 @@ function compileCallExpressionReturningTemplateNodes(childPath, childRefPath, st
     const runtimeValuePointer = getRuntimeValueIndex(cachedNode, state);
     return new ReferenceVNode(runtimeValuePointer);
   }
-  const { isStatic, templateNode } = compileReactComputeFunction(calleePath, state, false, null, false);
+  const { isStatic, templateNode } = compileReactComputeFunction(calleePath, state, false, false);
 
   if (isStatic) {
     return templateNode;

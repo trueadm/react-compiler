@@ -1,4 +1,3 @@
-import { pushOpcode, pushOpcodeValue } from "../opcodes";
 import { assertType, getTypeAnnotationForExpression } from "../annotations";
 import {
   getBindingPathRef,
@@ -40,7 +39,7 @@ import {
   isReferenceReactContextConsumer,
   isReferenceReactContextProvider,
 } from "./context";
-import { createOpcodesForReactContextConsumer } from "./context";
+import { compileReactContextConsumer } from "./context";
 import { compileMutatedBinding, compileNode } from "../nodes";
 import { hyphenateStyleName } from "./style";
 import { compileReactFunctionComponent } from "./components";
@@ -52,6 +51,8 @@ import * as t from "@babel/types";
 import { compileCxMockCall } from "../mocks/cx";
 import {
   ConditionalTemplateNode,
+  ContextConsumerTemplateNode,
+  ContextProviderTemplateNode,
   DynamicTextArrayTemplateNode,
   DynamicTextTemplateNode,
   DynamicValueTemplateNode,
@@ -95,7 +96,7 @@ function compileArrayMapTemplate(childPath, state, componentPath) {
   }
   const mapFunctionPath = getReferenceFromExpression(args[0], state);
   // Compiles the array map function to return vNodes
-  const { templateNode } = compileReactComputeFunction(mapFunctionPath, state, false, null, true);
+  const { templateNode } = compileReactComputeFunction(mapFunctionPath, state, false, true);
   const vNodeCollectionValueIndex = getRuntimeValueIndex(childPath.node, state);
   return new VNodeCollectionTemplateNode(vNodeCollectionValueIndex, templateNode);
 }
@@ -158,7 +159,6 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
         templateNode.staticProps.push([propName, propInformation, propTemplateNode.value]);
       }
     } else {
-      debugger;
       invariant(false, "TODO");
     }
   } else {
@@ -244,7 +244,10 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
     childTemplateNode instanceof ReferenceVNode ||
     childTemplateNode instanceof ReferenceComponentTemplateNode ||
     childTemplateNode instanceof ConditionalTemplateNode ||
-    childTemplateNode instanceof LogicalTemplateNode
+    childTemplateNode instanceof LogicalTemplateNode ||
+    childTemplateNode instanceof FragmentTemplateNode ||
+    childTemplateNode instanceof ContextProviderTemplateNode ||
+    childTemplateNode instanceof ContextConsumerTemplateNode
   ) {
     templateNode.children.push(childTemplateNode);
     return;
@@ -254,15 +257,10 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
     // TODO remove runtime values to optimize size?
     return;
   }
-  if (t.isArrowFunctionExpression(childNode) || t.isFunctionExpression(childNode)) {
-    pushOpcode(opcodes, "ELEMENT_DYNAMIC_FUNCTION_CHILD", childOpcodes);
-    const reconcilerValueIndexForHostNode = state.reconciler.valueIndex++;
-    pushOpcodeValue(opcodes, reconcilerValueIndexForHostNode, "HOST_NODE_VALUE_POINTER_INDEX");
-    return;
-  }
   // React templates from incoming props
   if (assertType(childPath, typeAnnotation, true, state, "REACT_NODE")) {
     if (state.isRootComponent) {
+      debugger;
       throw new Error(
         `The compiler found a React element node type in the root component but was unable to statically find JSX template at ${getCodeLocation(
           childNode,
@@ -476,17 +474,6 @@ function canInlineNode(path, state) {
   return false;
 }
 
-function getTopLevelPathFromComponentPath(path) {
-  let parentPath = path.parentPath;
-  let lastPathKey = path.key;
-
-  while (!t.isProgram(parentPath.node) && !t.isBlockStatement(parentPath.node)) {
-    lastPathKey = parentPath.key;
-    parentPath = parentPath.parentPath;
-  }
-  return { key: lastPathKey, path: parentPath };
-}
-
 function createPropTemplateFromJSXElement(path, state, componentPath) {
   const runtimeValues = new Map();
   const childState = { ...state, ...{ runtimeValues } };
@@ -631,7 +618,7 @@ function createPropTemplateForArrayExpression(pathRef, state, componentPath) {
 
 function createPropTemplateForCallExpression(path, pathRef, state, componentPath) {
   const calleePath = getReferenceFromExpression(pathRef.get("callee"), state);
-  const { isStatic, templateNode } = compileReactComputeFunction(calleePath, state, false, null, false);
+  const { isStatic, templateNode } = compileReactComputeFunction(calleePath, state, false, false);
 
   state.helpers.add("createVNode");
   if (isStatic) {
@@ -650,7 +637,7 @@ function createPropTemplateForFunctionExpression(pathRef, state, componentPath) 
       moveOutFunctionFromTemplate(pathRef);
     }
   }
-  const { isStatic, templateNode } = compileReactComputeFunction(pathRef, state, false, null, false);
+  const { isStatic, templateNode } = compileReactComputeFunction(pathRef, state, false, false);
 
   state.helpers.add("createVNode");
   if (isStatic) {
@@ -1055,21 +1042,12 @@ function compileJSXElementType(typePath, attributesPath, childrenPath, state, co
   const typeName = t.isStringLiteral(typePath.node) ? typePath.node.value : typePath.node.name;
 
   if (isReferenceReactContextProvider(typePath, state)) {
-    const contextObjectRuntimeValueIndex = getContextObjectRuntimeValueIndex(typePath, state);
-    const hostNodeId = Symbol();
-    pushOpcode(opcodes, "OPEN_CONTEXT_PROVIDER", contextObjectRuntimeValueIndex);
-    createOpcodesForJSXElementHostComponent(
-      hostNodeId,
-      null,
-      attributesPath,
-      childrenPath,
-      opcodes,
-      state,
-      componentPath,
-    );
-    pushOpcode(opcodes, "CLOSE_CONTEXT_PROVIDER");
+    const contextObjectValueIndex = getContextObjectRuntimeValueIndex(typePath, state);
+    const templateNode = new ContextProviderTemplateNode(contextObjectValueIndex);
+    compileJSXElementHostComponent(templateNode, null, attributesPath, childrenPath, state, componentPath);
+    return templateNode;
   } else if (isReferenceReactContextConsumer(typePath, state)) {
-    createOpcodesForReactContextConsumer(typePath, childrenPath, opcodes, state, componentPath);
+    return compileReactContextConsumer(typePath, childrenPath, state, componentPath);
   } else if (isReactFragment(typePath, state)) {
     return compileJSXFragment(childrenPath, attributesPath, state, componentPath, false);
   } else if (isHostComponentType(typePath, state)) {
@@ -1326,15 +1304,12 @@ function compileReactCreateElementType(typePath, args, state, componentPath) {
     }
 
     if (isReferenceReactContextProvider(typePath, state)) {
-      const contextObjectRuntimeValueIndex = getContextObjectRuntimeValueIndex(typePath, state);
-      const hostNodeId = Symbol();
-      pushOpcode(opcodes, "OPEN_CONTEXT_PROVIDER", contextObjectRuntimeValueIndex);
-      createOpcodesForReactCreateElementHostComponent(hostNodeId, null, args, opcodes, state, componentPath);
-      pushOpcode(opcodes, "CLOSE_CONTEXT_PROVIDER");
-      return;
+      const contextObjectValueIndex = getContextObjectRuntimeValueIndex(typePath, state);
+      const templateNode = new ContextProviderTemplateNode(contextObjectValueIndex);
+      compileReactCreateElementHostComponent(templateNode, null, args, state, componentPath);
+      return templateNode;
     } else if (isReferenceReactContextConsumer(typePath, state)) {
-      createOpcodesForReactContextConsumer(typePath, childrenPath, opcodes, state, componentPath);
-      return;
+      return compileReactContextConsumer(typePath, childrenPath, state, componentPath);
     } else if (t.isIdentifier(typePath.node)) {
       componentName = typePath.node.name;
     } else if (t.isFunctionDeclaration(typePath.node)) {

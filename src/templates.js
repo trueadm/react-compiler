@@ -18,6 +18,8 @@ export const VNODE = 12;
 export const REFERENCE_VNODE = 13;
 export const MULTI_RETURN_CONDITIONAL = 14;
 export const VNODE_COLLECTION = 15;
+export const CONTEXT_PROVIDER = 16;
+export const CONTEXT_CONSUMER = 17;
 
 // Elements
 export const HAS_STATIC_PROPS = 1 << 6;
@@ -158,6 +160,56 @@ export class ReferenceVNode {
   }
 }
 
+function hostComponentChildrenToAST(flag, children, isContextProvider) {
+  let childrenASTNode = null;
+  const childrenLength = children.length;
+  if (childrenLength === 1) {
+    const child = children[0];
+
+    if (!isContextProvider) {
+      if (child instanceof StaticTextTemplateNode) {
+        flag |= HAS_STATIC_TEXT_CONTENT;
+        childrenASTNode = t.stringLiteral(child.text);
+      } else if (child instanceof DynamicTextTemplateNode) {
+        flag |= HAS_DYNAMIC_TEXT_CONTENT;
+        childrenASTNode = t.numericLiteral(child.valueIndex);
+      } else if (child instanceof FragmentTemplateNode) {
+        invariant(false, "TODO");
+      } else if (child instanceof DynamicTextArrayTemplateNode) {
+        flag |= HAS_DYNAMIC_TEXT_ARRAY_CONTENT;
+        childrenASTNode = t.numericLiteral(child.valueIndex);
+      }
+    }
+    if (child instanceof StaticValueTemplateNode) {
+      // Should not happen
+      invariant(false, "TODO");
+    } else if (childrenASTNode === null) {
+      flag |= HAS_CHILD;
+      childrenASTNode = child.toAST();
+    }
+  } else if (childrenLength > 1) {
+    flag |= HAS_CHILDREN;
+    const childrenASTNodes = [];
+    for (let child of children) {
+      if (child instanceof FragmentTemplateNode) {
+        const fragmentChildren = child.children;
+
+        for (let x = 0; x < fragmentChildren.length; x++) {
+          const fragmentChild = fragmentChildren[x];
+          childrenASTNodes.push(fragmentChild.toAST());
+        }
+      } else if (child instanceof StaticValueTemplateNode) {
+        // Should not happen
+        invariant(false, "TODO");
+      } else {
+        childrenASTNodes.push(child.toAST());
+      }
+    }
+    childrenASTNode = t.arrayExpression(childrenASTNodes);
+  }
+  return [flag, childrenASTNode];
+}
+
 export class HostComponentTemplateNode {
   constructor(tagName, isVoidElement) {
     this.tagName = tagName;
@@ -181,13 +233,11 @@ export class HostComponentTemplateNode {
     const hasDynamicProps = this.dynamicProps.length !== 0;
     const hasStaticStyles = this.staticStyles.length !== 0;
     const hasDynamicStyles = this.dynamicStyles.length !== 0;
-    const childrenLength = this.children.length;
     let flag = HOST_COMPONENT;
     let staticPropsASTNode = null;
     let dynamicPropsASTNode = null;
     let staticStylesASTNode = null;
     let dynamicStylesASTNode = null;
-    let childrenASTNode = null;
 
     if (this.isStatic) {
       flag |= IS_STATIC;
@@ -235,42 +285,8 @@ export class HostComponentTemplateNode {
       }
       dynamicStylesASTNode = t.arrayExpression(dynamicStylesASTNodes);
     }
-    if (childrenLength === 1) {
-      const child = this.children[0];
-
-      if (child instanceof StaticTextTemplateNode) {
-        flag |= HAS_STATIC_TEXT_CONTENT;
-        childrenASTNode = t.stringLiteral(child.text);
-      } else if (child instanceof DynamicTextTemplateNode) {
-        flag |= HAS_DYNAMIC_TEXT_CONTENT;
-        childrenASTNode = t.numericLiteral(child.valueIndex);
-      } else if (child instanceof FragmentTemplateNode) {
-        debugger;
-      } else if (child instanceof DynamicTextArrayTemplateNode) {
-        flag |= HAS_DYNAMIC_TEXT_ARRAY_CONTENT;
-        childrenASTNode = t.numericLiteral(child.valueIndex);
-      } else if (child instanceof StaticValueTemplateNode) {
-        // Should not happen
-        debugger;
-      } else {
-        flag |= HAS_CHILD;
-        childrenASTNode = child.toAST();
-      }
-    } else if (childrenLength > 1) {
-      flag |= HAS_CHILDREN;
-      const childrenASTNodes = [];
-      for (let child of this.children) {
-        if (child instanceof FragmentTemplateNode) {
-          debugger;
-        } else if (child instanceof StaticValueTemplateNode) {
-          // Should not happen
-          debugger;
-        } else {
-          childrenASTNodes.push(child.toAST());
-        }
-      }
-      childrenASTNode = t.arrayExpression(childrenASTNodes);
-    }
+    let childrenASTNode = null;
+    [flag, childrenASTNode] = hostComponentChildrenToAST(flag, this.children, false);
     // TODO: Maybe change to hex if less bytes?
     ASTNode.push(t.numericLiteral(flag));
     ASTNode.push(t.stringLiteral(this.tagName));
@@ -291,6 +307,63 @@ export class HostComponentTemplateNode {
       ASTNode.push(childrenASTNode);
     }
     return t.arrayExpression(ASTNode);
+  }
+}
+
+export class ContextProviderTemplateNode {
+  constructor(contextObjectValueIndex) {
+    this.contextObjectValueIndex = contextObjectValueIndex;
+    this.staticProps = [];
+    this.dynamicProps = [];
+    this.children = [];
+  }
+
+  toAST() {
+    const ASTNode = [];
+    const hasStaticProps = this.staticProps.length !== 0;
+    const hasDynamicProps = this.dynamicProps.length !== 0;
+    let flag = CONTEXT_PROVIDER;
+    let contextValueASTNode = null;
+
+    if (hasStaticProps) {
+      flag |= HAS_STATIC_PROPS;
+      invariant(this.staticProps.length < 2, "Context providers should never have more than 1 prop");
+      const [propName, , propValue] = this.staticProps[0];
+      invariant(propName === "value", "Context providers prop should always be value");
+      contextValueASTNode = valueToBabelNode(propValue);
+    }
+    if (hasDynamicProps) {
+      debugger;
+    }
+    let childrenASTNode = null;
+    [flag, childrenASTNode] = hostComponentChildrenToAST(flag, this.children, true);
+    ASTNode.push(t.numericLiteral(flag));
+    ASTNode.push(t.numericLiteral(this.contextObjectValueIndex));
+
+    if (contextValueASTNode !== null) {
+      ASTNode.push(contextValueASTNode);
+    }
+    if (childrenASTNode !== null) {
+      ASTNode.push(childrenASTNode);
+    }
+    return t.arrayExpression(ASTNode);
+  }
+}
+
+export class ContextConsumerTemplateNode {
+  constructor(contextObjectValueIndex, templateNode, computeFunctionValueIndex) {
+    this.contextObjectValueIndex = contextObjectValueIndex;
+    this.templateNode = templateNode;
+    this.computeFunctionValueIndex = computeFunctionValueIndex;
+  }
+
+  toAST() {
+    return t.arrayExpression([
+      t.numericLiteral(CONTEXT_CONSUMER),
+      t.numericLiteral(this.contextObjectValueIndex),
+      t.numericLiteral(this.computeFunctionValueIndex),
+      this.templateNode.toAST(),
+    ]);
   }
 }
 

@@ -32,6 +32,8 @@ export const VNODE = 12;
 export const REFERENCE_VNODE = 13;
 export const MULTI_RETURN_CONDITIONAL = 14;
 export const VNODE_COLLECTION = 15;
+export const CONTEXT_PROVIDER = 16;
+export const CONTEXT_CONSUMER = 17;
 
 // Elements
 export const HAS_STATIC_PROPS = 1 << 6;
@@ -923,7 +925,10 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
 
   if ((templateFlags & HAS_DYNAMIC_TEXT_CONTENT) !== 0) {
     const textContentValueIndex = hostComponentTemplate[childrenTemplateIndex];
-    children = escapeText(values[textContentValueIndex]);
+    const text = values[textContentValueIndex];
+    if (text !== undefined && text !== null) {
+      children = escapeText(text);
+    }
   } else if ((templateFlags & HAS_STATIC_TEXT_CONTENT) !== 0) {
     children = hostComponentTemplate[childrenTemplateIndex];
   } else if ((templateFlags & HAS_CHILD) !== 0) {
@@ -940,6 +945,55 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
     children += renderTextArrayToString(textChildrenArray, state);
   }
   return `<${tagName}${styles}${inner}>${children}</${tagName}>`;
+}
+
+function renderContextProviderTemplateToString(
+  templateTypeAndFlags,
+  contextProviderTemplate,
+  values,
+  isOnlyChild,
+  state,
+) {
+  const templateFlags = templateTypeAndFlags & ~0x3f;
+  const contextObjectValueIndex = contextProviderTemplate[1];
+  const contextObject = values[contextObjectValueIndex];
+  let childrenTemplateIndex = 2;
+
+  if ((templateFlags & HAS_STATIC_PROPS) !== 0) {
+    childrenTemplateIndex = 3;
+    const contextValue = contextProviderTemplate[2];
+    pushCurrentContextValue(contextObject, contextValue, state);
+  } else {
+    pushCurrentContextValue(contextObject, undefined, state);
+  }
+  state.hasCreatedMarkupForRoot = true;
+
+  if ((templateFlags & HAS_CHILD) !== 0) {
+    const child = contextProviderTemplate[childrenTemplateIndex];
+    return renderTemplateToString(child, values, true, state);
+  } else if ((templateFlags & HAS_CHILDREN) !== 0) {
+    let children = "";
+    const childrenTemplateNodes = contextProviderTemplate[childrenTemplateIndex];
+    for (let i = 0, length = childrenTemplateNodes.length; i < length; ++i) {
+      children += renderTemplateToString(childrenTemplateNodes[i], values, false, state);
+    }
+    return children;
+  }
+  return "";
+}
+
+function renderContextConsumerTemplateToString(contextConsumerTemplate, values, isOnlyChild, state) {
+  const contextObjectValueIndex = contextConsumerTemplate[1];
+  const computeFunctionValueIndex = contextConsumerTemplate[2];
+  const contextConsumerTemplateNode = contextConsumerTemplate[3];
+  const contextObject = values[contextObjectValueIndex];
+  const computeFunction = values[computeFunctionValueIndex];
+  const contextValue = getCurrentContextValue(contextObject, state);
+  const contextConsumerValues = computeFunction(contextValue);
+  if (contextConsumerValues === null) {
+    return "";
+  }
+  return renderTemplateToString(contextConsumerTemplateNode, contextConsumerValues, isOnlyChild, state);
 }
 
 function renderTextTemplateToString(templateTypeAndFlags, textTemplate, values, isOnlyChild, state) {
@@ -1181,6 +1235,10 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
       return renderMultiReturnConditionalTemplateToString(templateNode, values, isOnlyChild, state);
     case VNODE_COLLECTION:
       return renderVNodeCollectionTemplateToString(templateNode, values, isOnlyChild, state);
+    case CONTEXT_PROVIDER:
+      return renderContextProviderTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
+    case CONTEXT_CONSUMER:
+      return renderContextConsumerTemplateToString(templateNode, values, isOnlyChild, state);
     default:
       throw new Error("Should never happen");
   }
@@ -1188,6 +1246,7 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
 
 function createState(rootProps) {
   return {
+    contextValueStack: new Map(),
     hasCreatedMarkupForRoot: false,
     lastChildWasText: false,
     rootProps,
