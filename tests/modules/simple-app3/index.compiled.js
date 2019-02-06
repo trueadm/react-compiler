@@ -7,9 +7,7 @@ function App_ComputeFunction() {
 
   var __cached__0;
 
-  renderSpan();
   __cached__1 = renderDivWithText("foo bar!");
-  renderDiv();
   __cached__0 = renderText();
   renderText();
   return [[renderText()], __cached__0, __cached__1];

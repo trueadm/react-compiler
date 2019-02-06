@@ -19,6 +19,7 @@ import {
   pathContainsReactElement,
   updateCommonJSLikeRequireCallPathToCompiledPath,
   updateImportSyntaxPathToCompiledPath,
+  markNodeAsDCE,
 } from "./utils";
 import { compileJSXElement, compileJSXFragment, compileReactCreateElement } from "./react/elements";
 import invariant from "./invariant";
@@ -98,6 +99,23 @@ function compileCallExpression(path, refPath, state, componentPath, isRoot) {
   }
   if (assertType(path, getTypeAnnotationForExpression(refPath, state), true, state, "REACT_NODE")) {
     return compileCallExpressionReturningTemplateNodes(path, refPath, state, componentPath, isRoot);
+  }
+  const calleePath = refPath.get("callee");
+  // Optimization case for .toString being inlined etc
+  if (t.isMemberExpression(calleePath)) {
+    const calleePathRef = getReferenceFromExpression(calleePath, state);
+
+    if (t.isStringLiteral(calleePathRef)) {
+      markNodeAsDCE(refPath.node);
+      return compileNode(calleePathRef, calleePathRef, state, componentPath, isRoot);
+    } else if (t.isNumericLiteral(calleePathRef)) {
+      markNodeAsDCE(refPath.node);
+      const node = compileNode(calleePathRef, calleePathRef, state, componentPath, isRoot);
+      if (node instanceof StaticValueTemplateNode) {
+        node.value = node.value.toString();
+      }
+      return node;
+    }
   }
   const pathConditions = getPathConditions(componentPath, refPath, state);
   let node = refPath.node;

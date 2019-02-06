@@ -93,6 +93,28 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
         if (node.computed) {
           types.push(objectType.typeParameters.params[i]);
         } else {
+          if (t.isIdentifier(node.property)) {
+            const propertyName = node.property.name;
+            if (
+              propertyName === "map" ||
+              propertyName === "reduce" ||
+              propertyName === "filter" ||
+              propertyName === "every" ||
+              propertyName === "some" ||
+              propertyName === "slice" ||
+              propertyName === "entries" ||
+              propertyName === "flat" ||
+              propertyName === "flatMap" ||
+              propertyName === "keys" ||
+              propertyName === "values" ||
+              propertyName === "concat"
+            ) {
+              return objectType;
+            }
+            if (propertyName === "length") {
+              return t.numberTypeAnnotation();
+            }
+          }
           invariant(false, "TODO");
         }
       }

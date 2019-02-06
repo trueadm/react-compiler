@@ -62,6 +62,11 @@ export function applyDeadCodeElimination(moduleAst, moduleState) {
           removePath(path);
         }
       },
+      CallExpression(path) {
+        if (path.node.canDCE) {
+          removePath(path);
+        }
+      },
       Identifier(path) {
         const node = path.node;
 
