@@ -74,7 +74,8 @@ export function applyDeadCodeElimination(moduleAst, moduleState) {
         }
         if (moduleState.externalBindings.has(node.name)) {
           return;
-        
+        }
+
         const binding = path.scope.getBinding(node.name);
         if (binding === undefined) {
           return;

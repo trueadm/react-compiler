@@ -88,15 +88,18 @@ export function getTypeAnnotationForExpression(path, state, errorOnMissingType =
       }
     }
     if (t.isGenericTypeAnnotation(objectType) && t.isIdentifier(objectType.id) && objectType.id.name === "Array") {
-      if (objectType.typeParameters.params.length === 1) {
+      const types = [];
+      for (let i = 0; i < objectType.typeParameters.params.length; i++) {
         if (node.computed) {
-          return objectType.typeParameters.params[0];
+          types.push(objectType.typeParameters.params[i]);
         } else {
           invariant(false, "TODO");
         }
-      } else {
-        invariant(false, "TODO");
       }
+      if (types.length === 1) {
+        return types[0];
+      }
+      return t.unionTypeAnnotation(types);
     }
     return objectType;
   } else if (t.isIdentifier(node)) {
