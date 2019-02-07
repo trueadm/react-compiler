@@ -186,10 +186,6 @@ export function convertRootPropsToPropsArray(rootProps, rootPropsShape) {
   return props;
 }
 
-export function isReactNode(node) {
-  return node !== null && node.t !== undefined && node.v !== undefined;
-}
-
 export function callComputeFunctionWithArray(computeFunction, arr) {
   if (arr === null) {
     return computeFunction();
