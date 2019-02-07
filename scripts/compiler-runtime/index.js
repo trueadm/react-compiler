@@ -56,7 +56,7 @@ export function createContext(defaultValue, calculateChangedBits) {
 
 export function createVNode(t, v, k) {
   return {
-    h: null,
+    f: null,
     k: k === undefined ? null : k,
     t,
     v: v || null,
