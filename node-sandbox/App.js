@@ -1,13 +1,7 @@
-// props:{items: [1,2,3,4,5]}
-var React = require("react");
+import React from "react";
 
-function Component({ items }: { items: Array<number> }) {
-  const children = items
-    .filter((item: number) => item % 2)
-    .map((item, i: number): React.Node => <li key={i}>Static item!</li>);
-  return <ul>{children}</ul>;
+export function Component() {
+  return <div>Hello world</div>
 }
 
 Component.compileRootComponent = true;
-
-module.exports = Component;

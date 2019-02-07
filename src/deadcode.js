@@ -101,6 +101,7 @@ export function applyDeadCodeElimination(moduleAst, moduleState) {
             traverse(moduleAst, {
               AssignmentExpression(assignPath) {
                 const assignmentNode = assignPath.node;
+                debugger;
                 if (t.isIdentifier(assignmentNode.left) && assignmentNode.left.name === node.name) {
                   removePath(assignPath);
                 }

@@ -197,6 +197,10 @@ export function replaceReactImportsWithCompilerRuntime(moduleAst) {
     ImportDeclaration(path) {
       const node = path.node;
       if (t.isStringLiteral(node.source) && node.source.value === "react") {
+        if (node.specifiers.length === 0) {
+          path.remove();
+          return;
+        }
         node.source.value = "react-compiler-runtime";
       }
     },

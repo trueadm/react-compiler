@@ -18,9 +18,17 @@
 
     return props;
   }
+  function createElement(tag) {
+    return document.createElement(tag);
+  }
+  function appendChild(parentDOMNode, DOMNode) {
+    parentDOMNode.appendChild(DOMNode);
+  }
 
   var ROOT_COMPONENT = 0;
   var HOST_COMPONENT = 2;
+  var HAS_STATIC_TEXT_CONTENT = 1 << 12;
+  var HAS_DYNAMIC_TEXT_CONTENT = 1 << 13;
   var IS_STATIC = 1 << 15;
   var rootFibers = new Map();
 
@@ -65,7 +73,25 @@
   }
 
   function mountHostComponent(templateTypeAndFlags, hostComponentTemplate, parentDOMNode, values, currentFiber) {
-    debugger;
+    var templateFlags = templateTypeAndFlags & ~0x3f;
+    var tagName = hostComponentTemplate[1];
+    var DOMNode = createElement(tagName);
+    var childrenTemplateIndex = 2;
+
+    if ((templateFlags & HAS_DYNAMIC_TEXT_CONTENT) !== 0) {
+      var textContentValueIndex = hostComponentTemplate[childrenTemplateIndex];
+      var text = values[textContentValueIndex];
+
+      if (text !== undefined && text !== null && text !== "") {
+        DOMNode.textContent = text;
+      }
+    } else if ((templateFlags & HAS_STATIC_TEXT_CONTENT) !== 0) {
+      DOMNode.textContent = hostComponentTemplate[childrenTemplateIndex];
+    }
+
+    if (parentDOMNode !== null) {
+      appendChild(parentDOMNode, DOMNode);
+    }
   }
 
   function mountTemplateNode(templateNode, parentDOMNode, values, currentFiber) {
@@ -125,7 +151,7 @@
 
   // DO NOT MODIFY
   var React = {
-    createElement: function createElement(type, props) {
+    createElement: function createElement$$1(type, props) {
       return {
         $$typeof: reactElementSymbol,
         key: null,

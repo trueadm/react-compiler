@@ -1,5 +1,3 @@
-import "react-compiler-runtime";
-
 function Foo_ComputeFunction(text) {
   return [text];
 }

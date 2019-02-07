@@ -254,3 +254,11 @@ export const isUnitlessNumber = new Set([
   "stroke-opacity",
   "stroke-width",
 ]);
+
+export function createElement(tag) {
+  return document.createElement(tag);
+}
+
+export function appendChild(parentDOMNode, DOMNode) {
+  parentDOMNode.appendChild(DOMNode);
+}

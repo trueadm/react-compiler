@@ -1,6 +1,6 @@
 import { currentDispatcher } from "./index";
 import { Dispatcher, callComputeFunctionWithHooks } from "./dom-dispatcher";
-import { convertRootPropsToPropsArray, emptyArray, reactElementSymbol } from "./utils";
+import { appendChild, createElement, convertRootPropsToPropsArray, reactElementSymbol } from "./utils";
 
 export const ROOT_COMPONENT = 0;
 export const COMPONENT = 1;
@@ -92,7 +92,24 @@ function mountFunctionComponent(isRoot, templateTypeAndFlags, componentTemplate,
 }
 
 function mountHostComponent(templateTypeAndFlags, hostComponentTemplate, parentDOMNode, values, currentFiber) {
-  debugger;
+  const templateFlags = templateTypeAndFlags & ~0x3f;
+  const tagName = hostComponentTemplate[1];
+  const DOMNode = createElement(tagName);
+  let childrenTemplateIndex = 2;
+
+  if ((templateFlags & HAS_DYNAMIC_TEXT_CONTENT) !== 0) {
+    const textContentValueIndex = hostComponentTemplate[childrenTemplateIndex];
+    const text = values[textContentValueIndex];
+    if (text !== undefined && text !== null && text !== "") {
+      DOMNode.textContent = text;
+    }
+  } else if ((templateFlags & HAS_STATIC_TEXT_CONTENT) !== 0) {
+    DOMNode.textContent = hostComponentTemplate[childrenTemplateIndex];
+  }
+
+  if (parentDOMNode !== null) {
+    appendChild(parentDOMNode, DOMNode);
+  }
 }
 
 function mountTemplateNode(templateNode, parentDOMNode, values, currentFiber) {

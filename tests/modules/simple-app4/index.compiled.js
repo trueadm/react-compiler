@@ -1,4 +1,3 @@
-import "react-compiler-runtime";
 import Foo from "./Foo.compiled.js";
 import { renderText, renderDivOrNull, renderDivWithText, renderSpan } from "./utils.compiled.js";
 
