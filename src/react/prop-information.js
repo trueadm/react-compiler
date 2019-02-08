@@ -230,15 +230,10 @@ function isReactEvent(name) {
   return false;
 }
 
-export function getPropInformation(propName, isPartialTemplate) {
+export function getPropInformation(propName) {
   let propInformationFlag = 0;
   let propNameToUse = propName;
 
-  if (isPartialTemplate) {
-    debugger;
-    // TODO
-    // propInformationFlag = propInformationFlag | PropFlagPartialTemplate;
-  }
   if (isReactEvent(propName)) {
     const propData = eventPropsToEventNames.get(propNameToUse);
 
@@ -300,14 +295,14 @@ export function transformStaticOpcodes(opcodes, propInformation) {
       return null;
     }
     const propValue = firstOpcode.value;
-    if (propInformation & PropFlagBoolean) {
+    if (propInformation & PROP_IS_BOOLEAN) {
       if (propValue === true) {
         return [t.stringLiteral("")];
       } else {
         return null;
       }
     }
-    if (propInformation & PropFlagPositiveNumeric) {
+    if (propInformation & PROP_IS_POSITIVE_NUMBER) {
       if (isNaN(propValue) || propValue < 1) {
         return null;
       }

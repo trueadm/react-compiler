@@ -1,6 +1,16 @@
 import { currentDispatcher } from "./index";
 import { Dispatcher, callComputeFunctionWithHooks } from "./dom-dispatcher";
-import { appendChild, createElement, convertRootPropsToPropsArray, reactElementSymbol } from "./utils";
+import {
+  appendChild,
+  callComputeFunctionWithArray,
+  convertRootPropsToPropsArray,
+  insertFiber,
+  isUnitlessNumber,
+  createElement,
+  createPlaceholder,
+  createTextNode,
+  reactElementSymbol,
+} from "./utils";
 
 export const ROOT_COMPONENT = 0;
 export const COMPONENT = 1;
@@ -51,7 +61,14 @@ export const PROP_IS_POSITIVE_NUMBER = 1 << 2;
 
 const rootFibers = new Map();
 
-function mountFunctionComponent(isRoot, templateTypeAndFlags, componentTemplate, parentDOMNode, values, currentFiber) {
+function mountFunctionComponentTemplate(
+  isRoot,
+  templateTypeAndFlags,
+  componentTemplate,
+  parentDOMNode,
+  values,
+  currentFiber,
+) {
   const templateFlags = templateTypeAndFlags & ~0x3f;
 
   if ((templateFlags & IS_STATIC) === 0) {
@@ -73,29 +90,122 @@ function mountFunctionComponent(isRoot, templateTypeAndFlags, componentTemplate,
       childTemplateNode = componentTemplate[2];
     }
     const hasHooks = (templateFlags & HAS_HOOKS) !== 0;
+    let componentValues;
 
-    debugger;
-    // if (hasHooks === true) {
-    //   prepareToUseHooks(computeFunction);
-    // }
-    // const componentValues = callComputeFunctionWithArray(computeFunction, componentProps);
-    // if (hasHooks === true) {
-    //   finishHooks(computeFunction);
-    // }
-    // if (componentValues === null) {
-    //   return "";
-    // }
-    // return renderTemplateToString(childTemplateNode, componentValues, isOnlyChild, state);
+    if (hasHooks === true) {
+      // TODO
+    } else {
+      componentValues = callComputeFunctionWithArray(computeFunction, componentProps);
+    }
+    const componentFiber = createFiber(componentTemplate, componentValues);
+    insertFiber(currentFiber, componentFiber);
+    if (componentValues === null) {
+      const placeholder = createPlaceholder();
+      componentFiber.hostNode = placeholder;
+      return placeholder;
+    }
+    const hostNode = mountTemplateNode(childTemplateNode, parentDOMNode, componentValues, componentFiber);
+    componentFiber.hostNode = hostNode;
+    return hostNode;
   }
   const childTemplateNode = componentTemplate[1];
   return mountTemplateNode(childTemplateNode, parentDOMNode, values, currentFiber);
 }
 
-function mountHostComponent(templateTypeAndFlags, hostComponentTemplate, parentDOMNode, values, currentFiber) {
+function renderPropValue(propFlags, value) {
+  if (value === null) {
+    return;
+  }
+  if ((propFlags & PROP_IS_BOOLEAN) !== 0 && typeof value !== "boolean") {
+    return;
+  } else if ((propFlags & PROP_IS_POSITIVE_NUMBER) !== 0) {
+    if (isNaN(value) || value < 1) {
+      return;
+    }
+  }
+  return value;
+}
+
+function mountPropValue(DOMNode, propFlags, propName, propValue) {
+  if (propName === "className") {
+    DOMNode.className = propValue;
+  } else if ((propFlags & PROP_IS_EVENT) !== 0) {
+    // TODO make events work
+  } else {
+    DOMNode.setAttribute(propName, propValue);
+  }
+}
+
+function mountHostComponentTemplate(templateTypeAndFlags, hostComponentTemplate, parentDOMNode, values, currentFiber) {
   const templateFlags = templateTypeAndFlags & ~0x3f;
   const tagName = hostComponentTemplate[1];
   const DOMNode = createElement(tagName);
+  let DOMNodeStyle;
   let childrenTemplateIndex = 2;
+
+  if ((templateFlags & HAS_STATIC_PROPS) !== 0) {
+    const staticProps = hostComponentTemplate[childrenTemplateIndex++];
+
+    for (let i = 0, length = staticProps.length; i < length; i += 3) {
+      const propName = staticProps[i];
+      const staticPropFlags = staticProps[i + 1];
+      const staticPropValue = renderPropValue(staticPropFlags, staticProps[i + 2]);
+      if (staticPropValue === undefined) {
+        continue;
+      }
+      mountPropValue(DOMNode, staticPropFlags, propName, staticPropValue);
+    }
+  }
+  if ((templateFlags & HAS_STATIC_STYLES) !== 0) {
+    if (DOMNodeStyle === undefined) {
+      DOMNodeStyle = DOMNode.style;
+    }
+    const staticStyles = hostComponentTemplate[childrenTemplateIndex++];
+
+    for (let i = 0, length = staticStyles.length; i < length; i += 2) {
+      const styleName = staticStyles[i];
+      const staticStyleValue = staticStyles[i + 1];
+      DOMNodeStyle.setProperty(styleName, staticStyleValue);
+    }
+  }
+  if ((templateFlags & HAS_DYNAMIC_PROPS) !== 0) {
+    const dynamicProps = hostComponentTemplate[childrenTemplateIndex++];
+
+    for (let i = 0, length = dynamicProps.length; i < length; i += 3) {
+      const propName = dynamicProps[i];
+      const dynamicPropFlags = dynamicProps[i + 1];
+      const dynamicPropValueIndex = dynamicProps[i + 2];
+      const dynamicPropValue = renderPropValue(dynamicPropFlags, values[dynamicPropValueIndex]);
+
+      if (dynamicPropValue === undefined) {
+        continue;
+      }
+      mountPropValue(DOMNode, dynamicPropFlags, propName, dynamicPropValue);
+    }
+  }
+  if ((templateFlags & HAS_DYNAMIC_STYLES) !== 0) {
+    if (DOMNodeStyle === undefined) {
+      DOMNodeStyle = DOMNode.style;
+    }
+    const dynamicStyles = hostComponentTemplate[childrenTemplateIndex++];
+
+    for (let i = 0, length = dynamicStyles.length; i < length; i += 2) {
+      let styleName = dynamicStyles[i];
+      const dynamicStyleValueIndex = dynamicStyles[i + 1];
+      let dynamicStyleValue = values[dynamicStyleValueIndex];
+
+      if (dynamicStyleValue === null || dynamicStyleValue === undefined) {
+        continue;
+      }
+      if (typeof dynamicStyleValue === "boolean") {
+        dynamicStyleValue = "";
+      }
+      if (typeof dynamicStyleValue === "number" && dynamicStyleValue !== 0 && !isUnitlessNumber.has(styleName)) {
+        dynamicStyleValue = `${dynamicStyleValue}px`;
+      }
+      DOMNodeStyle.setProperty(styleName, dynamicStyleValue);
+    }
+  }
 
   if ((templateFlags & HAS_DYNAMIC_TEXT_CONTENT) !== 0) {
     const textContentValueIndex = hostComponentTemplate[childrenTemplateIndex];
@@ -105,10 +215,53 @@ function mountHostComponent(templateTypeAndFlags, hostComponentTemplate, parentD
     }
   } else if ((templateFlags & HAS_STATIC_TEXT_CONTENT) !== 0) {
     DOMNode.textContent = hostComponentTemplate[childrenTemplateIndex];
+  } else if ((templateFlags & HAS_CHILD) !== 0) {
+    const child = hostComponentTemplate[childrenTemplateIndex];
+    mountTemplateNode(child, DOMNode, values, currentFiber);
+  } else if ((templateFlags & HAS_CHILDREN) !== 0) {
+    const childrenTemplateNodes = hostComponentTemplate[childrenTemplateIndex];
+    for (let i = 0, length = childrenTemplateNodes.length; i < length; ++i) {
+      mountTemplateNode(childrenTemplateNodes[i], DOMNode, values, currentFiber);
+    }
   }
 
   if (parentDOMNode !== null) {
     appendChild(parentDOMNode, DOMNode);
+  }
+  return DOMNode;
+}
+
+function mountTextTemplate(templateTypeAndFlags, textTemplate, parentDOMNode, values, currentFiber) {
+  const templateFlags = templateTypeAndFlags & ~0x3f;
+  const isStatic = (templateFlags & IS_STATIC) !== 0;
+  let text = isStatic === true ? textTemplate[1] : values[textTemplate[1]];
+  const textDOMNode = createTextNode(text);
+  if (parentDOMNode !== null) {
+    appendChild(parentDOMNode, textDOMNode);
+  }
+  return textDOMNode;
+}
+
+function mountMultiConditionalTemplate(multiConditionalTemplate, parentDOMNode, values, currentFiber) {
+  const conditions = multiConditionalTemplate[1];
+  const conditionalFiber = createFiber(multiConditionalTemplate, 0);
+  insertFiber(currentFiber, conditionalFiber);
+
+  for (let i = 0, length = conditions.length; i < length; i += 2) {
+    const conditionValueIndexOrNull = conditions[i];
+
+    if (conditionValueIndexOrNull === null) {
+      conditionalFiber.values = i;
+      const conditionTemplateNode = conditions[i + 1];
+      return mountTemplateNode(conditionTemplateNode, parentDOMNode, values, conditionalFiber);
+    }
+    const conditionValue = values[conditionValueIndexOrNull];
+
+    if (conditionValue) {
+      conditionalFiber.values = i;
+      const conditionTemplateNode = conditions[i + 1];
+      return mountTemplateNode(conditionTemplateNode, parentDOMNode, values, conditionalFiber);
+    }
   }
 }
 
@@ -118,9 +271,20 @@ function mountTemplateNode(templateNode, parentDOMNode, values, currentFiber) {
 
   switch (templateType) {
     case ROOT_COMPONENT:
-      return mountFunctionComponent(true, templateTypeAndFlags, templateNode, parentDOMNode, values, currentFiber);
+      return mountFunctionComponentTemplate(
+        true,
+        templateTypeAndFlags,
+        templateNode,
+        parentDOMNode,
+        values,
+        currentFiber,
+      );
     case HOST_COMPONENT:
-      return mountHostComponent(templateTypeAndFlags, templateNode, parentDOMNode, values, currentFiber);
+      return mountHostComponentTemplate(templateTypeAndFlags, templateNode, parentDOMNode, values, currentFiber);
+    case TEXT:
+      return mountTextTemplate(templateTypeAndFlags, templateNode, parentDOMNode, values, currentFiber);
+    case MULTI_CONDITIONAL:
+      return mountMultiConditionalTemplate(templateNode, parentDOMNode, values, currentFiber);
     default:
       throw new Error("Should never happen");
   }

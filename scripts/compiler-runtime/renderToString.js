@@ -153,7 +153,7 @@ function renderReferenceComponentTemplateToString(
   return renderTemplateToString(componentTemplateNode, props, isOnlyChild, state);
 }
 
-function renderPropValue(propFlags, value) {
+function filterPropValue(propFlags, value) {
   if (value === null) {
     return;
   }
@@ -189,7 +189,7 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
     for (let i = 0, length = staticProps.length; i < length; i += 3) {
       let propName = staticProps[i];
       const staticPropFlags = staticProps[i + 1];
-      const staticPropValue = renderPropValue(staticPropFlags, staticProps[i + 2]);
+      const staticPropValue = filterPropValue(staticPropFlags, staticProps[i + 2]);
       if (staticPropValue === undefined) {
         continue;
       }
@@ -204,7 +204,7 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
     const staticStyles = hostComponentTemplate[childrenTemplateIndex++];
 
     for (let i = 0, length = staticStyles.length; i < length; i += 2) {
-      let styleName = staticStyles[i];
+      const styleName = staticStyles[i];
       const staticStyleValue = staticStyles[i + 1];
       styles += `${lastChildWasStyle ? ";" : ""}${styleName}:${staticStyleValue}`;
       lastChildWasStyle = true;
@@ -217,7 +217,7 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
       let propName = dynamicProps[i];
       const dynamicPropFlags = dynamicProps[i + 1];
       const dynamicPropValueIndex = dynamicProps[i + 2];
-      const dynamicPropValue = renderPropValue(dynamicPropFlags, values[dynamicPropValueIndex]);
+      const dynamicPropValue = filterPropValue(dynamicPropFlags, values[dynamicPropValueIndex]);
 
       if (dynamicPropValue === undefined) {
         continue;

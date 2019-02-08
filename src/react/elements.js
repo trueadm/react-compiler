@@ -144,7 +144,7 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
   if (t.isCallExpression(valueRefPath.node) && propTemplateNode instanceof TemplateFunctionCallTemplateNode) {
     isPartialTemplate = true;
   }
-  const [propName, propInformation] = getPropInformation(propNameStr, isPartialTemplate);
+  const [propName, propInformation] = getPropInformation(propNameStr);
 
   // Static vs dynamic
   if (!isPartialTemplate && runtimeValueHash === getRuntimeValueHash(state)) {
@@ -260,7 +260,6 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
   // React templates from incoming props
   if (assertType(childPath, typeAnnotation, true, state, "REACT_NODE")) {
     if (state.isRootComponent) {
-      debugger;
       throw new Error(
         `The compiler found a React element node type in the root component but was unable to statically find JSX template at ${getCodeLocation(
           childNode,

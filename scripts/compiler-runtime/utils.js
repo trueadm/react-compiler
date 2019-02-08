@@ -262,3 +262,20 @@ export function createElement(tag) {
 export function appendChild(parentDOMNode, DOMNode) {
   parentDOMNode.appendChild(DOMNode);
 }
+
+export function createTextNode(text) {
+  return document.createTextNode(text);
+}
+
+export function createPlaceholder() {
+  return createTextNode("");
+}
+
+export function insertFiber(parentFiber, fiber) {
+  let children = parentFiber.children;
+  if (children === null) {
+    children = parentFiber.children = [];
+  }
+  children.push(fiber);
+  fiber.parent = parentFiber;
+}
