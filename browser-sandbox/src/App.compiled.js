@@ -1,3390 +1,3156 @@
-function ReactImage0_ComputeFunction(x) {
-  if (x === 0) {
-    return [0];
-  }
-
-  if (x === 15) {
-    return [1];
-  }
-
-  if (x === 22) {
-    return [2];
-  }
-
-  if (x === 29) {
-    return [3];
-  }
-
-  if (x === 42) {
-    return [4];
-  }
-
-  if (x === 67) {
-    return [5];
-  }
-
-  if (x === 70) {
-    return [6];
-  }
-
-  if (x === 76) {
-    return [7];
-  }
-
-  if (x === 79) {
-    return [8];
-  }
-
-  if (x === 88) {
-    return [9];
-  }
-
-  if (x === 91) {
-    return [10];
-  }
-
-  if (x === 94) {
-    return [11];
-  }
-
-  if (x === 98) {
-    return [12];
-  }
-
-  if (x === 108) {
-    return [13];
-  }
-
-  if (x === 111) {
-    return [14];
-  }
-
-  if (x === 126) {
-    return [15];
-  }
-
-  if (x === 127) {
-    return [16];
-  }
-
-  if (x === 134) {
-    return [17];
-  }
-
-  if (x === 135) {
-    return [18];
-  }
-
-  if (x === 148) {
-    return [19];
-  }
-
-  if (x === 152) {
-    return [20];
-  }
-
-  if (x === 153) {
-    return [21];
-  }
-
-  if (x === 160) {
-    return [22];
-  }
-
-  if (x === 177) {
-    return [23];
-  }
-
-  if (x === 186) {
-    return [24];
-  }
-
-  if (x === 195) {
-    return [25];
-  }
+const Link0_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const ReactImage1_ComputeFunction = function () {
+  return [];
+};
+
+const Link2_ComputeFunction = function () {
+  return [{}, function (): void {}, function (): void {}];
+};
+
+const AbstractButton3_ComputeFunction = function () {
+  return [];
+};
+
+const XUIButton4_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractPopoverButton5_ComputeFunction = function () {
+  return [];
+};
+
+const ReactXUIPopoverButton6_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAccountSelector7_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAccountSelectorContainer8_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton9_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUIButton10_ComputeFunction = function () {
+  return [];
+};
+
+const DownloadUploadTimestamp11_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage12_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton13_ComputeFunction = function () {
+  return [{}, function (): void {}];
+};
+
+const XUIButton14_ComputeFunction = function () {
+  return [];
+};
+
+const DownloadUploadTimestamp15_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton16_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUIButton17_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage18_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton19_ComputeFunction = function () {
+  return [{}];
+};
+
+const XUIButton20_ComputeFunction = function () {
+  return [];
+};
+
+const InlineBlock21_ComputeFunction = function () {
+  return [{}];
+};
+
+const ReactPopoverMenu22_ComputeFunction = function () {
+  return [];
+};
+
+const XUIButtonGroup23_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEResetDialog24_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETopNav25_ComputeFunction = function () {
+  return [];
+};
+
+const FluxContainer_ja_26_ComputeFunction = function () {
+  return [];
+};
+
+const Wrapper27_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}, function (): void {}, function (): void {}, function (): void {}];
+};
+
+const TabBarItem28_ComputeFunction = function () {
+  return [];
+};
+
+const XUIPageNavigationItem29_ComputeFunction = function () {
+  return [];
+};
+
+const TabBarItemWrapper30_ComputeFunction = function () {
+  return [];
+};
+
+const Wrapper31_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}, function (): void {}, function (): void {}, function (): void {}];
+};
+
+const TabBarItem32_ComputeFunction = function () {
+  return [];
+};
+
+const XUIPageNavigationItem33_ComputeFunction = function () {
+  return [];
+};
+
+const TabBarItemWrapper34_ComputeFunction = function () {
+  return [];
+};
+
+const Wrapper35_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}, function (): void {}, function (): void {}, function (): void {}];
+};
+
+const TabBarItem36_ComputeFunction = function () {
+  return [];
+};
+
+const XUIPageNavigationItem37_ComputeFunction = function () {
+  return [];
+};
+
+const TabBarItemWrapper38_ComputeFunction = function () {
+  return [];
+};
+
+const Wrapper39_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}, function (): void {}, function (): void {}, function (): void {}];
+};
+
+const TabBarItem40_ComputeFunction = function () {
+  return [];
+};
+
+const XUIPageNavigationItem41_ComputeFunction = function () {
+  return [];
+};
+
+const TabBarItemWrapper42_ComputeFunction = function () {
+  return [];
+};
+
+const Wrapper43_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}, function (): void {}, function (): void {}, function (): void {}];
+};
+
+const TabBarItem44_ComputeFunction = function () {
+  return [];
+};
+
+const XUIPageNavigationItem45_ComputeFunction = function () {
+  return [];
+};
+
+const TabBarItemWrapper46_ComputeFunction = function () {
+  return [];
+};
+
+const TabBarItem47_ComputeFunction = function () {
+  return [];
+};
+
+const InlineBlock48_ComputeFunction = function () {
+  return [{}, {}];
+};
+
+const ReactPopoverMenu49_ComputeFunction = function () {
+  return [];
+};
+
+const TabBarDropdownItem50_ComputeFunction = function () {
+  return [];
+};
+
+const TabBar51_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}, function (): void {}, function (): void {}];
+};
+
+const XUIPageNavigationGroup52_ComputeFunction = function () {
+  return [];
+};
+
+const LeftRight53_ComputeFunction = function () {
+  return [];
+};
+
+const XUIPageNavigation54_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPENavigationBar55_ComputeFunction = function () {
+  return [];
+};
+
+const FluxContainer_w_56_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage57_ComputeFunction = function () {
+  return [];
+};
+
+const Link58_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AbstractButton59_ComputeFunction = function () {
+  return [];
+};
+
+const XUIAbstractGlyphButton60_ComputeFunction = function () {
+  return [];
+};
+
+const XUICloseButton61_ComputeFunction = function () {
+  return [];
+};
+
+const XUIText62_ComputeFunction = function () {
+  return [];
+};
+
+const Link63_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUINotice64_ComputeFunction = function () {
+  return [];
+};
+
+const ReactCSSTransitionGroupChild65_ComputeFunction = function () {
+  return [];
+};
+
+const ReactTransitionGroup66_ComputeFunction = function () {
+  return [{}];
+};
+
+const ReactCSSTransitionGroup67_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETopError68_ComputeFunction = function () {
+  return [];
+};
+
+const FluxContainer_r_69_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage70_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage71_ComputeFunction = function () {
+  return [];
+};
+
+const Link72_ComputeFunction = function () {
+  return [{}, function (): void {}];
+};
+
+const AbstractButton73_ComputeFunction = function () {
+  return [];
+};
+
+const XUIButton74_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractPopoverButton75_ComputeFunction = function () {
+  return [];
+};
+
+const ReactXUIPopoverButton76_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage77_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage78_ComputeFunction = function () {
+  return [];
+};
+
+const Link79_ComputeFunction = function () {
+  return [{}, function (): void {}];
+};
+
+const AbstractButton80_ComputeFunction = function () {
+  return [];
+};
+
+const XUIButton81_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractPopoverButton82_ComputeFunction = function () {
+  return [];
+};
+
+const ReactXUIPopoverButton83_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEFiltersPopover84_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage85_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton86_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUIAbstractGlyphButton87_ComputeFunction = function () {
+  return [];
+};
+
+const XUICloseButton88_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage89_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage90_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPopoverLink91_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}];
+};
+
+const AdsHelpLink92_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton93_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUIButton94_ComputeFunction = function () {
+  return [];
+};
+
+const BUIFilterTokenInput95_ComputeFunction = function () {
+  return [];
+};
+
+const BUIFilterToken96_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const ReactImage97_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton98_ComputeFunction = function () {
+  return [function (): void {}, {}];
+};
+
+const XUIButton99_ComputeFunction = function () {
+  return [];
+};
+
+const BUIFilterTokenCreateButton100_ComputeFunction = function () {
+  return [];
+};
+
+const BUIFilterTokenizer101_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAmbientNUXMegaphone102_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEFilters103_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEFilterContainer104_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPECampaignTimeLimitNotice105_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPECampaignTimeLimitNoticeContainer106_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETablePager107_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupTablePagerContainer108_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETablePagerContainer109_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage110_ComputeFunction = function () {
+  return [];
+};
+
+const Link111_ComputeFunction = function () {
+  return [{}, {}, function (): void {}];
+};
+
+const AbstractButton112_ComputeFunction = function () {
+  return [];
+};
+
+const XUIButton113_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractPopoverButton114_ComputeFunction = function () {
+  return [];
+};
+
+const ReactXUIPopoverButton115_ComputeFunction = function () {
+  return [];
+};
+
+const XUISingleSelectorButton116_ComputeFunction = function () {
+  return [];
+};
+
+const InlineBlock117_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUISingleSelector118_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage119_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton120_ComputeFunction = function () {
+  return [{}, function (): void {}];
+};
+
+const XUIButton121_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEStatRange122_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEStatRangeContainer123_ComputeFunction = function () {
+  return [];
+};
+
+const Column124_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage125_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton126_ComputeFunction = function () {
+  return [function (): void {}, {}];
+};
+
+const XUIButton127_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage128_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton129_ComputeFunction = function () {
+  return [{}];
+};
+
+const XUIButton130_ComputeFunction = function () {
+  return [];
+};
+
+const InlineBlock131_ComputeFunction = function () {
+  return [{}, {}];
+};
+
+const ReactPopoverMenu132_ComputeFunction = function () {
+  return [];
+};
+
+const XUIButtonGroup133_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage134_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton135_ComputeFunction = function () {
+  return [{}, function (): void {}];
+};
+
+const XUIButton136_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage137_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton138_ComputeFunction = function () {
+  return [{}, function (): void {}];
+};
+
+const XUIButton139_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage140_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton141_ComputeFunction = function () {
+  return [{}, function (): void {}];
+};
+
+const XUIButton142_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage143_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton144_ComputeFunction = function () {
+  return [{}, function (): void {}];
+};
+
+const XUIButton145_ComputeFunction = function () {
+  return [];
+};
+
+const XUIButtonGroup146_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage147_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton148_ComputeFunction = function () {
+  return [{}, function (): void {}];
+};
+
+const XUIButton149_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage150_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton151_ComputeFunction = function () {
+  return [function (): void {}, {}];
+};
+
+const XUIButton152_ComputeFunction = function () {
+  return [];
+};
+
+const InlineBlock153_ComputeFunction = function () {
+  return [{}];
+};
+
+const ReactPopoverMenu154_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEExportImportMenu155_ComputeFunction = function () {
+  return [];
+};
+
+const FluxContainer_x_156_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEExportAsTextDialog157_ComputeFunction = function () {
+  return [];
+};
+
+const FluxContainer_q_158_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEExportImportMenuContainer159_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage160_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton161_ComputeFunction = function () {
+  return [function (): void {}, {}];
+};
+
+const XUIButton162_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton163_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUIButton164_ComputeFunction = function () {
+  return [];
+};
+
+const XUIButtonGroup165_ComputeFunction = function () {
+  return [];
+};
+
+const FillColumn166_ComputeFunction = function () {
+  return [];
+};
+
+const Layout167_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEMainPaneToolbar168_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupToolbarContainer169_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton170_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUIButton171_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton172_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUIButton173_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton174_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUIButton175_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPESimpleOrganizer176_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEOrganizerContainer177_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableColumnResizeHandle178_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage179_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETableHeader180_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell181_ComputeFunction = function () {
+  return [{}, {}];
+};
+
+const FixedDataTableCell182_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellGroupImpl183_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellGroup184_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETableHeader185_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell186_ComputeFunction = function () {
+  return [{}, {}];
+};
+
+const FixedDataTableCell187_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETableHeader188_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell189_ComputeFunction = function () {
+  return [{}, {}];
+};
+
+const FixedDataTableCell190_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETableHeader191_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell192_ComputeFunction = function () {
+  return [{}, {}];
+};
+
+const FixedDataTableCell193_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETableHeader194_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell195_ComputeFunction = function () {
+  return [{}, {}];
+};
+
+const FixedDataTableCell196_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETableHeader197_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell198_ComputeFunction = function () {
+  return [{}, {}];
+};
+
+const FixedDataTableCell199_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETableHeader200_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell201_ComputeFunction = function () {
+  return [{}, {}];
+};
+
+const FixedDataTableCell202_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellGroupImpl203_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellGroup204_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableRowImpl205_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableRow206_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractCheckboxInput207_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUICheckboxInput208_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell209_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell210_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETableHeader211_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader212_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader213_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell214_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell215_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const ReactImage216_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETableHeader217_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader218_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader219_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell220_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell221_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage222_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETableHeader223_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader224_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader225_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell226_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell227_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETableHeader228_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader229_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader230_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell231_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell232_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETableHeader233_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader234_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader235_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell236_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell237_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableCellGroupImpl238_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellGroup239_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPETableHeader240_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader241_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader242_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell243_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell244_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader245_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader246_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader247_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell248_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell249_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader250_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader251_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader252_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell253_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell254_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader255_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader256_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader257_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell258_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell259_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader260_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell261_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell262_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader263_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell264_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell265_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader266_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader267_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader268_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell269_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell270_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader271_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader272_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader273_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell274_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell275_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader276_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader277_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader278_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell279_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell280_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader281_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader282_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader283_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell284_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell285_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader286_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader287_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader288_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell289_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell290_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader291_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader292_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader293_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell294_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell295_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader296_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader297_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader298_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell299_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell300_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader301_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader302_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader303_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell304_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell305_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader306_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader307_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader308_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell309_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell310_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader311_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader312_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader313_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell314_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell315_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader316_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader317_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader318_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell319_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell320_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader321_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader322_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader323_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell324_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell325_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader326_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader327_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader328_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell329_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell330_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader331_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader332_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader333_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell334_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell335_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader336_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader337_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader338_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell339_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell340_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader341_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader342_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader343_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell344_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell345_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader346_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableAbstractSortableHeader347_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableSortableHeader348_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell349_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell350_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader351_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell352_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell353_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPETableHeader354_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell355_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell356_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellGroupImpl357_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellGroup358_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableRowImpl359_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableRow360_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractCheckboxInput361_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUICheckboxInput362_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell363_ComputeFunction = function () {
+  return [{}, function (): void {}];
+};
+
+const FixedDataTableCell364_ComputeFunction = function () {
+  return [];
+};
+
+const AdsEditableTextCellDisplay365_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}, function (): void {}];
+};
+
+const AdsEditableCell366_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell367_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell368_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellDefault369_ComputeFunction = function () {
+  return [{}];
+};
+
+const TransitionCell370_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCell371_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellDefault372_ComputeFunction = function () {
+  return [{}];
+};
+
+const TransitionCell373_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCell374_ComputeFunction = function () {
+  return [];
+};
+
+const BUISwitch375_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}, function (): void {}, function (): void {}];
+};
+
+const AdsStatusSwitchInternal376_ComputeFunction = function () {
+  return [];
+};
+
+const AdsStatusSwitch377_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell378_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell379_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage380_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEActivityStatusIndicator381_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell382_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell383_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellGroupImpl384_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellGroup385_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell386_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell387_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell388_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell389_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell390_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell391_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell392_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell393_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell394_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell395_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell396_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell397_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell398_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell399_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell400_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell401_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell402_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell403_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellDefault404_ComputeFunction = function () {
+  return [{}];
+};
+
+const TransitionCell405_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCell406_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellDefault407_ComputeFunction = function () {
+  return [{}];
+};
+
+const TransitionCell408_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCell409_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell410_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell411_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell412_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell413_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell414_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell415_ComputeFunction = function () {
+  return [];
+};
+
+const ReactDate416_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell417_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell418_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell419_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell420_ComputeFunction = function () {
+  return [];
+};
+
+const ReactDate421_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell422_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell423_ComputeFunction = function () {
+  return [];
+};
+
+const ReactDate424_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell425_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell426_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell427_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell428_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell429_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell430_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell431_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell432_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell433_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell434_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellDefault435_ComputeFunction = function () {
+  return [{}];
+};
+
+const TransitionCell436_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCell437_ComputeFunction = function () {
+  return [];
+};
+
+const Link438_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const ReactImage439_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPopoverLink440_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}];
+};
+
+const AdsHelpLink441_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell442_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell443_ComputeFunction = function () {
+  return [];
+};
+
+const TransitionCell444_ComputeFunction = function () {
+  return [{}];
+};
+
+const FixedDataTableCell445_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellGroupImpl446_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableCellGroup447_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableRowImpl448_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const FixedDataTableRow449_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTableBufferedRows450_ComputeFunction = function () {
+  return [];
+};
+
+const Scrollbar451_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}, function (): void {}, function (): void {}, function (): void {}];
+};
+
+const HorizontalScrollbar452_ComputeFunction = function () {
+  return [];
+};
+
+const FixedDataTable453_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const TransitionTable454_ComputeFunction = function () {
+  return [];
+};
+
+const AdsSelectableFixedDataTable455_ComputeFunction = function () {
+  return [];
+};
+
+const AdsDataTableKeyboardSupportDecorator456_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsEditableDataTableDecorator457_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPEDataTableContainer458_ComputeFunction = function () {
+  return [];
+};
+
+const ResponsiveBlock459_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPEAdTableContainer460_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEManageAdsPaneContainer461_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEContentContainer462_ComputeFunction = function () {
+  return [];
+};
+
+const FluxContainer_r_463_ComputeFunction = function () {
+  return [];
+};
+
+const FluxContainer_q_464_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEUploadDialog465_ComputeFunction = function () {
+  return [];
+};
+
+const FluxContainer_y_466_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage467_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPESideTrayTabButton468_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPEEditorTrayTabButton469_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage470_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPESideTrayTabButton471_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPEInsightsTrayTabButton472_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPESideTrayTabButton473_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPENekoDebuggerTrayTabButton474_ComputeFunction = function () {
+  return [];
+};
+
+const FBDragHandle475_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}, function (): void {}, function (): void {}, function (): void {}, function (): void {}];
+};
+
+const XUIText476_ComputeFunction = function () {
+  return [];
+};
+
+const XUIText477_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEEditorChildLink478_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEEditorChildLinkContainer479_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEHeaderSection480_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupHeaderSectionContainer481_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupDisapprovalMessage482_ComputeFunction = function () {
+  return [];
+};
+
+const FluxContainer_r_483_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupAutoNamingConfirmationContainer484_ComputeFunction = function () {
+  return [];
+};
+
+const AdsLabeledField485_ComputeFunction = function () {
+  return [];
+};
+
+const ReactXUIError486_ComputeFunction = function () {
+  return [];
+};
+
+const AdsTextInput487_ComputeFunction = function () {
+  return [];
+};
+
+const Link488_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}];
+};
+
+const AdsAutoNamingTemplateDialog489_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAmbientNUXMegaphone490_ComputeFunction = function () {
+  return [];
+};
+
+const AdsLabeledField491_ComputeFunction = function () {
+  return [];
+};
+
+const BUISwitch492_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}, function (): void {}, function (): void {}];
+};
+
+const AdsStatusSwitchInternal493_ComputeFunction = function () {
+  return [];
+};
+
+const AdsStatusSwitch494_ComputeFunction = function () {
+  return [];
+};
+
+const LeftRight495_ComputeFunction = function () {
+  return [];
+};
+
+const XUICard496_ComputeFunction = function () {
+  return [];
+};
+
+const ReactXUIError497_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCard498_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPENameSection499_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupNameSectionContainer500_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardHeaderTitle501_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardSection502_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardHeader503_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCardHeader504_ComputeFunction = function () {
+  return [];
+};
+
+const XUIText505_ComputeFunction = function () {
+  return [];
+};
+
+const Link506_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const Link507_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const Link508_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const Link509_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const List510_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardSection511_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCardSection512_ComputeFunction = function () {
+  return [];
+};
+
+const XUICard513_ComputeFunction = function () {
+  return [];
+};
+
+const ReactXUIError514_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCard515_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPELinkList516_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupLinksSection517_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupLinksSectionContainer518_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardHeaderTitle519_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardSection520_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardHeader521_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCardHeader522_ComputeFunction = function () {
+  return [];
+};
+
+const PillButton523_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const List524_ComputeFunction = function () {
+  return [];
+};
+
+const PillList525_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardSection526_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCardSection527_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEPreviewPillList528_ComputeFunction = function () {
+  return [];
+};
+
+const XUISpinner529_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage530_ComputeFunction = function () {
+  return [];
+};
+
+const XUINotice531_ComputeFunction = function () {
+  return [];
+};
+
+const AdPreview532_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardSection533_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCardSection534_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEPreview535_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEStandardPreview536_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEStandardPreviewContainer537_ComputeFunction = function () {
+  return [];
+};
+
+const XUICard538_ComputeFunction = function () {
+  return [];
+};
+
+const ReactXUIError539_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCard540_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupPreviewSection541_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupPreviewSectionContainer542_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEStickyArea543_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardHeaderTitle544_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardSection545_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardHeader546_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCardHeader547_ComputeFunction = function () {
+  return [];
+};
+
+const Link548_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const AdsPEWebsiteNoPageDestinationSection549_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEWebsiteNoPageDestinationSectionContainer550_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardSection551_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCardSection552_ComputeFunction = function () {
+  return [];
+};
+
+const XUICard553_ComputeFunction = function () {
+  return [];
+};
+
+const ReactXUIError554_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCard555_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupDestinationSection556_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupDestinationSectionContainer557_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardHeaderTitle558_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardSection559_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardHeader560_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCardHeader561_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage562_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPopoverLink563_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}];
+};
+
+const AdsHelpLink564_ComputeFunction = function () {
+  return [];
+};
+
+const AdsLabeledField565_ComputeFunction = function () {
+  return [];
+};
+
+const ReactXUIError566_ComputeFunction = function () {
+  return [];
+};
+
+const AdsTextInput567_ComputeFunction = function () {
+  return [];
+};
+
+const AdsBulkTextInput568_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEWebsiteURLField569_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage570_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPopoverLink571_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}];
+};
+
+const AdsHelpLink572_ComputeFunction = function () {
+  return [];
+};
+
+const AdsLabeledField573_ComputeFunction = function () {
+  return [];
+};
+
+const ReactXUIError574_ComputeFunction = function () {
+  return [];
+};
+
+const AdsTextInput575_ComputeFunction = function () {
+  return [];
+};
+
+const AdsBulkTextInput576_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEHeadlineField577_ComputeFunction = function () {
+  return [];
+};
+
+const AdsLabeledField578_ComputeFunction = function () {
+  return [];
+};
+
+const ReactXUIError579_ComputeFunction = function () {
+  return [];
+};
+
+const AdsTextInput580_ComputeFunction = function () {
+  return [];
+};
+
+const AdsBulkTextInput581_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEMessageField582_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton583_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUIButton584_ComputeFunction = function () {
+  return [];
+};
+
+const BackgroundImage585_ComputeFunction = function () {
+  return [];
+};
+
+const XUIText586_ComputeFunction = function () {
+  return [];
+};
+
+const XUIGrayText587_ComputeFunction = function () {
+  return [];
+};
+
+const XUIText588_ComputeFunction = function () {
+  return [];
+};
+
+const CenteredContainer589_ComputeFunction = function () {
+  return [];
+};
+
+const Link590_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUIText591_ComputeFunction = function () {
+  return [];
+};
+
+const AdsImageInput592_ComputeFunction = function () {
+  return [];
+};
+
+const AdsBulkImageInput593_ComputeFunction = function () {
+  return [];
+};
+
+const AdsLabeledField594_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEImageSelector595_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEImageSelectorContainer596_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEWebsiteNoPageCreative597_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEWebsiteNoPageCreativeContainer598_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardSection599_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCardSection600_ComputeFunction = function () {
+  return [];
+};
+
+const XUICard601_ComputeFunction = function () {
+  return [];
+};
+
+const ReactXUIError602_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCard603_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupCreativeSection604_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupCreativeSectionContainer605_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPELeadGenFormSection606_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPELeadGenFormContainer607_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardHeaderTitle608_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardSection609_ComputeFunction = function () {
+  return [];
+};
+
+const XUICardHeader610_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCardHeader611_ComputeFunction = function () {
+  return [];
+};
+
+const XUIText612_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage613_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPopoverLink614_ComputeFunction = function () {
+  return [function (): void {}, function (): void {}];
+};
+
+const AdsHelpLink615_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCFHelpLink616_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPixelTrackingLabel617_ComputeFunction = function () {
+  return [];
+};
+
+const ReactImage618_ComputeFunction = function () {
+  return [];
+};
+
+const XUIText619_ComputeFunction = function () {
+  return [];
+};
+
+const XUIGrayText620_ComputeFunction = function () {
+  return [];
+};
+
+const XUIText621_ComputeFunction = function () {
+  return [];
+};
+
+const Link622_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUIText623_ComputeFunction = function () {
+  return [];
+};
+
+const XUIGrayText624_ComputeFunction = function () {
+  return [];
+};
+
+const AbstractButton625_ComputeFunction = function () {
+  return [function (): void {}];
+};
+
+const XUIButton626_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPixelCreateButton627_ComputeFunction = function () {
+  return [];
+};
+
+const LeftRight628_ComputeFunction = function () {
+  return [];
+};
+
+const ImageBlock629_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPixelCreationCard630_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPixelTrackingSelector631_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPixelTracking632_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEPixelTracking633_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEPixelTrackingContainer634_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupAppTrackingSelectorContainer635_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEStandardTrackingSection636_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEStandardTrackingContainer637_ComputeFunction = function () {
+  return [];
+};
 
-  if (x === 198) {
-    return [26];
-  }
+const XUICardSection638_ComputeFunction = function () {
+  return [];
+};
 
-  if (x === 237) {
-    return [27];
-  }
-
-  if (x === 266) {
-    return [28];
-  }
-
-  if (x === 314) {
-    return [29];
-  }
-
-  if (x === 345) {
-    return [30];
-  }
-
-  if (x === 351) {
-    return [31];
-  }
-}
-
-;
-
-function AbstractLink1_ComputeFunction(x) {
-  if (x === 1) {
-    var __cached__0;
-
-    __cached__0 = function (): void {};
-
-    return [0, __cached__0];
-  }
-
-  if (x === 43) {
-    var __cached__1;
-
-    __cached__1 = function (): void {};
-
-    return [1, __cached__1];
-  }
-
-  if (x === 49) {
-    var __cached__2;
-
-    __cached__2 = function (): void {};
-
-    return [2, __cached__2];
-  }
-
-  if (x === 128) {
-    var __cached__3;
-
-    __cached__3 = function (): void {};
-
-    return [3, __cached__3];
-  }
-
-  if (x === 136) {
-    var __cached__4;
-
-    __cached__4 = function (): void {};
-
-    return [4, __cached__4];
-  }
-
-  if (x === 178) {
-    var __cached__5;
-
-    __cached__5 = function (): void {};
-
-    return [5, __cached__5];
-  }
-
-  if (x === 207) {
-    var __cached__6;
-
-    __cached__6 = function (): void {};
-
-    return [6, __cached__6];
-  }
-
-  if (x === 209) {
-    var __cached__7;
-
-    __cached__7 = function (): void {};
-
-    return [7, __cached__7];
-  }
-
-  if (x === 241) {
-    var __cached__8;
-
-    __cached__8 = function (): void {};
-
-    return [8, __cached__8];
-  }
-
-  if (x === 267) {
-    var __cached__9;
-
-    __cached__9 = function (): void {};
-
-    return [9, __cached__9];
-  }
-}
-
-;
-
-function Link2_ComputeFunction(x) {
-  if (x === 2) {
-    return [0];
-  }
-
-  if (x === 44) {
-    return [1];
-  }
-
-  if (x === 50) {
-    return [2];
-  }
-
-  if (x === 129) {
-    return [3];
-  }
-
-  if (x === 137) {
-    return [4];
-  }
-
-  if (x === 179) {
-    return [5];
-  }
-
-  if (x === 208) {
-    return [6];
-  }
-
-  if (x === 210) {
-    return [7];
-  }
-
-  if (x === 242) {
-    return [8];
-  }
-
-  if (x === 268) {
-    return [9];
-  }
-}
-
-;
-
-function AbstractButton3_ComputeFunction(x) {
-  if (x === 3) {
-    return [0];
-  }
-
-  if (x === 20) {
-    var __cached__10;
-
-    __cached__10 = function (): void {};
-
-    return [1, __cached__10];
-  }
-
-  if (x === 23) {
-    var __cached__11;
-
-    __cached__11 = function (): void {};
-
-    return [2, __cached__11];
-  }
-
-  if (x === 45) {
-    return [3];
-  }
-
-  if (x === 68) {
-    var __cached__12;
-
-    __cached__12 = function (): void {};
-
-    return [4, __cached__12];
-  }
-
-  if (x === 71) {
-    return [5];
-  }
-
-  if (x === 77) {
-    var __cached__13;
-
-    __cached__13 = function (): void {};
-
-    return [6, __cached__13];
-  }
-
-  if (x === 80) {
-    return [7];
-  }
-
-  if (x === 89) {
-    var __cached__14;
-
-    __cached__14 = function (): void {};
-
-    return [8, __cached__14];
-  }
-
-  if (x === 92) {
-    var __cached__15;
-
-    __cached__15 = function (): void {};
-
-    return [9, __cached__15];
-  }
-
-  if (x === 95) {
-    var __cached__16;
-
-    __cached__16 = function (): void {};
-
-    return [10, __cached__16];
-  }
-
-  if (x === 99) {
-    var __cached__17;
-
-    __cached__17 = function (): void {};
-
-    return [11, __cached__17];
-  }
-
-  if (x === 109) {
-    var __cached__18;
-
-    __cached__18 = function (): void {};
-
-    return [12, __cached__18];
-  }
-
-  if (x === 112) {
-    var __cached__19;
-
-    __cached__19 = function (): void {};
-
-    return [13, __cached__19];
-  }
-
-  if (x === 130) {
-    return [14];
-  }
-
-  if (x === 138) {
-    return [15];
-  }
-
-  if (x === 149) {
-    var __cached__20;
-
-    __cached__20 = function (): void {};
-
-    return [16, __cached__20];
-  }
-
-  if (x === 156) {
-    var __cached__21;
-
-    __cached__21 = function (): void {};
-
-    return [17, __cached__21];
-  }
-
-  if (x === 161) {
-    var __cached__22;
-
-    __cached__22 = function (): void {};
-
-    return [18, __cached__22];
-  }
-
-  if (x === 180) {
-    return [19];
-  }
-
-  if (x === 187) {
-    var __cached__23;
-
-    __cached__23 = function (): void {};
-
-    return [20, __cached__23];
-  }
-
-  if (x === 269) {
-    return [21];
-  }
-
-  if (x === 303) {
-    var __cached__24;
-
-    __cached__24 = function (): void {};
-
-    return [22, __cached__24];
-  }
-
-  if (x === 305) {
-    var __cached__25;
-
-    __cached__25 = function (): void {};
-
-    return [23, __cached__25];
-  }
-
-  if (x === 307) {
-    var __cached__26;
-
-    __cached__26 = function (): void {};
-
-    return [24, __cached__26];
-  }
-}
-
-;
-
-function XUIButton4_ComputeFunction(x) {
-  if (x === 4) {
-    return [0];
-  }
-
-  if (x === 21) {
-    return [1];
-  }
-
-  if (x === 24) {
-    return [2];
-  }
-
-  if (x === 69) {
-    return [3];
-  }
-
-  if (x === 72) {
-    return [4];
-  }
-
-  if (x === 78) {
-    return [5];
-  }
-
-  if (x === 81) {
-    return [6];
-  }
-
-  if (x === 90) {
-    return [7];
-  }
-
-  if (x === 93) {
-    return [8];
-  }
-
-  if (x === 96) {
-    return [9];
-  }
-
-  if (x === 100) {
-    return [10];
-  }
-
-  if (x === 110) {
-    return [11];
-  }
-
-  if (x === 113) {
-    return [12];
-  }
-
-  if (x === 131) {
-    return [13];
-  }
-
-  if (x === 139) {
-    return [14];
-  }
-
-  if (x === 157) {
-    return [15];
-  }
-
-  if (x === 162) {
-    return [16];
-  }
-
-  if (x === 188) {
-    return [17];
-  }
-
-  if (x === 270) {
-    return [18];
-  }
-
-  if (x === 304) {
-    return [19];
-  }
-
-  if (x === 306) {
-    return [20];
-  }
-
-  if (x === 308) {
-    return [21];
-  }
-}
-
-;
-
-function AbstractPopoverButton5_ComputeFunction(x) {
-  if (x === 5) {
-    return [0];
-  }
-
-  if (x === 132) {
-    return [1];
-  }
-
-  if (x === 140) {
-    return [2];
-  }
-
-  if (x === 271) {
-    return [3];
-  }
-}
-
-;
-
-function ReactXUIPopoverButton6_ComputeFunction(x) {
-  if (x === 6) {
-    return [0];
-  }
-
-  if (x === 133) {
-    return [1];
-  }
-
-  if (x === 141) {
-    return [2];
-  }
-
-  if (x === 272) {
-    return [3];
-  }
-}
-
-;
-
-function BIGAdAccountSelector7_ComputeFunction(x) {
-  if (x === 7) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPEBIGAdAccountSelectorContainer_8_ComputeFunction(x) {
-  if (x === 8) {
-    return [];
-  }
-}
-
-;
-
-function ErrorBoundary9_ComputeFunction(x) {
-  if (x === 9) {
-    return [0];
-  }
-
-  if (x === 13) {
-    return [1];
-  }
-
-  if (x === 27) {
-    return [2];
-  }
-
-  if (x === 32) {
-    return [3];
-  }
-
-  if (x === 38) {
-    return [4];
-  }
-
-  if (x === 57) {
-    return [5];
-  }
-
-  if (x === 60) {
-    return [6];
-  }
-
-  if (x === 64) {
-    return [7];
-  }
-
-  if (x === 124) {
-    return [8];
-  }
-
-  if (x === 170) {
-    return [9];
-  }
-
-  if (x === 175) {
-    return [10];
-  }
-
-  if (x === 193) {
-    return [11];
-  }
-
-  if (x === 301) {
-    return [12];
-  }
-
-  if (x === 311) {
-    return [13];
-  }
-
-  if (x === 471) {
-    return [14];
-  }
-
-  if (x === 475) {
-    return [15];
-  }
-}
-
-;
-
-function AdsErrorBoundary10_ComputeFunction(x) {
-  if (x === 10) {
-    return [0];
-  }
-
-  if (x === 14) {
-    return [1];
-  }
-
-  if (x === 28) {
-    return [2];
-  }
-
-  if (x === 33) {
-    return [3];
-  }
-
-  if (x === 39) {
-    return [4];
-  }
-
-  if (x === 58) {
-    return [5];
-  }
-
-  if (x === 61) {
-    return [6];
-  }
-
-  if (x === 65) {
-    return [7];
-  }
-
-  if (x === 125) {
-    return [8];
-  }
-
-  if (x === 171) {
-    return [9];
-  }
-
-  if (x === 176) {
-    return [10];
-  }
-
-  if (x === 194) {
-    return [11];
-  }
-
-  if (x === 302) {
-    return [12];
-  }
-
-  if (x === 312) {
-    return [13];
-  }
-
-  if (x === 472) {
-    return [14];
-  }
-
-  if (x === 476) {
-    return [15];
-  }
-}
-
-;
-
-function AdsPENavigationBar11_ComputeFunction(x) {
-  if (x === 11) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPENavigationBarContainer_12_ComputeFunction(x) {
-  if (x === 12) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEDraftSyncStatus13_ComputeFunction(x) {
-  if (x === 16) {
-    var __cached__27;
-
-    __cached__27 = function (): void {};
-
-    return [__cached__27];
-  }
-}
-
-;
-
-function FluxContainer_AdsPEDraftSyncStatusContainer_14_ComputeFunction(x) {
-  if (x === 17) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEDraftErrorsStatus15_ComputeFunction(x) {
-  if (x === 18) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_viewFn_16_ComputeFunction(x) {
-  if (x === 19) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEPublishButton17_ComputeFunction(x) {
-  if (x === 25) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPEPublishButtonContainer_18_ComputeFunction(x) {
-  if (x === 26) {
-    return [];
-  }
-}
-
-;
-
-function InlineBlock19_ComputeFunction(x) {
-  if (x === 30) {
-    return [0];
-  }
-
-  if (x === 73) {
-    return [1];
-  }
-
-  if (x === 82) {
-    return [2];
-  }
-
-  if (x === 101) {
-    return [3];
-  }
-
-  if (x === 273) {
-    return [4];
-  }
-}
-
-;
-
-function ReactPopoverMenu20_ComputeFunction(x) {
-  if (x === 31) {
-    return [0];
-  }
-
-  if (x === 74) {
-    return [1];
-  }
-
-  if (x === 83) {
-    return [2];
-  }
-
-  if (x === 102) {
-    return [3];
-  }
-
-  if (x === 274) {
-    return [4];
-  }
-}
-
-;
-
-function LeftRight21_ComputeFunction(x) {
-  if (x === 34) {
-    return [0];
-  }
-
-  if (x === 232) {
-    return [1];
-  }
-
-  if (x === 235) {
-    return [2];
-  }
-
-  if (x === 245) {
-    return [3];
-  }
-
-  if (x === 277) {
-    return [4];
-  }
-}
-
-;
-
-function AdsUnifiedNavigationLocalNav22_ComputeFunction(x) {
-  if (x === 35) {
-    return [];
-  }
-}
-
-;
-
-function XUIDialog23_ComputeFunction(x) {
-  if (x === 36) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEResetDialog24_ComputeFunction(x) {
-  if (x === 37) {
-    return [];
-  }
-}
-
-;
-
-function AdsPETopNav25_ComputeFunction(x) {
-  if (x === 40) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPETopNavContainer_26_ComputeFunction(x) {
-  if (x === 41) {
-    return [];
-  }
-}
-
-;
-
-function XUIAbstractGlyphButton27_ComputeFunction(x) {
-  if (x === 46) {
-    return [0];
-  }
-
-  if (x === 150) {
-    return [1];
-  }
-}
-
-;
-
-function XUICloseButton28_ComputeFunction(x) {
-  if (x === 47) {
-    return [0];
-  }
-
-  if (x === 151) {
-    return [1];
-  }
-}
-
-;
-
-function XUIText29_ComputeFunction(x) {
-  if (x === 48) {
-    return [0];
-  }
-
-  if (x === 205) {
-    return [1];
-  }
-
-  if (x === 206) {
-    return [2];
-  }
-}
-
-;
-
-function XUINotice30_ComputeFunction(x) {
-  if (x === 51) {
-    return [];
-  }
-}
-
-;
-
-function ReactCSSTransitionGroupChild31_ComputeFunction(x) {
-  if (x === 52) {
-    return [];
-  }
-}
-
-;
-
-function ReactTransitionGroup32_ComputeFunction(x) {
-  if (x === 53) {
-    return [];
-  }
-}
-
-;
-
-function ReactCSSTransitionGroup33_ComputeFunction(x) {
-  if (x === 54) {
-    return [];
-  }
-}
-
-;
-
-function AdsPETopError34_ComputeFunction(x) {
-  if (x === 55) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPETopErrorContainer_35_ComputeFunction(x) {
-  if (x === 56) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsGuidanceChannel_36_ComputeFunction(x) {
-  if (x === 59) {
-    return [];
-  }
-}
-
-;
-
-function ResponsiveBlock37_ComputeFunction(x) {
-  if (x === 62) {
-    return [0];
-  }
-
-  if (x === 469) {
-    return [1];
-  }
-}
-
-;
-
-function FluxContainer_AdsBulkEditDialogContainer_38_ComputeFunction(x) {
-  if (x === 63) {
-    return [];
-  }
-}
-
-;
-
-function Column39_ComputeFunction(x) {
-  if (x === 66) {
-    return [];
-  }
-}
-
-;
-
-function XUIButtonGroup40_ComputeFunction(x) {
-  if (x === 75) {
-    return [0];
-  }
-
-  if (x === 84) {
-    return [1];
-  }
-
-  if (x === 97) {
-    return [2];
-  }
-
-  if (x === 117) {
-    return [3];
-  }
-}
-
-;
-
-function AdsPEEditToolbarButton41_ComputeFunction(x) {
-  if (x === 85) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPEEditCampaignGroupToolbarButtonContainer_42_ComputeFunction(x) {
-  if (x === 86) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPEEditToolbarButtonContainer_43_ComputeFunction(x) {
-  if (x === 87) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEExportImportMenu44_ComputeFunction(x) {
-  if (x === 103) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPECustomizeExportContainer_45_ComputeFunction(x) {
-  if (x === 104) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEExportAsTextDialog46_ComputeFunction(x) {
-  if (x === 105) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPEExportAsTextDialogContainer_47_ComputeFunction(x) {
-  if (x === 106) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEExportImportMenuContainer48_ComputeFunction(x) {
-  if (x === 107) {
-    return [];
-  }
-}
-
-;
-;
-
-function TagSelectorPopover50_ComputeFunction(x) {
-  if (x === 115) {
-    return [];
-  }
-}
-
-;
-
-function AdsPECampaignGroupTagContainer51_ComputeFunction(x) {
-  if (x === 116) {
-    return [];
-  }
-}
-
-;
-
-function AdsRuleToolbarMenu52_ComputeFunction(x) {
-  if (x === 118) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPERuleToolbarMenuContainer_53_ComputeFunction(x) {
-  if (x === 119) {
-    return [];
-  }
-}
-
-;
-
-function FillColumn54_ComputeFunction(x) {
-  if (x === 120) {
-    return [];
-  }
-}
-
-;
-
-function Layout55_ComputeFunction(x) {
-  if (x === 121) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEMainPaneToolbar56_ComputeFunction(x) {
-  if (x === 122) {
-    return [];
-  }
-}
-
-;
-
-function AdsPECampaignGroupToolbarContainer57_ComputeFunction(x) {
-  if (x === 123) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEFiltersPopover58_ComputeFunction(x) {
-  if (x === 144) {
-    return [];
-  }
-}
-
-;
-
-function AbstractCheckboxInput59_ComputeFunction(x) {
-  if (x === 145) {
-    var __cached__28;
-
-    __cached__28 = function (): void {};
-
-    return [0, __cached__28];
-  }
-
-  if (x === 336) {
-    var __cached__29;
-
-    __cached__29 = function (): void {};
-
-    return [1, __cached__29];
-  }
-}
-
-;
-
-function XUICheckboxInput60_ComputeFunction(x) {
-  if (x === 146) {
-    return [0];
-  }
-
-  if (x === 337) {
-    return [1];
-  }
-}
-
-;
-
-function InputLabel61_ComputeFunction(x) {
-  if (x === 147) {
-    return [];
-  }
-}
-
-;
-
-function AdsPopoverLink62_ComputeFunction(x) {
-  if (x === 154) {
-    var __cached__32;
-
-    var __cached__31;
-
-    __cached__32 = function (): void {};
-
-    __cached__31 = function (): void {};
-
-    return [0, __cached__31, __cached__32];
-  }
-
-  if (x === 238) {
-    var __cached__34;
-
-    var __cached__33;
-
-    __cached__34 = function (): void {};
-
-    __cached__33 = function (): void {};
-
-    return [1, __cached__33, __cached__34];
-  }
-}
-
-;
-
-function AdsHelpLink63_ComputeFunction(x) {
-  if (x === 155) {
-    return [0];
-  }
-
-  if (x === 239) {
-    return [1];
-  }
-}
-
-;
-
-function BUIFilterTokenInput64_ComputeFunction(x) {
-  if (x === 158) {
-    return [];
-  }
-}
-
-;
-
-function BUIFilterToken65_ComputeFunction(x) {
-  if (x === 159) {
-    var __cached__30;
-
-    __cached__30 = function (): void {};
-
-    return [__cached__30];
-  }
-}
-
-;
-
-function BUIFilterTokenCreateButton66_ComputeFunction(x) {
-  if (x === 163) {
-    return [];
-  }
-}
-
-;
-
-function BUIFilterTokenizer67_ComputeFunction(x) {
-  if (x === 164) {
-    return [];
-  }
-}
-
-;
-;
-
-function XUIAmbientNUX69_ComputeFunction(x) {
-  if (x === 166) {
-    return [0];
-  }
-
-  if (x === 190) {
-    return [1];
-  }
-
-  if (x === 201) {
-    return [2];
-  }
-}
-
-;
-
-function AdsPEAmbientNUXMegaphone70_ComputeFunction(x) {
-  if (x === 167) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEFilters71_ComputeFunction(x) {
-  if (x === 168) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEFilterContainer72_ComputeFunction(x) {
-  if (x === 169) {
-    return [];
-  }
-}
-
-;
-
-function AdsPETablePager73_ComputeFunction(x) {
-  if (x === 172) {
-    return [];
-  }
-}
-
-;
-
-function AdsPECampaignGroupTablePagerContainer74_ComputeFunction(x) {
-  if (x === 173) {
-    return [];
-  }
-}
-
-;
-
-function AdsPETablePagerContainer75_ComputeFunction(x) {
-  if (x === 174) {
-    return [];
-  }
-}
-
-;
-
-function ReactXUIError76_ComputeFunction(x) {
-  if (x === 181) {
-    return [0];
-  }
-
-  if (x === 216) {
-    var __cached__38;
-
-    var __cached__37;
-
-    var __cached__36;
-
-    var __cached__35;
-
-    __cached__38 = function (): void {};
-
-    __cached__37 = function (): void {};
-
-    __cached__36 = function (): void {};
-
-    __cached__35 = function (): void {};
-
-    return [1, __cached__35, __cached__36, __cached__37, __cached__38];
-  }
-
-  if (x === 221) {
-    return [2];
-  }
-
-  if (x === 250) {
-    return [3];
-  }
-
-  if (x === 280) {
-    return [4];
-  }
-}
-
-;
-
-function BUIPopoverButton77_ComputeFunction(x) {
-  if (x === 182) {
-    return [];
-  }
-}
-
-;
-
-function BUIDateRangePicker78_ComputeFunction(x) {
-  if (x === 184) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEStatsRangePicker79_ComputeFunction(x) {
-  if (x === 185) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEStatRange80_ComputeFunction(x) {
-  if (x === 191) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEStatRangeContainer81_ComputeFunction(x) {
-  if (x === 192) {
-    return [];
-  }
-}
-
-;
-
-function AdsPESideTrayTabButton82_ComputeFunction(x) {
-  if (x === 196) {
-    var __cached__43;
-
-    __cached__43 = function (): void {};
-
-    return [0, __cached__43];
-  }
-
-  if (x === 199) {
-    var __cached__44;
-
-    __cached__44 = function (): void {};
-
-    return [1, __cached__44];
-  }
-
-  if (x === 203) {
-    return null;
-  }
-}
-
-;
-
-function AdsPEEditorTrayTabButton83_ComputeFunction(x) {
-  if (x === 197) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEInsightsTrayTabButton84_ComputeFunction(x) {
-  if (x === 202) {
-    return [];
-  }
-}
-
-;
-
-function AdsPENekoDebuggerTrayTabButton85_ComputeFunction(x) {
-  if (x === 204) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEEditorChildLink86_ComputeFunction(x) {
-  if (x === 211) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEEditorChildLinkContainer87_ComputeFunction(x) {
-  if (x === 212) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEHeaderSection88_ComputeFunction(x) {
-  if (x === 213) {
-    return [];
-  }
-}
-
-;
-
-function AdsPECampaignGroupHeaderSectionContainer89_ComputeFunction(x) {
-  if (x === 214) {
-    return [];
-  }
-}
-
-;
-
-function AdsEditorLoadingErrors90_ComputeFunction(x) {
-  if (x === 215) {
-    return [];
-  }
-}
-
-;
-
-function AdsTextInput91_ComputeFunction(x) {
-  if (x === 217) {
-    return [];
-  }
-}
-
-;
-
-function BUIFormElement92_ComputeFunction(x) {
-  if (x === 218) {
-    return [];
-  }
-}
-
-;
-
-function BUIForm93_ComputeFunction(x) {
-  if (x === 219) {
-    return [];
-  }
-}
-
-;
-
-function XUICard94_ComputeFunction(x) {
-  if (x === 220) {
-    return [0];
-  }
-
-  if (x === 249) {
-    return [1];
-  }
-
-  if (x === 279) {
-    return [2];
-  }
-}
-
-;
-
-function AdsCard95_ComputeFunction(x) {
-  if (x === 222) {
-    return [0];
-  }
-
-  if (x === 251) {
-    return [1];
-  }
-
-  if (x === 281) {
-    return [2];
-  }
-}
-
-;
-
-function AdsEditorNameSection96_ComputeFunction(x) {
-  if (x === 223) {
-    return [];
-  }
-}
-
-;
-
-function AdsCampaignGroupNameSectionContainer97_ComputeFunction(x) {
-  if (x === 224) {
-    return [];
-  }
-}
-
-;
-
-function _render98_ComputeFunction(x) {
-  if (x === 225) {
-    return [];
-  }
-}
-
-;
-
-function AdsPluginWrapper99_ComputeFunction(x) {
-  if (x === 226) {
-    return [0];
-  }
-
-  if (x === 255) {
-    return [1];
-  }
-
-  if (x === 258) {
-    return [2];
-  }
-
-  if (x === 287) {
-    return [3];
-  }
-
-  if (x === 291) {
-    return [4];
-  }
-}
-
-;
-
-function XUICardHeaderTitle100_ComputeFunction(x) {
-  if (x === 227) {
-    return [0];
-  }
-
-  if (x === 265) {
-    return [1];
-  }
-}
-
-;
-
-function XUICardSection101_ComputeFunction(x) {
-  if (x === 228) {
-    return [0];
-  }
-
-  if (x === 247) {
-    return [1];
-  }
-}
-
-;
-
-function XUICardHeader102_ComputeFunction(x) {
-  if (x === 229) {
-    return [];
-  }
-}
-
-;
-
-function AdsCardHeader103_ComputeFunction(x) {
-  if (x === 230) {
-    return [];
-  }
-}
-
-;
-
-function AdsLabeledField104_ComputeFunction(x) {
-  if (x === 231) {
-    return [0];
-  }
-
-  if (x === 234) {
-    return [1];
-  }
-
-  if (x === 240) {
-    return [2];
-  }
-}
-
-;
-
-function FlexibleBlock105_ComputeFunction(x) {
-  if (x === 233) {
-    return [0];
-  }
-
-  if (x === 236) {
-    return [1];
-  }
-
-  if (x === 246) {
-    return [2];
-  }
-}
-
-;
-
-function AdsBulkCampaignSpendCapField106_ComputeFunction(x) {
-  if (x === 243) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsCampaignGroupSpendCapContainer_107_ComputeFunction(x) {
-  if (x === 244) {
-    return [];
-  }
-}
-
-;
-
-function AdsCardSection108_ComputeFunction(x) {
-  if (x === 248) {
-    return [];
-  }
-}
-
-;
-
-function AdsEditorCampaignGroupDetailsSection109_ComputeFunction(x) {
-  if (x === 252) {
-    return [];
-  }
-}
-
-;
-
-function AdsEditorCampaignGroupDetailsSectionContainer110_ComputeFunction(x) {
-  if (x === 253) {
-    return [];
-  }
-}
-
-;
-
-function _render111_ComputeFunction(x) {
-  if (x === 254) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsEditorToplineDetailsSectionContainer_112_ComputeFunction(x) {
-  if (x === 256) {
-    return [];
-  }
-}
-
-;
-
-function _render113_ComputeFunction(x) {
-  if (x === 257) {
-    return [];
-  }
-}
-
-;
-
-function AdsStickyArea114_ComputeFunction(x) {
-  if (x === 259) {
-    var __cached__45;
-
-    __cached__45 = function (): void {};
-
-    return [0, __cached__45];
-  }
-
-  if (x === 292) {
-    var __cached__46;
-
-    __cached__46 = function (): void {};
-
-    return [1, __cached__46];
-  }
-}
-
-;
-
-function FluxContainer_AdsEditorColumnContainer_115_ComputeFunction(x) {
-  if (x === 260) {
-    return [0];
-  }
-
-  if (x === 293) {
-    return [1];
-  }
-}
-
-;
-
-function BUISwitch116_ComputeFunction(x) {
-  if (x === 261) {
-    var __cached__42;
-
-    var __cached__41;
-
-    var __cached__40;
-
-    var __cached__39;
-
-    __cached__42 = function (): void {};
-
-    __cached__41 = function (): void {};
-
-    __cached__40 = function (): void {};
-
-    __cached__39 = function (): void {};
-
-    return [__cached__39, __cached__40, __cached__41, __cached__42];
-  }
-}
-
-;
-
-function AdsStatusSwitchInternal117_ComputeFunction(x) {
-  if (x === 262) {
-    return [];
-  }
-}
-
-;
-
-function AdsStatusSwitch118_ComputeFunction(x) {
-  if (x === 263) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsCampaignGroupStatusSwitchContainer_119_ComputeFunction(x) {
-  if (x === 264) {
-    return [];
-  }
-}
-
-;
-
-function AdsLinksMenu120_ComputeFunction(x) {
-  if (x === 275) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPluginizedLinksMenuContainer_121_ComputeFunction(x) {
-  if (x === 276) {
-    return [];
-  }
-}
-
-;
-
-function AdsCardLeftRightHeader122_ComputeFunction(x) {
-  if (x === 278) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEIDSection123_ComputeFunction(x) {
-  if (x === 282) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPECampaignGroupIDSectionContainer_124_ComputeFunction(x) {
-  if (x === 283) {
-    return [];
-  }
-}
-
-;
-
-function DeferredComponent125_ComputeFunction(x) {
-  if (x === 284) {
-    return [];
-  }
-}
-
-;
-
-function BootloadedComponent126_ComputeFunction(x) {
-  if (x === 285) {
-    return [];
-  }
-}
-
-;
-
-function _render127_ComputeFunction(x) {
-  if (x === 286) {
-    return [];
-  }
-}
-
-;
-
-function AdsEditorErrorsCard128_ComputeFunction(x) {
-  if (x === 288) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_FunctionalContainer_129_ComputeFunction(x) {
-  if (x === 289) {
-    return [];
-  }
-}
-
-;
-
-function _render130_ComputeFunction(x) {
-  if (x === 290) {
-    return [];
-  }
-}
-
-;
-
-function AdsEditorMultiColumnLayout131_ComputeFunction(x) {
-  if (x === 294) {
-    return [];
-  }
-}
-
-;
-
-function AdsPECampaignGroupEditor132_ComputeFunction(x) {
-  if (x === 295) {
-    return [];
-  }
-}
-
-;
-
-function AdsPECampaignGroupEditorContainer133_ComputeFunction(x) {
-  if (x === 296) {
-    return [];
-  }
-}
-
-;
-
-function AdsPESideTrayTabContent134_ComputeFunction(x) {
-  if (x === 297) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEEditorTrayTabContentContainer135_ComputeFunction(x) {
-  if (x === 298) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEMultiTabDrawer136_ComputeFunction(x) {
-  if (x === 299) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPEMultiTabDrawerContainer_137_ComputeFunction(x) {
-  if (x === 300) {
-    return [];
-  }
-}
-
-;
-
-function AdsPESimpleOrganizer138_ComputeFunction(x) {
-  if (x === 309) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEOrganizerContainer139_ComputeFunction(x) {
-  if (x === 310) {
-    return [];
-  }
-}
-
-;
-
-function FixedDataTableColumnResizeHandle140_ComputeFunction(x) {
-  if (x === 313) {
-    return [];
-  }
-}
-
-;
-
-function AdsPETableHeader141_ComputeFunction(x) {
-  if (x === 315) {
-    return [0];
-  }
-
-  if (x === 320) {
-    return [1];
-  }
-
-  if (x === 323) {
-    return [2];
-  }
-
-  if (x === 326) {
-    return [3];
-  }
-
-  if (x === 329) {
-    return [4];
-  }
-
-  if (x === 340) {
-    return [5];
-  }
-
-  if (x === 346) {
-    return [6];
-  }
-
-  if (x === 352) {
-    return [7];
-  }
-
-  if (x === 357) {
-    return [8];
-  }
-
-  if (x === 362) {
-    return [9];
-  }
-
-  if (x === 369) {
-    return [10];
-  }
-
-  if (x === 374) {
-    return [11];
-  }
-
-  if (x === 379) {
-    return [12];
-  }
-
-  if (x === 384) {
-    return [13];
-  }
-
-  if (x === 389) {
-    return [14];
-  }
-
-  if (x === 394) {
-    return [15];
-  }
-
-  if (x === 399) {
-    return [16];
-  }
-
-  if (x === 404) {
-    return [17];
-  }
-
-  if (x === 409) {
-    return [18];
-  }
-
-  if (x === 414) {
-    return [19];
-  }
-
-  if (x === 419) {
-    return [20];
-  }
-
-  if (x === 424) {
-    return [21];
-  }
-
-  if (x === 429) {
-    return [22];
-  }
-
-  if (x === 434) {
-    return [23];
-  }
-
-  if (x === 439) {
-    return [24];
-  }
-
-  if (x === 444) {
-    return [25];
-  }
-
-  if (x === 449) {
-    return [26];
-  }
-
-  if (x === 452) {
-    return [27];
-  }
-}
-
-;
-
-function TransitionCell142_ComputeFunction(x) {
-  if (x === 316) {
-    return [0];
-  }
-
-  if (x === 321) {
-    return [1];
-  }
-
-  if (x === 324) {
-    return [2];
-  }
-
-  if (x === 327) {
-    return [3];
-  }
-
-  if (x === 330) {
-    return [4];
-  }
-
-  if (x === 338) {
-    return [5];
-  }
-
-  if (x === 343) {
-    return [6];
-  }
-
-  if (x === 349) {
-    return [7];
-  }
-
-  if (x === 355) {
-    return [8];
-  }
-
-  if (x === 360) {
-    return [9];
-  }
-
-  if (x === 365) {
-    return [10];
-  }
-
-  if (x === 372) {
-    return [11];
-  }
-
-  if (x === 377) {
-    return [12];
-  }
-
-  if (x === 382) {
-    return [13];
-  }
-
-  if (x === 387) {
-    return [14];
-  }
-
-  if (x === 392) {
-    return [15];
-  }
-
-  if (x === 397) {
-    return [16];
-  }
-
-  if (x === 402) {
-    return [17];
-  }
-
-  if (x === 407) {
-    return [18];
-  }
-
-  if (x === 412) {
-    return [19];
-  }
-
-  if (x === 417) {
-    return [20];
-  }
-
-  if (x === 422) {
-    return [21];
-  }
-
-  if (x === 427) {
-    return [22];
-  }
-
-  if (x === 432) {
-    return [23];
-  }
-
-  if (x === 437) {
-    return [24];
-  }
-
-  if (x === 442) {
-    return [25];
-  }
-
-  if (x === 447) {
-    return [26];
-  }
-
-  if (x === 450) {
-    return [27];
-  }
-
-  if (x === 453) {
-    return [28];
-  }
-}
-
-;
-
-function FixedDataTableCell143_ComputeFunction(x) {
-  if (x === 317) {
-    return [0];
-  }
-
-  if (x === 322) {
-    return [1];
-  }
-
-  if (x === 325) {
-    return [2];
-  }
-
-  if (x === 328) {
-    return [3];
-  }
-
-  if (x === 331) {
-    return [4];
-  }
-
-  if (x === 339) {
-    return [5];
-  }
-
-  if (x === 344) {
-    var __cached__71;
-
-    __cached__71 = function (): void {};
-
-    return [6, __cached__71];
-  }
-
-  if (x === 350) {
-    return [7];
-  }
-
-  if (x === 356) {
-    return [8];
-  }
-
-  if (x === 361) {
-    return [9];
-  }
-
-  if (x === 366) {
-    var __cached__72;
-
-    __cached__72 = function (): void {};
-
-    return [10, __cached__72];
-  }
-
-  if (x === 373) {
-    var __cached__73;
-
-    __cached__73 = function (): void {};
-
-    return [11, __cached__73];
-  }
-
-  if (x === 378) {
-    var __cached__74;
-
-    __cached__74 = function (): void {};
-
-    return [12, __cached__74];
-  }
-
-  if (x === 383) {
-    var __cached__75;
-
-    __cached__75 = function (): void {};
-
-    return [13, __cached__75];
-  }
-
-  if (x === 388) {
-    var __cached__76;
-
-    __cached__76 = function (): void {};
-
-    return [14, __cached__76];
-  }
-
-  if (x === 393) {
-    var __cached__77;
-
-    __cached__77 = function (): void {};
-
-    return [15, __cached__77];
-  }
-
-  if (x === 398) {
-    var __cached__78;
-
-    __cached__78 = function (): void {};
-
-    return [16, __cached__78];
-  }
-
-  if (x === 403) {
-    var __cached__79;
-
-    __cached__79 = function (): void {};
-
-    return [17, __cached__79];
-  }
-
-  if (x === 408) {
-    var __cached__80;
-
-    __cached__80 = function (): void {};
-
-    return [18, __cached__80];
-  }
-
-  if (x === 413) {
-    var __cached__81;
-
-    __cached__81 = function (): void {};
-
-    return [19, __cached__81];
-  }
-
-  if (x === 418) {
-    var __cached__82;
-
-    __cached__82 = function (): void {};
-
-    return [20, __cached__82];
-  }
-
-  if (x === 423) {
-    var __cached__83;
-
-    __cached__83 = function (): void {};
-
-    return [21, __cached__83];
-  }
-
-  if (x === 428) {
-    var __cached__84;
-
-    __cached__84 = function (): void {};
-
-    return [22, __cached__84];
-  }
-
-  if (x === 433) {
-    var __cached__85;
-
-    __cached__85 = function (): void {};
-
-    return [23, __cached__85];
-  }
-
-  if (x === 438) {
-    var __cached__86;
-
-    __cached__86 = function (): void {};
-
-    return [24, __cached__86];
-  }
-
-  if (x === 443) {
-    var __cached__87;
-
-    __cached__87 = function (): void {};
-
-    return [25, __cached__87];
-  }
-
-  if (x === 448) {
-    var __cached__88;
-
-    __cached__88 = function (): void {};
-
-    return [26, __cached__88];
-  }
-
-  if (x === 451) {
-    var __cached__89;
-
-    __cached__89 = function (): void {};
-
-    return [27, __cached__89];
-  }
-
-  if (x === 454) {
-    return [28];
-  }
-}
-
-;
-
-function FixedDataTableCellGroupImpl144_ComputeFunction(x) {
-  if (x === 318) {
-    return [0];
-  }
-
-  if (x === 332) {
-    return [1];
-  }
-
-  if (x === 367) {
-    return [2];
-  }
-
-  if (x === 455) {
-    return [3];
-  }
-}
-
-;
-
-function FixedDataTableCellGroup145_ComputeFunction(x) {
-  if (x === 319) {
-    return [0];
-  }
-
-  if (x === 333) {
-    return [1];
-  }
-
-  if (x === 368) {
-    return [2];
-  }
-
-  if (x === 456) {
-    return [3];
-  }
-}
-
-;
-
-function FixedDataTableRowImpl146_ComputeFunction(x) {
-  if (x === 334) {
-    return [0];
-  }
-
-  if (x === 457) {
-    return [1];
-  }
-}
-
-;
-
-function FixedDataTableRow147_ComputeFunction(x) {
-  if (x === 335) {
-    return [0];
-  }
-
-  if (x === 458) {
-    return [1];
-  }
-}
-
-;
-
-function FixedDataTableAbstractSortableHeader148_ComputeFunction(x) {
-  if (x === 341) {
-    var __cached__50;
-
-    __cached__50 = function (): void {};
-
-    return [0, __cached__50];
-  }
-
-  if (x === 347) {
-    var __cached__51;
-
-    __cached__51 = function (): void {};
-
-    return [1, __cached__51];
-  }
-
-  if (x === 353) {
-    var __cached__52;
-
-    __cached__52 = function (): void {};
-
-    return [2, __cached__52];
-  }
-
-  if (x === 358) {
-    var __cached__53;
-
-    __cached__53 = function (): void {};
-
-    return [3, __cached__53];
-  }
-
-  if (x === 363) {
-    var __cached__54;
-
-    __cached__54 = function (): void {};
-
-    return [4, __cached__54];
-  }
-
-  if (x === 370) {
-    var __cached__55;
-
-    __cached__55 = function (): void {};
-
-    return [5, __cached__55];
-  }
-
-  if (x === 375) {
-    var __cached__56;
-
-    __cached__56 = function (): void {};
-
-    return [6, __cached__56];
-  }
-
-  if (x === 380) {
-    var __cached__57;
-
-    __cached__57 = function (): void {};
-
-    return [7, __cached__57];
-  }
-
-  if (x === 385) {
-    var __cached__58;
-
-    __cached__58 = function (): void {};
-
-    return [8, __cached__58];
-  }
-
-  if (x === 390) {
-    var __cached__59;
-
-    __cached__59 = function (): void {};
-
-    return [9, __cached__59];
-  }
-
-  if (x === 395) {
-    var __cached__60;
-
-    __cached__60 = function (): void {};
-
-    return [10, __cached__60];
-  }
-
-  if (x === 400) {
-    var __cached__61;
-
-    __cached__61 = function (): void {};
-
-    return [11, __cached__61];
-  }
-
-  if (x === 405) {
-    var __cached__62;
-
-    __cached__62 = function (): void {};
-
-    return [12, __cached__62];
-  }
-
-  if (x === 410) {
-    var __cached__63;
-
-    __cached__63 = function (): void {};
-
-    return [13, __cached__63];
-  }
-
-  if (x === 415) {
-    var __cached__64;
-
-    __cached__64 = function (): void {};
-
-    return [14, __cached__64];
-  }
-
-  if (x === 420) {
-    var __cached__65;
-
-    __cached__65 = function (): void {};
-
-    return [15, __cached__65];
-  }
-
-  if (x === 425) {
-    var __cached__66;
-
-    __cached__66 = function (): void {};
-
-    return [16, __cached__66];
-  }
-
-  if (x === 430) {
-    var __cached__67;
-
-    __cached__67 = function (): void {};
-
-    return [17, __cached__67];
-  }
-
-  if (x === 435) {
-    var __cached__68;
-
-    __cached__68 = function (): void {};
-
-    return [18, __cached__68];
-  }
-
-  if (x === 440) {
-    var __cached__69;
-
-    __cached__69 = function (): void {};
-
-    return [19, __cached__69];
-  }
-
-  if (x === 445) {
-    var __cached__70;
-
-    __cached__70 = function (): void {};
-
-    return [20, __cached__70];
-  }
-}
-
-;
-
-function FixedDataTableSortableHeader149_ComputeFunction(x) {
-  if (x === 342) {
-    return [0];
-  }
-
-  if (x === 348) {
-    return [1];
-  }
-
-  if (x === 354) {
-    return [2];
-  }
-
-  if (x === 359) {
-    return [3];
-  }
-
-  if (x === 364) {
-    return [4];
-  }
-
-  if (x === 371) {
-    return [5];
-  }
-
-  if (x === 376) {
-    return [6];
-  }
-
-  if (x === 381) {
-    return [7];
-  }
-
-  if (x === 386) {
-    return [8];
-  }
-
-  if (x === 391) {
-    return [9];
-  }
-
-  if (x === 396) {
-    return [10];
-  }
-
-  if (x === 401) {
-    return [11];
-  }
-
-  if (x === 406) {
-    return [12];
-  }
-
-  if (x === 411) {
-    return [13];
-  }
-
-  if (x === 416) {
-    return [14];
-  }
-
-  if (x === 421) {
-    return [15];
-  }
-
-  if (x === 426) {
-    return [16];
-  }
-
-  if (x === 431) {
-    return [17];
-  }
-
-  if (x === 436) {
-    return [18];
-  }
-
-  if (x === 441) {
-    return [19];
-  }
-
-  if (x === 446) {
-    return [20];
-  }
-}
-
-;
-
-function FixedDataTableBufferedRows150_ComputeFunction(x) {
-  if (x === 459) {
-    return [];
-  }
-}
-
-;
-
-function Scrollbar151_ComputeFunction(x) {
-  if (x === 460) {
-    return null;
-  }
-
-  if (x === 461) {
-    var __cached__94;
-
-    var __cached__93;
-
-    var __cached__92;
-
-    var __cached__91;
-
-    var __cached__90;
-
-    __cached__94 = function (): void {};
-
-    __cached__93 = function (): void {};
-
-    __cached__92 = function (): void {};
-
-    __cached__91 = function (): void {};
-
-    __cached__90 = function (): void {};
-
-    return [__cached__90, __cached__91, __cached__92, __cached__93, __cached__94];
-  }
-}
-
-;
-
-function HorizontalScrollbar152_ComputeFunction(x) {
-  if (x === 462) {
-    return [];
-  }
-}
-
-;
-
-function FixedDataTable153_ComputeFunction(x) {
-  if (x === 463) {
-    var __cached__49;
-
-    __cached__49 = function (): void {};
-
-    return [__cached__49];
-  }
-}
-
-;
-
-function TransitionTable154_ComputeFunction(x) {
-  if (x === 464) {
-    return [];
-  }
-}
-
-;
-
-function AdsSelectableFixedDataTable155_ComputeFunction(x) {
-  if (x === 465) {
-    return [];
-  }
-}
-
-;
-
-function AdsDataTableKeyboardSupportDecorator156_ComputeFunction(x) {
-  if (x === 466) {
-    var __cached__48;
-
-    __cached__48 = function (): void {};
-
-    return [__cached__48];
-  }
-}
-
-;
-
-function AdsEditableDataTableDecorator157_ComputeFunction(x) {
-  if (x === 467) {
-    var __cached__47;
-
-    __cached__47 = function (): void {};
-
-    return [__cached__47];
-  }
-}
-
-;
-
-function AdsPEDataTableContainer158_ComputeFunction(x) {
-  if (x === 468) {
-    return [];
-  }
-}
-
-;
-
-function AdsPECampaignGroupTableContainer159_ComputeFunction(x) {
-  if (x === 470) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEManageAdsPaneContainer160_ComputeFunction(x) {
-  if (x === 473) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEContentContainer161_ComputeFunction(x) {
-  if (x === 474) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPEWorkspaceContainer_162_ComputeFunction(x) {
-  if (x === 477) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsSessionExpiredDialogContainer_163_ComputeFunction(x) {
-  if (x === 478) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPEUploadDialogLazyContainer_164_ComputeFunction(x) {
-  if (x === 479) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_DialogContainer_165_ComputeFunction(x) {
-  if (x === 480) {
-    return [];
-  }
-}
-
-;
-
-function AdsBugReportContainer166_ComputeFunction(x) {
-  if (x === 481) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEAudienceSplittingDialog167_ComputeFunction(x) {
-  if (x === 482) {
-    return [];
-  }
-}
-
-;
-
-function AdsPEAudienceSplittingDialogContainer168_ComputeFunction(x) {
-  if (x === 483) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsRuleDialogBootloadContainer_169_ComputeFunction(x) {
-  if (x === 484) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPECFTrayContainer_170_ComputeFunction(x) {
-  if (x === 485) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPEDeleteDraftContainer_171_ComputeFunction(x) {
-  if (x === 486) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPEInitialDraftPublishDialogContainer_172_ComputeFunction(x) {
-  if (x === 487) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPEReachFrequencyStatusTransitionDialogBootloadContainer_173_ComputeFunction(x) {
-  if (x === 488) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPEPurgeArchiveDialogContainer_174_ComputeFunction(x) {
-  if (x === 489) {
-    return [];
-  }
-}
-
-;
-
-function AdsPECreateDialogContainer175_ComputeFunction(x) {
-  if (x === 490) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPEModalStatusContainer_176_ComputeFunction(x) {
-  if (x === 491) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsBrowserExtensionErrorDialogContainer_177_ComputeFunction(x) {
-  if (x === 492) {
-    return [];
-  }
-}
-
-;
-
-function FluxContainer_AdsPESortByErrorTipContainer_178_ComputeFunction(x) {
-  if (x === 493) {
-    return [];
-  }
-}
-
-;
-
-function LeadDownloadDialogSelector179_ComputeFunction(x) {
-  if (x === 494) {
-    return [];
-  }
-}
-
-function FluxContainer_AdsPELeadDownloadDialogContainerClass_180_ComputeFunction(x) {
-  if (x === 495) {
-    return [];
-  }
-}
-
-function AdsPEContainer181_ComputeFunction(x) {
-  if (x === 496) {
-    return [];
-  }
-}
-
-function Component_ComputeFunction(x) {
-  if (x === undefined) {
-    return [];
-  }
-}
-
-const AdsEditorLoadingErrors90 = [1, AdsEditorLoadingErrors90_ComputeFunction, [32772, null]];
-const AdsEditorMultiColumnLayout131 = [1, AdsEditorMultiColumnLayout131_ComputeFunction, [1090, "div", ["className", 0, "_psh"], [1090, "div", ["className", 0, "_3cc0"], [2050, "div", [[76, AdsEditorLoadingErrors90, [215]], [2114, "div", ["className", 0, "_3ms3"], [[1090, "div", ["className", 0, "_3ms4"], [76, FluxContainer_AdsEditorColumnContainer_115, [260]]], [1090, "div", ["className", 0, "_3pvg"], [76, FluxContainer_AdsEditorColumnContainer_115, [293]]]]]]]]]];
-const AdsPEEditorChildLink86 = [1, AdsPEEditorChildLink86_ComputeFunction, [2114, "div", ["className", 0, "_3ywr"], [[76, Link2, [208]], [4162, "span", ["className", 0, "_3ywq"], "|"], [76, Link2, [210]]]]];
-const AdsPEEditorChildLinkContainer87 = [1, AdsPEEditorChildLinkContainer87_ComputeFunction, [76, AdsPEEditorChildLink86, [211]]];
-const AdsPEHeaderSection88 = [1, AdsPEHeaderSection88_ComputeFunction, [2114, "div", ["className", 0, "_yke"], [[66, "div", ["className", 0, "_2x9d _pr-"]], [76, XUIText29, [205]], [1090, "div", ["className", 0, "_3a-a"], [1090, "div", ["className", 0, "_3a-b"], [76, XUIText29, [206]]]], [76, AdsPEEditorChildLinkContainer87, [212]]]]];
-const AdsPECampaignGroupHeaderSectionContainer89 = [1, AdsPECampaignGroupHeaderSectionContainer89_ComputeFunction, [76, AdsPEHeaderSection88, [213]]];
-const AdsPECampaignGroupEditor132 = [1, AdsPECampaignGroupEditor132_ComputeFunction, [2050, "div", [[76, AdsPECampaignGroupHeaderSectionContainer89, [214]], [76, AdsEditorMultiColumnLayout131, [294]]]]];
-const AdsPECampaignGroupEditorContainer133 = [1, AdsPECampaignGroupEditorContainer133_ComputeFunction, [76, AdsPECampaignGroupEditor132, [295]]];
-const AdsPESideTrayTabContent134 = [1, AdsPESideTrayTabContent134_ComputeFunction, [1090, "div", ["className", 0, "_1o_8 _44ra _5cyn"], [76, AdsPECampaignGroupEditorContainer133, [296]]]];
-const AdsPEEditorTrayTabContentContainer135 = [1, AdsPEEditorTrayTabContentContainer135_ComputeFunction, [76, AdsPESideTrayTabContent134, [297]]];
-const AdsPENekoDebuggerTrayTabButton85 = [1, AdsPENekoDebuggerTrayTabButton85_ComputeFunction, [76, AdsPESideTrayTabButton82, [203]]];
-
-function FluxContainer_AdsEditorColumnContainer_115() {
-  return [1, FluxContainer_AdsEditorColumnContainer_115_ComputeFunction, [14, 0, [2050, "div", [[1026, "div", [76, AdsPluginWrapper99, [226]]], [1026, "div", [76, AdsPluginWrapper99, [255]]], [1026, "div", [76, AdsPluginWrapper99, [258]]], [76, AdsStickyArea114, [259]]]], 1, [2050, "div", [[1026, "div", [76, AdsPluginWrapper99, [287]]], [76, AdsStickyArea114, [292]]]]]];
-}
-
-const AdsPEInsightsTrayTabButton84 = [1, AdsPEInsightsTrayTabButton84_ComputeFunction, [2050, "span", [[76, AdsPESideTrayTabButton82, [199]], [76, XUIAmbientNUX69, [201]]]]];
-const AdsPEEditorTrayTabButton83 = [1, AdsPEEditorTrayTabButton83_ComputeFunction, [76, AdsPESideTrayTabButton82, [196]]];
-const AdsPEMultiTabDrawer136 = [1, AdsPEMultiTabDrawer136_ComputeFunction, [2114, "div", ["className", 0, "_2kev _2kex"], [[2114, "div", ["className", 0, "_5yno"], [[76, AdsPEEditorTrayTabButton83, [197]], [76, AdsPEInsightsTrayTabButton84, [202]], [76, AdsPENekoDebuggerTrayTabButton85, [204]]]], [1090, "div", ["className", 0, "_5ynn"], [76, AdsPEEditorTrayTabContentContainer135, [298]]]]]];
-const FluxContainer_AdsPEMultiTabDrawerContainer_137 = [1, FluxContainer_AdsPEMultiTabDrawerContainer_137_ComputeFunction, [76, AdsPEMultiTabDrawer136, [299]]];
-const BUIPopoverButton77 = [1, BUIPopoverButton77_ComputeFunction, [76, ReactXUIError76, [181]]];
-const BUIDateRangePicker78 = [1, BUIDateRangePicker78_ComputeFunction, [1026, "span", [76, BUIPopoverButton77, [182]]]];
-const AdsPEStatsRangePicker79 = [1, AdsPEStatsRangePicker79_ComputeFunction, [76, BUIDateRangePicker78, [184]]];
-const AdsPEStatRange80 = [1, AdsPEStatRange80_ComputeFunction, [2114, "div", ["className", 0, "_3c5k"], [[4162, "span", ["className", 0, "_3c5j"], "Stats:"], [2114, "span", ["className", 0, "_3c5l"], [[76, AdsPEStatsRangePicker79, [185]], [76, XUIButton4, [188]]]], [76, XUIAmbientNUX69, [190]]]]];
-const AdsPEStatRangeContainer81 = [1, AdsPEStatRangeContainer81_ComputeFunction, [76, AdsPEStatRange80, [191]]];
-const AdsPETablePager73 = [1, AdsPETablePager73_ComputeFunction, [32772, null]];
-const AdsPESimpleOrganizer138 = [1, AdsPESimpleOrganizer138_ComputeFunction, [2114, "div", ["className", 0, "_tm2"], [[76, XUIButton4, [304]], [76, XUIButton4, [306]], [76, XUIButton4, [308]]]]];
-
-function AdsPETableHeader141() {
-  return [1, AdsPETableHeader141_ComputeFunction, [14, 0, [2114, "div", ["className", 0, "_1cig _1ksv _1vd7 _4h2r"], [[76, ReactImage0, [314]], [4162, "span", ["className", 0, "_1cid"], "Campaigns"]]], 1, [1090, "div", ["className", 0, "_1cig _1vd7 _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Performance"]], 2, [1090, "div", ["className", 0, "_1cig _1vd7 _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Overview"]], 3, [1090, "div", ["className", 0, "_1cig _1vd7 _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Toplines"]], 4, [66, "div", ["className", 0, "_1cig _1vd7 _4h2r"]], 5, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Campaign Name"]], 6, [1090, "div", ["className", 0, "_1cig _25fg", "data-tooltip-content", 0, "Changed", "data-hover", 0, "tooltip"], [76, ReactImage0, [345]]], 7, [1090, "div", ["className", 0, "_1cig _25fg", "id", 0, "ads_pe_table_error_header", "data-tooltip-content", 0, "Errors", "data-hover", 0, "tooltip"], [76, ReactImage0, [351]]], 8, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Status"]], 9, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Delivery"]], 10, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Results"]], 11, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Cost"]], 12, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Reach"]], 13, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Impressions"]], 14, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Clicks"]], 15, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Avg. CPM"]], 16, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Avg. CPC"]], 17, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "CTR %"]], 18, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Spent"]], 19, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Objective"]], 20, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Buying Type"]], 21, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Campaign ID"]], 22, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Start"]], 23, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "End"]], 24, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Date created"]], 25, [1090, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Date last edited"]], 26, [1090, "div", ["className", 0, "_1cig _25fg _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Tags"]], 27, [66, "div", ["className", 0, "_1cig _25fg _4h2r"]]]];
-}
-
-const AdsPEOrganizerContainer139 = [1, AdsPEOrganizerContainer139_ComputeFunction, [1026, "div", [76, AdsPESimpleOrganizer138, [309]]]];
-const FixedDataTableColumnResizeHandle140 = [1, FixedDataTableColumnResizeHandle140_ComputeFunction, [1346, "div", ["className", 0, "_3487 _3488 _3489"], ["width", 0, "height", "25px", "left", 0], [322, "div", ["className", 0, "_348a"], ["height", "25px"]]]];
-
-function FixedDataTableAbstractSortableHeader148() {
-  return [1, FixedDataTableAbstractSortableHeader148_ComputeFunction, [14, 0, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [340]]]], 1, [1218, "div", ["className", 0, "_54_8 _1kst _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [346]]]], 2, [1218, "div", ["className", 0, "_54_8 _1kst _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [352]]]], 3, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [357]]]], 4, [1218, "div", ["className", 0, "_54_8 _54_9 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [362]]]], 5, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [369]]]], 6, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [374]]]], 7, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [379]]]], 8, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [384]]]], 9, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [389]]]], 10, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [394]]]], 11, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [399]]]], 12, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [404]]]], 13, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [409]]]], 14, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [414]]]], 15, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [419]]]], 16, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [424]]]], 17, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [429]]]], 18, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [434]]]], 19, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [439]]]], 20, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 1], [1090, "div", ["className", 0, "_2eq6"], [76, AdsPETableHeader141, [444]]]]]];
-}
-
-function FixedDataTableSortableHeader149() {
-  return [1, FixedDataTableSortableHeader149_ComputeFunction, [14, 0, [76, FixedDataTableAbstractSortableHeader148, [341]], 1, [76, FixedDataTableAbstractSortableHeader148, [347]], 2, [76, FixedDataTableAbstractSortableHeader148, [353]], 3, [76, FixedDataTableAbstractSortableHeader148, [358]], 4, [76, FixedDataTableAbstractSortableHeader148, [363]], 5, [76, FixedDataTableAbstractSortableHeader148, [370]], 6, [76, FixedDataTableAbstractSortableHeader148, [375]], 7, [76, FixedDataTableAbstractSortableHeader148, [380]], 8, [76, FixedDataTableAbstractSortableHeader148, [385]], 9, [76, FixedDataTableAbstractSortableHeader148, [390]], 10, [76, FixedDataTableAbstractSortableHeader148, [395]], 11, [76, FixedDataTableAbstractSortableHeader148, [400]], 12, [76, FixedDataTableAbstractSortableHeader148, [405]], 13, [76, FixedDataTableAbstractSortableHeader148, [410]], 14, [76, FixedDataTableAbstractSortableHeader148, [415]], 15, [76, FixedDataTableAbstractSortableHeader148, [420]], 16, [76, FixedDataTableAbstractSortableHeader148, [425]], 17, [76, FixedDataTableAbstractSortableHeader148, [430]], 18, [76, FixedDataTableAbstractSortableHeader148, [435]], 19, [76, FixedDataTableAbstractSortableHeader148, [440]], 20, [76, FixedDataTableAbstractSortableHeader148, [445]]]];
-}
-
-function TransitionCell142() {
-  return [1, TransitionCell142_ComputeFunction, [14, 0, [1346, "div", ["label", 0, "Campaigns", "height", 0, 40, "width", 0, 721, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "721px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, AdsPETableHeader141, [315]]]]], 1, [1346, "div", ["label", 0, "Performance", "height", 0, 40, "width", 0, 798, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "798px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, AdsPETableHeader141, [320]]]]], 2, [1346, "div", ["label", 0, "Overview", "height", 0, 40, "width", 0, 1022, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "1022px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, AdsPETableHeader141, [323]]]]], 3, [1346, "div", ["label", 0, "Toplines", "height", 0, 40, "width", 0, 0, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, AdsPETableHeader141, [326]]]]], 4, [1346, "div", ["label", 0, "", "height", 0, 40, "width", 0, 25, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "25px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, AdsPETableHeader141, [329]]]]], 5, [1346, "div", ["width", 0, 42, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "42px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, XUICheckboxInput60, [337]]]]], 6, [1346, "div", ["label", 0, "Campaign Name", "width", 0, 400, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "400px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [342]]]]], 7, [1346, "div", ["width", 0, 33, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "33px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [348]]]]], 8, [1346, "div", ["width", 0, 36, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "36px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [354]]]]], 9, [1346, "div", ["label", 0, "Status", "width", 0, 60, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "60px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [359]]]]], 10, [1346, "div", ["label", 0, "Delivery", "width", 0, 150, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "150px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [364]]]]], 11, [1346, "div", ["label", 0, "Results", "width", 0, 140, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "140px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [371]]]]], 12, [1346, "div", ["label", 0, "Cost", "width", 0, 140, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "140px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [376]]]]], 13, [1346, "div", ["label", 0, "Reach", "width", 0, 80, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "80px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [381]]]]], 14, [1346, "div", ["label", 0, "Impressions", "width", 0, 80, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "80px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [386]]]]], 15, [1346, "div", ["label", 0, "Clicks", "width", 0, 60, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "60px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [391]]]]], 16, [1346, "div", ["label", 0, "Avg. CPM", "width", 0, 80, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "80px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [396]]]]], 17, [1346, "div", ["label", 0, "Avg. CPC", "width", 0, 78, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "78px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [401]]]]], 18, [1346, "div", ["label", 0, "CTR %", "width", 0, 70, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "70px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [406]]]]], 19, [1346, "div", ["label", 0, "Spent", "width", 0, 70, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "70px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [411]]]]], 20, [1346, "div", ["label", 0, "Objective", "width", 0, 200, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "200px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [416]]]]], 21, [1346, "div", ["label", 0, "Buying Type", "width", 0, 100, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "100px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [421]]]]], 22, [1346, "div", ["label", 0, "Campaign ID", "width", 0, 120, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "120px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [426]]]]], 23, [1346, "div", ["label", 0, "Start", "width", 0, 113, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "113px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [431]]]]], 24, [1346, "div", ["label", 0, "End", "width", 0, 113, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "113px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [436]]]]], 25, [1346, "div", ["label", 0, "Date created", "width", 0, 113, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "113px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [441]]]]], 26, [1346, "div", ["label", 0, "Date last edited", "width", 0, 113, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "113px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableSortableHeader149, [446]]]]], 27, [1346, "div", ["label", 0, "Tags", "width", 0, 150, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "150px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, AdsPETableHeader141, [449]]]]], 28, [1346, "div", ["label", 0, "", "width", 0, 25, "className", 0, "_4lgc _4h2u", "height", 0, 25], ["height", "25px", "width", "25px"], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, AdsPETableHeader141, [452]]]]]]];
-}
-
-function FixedDataTableCell143() {
-  return [1, FixedDataTableCell143_ComputeFunction, [14, 0, [1346, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "721px", "left", 0], [76, TransitionCell142, [316]]], 1, [1346, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "798px", "left", 0], [76, TransitionCell142, [321]]], 2, [1346, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "1022px", "left", "798px"], [76, TransitionCell142, [324]]], 3, [1346, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", 0, "left", "1820px"], [76, TransitionCell142, [327]]], 4, [1346, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "25px", "left", "1820px"], [76, TransitionCell142, [330]]], 5, [1346, "div", ["className", 0, "_4lg0 _4lg6 _4h2m"], ["height", "25px", "width", "42px", "left", 0], [76, TransitionCell142, [338]]], 6, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "400px", "left", "42px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [343]]]], 7, [1346, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "33px", "left", "442px"], [76, TransitionCell142, [349]]], 8, [1346, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "36px", "left", "475px"], [76, TransitionCell142, [355]]], 9, [1346, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "60px", "left", "511px"], [76, TransitionCell142, [360]]], 10, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "150px", "left", "571px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [365]]]], 11, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "140px", "left", 0], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [372]]]], 12, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "140px", "left", "140px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [377]]]], 13, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "80px", "left", "280px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [382]]]], 14, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "80px", "left", "360px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [387]]]], 15, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "60px", "left", "440px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [392]]]], 16, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "80px", "left", "500px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [397]]]], 17, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "78px", "left", "580px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [402]]]], 18, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "70px", "left", "658px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [407]]]], 19, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "70px", "left", "728px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [412]]]], 20, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "200px", "left", "798px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [417]]]], 21, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "100px", "left", "998px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [422]]]], 22, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "120px", "left", "1098px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [427]]]], 23, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "113px", "left", "1218px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [432]]]], 24, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "113px", "left", "1331px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [437]]]], 25, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "113px", "left", "1444px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [442]]]], 26, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "113px", "left", "1557px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [447]]]], 27, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "150px", "left", "1670px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 1], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell142, [450]]]], 28, [1346, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "25px", "left", "1820px"], [76, TransitionCell142, [453]]]]];
-}
-
-function FixedDataTableCellGroupImpl144() {
-  return [1, FixedDataTableCellGroupImpl144_ComputeFunction, [14, 0, [1346, "div", ["className", 0, "_3pzj"], ["height", "40px", "position", "absolute", "width", "721px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [76, FixedDataTableCell143, [317]]], 1, [2370, "div", ["className", 0, "_3pzj"], ["height", "40px", "position", "absolute", "width", "1845px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[76, FixedDataTableCell143, [322]], [76, FixedDataTableCell143, [325]], [76, FixedDataTableCell143, [328]], [76, FixedDataTableCell143, [331]]]], 2, [2370, "div", ["className", 0, "_3pzj"], ["height", "25px", "position", "absolute", "width", "721px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[76, FixedDataTableCell143, [339]], [76, FixedDataTableCell143, [344]], [76, FixedDataTableCell143, [350]], [76, FixedDataTableCell143, [356]], [76, FixedDataTableCell143, [361]], [76, FixedDataTableCell143, [366]]]], 3, [2370, "div", ["className", 0, "_3pzj"], ["height", "25px", "position", "absolute", "width", "1845px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[76, FixedDataTableCell143, [373]], [76, FixedDataTableCell143, [378]], [76, FixedDataTableCell143, [383]], [76, FixedDataTableCell143, [388]], [76, FixedDataTableCell143, [393]], [76, FixedDataTableCell143, [398]], [76, FixedDataTableCell143, [403]], [76, FixedDataTableCell143, [408]], [76, FixedDataTableCell143, [413]], [76, FixedDataTableCell143, [418]], [76, FixedDataTableCell143, [423]], [76, FixedDataTableCell143, [428]], [76, FixedDataTableCell143, [433]], [76, FixedDataTableCell143, [438]], [76, FixedDataTableCell143, [443]], [76, FixedDataTableCell143, [448]], [76, FixedDataTableCell143, [451]], [76, FixedDataTableCell143, [454]]]]]];
-}
-
-function FixedDataTableCellGroup145() {
-  return [1, FixedDataTableCellGroup145_ComputeFunction, [14, 0, [1346, "div", ["className", 0, "_3pzk"], ["height", "40px", "left", 0], [76, FixedDataTableCellGroupImpl144, [318]]], 1, [1346, "div", ["className", 0, "_3pzk"], ["height", "40px", "left", "721px"], [76, FixedDataTableCellGroupImpl144, [332]]], 2, [1346, "div", ["className", 0, "_3pzk"], ["height", "25px", "left", 0], [76, FixedDataTableCellGroupImpl144, [367]]], 3, [1346, "div", ["className", 0, "_3pzk"], ["height", "25px", "left", "721px"], [76, FixedDataTableCellGroupImpl144, [455]]]]];
-}
-
-function FixedDataTableRowImpl146() {
-  return [1, FixedDataTableRowImpl146_ComputeFunction, [14, 0, [1346, "div", ["className", 0, "_1gd4 _4li _52no _3h1a _1mib"], ["width", "1209px", "height", "40px"], [2114, "div", ["className", 0, "_1gd5"], [[76, FixedDataTableCellGroup145, [319]], [76, FixedDataTableCellGroup145, [333]], [322, "div", ["className", 0, "_1gd6 _1gd8"], ["left", "721px", "height", "40px"]]]]], 1, [1346, "div", ["className", 0, "_1gd4 _4li _3h1a _1mib"], ["width", "1209px", "height", "25px"], [2114, "div", ["className", 0, "_1gd5"], [[76, FixedDataTableCellGroup145, [368]], [76, FixedDataTableCellGroup145, [456]], [322, "div", ["className", 0, "_1gd6 _1gd8"], ["left", "721px", "height", "25px"]]]]]]];
-}
-
-function FixedDataTableRow147() {
-  return [1, FixedDataTableRow147_ComputeFunction, [14, 0, [1346, "div", ["className", 0, "_1gda"], ["width", "1209px", "height", "40px", "z-index", 1, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [76, FixedDataTableRowImpl146, [334]]], 1, [1346, "div", ["className", 0, "_1gda"], ["width", "1209px", "height", "25px", "z-index", 1, "transform", "translate3d(0px,40px,0)", "backface-visibility", "hidden"], [76, FixedDataTableRowImpl146, [457]]]]];
-}
-
-function Scrollbar151() {
-  return [1, Scrollbar151_ComputeFunction, [1474, "div", ["className", 0, "_1t0r _1t0t _4jdr _1t0u", "tabindex", 0, 0], ["width", "1209px", "z-index", 99], ["onFocus", 1, 0, "onBlur", 1, 1, "onKeyDown", 1, 2, "onMouseDown", 1, 3, "onWheel", 1, 4], [322, "div", ["className", 0, "_1t0w _1t0y _1t0_"], ["width", "561.6340607950117px", "transform", "translate3d(4px,0px,0)", "backface-visibility", "hidden"]]]];
-}
-
-const FixedDataTableBufferedRows150 = [1, FixedDataTableBufferedRows150_ComputeFunction, [258, "div", ["position", "absolute", "pointer-events", "auto", "transform", "translate3d(0px,65px,0)", "backface-visibility", "hidden"]]];
-const HorizontalScrollbar152 = [1, HorizontalScrollbar152_ComputeFunction, [1346, "div", ["className", 0, "_3h1k _3h1m"], ["height", "15px", "width", "1209px"], [1282, "div", ["height", "15px", "position", "absolute", "overflow", "hidden", "width", "1209px", "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [76, Scrollbar151, [461]]]]];
-const FixedDataTable153 = [1, FixedDataTable153_ComputeFunction, [2498, "div", ["className", 0, "_3h1i _1mie"], ["height", "25px", "width", "1209px"], ["onWheel", 1, 0], [[2370, "div", ["className", 0, "_3h1j"], ["height", "8px", "width", "1209px"], [[76, FixedDataTableColumnResizeHandle140, [313]], [76, FixedDataTableRow147, [335]], [76, FixedDataTableRow147, [458]], [76, FixedDataTableBufferedRows150, [459]], [322, "div", ["className", 0, "_3h1e _3h1h"], ["top", "8px"]]]], [76, Scrollbar151, [460]], [76, HorizontalScrollbar152, [462]]]]];
-const TransitionTable154 = [1, TransitionTable154_ComputeFunction, [76, FixedDataTable153, [463]]];
-const AdsSelectableFixedDataTable155 = [1, AdsSelectableFixedDataTable155_ComputeFunction, [1090, "div", ["className", 0, "_5hht"], [76, TransitionTable154, [464]]]];
-const AdsDataTableKeyboardSupportDecorator156 = [1, AdsDataTableKeyboardSupportDecorator156_ComputeFunction, [1218, "div", ["className", 0, "_5d6f", "tabindex", 0, "0"], ["onKeyDown", 1, 0], [76, AdsSelectableFixedDataTable155, [465]]]];
-const AdsEditableDataTableDecorator157 = [1, AdsEditableDataTableDecorator157_ComputeFunction, [1154, "div", ["onCopy", 1, 0], [76, AdsDataTableKeyboardSupportDecorator156, [466]]]];
-const AdsPEDataTableContainer158 = [1, AdsPEDataTableContainer158_ComputeFunction, [1090, "div", ["className", 0, "_35l_ _1hr clearfix"], [76, AdsEditableDataTableDecorator157, [467]]]];
-
-function ResponsiveBlock37() {
-  return [1, ResponsiveBlock37_ComputeFunction, [14, 0, [2114, "div", ["className", 0, "_4u-c"], [[76, AdsErrorBoundary10, [58]], [76, AdsErrorBoundary10, [61]], [1090, "div", ["className", 0, "_4u-f"], [66, "iframe", ["aria-hidden", 0, "true", "className", 0, "_1_xb", "tabindex", 0, "-1"]]]]], 1, [2114, "div", ["className", 0, "_4u-c"], [[76, AdsPEDataTableContainer158, [468]], [1090, "div", ["className", 0, "_4u-f"], [66, "iframe", ["aria-hidden", 0, "true", "className", 0, "_1_xb", "tabindex", 0, "-1"]]]]]]];
-}
-
-const AdsPECampaignGroupTableContainer159 = [1, AdsPECampaignGroupTableContainer159_ComputeFunction, [76, ResponsiveBlock37, [469]]];
-const AdsPEManageAdsPaneContainer160 = [1, AdsPEManageAdsPaneContainer160_ComputeFunction, [2050, "div", [[76, AdsErrorBoundary10, [65]], [1090, "div", ["className", 0, "_2uty"], [76, AdsErrorBoundary10, [125]]], [2114, "div", ["className", 0, "_2utx _21oc"], [[76, AdsErrorBoundary10, [171]], [2114, "div", ["className", 0, "_41tu"], [[76, AdsErrorBoundary10, [176]], [76, AdsErrorBoundary10, [194]]]]]], [2370, "div", ["className", 0, "_2utz"], ["height", "25px"], [[76, AdsErrorBoundary10, [302]], [1090, "div", ["className", 0, "_2ut-"], [76, AdsErrorBoundary10, [312]]], [1090, "div", ["className", 0, "_2ut_"], [76, AdsErrorBoundary10, [472]]]]]]]];
-const AdsPEContentContainer161 = [1, AdsPEContentContainer161_ComputeFunction, [76, AdsPEManageAdsPaneContainer160, [473]]];
-const AdsPECampaignGroupTablePagerContainer74 = [1, AdsPECampaignGroupTablePagerContainer74_ComputeFunction, [76, AdsPETablePager73, [172]]];
-
-function AdsPESideTrayTabButton82() {
-  return [1, AdsPESideTrayTabButton82_ComputeFunction, [14, 0, [2242, "div", ["className", 0, "_1-ly _59j9 _d9a"], ["click", 1, 1], [[76, ReactImage0, [195]], [66, "div", ["className", 0, "_vf7"]], [66, "div", ["className", 0, "_vf8"]]]], 1, [2242, "div", ["className", 0, " _1-lz _d9a"], ["click", 1, 1], [[76, ReactImage0, [198]], [66, "div", ["className", 0, "_vf7"]], [66, "div", ["className", 0, "_vf8"]]]]]];
-}
-
-const AdsPETablePagerContainer75 = [1, AdsPETablePagerContainer75_ComputeFunction, [76, AdsPECampaignGroupTablePagerContainer74, [173]]];
-
-function XUIAmbientNUX69() {
-  return [1, XUIAmbientNUX69_ComputeFunction, [14, 0, [32772, null], 1, [32772, null], 2, [32772, null]]];
-}
-
-const AdsPEAmbientNUXMegaphone70 = [1, AdsPEAmbientNUXMegaphone70_ComputeFunction, [2050, "span", [[2, "span"], [76, XUIAmbientNUX69, [166]]]]];
-const BUIFilterTokenCreateButton66 = [1, BUIFilterTokenCreateButton66_ComputeFunction, [1090, "div", ["className", 0, "_1tc"], [76, XUIButton4, [162]]]];
-
-function AdsPopoverLink62() {
-  return [1, AdsPopoverLink62_ComputeFunction, [14, 0, [1026, "span", [2178, "span", ["onMouseEnter", 1, 1, "onMouseLeave", 1, 2], [[66, "span", ["className", 0, "_3o_j"]], [76, ReactImage0, [153]]]]], 1, [1026, "span", [2178, "span", ["onMouseEnter", 1, 1, "onMouseLeave", 1, 2], [[66, "span", ["className", 0, "_3o_j"]], [76, ReactImage0, [237]]]]]]];
-}
-
-function AdsCard95() {
-  return [1, AdsCard95_ComputeFunction, [14, 0, [76, ReactXUIError76, [221]], 1, [76, ReactXUIError76, [250]], 2, [76, ReactXUIError76, [280]]]];
-}
-
-function AdsHelpLink63() {
-  return [1, AdsHelpLink63_ComputeFunction, [14, 0, [76, AdsPopoverLink62, [154]], 1, [76, AdsPopoverLink62, [238]]]];
-}
-
-const AdsEditorNameSection96 = [1, AdsEditorNameSection96_ComputeFunction, [76, AdsCard95, [222]]];
-const AdsCampaignGroupNameSectionContainer97 = [1, AdsCampaignGroupNameSectionContainer97_ComputeFunction, [76, AdsEditorNameSection96, [223]]];
-const _render98 = [1, _render98_ComputeFunction, [76, AdsCampaignGroupNameSectionContainer97, [224]]];
-const AdsEditorCampaignGroupDetailsSection109 = [1, AdsEditorCampaignGroupDetailsSection109_ComputeFunction, [76, AdsCard95, [251]]];
-const AdsEditorCampaignGroupDetailsSectionContainer110 = [1, AdsEditorCampaignGroupDetailsSectionContainer110_ComputeFunction, [76, AdsEditorCampaignGroupDetailsSection109, [252]]];
-const _render111 = [1, _render111_ComputeFunction, [76, AdsEditorCampaignGroupDetailsSectionContainer110, [253]]];
-const FluxContainer_AdsEditorToplineDetailsSectionContainer_112 = [1, FluxContainer_AdsEditorToplineDetailsSectionContainer_112_ComputeFunction, [32772, null]];
-const _render113 = [1, _render113_ComputeFunction, [76, FluxContainer_AdsEditorToplineDetailsSectionContainer_112, [256]]];
-const AdsPEIDSection123 = [1, AdsPEIDSection123_ComputeFunction, [76, AdsCard95, [281]]];
-const FluxContainer_AdsPECampaignGroupIDSectionContainer_124 = [1, FluxContainer_AdsPECampaignGroupIDSectionContainer_124_ComputeFunction, [76, AdsPEIDSection123, [282]]];
-
-function AdsStickyArea114() {
-  return [1, AdsStickyArea114_ComputeFunction, [14, 0, [1026, "div", [130, "div", ["onWheel", 1, 1]]], 1, [1026, "div", [1154, "div", ["onWheel", 1, 1], [1026, "div", [76, AdsPluginWrapper99, [291]]]]]]];
-}
-
-const DeferredComponent125 = [1, DeferredComponent125_ComputeFunction, [76, FluxContainer_AdsPECampaignGroupIDSectionContainer_124, [283]]];
-const BootloadedComponent126 = [1, BootloadedComponent126_ComputeFunction, [76, DeferredComponent125, [284]]];
-const _render127 = [1, _render127_ComputeFunction, [76, BootloadedComponent126, [285]]];
-const AdsEditorErrorsCard128 = [1, AdsEditorErrorsCard128_ComputeFunction, [32772, null]];
-const FluxContainer_FunctionalContainer_129 = [1, FluxContainer_FunctionalContainer_129_ComputeFunction, [76, AdsEditorErrorsCard128, [288]]];
-const _render130 = [1, _render130_ComputeFunction, [76, FluxContainer_FunctionalContainer_129, [289]]];
-
-function AdsPluginWrapper99() {
-  return [1, AdsPluginWrapper99_ComputeFunction, [14, 0, [76, _render98, [225]], 1, [76, _render111, [254]], 2, [76, _render113, [257]], 3, [76, _render127, [286]], 4, [76, _render130, [290]]]];
-}
-
-const BUIFilterTokenInput64 = [1, BUIFilterTokenInput64_ComputeFunction, [2114, "div", ["className", 0, "_5b5o _3yz3 _4cld"], [[2114, "div", ["className", 0, "_5b5t _2d2k"], [[76, ReactImage0, [152]], [2114, "div", ["className", 0, "_5b5r"], [[32771, "Campaigns: (1)"], [76, AdsHelpLink63, [155]]]]]], [76, XUIButton4, [157]]]]];
-const BUIFilterToken65 = [1, BUIFilterToken65_ComputeFunction, [2114, "div", ["className", 0, "_3yz1 _3yz2 _3dad"], [[2114, "div", ["className", 0, "_3yz4", "aria-hidden", 0, false], [[2242, "div", ["className", 0, "_3yz5"], ["click", 1, 0], [[76, ReactImage0, [148]], [4162, "div", ["className", 0, "_3yz7"], "Campaigns:"], [4162, "div", ["className", 0, "ellipsis _3yz8", "data-hover", 0, "tooltip", "data-tooltip-display", 0, "overflow"], "(1)"]]], [76, XUICloseButton28, [151]]]], [76, BUIFilterTokenInput64, [158]]]]];
-const BUIFilterTokenizer67 = [1, BUIFilterTokenizer67_ComputeFunction, [2114, "div", ["className", 0, "_5b-m  clearfix"], [[76, BUIFilterToken65, [159]], [76, BUIFilterTokenCreateButton66, [163]], [66, "div", ["className", 0, "_49u3"]]]]];
-
-function AbstractCheckboxInput59() {
-  return [1, AbstractCheckboxInput59_ComputeFunction, [14, 0, [2114, "label", ["className", 0, "uiInputLabelInput _55sg _kv1"], [[131266, "input", ["type", 0, "checkbox", "disabled", 2, true, "name", 0, "filterUnpublished", "id", 0, "js_input_label_21"], ["click", 1, 1]], [2, "span"]]], 1, [2114, "label", ["className", 0, "_4h2r _55sg _kv1"], [[131266, "input", ["type", 0, "checkbox"], ["onChange", 1, 1]], [2, "span"]]]]];
-}
-
-const AdsTextInput91 = [1, AdsTextInput91_ComputeFunction, [76, ReactXUIError76, [216]]];
-const BUISwitch116 = [1, BUISwitch116_ComputeFunction, [1218, "div", ["data-hover", 0, "tooltip", "data-tooltip-content", 0, "Currently active. Click this switch to deactivate it.", "data-tooltip-position", 0, "below", "disabled", 2, false, "value", 0, true, "className", 0, "_128j _128k _128n", "role", 0, "checkbox", "aria-checked", 0, "true"], ["onToggle", 1, 0], [1218, "div", ["className", 0, "_128o", "tabindex", 0, "0"], ["click", 1, 1, "onKeyDown", 1, 2, "onMouseDown", 1, 3], [66, "div", ["className", 0, "_128p"]]]]];
-const AdsStatusSwitchInternal117 = [1, AdsStatusSwitchInternal117_ComputeFunction, [76, BUISwitch116, [261]]];
-const AdsStatusSwitch118 = [1, AdsStatusSwitch118_ComputeFunction, [76, AdsStatusSwitchInternal117, [262]]];
-const FluxContainer_AdsCampaignGroupStatusSwitchContainer_119 = [1, FluxContainer_AdsCampaignGroupStatusSwitchContainer_119_ComputeFunction, [76, AdsStatusSwitch118, [263]]];
-
-function XUICardHeaderTitle100() {
-  return [1, XUICardHeaderTitle100_ComputeFunction, [14, 0, [2114, "span", ["className", 0, "_38my"], [[32771, "Campaign Details"], [66, "span", ["className", 0, "_c1c"]]]], 1, [2114, "span", ["className", 0, "_38my"], [[2050, "span", [[32771, "Campaign ID"], [32771, ": "], [32771, "98010048849317"]]], [1090, "div", ["className", 0, "_5lh9"], [76, FluxContainer_AdsCampaignGroupStatusSwitchContainer_119, [264]]], [66, "span", ["className", 0, "_c1c"]]]]]];
-}
-
-const BUIFormElement92 = [1, BUIFormElement92_ComputeFunction, [2114, "div", ["className", 0, "_5521 clearfix"], [[1090, "div", ["className", 0, "_5522 _3w5q"], [4162, "label", ["for", 0, "1467872040612:1961945894", "className", 0, "_5523 _3w5r"], "Campaign Name"]], [1090, "div", ["className", 0, "_5527"], [1090, "div", ["className", 0, "_5528"], [1090, "span", ["className", 0, "_40bg", "id", 0, "1467872040612:1961945894"], [76, AdsTextInput91, [217]]]]]]]];
-
-function AdsLabeledField104() {
-  return [1, AdsLabeledField104_ComputeFunction, [14, 0, [2114, "div", ["className", 0, "_2oc6 _3bvz", "label", 0, "Objective"], [[4162, "label", ["className", 0, "_4el4 _3qwj _3hy-"], "Objective "], [66, "div", ["className", 0, "_3bv-"]]]], 1, [2114, "div", ["className", 0, "_2oc6 _3bvz", "label", 0, "Buying Type"], [[4162, "label", ["className", 0, "_4el4 _3qwj _3hy-"], "Buying Type "], [66, "div", ["className", 0, "_3bv-"]]]], 2, [2114, "div", ["className", 0, "_2oc6 _3bvz"], [[4162, "label", ["className", 0, "_4el4 _3qwj _3hy-"], "Campaign Spending Limit "], [76, AdsHelpLink63, [239]], [66, "div", ["className", 0, "_3bv-"]]]]]];
-}
-
-const AdsBulkCampaignSpendCapField106 = [1, AdsBulkCampaignSpendCapField106_ComputeFunction, [2114, "div", ["className", 0, "_33dv"], [[32771, ""], [76, Link2, [242]], [32771, " (optional)"]]]];
-const FluxContainer_AdsCampaignGroupSpendCapContainer_107 = [1, FluxContainer_AdsCampaignGroupSpendCapContainer_107_ComputeFunction, [76, AdsBulkCampaignSpendCapField106, [243]]];
-const AdsLinksMenu120 = [1, AdsLinksMenu120_ComputeFunction, [76, ReactPopoverMenu20, [274]]];
-const FluxContainer_AdsPluginizedLinksMenuContainer_121 = [1, FluxContainer_AdsPluginizedLinksMenuContainer_121_ComputeFunction, [1026, "div", [76, AdsLinksMenu120, [275]]]];
-const BUIForm93 = [1, BUIForm93_ComputeFunction, [1090, "div", ["className", 0, "_5ks1 _550r  _550t _550y _3w5n"], [76, BUIFormElement92, [218]]]];
-
-function FlexibleBlock105() {
-  return [1, FlexibleBlock105_ComputeFunction, [14, 0, [76, LeftRight21, [232]], 1, [76, LeftRight21, [235]], 2, [76, LeftRight21, [245]]]];
-}
-
-function XUICardSection101() {
-  return [1, XUICardSection101_ComputeFunction, [14, 0, [2114, "div", ["className", 0, "_5dw9 _5dwa _4-u3"], [[76, XUICardHeaderTitle100, [227]], [66, "div", ["className", 0, "_3s3-"]]]], 1, [1090, "div", ["className", 0, "_12jy _4-u3"], [2114, "div", ["className", 0, "_3-8j"], [[76, FlexibleBlock105, [233]], [76, FlexibleBlock105, [236]], [76, FlexibleBlock105, [246]]]]]]];
-}
-
-const XUICardHeader102 = [1, XUICardHeader102_ComputeFunction, [76, XUICardSection101, [228]]];
-const AdsCardHeader103 = [1, AdsCardHeader103_ComputeFunction, [76, XUICardHeader102, [229]]];
-const AdsCardSection108 = [1, AdsCardSection108_ComputeFunction, [76, XUICardSection101, [247]]];
-const AdsCardLeftRightHeader122 = [1, AdsCardLeftRightHeader122_ComputeFunction, [76, LeftRight21, [277]]];
-
-function XUICard94() {
-  return [1, XUICard94_ComputeFunction, [14, 0, [1090, "div", ["className", 0, "_40bc _12k2 _4-u2  _4-u8"], [76, BUIForm93, [219]]], 1, [2114, "div", ["className", 0, "_12k2 _4-u2  _4-u8"], [[76, AdsCardHeader103, [230]], [76, AdsCardSection108, [248]]]], 2, [1090, "div", ["className", 0, "_12k2 _4-u2  _4-u8"], [76, AdsCardLeftRightHeader122, [278]]]]];
-}
-
-function ReactXUIError76() {
-  return [1, ReactXUIError76_ComputeFunction, [14, 0, [76, AbstractButton3, [180]], 1, [1090, "div", ["className", 0, "_40bf _2vl4 _1h18"], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4290, "textarea", ["className", 0, "_2vli _2vlj _1h26 _1h27", "dir", 0, "auto"], ["onBlur", 1, 1, "onChange", 1, 2, "onFocus", 1, 3, "onKeyDown", 1, 4], "Test Campaign"]], [66, "div", ["aria-hidden", 0, "true", "className", 0, "_2vlk"]]]]]], 2, [76, XUICard94, [220]], 3, [76, XUICard94, [249]], 4, [76, XUICard94, [279]]]];
-}
-
-function XUICheckboxInput60() {
-  return [1, XUICheckboxInput60_ComputeFunction, [14, 0, [76, AbstractCheckboxInput59, [145]], 1, [76, AbstractCheckboxInput59, [336]]]];
-}
-
-const InputLabel61 = [1, InputLabel61_ComputeFunction, [2114, "div", ["display", 0, "block", "className", 0, "uiInputLabel clearfix"], [[76, XUICheckboxInput60, [146]], [4162, "label", ["className", 0, "uiInputLabelLabel", "for", 0, "js_input_label_21"], "Always show new items"]]]];
-const AdsPEFiltersPopover58 = [1, AdsPEFiltersPopover58_ComputeFunction, [2114, "span", ["className", 0, "_5b-l  _5bbe"], [[76, ReactXUIPopoverButton6, [133]], [76, ReactXUIPopoverButton6, [141]]]]];
-const AdsPEFilters71 = [1, AdsPEFilters71_ComputeFunction, [2114, "div", ["className", 0, "_4rw_"], [[76, AdsPEFiltersPopover58, [144]], [1090, "div", ["className", 0, "_1eo"], [76, InputLabel61, [147]]], [76, BUIFilterTokenizer67, [164]], [32771, ""], [76, AdsPEAmbientNUXMegaphone70, [167]]]]];
-const AdsPEFilterContainer72 = [1, AdsPEFilterContainer72_ComputeFunction, [76, AdsPEFilters71, [168]]];
-const AdsRuleToolbarMenu52 = [1, AdsRuleToolbarMenu52_ComputeFunction, [32772, null]];
-const FluxContainer_AdsPERuleToolbarMenuContainer_53 = [1, FluxContainer_AdsPERuleToolbarMenuContainer_53_ComputeFunction, [76, AdsRuleToolbarMenu52, [118]]];
-const AdsPEEditToolbarButton41 = [1, AdsPEEditToolbarButton41_ComputeFunction, [76, XUIButtonGroup40, [84]]];
-const FluxContainer_AdsPEEditCampaignGroupToolbarButtonContainer_42 = [1, FluxContainer_AdsPEEditCampaignGroupToolbarButtonContainer_42_ComputeFunction, [76, AdsPEEditToolbarButton41, [85]]];
-const FluxContainer_AdsPEEditToolbarButtonContainer_43 = [1, FluxContainer_AdsPEEditToolbarButtonContainer_43_ComputeFunction, [76, FluxContainer_AdsPEEditCampaignGroupToolbarButtonContainer_42, [86]]];
-const TagSelectorPopover50 = [1, TagSelectorPopover50_ComputeFunction, [1090, "span", ["className", 0, " _3d6e"], [76, XUIButton4, [113]]]];
-const AdsPECampaignGroupTagContainer51 = [1, AdsPECampaignGroupTagContainer51_ComputeFunction, [76, TagSelectorPopover50, [115]]];
-const AdsPEExportAsTextDialog46 = [1, AdsPEExportAsTextDialog46_ComputeFunction, [32772, null]];
-const FluxContainer_AdsPEExportAsTextDialogContainer_47 = [1, FluxContainer_AdsPEExportAsTextDialogContainer_47_ComputeFunction, [76, AdsPEExportAsTextDialog46, [105]]];
-const FluxContainer_AdsPECustomizeExportContainer_45 = [1, FluxContainer_AdsPECustomizeExportContainer_45_ComputeFunction, [32772, null]];
-const AdsPEExportImportMenu44 = [1, AdsPEExportImportMenu44_ComputeFunction, [76, ReactPopoverMenu20, [102]]];
-const AdsPEExportImportMenuContainer48 = [1, AdsPEExportImportMenuContainer48_ComputeFunction, [2050, "span", [[76, AdsPEExportImportMenu44, [103]], [76, FluxContainer_AdsPECustomizeExportContainer_45, [104]], [76, FluxContainer_AdsPEExportAsTextDialogContainer_47, [106]]]]];
-
-function XUIButtonGroup40() {
-  return [1, XUIButtonGroup40_ComputeFunction, [14, 0, [2114, "div", ["className", 0, "_5n7z _51xa"], [[76, XUIButton4, [69]], [76, ReactPopoverMenu20, [74]]]], 1, [2114, "div", ["className", 0, "_5n7z _51xa"], [[76, XUIButton4, [78]], [76, ReactPopoverMenu20, [83]]]], 2, [2114, "div", ["className", 0, "_5n7z _51xa"], [[76, XUIButton4, [90]], [76, XUIButton4, [93]], [76, XUIButton4, [96]]]], 3, [2114, "div", ["className", 0, "_5n7z _51xa"], [[76, AdsPEExportImportMenuContainer48, [107]], [76, XUIButton4, [110]], [76, AdsPECampaignGroupTagContainer51, [116]]]]]];
-}
-
-const FillColumn54 = [1, FillColumn54_ComputeFunction, [1090, "div", ["className", 0, "_4bl9"], [2114, "span", ["className", 0, "_3c5e"], [[2050, "span", [[76, XUIButtonGroup40, [75]], [76, FluxContainer_AdsPEEditToolbarButtonContainer_43, [87]], [76, XUIButtonGroup40, [97]]]], [76, XUIButtonGroup40, [117]], [76, FluxContainer_AdsPERuleToolbarMenuContainer_53, [119]]]]]];
-const Column39 = [1, Column39_ComputeFunction, [1090, "div", ["className", 0, "_4bl8 _4bl7"], [1090, "div", ["className", 0, "_3c5f"], [66, "div", ["className", 0, "_3c5i"]]]]];
-const Layout55 = [1, Layout55_ComputeFunction, [2114, "div", ["className", 0, "clearfix"], [[76, Column39, [66]], [76, FillColumn54, [120]]]]];
-const AdsPEMainPaneToolbar56 = [1, AdsPEMainPaneToolbar56_ComputeFunction, [1090, "div", ["className", 0, "_3c5b clearfix"], [76, Layout55, [121]]]];
-const AdsPECampaignGroupToolbarContainer57 = [1, AdsPECampaignGroupToolbarContainer57_ComputeFunction, [76, AdsPEMainPaneToolbar56, [122]]];
-const FluxContainer_AdsBulkEditDialogContainer_38 = [1, FluxContainer_AdsBulkEditDialogContainer_38_ComputeFunction, [32772, null]];
-const FluxContainer_AdsGuidanceChannel_36 = [1, FluxContainer_AdsGuidanceChannel_36_ComputeFunction, [32772, null]];
-
-function XUIAbstractGlyphButton27() {
-  return [1, XUIAbstractGlyphButton27_ComputeFunction, [14, 0, [76, AbstractButton3, [45]], 1, [76, AbstractButton3, [149]]]];
-}
-
-function XUICloseButton28() {
-  return [1, XUICloseButton28_ComputeFunction, [14, 0, [76, XUIAbstractGlyphButton27, [46]], 1, [76, XUIAbstractGlyphButton27, [150]]]];
-}
-
-const XUINotice30 = [1, XUINotice30_ComputeFunction, [2114, "div", ["size", 4, "medium", "className", 0, "_585n _585o _2wdd"], [[76, ReactImage0, [42]], [76, XUICloseButton28, [47]], [2114, "div", ["className", 0, "_585r _2i-a _50f4"], [[32771, "Please go to "], [76, Link2, [50]], [32771, " to set up a payment method for this ad account."]]]]]];
-const ReactCSSTransitionGroupChild31 = [1, ReactCSSTransitionGroupChild31_ComputeFunction, [76, XUINotice30, [51]]];
-const ReactTransitionGroup32 = [1, ReactTransitionGroup32_ComputeFunction, [1026, "span", [76, ReactCSSTransitionGroupChild31, [52]]]];
-const ReactCSSTransitionGroup33 = [1, ReactCSSTransitionGroup33_ComputeFunction, [76, ReactTransitionGroup32, [53]]];
-const AdsPETopError34 = [1, AdsPETopError34_ComputeFunction, [1090, "div", ["className", 0, "_2wdc"], [76, ReactCSSTransitionGroup33, [54]]]];
-const FluxContainer_AdsPETopErrorContainer_35 = [1, FluxContainer_AdsPETopErrorContainer_35_ComputeFunction, [76, AdsPETopError34, [55]]];
-const XUIDialog23 = [1, XUIDialog23_ComputeFunction, [32772, null]];
-const AdsPEResetDialog24 = [1, AdsPEResetDialog24_ComputeFunction, [1026, "span", [76, XUIDialog23, [36]]]];
-const AdsPEDraftErrorsStatus15 = [1, AdsPEDraftErrorsStatus15_ComputeFunction, [32772, null]];
-const FluxContainer_viewFn_16 = [1, FluxContainer_viewFn_16_ComputeFunction, [76, AdsPEDraftErrorsStatus15, [18]]];
-const AdsPEDraftSyncStatus13 = [1, AdsPEDraftSyncStatus13_ComputeFunction, [1218, "div", ["className", 0, "_3ut-"], ["click", 1, 0], [1090, "span", ["className", 0, "_3uu0"], [76, ReactImage0, [15]]]]];
-const FluxContainer_AdsPEDraftSyncStatusContainer_14 = [1, FluxContainer_AdsPEDraftSyncStatusContainer_14_ComputeFunction, [76, AdsPEDraftSyncStatus13, [16]]];
-const AdsPEPublishButton17 = [1, AdsPEPublishButton17_ComputeFunction, [2114, "div", ["className", 0, "_5533"], [[76, FluxContainer_AdsPEDraftSyncStatusContainer_14, [17]], [76, FluxContainer_viewFn_16, [19]], [76, XUIButton4, [21]], [76, XUIButton4, [24]]]]];
-const FluxContainer_AdsPEPublishButtonContainer_18 = [1, FluxContainer_AdsPEPublishButtonContainer_18_ComputeFunction, [76, AdsPEPublishButton17, [25]]];
-const AdsPENavigationBar11 = [1, AdsPENavigationBar11_ComputeFunction, [66, "div", ["className", 0, "_4t_9"]]];
-const FluxContainer_AdsPENavigationBarContainer_12 = [1, FluxContainer_AdsPENavigationBarContainer_12_ComputeFunction, [76, AdsPENavigationBar11, [11]]];
-
-function ReactPopoverMenu20() {
-  return [1, ReactPopoverMenu20_ComputeFunction, [14, 0, [76, InlineBlock19, [30]], 1, [76, InlineBlock19, [73]], 2, [76, InlineBlock19, [82]], 3, [76, InlineBlock19, [101]], 4, [76, InlineBlock19, [273]]]];
-}
-
-function ReactImage0() {
-  return [1, ReactImage0_ComputeFunction, [14, 0, [66, "i", ["alt", 0, "", "className", 0, "_3-99 img sp_i534r85sjIn sx_538591"]], 1, [66, "i", ["className", 0, "_3ut_ img sp_i534r85sjIn sx_e8ac93", "alt", 0, ""]], 2, [66, "i", ["alt", 0, "", "className", 0, "_3-8_ img sp_i534r85sjIn sx_7b15bc"]], 3, [66, "i", ["className", 0, "_1m1s _4540 _p img sp_i534r85sjIn sx_f40b1c", "alt", 0, ""]], 4, [1090, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_i534r85sjIn sx_20273d"], [4098, "u", "Warning"]], 5, [66, "i", ["alt", 0, "", "className", 0, "_3-8_ img sp_i534r85sjIn sx_b5d079"]], 6, [66, "i", ["alt", 0, "", "className", 0, "img sp_i534r85sjIn sx_29f8c9"]], 7, [66, "i", ["alt", 0, "", "className", 0, "_3-8_ img sp_i534r85sjIn sx_ef6a9c"]], 8, [66, "i", ["alt", 0, "", "className", 0, "img sp_i534r85sjIn sx_6f8c43"]], 9, [66, "i", ["alt", 0, "", "className", 0, "img sp_i534r85sjIn sx_e94a2d"]], 10, [66, "i", ["alt", 0, "", "className", 0, "img sp_i534r85sjIn sx_7ed7d4"]], 11, [66, "i", ["alt", 0, "", "className", 0, "img sp_i534r85sjIn sx_930440"]], 12, [66, "i", ["alt", 0, "", "className", 0, "img sp_i534r85sjIn sx_750c83"]], 13, [66, "i", ["alt", 0, "", "className", 0, "img sp_i534r85sjIn sx_73c1bb"]], 14, [66, "i", ["alt", 0, "", "className", 0, "img sp_i534r85sjIn sx_29f28d"]], 15, [66, "i", ["alt", 0, "", "className", 0, "_3-8_ img sp_i534r85sjIn sx_91c59e"]], 16, [66, "i", ["alt", 0, "", "className", 0, "_3-99 img sp_i534r85sjIn sx_538591"]], 17, [66, "i", ["alt", 0, "", "className", 0, "_3-8_ img sp_i534r85sjIn sx_c8eb75"]], 18, [66, "i", ["alt", 0, "", "className", 0, "_3-99 img sp_i534r85sjIn sx_538591"]], 19, [66, "i", ["className", 0, "_3yz6 _5whs img sp_i534r85sjIn sx_896996", "alt", 0, ""]], 20, [66, "i", ["className", 0, "_5b5p _4gem img sp_i534r85sjIn sx_896996", "alt", 0, ""]], 21, [66, "i", ["className", 0, "_541d img sp_i534r85sjIn sx_2f396a", "alt", 0, ""]], 22, [66, "i", ["alt", 0, "", "className", 0, "img sp_i534r85sjIn sx_31d9b0"]], 23, [66, "i", ["alt", 0, "", "className", 0, "_3-99 img sp_i534r85sjIn sx_2c18b7"]], 24, [66, "i", ["alt", 0, "", "className", 0, "img sp_i534r85sjIn sx_0a681f"]], 25, [66, "i", ["className", 0, "_1-lx img sp_OkER5ktbEyg sx_b369b4", "alt", 0, ""]], 26, [66, "i", ["className", 0, "_1-lx img sp_i534r85sjIn sx_96948e", "alt", 0, ""]], 27, [66, "i", ["className", 0, "_541d img sp_i534r85sjIn sx_2f396a", "alt", 0, ""]], 28, [66, "i", ["alt", 0, "", "className", 0, "_3-99 img sp_i534r85sjIn sx_538591"]], 29, [66, "i", ["className", 0, "_1cie _1cif img sp_i534r85sjIn sx_6e6820", "alt", 0, ""]], 30, [66, "i", ["className", 0, "_1cie img sp_i534r85sjIn sx_e896cf", "alt", 0, ""]], 31, [66, "i", ["className", 0, "_1cie img sp_i534r85sjIn sx_38fed8", "alt", 0, ""]]]];
-}
-
-function XUIText29() {
-  return [1, XUIText29_ComputeFunction, [14, 0, [4162, "span", ["display", 0, "inline", "className", 0, " _50f7"], "Ads Manager"], 1, [4162, "span", ["className", 0, "_2x9f  _50f5 _50f7", "display", 0, "inline"], "Editing Campaign"], 2, [4162, "span", ["display", 0, "inline", "className", 0, " _50f5 _50f7"], "Test Campaign"]]];
-}
-
-function AbstractLink1() {
-  return [1, AbstractLink1_ComputeFunction, [14, 0, [2498, "a", ["className", 0, "_387r _55pi _2agf _4jy0 _4jy4 _517h _51sy _42ft", "href", 0, "#"], ["width", "250px", "max-width", "250px"], ["click", 1, 1], [[1346, "span", ["className", 0, "_55pe"], ["max-width", "236px"], [2050, "span", [[4162, "span", ["className", 0, "_48u-"], "Account:"], [32771, " "], [32771, "Dick Madanson (10149999073643408)"]]]], [76, ReactImage0, [0]]]], 1, [4290, "a", ["className", 0, "_585q _50zy _50-0 _50z- _5upp _42ft", "size", 4, "medium", "title", 0, "Remove", "href", 0, "#"], ["click", 1, 1], "Remove"], 2, [1218, "a", ["target", 0, "_blank", "href", 0, "/ads/manage/billing.php?act=10149999073643408"], ["click", 1, 1], [76, XUIText29, [48]]], 3, [2498, "a", ["className", 0, " _5bbf _55pi _2agf _4jy0 _4jy4 _517h _51sy _42ft", "href", 0, "#"], ["max-width", "200px"], ["click", 1, 1], [[2370, "span", ["className", 0, "_55pe"], ["max-width", "186px"], [[76, ReactImage0, [126]], [32771, "Search"]]], [76, ReactImage0, [127]]]], 4, [2498, "a", ["className", 0, " _5bbf _55pi _2agf _4jy0 _4jy4 _517h _51sy _42ft", "href", 0, "#"], ["max-width", "200px"], ["click", 1, 1], [[2370, "span", ["className", 0, "_55pe"], ["max-width", "186px"], [[76, ReactImage0, [134]], [32771, "Filters"]]], [76, ReactImage0, [135]]]], 5, [2242, "a", ["className", 0, "_1_-t _1_-v _42ft", "height", 0, "medium", "role", 0, "button", "href", 0, "#"], ["click", 1, 1], [[32771, "Lifetime"], [76, ReactImage0, [177]]]], 6, [4290, "a", ["href", 0, "#"], ["click", 1, 1], "Create Ad Set"], 7, [4290, "a", ["href", 0, "#"], ["click", 1, 1], "View Ad Set"], 8, [4290, "a", ["href", 0, "#"], ["click", 1, 1], "Set a Limit"], 9, [2498, "a", ["className", 0, "_p _55pi _2agf _4jy0 _4jy3 _517h _51sy _42ft", "href", 0, "#"], ["max-width", "200px"], ["click", 1, 1], [[4418, "span", ["className", 0, "_55pe"], ["max-width", "186px"], "Links"], [76, ReactImage0, [266]]]]]];
-}
-
-function Link2() {
-  return [1, Link2_ComputeFunction, [14, 0, [76, AbstractLink1, [1]], 1, [76, AbstractLink1, [43]], 2, [76, AbstractLink1, [49]], 3, [76, AbstractLink1, [128]], 4, [76, AbstractLink1, [136]], 5, [76, AbstractLink1, [178]], 6, [76, AbstractLink1, [207]], 7, [76, AbstractLink1, [209]], 8, [76, AbstractLink1, [241]], 9, [76, AbstractLink1, [267]]]];
-}
-
-function InlineBlock19() {
-  return [1, InlineBlock19_ComputeFunction, [14, 0, [1090, "div", ["className", 0, "uiPopover _6a _6b"], [76, ReactImage0, [29]]], 1, [1090, "div", ["className", 0, "uiPopover _6a _6b"], [76, XUIButton4, [72]]], 2, [1090, "div", ["className", 0, "_1nwm uiPopover _6a _6b"], [76, XUIButton4, [81]]], 3, [1090, "div", ["size", 4, "large", "className", 0, "uiPopover _6a _6b"], [76, XUIButton4, [100]]], 4, [1346, "div", ["className", 0, "_3-90 uiPopover _6a _6b"], ["margin-top", "2px"], [76, ReactXUIPopoverButton6, [272]]]]];
-}
-
-function AbstractButton3() {
-  return [1, AbstractButton3_ComputeFunction, [14, 0, [76, Link2, [2]], 1, [4290, "button", ["className", 0, "_5n7z _4jy0 _4jy4 _517h _51sy _42ft", "type", 0, "submit", "value", 0, "1"], ["click", 1, 1], "Discard Changes"], 2, [2242, "button", ["className", 0, "_5n7z _2yak _4lj- _4jy0 _4jy4 _517h _51sy _42ft _42fr", "disabled", 2, true, "data-tooltip-content", 0, "You have no changes to publish", "data-hover", 0, "tooltip", "type", 0, "submit", "value", 0, "1"], ["click", 1, 1], [[76, ReactImage0, [22]], [32771, "Review Changes"]]], 3, [76, Link2, [44]], 4, [2242, "button", ["className", 0, "_u_k _4jy0 _4jy4 _517h _51sy _42ft", "type", 0, "submit", "value", 0, "1"], ["click", 1, 1], [[76, ReactImage0, [67]], [32771, "Create Campaign"]]], 5, [1090, "button", ["className", 0, "_u_k _3qx6 _p _4jy0 _4jy4 _517h _51sy _42ft", "type", 0, "submit", "value", 0, "1"], [76, ReactImage0, [70]]], 6, [2242, "button", ["aria-label", 0, "Edit", "data-tooltip-content", 0, "Edit Campaigns (Ctrl+U)", "data-hover", 0, "tooltip", "className", 0, "_d2_ _u_k noMargin _4jy0 _4jy4 _517h _51sy _42ft", "disabled", 2, false, "type", 0, "submit", "value", 0, "1"], ["click", 1, 1], [[76, ReactImage0, [76]], [32771, "Edit"]]], 7, [1090, "button", ["className", 0, "_u_k _3qx6 _p _4jy0 _4jy4 _517h _51sy _42ft", "disabled", 2, false, "type", 0, "submit", "value", 0, "1"], [76, ReactImage0, [79]]], 8, [1218, "button", ["aria-label", 0, "Revert", "className", 0, "_u_k _4jy0 _4jy4 _517h _51sy _42ft _42fr", "data-hover", 0, "tooltip", "data-tooltip-content", 0, "Revert", "disabled", 2, true, "type", 0, "submit", "value", 0, "1"], ["click", 1, 1], [76, ReactImage0, [88]]], 9, [1218, "button", ["aria-label", 0, "Delete", "className", 0, "_u_k _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "data-tooltip-content", 0, "Delete", "disabled", 2, false, "type", 0, "submit", "value", 0, "1"], ["click", 1, 1], [76, ReactImage0, [91]]], 10, [1218, "button", ["aria-label", 0, "Duplicate", "className", 0, "_u_k _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "data-tooltip-content", 0, "Duplicate", "disabled", 2, false, "type", 0, "submit", "value", 0, "1"], ["click", 1, 1], [76, ReactImage0, [94]]], 11, [1218, "button", ["aria-label", 0, "Export &amp; Import", "className", 0, "_u_k noMargin _p _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "data-tooltip-content", 0, "Export &amp; Import", "type", 0, "submit", "value", 0, "1"], ["click", 1, 1], [76, ReactImage0, [98]]], 12, [1474, "button", ["aria-label", 0, "Create Report", "className", 0, "_u_k _5n7z _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "data-tooltip-content", 0, "Create Report", "disabled", 2, false, "type", 0, "submit", "value", 0, "1"], ["box-sizing", "border-box", "height", "28px", "width", "48px"], ["click", 1, 1], [76, ReactImage0, [108]]], 13, [1218, "button", ["aria-label", 0, "Campaign Tags", "className", 0, " _5uy7 _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "data-tooltip-content", 0, "Campaign Tags", "disabled", 2, false, "type", 0, "submit", "value", 0, "1"], ["click", 1, 1], [76, ReactImage0, [111]]], 14, [76, Link2, [129]], 15, [76, Link2, [137]], 16, [4290, "button", ["className", 0, "_3yz9 _1t-2 _50z- _50zy _50zz _50z- _5upp _42ft", "size", 4, "small", "type", 0, "button", "title", 0, "Remove"], ["click", 1, 1], "Remove"], 17, [4290, "button", ["className", 0, "_5b5u _5b5v _4jy0 _4jy3 _517h _51sy _42ft", "type", 0, "submit", "value", 0, "1"], ["click", 1, 1], "Apply"], 18, [1218, "button", ["className", 0, "_1wdf _4jy0 _517i _517h _51sy _42ft", "type", 0, "submit", "value", 0, "1"], ["click", 1, 1], [76, ReactImage0, [160]]], 19, [76, Link2, [179]], 20, [1218, "button", ["aria-label", 0, "List Settings", "className", 0, "_u_k _3c5o _1-r0 _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "data-tooltip-content", 0, "List Settings", "type", 0, "submit", "value", 0, "1"], ["click", 1, 1], [76, ReactImage0, [186]]], 21, [76, Link2, [268]], 22, [1218, "button", ["className", 0, "_tm3 _tm6 _tm7 _4jy0 _4jy6 _517h _51sy _42ft", "data-tooltip-position", 0, "right", "data-tooltip-content", 0, "Campaigns", "data-hover", 0, "tooltip", "type", 0, "submit", "value", 0, "1"], ["click", 1, 1], [2050, "div", [[66, "div", ["className", 0, "_tma"]], [66, "div", ["className", 0, "_tm8"]], [4162, "div", ["className", 0, "_tm9"], "1"]]]], 23, [1218, "button", ["className", 0, "_tm4 _tm6 _4jy0 _4jy6 _517h _51sy _42ft", "data-tooltip-position", 0, "right", "data-tooltip-content", 0, "Ad Sets", "data-hover", 0, "tooltip", "type", 0, "submit", "value", 0, "1"], ["click", 1, 1], [2050, "div", [[66, "div", ["className", 0, "_tma"]], [66, "div", ["className", 0, "_tm8"]], [4162, "div", ["className", 0, "_tm9"], "1"]]]], 24, [1218, "button", ["className", 0, "_tm5 _tm6 _4jy0 _4jy6 _517h _51sy _42ft", "data-tooltip-position", 0, "right", "data-tooltip-content", 0, "Ads", "data-hover", 0, "tooltip", "type", 0, "submit", "value", 0, "1"], ["click", 1, 1], [2050, "div", [[66, "div", ["className", 0, "_tma"]], [66, "div", ["className", 0, "_tm8"]], [4162, "div", ["className", 0, "_tm9"], "1"]]]]]];
-}
-
-function XUIButton4() {
-  return [1, XUIButton4_ComputeFunction, [14, 0, [76, AbstractButton3, [3]], 1, [76, AbstractButton3, [20]], 2, [76, AbstractButton3, [23]], 3, [76, AbstractButton3, [68]], 4, [76, AbstractButton3, [71]], 5, [76, AbstractButton3, [77]], 6, [76, AbstractButton3, [80]], 7, [76, AbstractButton3, [89]], 8, [76, AbstractButton3, [92]], 9, [76, AbstractButton3, [95]], 10, [76, AbstractButton3, [99]], 11, [76, AbstractButton3, [109]], 12, [76, AbstractButton3, [112]], 13, [76, AbstractButton3, [130]], 14, [76, AbstractButton3, [138]], 15, [76, AbstractButton3, [156]], 16, [76, AbstractButton3, [161]], 17, [76, AbstractButton3, [187]], 18, [76, AbstractButton3, [269]], 19, [76, AbstractButton3, [303]], 20, [76, AbstractButton3, [305]], 21, [76, AbstractButton3, [307]]]];
-}
-
-function AbstractPopoverButton5() {
-  return [1, AbstractPopoverButton5_ComputeFunction, [14, 0, [76, XUIButton4, [4]], 1, [76, XUIButton4, [131]], 2, [76, XUIButton4, [139]], 3, [76, XUIButton4, [270]]]];
-}
-
-function ReactXUIPopoverButton6() {
-  return [1, ReactXUIPopoverButton6_ComputeFunction, [14, 0, [76, AbstractPopoverButton5, [5]], 1, [76, AbstractPopoverButton5, [132]], 2, [76, AbstractPopoverButton5, [140]], 3, [76, AbstractPopoverButton5, [271]]]];
-}
-
-const BIGAdAccountSelector7 = [1, BIGAdAccountSelector7_ComputeFunction, [1026, "div", [76, ReactXUIPopoverButton6, [6]]]];
-const FluxContainer_AdsPEBIGAdAccountSelectorContainer_8 = [1, FluxContainer_AdsPEBIGAdAccountSelectorContainer_8_ComputeFunction, [76, BIGAdAccountSelector7, [7]]];
-
-function ErrorBoundary9() {
-  return [1, ErrorBoundary9_ComputeFunction, [14, 0, [76, FluxContainer_AdsPEBIGAdAccountSelectorContainer_8, [8]], 1, [76, FluxContainer_AdsPENavigationBarContainer_12, [12]], 2, [76, FluxContainer_AdsPEPublishButtonContainer_18, [26]], 3, [76, ReactPopoverMenu20, [31]], 4, [76, AdsPEResetDialog24, [37]], 5, [76, FluxContainer_AdsPETopErrorContainer_35, [56]], 6, [76, FluxContainer_AdsGuidanceChannel_36, [59]], 7, [76, FluxContainer_AdsBulkEditDialogContainer_38, [63]], 8, [76, AdsPECampaignGroupToolbarContainer57, [123]], 9, [76, AdsPEFilterContainer72, [169]], 10, [76, AdsPETablePagerContainer75, [174]], 11, [76, AdsPEStatRangeContainer81, [192]], 12, [76, FluxContainer_AdsPEMultiTabDrawerContainer_137, [300]], 13, [76, AdsPEOrganizerContainer139, [310]], 14, [76, AdsPECampaignGroupTableContainer159, [470]], 15, [76, AdsPEContentContainer161, [474]]]];
-}
-
-function AdsErrorBoundary10() {
-  return [1, AdsErrorBoundary10_ComputeFunction, [14, 0, [76, ErrorBoundary9, [9]], 1, [76, ErrorBoundary9, [13]], 2, [76, ErrorBoundary9, [27]], 3, [76, ErrorBoundary9, [32]], 4, [76, ErrorBoundary9, [38]], 5, [76, ErrorBoundary9, [57]], 6, [76, ErrorBoundary9, [60]], 7, [76, ErrorBoundary9, [64]], 8, [76, ErrorBoundary9, [124]], 9, [76, ErrorBoundary9, [170]], 10, [76, ErrorBoundary9, [175]], 11, [76, ErrorBoundary9, [193]], 12, [76, ErrorBoundary9, [301]], 13, [76, ErrorBoundary9, [311]], 14, [76, ErrorBoundary9, [471]], 15, [76, ErrorBoundary9, [475]]]];
-}
-
-function LeftRight21() {
-  return [1, LeftRight21_ComputeFunction, [14, 0, [2114, "div", ["className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [2114, "div", ["className", 0, "_34_j"], [[1090, "div", ["className", 0, "_34_k"], [76, AdsErrorBoundary10, [10]]], [1090, "div", ["className", 0, "_2u-6"], [76, AdsErrorBoundary10, [14]]]]]], [1090, "div", ["className", 0, "_ohf rfloat"], [2114, "div", ["className", 0, "_34_m"], [[1090, "div", ["className", 0, "_5ju2"], [76, AdsErrorBoundary10, [28]]], [1090, "div", ["className", 0, "_5ju2"], [76, AdsErrorBoundary10, [33]]]]]]]], 1, [2114, "div", ["direction", 0, "left", "className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [76, AdsLabeledField104, [231]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef"], [4162, "div", ["className", 0, "_2oc7"], "Clicks to Website"]]]]], 2, [2114, "div", ["className", 0, "_3-8x clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [76, AdsLabeledField104, [234]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef"], [4162, "div", ["className", 0, "_2oc7"], "Auction"]]]]], 3, [2114, "div", ["className", 0, "_3-8y clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [76, AdsLabeledField104, [240]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef"], [76, FluxContainer_AdsCampaignGroupSpendCapContainer_107, [244]]]]]], 4, [2114, "div", ["className", 0, "_5dw9 _5dwa clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [76, XUICardHeaderTitle100, [265]]], [1090, "div", ["className", 0, "_ohf rfloat"], [76, FluxContainer_AdsPluginizedLinksMenuContainer_121, [276]]]]]]];
-}
-
-const AdsUnifiedNavigationLocalNav22 = [1, AdsUnifiedNavigationLocalNav22_ComputeFunction, [1090, "div", ["className", 0, "_34_i"], [76, LeftRight21, [34]]]];
-const AdsPETopNav25 = [1, AdsPETopNav25_ComputeFunction, [2306, "div", ["width", "1306px"], [[76, AdsUnifiedNavigationLocalNav22, [35]], [76, AdsErrorBoundary10, [39]]]]];
-const FluxContainer_AdsPETopNavContainer_26 = [1, FluxContainer_AdsPETopNavContainer_26_ComputeFunction, [76, AdsPETopNav25, [40]]];
-const FluxContainer_AdsPEWorkspaceContainer_162 = [1, FluxContainer_AdsPEWorkspaceContainer_162_ComputeFunction, [2370, "div", ["className", 0, "_49wu"], ["height", "177px", "top", "43px", "width", "1306px"], [[76, ResponsiveBlock37, [62]], [76, AdsErrorBoundary10, [476]]]]];
-const FluxContainer_AdsSessionExpiredDialogContainer_163 = [1, FluxContainer_AdsSessionExpiredDialogContainer_163_ComputeFunction, [32772, null]];
-const FluxContainer_AdsPEUploadDialogLazyContainer_164 = [1, FluxContainer_AdsPEUploadDialogLazyContainer_164_ComputeFunction, [32772, null]];
-const FluxContainer_DialogContainer_165 = [1, FluxContainer_DialogContainer_165_ComputeFunction, [32772, null]];
-const AdsBugReportContainer166 = [1, AdsBugReportContainer166_ComputeFunction, [2, "span"]];
-const AdsPEAudienceSplittingDialog167 = [1, AdsPEAudienceSplittingDialog167_ComputeFunction, [32772, null]];
-const AdsPEAudienceSplittingDialogContainer168 = [1, AdsPEAudienceSplittingDialogContainer168_ComputeFunction, [1026, "div", [76, AdsPEAudienceSplittingDialog167, [482]]]];
-const FluxContainer_AdsRuleDialogBootloadContainer_169 = [1, FluxContainer_AdsRuleDialogBootloadContainer_169_ComputeFunction, [32772, null]];
-const FluxContainer_AdsPECFTrayContainer_170 = [1, FluxContainer_AdsPECFTrayContainer_170_ComputeFunction, [32772, null]];
-const FluxContainer_AdsPEDeleteDraftContainer_171 = [1, FluxContainer_AdsPEDeleteDraftContainer_171_ComputeFunction, [32772, null]];
-const FluxContainer_AdsPEInitialDraftPublishDialogContainer_172 = [1, FluxContainer_AdsPEInitialDraftPublishDialogContainer_172_ComputeFunction, [32772, null]];
-const FluxContainer_AdsPEReachFrequencyStatusTransitionDialogBootloadContainer_173 = [1, FluxContainer_AdsPEReachFrequencyStatusTransitionDialogBootloadContainer_173_ComputeFunction, [32772, null]];
-const FluxContainer_AdsPEPurgeArchiveDialogContainer_174 = [1, FluxContainer_AdsPEPurgeArchiveDialogContainer_174_ComputeFunction, [32772, null]];
-const AdsPECreateDialogContainer175 = [1, AdsPECreateDialogContainer175_ComputeFunction, [2, "span"]];
-const FluxContainer_AdsPEModalStatusContainer_176 = [1, FluxContainer_AdsPEModalStatusContainer_176_ComputeFunction, [32772, null]];
-const FluxContainer_AdsBrowserExtensionErrorDialogContainer_177 = [1, FluxContainer_AdsBrowserExtensionErrorDialogContainer_177_ComputeFunction, [32772, null]];
-const FluxContainer_AdsPESortByErrorTipContainer_178 = [1, FluxContainer_AdsPESortByErrorTipContainer_178_ComputeFunction, [32772, null]];
-const LeadDownloadDialogSelector179 = [1, LeadDownloadDialogSelector179_ComputeFunction, [32772, null]];
-const FluxContainer_AdsPELeadDownloadDialogContainerClass_180 = [1, FluxContainer_AdsPELeadDownloadDialogContainerClass_180_ComputeFunction, [76, LeadDownloadDialogSelector179, [494]]];
-const AdsPEContainer181 = [1, AdsPEContainer181_ComputeFunction, [2114, "div", ["id", 0, "ads_pe_container"], [[76, FluxContainer_AdsPETopNavContainer_26, [41]], [76, FluxContainer_AdsPEWorkspaceContainer_162, [477]], [76, FluxContainer_AdsSessionExpiredDialogContainer_163, [478]], [76, FluxContainer_AdsPEUploadDialogLazyContainer_164, [479]], [76, FluxContainer_DialogContainer_165, [480]], [76, AdsBugReportContainer166, [481]], [76, AdsPEAudienceSplittingDialogContainer168, [483]], [76, FluxContainer_AdsRuleDialogBootloadContainer_169, [484]], [76, FluxContainer_AdsPECFTrayContainer_170, [485]], [2050, "span", [[76, FluxContainer_AdsPEDeleteDraftContainer_171, [486]], [76, FluxContainer_AdsPEInitialDraftPublishDialogContainer_172, [487]], [76, FluxContainer_AdsPEReachFrequencyStatusTransitionDialogBootloadContainer_173, [488]]]], [76, FluxContainer_AdsPEPurgeArchiveDialogContainer_174, [489]], [76, AdsPECreateDialogContainer175, [490]], [76, FluxContainer_AdsPEModalStatusContainer_176, [491]], [76, FluxContainer_AdsBrowserExtensionErrorDialogContainer_177, [492]], [76, FluxContainer_AdsPESortByErrorTipContainer_178, [493]], [76, FluxContainer_AdsPELeadDownloadDialogContainerClass_180, [495]], [66, "div", ["id", 0, "web_ads_guidance_tips"]]]]];
-export const Component = [0, ["x"], Component_ComputeFunction, [76, AdsPEContainer181, [496]]];
+const AdsCardSection639_ComputeFunction = function () {
+  return [];
+};
+
+const XUICard640_ComputeFunction = function () {
+  return [];
+};
+
+const ReactXUIError641_ComputeFunction = function () {
+  return [];
+};
+
+const AdsCard642_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupTrackingSection643_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupTrackingSectionContainer644_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupIOSection645_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupIOSectionContainer646_ComputeFunction = function () {
+  return [];
+};
+
+const LeftRight647_ComputeFunction = function () {
+  return [];
+};
+
+const FlexibleBlock648_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEMultiColumnEditor649_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupEditor650_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAdgroupEditorContainer651_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPESideTrayTabContent652_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEEditorTrayTabContent653_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEMultiTabDrawer654_ComputeFunction = function () {
+  return [{}, {}];
+};
+
+const FluxContainer_x_655_ComputeFunction = function () {
+  return [];
+};
+
+const AdsBugReportContainer656_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAudienceSplittingDialog657_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEAudienceSplittingDialogContainer658_ComputeFunction = function () {
+  return [];
+};
+
+const FluxContainer_p_659_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPECreateDialogContainer660_ComputeFunction = function () {
+  return [];
+};
+
+const AdsPEContainer661_ComputeFunction = function () {
+  return [];
+};
+
+function Component_ComputeFunction() {
+  return [];
+}
+
+const Link0 = [1, Link0_ComputeFunction, [194, "a", ["href", 0, "/", "className", 0, "_5ljn"], ["click", 1, 0]]];
+const Link2 = [1, Link2_ComputeFunction, [2498, "a", ["className", 0, "_387r _55pi _2agf _387r _55pi _4jy0 _4jy3 _517h _51sy _42ft", "href", 0, "#", "use", 0, "default", "borderShade", 0, "light"], ["max-width", "200px"], ["imageRight", 0, 0, "click", 1, 1, "onToggle", 1, 2], [[4418, "span", ["className", 0, "_55pe"], ["max-width", "186px"], "Dick Madanson (10149999073643408)"], [98370, "i", ["alt", 0, "", "className", 0, "_3-99 img sp_UuU9HmrQ397 sx_7e56e9"]]]]];
+const AbstractButton3 = [32769, [76, Link2, []]];
+const XUIButton4 = [32769, [76, Link2, []]];
+const AbstractPopoverButton5 = [32769, [76, Link2, []]];
+const ReactXUIPopoverButton6 = [32769, [76, Link2, []]];
+const AdsPEAccountSelector7 = [32769, [76, Link2, []]];
+const AdsPEAccountSelectorContainer8 = [32769, [76, Link2, []]];
+const AbstractButton9 = [1, AbstractButton9_ComputeFunction, [4290, "button", ["id", 0, "downloadButton", "className", 0, "_5lk0 _4jy0 _4jy3 _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], "Download to Power Editor"]];
+const XUIButton10 = [32769, [76, AbstractButton9, []]];
+const AbstractButton13 = [1, AbstractButton13_ComputeFunction, [2242, "button", ["id", 0, "uploadButton", "className", 0, "_5lk0 _4jy0 _4jy3 _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0, "click", 1, 1], [[98370, "i", ["alt", 0, "", "className", 0, "_3-8_ img sp_UuU9HmrQ397 sx_dbc06a"]], [32771, "Upload Changes"]]]];
+const XUIButton14 = [32769, [76, AbstractButton13, []]];
+const AbstractButton16 = [1, AbstractButton16_ComputeFunction, [4290, "button", ["className", 0, "_5ljz _4jy0 _4jy3 _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], "Help"]];
+const XUIButton17 = [32769, [76, AbstractButton16, []]];
+const AbstractButton19 = [1, AbstractButton19_ComputeFunction, [1218, "button", ["className", 0, "_5ljw _p _4jy0 _4jy3 _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_d5a685"]]]];
+const XUIButton20 = [32769, [76, AbstractButton19, []]];
+const InlineBlock21 = [1, InlineBlock21_ComputeFunction, [1218, "div", ["className", 0, "_5ljz uiPopover _6a _6b", "alignh", 0, "right", "alignv", 0, "middle"], ["menu", 0, 0], [76, AbstractButton19, []]]];
+const ReactPopoverMenu22 = [32769, [76, InlineBlock21, []]];
+const XUIButtonGroup23 = [32769, [100418, "div", ["className", 0, "_13xj _51xa", "id", 0, "helpButton"], [[76, AbstractButton16, []], [76, InlineBlock21, []]]]];
+const AdsPETopNav25 = [32769, [100418, "div", ["className", 0, "_5ljl", "id", 0, "ads_pe_top_nav"], [[2114, "div", ["className", 0, "_5ljm"], [[76, Link0, []], [1090, "div", ["className", 0, "_5rne"], [4162, "span", ["className", 0, "_5ljs", "data-testid", 0, "PETopNavLogoText"], "Power Editor"]], [4162, "span", ["className", 0, "_5ljt _5lju"], "Dick Madanson"]]], [2114, "div", ["className", 0, "_5ljy"], [[2114, "div", ["className", 0, "_5ljz _5mun"], [[76, Link2, []], [4162, "div", ["className", 0, "_5lj- _5lju"], "Account 10149999073643408"]]], [2114, "div", ["className", 0, "_5ljz"], [[1090, "div", ["className", 0, "_5lj_"], [76, AbstractButton9, []]], [1090, "div", ["className", 0, "_5lj- _5lju"], [100354, "div", [[32771, "Last downloaded"], [32771, " "], [4162, "abbr", ["className", 0, "livetimestamp", "data-utime", 0, 1446062352, "data-shorten", 0, false], "a few seconds ago"]]]]]], [2114, "div", ["className", 0, "_5ljz"], [[1090, "div", ["className", 0, "_5lj_"], [76, AbstractButton13, []]], [1090, "div", ["className", 0, "_5lj- _5lju"], [98306, "div"]]]]]], [1090, "div", ["className", 0, "_5lk3"], [100418, "div", ["className", 0, "_13xj _51xa", "id", 0, "helpButton"], [[76, AbstractButton16, []], [76, InlineBlock21, []]]]], [98306, "span"]]]];
+const FluxContainer_ja_26 = [32769, [100418, "div", ["className", 0, "_5ljl", "id", 0, "ads_pe_top_nav"], [[2114, "div", ["className", 0, "_5ljm"], [[76, Link0, []], [1090, "div", ["className", 0, "_5rne"], [4162, "span", ["className", 0, "_5ljs", "data-testid", 0, "PETopNavLogoText"], "Power Editor"]], [4162, "span", ["className", 0, "_5ljt _5lju"], "Dick Madanson"]]], [2114, "div", ["className", 0, "_5ljy"], [[2114, "div", ["className", 0, "_5ljz _5mun"], [[76, Link2, []], [4162, "div", ["className", 0, "_5lj- _5lju"], "Account 10149999073643408"]]], [2114, "div", ["className", 0, "_5ljz"], [[1090, "div", ["className", 0, "_5lj_"], [76, AbstractButton9, []]], [1090, "div", ["className", 0, "_5lj- _5lju"], [100354, "div", [[32771, "Last downloaded"], [32771, " "], [4162, "abbr", ["className", 0, "livetimestamp", "data-utime", 0, 1446062352, "data-shorten", 0, false], "a few seconds ago"]]]]]], [2114, "div", ["className", 0, "_5ljz"], [[1090, "div", ["className", 0, "_5lj_"], [76, AbstractButton13, []]], [1090, "div", ["className", 0, "_5lj- _5lju"], [98306, "div"]]]]]], [1090, "div", ["className", 0, "_5lk3"], [100418, "div", ["className", 0, "_13xj _51xa", "id", 0, "helpButton"], [[76, AbstractButton16, []], [76, InlineBlock21, []]]]], [98306, "span"]]]];
+const Wrapper27 = [1, Wrapper27_ComputeFunction, [1218, "li", ["selected", 130, true, "className", 0, "_5vwz _5vwy _45hc _1hqh", "role", 0, "presentation"], ["click", 1, 0, "onMouseDown", 1, 1, "onFocus", 1, 2, "onBlur", 1, 3], [2242, "a", ["aria-selected", 0, true], ["onKeyDown", 1, 4], [[4162, "div", ["className", 0, "_4jq5"], "Manage Ads"], [66, "span", ["className", 0, "_13xf"]]]]]];
+const TabBarItem28 = [32769, [76, Wrapper27, []]];
+const XUIPageNavigationItem29 = [32769, [76, Wrapper27, []]];
+const TabBarItemWrapper30 = [32769, [76, Wrapper27, []]];
+const Wrapper31 = [1, Wrapper31_ComputeFunction, [1218, "li", ["className", 0, "_5vwz _45hc", "role", 0, "presentation"], ["click", 1, 0, "onMouseDown", 1, 1, "onFocus", 1, 2, "onBlur", 1, 3], [2242, "a", ["aria-selected", 0, false], ["onKeyDown", 1, 4], [[4162, "div", ["className", 0, "_4jq5"], "Audiences"], [66, "span", ["className", 0, "_13xf"]]]]]];
+const TabBarItem32 = [32769, [76, Wrapper31, []]];
+const XUIPageNavigationItem33 = [32769, [76, Wrapper31, []]];
+const TabBarItemWrapper34 = [32769, [76, Wrapper31, []]];
+const Wrapper35 = [1, Wrapper35_ComputeFunction, [1218, "li", ["className", 0, "_5vwz _45hc", "role", 0, "presentation"], ["click", 1, 0, "onMouseDown", 1, 1, "onFocus", 1, 2, "onBlur", 1, 3], [2242, "a", ["aria-selected", 0, false], ["onKeyDown", 1, 4], [[4162, "div", ["className", 0, "_4jq5"], "Image Library"], [66, "span", ["className", 0, "_13xf"]]]]]];
+const TabBarItem36 = [32769, [76, Wrapper35, []]];
+const XUIPageNavigationItem37 = [32769, [76, Wrapper35, []]];
+const TabBarItemWrapper38 = [32769, [76, Wrapper35, []]];
+const Wrapper39 = [1, Wrapper39_ComputeFunction, [1218, "li", ["className", 0, "_5vwz _45hc", "role", 0, "presentation"], ["click", 1, 0, "onMouseDown", 1, 1, "onFocus", 1, 2, "onBlur", 1, 3], [2242, "a", ["aria-selected", 0, false], ["onKeyDown", 1, 4], [[4162, "div", ["className", 0, "_4jq5"], "Reporting"], [66, "span", ["className", 0, "_13xf"]]]]]];
+const TabBarItem40 = [32769, [76, Wrapper39, []]];
+const XUIPageNavigationItem41 = [32769, [76, Wrapper39, []]];
+const TabBarItemWrapper42 = [32769, [76, Wrapper39, []]];
+const Wrapper43 = [1, Wrapper43_ComputeFunction, [1218, "li", ["className", 0, "_5vwz _45hc", "role", 0, "presentation"], ["click", 1, 0, "onMouseDown", 1, 1, "onFocus", 1, 2, "onBlur", 1, 3], [2242, "a", ["aria-selected", 0, false], ["onKeyDown", 1, 4], [[4162, "div", ["className", 0, "_4jq5"], "Page Posts"], [66, "span", ["className", 0, "_13xf"]]]]]];
+const TabBarItem44 = [32769, [76, Wrapper43, []]];
+const XUIPageNavigationItem45 = [32769, [76, Wrapper43, []]];
+const TabBarItemWrapper46 = [32769, [76, Wrapper43, []]];
+const InlineBlock48 = [1, InlineBlock48_ComputeFunction, [1218, "div", ["alignv", 0, "middle", "className", 0, "uiPopover _6a _6b"], ["menu", 0, 0, "layerBehaviors", 0, 1], [99394, "a", ["aria-selected", 0, false], [2114, "span", ["className", 0, "_1b0"], [[32771, "Tools"], [4162, "span", ["className", 0, "accessible_elem"], "additional tabs menu"]]]]]];
+const ReactPopoverMenu49 = [32769, [76, InlineBlock48, []]];
+const TabBarDropdownItem50 = [32769, [99394, "li", ["className", 0, " _45hd", "role", 0, "tab"], [76, InlineBlock48, []]]];
+const TabBar51 = [1, TabBar51_ComputeFunction, [2242, "ul", ["activeTabKey", 0, "MANAGE_ADS", "maxTabsVisible", 0, 5, "moreLabel", 0, "Tools", "className", 0, "_43o4", "role", 0, "tablist"], ["onTabClick", 1, 0, "onWidthCalculated", 1, 1, "onKeyDown", 1, 2, "onKeyUp", 1, 3], [[76, Wrapper27, []], [76, Wrapper31, []], [76, Wrapper35, []], [76, Wrapper39, []], [76, Wrapper43, []], [99394, "li", ["className", 0, " _45hd", "role", 0, "tab"], [76, InlineBlock48, []]]]]];
+const XUIPageNavigationGroup52 = [32769, [76, TabBar51, []]];
+const LeftRight53 = [32769, [99394, "div", ["className", 0, "_5vx7 clearfix"], [1090, "div", ["className", 0, "_ohe lfloat"], [76, TabBar51, []]]]];
+const XUIPageNavigation54 = [32769, [99394, "div", ["className", 0, "_5vx2 _5vx4 _5vx6 _5kkt"], [99394, "div", ["className", 0, "_5vx7 clearfix"], [1090, "div", ["className", 0, "_ohe lfloat"], [76, TabBar51, []]]]]];
+const AdsPENavigationBar55 = [32769, [99394, "div", ["className", 0, "_5_a", "id", 0, "ads_pe_navigation_bar"], [99394, "div", ["className", 0, "_5vx2 _5vx4 _5vx6 _5kkt"], [99394, "div", ["className", 0, "_5vx7 clearfix"], [1090, "div", ["className", 0, "_ohe lfloat"], [76, TabBar51, []]]]]]];
+const FluxContainer_w_56 = [32769, [99394, "div", ["className", 0, "_5_a", "id", 0, "ads_pe_navigation_bar"], [99394, "div", ["className", 0, "_5vx2 _5vx4 _5vx6 _5kkt"], [99394, "div", ["className", 0, "_5vx7 clearfix"], [1090, "div", ["className", 0, "_ohe lfloat"], [76, TabBar51, []]]]]]];
+const Link58 = [1, Link58_ComputeFunction, [4290, "a", ["className", 0, "_585q _50zy _50-0 _50z- _5upp _42ft", "href", 0, "#", "shade", 0, "dark", "title", 0, "Remove"], ["click", 1, 0], "Remove"]];
+const AbstractButton59 = [32769, [76, Link58, []]];
+const XUIAbstractGlyphButton60 = [32769, [76, Link58, []]];
+const XUICloseButton61 = [32769, [76, Link58, []]];
+const Link63 = [1, Link63_ComputeFunction, [1218, "a", ["href", 0, "/ads/manage/billing.php?act=10149999073643408", "target", 0, "_blank"], ["click", 1, 0], [102466, "span", ["weight", 0, "bold", "display", 0, "inline", "className", 0, " _50f7"], "Ads Manager"]]];
+const XUINotice64 = [32769, [100418, "div", ["className", 0, "_585n _585o _2wdd"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [76, Link58, []], [2114, "div", ["className", 0, "_585r _2i-a _50f4"], [[32771, "Please go to "], [76, Link63, []], [32771, " to set up a payment method for this ad account."]]]]]];
+const ReactCSSTransitionGroupChild65 = [32769, [100418, "div", ["className", 0, "_585n _585o _2wdd"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [76, Link58, []], [2114, "div", ["className", 0, "_585r _2i-a _50f4"], [[32771, "Please go to "], [76, Link63, []], [32771, " to set up a payment method for this ad account."]]]]]];
+const ReactTransitionGroup66 = [1, ReactTransitionGroup66_ComputeFunction, [1218, "span", ["transitionEnterTimeout", 0, 500, "transitionLeaveTimeout", 0, 500, "component", 0, "span"], ["transitionName", 0, 0], [100418, "div", ["className", 0, "_585n _585o _2wdd"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [76, Link58, []], [2114, "div", ["className", 0, "_585r _2i-a _50f4"], [[32771, "Please go to "], [76, Link63, []], [32771, " to set up a payment method for this ad account."]]]]]]];
+const ReactCSSTransitionGroup67 = [32769, [76, ReactTransitionGroup66, []]];
+const AdsPETopError68 = [32769, [99394, "div", ["className", 0, "_2wdc"], [76, ReactTransitionGroup66, []]]];
+const FluxContainer_r_69 = [32769, [99394, "div", ["className", 0, "_2wdc"], [76, ReactTransitionGroup66, []]]];
+const Link72 = [1, Link72_ComputeFunction, [2498, "a", ["className", 0, " _5bbf _55pi _2agf  _5bbf _55pi _4jy0 _4jy4 _517h _51sy _42ft", "href", 0, "#", "use", 0, "default", "borderShade", 0, "light"], ["max-width", "200px"], ["imageRight", 0, 0, "click", 1, 1], [[2370, "span", ["className", 0, "_55pe"], ["max-width", "186px"], [[98370, "i", ["className", 0, "_3-8_ img sp_UuU9HmrQ397 sx_bae57d"]], [32771, "Search"]]], [98370, "i", ["alt", 0, "", "className", 0, "_3-99 img sp_UuU9HmrQ397 sx_7e56e9"]]]]];
+const AbstractButton73 = [32769, [76, Link72, []]];
+const XUIButton74 = [32769, [76, Link72, []]];
+const AbstractPopoverButton75 = [32769, [76, Link72, []]];
+const ReactXUIPopoverButton76 = [32769, [76, Link72, []]];
+const Link79 = [1, Link79_ComputeFunction, [2498, "a", ["className", 0, " _5bbf _55pi _2agf  _5bbf _55pi _4jy0 _4jy4 _517h _51sy _42ft", "href", 0, "#", "use", 0, "default", "borderShade", 0, "light"], ["max-width", "200px"], ["imageRight", 0, 0, "click", 1, 1], [[2370, "span", ["className", 0, "_55pe"], ["max-width", "186px"], [[98370, "i", ["className", 0, "_3-8_ img sp_UuU9HmrQ397 sx_81d5f0"]], [32771, "Filters"]]], [98370, "i", ["alt", 0, "", "className", 0, "_3-99 img sp_UuU9HmrQ397 sx_7e56e9"]]]]];
+const AbstractButton80 = [32769, [76, Link79, []]];
+const XUIButton81 = [32769, [76, Link79, []]];
+const AbstractPopoverButton82 = [32769, [76, Link79, []]];
+const ReactXUIPopoverButton83 = [32769, [76, Link79, []]];
+const AdsPEFiltersPopover84 = [32769, [100418, "span", ["className", 0, "_5b-l  _5bbe"], [[76, Link72, []], [76, Link79, []]]]];
+const AbstractButton86 = [1, AbstractButton86_ComputeFunction, [4290, "button", ["className", 0, "_3yz9 _1t-2 _50z_ _50zy _50zz _50z- _5upp _42ft", "shade", 0, "dark", "type", 0, "button", "title", 0, "Remove"], ["click", 1, 0], "Remove"]];
+const XUIAbstractGlyphButton87 = [32769, [76, AbstractButton86, []]];
+const XUICloseButton88 = [32769, [76, AbstractButton86, []]];
+const AdsPopoverLink91 = [1, AdsPopoverLink91_ComputeFunction, [2178, "span", ["onMouseEnter", 1, 0, "onMouseLeave", 1, 1], [[66, "span", ["className", 0, "_3o_j"]], [98370, "i", ["className", 0, "_541d img sp_R48dKBxiJkP sx_dc2cdb"]]]]];
+const AdsHelpLink92 = [32769, [76, AdsPopoverLink91, []]];
+const AbstractButton93 = [1, AbstractButton93_ComputeFunction, [4290, "button", ["className", 0, "_5b5u _5b5v _4jy0 _4jy3 _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], "Apply"]];
+const XUIButton94 = [32769, [76, AbstractButton93, []]];
+const BUIFilterTokenInput95 = [32769, [100418, "div", ["className", 0, "_5b5o _3yz3 _4cld"], [[2114, "div", ["className", 0, "_5b5t _2d2k"], [[98370, "i", ["className", 0, "_5b5p _4gem img sp_UuU9HmrQ397 sx_5fe5c2"]], [2114, "div", ["className", 0, "_5b5r"], [[32771, "Ads: (1)"], [76, AdsPopoverLink91, []]]]]], [76, AbstractButton93, []]]]];
+const BUIFilterToken96 = [1, BUIFilterToken96_ComputeFunction, [2114, "div", ["className", 0, "_3yz1 _3yz2 _3dad"], [[2114, "div", ["aria-hidden", 0, false], [[2242, "div", ["className", 0, "_3yz5"], ["click", 1, 0], [[98370, "i", ["className", 0, "_3yz6 _5whs img sp_UuU9HmrQ397 sx_5fe5c2"]], [4162, "div", ["className", 0, "_3yz7"], "Ads:"], [4162, "div", ["className", 0, "ellipsis _3yz8", "data-hover", 0, "tooltip", "data-tooltip-display", 0, "overflow"], "(1)"]]], [76, AbstractButton86, []]]], [100418, "div", ["className", 0, "_5b5o _3yz3 _4cld"], [[2114, "div", ["className", 0, "_5b5t _2d2k"], [[98370, "i", ["className", 0, "_5b5p _4gem img sp_UuU9HmrQ397 sx_5fe5c2"]], [2114, "div", ["className", 0, "_5b5r"], [[32771, "Ads: (1)"], [76, AdsPopoverLink91, []]]]]], [76, AbstractButton93, []]]]]]];
+const AbstractButton98 = [1, AbstractButton98_ComputeFunction, [1218, "button", ["className", 0, "_1wdf _4jy0 _517i _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0, "image", 0, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_158e8d"]]]];
+const XUIButton99 = [32769, [76, AbstractButton98, []]];
+const BUIFilterTokenCreateButton100 = [32769, [99394, "div", ["className", 0, "_1tc"], [76, AbstractButton98, []]]];
+const BUIFilterTokenizer101 = [32769, [100418, "div", ["className", 0, "_5b-m _3o1v clearfix"], [[76, BUIFilterToken96, []], [99394, "div", ["className", 0, "_1tc"], [76, AbstractButton98, []]], [66, "div", ["className", 0, "_49u3"]]]]];
+const AdsPEFilters103 = [32769, [100418, "div", ["className", 0, "_4rw_"], [[100418, "span", ["className", 0, "_5b-l  _5bbe"], [[76, Link72, []], [76, Link79, []]]], [100418, "div", ["className", 0, "_5b-m _3o1v clearfix"], [[76, BUIFilterToken96, []], [99394, "div", ["className", 0, "_1tc"], [76, AbstractButton98, []]], [66, "div", ["className", 0, "_49u3"]]]], [32771, ""], [98306, "span"]]]];
+const AdsPEFilterContainer104 = [32769, [100418, "div", ["className", 0, "_4rw_"], [[100418, "span", ["className", 0, "_5b-l  _5bbe"], [[76, Link72, []], [76, Link79, []]]], [100418, "div", ["className", 0, "_5b-m _3o1v clearfix"], [[76, BUIFilterToken96, []], [99394, "div", ["className", 0, "_1tc"], [76, AbstractButton98, []]], [66, "div", ["className", 0, "_49u3"]]]], [32771, ""], [98306, "span"]]]];
+const Link111 = [1, Link111_ComputeFunction, [2498, "a", ["className", 0, "_55pi _2agf _55pi _4jy0 _4jy4 _517h _51sy _42ft", "href", 0, "#", "use", 0, "default", "borderShade", 0, "light"], ["max-width", "200px"], ["imageRight", 0, 0, "chevron", 0, 1, "click", 1, 2], [[4418, "span", ["className", 0, "_55pe"], ["max-width", "186px"], "Lifetime"], [98370, "i", ["alt", 0, "", "className", 0, "_3-99 img sp_UuU9HmrQ397 sx_132804"]]]]];
+const AbstractButton112 = [32769, [76, Link111, []]];
+const XUIButton113 = [32769, [76, Link111, []]];
+const AbstractPopoverButton114 = [32769, [76, Link111, []]];
+const ReactXUIPopoverButton115 = [32769, [76, Link111, []]];
+const XUISingleSelectorButton116 = [32769, [76, Link111, []]];
+const InlineBlock117 = [1, InlineBlock117_ComputeFunction, [2242, "div", ["className", 0, "_3c5o _3c5p _6a _6b", "defaultValue", 64, "LIFETIME", "alignv", 0, "middle"], ["onChange", 1, 0], [[262210, "input", ["type", 0, "hidden", "autoComplete", 0, "off", "value", 32, "LIFETIME"]], [76, Link111, []]]]];
+const XUISingleSelector118 = [32769, [76, InlineBlock117, []]];
+const AbstractButton120 = [1, AbstractButton120_ComputeFunction, [1218, "button", ["aria-label", 0, "List Settings", "className", 0, "_u_k _3c5o _1-r0 _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0, "click", 1, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_6c732d"]]]];
+const XUIButton121 = [32769, [76, AbstractButton120, []]];
+const AdsPEStatRange122 = [32769, [100418, "div", ["className", 0, "_3c5k"], [[4162, "span", ["className", 0, "_3c5j"], "Stats:"], [2114, "span", ["className", 0, "_3c5l"], [[76, InlineBlock117, []], [76, AbstractButton120, []]]]]]];
+const AdsPEStatRangeContainer123 = [32769, [100418, "div", ["className", 0, "_3c5k"], [[4162, "span", ["className", 0, "_3c5j"], "Stats:"], [2114, "span", ["className", 0, "_3c5l"], [[76, InlineBlock117, []], [76, AbstractButton120, []]]]]]];
+const Column124 = [32769, [99394, "div", ["className", 0, "_4bl8 _4bl7"], [2114, "div", ["className", 0, "_3c5f"], [[66, "div", ["className", 0, "_3c5i"]], [100418, "div", ["className", 0, "_3c5k"], [[4162, "span", ["className", 0, "_3c5j"], "Stats:"], [2114, "span", ["className", 0, "_3c5l"], [[76, InlineBlock117, []], [76, AbstractButton120, []]]]]]]]]];
+const AbstractButton126 = [1, AbstractButton126_ComputeFunction, [2242, "button", ["className", 0, "_u_k _4jy0 _4jy4 _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0, "image", 0, 1], [[98370, "i", ["alt", 0, "", "className", 0, "_3-8_ img sp_UuU9HmrQ397 sx_158e8d"]], [32771, "Create Ad"]]]];
+const XUIButton127 = [32769, [76, AbstractButton126, []]];
+const AbstractButton129 = [1, AbstractButton129_ComputeFunction, [1218, "button", ["className", 0, "_u_k _p _4jy0 _4jy4 _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_d5a685"]]]];
+const XUIButton130 = [32769, [76, AbstractButton129, []]];
+const InlineBlock131 = [1, InlineBlock131_ComputeFunction, [1218, "div", ["alignh", 0, "right", "alignv", 0, "middle", "className", 0, "uiPopover _6a _6b"], ["menu", 0, 0, "layerBehaviors", 0, 1], [76, AbstractButton129, []]]];
+const ReactPopoverMenu132 = [32769, [76, InlineBlock131, []]];
+const XUIButtonGroup133 = [32769, [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton126, []], [76, InlineBlock131, []]]]];
+const AbstractButton135 = [1, AbstractButton135_ComputeFunction, [2242, "button", ["className", 0, "_d2_ _u_k _5n7z _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "aria-label", 0, "Edit Ads (Ctrl+U)", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0, "click", 1, 1], [[98370, "i", ["alt", 0, "", "className", 0, "_3-8_ img sp_UuU9HmrQ397 sx_990b54"]], [32771, "Edit"]]]];
+const XUIButton136 = [32769, [76, AbstractButton135, []]];
+const AbstractButton138 = [1, AbstractButton138_ComputeFunction, [1218, "button", ["aria-label", 0, "Duplicate", "className", 0, "_u_k _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0, "click", 1, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_203adb"]]]];
+const XUIButton139 = [32769, [76, AbstractButton138, []]];
+const AbstractButton141 = [1, AbstractButton141_ComputeFunction, [1218, "button", ["aria-label", 0, "Revert", "className", 0, "_u_k _4jy0 _4jy4 _517h _51sy _42ft _42fr", "data-hover", 0, "tooltip", "disabled", 2, true, "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0, "click", 1, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_0c342e"]]]];
+const XUIButton142 = [32769, [76, AbstractButton141, []]];
+const AbstractButton144 = [1, AbstractButton144_ComputeFunction, [1218, "button", ["aria-label", 0, "Delete", "className", 0, "_u_k _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0, "click", 1, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_0e75f5"]]]];
+const XUIButton145 = [32769, [76, AbstractButton144, []]];
+const XUIButtonGroup146 = [32769, [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton138, []], [76, AbstractButton141, []], [76, AbstractButton144, []]]]];
+const AbstractButton148 = [1, AbstractButton148_ComputeFunction, [1218, "button", ["className", 0, "_u_k _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "aria-label", 0, "Save Audience", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0, "click", 1, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_8c19ae"]]]];
+const XUIButton149 = [32769, [76, AbstractButton148, []]];
+const AbstractButton151 = [1, AbstractButton151_ComputeFunction, [1218, "button", ["className", 0, "_u_k noMargin _p _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "aria-label", 0, "Export &amp; Import", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0, "image", 0, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_d2b33c"]]]];
+const XUIButton152 = [32769, [76, AbstractButton151, []]];
+const InlineBlock153 = [1, InlineBlock153_ComputeFunction, [1218, "div", ["alignv", 0, "middle", "className", 0, "uiPopover _6a _6b"], ["menu", 0, 0], [76, AbstractButton151, []]]];
+const ReactPopoverMenu154 = [32769, [76, InlineBlock153, []]];
+const AdsPEExportImportMenu155 = [32769, [76, InlineBlock153, []]];
+const AdsPEExportImportMenuContainer159 = [32769, [99330, "span", [76, InlineBlock153, []]]];
+const AbstractButton161 = [1, AbstractButton161_ComputeFunction, [1474, "button", ["className", 0, "_u_k _5n7z _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "aria-label", 0, "Create Report", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["box-sizing", "border-box", "height", "28px", "width", "48px"], ["click", 1, 0, "image", 0, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_872db1"]]]];
+const XUIButton162 = [32769, [76, AbstractButton161, []]];
+const AbstractButton163 = [1, AbstractButton163_ComputeFunction, [4290, "button", ["disabled", 2, true, "className", 0, "hidden_elem _5n7z _4jy0 _4jy4 _517h _51sy _42ft _42fr", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], "Generate Variations"]];
+const XUIButton164 = [32769, [76, AbstractButton163, []]];
+const XUIButtonGroup165 = [32769, [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton148, []], [99330, "span", [76, InlineBlock153, []]], [76, AbstractButton161, []], [76, AbstractButton163, []]]]];
+const FillColumn166 = [32769, [99394, "div", ["className", 0, "_4bl9"], [2114, "span", ["className", 0, "_3c5e"], [[2050, "span", [[100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton126, []], [76, InlineBlock131, []]]], [76, AbstractButton135, []], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton138, []], [76, AbstractButton141, []], [76, AbstractButton144, []]]]]], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton148, []], [99330, "span", [76, InlineBlock153, []]], [76, AbstractButton161, []], [76, AbstractButton163, []]]]]]]];
+const Layout167 = [32769, [100418, "div", ["className", 0, "clearfix"], [[99394, "div", ["className", 0, "_4bl8 _4bl7"], [2114, "div", ["className", 0, "_3c5f"], [[66, "div", ["className", 0, "_3c5i"]], [100418, "div", ["className", 0, "_3c5k"], [[4162, "span", ["className", 0, "_3c5j"], "Stats:"], [2114, "span", ["className", 0, "_3c5l"], [[76, InlineBlock117, []], [76, AbstractButton120, []]]]]]]]], [99394, "div", ["className", 0, "_4bl9"], [2114, "span", ["className", 0, "_3c5e"], [[2050, "span", [[100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton126, []], [76, InlineBlock131, []]]], [76, AbstractButton135, []], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton138, []], [76, AbstractButton141, []], [76, AbstractButton144, []]]]]], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton148, []], [99330, "span", [76, InlineBlock153, []]], [76, AbstractButton161, []], [76, AbstractButton163, []]]]]]]]]];
+const AdsPEMainPaneToolbar168 = [32769, [99394, "div", ["className", 0, "_3c5b clearfix"], [100418, "div", ["className", 0, "clearfix"], [[99394, "div", ["className", 0, "_4bl8 _4bl7"], [2114, "div", ["className", 0, "_3c5f"], [[66, "div", ["className", 0, "_3c5i"]], [100418, "div", ["className", 0, "_3c5k"], [[4162, "span", ["className", 0, "_3c5j"], "Stats:"], [2114, "span", ["className", 0, "_3c5l"], [[76, InlineBlock117, []], [76, AbstractButton120, []]]]]]]]], [99394, "div", ["className", 0, "_4bl9"], [2114, "span", ["className", 0, "_3c5e"], [[2050, "span", [[100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton126, []], [76, InlineBlock131, []]]], [76, AbstractButton135, []], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton138, []], [76, AbstractButton141, []], [76, AbstractButton144, []]]]]], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton148, []], [99330, "span", [76, InlineBlock153, []]], [76, AbstractButton161, []], [76, AbstractButton163, []]]]]]]]]]];
+const AdsPEAdgroupToolbarContainer169 = [32769, [99330, "div", [99394, "div", ["className", 0, "_3c5b clearfix"], [100418, "div", ["className", 0, "clearfix"], [[99394, "div", ["className", 0, "_4bl8 _4bl7"], [2114, "div", ["className", 0, "_3c5f"], [[66, "div", ["className", 0, "_3c5i"]], [100418, "div", ["className", 0, "_3c5k"], [[4162, "span", ["className", 0, "_3c5j"], "Stats:"], [2114, "span", ["className", 0, "_3c5l"], [[76, InlineBlock117, []], [76, AbstractButton120, []]]]]]]]], [99394, "div", ["className", 0, "_4bl9"], [2114, "span", ["className", 0, "_3c5e"], [[2050, "span", [[100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton126, []], [76, InlineBlock131, []]]], [76, AbstractButton135, []], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton138, []], [76, AbstractButton141, []], [76, AbstractButton144, []]]]]], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton148, []], [99330, "span", [76, InlineBlock153, []]], [76, AbstractButton161, []], [76, AbstractButton163, []]]]]]]]]]]];
+const AbstractButton170 = [1, AbstractButton170_ComputeFunction, [1218, "button", ["className", 0, "_tm3 _tm6 _4jy0 _4jy6 _517h _51sy _42ft", "data-tooltip-position", 0, "right", "aria-label", 0, "Campaigns", "data-hover", 0, "tooltip", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], [2050, "div", [[66, "div", ["className", 0, "_tma"]], [66, "div", ["className", 0, "_tm8"]], [4162, "div", ["className", 0, "_tm9"], "1"]]]]];
+const XUIButton171 = [32769, [76, AbstractButton170, []]];
+const AbstractButton172 = [1, AbstractButton172_ComputeFunction, [1218, "button", ["className", 0, "_tm4 _tm6 _4jy0 _4jy6 _517h _51sy _42ft", "data-tooltip-position", 0, "right", "aria-label", 0, "Ad Sets", "data-hover", 0, "tooltip", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], [2050, "div", [[66, "div", ["className", 0, "_tma"]], [66, "div", ["className", 0, "_tm8"]], [4162, "div", ["className", 0, "_tm9"], "1"]]]]];
+const XUIButton173 = [32769, [76, AbstractButton172, []]];
+const AbstractButton174 = [1, AbstractButton174_ComputeFunction, [1218, "button", ["className", 0, "_tm5 _tm6 _tm7 _4jy0 _4jy6 _517h _51sy _42ft", "data-tooltip-position", 0, "right", "aria-label", 0, "Ads", "data-hover", 0, "tooltip", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], [2050, "div", [[66, "div", ["className", 0, "_tma"]], [66, "div", ["className", 0, "_tm8"]], [4162, "div", ["className", 0, "_tm9"], "1"]]]]];
+const XUIButton175 = [32769, [76, AbstractButton174, []]];
+const AdsPESimpleOrganizer176 = [32769, [100418, "div", ["className", 0, "_tm2"], [[76, AbstractButton170, []], [76, AbstractButton172, []], [76, AbstractButton174, []]]]];
+const AdsPEOrganizerContainer177 = [32769, [99330, "div", [100418, "div", ["className", 0, "_tm2"], [[76, AbstractButton170, []], [76, AbstractButton172, []], [76, AbstractButton174, []]]]]];
+const TransitionCell181 = [1, TransitionCell181_ComputeFunction, [1474, "div", ["label", 0, "Ads", "dataKey", 0, 0, "height", 0, 40, "width", 0, 521, "rowIndex", 0, 0, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "521px"], ["groupHeaderLabels", 0, 0, "groupHeaderData", 0, 1], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [100418, "div", ["className", 0, "_1cig _1ksv _1vd7 _4h2r"], [[98370, "i", ["className", 0, "_1cie _1cif img sp_R48dKBxiJkP sx_dc0ad2"]], [4162, "span", ["className", 0, "_1cid"], "Ads"]]]]]]];
+const FixedDataTableCell182 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "521px", "left", 0], [76, TransitionCell181, []]]];
+const FixedDataTableCellGroupImpl183 = [32769, [99650, "div", ["className", 0, "_3pzj"], ["height", "40px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "521px", "left", 0], [76, TransitionCell181, []]]]];
+const FixedDataTableCellGroup184 = [32769, [99650, "div", ["className", 0, "_3pzk"], ["height", "40px", "left", 0], [99650, "div", ["className", 0, "_3pzj"], ["height", "40px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "521px", "left", 0], [76, TransitionCell181, []]]]]];
+const TransitionCell186 = [1, TransitionCell186_ComputeFunction, [1474, "div", ["label", 0, "Delivery", "dataKey", 0, 1, "height", 0, 40, "width", 0, 298, "rowIndex", 0, 0, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "298px"], ["groupHeaderLabels", 0, 0, "groupHeaderData", 0, 1], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _1vd7 _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Delivery"]]]]]];
+const FixedDataTableCell187 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "298px", "left", 0], [76, TransitionCell186, []]]];
+const TransitionCell189 = [1, TransitionCell189_ComputeFunction, [1474, "div", ["label", 0, "Performance", "dataKey", 0, 2, "height", 0, 40, "width", 0, 490, "rowIndex", 0, 0, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "490px"], ["groupHeaderLabels", 0, 0, "groupHeaderData", 0, 1], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _1vd7 _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Performance"]]]]]];
+const FixedDataTableCell190 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "490px", "left", "298px"], [76, TransitionCell189, []]]];
+const TransitionCell192 = [1, TransitionCell192_ComputeFunction, [1474, "div", ["label", 0, "Overview", "dataKey", 0, 3, "height", 0, 40, "width", 0, 972, "rowIndex", 0, 0, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "972px"], ["groupHeaderLabels", 0, 0, "groupHeaderData", 0, 1], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _1vd7 _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Overview"]]]]]];
+const FixedDataTableCell193 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "972px", "left", "788px"], [76, TransitionCell192, []]]];
+const TransitionCell195 = [1, TransitionCell195_ComputeFunction, [1474, "div", ["label", 0, "Creative Assets", "dataKey", 0, 4, "height", 0, 40, "width", 0, 514, "rowIndex", 0, 0, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "514px"], ["groupHeaderLabels", 0, 0, "groupHeaderData", 0, 1], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _1vd7 _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Creative Assets"]]]]]];
+const FixedDataTableCell196 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "514px", "left", "1760px"], [76, TransitionCell195, []]]];
+const TransitionCell198 = [1, TransitionCell198_ComputeFunction, [1474, "div", ["label", 0, "Toplines", "dataKey", 0, 5, "height", 0, 40, "width", 0, 0, "rowIndex", 0, 0, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", 0], ["groupHeaderLabels", 0, 0, "groupHeaderData", 0, 1], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _1vd7 _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Toplines"]]]]]];
+const FixedDataTableCell199 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", 0, "left", "2274px"], [76, TransitionCell198, []]]];
+const TransitionCell201 = [1, TransitionCell201_ComputeFunction, [1474, "div", ["label", 0, "", "dataKey", 0, 6, "height", 0, 40, "width", 0, 25, "rowIndex", 0, 0, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "25px"], ["groupHeaderLabels", 0, 0, "groupHeaderData", 0, 1], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [98370, "div", ["className", 0, "_1cig _1vd7 _4h2r"]]]]]];
+const FixedDataTableCell202 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "25px", "left", "2274px"], [76, TransitionCell201, []]]];
+const FixedDataTableCellGroupImpl203 = [32769, [100674, "div", ["className", 0, "_3pzj"], ["height", "40px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "298px", "left", 0], [76, TransitionCell186, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "490px", "left", "298px"], [76, TransitionCell189, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "972px", "left", "788px"], [76, TransitionCell192, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "514px", "left", "1760px"], [76, TransitionCell195, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", 0, "left", "2274px"], [76, TransitionCell198, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "25px", "left", "2274px"], [76, TransitionCell201, []]]]]];
+const FixedDataTableCellGroup204 = [32769, [99650, "div", ["className", 0, "_3pzk"], ["height", "40px", "left", "521px"], [100674, "div", ["className", 0, "_3pzj"], ["height", "40px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "298px", "left", 0], [76, TransitionCell186, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "490px", "left", "298px"], [76, TransitionCell189, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "972px", "left", "788px"], [76, TransitionCell192, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "514px", "left", "1760px"], [76, TransitionCell195, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", 0, "left", "2274px"], [76, TransitionCell198, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "25px", "left", "2274px"], [76, TransitionCell201, []]]]]]];
+const FixedDataTableRowImpl205 = [32769, [99650, "div", ["className", 0, "_1gd4 _4li _52no _3h1a _1mib"], ["width", "1083px", "height", "40px"], [2114, "div", ["className", 0, "_1gd5"], [[99650, "div", ["className", 0, "_3pzk"], ["height", "40px", "left", 0], [99650, "div", ["className", 0, "_3pzj"], ["height", "40px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "521px", "left", 0], [76, TransitionCell181, []]]]], [99650, "div", ["className", 0, "_3pzk"], ["height", "40px", "left", "521px"], [100674, "div", ["className", 0, "_3pzj"], ["height", "40px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "298px", "left", 0], [76, TransitionCell186, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "490px", "left", "298px"], [76, TransitionCell189, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "972px", "left", "788px"], [76, TransitionCell192, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "514px", "left", "1760px"], [76, TransitionCell195, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", 0, "left", "2274px"], [76, TransitionCell198, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "25px", "left", "2274px"], [76, TransitionCell201, []]]]]], [322, "div", ["className", 0, "_1gd6 _1gd8"], ["left", "521px", "height", "40px"]]]]]];
+const FixedDataTableRow206 = [32769, [99650, "div", ["className", 0, "_1gda"], ["width", "1083px", "height", "40px", "z-index", 1, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [99650, "div", ["className", 0, "_1gd4 _4li _52no _3h1a _1mib"], ["width", "1083px", "height", "40px"], [2114, "div", ["className", 0, "_1gd5"], [[99650, "div", ["className", 0, "_3pzk"], ["height", "40px", "left", 0], [99650, "div", ["className", 0, "_3pzj"], ["height", "40px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "521px", "left", 0], [76, TransitionCell181, []]]]], [99650, "div", ["className", 0, "_3pzk"], ["height", "40px", "left", "521px"], [100674, "div", ["className", 0, "_3pzj"], ["height", "40px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "298px", "left", 0], [76, TransitionCell186, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "490px", "left", "298px"], [76, TransitionCell189, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "972px", "left", "788px"], [76, TransitionCell192, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "514px", "left", "1760px"], [76, TransitionCell195, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", 0, "left", "2274px"], [76, TransitionCell198, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "25px", "left", "2274px"], [76, TransitionCell201, []]]]]], [322, "div", ["className", 0, "_1gd6 _1gd8"], ["left", "521px", "height", "40px"]]]]]]];
+const AbstractCheckboxInput207 = [1, AbstractCheckboxInput207_ComputeFunction, [2114, "label", ["className", 0, "_4h2r _55sg _kv1"], [[262338, "input", ["type", 0, "checkbox"], ["onChange", 1, 0]], [2, "span"]]]];
+const XUICheckboxInput208 = [32769, [76, AbstractCheckboxInput207, []]];
+const TransitionCell209 = [1, TransitionCell209_ComputeFunction, [1474, "div", ["width", 0, 42, "dataKey", 0, "common.id", "className", 0, "_4lgc _4h2u", "columnKey", 0, "common.id", "height", 0, 25], ["height", "25px", "width", "42px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, AbstractCheckboxInput207, []]]]]];
+const FixedDataTableCell210 = [32769, [99650, "div", ["className", 0, "_4lg0 _4lg6 _4h2m"], ["height", "25px", "width", "42px", "left", 0], [76, TransitionCell209, []]]];
+const FixedDataTableAbstractSortableHeader212 = [1, FixedDataTableAbstractSortableHeader212_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Ad Name"]]]]];
+const FixedDataTableSortableHeader213 = [32769, [76, FixedDataTableAbstractSortableHeader212, []]];
+const TransitionCell214 = [1, TransitionCell214_ComputeFunction, [1474, "div", ["label", 0, "Ad Name", "width", 0, 200, "dataKey", 0, "ad.name", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.name", "height", 0, 25], ["height", "25px", "width", "200px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader212, []]]]]];
+const FixedDataTableCell215 = [1, FixedDataTableCell215_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "200px", "left", "42px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell214, []]]]];
+const FixedDataTableAbstractSortableHeader218 = [1, FixedDataTableAbstractSortableHeader218_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _1kst _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [98370, "i", ["className", 0, "_1cie img sp_UuU9HmrQ397 sx_844e7d"]]]]]];
+const FixedDataTableSortableHeader219 = [32769, [76, FixedDataTableAbstractSortableHeader218, []]];
+const TransitionCell220 = [1, TransitionCell220_ComputeFunction, [1474, "div", ["width", 0, 33, "dataKey", 0, "edit_status", "className", 0, "_4lgc _4h2u", "columnKey", 0, "edit_status", "height", 0, 25], ["height", "25px", "width", "33px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader218, []]]]]];
+const FixedDataTableCell221 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "33px", "left", "242px"], [76, TransitionCell220, []]]];
+const FixedDataTableAbstractSortableHeader224 = [1, FixedDataTableAbstractSortableHeader224_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _1kst _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [98370, "i", ["className", 0, "_1cie img sp_UuU9HmrQ397 sx_36dc45"]]]]]];
+const FixedDataTableSortableHeader225 = [32769, [76, FixedDataTableAbstractSortableHeader224, []]];
+const TransitionCell226 = [1, TransitionCell226_ComputeFunction, [1474, "div", ["width", 0, 36, "dataKey", 0, "errors", "className", 0, "_4lgc _4h2u", "columnKey", 0, "errors", "height", 0, 25], ["height", "25px", "width", "36px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader224, []]]]]];
+const FixedDataTableCell227 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "36px", "left", "275px"], [76, TransitionCell226, []]]];
+const FixedDataTableAbstractSortableHeader229 = [1, FixedDataTableAbstractSortableHeader229_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Status"]]]]];
+const FixedDataTableSortableHeader230 = [32769, [76, FixedDataTableAbstractSortableHeader229, []]];
+const TransitionCell231 = [1, TransitionCell231_ComputeFunction, [1474, "div", ["label", 0, "Status", "width", 0, 60, "dataKey", 0, "ad.adgroup_status", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.adgroup_status", "height", 0, 25], ["height", "25px", "width", "60px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader229, []]]]]];
+const FixedDataTableCell232 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "60px", "left", "311px"], [76, TransitionCell231, []]]];
+const FixedDataTableAbstractSortableHeader234 = [1, FixedDataTableAbstractSortableHeader234_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Delivery"]]]]];
+const FixedDataTableSortableHeader235 = [32769, [76, FixedDataTableAbstractSortableHeader234, []]];
+const TransitionCell236 = [1, TransitionCell236_ComputeFunction, [1474, "div", ["label", 0, "Delivery", "width", 0, 150, "dataKey", 0, "ukiAdData.computed_activity_status", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ukiAdData.computed_activity_status", "height", 0, 25], ["height", "25px", "width", "150px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader234, []]]]]];
+const FixedDataTableCell237 = [1, FixedDataTableCell237_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "150px", "left", "371px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell236, []]]]];
+const FixedDataTableCellGroupImpl238 = [32769, [100674, "div", ["className", 0, "_3pzj"], ["height", "25px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4lg6 _4h2m"], ["height", "25px", "width", "42px", "left", 0], [76, TransitionCell209, []]], [76, FixedDataTableCell215, []], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "33px", "left", "242px"], [76, TransitionCell220, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "36px", "left", "275px"], [76, TransitionCell226, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "60px", "left", "311px"], [76, TransitionCell231, []]], [76, FixedDataTableCell237, []]]]];
+const FixedDataTableCellGroup239 = [32769, [99650, "div", ["className", 0, "_3pzk"], ["height", "25px", "left", 0], [100674, "div", ["className", 0, "_3pzj"], ["height", "25px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4lg6 _4h2m"], ["height", "25px", "width", "42px", "left", 0], [76, TransitionCell209, []]], [76, FixedDataTableCell215, []], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "33px", "left", "242px"], [76, TransitionCell220, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "36px", "left", "275px"], [76, TransitionCell226, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "60px", "left", "311px"], [76, TransitionCell231, []]], [76, FixedDataTableCell237, []]]]]];
+const FixedDataTableAbstractSortableHeader241 = [1, FixedDataTableAbstractSortableHeader241_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Reach"]]]]];
+const FixedDataTableSortableHeader242 = [32769, [76, FixedDataTableAbstractSortableHeader241, []]];
+const TransitionCell243 = [1, TransitionCell243_ComputeFunction, [1474, "div", ["label", 0, "Reach", "width", 0, 60, "dataKey", 0, "stats.unique_impressions", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.unique_impressions", "height", 0, 25], ["height", "25px", "width", "60px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader241, []]]]]];
+const FixedDataTableCell244 = [1, FixedDataTableCell244_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "60px", "left", 0], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell243, []]]]];
+const FixedDataTableAbstractSortableHeader246 = [1, FixedDataTableAbstractSortableHeader246_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Ad Impressions"]]]]];
+const FixedDataTableSortableHeader247 = [32769, [76, FixedDataTableAbstractSortableHeader246, []]];
+const TransitionCell248 = [1, TransitionCell248_ComputeFunction, [1474, "div", ["label", 0, "Ad Impressions", "width", 0, 80, "dataKey", 0, "stats.impressions", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.impressions", "height", 0, 25], ["height", "25px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader246, []]]]]];
+const FixedDataTableCell249 = [1, FixedDataTableCell249_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "80px", "left", "60px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell248, []]]]];
+const FixedDataTableAbstractSortableHeader251 = [1, FixedDataTableAbstractSortableHeader251_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Avg. CPM"]]]]];
+const FixedDataTableSortableHeader252 = [32769, [76, FixedDataTableAbstractSortableHeader251, []]];
+const TransitionCell253 = [1, TransitionCell253_ComputeFunction, [1474, "div", ["label", 0, "Avg. CPM", "width", 0, 80, "dataKey", 0, "stats.avg_cpm", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.avg_cpm", "height", 0, 25], ["height", "25px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader251, []]]]]];
+const FixedDataTableCell254 = [1, FixedDataTableCell254_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "80px", "left", "140px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell253, []]]]];
+const FixedDataTableAbstractSortableHeader256 = [1, FixedDataTableAbstractSortableHeader256_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Avg. CPC"]]]]];
+const FixedDataTableSortableHeader257 = [32769, [76, FixedDataTableAbstractSortableHeader256, []]];
+const TransitionCell258 = [1, TransitionCell258_ComputeFunction, [1474, "div", ["label", 0, "Avg. CPC", "width", 0, 78, "dataKey", 0, "stats.avg_cpc", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.avg_cpc", "height", 0, 25], ["height", "25px", "width", "78px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader256, []]]]]];
+const FixedDataTableCell259 = [1, FixedDataTableCell259_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "78px", "left", "220px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell258, []]]]];
+const TransitionCell261 = [1, TransitionCell261_ComputeFunction, [1474, "div", ["label", 0, "Results", "width", 0, 140, "dataKey", 0, "stats.actions", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.actions", "height", 0, 25], ["height", "25px", "width", "140px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _25fg _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Results"]]]]]];
+const FixedDataTableCell262 = [1, FixedDataTableCell262_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "140px", "left", "298px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell261, []]]]];
+const TransitionCell264 = [1, TransitionCell264_ComputeFunction, [1474, "div", ["label", 0, "Cost", "width", 0, 140, "dataKey", 0, "stats.cpa", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.cpa", "height", 0, 25], ["height", "25px", "width", "140px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _25fg _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Cost"]]]]]];
+const FixedDataTableCell265 = [1, FixedDataTableCell265_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "140px", "left", "438px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell264, []]]]];
+const FixedDataTableAbstractSortableHeader267 = [1, FixedDataTableAbstractSortableHeader267_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Clicks"]]]]];
+const FixedDataTableSortableHeader268 = [32769, [76, FixedDataTableAbstractSortableHeader267, []]];
+const TransitionCell269 = [1, TransitionCell269_ComputeFunction, [1474, "div", ["label", 0, "Clicks", "width", 0, 60, "dataKey", 0, "stats.clicks", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.clicks", "height", 0, 25], ["height", "25px", "width", "60px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader267, []]]]]];
+const FixedDataTableCell270 = [1, FixedDataTableCell270_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "60px", "left", "578px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell269, []]]]];
+const FixedDataTableAbstractSortableHeader272 = [1, FixedDataTableAbstractSortableHeader272_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "CTR %"]]]]];
+const FixedDataTableSortableHeader273 = [32769, [76, FixedDataTableAbstractSortableHeader272, []]];
+const TransitionCell274 = [1, TransitionCell274_ComputeFunction, [1474, "div", ["label", 0, "CTR %", "width", 0, 70, "dataKey", 0, "stats.ctr", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.ctr", "height", 0, 25], ["height", "25px", "width", "70px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader272, []]]]]];
+const FixedDataTableCell275 = [1, FixedDataTableCell275_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "70px", "left", "638px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell274, []]]]];
+const FixedDataTableAbstractSortableHeader277 = [1, FixedDataTableAbstractSortableHeader277_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Social %"]]]]];
+const FixedDataTableSortableHeader278 = [32769, [76, FixedDataTableAbstractSortableHeader277, []]];
+const TransitionCell279 = [1, TransitionCell279_ComputeFunction, [1474, "div", ["label", 0, "Social %", "width", 0, 80, "dataKey", 0, "stats.social_percent", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.social_percent", "height", 0, 25], ["height", "25px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader277, []]]]]];
+const FixedDataTableCell280 = [1, FixedDataTableCell280_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "80px", "left", "708px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell279, []]]]];
+const FixedDataTableAbstractSortableHeader282 = [1, FixedDataTableAbstractSortableHeader282_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Ad Set Name"]]]]];
+const FixedDataTableSortableHeader283 = [32769, [76, FixedDataTableAbstractSortableHeader282, []]];
+const TransitionCell284 = [1, TransitionCell284_ComputeFunction, [1474, "div", ["label", 0, "Ad Set Name", "width", 0, 100, "dataKey", 0, "campaign.name", "className", 0, "_4lgc _4h2u", "columnKey", 0, "campaign.name", "height", 0, 25], ["height", "25px", "width", "100px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader282, []]]]]];
+const FixedDataTableCell285 = [1, FixedDataTableCell285_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "100px", "left", "788px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell284, []]]]];
+const FixedDataTableAbstractSortableHeader287 = [1, FixedDataTableAbstractSortableHeader287_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Campaign Name"]]]]];
+const FixedDataTableSortableHeader288 = [32769, [76, FixedDataTableAbstractSortableHeader287, []]];
+const TransitionCell289 = [1, TransitionCell289_ComputeFunction, [1474, "div", ["label", 0, "Campaign Name", "width", 0, 150, "dataKey", 0, "campaignGroup.name", "className", 0, "_4lgc _4h2u", "columnKey", 0, "campaignGroup.name", "height", 0, 25], ["height", "25px", "width", "150px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader287, []]]]]];
+const FixedDataTableCell290 = [1, FixedDataTableCell290_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "150px", "left", "888px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell289, []]]]];
+const FixedDataTableAbstractSortableHeader292 = [1, FixedDataTableAbstractSortableHeader292_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Ad ID"]]]]];
+const FixedDataTableSortableHeader293 = [32769, [76, FixedDataTableAbstractSortableHeader292, []]];
+const TransitionCell294 = [1, TransitionCell294_ComputeFunction, [1474, "div", ["label", 0, "Ad ID", "width", 0, 120, "dataKey", 0, "ad.id", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.id", "height", 0, 25], ["height", "25px", "width", "120px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader292, []]]]]];
+const FixedDataTableCell295 = [1, FixedDataTableCell295_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "120px", "left", "1038px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell294, []]]]];
+const FixedDataTableAbstractSortableHeader297 = [1, FixedDataTableAbstractSortableHeader297_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Objective"]]]]];
+const FixedDataTableSortableHeader298 = [32769, [76, FixedDataTableAbstractSortableHeader297, []]];
+const TransitionCell299 = [1, TransitionCell299_ComputeFunction, [1474, "div", ["label", 0, "Objective", "width", 0, 80, "dataKey", 0, "campaignGroup.objective", "className", 0, "_4lgc _4h2u", "columnKey", 0, "campaignGroup.objective", "height", 0, 25], ["height", "25px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader297, []]]]]];
+const FixedDataTableCell300 = [1, FixedDataTableCell300_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "80px", "left", "1158px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell299, []]]]];
+const FixedDataTableAbstractSortableHeader302 = [1, FixedDataTableAbstractSortableHeader302_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Spent"]]]]];
+const FixedDataTableSortableHeader303 = [32769, [76, FixedDataTableAbstractSortableHeader302, []]];
+const TransitionCell304 = [1, TransitionCell304_ComputeFunction, [1474, "div", ["label", 0, "Spent", "width", 0, 70, "dataKey", 0, "stats.spent_100", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.spent_100", "height", 0, 25], ["height", "25px", "width", "70px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader302, []]]]]];
+const FixedDataTableCell305 = [1, FixedDataTableCell305_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "70px", "left", "1238px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell304, []]]]];
+const FixedDataTableAbstractSortableHeader307 = [1, FixedDataTableAbstractSortableHeader307_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Start"]]]]];
+const FixedDataTableSortableHeader308 = [32769, [76, FixedDataTableAbstractSortableHeader307, []]];
+const TransitionCell309 = [1, TransitionCell309_ComputeFunction, [1474, "div", ["label", 0, "Start", "width", 0, 113, "dataKey", 0, "derivedCampaign.startDate", "className", 0, "_4lgc _4h2u", "columnKey", 0, "derivedCampaign.startDate", "height", 0, 25], ["height", "25px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader307, []]]]]];
+const FixedDataTableCell310 = [1, FixedDataTableCell310_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "113px", "left", "1308px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell309, []]]]];
+const FixedDataTableAbstractSortableHeader312 = [1, FixedDataTableAbstractSortableHeader312_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "End"]]]]];
+const FixedDataTableSortableHeader313 = [32769, [76, FixedDataTableAbstractSortableHeader312, []]];
+const TransitionCell314 = [1, TransitionCell314_ComputeFunction, [1474, "div", ["label", 0, "End", "width", 0, 113, "dataKey", 0, "derivedCampaign.endDate", "className", 0, "_4lgc _4h2u", "columnKey", 0, "derivedCampaign.endDate", "height", 0, 25], ["height", "25px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader312, []]]]]];
+const FixedDataTableCell315 = [1, FixedDataTableCell315_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "113px", "left", "1421px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell314, []]]]];
+const FixedDataTableAbstractSortableHeader317 = [1, FixedDataTableAbstractSortableHeader317_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Date created"]]]]];
+const FixedDataTableSortableHeader318 = [32769, [76, FixedDataTableAbstractSortableHeader317, []]];
+const TransitionCell319 = [1, TransitionCell319_ComputeFunction, [1474, "div", ["label", 0, "Date created", "width", 0, 113, "dataKey", 0, "ad.created_time", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.created_time", "height", 0, 25], ["height", "25px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader317, []]]]]];
+const FixedDataTableCell320 = [1, FixedDataTableCell320_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "113px", "left", "1534px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell319, []]]]];
+const FixedDataTableAbstractSortableHeader322 = [1, FixedDataTableAbstractSortableHeader322_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Date last edited"]]]]];
+const FixedDataTableSortableHeader323 = [32769, [76, FixedDataTableAbstractSortableHeader322, []]];
+const TransitionCell324 = [1, TransitionCell324_ComputeFunction, [1474, "div", ["label", 0, "Date last edited", "width", 0, 113, "dataKey", 0, "ad.updated_time", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.updated_time", "height", 0, 25], ["height", "25px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader322, []]]]]];
+const FixedDataTableCell325 = [1, FixedDataTableCell325_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "113px", "left", "1647px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell324, []]]]];
+const FixedDataTableAbstractSortableHeader327 = [1, FixedDataTableAbstractSortableHeader327_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Title"]]]]];
+const FixedDataTableSortableHeader328 = [32769, [76, FixedDataTableAbstractSortableHeader327, []]];
+const TransitionCell329 = [1, TransitionCell329_ComputeFunction, [1474, "div", ["label", 0, "Title", "width", 0, 80, "dataKey", 0, "ad.title", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.title", "height", 0, 25], ["height", "25px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader327, []]]]]];
+const FixedDataTableCell330 = [1, FixedDataTableCell330_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "80px", "left", "1760px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell329, []]]]];
+const FixedDataTableAbstractSortableHeader332 = [1, FixedDataTableAbstractSortableHeader332_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Body"]]]]];
+const FixedDataTableSortableHeader333 = [32769, [76, FixedDataTableAbstractSortableHeader332, []]];
+const TransitionCell334 = [1, TransitionCell334_ComputeFunction, [1474, "div", ["label", 0, "Body", "width", 0, 80, "dataKey", 0, "ad.creative.body", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.creative.body", "height", 0, 25], ["height", "25px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader332, []]]]]];
+const FixedDataTableCell335 = [1, FixedDataTableCell335_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "80px", "left", "1840px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell334, []]]]];
+const FixedDataTableAbstractSortableHeader337 = [1, FixedDataTableAbstractSortableHeader337_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Destination"]]]]];
+const FixedDataTableSortableHeader338 = [32769, [76, FixedDataTableAbstractSortableHeader337, []]];
+const TransitionCell339 = [1, TransitionCell339_ComputeFunction, [1474, "div", ["label", 0, "Destination", "width", 0, 92, "dataKey", 0, "destination", "className", 0, "_4lgc _4h2u", "columnKey", 0, "destination", "height", 0, 25], ["height", "25px", "width", "92px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader337, []]]]]];
+const FixedDataTableCell340 = [1, FixedDataTableCell340_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "92px", "left", "1920px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell339, []]]]];
+const FixedDataTableAbstractSortableHeader342 = [1, FixedDataTableAbstractSortableHeader342_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Link"]]]]];
+const FixedDataTableSortableHeader343 = [32769, [76, FixedDataTableAbstractSortableHeader342, []]];
+const TransitionCell344 = [1, TransitionCell344_ComputeFunction, [1474, "div", ["label", 0, "Link", "width", 0, 70, "dataKey", 0, "ad.creative.link_url", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.creative.link_url", "height", 0, 25], ["height", "25px", "width", "70px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader342, []]]]]];
+const FixedDataTableCell345 = [1, FixedDataTableCell345_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "70px", "left", "2012px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell344, []]]]];
+const FixedDataTableAbstractSortableHeader347 = [1, FixedDataTableAbstractSortableHeader347_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Related Page"]]]]];
+const FixedDataTableSortableHeader348 = [32769, [76, FixedDataTableAbstractSortableHeader347, []]];
+const TransitionCell349 = [1, TransitionCell349_ComputeFunction, [1474, "div", ["label", 0, "Related Page", "width", 0, 92, "dataKey", 0, "page", "className", 0, "_4lgc _4h2u", "columnKey", 0, "page", "height", 0, 25], ["height", "25px", "width", "92px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader347, []]]]]];
+const FixedDataTableCell350 = [1, FixedDataTableCell350_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "92px", "left", "2082px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell349, []]]]];
+const TransitionCell352 = [1, TransitionCell352_ComputeFunction, [1474, "div", ["label", 0, "Preview Link", "width", 0, 100, "dataKey", 0, "ad.demolink_hash", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.demolink_hash", "height", 0, 25], ["height", "25px", "width", "100px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _25fg _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Preview Link"]]]]]];
+const FixedDataTableCell353 = [1, FixedDataTableCell353_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "100px", "left", "2174px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell352, []]]]];
+const TransitionCell355 = [1, TransitionCell355_ComputeFunction, [1474, "div", ["label", 0, "", "width", 0, 25, "dataKey", 0, "scrollbar_spacer", "className", 0, "_4lgc _4h2u", "columnKey", 0, "scrollbar_spacer", "height", 0, 25], ["height", "25px", "width", "25px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [98370, "div", ["className", 0, "_1cig _25fg _4h2r"]]]]]];
+const FixedDataTableCell356 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "25px", "left", "2274px"], [76, TransitionCell355, []]]];
+const FixedDataTableCellGroupImpl357 = [32769, [100674, "div", ["className", 0, "_3pzj"], ["height", "25px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[76, FixedDataTableCell244, []], [76, FixedDataTableCell249, []], [76, FixedDataTableCell254, []], [76, FixedDataTableCell259, []], [76, FixedDataTableCell262, []], [76, FixedDataTableCell265, []], [76, FixedDataTableCell270, []], [76, FixedDataTableCell275, []], [76, FixedDataTableCell280, []], [76, FixedDataTableCell285, []], [76, FixedDataTableCell290, []], [76, FixedDataTableCell295, []], [76, FixedDataTableCell300, []], [76, FixedDataTableCell305, []], [76, FixedDataTableCell310, []], [76, FixedDataTableCell315, []], [76, FixedDataTableCell320, []], [76, FixedDataTableCell325, []], [76, FixedDataTableCell330, []], [76, FixedDataTableCell335, []], [76, FixedDataTableCell340, []], [76, FixedDataTableCell345, []], [76, FixedDataTableCell350, []], [76, FixedDataTableCell353, []], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "25px", "left", "2274px"], [76, TransitionCell355, []]]]]];
+const FixedDataTableCellGroup358 = [32769, [99650, "div", ["className", 0, "_3pzk"], ["height", "25px", "left", "521px"], [100674, "div", ["className", 0, "_3pzj"], ["height", "25px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[76, FixedDataTableCell244, []], [76, FixedDataTableCell249, []], [76, FixedDataTableCell254, []], [76, FixedDataTableCell259, []], [76, FixedDataTableCell262, []], [76, FixedDataTableCell265, []], [76, FixedDataTableCell270, []], [76, FixedDataTableCell275, []], [76, FixedDataTableCell280, []], [76, FixedDataTableCell285, []], [76, FixedDataTableCell290, []], [76, FixedDataTableCell295, []], [76, FixedDataTableCell300, []], [76, FixedDataTableCell305, []], [76, FixedDataTableCell310, []], [76, FixedDataTableCell315, []], [76, FixedDataTableCell320, []], [76, FixedDataTableCell325, []], [76, FixedDataTableCell330, []], [76, FixedDataTableCell335, []], [76, FixedDataTableCell340, []], [76, FixedDataTableCell345, []], [76, FixedDataTableCell350, []], [76, FixedDataTableCell353, []], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "25px", "left", "2274px"], [76, TransitionCell355, []]]]]]];
+const FixedDataTableRowImpl359 = [32769, [99650, "div", ["className", 0, "_1gd4 _4li _3h1a _1mib"], ["width", "1083px", "height", "25px"], [2114, "div", ["className", 0, "_1gd5"], [[99650, "div", ["className", 0, "_3pzk"], ["height", "25px", "left", 0], [100674, "div", ["className", 0, "_3pzj"], ["height", "25px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4lg6 _4h2m"], ["height", "25px", "width", "42px", "left", 0], [76, TransitionCell209, []]], [76, FixedDataTableCell215, []], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "33px", "left", "242px"], [76, TransitionCell220, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "36px", "left", "275px"], [76, TransitionCell226, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "60px", "left", "311px"], [76, TransitionCell231, []]], [76, FixedDataTableCell237, []]]]], [99650, "div", ["className", 0, "_3pzk"], ["height", "25px", "left", "521px"], [100674, "div", ["className", 0, "_3pzj"], ["height", "25px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[76, FixedDataTableCell244, []], [76, FixedDataTableCell249, []], [76, FixedDataTableCell254, []], [76, FixedDataTableCell259, []], [76, FixedDataTableCell262, []], [76, FixedDataTableCell265, []], [76, FixedDataTableCell270, []], [76, FixedDataTableCell275, []], [76, FixedDataTableCell280, []], [76, FixedDataTableCell285, []], [76, FixedDataTableCell290, []], [76, FixedDataTableCell295, []], [76, FixedDataTableCell300, []], [76, FixedDataTableCell305, []], [76, FixedDataTableCell310, []], [76, FixedDataTableCell315, []], [76, FixedDataTableCell320, []], [76, FixedDataTableCell325, []], [76, FixedDataTableCell330, []], [76, FixedDataTableCell335, []], [76, FixedDataTableCell340, []], [76, FixedDataTableCell345, []], [76, FixedDataTableCell350, []], [76, FixedDataTableCell353, []], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "25px", "left", "2274px"], [76, TransitionCell355, []]]]]], [322, "div", ["className", 0, "_1gd6 _1gd8"], ["left", "521px", "height", "25px"]]]]]];
+const FixedDataTableRow360 = [32769, [99650, "div", ["className", 0, "_1gda"], ["width", "1083px", "height", "25px", "z-index", 1, "transform", "translate3d(0px,40px,0)", "backface-visibility", "hidden"], [99650, "div", ["className", 0, "_1gd4 _4li _3h1a _1mib"], ["width", "1083px", "height", "25px"], [2114, "div", ["className", 0, "_1gd5"], [[99650, "div", ["className", 0, "_3pzk"], ["height", "25px", "left", 0], [100674, "div", ["className", 0, "_3pzj"], ["height", "25px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4lg6 _4h2m"], ["height", "25px", "width", "42px", "left", 0], [76, TransitionCell209, []]], [76, FixedDataTableCell215, []], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "33px", "left", "242px"], [76, TransitionCell220, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "36px", "left", "275px"], [76, TransitionCell226, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "60px", "left", "311px"], [76, TransitionCell231, []]], [76, FixedDataTableCell237, []]]]], [99650, "div", ["className", 0, "_3pzk"], ["height", "25px", "left", "521px"], [100674, "div", ["className", 0, "_3pzj"], ["height", "25px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[76, FixedDataTableCell244, []], [76, FixedDataTableCell249, []], [76, FixedDataTableCell254, []], [76, FixedDataTableCell259, []], [76, FixedDataTableCell262, []], [76, FixedDataTableCell265, []], [76, FixedDataTableCell270, []], [76, FixedDataTableCell275, []], [76, FixedDataTableCell280, []], [76, FixedDataTableCell285, []], [76, FixedDataTableCell290, []], [76, FixedDataTableCell295, []], [76, FixedDataTableCell300, []], [76, FixedDataTableCell305, []], [76, FixedDataTableCell310, []], [76, FixedDataTableCell315, []], [76, FixedDataTableCell320, []], [76, FixedDataTableCell325, []], [76, FixedDataTableCell330, []], [76, FixedDataTableCell335, []], [76, FixedDataTableCell340, []], [76, FixedDataTableCell345, []], [76, FixedDataTableCell350, []], [76, FixedDataTableCell353, []], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "25px", "left", "2274px"], [76, TransitionCell355, []]]]]], [322, "div", ["className", 0, "_1gd6 _1gd8"], ["left", "521px", "height", "25px"]]]]]]];
+const AbstractCheckboxInput361 = [1, AbstractCheckboxInput361_ComputeFunction, [2114, "label", ["className", 0, "_5hhv _55sg _kv1"], [[194, "lol", ["checked", 130, true, "type", 0, "checkbox"], ["onChange", 1, 0]], [2, "span"]]]];
+const XUICheckboxInput362 = [32769, [76, AbstractCheckboxInput361, []]];
+const TransitionCell363 = [1, TransitionCell363_ComputeFunction, [1474, "div", ["dataKey", 0, "common.id", "className", 0, "_4lgc _4h2u", "width", 0, 42, "columnKey", 0, "common.id", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "42px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [1218, "span", ["className", 0, "_5hhu _4h2r"], ["onMouseDown", 1, 1], [76, AbstractCheckboxInput361, []]]]]]];
+const FixedDataTableCell364 = [32769, [99650, "div", ["className", 0, "_4lg0 _4lg6 _4h2m"], ["height", "32px", "width", "42px", "left", 0], [76, TransitionCell363, []]]];
+const AdsEditableTextCellDisplay365 = [1, AdsEditableTextCellDisplay365_ComputeFunction, [1218, "div", ["className", 0, "_vew"], ["onDoubleClick", 1, 0, "onMouseEnter", 1, 1, "onMouseLeave", 1, 2], [2114, "div", ["className", 0, "_vex _5w6k"], [[4162, "div", ["className", 0, "_vey"], "Test Ad"], [66, "div", ["className", 0, "_5w6_"]]]]]];
+const AdsEditableCell366 = [32769, [99394, "div", ["className", 0, "_2d6h _2-ev _4h2r _5abb"], [76, AdsEditableTextCellDisplay365, []]]];
+const TransitionCell367 = [1, TransitionCell367_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.name", "className", 0, "_4lgc _4h2u", "width", 0, 200, "columnKey", 0, "ad.name", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "200px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_2d6h _2-ev _4h2r _5abb"], [76, AdsEditableTextCellDisplay365, []]]]]]];
+const FixedDataTableCell368 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "200px", "left", "42px"], [76, TransitionCell367, []]]];
+const FixedDataTableCellDefault369 = [1, FixedDataTableCellDefault369_ComputeFunction, [1474, "div", ["dataKey", 0, "edit_status", "className", 0, "_4lgc _4h2u", "width", 0, 33, "columnKey", 0, "edit_status", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "33px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_4h2r"], ""]]]]];
+const TransitionCell370 = [32769, [76, FixedDataTableCellDefault369, []]];
+const FixedDataTableCell371 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "33px", "left", "242px"], [76, FixedDataTableCellDefault369, []]]];
+const FixedDataTableCellDefault372 = [1, FixedDataTableCellDefault372_ComputeFunction, [1474, "div", ["dataKey", 0, "errors", "className", 0, "_4lgc _4h2u", "width", 0, 36, "columnKey", 0, "errors", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "36px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [66, "div", ["className", 0, "_4h2r"]]]]]];
+const TransitionCell373 = [32769, [76, FixedDataTableCellDefault372, []]];
+const FixedDataTableCell374 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "36px", "left", "275px"], [76, FixedDataTableCellDefault372, []]]];
+const BUISwitch375 = [1, BUISwitch375_ComputeFunction, [1218, "lol2", ["value", 32, true, "disabled", 2, true, "data-hover", 0, "tooltip", "data-tooltip-position", 0, "below", "aria-label", 0, "Currently active and you can not deactivate it.", "className", 0, "_128j _128k _128m _128n", "role", 0, "checkbox", "aria-checked", 0, "true"], ["onToggle", 1, 0], [1218, "div", ["className", 0, "_128o", "tabindex", 0, "-1"], ["click", 1, 1, "onKeyDown", 1, 2, "onMouseDown", 1, 3], [66, "div", ["className", 0, "_128p"]]]]];
+const AdsStatusSwitchInternal376 = [32769, [76, BUISwitch375, []]];
+const AdsStatusSwitch377 = [32769, [76, BUISwitch375, []]];
+const TransitionCell378 = [1, TransitionCell378_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.adgroup_status", "className", 0, "_4lgc _4h2u", "width", 0, 60, "columnKey", 0, "ad.adgroup_status", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "60px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [1090, "div", ["className", 0, "_15si _4h2r"], [76, BUISwitch375, []]]]]]];
+const FixedDataTableCell379 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "60px", "left", "311px"], [76, TransitionCell378, []]]];
+const TransitionCell382 = [1, TransitionCell382_ComputeFunction, [1474, "div", ["dataKey", 0, "ukiAdData.computed_activity_status", "className", 0, "_4lgc _4h2u", "width", 0, 150, "columnKey", 0, "ukiAdData.computed_activity_status", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "150px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [1090, "div", ["className", 0, "_2d6h _4h2r"], [100418, "div", ["className", 0, "_k4-"], [[98370, "i", ["aria-label", 0, "Pending Review", "data-hover", 0, "tooltip", "className", 0, "_4ms8 img sp_UuU9HmrQ397 sx_ced63f", "width", 0, "7", "height", 0, "7"]], [32771, "Pending Review"]]]]]]]];
+const FixedDataTableCell383 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "150px", "left", "371px"], [76, TransitionCell382, []]]];
+const FixedDataTableCellGroupImpl384 = [32769, [100674, "div", ["className", 0, "_3pzj"], ["height", "32px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4lg6 _4h2m"], ["height", "32px", "width", "42px", "left", 0], [76, TransitionCell363, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "200px", "left", "42px"], [76, TransitionCell367, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "33px", "left", "242px"], [76, FixedDataTableCellDefault369, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "36px", "left", "275px"], [76, FixedDataTableCellDefault372, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "60px", "left", "311px"], [76, TransitionCell378, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "150px", "left", "371px"], [76, TransitionCell382, []]]]]];
+const FixedDataTableCellGroup385 = [32769, [99650, "div", ["className", 0, "_3pzk"], ["height", "32px", "left", 0], [100674, "div", ["className", 0, "_3pzj"], ["height", "32px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4lg6 _4h2m"], ["height", "32px", "width", "42px", "left", 0], [76, TransitionCell363, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "200px", "left", "42px"], [76, TransitionCell367, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "33px", "left", "242px"], [76, FixedDataTableCellDefault369, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "36px", "left", "275px"], [76, FixedDataTableCellDefault372, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "60px", "left", "311px"], [76, TransitionCell378, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "150px", "left", "371px"], [76, TransitionCell382, []]]]]]];
+const TransitionCell386 = [1, TransitionCell386_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.unique_impressions", "className", 0, "_4lgc _4h2u", "width", 0, 60, "columnKey", 0, "stats.unique_impressions", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "60px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
+const FixedDataTableCell387 = [32769, [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "60px", "left", 0], [76, TransitionCell386, []]]];
+const TransitionCell388 = [1, TransitionCell388_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.impressions", "className", 0, "_4lgc _4h2u", "width", 0, 80, "columnKey", 0, "stats.impressions", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
+const FixedDataTableCell389 = [32769, [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "80px", "left", "60px"], [76, TransitionCell388, []]]];
+const TransitionCell390 = [1, TransitionCell390_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.avg_cpm", "className", 0, "_4lgc _4h2u", "width", 0, 80, "columnKey", 0, "stats.avg_cpm", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
+const FixedDataTableCell391 = [32769, [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "80px", "left", "140px"], [76, TransitionCell390, []]]];
+const TransitionCell392 = [1, TransitionCell392_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.avg_cpc", "className", 0, "_4lgc _4h2u", "width", 0, 78, "columnKey", 0, "stats.avg_cpc", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "78px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
+const FixedDataTableCell393 = [32769, [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "78px", "left", "220px"], [76, TransitionCell392, []]]];
+const TransitionCell394 = [1, TransitionCell394_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.actions", "className", 0, "_4lgc _4h2u", "width", 0, 140, "columnKey", 0, "stats.actions", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "140px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
+const FixedDataTableCell395 = [32769, [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "140px", "left", "298px"], [76, TransitionCell394, []]]];
+const TransitionCell396 = [1, TransitionCell396_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.cpa", "className", 0, "_4lgc _4h2u", "width", 0, 140, "columnKey", 0, "stats.cpa", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "140px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
+const FixedDataTableCell397 = [32769, [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "140px", "left", "438px"], [76, TransitionCell396, []]]];
+const TransitionCell398 = [1, TransitionCell398_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.clicks", "className", 0, "_4lgc _4h2u", "width", 0, 60, "columnKey", 0, "stats.clicks", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "60px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
+const FixedDataTableCell399 = [32769, [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "60px", "left", "578px"], [76, TransitionCell398, []]]];
+const TransitionCell400 = [1, TransitionCell400_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.ctr", "className", 0, "_4lgc _4h2u", "width", 0, 70, "columnKey", 0, "stats.ctr", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "70px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
+const FixedDataTableCell401 = [32769, [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "70px", "left", "638px"], [76, TransitionCell400, []]]];
+const TransitionCell402 = [1, TransitionCell402_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.social_percent", "className", 0, "_4lgc _4h2u", "width", 0, 80, "columnKey", 0, "stats.social_percent", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
+const FixedDataTableCell403 = [32769, [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "80px", "left", "708px"], [76, TransitionCell402, []]]];
+const FixedDataTableCellDefault404 = [1, FixedDataTableCellDefault404_ComputeFunction, [1474, "div", ["dataKey", 0, "campaign.name", "className", 0, "_4lgc _4h2u", "width", 0, 100, "columnKey", 0, "campaign.name", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "100px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_4h2r"], "Test Ad Set"]]]]];
+const TransitionCell405 = [32769, [76, FixedDataTableCellDefault404, []]];
+const FixedDataTableCell406 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "100px", "left", "788px"], [76, FixedDataTableCellDefault404, []]]];
+const FixedDataTableCellDefault407 = [1, FixedDataTableCellDefault407_ComputeFunction, [1474, "div", ["dataKey", 0, "campaignGroup.name", "className", 0, "_4lgc _4h2u", "width", 0, 150, "columnKey", 0, "campaignGroup.name", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "150px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_4h2r"], "Test Campaign"]]]]];
+const TransitionCell408 = [32769, [76, FixedDataTableCellDefault407, []]];
+const FixedDataTableCell409 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "150px", "left", "888px"], [76, FixedDataTableCellDefault407, []]]];
+const TransitionCell410 = [1, TransitionCell410_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.id", "className", 0, "_4lgc _4h2u", "width", 0, 120, "columnKey", 0, "ad.id", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "120px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _4h2r"], "98010048849345"]]]]];
+const FixedDataTableCell411 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "120px", "left", "1038px"], [76, TransitionCell410, []]]];
+const TransitionCell412 = [1, TransitionCell412_ComputeFunction, [1474, "div", ["dataKey", 0, "campaignGroup.objective", "className", 0, "_4lgc _4h2u", "width", 0, 80, "columnKey", 0, "campaignGroup.objective", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _4h2r"], "Clicks to Website"]]]]];
+const FixedDataTableCell413 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "80px", "left", "1158px"], [76, TransitionCell412, []]]];
+const TransitionCell414 = [1, TransitionCell414_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.spent_100", "className", 0, "_4lgc _4h2u", "width", 0, 70, "columnKey", 0, "stats.spent_100", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "70px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
+const FixedDataTableCell415 = [32769, [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "70px", "left", "1238px"], [76, TransitionCell414, []]]];
+const TransitionCell417 = [1, TransitionCell417_ComputeFunction, [1474, "div", ["dataKey", 0, "derivedCampaign.startDate", "className", 0, "_4lgc _4h2u", "width", 0, 113, "columnKey", 0, "derivedCampaign.startDate", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [1090, "div", ["className", 0, "_2d6h _4h2r"], [102402, "span", "10/24/2015"]]]]]];
+const FixedDataTableCell418 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1308px"], [76, TransitionCell417, []]]];
+const TransitionCell419 = [1, TransitionCell419_ComputeFunction, [1474, "div", ["dataKey", 0, "derivedCampaign.endDate", "className", 0, "_4lgc _4h2u", "width", 0, 113, "columnKey", 0, "derivedCampaign.endDate", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _4h2r"], "Ongoing"]]]]];
+const FixedDataTableCell420 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1421px"], [76, TransitionCell419, []]]];
+const TransitionCell422 = [1, TransitionCell422_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.created_time", "className", 0, "_4lgc _4h2u", "width", 0, 113, "columnKey", 0, "ad.created_time", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [1090, "div", ["className", 0, "_2d6h _4h2r"], [102402, "span", "10/24/2015"]]]]]];
+const FixedDataTableCell423 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1534px"], [76, TransitionCell422, []]]];
+const TransitionCell425 = [1, TransitionCell425_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.updated_time", "className", 0, "_4lgc _4h2u", "width", 0, 113, "columnKey", 0, "ad.updated_time", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [1090, "div", ["className", 0, "_2d6h _4h2r"], [102402, "span", "10/24/2015"]]]]]];
+const FixedDataTableCell426 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1647px"], [76, TransitionCell425, []]]];
+const TransitionCell427 = [1, TransitionCell427_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.title", "className", 0, "_4lgc _4h2u", "width", 0, 80, "columnKey", 0, "ad.title", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _4h2r"], "Example"]]]]];
+const FixedDataTableCell428 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "80px", "left", "1760px"], [76, TransitionCell427, []]]];
+const TransitionCell429 = [1, TransitionCell429_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.creative.body", "className", 0, "_4lgc _4h2u", "width", 0, 80, "columnKey", 0, "ad.creative.body", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _4h2r"], "It&#x27;s an example."]]]]];
+const FixedDataTableCell430 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "80px", "left", "1840px"], [76, TransitionCell429, []]]];
+const TransitionCell431 = [1, TransitionCell431_ComputeFunction, [1474, "div", ["dataKey", 0, "destination", "className", 0, "_4lgc _4h2u", "width", 0, 92, "columnKey", 0, "destination", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "92px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [66, "div", ["className", 0, "_2d6h _4h2r"]]]]]];
+const FixedDataTableCell432 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "92px", "left", "1920px"], [76, TransitionCell431, []]]];
+const TransitionCell433 = [1, TransitionCell433_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.creative.link_url", "className", 0, "_4lgc _4h2u", "width", 0, 70, "columnKey", 0, "ad.creative.link_url", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "70px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _4h2r"], "http://www.example.com/"]]]]];
+const FixedDataTableCell434 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "70px", "left", "2012px"], [76, TransitionCell433, []]]];
+const FixedDataTableCellDefault435 = [1, FixedDataTableCellDefault435_ComputeFunction, [1474, "div", ["dataKey", 0, "page", "className", 0, "_4lgc _4h2u", "width", 0, 92, "columnKey", 0, "page", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "92px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [66, "div", ["className", 0, "_4h2r"]]]]]];
+const TransitionCell436 = [32769, [76, FixedDataTableCellDefault435, []]];
+const FixedDataTableCell437 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "92px", "left", "2082px"], [76, FixedDataTableCellDefault435, []]]];
+const Link438 = [1, Link438_ComputeFunction, [4290, "a", ["href", 0, "https://www.facebook.com/?demo_ad=98010048849345&amp;h=AQA24w3temAtB-5f#pagelet_ego_pane", "target", 0, "_blank"], ["click", 1, 0], "Preview Ad"]];
+const AdsPopoverLink440 = [1, AdsPopoverLink440_ComputeFunction, [2178, "span", ["onMouseEnter", 1, 0, "onMouseLeave", 1, 1], [[66, "span", ["className", 0, "_3o_j"]], [98370, "i", ["className", 0, "_541d img sp_R48dKBxiJkP sx_dc2cdb"]]]]];
+const AdsHelpLink441 = [32769, [76, AdsPopoverLink440, []]];
+const TransitionCell442 = [1, TransitionCell442_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.demolink_hash", "className", 0, "_4lgc _4h2u", "width", 0, 100, "columnKey", 0, "ad.demolink_hash", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "100px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [2114, "div", ["className", 0, "_4h2r"], [[76, Link438, []], [76, AdsPopoverLink440, []]]]]]]];
+const FixedDataTableCell443 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "100px", "left", "2174px"], [76, TransitionCell442, []]]];
+const TransitionCell444 = [1, TransitionCell444_ComputeFunction, [1474, "div", ["dataKey", 0, "scrollbar_spacer", "className", 0, "_4lgc _4h2u", "width", 0, 25, "columnKey", 0, "scrollbar_spacer", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "25px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [66, "div", ["className", 0, "_2d6h _4h2r"]]]]]];
+const FixedDataTableCell445 = [32769, [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "25px", "left", "2274px"], [76, TransitionCell444, []]]];
+const FixedDataTableCellGroupImpl446 = [32769, [100674, "div", ["className", 0, "_3pzj"], ["height", "32px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "60px", "left", 0], [76, TransitionCell386, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "80px", "left", "60px"], [76, TransitionCell388, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "80px", "left", "140px"], [76, TransitionCell390, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "78px", "left", "220px"], [76, TransitionCell392, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "140px", "left", "298px"], [76, TransitionCell394, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "140px", "left", "438px"], [76, TransitionCell396, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "60px", "left", "578px"], [76, TransitionCell398, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "70px", "left", "638px"], [76, TransitionCell400, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "80px", "left", "708px"], [76, TransitionCell402, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "100px", "left", "788px"], [76, FixedDataTableCellDefault404, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "150px", "left", "888px"], [76, FixedDataTableCellDefault407, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "120px", "left", "1038px"], [76, TransitionCell410, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "80px", "left", "1158px"], [76, TransitionCell412, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "70px", "left", "1238px"], [76, TransitionCell414, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1308px"], [76, TransitionCell417, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1421px"], [76, TransitionCell419, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1534px"], [76, TransitionCell422, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1647px"], [76, TransitionCell425, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "80px", "left", "1760px"], [76, TransitionCell427, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "80px", "left", "1840px"], [76, TransitionCell429, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "92px", "left", "1920px"], [76, TransitionCell431, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "70px", "left", "2012px"], [76, TransitionCell433, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "92px", "left", "2082px"], [76, FixedDataTableCellDefault435, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "100px", "left", "2174px"], [76, TransitionCell442, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "25px", "left", "2274px"], [76, TransitionCell444, []]]]]];
+const FixedDataTableCellGroup447 = [32769, [99650, "div", ["className", 0, "_3pzk"], ["height", "32px", "left", "521px"], [100674, "div", ["className", 0, "_3pzj"], ["height", "32px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "60px", "left", 0], [76, TransitionCell386, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "80px", "left", "60px"], [76, TransitionCell388, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "80px", "left", "140px"], [76, TransitionCell390, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "78px", "left", "220px"], [76, TransitionCell392, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "140px", "left", "298px"], [76, TransitionCell394, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "140px", "left", "438px"], [76, TransitionCell396, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "60px", "left", "578px"], [76, TransitionCell398, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "70px", "left", "638px"], [76, TransitionCell400, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "80px", "left", "708px"], [76, TransitionCell402, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "100px", "left", "788px"], [76, FixedDataTableCellDefault404, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "150px", "left", "888px"], [76, FixedDataTableCellDefault407, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "120px", "left", "1038px"], [76, TransitionCell410, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "80px", "left", "1158px"], [76, TransitionCell412, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "70px", "left", "1238px"], [76, TransitionCell414, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1308px"], [76, TransitionCell417, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1421px"], [76, TransitionCell419, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1534px"], [76, TransitionCell422, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1647px"], [76, TransitionCell425, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "80px", "left", "1760px"], [76, TransitionCell427, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "80px", "left", "1840px"], [76, TransitionCell429, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "92px", "left", "1920px"], [76, TransitionCell431, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "70px", "left", "2012px"], [76, TransitionCell433, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "92px", "left", "2082px"], [76, FixedDataTableCellDefault435, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "100px", "left", "2174px"], [76, TransitionCell442, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "25px", "left", "2274px"], [76, TransitionCell444, []]]]]]];
+const FixedDataTableRowImpl448 = [1, FixedDataTableRowImpl448_ComputeFunction, [1474, "div", ["className", 0, "_1gd4 _4li _52no _35m0 _35m1 _3c7k _4efq _4efs"], ["width", "1083px", "height", "32px"], ["onMouseDown", 1, 0], [2114, "div", ["className", 0, "_1gd5"], [[99650, "div", ["className", 0, "_3pzk"], ["height", "32px", "left", 0], [100674, "div", ["className", 0, "_3pzj"], ["height", "32px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4lg6 _4h2m"], ["height", "32px", "width", "42px", "left", 0], [76, TransitionCell363, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "200px", "left", "42px"], [76, TransitionCell367, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "33px", "left", "242px"], [76, FixedDataTableCellDefault369, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "36px", "left", "275px"], [76, FixedDataTableCellDefault372, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "60px", "left", "311px"], [76, TransitionCell378, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "150px", "left", "371px"], [76, TransitionCell382, []]]]]], [99650, "div", ["className", 0, "_3pzk"], ["height", "32px", "left", "521px"], [100674, "div", ["className", 0, "_3pzj"], ["height", "32px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "60px", "left", 0], [76, TransitionCell386, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "80px", "left", "60px"], [76, TransitionCell388, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "80px", "left", "140px"], [76, TransitionCell390, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "78px", "left", "220px"], [76, TransitionCell392, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "140px", "left", "298px"], [76, TransitionCell394, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "140px", "left", "438px"], [76, TransitionCell396, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "60px", "left", "578px"], [76, TransitionCell398, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "70px", "left", "638px"], [76, TransitionCell400, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "80px", "left", "708px"], [76, TransitionCell402, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "100px", "left", "788px"], [76, FixedDataTableCellDefault404, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "150px", "left", "888px"], [76, FixedDataTableCellDefault407, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "120px", "left", "1038px"], [76, TransitionCell410, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "80px", "left", "1158px"], [76, TransitionCell412, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "70px", "left", "1238px"], [76, TransitionCell414, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1308px"], [76, TransitionCell417, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1421px"], [76, TransitionCell419, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1534px"], [76, TransitionCell422, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1647px"], [76, TransitionCell425, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "80px", "left", "1760px"], [76, TransitionCell427, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "80px", "left", "1840px"], [76, TransitionCell429, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "92px", "left", "1920px"], [76, TransitionCell431, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "70px", "left", "2012px"], [76, TransitionCell433, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "92px", "left", "2082px"], [76, FixedDataTableCellDefault435, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "100px", "left", "2174px"], [76, TransitionCell442, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "25px", "left", "2274px"], [76, TransitionCell444, []]]]]], [322, "div", ["className", 0, "_1gd6 _1gd8"], ["left", "521px", "height", "32px"]]]]]];
+const FixedDataTableRow449 = [32769, [99650, "div", ["className", 0, "_1gda"], ["width", "1083px", "height", "32px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [76, FixedDataTableRowImpl448, []]]];
+const FixedDataTableBufferedRows450 = [32769, [99586, "div", ["position", "absolute", "pointer-events", "auto", "transform", "translate3d(0px,65px,0)", "backface-visibility", "hidden"], [99650, "div", ["className", 0, "_1gda"], ["width", "1083px", "height", "32px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [76, FixedDataTableRowImpl448, []]]]];
+const Scrollbar451 = [1, Scrollbar451_ComputeFunction, [1474, "div", ["className", 0, "_1t0r _1t0t _4jdr _1t0u", "tabindex", 0, 0], ["width", "1083px", "z-index", 99], ["onFocus", 1, 0, "onBlur", 1, 1, "onKeyDown", 1, 2, "onMouseDown", 1, 3, "onWheel", 1, 4], [258, "div", ["width", "407.918085106383px", "transform", "translate3d(4px,0px,0)", "backface-visibility", "hidden"]]]];
+const HorizontalScrollbar452 = [32769, [99650, "div", ["className", 0, "_3h1k _3h1m"], ["height", "15px", "width", "1083px"], [1282, "div", ["height", "15px", "position", "absolute", "overflow", "hidden", "width", "1083px", "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [76, Scrollbar451, []]]]];
+const FixedDataTable453 = [1, FixedDataTable453_ComputeFunction, [2498, "div", ["className", 0, "_3h1i _1mie"], ["height", "532px", "width", "1083px"], ["onWheel", 1, 0], [[2370, "div", ["className", 0, "_3h1j"], ["height", "515px", "width", "1083px"], [[99650, "div", ["className", 0, "_3487 _3488 _3489"], ["width", 0, "height", "532px", "left", 0], [322, "div", ["className", 0, "_348a"], ["height", "532px"]]], [99650, "div", ["className", 0, "_1gda"], ["width", "1083px", "height", "40px", "z-index", 1, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [99650, "div", ["className", 0, "_1gd4 _4li _52no _3h1a _1mib"], ["width", "1083px", "height", "40px"], [2114, "div", ["className", 0, "_1gd5"], [[99650, "div", ["className", 0, "_3pzk"], ["height", "40px", "left", 0], [99650, "div", ["className", 0, "_3pzj"], ["height", "40px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "521px", "left", 0], [76, TransitionCell181, []]]]], [99650, "div", ["className", 0, "_3pzk"], ["height", "40px", "left", "521px"], [100674, "div", ["className", 0, "_3pzj"], ["height", "40px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "298px", "left", 0], [76, TransitionCell186, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "490px", "left", "298px"], [76, TransitionCell189, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "972px", "left", "788px"], [76, TransitionCell192, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "514px", "left", "1760px"], [76, TransitionCell195, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", 0, "left", "2274px"], [76, TransitionCell198, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "25px", "left", "2274px"], [76, TransitionCell201, []]]]]], [322, "div", ["className", 0, "_1gd6 _1gd8"], ["left", "521px", "height", "40px"]]]]]], [99650, "div", ["className", 0, "_1gda"], ["width", "1083px", "height", "25px", "z-index", 1, "transform", "translate3d(0px,40px,0)", "backface-visibility", "hidden"], [99650, "div", ["className", 0, "_1gd4 _4li _3h1a _1mib"], ["width", "1083px", "height", "25px"], [2114, "div", ["className", 0, "_1gd5"], [[99650, "div", ["className", 0, "_3pzk"], ["height", "25px", "left", 0], [100674, "div", ["className", 0, "_3pzj"], ["height", "25px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4lg6 _4h2m"], ["height", "25px", "width", "42px", "left", 0], [76, TransitionCell209, []]], [76, FixedDataTableCell215, []], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "33px", "left", "242px"], [76, TransitionCell220, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "36px", "left", "275px"], [76, TransitionCell226, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "60px", "left", "311px"], [76, TransitionCell231, []]], [76, FixedDataTableCell237, []]]]], [99650, "div", ["className", 0, "_3pzk"], ["height", "25px", "left", "521px"], [100674, "div", ["className", 0, "_3pzj"], ["height", "25px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[76, FixedDataTableCell244, []], [76, FixedDataTableCell249, []], [76, FixedDataTableCell254, []], [76, FixedDataTableCell259, []], [76, FixedDataTableCell262, []], [76, FixedDataTableCell265, []], [76, FixedDataTableCell270, []], [76, FixedDataTableCell275, []], [76, FixedDataTableCell280, []], [76, FixedDataTableCell285, []], [76, FixedDataTableCell290, []], [76, FixedDataTableCell295, []], [76, FixedDataTableCell300, []], [76, FixedDataTableCell305, []], [76, FixedDataTableCell310, []], [76, FixedDataTableCell315, []], [76, FixedDataTableCell320, []], [76, FixedDataTableCell325, []], [76, FixedDataTableCell330, []], [76, FixedDataTableCell335, []], [76, FixedDataTableCell340, []], [76, FixedDataTableCell345, []], [76, FixedDataTableCell350, []], [76, FixedDataTableCell353, []], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "25px", "left", "2274px"], [76, TransitionCell355, []]]]]], [322, "div", ["className", 0, "_1gd6 _1gd8"], ["left", "521px", "height", "25px"]]]]]], [99586, "div", ["position", "absolute", "pointer-events", "auto", "transform", "translate3d(0px,65px,0)", "backface-visibility", "hidden"], [99650, "div", ["className", 0, "_1gda"], ["width", "1083px", "height", "32px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [76, FixedDataTableRowImpl448, []]]]]], [99650, "div", ["className", 0, "_3h1k _3h1m"], ["height", "15px", "width", "1083px"], [1282, "div", ["height", "15px", "position", "absolute", "overflow", "hidden", "width", "1083px", "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [76, Scrollbar451, []]]]]]];
+const TransitionTable454 = [32769, [76, FixedDataTable453, []]];
+const AdsSelectableFixedDataTable455 = [32769, [99394, "div", ["className", 0, "_5hht"], [76, FixedDataTable453, []]]];
+const AdsDataTableKeyboardSupportDecorator456 = [1, AdsDataTableKeyboardSupportDecorator456_ComputeFunction, [1154, "div", ["onKeyDown", 1, 0], [99394, "div", ["className", 0, "_5hht"], [76, FixedDataTable453, []]]]];
+const AdsEditableDataTableDecorator457 = [1, AdsEditableDataTableDecorator457_ComputeFunction, [1154, "div", ["onCopy", 1, 0], [76, AdsDataTableKeyboardSupportDecorator456, []]]];
+const AdsPEDataTableContainer458 = [32769, [99394, "div", ["className", 0, "_35l_"], [76, AdsEditableDataTableDecorator457, []]]];
+const ResponsiveBlock459 = [1, ResponsiveBlock459_ComputeFunction, [2242, "div", ["className", 0, "_4u-c"], ["onResize", 1, 0], [[99394, "div", ["className", 0, "_35l_"], [76, AdsEditableDataTableDecorator457, []]], [1090, "div", ["className", 0, "_4u-f"], [66, "iframe", ["tabindex", 0, "-1"]]]]]];
+const AdsPEAdTableContainer460 = [32769, [76, ResponsiveBlock459, []]];
+const AdsPEManageAdsPaneContainer461 = [32769, [100418, "div", ["className", 0, "_2utw"], [[2114, "div", ["className", 0, "_2utx _41tt"], [[100418, "div", ["className", 0, "_4rw_"], [[100418, "span", ["className", 0, "_5b-l  _5bbe"], [[76, Link72, []], [76, Link79, []]]], [100418, "div", ["className", 0, "_5b-m _3o1v clearfix"], [[76, BUIFilterToken96, []], [99394, "div", ["className", 0, "_1tc"], [76, AbstractButton98, []]], [66, "div", ["className", 0, "_49u3"]]]], [32771, ""], [98306, "span"]]], [98306, "div"]]], [1090, "div", ["className", 0, " _41ts"], [99330, "div", [99394, "div", ["className", 0, "_3c5b clearfix"], [100418, "div", ["className", 0, "clearfix"], [[99394, "div", ["className", 0, "_4bl8 _4bl7"], [2114, "div", ["className", 0, "_3c5f"], [[66, "div", ["className", 0, "_3c5i"]], [100418, "div", ["className", 0, "_3c5k"], [[4162, "span", ["className", 0, "_3c5j"], "Stats:"], [2114, "span", ["className", 0, "_3c5l"], [[76, InlineBlock117, []], [76, AbstractButton120, []]]]]]]]], [99394, "div", ["className", 0, "_4bl9"], [2114, "span", ["className", 0, "_3c5e"], [[2050, "span", [[100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton126, []], [76, InlineBlock131, []]]], [76, AbstractButton135, []], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton138, []], [76, AbstractButton141, []], [76, AbstractButton144, []]]]]], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton148, []], [99330, "span", [76, InlineBlock153, []]], [76, AbstractButton161, []], [76, AbstractButton163, []]]]]]]]]]]], [2114, "div", ["className", 0, "_2utz"], [[1090, "div", ["className", 0, "_2ut-"], [99330, "div", [100418, "div", ["className", 0, "_tm2"], [[76, AbstractButton170, []], [76, AbstractButton172, []], [76, AbstractButton174, []]]]]], [1090, "div", ["className", 0, "_2ut_"], [76, ResponsiveBlock459, []]]]]]]];
+const AdsPEContentContainer462 = [32769, [100418, "div", ["className", 0, "_2utw"], [[2114, "div", ["className", 0, "_2utx _41tt"], [[100418, "div", ["className", 0, "_4rw_"], [[100418, "span", ["className", 0, "_5b-l  _5bbe"], [[76, Link72, []], [76, Link79, []]]], [100418, "div", ["className", 0, "_5b-m _3o1v clearfix"], [[76, BUIFilterToken96, []], [99394, "div", ["className", 0, "_1tc"], [76, AbstractButton98, []]], [66, "div", ["className", 0, "_49u3"]]]], [32771, ""], [98306, "span"]]], [98306, "div"]]], [1090, "div", ["className", 0, " _41ts"], [99330, "div", [99394, "div", ["className", 0, "_3c5b clearfix"], [100418, "div", ["className", 0, "clearfix"], [[99394, "div", ["className", 0, "_4bl8 _4bl7"], [2114, "div", ["className", 0, "_3c5f"], [[66, "div", ["className", 0, "_3c5i"]], [100418, "div", ["className", 0, "_3c5k"], [[4162, "span", ["className", 0, "_3c5j"], "Stats:"], [2114, "span", ["className", 0, "_3c5l"], [[76, InlineBlock117, []], [76, AbstractButton120, []]]]]]]]], [99394, "div", ["className", 0, "_4bl9"], [2114, "span", ["className", 0, "_3c5e"], [[2050, "span", [[100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton126, []], [76, InlineBlock131, []]]], [76, AbstractButton135, []], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton138, []], [76, AbstractButton141, []], [76, AbstractButton144, []]]]]], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton148, []], [99330, "span", [76, InlineBlock153, []]], [76, AbstractButton161, []], [76, AbstractButton163, []]]]]]]]]]]], [2114, "div", ["className", 0, "_2utz"], [[1090, "div", ["className", 0, "_2ut-"], [99330, "div", [100418, "div", ["className", 0, "_tm2"], [[76, AbstractButton170, []], [76, AbstractButton172, []], [76, AbstractButton174, []]]]]], [1090, "div", ["className", 0, "_2ut_"], [76, ResponsiveBlock459, []]]]]]]];
+const FluxContainer_r_463 = [32769, [100674, "div", ["className", 0, "mainWrapper"], ["width", "1192px"], [[99394, "div", ["className", 0, "_2wdc"], [76, ReactTransitionGroup66, []]], [100418, "div", ["className", 0, "_2utw"], [[2114, "div", ["className", 0, "_2utx _41tt"], [[100418, "div", ["className", 0, "_4rw_"], [[100418, "span", ["className", 0, "_5b-l  _5bbe"], [[76, Link72, []], [76, Link79, []]]], [100418, "div", ["className", 0, "_5b-m _3o1v clearfix"], [[76, BUIFilterToken96, []], [99394, "div", ["className", 0, "_1tc"], [76, AbstractButton98, []]], [66, "div", ["className", 0, "_49u3"]]]], [32771, ""], [98306, "span"]]], [98306, "div"]]], [1090, "div", ["className", 0, " _41ts"], [99330, "div", [99394, "div", ["className", 0, "_3c5b clearfix"], [100418, "div", ["className", 0, "clearfix"], [[99394, "div", ["className", 0, "_4bl8 _4bl7"], [2114, "div", ["className", 0, "_3c5f"], [[66, "div", ["className", 0, "_3c5i"]], [100418, "div", ["className", 0, "_3c5k"], [[4162, "span", ["className", 0, "_3c5j"], "Stats:"], [2114, "span", ["className", 0, "_3c5l"], [[76, InlineBlock117, []], [76, AbstractButton120, []]]]]]]]], [99394, "div", ["className", 0, "_4bl9"], [2114, "span", ["className", 0, "_3c5e"], [[2050, "span", [[100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton126, []], [76, InlineBlock131, []]]], [76, AbstractButton135, []], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton138, []], [76, AbstractButton141, []], [76, AbstractButton144, []]]]]], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton148, []], [99330, "span", [76, InlineBlock153, []]], [76, AbstractButton161, []], [76, AbstractButton163, []]]]]]]]]]]], [2114, "div", ["className", 0, "_2utz"], [[1090, "div", ["className", 0, "_2ut-"], [99330, "div", [100418, "div", ["className", 0, "_tm2"], [[76, AbstractButton170, []], [76, AbstractButton172, []], [76, AbstractButton174, []]]]]], [1090, "div", ["className", 0, "_2ut_"], [76, ResponsiveBlock459, []]]]]]]]]];
+const AdsPESideTrayTabButton468 = [1, AdsPESideTrayTabButton468_ComputeFunction, [2242, "div", ["className", 0, "_1-ly _59j9 _d9a"], ["click", 1, 0], [[98370, "i", ["className", 0, "_1-lx img sp_UuU9HmrQ397 sx_990b54"]], [66, "div", ["className", 0, "_vf7"]], [66, "div", ["className", 0, "_vf8"]]]]];
+const AdsPEEditorTrayTabButton469 = [32769, [76, AdsPESideTrayTabButton468, []]];
+const AdsPESideTrayTabButton471 = [1, AdsPESideTrayTabButton471_ComputeFunction, [2242, "div", ["className", 0, " _1-lz _d9a"], ["click", 1, 0], [[98370, "i", ["className", 0, "_1-lx img sp_UuU9HmrQ397 sx_94017f"]], [66, "div", ["className", 0, "_vf7"]], [66, "div", ["className", 0, "_vf8"]]]]];
+const AdsPEInsightsTrayTabButton472 = [32769, [76, AdsPESideTrayTabButton471, []]];
+const FBDragHandle475 = [1, FBDragHandle475_ComputeFunction, [450, "div", ["className", 0, "_4a2j _2ciy _2ciz", "throttle", 0, 25, "delay", 0, 0, "threshold", 0, 0], ["height", "550px"], ["onStart", 1, 0, "onEnd", 1, 1, "onChange", 1, 2, "onMouseDown", 1, 3, "onMouseUp", 1, 4, "onMouseLeave", 1, 5]]];
+const Link488 = [1, Link488_ComputeFunction, [4290, "a", ["className", 0, "_5ir9", "label", 0, "Rename using available fields", "href", 0, "#"], ["onMouseDown", 1, 0, "click", 1, 1], "Rename using available fields"]];
+const AdsAutoNamingTemplateDialog489 = [32769, [76, Link488, []]];
+const AdsPEAmbientNUXMegaphone490 = [32769, [99330, "span", [76, Link488, []]]];
+const BUISwitch492 = [1, BUISwitch492_ComputeFunction, [1218, "div", ["value", 32, true, "disabled", 2, true, "data-hover", 0, "tooltip", "data-tooltip-position", 0, "below", "aria-label", 0, "Currently active and you can not deactivate it.", "className", 0, "_128j _128k _128m _128n", "role", 0, "checkbox", "aria-checked", 0, "true"], ["onToggle", 1, 0], [1218, "div", ["className", 0, "_128o", "tabindex", 0, "-1"], ["click", 1, 1, "onKeyDown", 1, 2, "onMouseDown", 1, 3], [66, "div", ["className", 0, "_128p"]]]]];
+const AdsStatusSwitchInternal493 = [32769, [76, BUISwitch492, []]];
+const AdsStatusSwitch494 = [32769, [76, BUISwitch492, []]];
+const LeftRight495 = [32769, [100418, "div", ["className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Ad Name", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Ad Name"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [2114, "span", ["className", 0, "_5irl"], [[99394, "div", ["className", 0, "_5ira _2vl4 _1h18"], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Test Ad"]], [66, "div", ["className", 0, "_2vlk"]]]]]], [99330, "span", [76, Link488, []]]]]]]], [1090, "div", ["className", 0, "_ohf rfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Status", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Status"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1090, "div", ["className", 0, "_5irp"], [76, BUISwitch492, []]]]]]]]];
+const XUICard496 = [32769, [99394, "div", ["className", 0, "_5ir8 _12k2 _4-u2  _4-u8", "xuiErrorPosition", 0, "above", "background", 0, "white"], [100418, "div", ["className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Ad Name", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Ad Name"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [2114, "span", ["className", 0, "_5irl"], [[99394, "div", ["className", 0, "_5ira _2vl4 _1h18"], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Test Ad"]], [66, "div", ["className", 0, "_2vlk"]]]]]], [99330, "span", [76, Link488, []]]]]]]], [1090, "div", ["className", 0, "_ohf rfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Status", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Status"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1090, "div", ["className", 0, "_5irp"], [76, BUISwitch492, []]]]]]]]]];
+const ReactXUIError497 = [32769, [99394, "div", ["className", 0, "_5ir8 _12k2 _4-u2  _4-u8", "xuiErrorPosition", 0, "above", "background", 0, "white"], [100418, "div", ["className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Ad Name", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Ad Name"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [2114, "span", ["className", 0, "_5irl"], [[99394, "div", ["className", 0, "_5ira _2vl4 _1h18"], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Test Ad"]], [66, "div", ["className", 0, "_2vlk"]]]]]], [99330, "span", [76, Link488, []]]]]]]], [1090, "div", ["className", 0, "_ohf rfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Status", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Status"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1090, "div", ["className", 0, "_5irp"], [76, BUISwitch492, []]]]]]]]]];
+const AdsCard498 = [32769, [99394, "div", ["className", 0, "_5ir8 _12k2 _4-u2  _4-u8", "xuiErrorPosition", 0, "above", "background", 0, "white"], [100418, "div", ["className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Ad Name", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Ad Name"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [2114, "span", ["className", 0, "_5irl"], [[99394, "div", ["className", 0, "_5ira _2vl4 _1h18"], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Test Ad"]], [66, "div", ["className", 0, "_2vlk"]]]]]], [99330, "span", [76, Link488, []]]]]]]], [1090, "div", ["className", 0, "_ohf rfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Status", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Status"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1090, "div", ["className", 0, "_5irp"], [76, BUISwitch492, []]]]]]]]]];
+const AdsPENameSection499 = [32769, [99394, "div", ["className", 0, "_5ir8 _12k2 _4-u2  _4-u8", "xuiErrorPosition", 0, "above", "background", 0, "white"], [100418, "div", ["className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Ad Name", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Ad Name"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [2114, "span", ["className", 0, "_5irl"], [[99394, "div", ["className", 0, "_5ira _2vl4 _1h18"], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Test Ad"]], [66, "div", ["className", 0, "_2vlk"]]]]]], [99330, "span", [76, Link488, []]]]]]]], [1090, "div", ["className", 0, "_ohf rfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Status", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Status"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1090, "div", ["className", 0, "_5irp"], [76, BUISwitch492, []]]]]]]]]];
+const AdsPEAdgroupNameSectionContainer500 = [32769, [99394, "div", ["className", 0, "_5ir8 _12k2 _4-u2  _4-u8", "xuiErrorPosition", 0, "above", "background", 0, "white"], [100418, "div", ["className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Ad Name", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Ad Name"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [2114, "span", ["className", 0, "_5irl"], [[99394, "div", ["className", 0, "_5ira _2vl4 _1h18"], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Test Ad"]], [66, "div", ["className", 0, "_2vlk"]]]]]], [99330, "span", [76, Link488, []]]]]]]], [1090, "div", ["className", 0, "_ohf rfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Status", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Status"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1090, "div", ["className", 0, "_5irp"], [76, BUISwitch492, []]]]]]]]]];
+const Link506 = [1, Link506_ComputeFunction, [4290, "a", ["target", 0, "_blank", "href", 0, "/ads/manager/ad/?ids=98010048849345"], ["click", 1, 0], "Open in Ads Manager"]];
+const Link507 = [1, Link507_ComputeFunction, [4290, "a", ["target", 0, "_blank", "href", 0, "#"], ["click", 1, 0], "Open in Ads Reporting"]];
+const Link508 = [1, Link508_ComputeFunction, [4290, "a", ["target", 0, "_blank", "href", 0, "https://www.facebook.com/?demo_ad=98010048849345&amp;h=AQA24w3temAtB-5f#pagelet_ego_pane"], ["click", 1, 0], "View on Desktop Right Column"]];
+const Link509 = [1, Link509_ComputeFunction, [4290, "a", ["target", 0, "_blank", "href", 0, "/ads/manage/powereditor/?act=10149999073643408&amp;adgroup=98010048849345"], ["click", 1, 0], "Open Power Editor with this ad selected"]];
+const List510 = [32769, [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]];
+const XUICardSection511 = [32769, [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]];
+const AdsCardSection512 = [32769, [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]];
+const XUICard513 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Ad Links"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]]]];
+const ReactXUIError514 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Ad Links"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]]]];
+const AdsCard515 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Ad Links"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]]]];
+const AdsPELinkList516 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Ad Links"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]]]];
+const AdsPEAdgroupLinksSection517 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Ad Links"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]]]];
+const AdsPEAdgroupLinksSectionContainer518 = [32769, [99330, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Ad Links"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]]]]];
+const PillButton523 = [1, PillButton523_ComputeFunction, [4290, "a", ["selected", 130, true, "href", 0, "#", "className", 0, "uiPillButton uiPillButtonSelected"], ["click", 1, 0], "Desktop Right Column"]];
+const List524 = [32769, [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]];
+const PillList525 = [32769, [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]];
+const XUICardSection526 = [32769, [99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]]];
+const AdsCardSection527 = [32769, [99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]]];
+const AdsPEPreviewPillList528 = [32769, [99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]]];
+const AdsPEPreview535 = [32769, [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]];
+const AdsPEStandardPreview536 = [32769, [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]];
+const AdsPEStandardPreviewContainer537 = [32769, [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]];
+const XUICard538 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Preview"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]]]];
+const ReactXUIError539 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Preview"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]]]];
+const AdsCard540 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Preview"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]]]];
+const AdsPEAdgroupPreviewSection541 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Preview"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]]]];
+const AdsPEAdgroupPreviewSectionContainer542 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Preview"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]]]];
+const AdsPEStickyArea543 = [32769, [99330, "div", [1026, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Preview"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]]]]]];
+const Link548 = [1, Link548_ComputeFunction, [4290, "a", ["className", 0, "fwb", "href", 0, "#"], ["click", 1, 0], "Connect a Facebook Page"]];
+const AdsPEWebsiteNoPageDestinationSection549 = [32769, [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]];
+const AdsPEWebsiteNoPageDestinationSectionContainer550 = [32769, [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]];
+const XUICardSection551 = [32769, [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]];
+const AdsCardSection552 = [32769, [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]];
+const XUICard553 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Facebook Page"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]]]];
+const ReactXUIError554 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Facebook Page"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]]]];
+const AdsCard555 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Facebook Page"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]]]];
+const AdsPEAdgroupDestinationSection556 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Facebook Page"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]]]];
+const AdsPEAdgroupDestinationSectionContainer557 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Facebook Page"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]]]];
+const AdsPopoverLink563 = [1, AdsPopoverLink563_ComputeFunction, [2178, "span", ["onMouseEnter", 1, 0, "onMouseLeave", 1, 1], [[66, "span", ["className", 0, "_3o_j"]], [98370, "i", ["className", 0, "_541d img sp_R48dKBxiJkP sx_dc2cdb"]]]]];
+const AdsHelpLink564 = [32769, [76, AdsPopoverLink563, []]];
+const AdsLabeledField565 = [32769, [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]]];
+const ReactXUIError566 = [32769, [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]]];
+const AdsTextInput567 = [32769, [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]]];
+const AdsBulkTextInput568 = [32769, [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]]];
+const AdsPEWebsiteURLField569 = [32769, [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]]];
+const AdsPopoverLink571 = [1, AdsPopoverLink571_ComputeFunction, [2178, "span", ["onMouseEnter", 1, 0, "onMouseLeave", 1, 1], [[66, "span", ["className", 0, "_3o_j"]], [98370, "i", ["className", 0, "_541d img sp_R48dKBxiJkP sx_dc2cdb"]]]]];
+const AdsHelpLink572 = [32769, [76, AdsPopoverLink571, []]];
+const AdsLabeledField573 = [32769, [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]]];
+const ReactXUIError574 = [32769, [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]]];
+const AdsTextInput575 = [32769, [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]]];
+const AdsBulkTextInput576 = [32769, [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]]];
+const AdsPEHeadlineField577 = [32769, [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]]];
+const AbstractButton583 = [1, AbstractButton583_ComputeFunction, [4290, "button", ["use", 0, "default", "borderShade", 0, "light", "className", 0, "_4jy0 _4jy4 _517h _51sy _42ft", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], "Change Image"]];
+const XUIButton584 = [32769, [76, AbstractButton583, []]];
+const Link590 = [1, Link590_ComputeFunction, [4290, "a", ["href", 0, "/business/ads-guide/", "target", 0, "_blank"], ["click", 1, 0], "Facebook Ad Guidelines"]];
+const XUIText591 = [32769, [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]];
+const AdsImageInput592 = [32769, [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]];
+const AdsBulkImageInput593 = [32769, [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]];
+const AdsLabeledField594 = [32769, [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]];
+const AdsPEImageSelector595 = [32769, [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]];
+const AdsPEImageSelectorContainer596 = [32769, [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]];
+const AdsPEWebsiteNoPageCreative597 = [32769, [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]];
+const AdsPEWebsiteNoPageCreativeContainer598 = [32769, [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]];
+const XUICardSection599 = [32769, [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]];
+const AdsCardSection600 = [32769, [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]];
+const XUICard601 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Creative"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]]]];
+const ReactXUIError602 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Creative"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]]]];
+const AdsCard603 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Creative"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]]]];
+const AdsPEAdgroupCreativeSection604 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Creative"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]]]];
+const AdsPEAdgroupCreativeSectionContainer605 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Creative"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]]]];
+const AdsPopoverLink614 = [1, AdsPopoverLink614_ComputeFunction, [2178, "span", ["onMouseEnter", 1, 0, "onMouseLeave", 1, 1], [[66, "span", ["className", 0, "_3o_j"]], [98370, "i", ["className", 0, "_5s_w _541d img sp_R48dKBxiJkP sx_dc2cdb"]]]]];
+const AdsHelpLink615 = [32769, [76, AdsPopoverLink614, []]];
+const AdsCFHelpLink616 = [32769, [76, AdsPopoverLink614, []]];
+const AdsPixelTrackingLabel617 = [32769, [100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]]];
+const Link622 = [1, Link622_ComputeFunction, [1218, "a", ["href", 0, "/help/336923339852238", "target", 0, "_blank"], ["click", 1, 0], [102466, "span", ["weight", 0, "inherit", "display", 0, "inline", "className", 0, " _50f4"], "Learn More"]]];
+const XUIText623 = [32769, [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]]];
+const XUIGrayText624 = [32769, [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]]];
+const AbstractButton625 = [1, AbstractButton625_ComputeFunction, [4290, "button", ["className", 0, "_23ng _4jy0 _4jy4 _4jy1 _51sy selected _42ft", "use", 0, "confirm", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], "Create a Pixel"]];
+const XUIButton626 = [32769, [76, AbstractButton625, []]];
+const AdsPixelCreateButton627 = [32769, [76, AbstractButton625, []]];
+const LeftRight628 = [32769, [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]];
+const ImageBlock629 = [32769, [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]];
+const AdsPixelCreationCard630 = [32769, [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]];
+const AdsPixelTrackingSelector631 = [32769, [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]];
+const AdsPixelTracking632 = [32769, [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]];
+const AdsPEPixelTracking633 = [32769, [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]];
+const AdsPEPixelTrackingContainer634 = [32769, [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]];
+const AdsPEStandardTrackingSection636 = [32769, [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]];
+const AdsPEStandardTrackingContainer637 = [32769, [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]];
+const XUICardSection638 = [32769, [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]];
+const AdsCardSection639 = [32769, [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]];
+const XUICard640 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Tracking"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]]]];
+const ReactXUIError641 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Tracking"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]]]];
+const AdsCard642 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Tracking"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]]]];
+const AdsPEAdgroupTrackingSection643 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Tracking"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]]]];
+const AdsPEAdgroupTrackingSectionContainer644 = [32769, [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Tracking"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]]]];
+const LeftRight647 = [32769, [100418, "div", ["flex", 0, "left", "direction", 0, "right", "className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohf rfloat"], [1090, "div", ["className", 0, "_20ro _20rp"], [2050, "div", [[99330, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Ad Links"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]]]], [99330, "div", [1026, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Preview"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]]]]]]]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef"], [2050, "div", [[100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Facebook Page"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Creative"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Tracking"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]]]]]]]]]];
+const FlexibleBlock648 = [32769, [100418, "div", ["flex", 0, "left", "direction", 0, "right", "className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohf rfloat"], [1090, "div", ["className", 0, "_20ro _20rp"], [2050, "div", [[99330, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Ad Links"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]]]], [99330, "div", [1026, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Preview"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]]]]]]]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef"], [2050, "div", [[100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Facebook Page"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Creative"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Tracking"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]]]]]]]]]];
+const AdsPEMultiColumnEditor649 = [32769, [100418, "div", ["className", 0, "_2j_c _ykd"], [[1026, "div", [99394, "div", ["className", 0, "_5ir8 _12k2 _4-u2  _4-u8", "xuiErrorPosition", 0, "above", "background", 0, "white"], [100418, "div", ["className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Ad Name", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Ad Name"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [2114, "span", ["className", 0, "_5irl"], [[99394, "div", ["className", 0, "_5ira _2vl4 _1h18"], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Test Ad"]], [66, "div", ["className", 0, "_2vlk"]]]]]], [99330, "span", [76, Link488, []]]]]]]], [1090, "div", ["className", 0, "_ohf rfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Status", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Status"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1090, "div", ["className", 0, "_5irp"], [76, BUISwitch492, []]]]]]]]]], [100418, "div", ["flex", 0, "left", "direction", 0, "right", "className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohf rfloat"], [1090, "div", ["className", 0, "_20ro _20rp"], [2050, "div", [[99330, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Ad Links"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]]]], [99330, "div", [1026, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Preview"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]]]]]]]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef"], [2050, "div", [[100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Facebook Page"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Creative"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Tracking"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]]]]]]]]]]]];
+const AdsPEAdgroupEditor650 = [32769, [100354, "div", [[100418, "div", ["className", 0, "_yke"], [[66, "div", ["className", 0, "_2x9d _pry"]], [102466, "span", ["weight", 0, "bold", "className", 0, "_2x9f  _50f5 _50f7", "display", 0, "inline"], "Editing Ad"], [1090, "div", ["className", 0, "_3a-a"], [1090, "div", ["className", 0, "_3a-b"], [102466, "span", ["weight", 0, "bold", "display", 0, "inline", "className", 0, " _50f5 _50f7"], "Test Ad"]]]]], [100418, "div", ["className", 0, "_2j_c _ykd"], [[1026, "div", [99394, "div", ["className", 0, "_5ir8 _12k2 _4-u2  _4-u8", "xuiErrorPosition", 0, "above", "background", 0, "white"], [100418, "div", ["className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Ad Name", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Ad Name"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [2114, "span", ["className", 0, "_5irl"], [[99394, "div", ["className", 0, "_5ira _2vl4 _1h18"], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Test Ad"]], [66, "div", ["className", 0, "_2vlk"]]]]]], [99330, "span", [76, Link488, []]]]]]]], [1090, "div", ["className", 0, "_ohf rfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Status", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Status"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1090, "div", ["className", 0, "_5irp"], [76, BUISwitch492, []]]]]]]]]], [100418, "div", ["flex", 0, "left", "direction", 0, "right", "className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohf rfloat"], [1090, "div", ["className", 0, "_20ro _20rp"], [2050, "div", [[99330, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Ad Links"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]]]], [99330, "div", [1026, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Preview"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]]]]]]]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef"], [2050, "div", [[100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Facebook Page"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Creative"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Tracking"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]]]]]]]]]]]]]];
+const AdsPEAdgroupEditorContainer651 = [32769, [100354, "div", [[100418, "div", ["className", 0, "_yke"], [[66, "div", ["className", 0, "_2x9d _pry"]], [102466, "span", ["weight", 0, "bold", "className", 0, "_2x9f  _50f5 _50f7", "display", 0, "inline"], "Editing Ad"], [1090, "div", ["className", 0, "_3a-a"], [1090, "div", ["className", 0, "_3a-b"], [102466, "span", ["weight", 0, "bold", "display", 0, "inline", "className", 0, " _50f5 _50f7"], "Test Ad"]]]]], [100418, "div", ["className", 0, "_2j_c _ykd"], [[1026, "div", [99394, "div", ["className", 0, "_5ir8 _12k2 _4-u2  _4-u8", "xuiErrorPosition", 0, "above", "background", 0, "white"], [100418, "div", ["className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Ad Name", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Ad Name"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [2114, "span", ["className", 0, "_5irl"], [[99394, "div", ["className", 0, "_5ira _2vl4 _1h18"], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Test Ad"]], [66, "div", ["className", 0, "_2vlk"]]]]]], [99330, "span", [76, Link488, []]]]]]]], [1090, "div", ["className", 0, "_ohf rfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Status", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Status"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1090, "div", ["className", 0, "_5irp"], [76, BUISwitch492, []]]]]]]]]], [100418, "div", ["flex", 0, "left", "direction", 0, "right", "className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohf rfloat"], [1090, "div", ["className", 0, "_20ro _20rp"], [2050, "div", [[99330, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Ad Links"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]]]], [99330, "div", [1026, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Preview"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]]]]]]]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef"], [2050, "div", [[100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Facebook Page"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Creative"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Tracking"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]]]]]]]]]]]]]];
+const AdsPESideTrayTabContent652 = [32769, [99394, "div", ["className", 0, "_1o_8 _44ra _5cyn"], [100354, "div", [[100418, "div", ["className", 0, "_yke"], [[66, "div", ["className", 0, "_2x9d _pry"]], [102466, "span", ["weight", 0, "bold", "className", 0, "_2x9f  _50f5 _50f7", "display", 0, "inline"], "Editing Ad"], [1090, "div", ["className", 0, "_3a-a"], [1090, "div", ["className", 0, "_3a-b"], [102466, "span", ["weight", 0, "bold", "display", 0, "inline", "className", 0, " _50f5 _50f7"], "Test Ad"]]]]], [100418, "div", ["className", 0, "_2j_c _ykd"], [[1026, "div", [99394, "div", ["className", 0, "_5ir8 _12k2 _4-u2  _4-u8", "xuiErrorPosition", 0, "above", "background", 0, "white"], [100418, "div", ["className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Ad Name", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Ad Name"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [2114, "span", ["className", 0, "_5irl"], [[99394, "div", ["className", 0, "_5ira _2vl4 _1h18"], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Test Ad"]], [66, "div", ["className", 0, "_2vlk"]]]]]], [99330, "span", [76, Link488, []]]]]]]], [1090, "div", ["className", 0, "_ohf rfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Status", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Status"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1090, "div", ["className", 0, "_5irp"], [76, BUISwitch492, []]]]]]]]]], [100418, "div", ["flex", 0, "left", "direction", 0, "right", "className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohf rfloat"], [1090, "div", ["className", 0, "_20ro _20rp"], [2050, "div", [[99330, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Ad Links"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]]]], [99330, "div", [1026, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Preview"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]]]]]]]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef"], [2050, "div", [[100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Facebook Page"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Creative"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Tracking"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]]]]]]]]]]]]]]];
+const AdsPEEditorTrayTabContent653 = [32769, [99394, "div", ["className", 0, "_1o_8 _44ra _5cyn"], [100354, "div", [[100418, "div", ["className", 0, "_yke"], [[66, "div", ["className", 0, "_2x9d _pry"]], [102466, "span", ["weight", 0, "bold", "className", 0, "_2x9f  _50f5 _50f7", "display", 0, "inline"], "Editing Ad"], [1090, "div", ["className", 0, "_3a-a"], [1090, "div", ["className", 0, "_3a-b"], [102466, "span", ["weight", 0, "bold", "display", 0, "inline", "className", 0, " _50f5 _50f7"], "Test Ad"]]]]], [100418, "div", ["className", 0, "_2j_c _ykd"], [[1026, "div", [99394, "div", ["className", 0, "_5ir8 _12k2 _4-u2  _4-u8", "xuiErrorPosition", 0, "above", "background", 0, "white"], [100418, "div", ["className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Ad Name", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Ad Name"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [2114, "span", ["className", 0, "_5irl"], [[99394, "div", ["className", 0, "_5ira _2vl4 _1h18"], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Test Ad"]], [66, "div", ["className", 0, "_2vlk"]]]]]], [99330, "span", [76, Link488, []]]]]]]], [1090, "div", ["className", 0, "_ohf rfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Status", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Status"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1090, "div", ["className", 0, "_5irp"], [76, BUISwitch492, []]]]]]]]]], [100418, "div", ["flex", 0, "left", "direction", 0, "right", "className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohf rfloat"], [1090, "div", ["className", 0, "_20ro _20rp"], [2050, "div", [[99330, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Ad Links"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]]]], [99330, "div", [1026, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Preview"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]]]]]]]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef"], [2050, "div", [[100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Facebook Page"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Creative"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Tracking"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]]]]]]]]]]]]]]];
+const AdsPEMultiTabDrawer654 = [1, AdsPEMultiTabDrawer654_ComputeFunction, [2498, "div", ["className", 0, "_2kev _2kew _2kex"], ["height", "550px", "width", "1027px"], ["tabButtons", 0, 0, "tabContentPanes", 0, 1], [[2114, "div", ["className", 0, "_2kf0"], [[76, AdsPESideTrayTabButton468, []], [76, AdsPESideTrayTabButton471, []]]], [2114, "div", ["className", 0, "_2kf1"], [[76, FBDragHandle475, []], [99394, "div", ["className", 0, "_1o_8 _44ra _5cyn"], [100354, "div", [[100418, "div", ["className", 0, "_yke"], [[66, "div", ["className", 0, "_2x9d _pry"]], [102466, "span", ["weight", 0, "bold", "className", 0, "_2x9f  _50f5 _50f7", "display", 0, "inline"], "Editing Ad"], [1090, "div", ["className", 0, "_3a-a"], [1090, "div", ["className", 0, "_3a-b"], [102466, "span", ["weight", 0, "bold", "display", 0, "inline", "className", 0, " _50f5 _50f7"], "Test Ad"]]]]], [100418, "div", ["className", 0, "_2j_c _ykd"], [[1026, "div", [99394, "div", ["className", 0, "_5ir8 _12k2 _4-u2  _4-u8", "xuiErrorPosition", 0, "above", "background", 0, "white"], [100418, "div", ["className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Ad Name", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Ad Name"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [2114, "span", ["className", 0, "_5irl"], [[99394, "div", ["className", 0, "_5ira _2vl4 _1h18"], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Test Ad"]], [66, "div", ["className", 0, "_2vlk"]]]]]], [99330, "span", [76, Link488, []]]]]]]], [1090, "div", ["className", 0, "_ohf rfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Status", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Status"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1090, "div", ["className", 0, "_5irp"], [76, BUISwitch492, []]]]]]]]]], [100418, "div", ["flex", 0, "left", "direction", 0, "right", "className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohf rfloat"], [1090, "div", ["className", 0, "_20ro _20rp"], [2050, "div", [[99330, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Ad Links"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]]]], [99330, "div", [1026, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Preview"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]]]]]]]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef"], [2050, "div", [[100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Facebook Page"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Creative"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Tracking"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]]]]]]]]]]]]]]]]]]];
+const FluxContainer_x_655 = [32769, [76, AdsPEMultiTabDrawer654, []]];
+const AdsPEContainer661 = [32769, [100418, "div", ["id", 0, "ads_pe_container"], [[100418, "div", ["className", 0, "_5ljl", "id", 0, "ads_pe_top_nav"], [[2114, "div", ["className", 0, "_5ljm"], [[76, Link0, []], [1090, "div", ["className", 0, "_5rne"], [4162, "span", ["className", 0, "_5ljs", "data-testid", 0, "PETopNavLogoText"], "Power Editor"]], [4162, "span", ["className", 0, "_5ljt _5lju"], "Dick Madanson"]]], [2114, "div", ["className", 0, "_5ljy"], [[2114, "div", ["className", 0, "_5ljz _5mun"], [[76, Link2, []], [4162, "div", ["className", 0, "_5lj- _5lju"], "Account 10149999073643408"]]], [2114, "div", ["className", 0, "_5ljz"], [[1090, "div", ["className", 0, "_5lj_"], [76, AbstractButton9, []]], [1090, "div", ["className", 0, "_5lj- _5lju"], [100354, "div", [[32771, "Last downloaded"], [32771, " "], [4162, "abbr", ["className", 0, "livetimestamp", "data-utime", 0, 1446062352, "data-shorten", 0, false], "a few seconds ago"]]]]]], [2114, "div", ["className", 0, "_5ljz"], [[1090, "div", ["className", 0, "_5lj_"], [76, AbstractButton13, []]], [1090, "div", ["className", 0, "_5lj- _5lju"], [98306, "div"]]]]]], [1090, "div", ["className", 0, "_5lk3"], [100418, "div", ["className", 0, "_13xj _51xa", "id", 0, "helpButton"], [[76, AbstractButton16, []], [76, InlineBlock21, []]]]], [98306, "span"]]], [99394, "div", ["className", 0, "_5_a", "id", 0, "ads_pe_navigation_bar"], [99394, "div", ["className", 0, "_5vx2 _5vx4 _5vx6 _5kkt"], [99394, "div", ["className", 0, "_5vx7 clearfix"], [1090, "div", ["className", 0, "_ohe lfloat"], [76, TabBar51, []]]]]], [100674, "div", ["className", 0, "mainWrapper"], ["width", "1192px"], [[99394, "div", ["className", 0, "_2wdc"], [76, ReactTransitionGroup66, []]], [100418, "div", ["className", 0, "_2utw"], [[2114, "div", ["className", 0, "_2utx _41tt"], [[100418, "div", ["className", 0, "_4rw_"], [[100418, "span", ["className", 0, "_5b-l  _5bbe"], [[76, Link72, []], [76, Link79, []]]], [100418, "div", ["className", 0, "_5b-m _3o1v clearfix"], [[76, BUIFilterToken96, []], [99394, "div", ["className", 0, "_1tc"], [76, AbstractButton98, []]], [66, "div", ["className", 0, "_49u3"]]]], [32771, ""], [98306, "span"]]], [98306, "div"]]], [1090, "div", ["className", 0, " _41ts"], [99330, "div", [99394, "div", ["className", 0, "_3c5b clearfix"], [100418, "div", ["className", 0, "clearfix"], [[99394, "div", ["className", 0, "_4bl8 _4bl7"], [2114, "div", ["className", 0, "_3c5f"], [[66, "div", ["className", 0, "_3c5i"]], [100418, "div", ["className", 0, "_3c5k"], [[4162, "span", ["className", 0, "_3c5j"], "Stats:"], [2114, "span", ["className", 0, "_3c5l"], [[76, InlineBlock117, []], [76, AbstractButton120, []]]]]]]]], [99394, "div", ["className", 0, "_4bl9"], [2114, "span", ["className", 0, "_3c5e"], [[2050, "span", [[100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton126, []], [76, InlineBlock131, []]]], [76, AbstractButton135, []], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton138, []], [76, AbstractButton141, []], [76, AbstractButton144, []]]]]], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton148, []], [99330, "span", [76, InlineBlock153, []]], [76, AbstractButton161, []], [76, AbstractButton163, []]]]]]]]]]]], [2114, "div", ["className", 0, "_2utz"], [[1090, "div", ["className", 0, "_2ut-"], [99330, "div", [100418, "div", ["className", 0, "_tm2"], [[76, AbstractButton170, []], [76, AbstractButton172, []], [76, AbstractButton174, []]]]]], [1090, "div", ["className", 0, "_2ut_"], [76, ResponsiveBlock459, []]]]]]]]], [76, AdsPEMultiTabDrawer654, []], [98306, "div"]]]];
+export const Component = [32768, [100418, "div", ["id", 0, "ads_pe_container"], [[100418, "div", ["className", 0, "_5ljl", "id", 0, "ads_pe_top_nav"], [[2114, "div", ["className", 0, "_5ljm"], [[76, Link0, []], [1090, "div", ["className", 0, "_5rne"], [4162, "span", ["className", 0, "_5ljs", "data-testid", 0, "PETopNavLogoText"], "Power Editor"]], [4162, "span", ["className", 0, "_5ljt _5lju"], "Dick Madanson"]]], [2114, "div", ["className", 0, "_5ljy"], [[2114, "div", ["className", 0, "_5ljz _5mun"], [[76, Link2, []], [4162, "div", ["className", 0, "_5lj- _5lju"], "Account 10149999073643408"]]], [2114, "div", ["className", 0, "_5ljz"], [[1090, "div", ["className", 0, "_5lj_"], [76, AbstractButton9, []]], [1090, "div", ["className", 0, "_5lj- _5lju"], [100354, "div", [[32771, "Last downloaded"], [32771, " "], [4162, "abbr", ["className", 0, "livetimestamp", "data-utime", 0, 1446062352, "data-shorten", 0, false], "a few seconds ago"]]]]]], [2114, "div", ["className", 0, "_5ljz"], [[1090, "div", ["className", 0, "_5lj_"], [76, AbstractButton13, []]], [1090, "div", ["className", 0, "_5lj- _5lju"], [98306, "div"]]]]]], [1090, "div", ["className", 0, "_5lk3"], [100418, "div", ["className", 0, "_13xj _51xa", "id", 0, "helpButton"], [[76, AbstractButton16, []], [76, InlineBlock21, []]]]], [98306, "span"]]], [99394, "div", ["className", 0, "_5_a", "id", 0, "ads_pe_navigation_bar"], [99394, "div", ["className", 0, "_5vx2 _5vx4 _5vx6 _5kkt"], [99394, "div", ["className", 0, "_5vx7 clearfix"], [1090, "div", ["className", 0, "_ohe lfloat"], [76, TabBar51, []]]]]], [100674, "div", ["className", 0, "mainWrapper"], ["width", "1192px"], [[99394, "div", ["className", 0, "_2wdc"], [76, ReactTransitionGroup66, []]], [100418, "div", ["className", 0, "_2utw"], [[2114, "div", ["className", 0, "_2utx _41tt"], [[100418, "div", ["className", 0, "_4rw_"], [[100418, "span", ["className", 0, "_5b-l  _5bbe"], [[76, Link72, []], [76, Link79, []]]], [100418, "div", ["className", 0, "_5b-m _3o1v clearfix"], [[76, BUIFilterToken96, []], [99394, "div", ["className", 0, "_1tc"], [76, AbstractButton98, []]], [66, "div", ["className", 0, "_49u3"]]]], [32771, ""], [98306, "span"]]], [98306, "div"]]], [1090, "div", ["className", 0, " _41ts"], [99330, "div", [99394, "div", ["className", 0, "_3c5b clearfix"], [100418, "div", ["className", 0, "clearfix"], [[99394, "div", ["className", 0, "_4bl8 _4bl7"], [2114, "div", ["className", 0, "_3c5f"], [[66, "div", ["className", 0, "_3c5i"]], [100418, "div", ["className", 0, "_3c5k"], [[4162, "span", ["className", 0, "_3c5j"], "Stats:"], [2114, "span", ["className", 0, "_3c5l"], [[76, InlineBlock117, []], [76, AbstractButton120, []]]]]]]]], [99394, "div", ["className", 0, "_4bl9"], [2114, "span", ["className", 0, "_3c5e"], [[2050, "span", [[100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton126, []], [76, InlineBlock131, []]]], [76, AbstractButton135, []], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton138, []], [76, AbstractButton141, []], [76, AbstractButton144, []]]]]], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton148, []], [99330, "span", [76, InlineBlock153, []]], [76, AbstractButton161, []], [76, AbstractButton163, []]]]]]]]]]]], [2114, "div", ["className", 0, "_2utz"], [[1090, "div", ["className", 0, "_2ut-"], [99330, "div", [100418, "div", ["className", 0, "_tm2"], [[76, AbstractButton170, []], [76, AbstractButton172, []], [76, AbstractButton174, []]]]]], [1090, "div", ["className", 0, "_2ut_"], [76, ResponsiveBlock459, []]]]]]]]], [76, AdsPEMultiTabDrawer654, []], [98306, "div"]]]];
