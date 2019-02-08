@@ -195,6 +195,9 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
       let propName = staticProps[i];
       const propFlags = staticProps[i + 1];
       let staticPropValue = staticProps[i + 2];
+      if (staticPropValue === null || staticPropValue === undefined) {
+        continue;
+      }
       if ((propFlags & PROP_IS_EVENT) !== 0 || (propFlags & PROP_IS_RESERVED) !== 0) {
         continue;
       }

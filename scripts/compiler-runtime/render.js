@@ -60,6 +60,11 @@ export const LOGICAL_OR = 1 << 7;
 export const PROP_IS_EVENT = 1;
 export const PROP_IS_BOOLEAN = 1 << 1;
 export const PROP_IS_POSITIVE_NUMBER = 1 << 2;
+export const PROP_IS_NUMERIC = 1 << 3;
+export const PROP_IS_OVERLOADED_BOOLEAN = 1 << 4;
+export const PROP_IS_BOOLEANISH_STRING = 1 << 5;
+export const PROP_IS_RESERVED = 1 << 6;
+export const PROP_IS_PROPEPRTY = 1 << 7;
 
 const componentTemplateCache = new Map();
 const rootFibers = new Map();
@@ -139,12 +144,24 @@ function mountHostComponentTemplate(templateTypeAndFlags, hostComponentTemplate,
   if ((templateFlags & HAS_STATIC_PROPS) !== 0) {
     const staticProps = hostComponentTemplate[childrenTemplateIndex++];
 
-    for (let i = 0, length = staticProps.length; i < length; i += 2) {
+    for (let i = 0, length = staticProps.length; i < length; i += 3) {
       const propName = staticProps[i];
-      const staticPropValue = staticProps[i + 1];
+      const propFlags = staticProps[i + 1];
+      if ((propFlags & PROP_IS_RESERVED) !== 0) {
+        continue;
+      } else if ((propFlags & PROP_IS_EVENT) !== 0) {
+        // TODO
+        continue;
+      }
+      let staticPropValue = staticProps[i + 2];
       if (propName === "className") {
         DOMNode.className = staticPropValue;
+      } else if ((propFlags & PROP_IS_PROPEPRTY) !== 0) {
+        DOMNode[propName] = staticPropValue;
       } else {
+        if ((propFlags & PROP_IS_BOOLEAN) !== 0) {
+          staticPropValue = "";
+        }
         DOMNode.setAttribute(propName, staticPropValue);
       }
     }

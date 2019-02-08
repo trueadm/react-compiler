@@ -5,6 +5,7 @@ export const PROP_IS_NUMERIC = 1 << 3;
 export const PROP_IS_OVERLOADED_BOOLEAN = 1 << 4;
 export const PROP_IS_BOOLEANISH_STRING = 1 << 5;
 export const PROP_IS_RESERVED = 1 << 6;
+export const PROP_IS_PROPEPRTY = 1 << 7;
 
 const reservedProps = new Set([
   "children",
@@ -262,7 +263,7 @@ export function getPropInformation(propName) {
     propInformationFlag = propInformationFlag | PROP_IS_RESERVED;
   }
   if (mustUsePropertyProps.has(propName)) {
-    // propInformationFlag = propInformationFlag | PropFlagMustUseProperty;
+    propInformationFlag = propInformationFlag | PROP_IS_PROPEPRTY;
   }
   if (booleanishStringProps.has(propName)) {
     propInformationFlag = propInformationFlag | PROP_IS_BOOLEANISH_STRING;

@@ -3930,7 +3930,7 @@ const FixedDataTableRow360 = function() {
 const AbstractCheckboxInput361 = function() {
   return (
     <label className={"_5hhv _55sg _kv1"}>
-      <input
+      <lol
         className={null}
         disabled={false}
         inline={true}
@@ -4111,7 +4111,7 @@ const FixedDataTableCell374 = function() {
 
 const BUISwitch375 = function() {
   return (
-    <lol
+    <lol2
       value={true}
       disabled={true}
       onToggle={function(): void {}}
@@ -4133,7 +4133,7 @@ const BUISwitch375 = function() {
         <div className={"_128p"} />
       </div>
       {null}
-    </lol>
+    </lol2>
   );
 };
 

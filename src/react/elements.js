@@ -166,13 +166,11 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
       }
       templateNode.staticProps.push([propName, propInformation, filteredValue]);
     } else if (propTemplateNode instanceof StaticValueTemplateNode) {
-      if (propTemplateNode.value !== undefined && propTemplateNode.value !== null) {
-        const filteredValue = filterStaticPropValue(propName, propInformation, propTemplateNode.value);
-        if (filteredValue === undefined) {
-          return;
-        }
-        templateNode.staticProps.push([propName, propInformation, filteredValue]);
+      const filteredValue = filterStaticPropValue(propName, propInformation, propTemplateNode.value);
+      if (filteredValue === undefined) {
+        return;
       }
+      templateNode.staticProps.push([propName, propInformation, filteredValue]);
     } else {
       invariant(false, "TODO");
     }

@@ -147,7 +147,8 @@ function unescapeCompiledOutput(output) {
   return output
     .replace(/(\&amp;amp;|\&amp;)/g, "&")
     .replace(/\&lt;/g, "<")
-    .replace(/\&gt;/g, ">");
+    .replace(/\&gt;/g, ">")
+    .replace(/\&#x27;/g, "'");
 }
 
 function renderOriginalComponentToString(component, props) {
