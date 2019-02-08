@@ -15,5 +15,5 @@ function App_ComputeFunction() {
   return [[renderText()], __cached__0, __cached__1, __cached__2];
 }
 
-const App = [0, 0, App_ComputeFunction, [2050, "div", [[11, Foo, 0], [3, 1], [8, [4098, "div", "another span!"], 2], [8, [8194, "div", 0], 3], [36866, "span", "Span!"]]]];
+const App = [0, 0, App_ComputeFunction, [2050, "div", [[12, Foo, 0], [3, 1], [8, [4098, "div", "another span!"], 2], [8, [8194, "div", 0], 3], [102402, "span", "Span!"]]]];
 module["exports"] = App;

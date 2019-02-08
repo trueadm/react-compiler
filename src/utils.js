@@ -427,6 +427,8 @@ export function markNodeAsDCE(node) {
     // NO-OP
   } else if (t.isJSXExpressionContainer(node)) {
     markNodeAsDCE(node.expression);
+  } else if (t.isJSXAttribute(node)) {
+    markNodeAsDCE(node.value);
   } else if (t.isMemberExpression(node) || t.isJSXMemberExpression(node)) {
     markNodeAsDCE(node.object);
     markNodeAsDCE(node.property);

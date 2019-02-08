@@ -15,5 +15,5 @@ function App_ComputeFunction(x) {
   return [[x], __cached__0, [x]];
 }
 
-const App = [0, ["x"], App_ComputeFunction, [2050, "div", [[11, Header, 0], [3, 1], [11, Footer, 2]]]];
+const App = [0, ["x"], App_ComputeFunction, [2050, "div", [[12, Header, 0], [3, 1], [12, Footer, 2]]]];
 module["exports"] = App;

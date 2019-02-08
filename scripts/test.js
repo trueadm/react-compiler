@@ -109,11 +109,6 @@ function renderOriginalComponent(component, props) {
   document.body.appendChild(root);
   /* eslint-disable-next-line */
   if (global.gc) global.gc();
-  if (benchmarkFlag) {
-    // Run once to warm up cache
-    ReactDOM.render(createElementForTesting(component, props), root);
-    ReactDOM.render(null, root);
-  }
   // Run once again to measure perf
   const start = performance.now();
   ReactDOM.render(createElementForTesting(component, props), root);
@@ -133,11 +128,6 @@ function renderCompiledComponent(component, props) {
   document.body.appendChild(root);
   /* eslint-disable-next-line */
   if (global.gc) global.gc();
-  if (benchmarkFlag) {
-    // Run once to warm up cache
-    render(createElementForTesting(component, props), root);
-    render(null, root);
-  }
   // Run once again to measure perf
   const start = performance.now();
   render(createElementForTesting(component, props), root);

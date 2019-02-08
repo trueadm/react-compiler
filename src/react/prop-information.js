@@ -1,9 +1,10 @@
-import * as t from "@babel/types";
-import invariant from "../invariant";
-
 export const PROP_IS_EVENT = 1;
 export const PROP_IS_BOOLEAN = 1 << 1;
 export const PROP_IS_POSITIVE_NUMBER = 1 << 2;
+export const PROP_IS_NUMERIC = 1 << 3;
+export const PROP_IS_OVERLOADED_BOOLEAN = 1 << 4;
+export const PROP_IS_BOOLEANISH_STRING = 1 << 5;
+export const PROP_IS_RESERVED = 1 << 6;
 
 const reservedProps = new Set([
   "children",
@@ -15,7 +16,16 @@ const reservedProps = new Set([
   "suppressHydrationWarning",
   "style",
 ]);
-const booleanishStringProps = new Set(["autoReverse", "externalResourcesRequired", "focusable", "preserveAlpha"]);
+const booleanishStringProps = new Set([
+  "autoReverse",
+  "externalResourcesRequired",
+  "focusable",
+  "preserveAlpha",
+  "contentEditable",
+  "draggable",
+  "spellCheck",
+  "value",
+]);
 const mustUsePropertyProps = new Set(["checked", "multiple", "muted", "selected"]);
 const booleanProps = new Set([
   "allowFullScreen",
@@ -249,22 +259,22 @@ export function getPropInformation(propName) {
     }
   }
   if (reservedProps.has(propName)) {
-    // propInformationFlag = propInformationFlag | PropFlagReserved;
+    propInformationFlag = propInformationFlag | PROP_IS_RESERVED;
   }
   if (mustUsePropertyProps.has(propName)) {
     // propInformationFlag = propInformationFlag | PropFlagMustUseProperty;
   }
   if (booleanishStringProps.has(propName)) {
-    // propInformationFlag = propInformationFlag | PropFlagBooleanishString;
+    propInformationFlag = propInformationFlag | PROP_IS_BOOLEANISH_STRING;
   }
   if (booleanProps.has(propName)) {
     propInformationFlag = propInformationFlag | PROP_IS_BOOLEAN;
   }
   if (overloadedBooleanProps.has(propName)) {
-    // propInformationFlag = propInformationFlag | PropFlagOverloadedBoolean;
+    propInformationFlag = propInformationFlag | PROP_IS_OVERLOADED_BOOLEAN;
   }
   if (numericProps.has(propName)) {
-    // propInformationFlag = propInformationFlag | PropFlagNumeric;
+    propInformationFlag = propInformationFlag | PROP_IS_NUMERIC;
   }
   if (positiveNumericProps.has(propName)) {
     propInformationFlag = propInformationFlag | PROP_IS_POSITIVE_NUMBER;
@@ -283,32 +293,65 @@ export function getPropInformation(propName) {
   return [propNameToUse, propInformationFlag];
 }
 
-export function transformStaticOpcodes(opcodes, propInformation) {
-  if (opcodes.length === 1) {
-    const firstOpcode = opcodes[0];
-
-    if (
-      t.isNullLiteral(firstOpcode) ||
-      t.isUnaryExpression(firstOpcode) ||
-      (t.isIdentifier(firstOpcode) && firstOpcode.name === "undefined")
-    ) {
-      return null;
-    }
-    const propValue = firstOpcode.value;
-    if (propInformation & PROP_IS_BOOLEAN) {
-      if (propValue === true) {
-        return [t.stringLiteral("")];
-      } else {
-        return null;
-      }
-    }
-    if (propInformation & PROP_IS_POSITIVE_NUMBER) {
-      if (isNaN(propValue) || propValue < 1) {
-        return null;
-      }
-    }
-  } else {
-    invariant(false, "TODO");
+function shouldRemoveAttributeWithWarning(name, value, propInformation, isCustomComponentTag) {
+  if (propInformation & PROP_IS_RESERVED) {
+    return false;
   }
-  return opcodes;
+  switch (typeof value) {
+    case "function":
+    case "symbol":
+      return true;
+    case "boolean": {
+      if (isCustomComponentTag) {
+        return false;
+      }
+      if (propInformation !== 0) {
+        return (
+          (propInformation & PROP_IS_BOOLEANISH_STRING) !== 0 &&
+          (propInformation & PROP_IS_BOOLEAN) !== 0 &&
+          (propInformation & PROP_IS_OVERLOADED_BOOLEAN) !== 0
+        );
+      } else {
+        const prefix = name.toLowerCase().slice(0, 5);
+        return prefix !== "data-" && prefix !== "aria-";
+      }
+    }
+    default:
+      return false;
+  }
+}
+
+function shouldRemoveAttribute(name, value, propInformation, isCustomComponentTag) {
+  if (value === null || typeof value === "undefined") {
+    return true;
+  }
+  if (shouldRemoveAttributeWithWarning(name, value, propInformation, isCustomComponentTag)) {
+    return true;
+  }
+  if (isCustomComponentTag) {
+    return false;
+  }
+  if (propInformation & PROP_IS_BOOLEAN) {
+    return !value;
+  }
+  if (propInformation & PROP_IS_OVERLOADED_BOOLEAN) {
+    return value === false;
+  }
+  if (propInformation & PROP_IS_NUMERIC) {
+    return isNaN(value);
+  }
+  if (propInformation & PROP_IS_POSITIVE_NUMBER) {
+    return isNaN(value) || value < 1;
+  }
+  return false;
+}
+
+export function filterStaticPropValue(name, propInformation, value) {
+  if (value === null || value === undefined) {
+    return;
+  }
+  if (shouldRemoveAttribute(name, value, propInformation, false)) {
+    return;
+  }
+  return value;
 }

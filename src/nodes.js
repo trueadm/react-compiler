@@ -31,12 +31,13 @@ import {
   DynamicTextTemplateNode,
   DynamicValueTemplateNode,
   FragmentTemplateNode,
+  FunctionTemplateNode,
   LogicalTemplateNode,
   MultiConditionalTemplateNode,
   StaticTextTemplateNode,
   TemplateFunctionCallTemplateNode,
   StaticValueTemplateNode,
-  ReferenceVNode,
+  ReferenceReactNode,
 } from "./templates";
 
 export function compileMutatedBinding(childPath, state, componentPath, isRoot) {
@@ -132,7 +133,7 @@ function compileCallExpressionReturningTemplateNodes(childPath, childRefPath, st
   if (t.isIdentifier(calleePath.node) || t.isMemberExpression(calleePath.node)) {
     const cachedNode = getCachedRuntimeValue(childRefPath.node, state);
     const runtimeValuePointer = getRuntimeValueIndex(cachedNode, state);
-    return new ReferenceVNode(runtimeValuePointer);
+    return new ReferenceReactNode(runtimeValuePointer);
   }
   const { isStatic, templateNode } = compileReactComputeFunction(calleePath, state, false, false);
 
@@ -204,27 +205,26 @@ function compileString(string) {
   return new StaticTextTemplateNode(handleWhiteSpace(escapeText(string)));
 }
 
+export function compileFunction(functionPath, componentPath, state) {
+  let node = functionPath.node;
+  const pathConditions = getPathConditions(componentPath, functionPath, state);
+  if (t.isFunctionDeclaration(node) || pathConditions.length > 0) {
+    node = getCachedRuntimeValue(node, state);
+  }
+  const valueIndex = getRuntimeValueIndex(node, state);
+  return new DynamicValueTemplateNode(valueIndex);
+}
+
 export function compileNode(path, refPath, state, componentPath, isRoot) {
   let node = refPath.node;
 
   if (t.isIdentifier(node) && pathContainsReactElement(refPath, state)) {
     if (isIdentifierReferenceConstant(refPath, state)) {
       const runtimeValueIndex = getRuntimeValueIndex(node, state);
-      return new ReferenceVNode(runtimeValueIndex);
+      return new ReferenceReactNode(runtimeValueIndex);
     } else {
       return compileMutatedBinding(refPath, state, componentPath, false);
     }
-  } else if (t.isArrowFunctionExpression(node) || t.isFunctionExpression(node)) {
-    if (isNodeWithinReactElementTemplate(refPath, state)) {
-      moveOutFunctionFromTemplate(refPath);
-    }
-    const pathConditions = getPathConditions(componentPath, refPath, state);
-    if (pathConditions.length > 0) {
-      node = getCachedRuntimeValue(node, state);
-    }
-    // TODO check if the condtion is used more than once?
-    const valueIndex = getRuntimeValueIndex(node, state);
-    return new DynamicValueTemplateNode(valueIndex);
   } else if (t.isArrayExpression(node)) {
     return compileArrayExpression(path, refPath, state, componentPath, isRoot);
   } else if (t.isCallExpression(node)) {
@@ -259,6 +259,11 @@ export function compileNode(path, refPath, state, componentPath, isRoot) {
     return compileConditionalExpressionTemplate(refPath, state, componentPath, isRoot);
   } else if (t.isLogicalExpression(node) && pathContainsReactElement(refPath, state)) {
     return compileLogicalExpressionTemplate(refPath, state, componentPath, isRoot);
+  } else if (t.isFunctionExpression(node) || t.isArrowFunctionExpression(node) || t.isFunctionDeclaration(node)) {
+    if (isNodeWithinReactElementTemplate(refPath, state)) {
+      moveOutFunctionFromTemplate(refPath);
+    }
+    return new FunctionTemplateNode(refPath);
   } else if (
     t.isIdentifier(node) ||
     t.isMemberExpression(node) ||
@@ -266,8 +271,6 @@ export function compileNode(path, refPath, state, componentPath, isRoot) {
     t.isLogicalExpression(node) ||
     t.isUpdateExpression(node) ||
     t.isUnaryExpression(node) ||
-    t.isFunctionExpression(node) ||
-    t.isArrowFunctionExpression(node) ||
     t.isObjectExpression(node)
   ) {
     if (t.isIdentifier(node) && node.name === "undefined") {
@@ -275,10 +278,6 @@ export function compileNode(path, refPath, state, componentPath, isRoot) {
     }
     const runtimeValuePointer = getRuntimeValueIndex(node, state);
     return new DynamicValueTemplateNode(runtimeValuePointer);
-  } else if (t.isFunctionDeclaration(node)) {
-    const cachedNode = getCachedRuntimeValue(node, state);
-    const valueIndex = getRuntimeValueIndex(cachedNode, state);
-    return new DynamicValueTemplateNode(valueIndex);
   } else if (t.isTemplateLiteral(node)) {
     if (node.expressions.length > 0) {
       const valueIndex = getRuntimeValueIndex(node, state);

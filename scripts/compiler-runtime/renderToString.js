@@ -22,11 +22,11 @@ export const LOGICAL = 7;
 export const TEMPLATE_FUNCTION_CALL = 8;
 export const MULTI_CONDITIONAL = 9;
 export const TEXT_ARRAY = 10;
-export const REFERENCE_COMPONENT = 11;
-export const VNODE = 12;
-export const REFERENCE_VNODE = 13;
+export const VNODE_ARRAY = 11;
+export const REFERENCE_COMPONENT = 12;
+export const REFERENCE_REACT_NODE = 13;
 export const MULTI_RETURN_CONDITIONAL = 14;
-export const VNODE_COLLECTION = 15;
+export const VNODE = 15;
 export const CONTEXT_PROVIDER = 16;
 export const CONTEXT_CONSUMER = 17;
 
@@ -40,9 +40,10 @@ export const HAS_CHILDREN = 1 << 11;
 export const HAS_STATIC_TEXT_CONTENT = 1 << 12;
 export const HAS_DYNAMIC_TEXT_CONTENT = 1 << 13;
 export const HAS_DYNAMIC_TEXT_ARRAY_CONTENT = 1 << 14;
-export const IS_STATIC = 1 << 15;
-export const IS_SVG = 1 << 16;
-export const IS_VOID = 1 << 17;
+export const IS_SHALLOW_STATIC = 1 << 15;
+export const IS_DEEP_STATIC = 1 << 16;
+export const IS_SVG = 1 << 17;
+export const IS_VOID = 1 << 18;
 
 // Components
 export const HAS_HOOKS = 1 << 6;
@@ -57,6 +58,10 @@ export const LOGICAL_OR = 1 << 7;
 export const PROP_IS_EVENT = 1;
 export const PROP_IS_BOOLEAN = 1 << 1;
 export const PROP_IS_POSITIVE_NUMBER = 1 << 2;
+export const PROP_IS_NUMERIC = 1 << 3;
+export const PROP_IS_OVERLOADED_BOOLEAN = 1 << 4;
+export const PROP_IS_BOOLEANISH_STRING = 1 << 5;
+export const PROP_IS_RESERVED = 1 << 6;
 
 const componentTemplateCache = new Map();
 
@@ -70,7 +75,7 @@ function renderFunctionComponentTemplateToString(
 ) {
   const templateFlags = templateTypeAndFlags & ~0x3f;
 
-  if ((templateFlags & IS_STATIC) === 0) {
+  if ((templateFlags & IS_SHALLOW_STATIC) === 0) {
     let componentProps = null;
     let computeFunction;
     let childTemplateNode;
@@ -188,15 +193,20 @@ function renderHostComponentTemplateToString(templateTypeAndFlags, hostComponent
 
     for (let i = 0, length = staticProps.length; i < length; i += 3) {
       let propName = staticProps[i];
-      const staticPropFlags = staticProps[i + 1];
-      const staticPropValue = filterPropValue(staticPropFlags, staticProps[i + 2]);
-      if (staticPropValue === undefined) {
+      const propFlags = staticProps[i + 1];
+      let staticPropValue = staticProps[i + 2];
+      if ((propFlags & PROP_IS_EVENT) !== 0 || (propFlags & PROP_IS_RESERVED) !== 0) {
         continue;
+      }
+      if (
+        (propFlags & PROP_IS_BOOLEAN) !== 0 ||
+        ((propFlags & PROP_IS_OVERLOADED_BOOLEAN) !== 0 && staticPropValue === true)
+      ) {
+        staticPropValue = "";
       }
       if (propName === "className") {
         propName = "class";
       }
-
       inner += ` ${propName}="${staticPropValue}"`;
     }
   }
@@ -336,7 +346,7 @@ function renderContextConsumerTemplateToString(contextConsumerTemplate, values, 
 
 function renderTextTemplateToString(templateTypeAndFlags, textTemplate, values, isOnlyChild, state) {
   const templateFlags = templateTypeAndFlags & ~0x3f;
-  const isStatic = (templateFlags & IS_STATIC) !== 0;
+  const isStatic = (templateFlags & IS_SHALLOW_STATIC) !== 0;
   let text = isStatic === true ? textTemplate[1] : values[textTemplate[1]];
   const lastChildWasText = state.lastChildWasText;
 
@@ -357,7 +367,7 @@ function renderTextTemplateToString(templateTypeAndFlags, textTemplate, values, 
 
 function renderValueTemplateToString(templateTypeAndFlags, textTemplate, values, isOnlyChild, state) {
   const templateFlags = templateTypeAndFlags & ~0x3f;
-  const isStatic = (templateFlags & IS_STATIC) !== 0;
+  const isStatic = (templateFlags & IS_SHALLOW_STATIC) !== 0;
   const value = isStatic === true ? textTemplate[1] : escapeText(values[textTemplate[1]]);
 
   if (value === null || value === undefined || typeof value === "boolean") {
@@ -378,7 +388,7 @@ function renderValueTemplateToString(templateTypeAndFlags, textTemplate, values,
 
 function renderTextArrayTemplateToString(templateTypeAndFlags, textTemplate, values, isOnlyChild, state) {
   const templateFlags = templateTypeAndFlags & ~0x3f;
-  const isStatic = (templateFlags & IS_STATIC) !== 0;
+  const isStatic = (templateFlags & IS_SHALLOW_STATIC) !== 0;
   const textArray = isStatic === true ? textTemplate[1] : values[textTemplate[1]];
   return renderTextArrayToString(textArray, state);
 }
@@ -390,7 +400,7 @@ function renderVNodeCollectionTemplateToString(vNodeCollectionTemplate, values, 
 
   let collectionString = "";
   for (let i = 0; i < vNodeCollectionLength; ++i) {
-    collectionString += renderVNodeToString(vNodeCollection[i], false, state);
+    collectionString += renderReactNodeToString(vNodeCollection[i], false, state);
   }
   return collectionString;
 }
@@ -462,10 +472,10 @@ function renderTemplateFunctionCallTemplateToString(templateFunctionCallTemplate
   return renderTemplateToString(functionCallTemplateNode, functionCallValues, isOnlyChild, state);
 }
 
-function renderReferenceVNodeTemplateToString(referenceVNode, values, isOnlyChild, state) {
-  const vNodeValueIndex = referenceVNode[1];
-  const vNode = values[vNodeValueIndex];
-  return renderVNodeToString(vNode, isOnlyChild, state);
+function renderReferenceReactNodeTemplateToString(referenceReactNodeTemplateNode, values, isOnlyChild, state) {
+  const reactNodeValueIndex = referenceReactNodeTemplateNode[1];
+  const reactNode = values[reactNodeValueIndex];
+  return renderReactNodeToString(reactNode, isOnlyChild, state);
 }
 
 function renderFragmentTemplateToString(fragmentTemplate, values, isOnlyChild, state) {
@@ -481,44 +491,48 @@ function renderFragmentTemplateToString(fragmentTemplate, values, isOnlyChild, s
   return fragmentString;
 }
 
-function renderVNodeToString(vNode, isOnlyChild, state) {
-  if (vNode === undefined || vNode === null || typeof vNode === "boolean") {
+function renderReactNodeToString(reactNode, isOnlyChild, state) {
+  if (reactNode === undefined || reactNode === null || typeof reactNode === "boolean") {
     return "";
   }
-  if (typeof vNode === "string" || typeof vNode === "number") {
+  if (typeof reactNode === "string" || typeof reactNode === "number") {
     if (isOnlyChild) {
       const lastChildWasText = state.lastChildWasText;
       state.lastChildWasText = true;
       if (lastChildWasText === true) {
-        return `<!-- -->${escapeText(vNode)}`;
+        return `<!-- -->${escapeText(reactNode)}`;
       }
     }
-    return escapeText(vNode);
+    return escapeText(reactNode);
   }
-  if (isArray(vNode)) {
+  if (isArray(reactNode)) {
     let str = "";
-    for (let i = 0, length = vNode.length; i < length; ++i) {
-      str += renderVNodeToString(vNode[i], true, state);
+    for (let i = 0, length = reactNode.length; i < length; ++i) {
+      str += renderReactNodeToString(reactNode[i], true, state);
     }
     return str;
-  } else {
-    const templateNode = vNode.t;
-    let values = vNode.v;
-    if (values !== null) {
-      // TODO
-    }
-    return renderTemplateToString(templateNode, values, isOnlyChild, state);
   }
+  // Otherwise ReactNode is a vNode
+  return renderVNodeToString(reactNode, isOnlyChild, state);
 }
 
-function renderMultiReturnConditionalTemplateToString(templateNode, values, isOnlyChild, state) {
+function renderVNodeToString(vNode, isOnlyChild, state) {
+  const templateNode = vNode.t;
+  let values = vNode.v;
+  if (values !== null) {
+    // TODO
+  }
+  return renderTemplateToString(templateNode, values, isOnlyChild, state);
+}
+
+function renderMultiReturnConditionalTemplateToString(multiReturnTemplateNode, values, isOnlyChild, state) {
   const conditionBranchToUseKey = values[0];
 
-  for (let i = 1; i < templateNode.length; i += 2) {
-    const branchIndex = templateNode[i];
+  for (let i = 1; i < multiReturnTemplateNode.length; i += 2) {
+    const branchIndex = multiReturnTemplateNode[i];
 
     if (branchIndex === conditionBranchToUseKey) {
-      const branchTemplateNode = templateNode[i + 1];
+      const branchTemplateNode = multiReturnTemplateNode[i + 1];
       return renderTemplateToString(branchTemplateNode, values, isOnlyChild, state);
     }
   }
@@ -565,14 +579,16 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
       return renderMultiConditionalTemplateToString(templateNode, values, isOnlyChild, state);
     case TEXT_ARRAY:
       return renderTextArrayTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
+    case VNODE_ARRAY:
+      return renderVNodeCollectionTemplateToString(templateNode, values, isOnlyChild, state);
     case REFERENCE_COMPONENT:
       return renderReferenceComponentTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
-    case REFERENCE_VNODE:
-      return renderReferenceVNodeTemplateToString(templateNode, values, isOnlyChild, state);
+    case REFERENCE_REACT_NODE:
+      return renderReferenceReactNodeTemplateToString(templateNode, values, isOnlyChild, state);
     case MULTI_RETURN_CONDITIONAL:
       return renderMultiReturnConditionalTemplateToString(templateNode, values, isOnlyChild, state);
-    case VNODE_COLLECTION:
-      return renderVNodeCollectionTemplateToString(templateNode, values, isOnlyChild, state);
+    case VNODE:
+      throw new Error("TODO");
     case CONTEXT_PROVIDER:
       return renderContextProviderTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
     case CONTEXT_CONSUMER:

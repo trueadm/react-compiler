@@ -17,9 +17,9 @@ const React = {
 }
 
 const root = document.getElementById("root");
-const props = {cond: false, defaultClassName: "default-item"};
+const props = {};
 
 const start = performance.now();
 render(<Component {...props} />, root);
-console.log(performance.now() - start);
+alert(performance.now() - start);
 

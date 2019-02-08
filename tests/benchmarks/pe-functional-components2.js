@@ -1,7 +1,7 @@
-
+const React = require("react");
 
 const Link0 = function() {
-  return <a href={"/"} className={"_5ljn"} rel={undefined} onClick={function() {}} />;
+  return <a href={"/"} className={"_5ljn"} rel={undefined} onClick={function(): void {}} />;
 };
 
 const ReactImage1 = function() {
@@ -18,8 +18,8 @@ const Link2 = function() {
       className={"_387r _55pi _2agf _387r _55pi _4jy0 _4jy3 _517h _51sy _42ft"}
       href={"#"}
       haschevron={true}
-      onClick={function() {}}
-      onToggle={function() {}}
+      onClick={function(): void {}}
+      onToggle={function(): void {}}
       size={"medium"}
       use={"default"}
       borderShade={"light"}
@@ -67,7 +67,7 @@ const AbstractButton9 = function() {
       id={"downloadButton"}
       className={"_5lk0 _4jy0 _4jy3 _517h _51sy _42ft"}
       label={null}
-      onClick={function() {}}
+      onClick={function(): void {}}
       use={"default"}
       size={"medium"}
       borderShade={"light"}
@@ -109,7 +109,7 @@ const AbstractButton13 = function() {
       image={{}}
       use={"default"}
       label={null}
-      onClick={function() {}}
+      onClick={function(): void {}}
       size={"medium"}
       borderShade={"light"}
       suppressed={false}
@@ -136,7 +136,7 @@ const AbstractButton16 = function() {
     <button
       className={"_5ljz _4jy0 _4jy3 _517h _51sy _42ft"}
       label={null}
-      onClick={function() {}}
+      onClick={function(): void {}}
       use={"default"}
       size={"medium"}
       borderShade={"light"}
@@ -268,17 +268,17 @@ const Wrapper27 = function() {
       focused={false}
       tabIndex={null}
       hideFocusRing={true}
-      onClick={function() {}}
-      onMouseDown={function() {}}
-      onFocus={function() {}}
-      onBlur={function() {}}
+      onClick={function(): void {}}
+      onMouseDown={function(): void {}}
+      onFocus={function(): void {}}
+      onBlur={function(): void {}}
       className={"_5vwz _5vwy _45hc _1hqh"}
-      wrapper={function() {}}
+      wrapper={function(): void {}}
       shouldWrapTab={true}
       mockSpacebarClick={true}
       role={"presentation"}
     >
-      <a aria-selected={true} onKeyDown={function() {}}>
+      <a aria-selected={true} onKeyDown={function(): void {}}>
         <div className="_4jq5">{"Manage Ads"}</div>
         <span className="_13xf" />
       </a>
@@ -305,17 +305,17 @@ const Wrapper31 = function() {
       focused={false}
       tabIndex={null}
       hideFocusRing={true}
-      onClick={function() {}}
-      onMouseDown={function() {}}
-      onFocus={function() {}}
-      onBlur={function() {}}
+      onClick={function(): void {}}
+      onMouseDown={function(): void {}}
+      onFocus={function(): void {}}
+      onBlur={function(): void {}}
       className={"_5vwz _45hc"}
-      wrapper={function() {}}
+      wrapper={function(): void {}}
       shouldWrapTab={true}
       mockSpacebarClick={true}
       role={"presentation"}
     >
-      <a aria-selected={false} onKeyDown={function() {}}>
+      <a aria-selected={false} onKeyDown={function(): void {}}>
         <div className={"_4jq5"}>{"Audiences"}</div>
         <span className={"_13xf"} />
       </a>
@@ -342,17 +342,17 @@ const Wrapper35 = function() {
       focused={false}
       tabIndex={null}
       hideFocusRing={true}
-      onClick={function() {}}
-      onMouseDown={function() {}}
-      onFocus={function() {}}
-      onBlur={function() {}}
+      onClick={function(): void {}}
+      onMouseDown={function(): void {}}
+      onFocus={function(): void {}}
+      onBlur={function(): void {}}
       className={"_5vwz _45hc"}
-      wrapper={function() {}}
+      wrapper={function(): void {}}
       shouldWrapTab={true}
       mockSpacebarClick={true}
       role={"presentation"}
     >
-      <a aria-selected={false} onKeyDown={function() {}}>
+      <a aria-selected={false} onKeyDown={function(): void {}}>
         <div className={"_4jq5"}>{"Image Library"}</div>
         <span className={"_13xf"} />
       </a>
@@ -379,17 +379,17 @@ const Wrapper39 = function() {
       focused={false}
       tabIndex={null}
       hideFocusRing={true}
-      onClick={function() {}}
-      onMouseDown={function() {}}
-      onFocus={function() {}}
-      onBlur={function() {}}
+      onClick={function(): void {}}
+      onMouseDown={function(): void {}}
+      onFocus={function(): void {}}
+      onBlur={function(): void {}}
       className={"_5vwz _45hc"}
-      wrapper={function() {}}
+      wrapper={function(): void {}}
       shouldWrapTab={true}
       mockSpacebarClick={true}
       role={"presentation"}
     >
-      <a aria-selected={false} onKeyDown={function() {}}>
+      <a aria-selected={false} onKeyDown={function(): void {}}>
         <div className={"_4jq5"}>
           {"Reporting"}
           {null}
@@ -419,17 +419,17 @@ const Wrapper43 = function() {
       focused={false}
       tabIndex={null}
       hideFocusRing={true}
-      onClick={function() {}}
-      onMouseDown={function() {}}
-      onFocus={function() {}}
-      onBlur={function() {}}
+      onClick={function(): void {}}
+      onMouseDown={function(): void {}}
+      onFocus={function(): void {}}
+      onBlur={function(): void {}}
       className={"_5vwz _45hc"}
-      wrapper={function() {}}
+      wrapper={function(): void {}}
       shouldWrapTab={true}
       mockSpacebarClick={true}
       role={"presentation"}
     >
-      <a aria-selected={false} onKeyDown={function() {}}>
+      <a aria-selected={false} onKeyDown={function(): void {}}>
         <div className={"_4jq5"}>{"Page Posts"}</div>
         <span className={"_13xf"} />
       </a>
@@ -490,19 +490,19 @@ const TabBarDropdownItem50 = function() {
 const TabBar51 = function() {
   return (
     <ul
-      onTabClick={function() {}}
+      onTabClick={function(): void {}}
       activeTabKey={"MANAGE_ADS"}
-      onWidthCalculated={function() {}}
+      onWidthCalculated={function(): void {}}
       width={null}
       maxTabsVisible={5}
       moreLabel={"Tools"}
       alwaysShowActive={true}
-      dropdownTabComponent={function() {}}
+      dropdownTabComponent={function(): void {}}
       shouldCalculateVisibleTabs={true}
       className={"_43o4"}
       role={"tablist"}
-      onKeyDown={function() {}}
-      onKeyUp={function() {}}
+      onKeyDown={function(): void {}}
+      onKeyUp={function(): void {}}
     >
       <TabBarItemWrapper30 key={"MANAGE_ADS"} />
       <TabBarItemWrapper34 key={"AUDIENCES"} />
@@ -562,7 +562,7 @@ const Link58 = function() {
     <a
       className={"_585q _50zy _50-0 _50z- _5upp _42ft"}
       href={"#"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       size={"medium"}
       shade={"dark"}
       type={null}
@@ -603,7 +603,7 @@ const XUIText62 = function() {
 
 const Link63 = function() {
   return (
-    <a href={"/ads/manage/billing.php?act=10149999073643408"} target={"_blank"} rel={undefined} onClick={function() {}}>
+    <a href={"/ads/manage/billing.php?act=10149999073643408"} target={"_blank"} rel={undefined} onClick={function(): void {}}>
       <XUIText62 />
     </a>
   );
@@ -636,7 +636,7 @@ const ReactTransitionGroup66 = function() {
       transitionAppear={false}
       transitionEnter={true}
       transitionLeave={true}
-      childFactory={function() {}}
+      childFactory={function(): void {}}
       component={"span"}
     >
       <ReactCSSTransitionGroupChild65 key={".0"} />
@@ -678,7 +678,7 @@ const Link72 = function() {
       className={" _5bbf _55pi _2agf  _5bbf _55pi _4jy0 _4jy4 _517h _51sy _42ft"}
       href={"#"}
       haschevron={true}
-      onClick={function() {}}
+      onClick={function(): void {}}
       size={"large"}
       use={"default"}
       borderShade={"light"}
@@ -730,7 +730,7 @@ const Link79 = function() {
       className={" _5bbf _55pi _2agf  _5bbf _55pi _4jy0 _4jy4 _517h _51sy _42ft"}
       href={"#"}
       haschevron={true}
-      onClick={function() {}}
+      onClick={function(): void {}}
       size={"large"}
       use={"default"}
       borderShade={"light"}
@@ -782,7 +782,7 @@ const AbstractButton86 = function() {
     <button
       className={"_3yz9 _1t-2 _50z_ _50zy _50zz _50z- _5upp _42ft"}
       size={"small"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       shade={"dark"}
       type={"button"}
       label={null}
@@ -816,7 +816,7 @@ const ReactImage90 = function() {
 
 const AdsPopoverLink91 = function() {
   return (
-    <span onMouseEnter={function() {}} onMouseLeave={function() {}}>
+    <span onMouseEnter={function(): void {}} onMouseLeave={function(): void {}}>
       <span className={"_3o_j"} />
       <ReactImage90 />
     </span>
@@ -833,7 +833,7 @@ const AbstractButton93 = function() {
       className={"_5b5u _5b5v _4jy0 _4jy3 _517h _51sy _42ft"}
       label={null}
       use={"default"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       size={"medium"}
       borderShade={"light"}
       suppressed={false}
@@ -870,7 +870,7 @@ const BUIFilterToken96 = function() {
   return (
     <div className={"_3yz1 _3yz2 _3dad"}>
       <div aria-hidden={false}>
-        <div onClick={function() {}} className={"_3yz5"}>
+        <div onClick={function(): void {}} className={"_3yz5"}>
           <ReactImage85 />
           <div className={"_3yz7"}>{"Ads:"}</div>
           <div className={"ellipsis _3yz8"} data-hover={"tooltip"} data-tooltip-display={"overflow"}>
@@ -893,7 +893,7 @@ const AbstractButton98 = function() {
     <button
       className={"_1wdf _4jy0 _517i _517h _51sy _42ft"}
       size={"small"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       image={{}}
       use={"default"}
       borderShade={"light"}
@@ -994,7 +994,7 @@ const Link111 = function() {
       chevron={{}}
       use={"default"}
       borderShade={"light"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       rel={undefined}
     >
       {null}
@@ -1033,7 +1033,7 @@ const InlineBlock117 = function() {
       className={"_3c5o _3c5p _6a _6b"}
       defaultValue={"LIFETIME"}
       size={"large"}
-      onChange={function() {}}
+      onChange={function(): void {}}
       disabled={false}
       alignv={"middle"}
       fullWidth={false}
@@ -1060,7 +1060,7 @@ const AbstractButton120 = function() {
       data-hover={"tooltip"}
       image={{}}
       size={"large"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       use={"default"}
       borderShade={"light"}
       suppressed={false}
@@ -1119,7 +1119,7 @@ const AbstractButton126 = function() {
       className={"_u_k _4jy0 _4jy4 _517h _51sy _42ft"}
       label={null}
       size={"large"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       image={{}}
       use={"default"}
       borderShade={"light"}
@@ -1208,7 +1208,7 @@ const AbstractButton135 = function() {
       image={{}}
       data-hover={"tooltip"}
       aria-label={"Edit Ads (Ctrl+U)"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       use={"default"}
       label={null}
       borderShade={"light"}
@@ -1240,7 +1240,7 @@ const AbstractButton138 = function() {
       disabled={false}
       image={{}}
       size={"large"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       use={"default"}
       borderShade={"light"}
       suppressed={false}
@@ -1272,7 +1272,7 @@ const AbstractButton141 = function() {
       disabled={true}
       image={{}}
       size={"large"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       use={"default"}
       borderShade={"light"}
       suppressed={false}
@@ -1304,7 +1304,7 @@ const AbstractButton144 = function() {
       data-hover={"tooltip"}
       disabled={false}
       size={"large"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       use={"default"}
       borderShade={"light"}
       suppressed={false}
@@ -1346,7 +1346,7 @@ const AbstractButton148 = function() {
       image={{}}
       data-hover={"tooltip"}
       aria-label={"Save Audience"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       use={"default"}
       borderShade={"light"}
       suppressed={false}
@@ -1374,7 +1374,7 @@ const AbstractButton151 = function() {
     <button
       size={"large"}
       className={"_u_k noMargin _p _4jy0 _4jy4 _517h _51sy _42ft"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       image={{}}
       data-hover={"tooltip"}
       aria-label={"Export & Import"}
@@ -1444,7 +1444,7 @@ const AbstractButton161 = function() {
     <button
       size={"large"}
       disabled={false}
-      onClick={function() {}}
+      onClick={function(): void {}}
       className={"_u_k _5n7z _4jy0 _4jy4 _517h _51sy _42ft"}
       image={{}}
       style={{ boxSizing: "border-box", height: "28px", width: "48px" }}
@@ -1475,7 +1475,7 @@ const AbstractButton163 = function() {
       disabled={true}
       className={"hidden_elem _5n7z _4jy0 _4jy4 _517h _51sy _42ft _42fr"}
       label={null}
-      onClick={function() {}}
+      onClick={function(): void {}}
       use={"default"}
       borderShade={"light"}
       suppressed={false}
@@ -1553,7 +1553,7 @@ const AbstractButton170 = function() {
       data-tooltip-position={"right"}
       aria-label={"Campaigns"}
       data-hover={"tooltip"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       size={"xxlarge"}
       use={"default"}
       borderShade={"light"}
@@ -1584,7 +1584,7 @@ const AbstractButton172 = function() {
       data-tooltip-position={"right"}
       aria-label={"Ad Sets"}
       data-hover={"tooltip"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       size={"xxlarge"}
       use={"default"}
       borderShade={"light"}
@@ -1615,7 +1615,7 @@ const AbstractButton174 = function() {
       data-tooltip-position={"right"}
       aria-label={"Ads"}
       data-hover={"tooltip"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       size={"xxlarge"}
       use={"default"}
       borderShade={"light"}
@@ -1683,7 +1683,7 @@ const TransitionCell181 = function() {
       isHeaderCell={true}
       label={"Ads"}
       dataKey={0}
-      groupHeaderRenderer={function() {}}
+      groupHeaderRenderer={function(): void {}}
       groupHeaderLabels={{}}
       groupHeaderData={{}}
       columnKey={undefined}
@@ -1752,7 +1752,7 @@ const TransitionCell186 = function() {
       isHeaderCell={true}
       label={"Delivery"}
       dataKey={1}
-      groupHeaderRenderer={function() {}}
+      groupHeaderRenderer={function(): void {}}
       groupHeaderLabels={{}}
       groupHeaderData={{}}
       columnKey={undefined}
@@ -1795,7 +1795,7 @@ const TransitionCell189 = function() {
       isHeaderCell={true}
       label={"Performance"}
       dataKey={2}
-      groupHeaderRenderer={function() {}}
+      groupHeaderRenderer={function(): void {}}
       groupHeaderLabels={{}}
       groupHeaderData={{}}
       columnKey={undefined}
@@ -1838,7 +1838,7 @@ const TransitionCell192 = function() {
       isHeaderCell={true}
       label={"Overview"}
       dataKey={3}
-      groupHeaderRenderer={function() {}}
+      groupHeaderRenderer={function(): void {}}
       groupHeaderLabels={{}}
       groupHeaderData={{}}
       columnKey={undefined}
@@ -1881,7 +1881,7 @@ const TransitionCell195 = function() {
       isHeaderCell={true}
       label={"Creative Assets"}
       dataKey={4}
-      groupHeaderRenderer={function() {}}
+      groupHeaderRenderer={function(): void {}}
       groupHeaderLabels={{}}
       groupHeaderData={{}}
       columnKey={undefined}
@@ -1924,7 +1924,7 @@ const TransitionCell198 = function() {
       isHeaderCell={true}
       label={"Toplines"}
       dataKey={5}
-      groupHeaderRenderer={function() {}}
+      groupHeaderRenderer={function(): void {}}
       groupHeaderLabels={{}}
       groupHeaderData={{}}
       columnKey={undefined}
@@ -1962,7 +1962,7 @@ const TransitionCell201 = function() {
       isHeaderCell={true}
       label={""}
       dataKey={6}
-      groupHeaderRenderer={function() {}}
+      groupHeaderRenderer={function(): void {}}
       groupHeaderLabels={{}}
       groupHeaderData={{}}
       columnKey={undefined}
@@ -2061,7 +2061,7 @@ const FixedDataTableRow206 = function() {
 const AbstractCheckboxInput207 = function() {
   return (
     <label className={"_4h2r _55sg _kv1"}>
-      <input checked={undefined} onChange={function() {}} className={null} type={"checkbox"} />
+      <input checked={undefined} onChange={function(): void {}} className={null} type={"checkbox"} />
       <span data-hover={null} aria-label={undefined} />
     </label>
   );
@@ -2080,8 +2080,8 @@ const TransitionCell209 = function() {
       dataKey={"common.id"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"common.id"}
       height={25}
       style={{ height: 25, width: 42 }}
@@ -2115,7 +2115,7 @@ const AdsPETableHeader211 = function() {
 
 const FixedDataTableAbstractSortableHeader212 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader211 />
@@ -2137,8 +2137,8 @@ const TransitionCell214 = function() {
       dataKey={"ad.name"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"ad.name"}
       height={25}
       style={{ height: 25, width: 200 }}
@@ -2155,7 +2155,7 @@ const TransitionCell214 = function() {
 const FixedDataTableCell215 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 200, left: 42 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell214 />
@@ -2178,7 +2178,7 @@ const AdsPETableHeader217 = function() {
 
 const FixedDataTableAbstractSortableHeader218 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _1kst _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _1kst _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader217 />
@@ -2200,8 +2200,8 @@ const TransitionCell220 = function() {
       dataKey={"edit_status"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"edit_status"}
       height={25}
       style={{ height: 25, width: 33 }}
@@ -2239,7 +2239,7 @@ const AdsPETableHeader223 = function() {
 
 const FixedDataTableAbstractSortableHeader224 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _1kst _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _1kst _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader223 />
@@ -2261,8 +2261,8 @@ const TransitionCell226 = function() {
       dataKey={"errors"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"errors"}
       height={25}
       style={{ height: 25, width: 36 }}
@@ -2296,7 +2296,7 @@ const AdsPETableHeader228 = function() {
 
 const FixedDataTableAbstractSortableHeader229 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader228 />
@@ -2318,8 +2318,8 @@ const TransitionCell231 = function() {
       dataKey={"ad.adgroup_status"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"ad.adgroup_status"}
       height={25}
       style={{ height: 25, width: 60 }}
@@ -2353,7 +2353,7 @@ const AdsPETableHeader233 = function() {
 
 const FixedDataTableAbstractSortableHeader234 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader233 />
@@ -2375,8 +2375,8 @@ const TransitionCell236 = function() {
       dataKey={"ukiAdData.computed_activity_status"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"ukiAdData.computed_activity_status"}
       height={25}
       style={{ height: 25, width: 150 }}
@@ -2393,7 +2393,7 @@ const TransitionCell236 = function() {
 const FixedDataTableCell237 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 150, left: 371 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell236 />
@@ -2443,7 +2443,7 @@ const AdsPETableHeader240 = function() {
 
 const FixedDataTableAbstractSortableHeader241 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader240 />
@@ -2465,8 +2465,8 @@ const TransitionCell243 = function() {
       dataKey={"stats.unique_impressions"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"stats.unique_impressions"}
       height={25}
       style={{ height: 25, width: 60 }}
@@ -2483,7 +2483,7 @@ const TransitionCell243 = function() {
 const FixedDataTableCell244 = function() {
   return (
     <div className={"_4lg0 _4lg5 _4h2p _4h2m"} style={{ height: 25, width: 60, left: 0 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell243 />
@@ -2502,7 +2502,7 @@ const AdsPETableHeader245 = function() {
 
 const FixedDataTableAbstractSortableHeader246 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader245 />
@@ -2524,8 +2524,8 @@ const TransitionCell248 = function() {
       dataKey={"stats.impressions"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"stats.impressions"}
       height={25}
       style={{ height: 25, width: 80 }}
@@ -2542,7 +2542,7 @@ const TransitionCell248 = function() {
 const FixedDataTableCell249 = function() {
   return (
     <div className={"_4lg0 _4lg5 _4h2p _4h2m"} style={{ height: 25, width: 80, left: 60 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell248 />
@@ -2561,7 +2561,7 @@ const AdsPETableHeader250 = function() {
 
 const FixedDataTableAbstractSortableHeader251 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader250 />
@@ -2583,8 +2583,8 @@ const TransitionCell253 = function() {
       dataKey={"stats.avg_cpm"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"stats.avg_cpm"}
       height={25}
       style={{ height: 25, width: 80 }}
@@ -2601,7 +2601,7 @@ const TransitionCell253 = function() {
 const FixedDataTableCell254 = function() {
   return (
     <div className={"_4lg0 _4lg5 _4h2p _4h2m"} style={{ height: 25, width: 80, left: 140 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell253 />
@@ -2620,7 +2620,7 @@ const AdsPETableHeader255 = function() {
 
 const FixedDataTableAbstractSortableHeader256 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader255 />
@@ -2642,8 +2642,8 @@ const TransitionCell258 = function() {
       dataKey={"stats.avg_cpc"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"stats.avg_cpc"}
       height={25}
       style={{ height: 25, width: 78 }}
@@ -2660,7 +2660,7 @@ const TransitionCell258 = function() {
 const FixedDataTableCell259 = function() {
   return (
     <div className={"_4lg0 _4lg5 _4h2p _4h2m"} style={{ height: 25, width: 78, left: 220 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell258 />
@@ -2686,8 +2686,8 @@ const TransitionCell261 = function() {
       dataKey={"stats.actions"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"stats.actions"}
       height={25}
       style={{ height: 25, width: 140 }}
@@ -2704,7 +2704,7 @@ const TransitionCell261 = function() {
 const FixedDataTableCell262 = function() {
   return (
     <div className={"_4lg0 _4lg5 _4h2p _4h2m"} style={{ height: 25, width: 140, left: 298 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell261 />
@@ -2730,8 +2730,8 @@ const TransitionCell264 = function() {
       dataKey={"stats.cpa"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"stats.cpa"}
       height={25}
       style={{ height: 25, width: 140 }}
@@ -2748,7 +2748,7 @@ const TransitionCell264 = function() {
 const FixedDataTableCell265 = function() {
   return (
     <div className={"_4lg0 _4lg5 _4h2p _4h2m"} style={{ height: 25, width: 140, left: 438 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell264 />
@@ -2767,7 +2767,7 @@ const AdsPETableHeader266 = function() {
 
 const FixedDataTableAbstractSortableHeader267 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader266 />
@@ -2789,8 +2789,8 @@ const TransitionCell269 = function() {
       dataKey={"stats.clicks"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"stats.clicks"}
       height={25}
       style={{ height: 25, width: 60 }}
@@ -2807,7 +2807,7 @@ const TransitionCell269 = function() {
 const FixedDataTableCell270 = function() {
   return (
     <div className={"_4lg0 _4lg5 _4h2p _4h2m"} style={{ height: 25, width: 60, left: 578 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell269 />
@@ -2826,7 +2826,7 @@ const AdsPETableHeader271 = function() {
 
 const FixedDataTableAbstractSortableHeader272 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader271 />
@@ -2848,8 +2848,8 @@ const TransitionCell274 = function() {
       dataKey={"stats.ctr"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"stats.ctr"}
       height={25}
       style={{ height: 25, width: 70 }}
@@ -2866,7 +2866,7 @@ const TransitionCell274 = function() {
 const FixedDataTableCell275 = function() {
   return (
     <div className={"_4lg0 _4lg5 _4h2p _4h2m"} style={{ height: 25, width: 70, left: 638 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell274 />
@@ -2885,7 +2885,7 @@ const AdsPETableHeader276 = function() {
 
 const FixedDataTableAbstractSortableHeader277 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader276 />
@@ -2907,8 +2907,8 @@ const TransitionCell279 = function() {
       dataKey={"stats.social_percent"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"stats.social_percent"}
       height={25}
       style={{ height: 25, width: 80 }}
@@ -2925,7 +2925,7 @@ const TransitionCell279 = function() {
 const FixedDataTableCell280 = function() {
   return (
     <div className={"_4lg0 _4lg5 _4h2p _4h2m"} style={{ height: 25, width: 80, left: 708 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell279 />
@@ -2944,7 +2944,7 @@ const AdsPETableHeader281 = function() {
 
 const FixedDataTableAbstractSortableHeader282 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader281 />
@@ -2966,8 +2966,8 @@ const TransitionCell284 = function() {
       dataKey={"campaign.name"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"campaign.name"}
       height={25}
       style={{ height: 25, width: 100 }}
@@ -2984,7 +2984,7 @@ const TransitionCell284 = function() {
 const FixedDataTableCell285 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 100, left: 788 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell284 />
@@ -3003,7 +3003,7 @@ const AdsPETableHeader286 = function() {
 
 const FixedDataTableAbstractSortableHeader287 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader286 />
@@ -3025,8 +3025,8 @@ const TransitionCell289 = function() {
       dataKey={"campaignGroup.name"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"campaignGroup.name"}
       height={25}
       style={{ height: 25, width: 150 }}
@@ -3043,7 +3043,7 @@ const TransitionCell289 = function() {
 const FixedDataTableCell290 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 150, left: 888 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell289 />
@@ -3062,7 +3062,7 @@ const AdsPETableHeader291 = function() {
 
 const FixedDataTableAbstractSortableHeader292 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader291 />
@@ -3084,8 +3084,8 @@ const TransitionCell294 = function() {
       dataKey={"ad.id"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"ad.id"}
       height={25}
       style={{ height: 25, width: 120 }}
@@ -3102,7 +3102,7 @@ const TransitionCell294 = function() {
 const FixedDataTableCell295 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 120, left: 1038 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell294 />
@@ -3121,7 +3121,7 @@ const AdsPETableHeader296 = function() {
 
 const FixedDataTableAbstractSortableHeader297 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader296 />
@@ -3143,8 +3143,8 @@ const TransitionCell299 = function() {
       dataKey={"campaignGroup.objective"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"campaignGroup.objective"}
       height={25}
       style={{ height: 25, width: 80 }}
@@ -3161,7 +3161,7 @@ const TransitionCell299 = function() {
 const FixedDataTableCell300 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 80, left: 1158 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell299 />
@@ -3180,7 +3180,7 @@ const AdsPETableHeader301 = function() {
 
 const FixedDataTableAbstractSortableHeader302 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader301 />
@@ -3202,8 +3202,8 @@ const TransitionCell304 = function() {
       dataKey={"stats.spent_100"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"stats.spent_100"}
       height={25}
       style={{ height: 25, width: 70 }}
@@ -3220,7 +3220,7 @@ const TransitionCell304 = function() {
 const FixedDataTableCell305 = function() {
   return (
     <div className={"_4lg0 _4lg5 _4h2p _4h2m"} style={{ height: 25, width: 70, left: 1238 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell304 />
@@ -3239,7 +3239,7 @@ const AdsPETableHeader306 = function() {
 
 const FixedDataTableAbstractSortableHeader307 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader306 />
@@ -3261,8 +3261,8 @@ const TransitionCell309 = function() {
       dataKey={"derivedCampaign.startDate"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"derivedCampaign.startDate"}
       height={25}
       style={{ height: 25, width: 113 }}
@@ -3279,7 +3279,7 @@ const TransitionCell309 = function() {
 const FixedDataTableCell310 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 113, left: 1308 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell309 />
@@ -3298,7 +3298,7 @@ const AdsPETableHeader311 = function() {
 
 const FixedDataTableAbstractSortableHeader312 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader311 />
@@ -3320,8 +3320,8 @@ const TransitionCell314 = function() {
       dataKey={"derivedCampaign.endDate"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"derivedCampaign.endDate"}
       height={25}
       style={{ height: 25, width: 113 }}
@@ -3338,7 +3338,7 @@ const TransitionCell314 = function() {
 const FixedDataTableCell315 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 113, left: 1421 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell314 />
@@ -3357,7 +3357,7 @@ const AdsPETableHeader316 = function() {
 
 const FixedDataTableAbstractSortableHeader317 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader316 />
@@ -3379,8 +3379,8 @@ const TransitionCell319 = function() {
       dataKey={"ad.created_time"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"ad.created_time"}
       height={25}
       style={{ height: 25, width: 113 }}
@@ -3397,7 +3397,7 @@ const TransitionCell319 = function() {
 const FixedDataTableCell320 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 113, left: 1534 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell319 />
@@ -3416,7 +3416,7 @@ const AdsPETableHeader321 = function() {
 
 const FixedDataTableAbstractSortableHeader322 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader321 />
@@ -3438,8 +3438,8 @@ const TransitionCell324 = function() {
       dataKey={"ad.updated_time"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"ad.updated_time"}
       height={25}
       style={{ height: 25, width: 113 }}
@@ -3456,7 +3456,7 @@ const TransitionCell324 = function() {
 const FixedDataTableCell325 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 113, left: 1647 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell324 />
@@ -3475,7 +3475,7 @@ const AdsPETableHeader326 = function() {
 
 const FixedDataTableAbstractSortableHeader327 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader326 />
@@ -3497,8 +3497,8 @@ const TransitionCell329 = function() {
       dataKey={"ad.title"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"ad.title"}
       height={25}
       style={{ height: 25, width: 80 }}
@@ -3515,7 +3515,7 @@ const TransitionCell329 = function() {
 const FixedDataTableCell330 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 80, left: 1760 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell329 />
@@ -3534,7 +3534,7 @@ const AdsPETableHeader331 = function() {
 
 const FixedDataTableAbstractSortableHeader332 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader331 />
@@ -3556,8 +3556,8 @@ const TransitionCell334 = function() {
       dataKey={"ad.creative.body"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"ad.creative.body"}
       height={25}
       style={{ height: 25, width: 80 }}
@@ -3574,7 +3574,7 @@ const TransitionCell334 = function() {
 const FixedDataTableCell335 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 80, left: 1840 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell334 />
@@ -3593,7 +3593,7 @@ const AdsPETableHeader336 = function() {
 
 const FixedDataTableAbstractSortableHeader337 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader336 />
@@ -3615,8 +3615,8 @@ const TransitionCell339 = function() {
       dataKey={"destination"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"destination"}
       height={25}
       style={{ height: 25, width: 92 }}
@@ -3633,7 +3633,7 @@ const TransitionCell339 = function() {
 const FixedDataTableCell340 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 92, left: 1920 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell339 />
@@ -3652,7 +3652,7 @@ const AdsPETableHeader341 = function() {
 
 const FixedDataTableAbstractSortableHeader342 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader341 />
@@ -3674,8 +3674,8 @@ const TransitionCell344 = function() {
       dataKey={"ad.creative.link_url"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"ad.creative.link_url"}
       height={25}
       style={{ height: 25, width: 70 }}
@@ -3692,7 +3692,7 @@ const TransitionCell344 = function() {
 const FixedDataTableCell345 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 70, left: 2012 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell344 />
@@ -3711,7 +3711,7 @@ const AdsPETableHeader346 = function() {
 
 const FixedDataTableAbstractSortableHeader347 = function() {
   return (
-    <div onClick={function() {}} className={"_54_8 _4h2r _2wzx"}>
+    <div onClick={function(): void {}} className={"_54_8 _4h2r _2wzx"}>
       <div className={"_2eq6"}>
         {null}
         <AdsPETableHeader346 />
@@ -3733,8 +3733,8 @@ const TransitionCell349 = function() {
       dataKey={"page"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"page"}
       height={25}
       style={{ height: 25, width: 92 }}
@@ -3751,7 +3751,7 @@ const TransitionCell349 = function() {
 const FixedDataTableCell350 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 92, left: 2082 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell349 />
@@ -3777,8 +3777,8 @@ const TransitionCell352 = function() {
       dataKey={"ad.demolink_hash"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"ad.demolink_hash"}
       height={25}
       style={{ height: 25, width: 100 }}
@@ -3795,7 +3795,7 @@ const TransitionCell352 = function() {
 const FixedDataTableCell353 = function() {
   return (
     <div className={"_4lg0 _4h2m"} style={{ height: 25, width: 100, left: 2174 }}>
-      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function() {}}>
+      <div className={"_4lg9"} style={{ height: 25 }} onMouseDown={function(): void {}}>
         <div className={"_4lga _4lgb"} style={{ height: 25 }} />
       </div>
       <TransitionCell352 />
@@ -3816,8 +3816,8 @@ const TransitionCell355 = function() {
       dataKey={"scrollbar_spacer"}
       className={"_4lgc _4h2u"}
       columnData={{}}
-      cellRenderer={function() {}}
-      headerDataGetter={function() {}}
+      cellRenderer={function(): void {}}
+      headerDataGetter={function(): void {}}
       columnKey={"scrollbar_spacer"}
       height={25}
       style={{ height: 25, width: 25 }}
@@ -3936,7 +3936,7 @@ const AbstractCheckboxInput361 = function() {
         inline={true}
         checked={true}
         value={undefined}
-        onChange={function() {}}
+        onChange={function(): void {}}
         type={"checkbox"}
       />
       <span data-hover={null} aria-label={undefined} />
@@ -3953,11 +3953,11 @@ const TransitionCell363 = function() {
     <div
       dataKey={"common.id"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={42}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"common.id"}
       height={32}
       rowIndex={0}
@@ -3965,7 +3965,7 @@ const TransitionCell363 = function() {
     >
       <div className={"_4lgd _4h2w"}>
         <div className={"_4lge _4h2x"}>
-          <span className={"_5hhu _4h2r"} onMouseDown={function() {}}>
+          <span className={"_5hhu _4h2r"} onMouseDown={function(): void {}}>
             <XUICheckboxInput362 />
           </span>
         </div>
@@ -3985,7 +3985,7 @@ const FixedDataTableCell364 = function() {
 
 const AdsEditableTextCellDisplay365 = function() {
   return (
-    <div className={"_vew"} onDoubleClick={function() {}} onMouseEnter={function() {}} onMouseLeave={function() {}}>
+    <div className={"_vew"} onDoubleClick={function(): void {}} onMouseEnter={function(): void {}} onMouseLeave={function(): void {}}>
       <div className={"_vex _5w6k"}>
         <div className={"_vey"}>{"Test Ad"}</div>
         <div className={"_5w6_"} />
@@ -4007,11 +4007,11 @@ const TransitionCell367 = function() {
     <div
       dataKey={"ad.name"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={200}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"ad.name"}
       height={32}
       rowIndex={0}
@@ -4040,11 +4040,11 @@ const FixedDataTableCellDefault369 = function() {
     <div
       dataKey={"edit_status"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={33}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"edit_status"}
       height={32}
       rowIndex={0}
@@ -4077,11 +4077,11 @@ const FixedDataTableCellDefault372 = function() {
     <div
       dataKey={"errors"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={36}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"errors"}
       height={32}
       rowIndex={0}
@@ -4111,10 +4111,10 @@ const FixedDataTableCell374 = function() {
 
 const BUISwitch375 = function() {
   return (
-    <div
+    <lol
       value={true}
       disabled={true}
-      onToggle={function() {}}
+      onToggle={function(): void {}}
       data-hover={"tooltip"}
       data-tooltip-position={"below"}
       aria-label={"Currently active and you can not deactivate it."}
@@ -4125,15 +4125,15 @@ const BUISwitch375 = function() {
     >
       <div
         className={"_128o"}
-        onClick={function() {}}
-        onKeyDown={function() {}}
-        onMouseDown={function() {}}
+        onClick={function(): void {}}
+        onKeyDown={function(): void {}}
+        onMouseDown={function(): void {}}
         tabIndex={"-1"}
       >
         <div className={"_128p"} />
       </div>
       {null}
-    </div>
+    </lol>
   );
 };
 
@@ -4150,11 +4150,11 @@ const TransitionCell378 = function() {
     <div
       dataKey={"ad.adgroup_status"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={60}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"ad.adgroup_status"}
       height={32}
       rowIndex={0}
@@ -4208,11 +4208,11 @@ const TransitionCell382 = function() {
     <div
       dataKey={"ukiAdData.computed_activity_status"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={150}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"ukiAdData.computed_activity_status"}
       height={32}
       rowIndex={0}
@@ -4274,11 +4274,11 @@ const TransitionCell386 = function() {
     <div
       dataKey={"stats.unique_impressions"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={60}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"stats.unique_impressions"}
       height={32}
       rowIndex={0}
@@ -4307,11 +4307,11 @@ const TransitionCell388 = function() {
     <div
       dataKey={"stats.impressions"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={80}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"stats.impressions"}
       height={32}
       rowIndex={0}
@@ -4340,11 +4340,11 @@ const TransitionCell390 = function() {
     <div
       dataKey={"stats.avg_cpm"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={80}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"stats.avg_cpm"}
       height={32}
       rowIndex={0}
@@ -4373,11 +4373,11 @@ const TransitionCell392 = function() {
     <div
       dataKey={"stats.avg_cpc"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={78}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"stats.avg_cpc"}
       height={32}
       rowIndex={0}
@@ -4406,11 +4406,11 @@ const TransitionCell394 = function() {
     <div
       dataKey={"stats.actions"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={140}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"stats.actions"}
       height={32}
       rowIndex={0}
@@ -4439,11 +4439,11 @@ const TransitionCell396 = function() {
     <div
       dataKey={"stats.cpa"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={140}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"stats.cpa"}
       height={32}
       rowIndex={0}
@@ -4472,11 +4472,11 @@ const TransitionCell398 = function() {
     <div
       dataKey={"stats.clicks"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={60}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"stats.clicks"}
       height={32}
       rowIndex={0}
@@ -4505,11 +4505,11 @@ const TransitionCell400 = function() {
     <div
       dataKey={"stats.ctr"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={70}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"stats.ctr"}
       height={32}
       rowIndex={0}
@@ -4538,11 +4538,11 @@ const TransitionCell402 = function() {
     <div
       dataKey={"stats.social_percent"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={80}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"stats.social_percent"}
       height={32}
       rowIndex={0}
@@ -4571,10 +4571,10 @@ const FixedDataTableCellDefault404 = function() {
     <div
       dataKey={"campaign.name"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={100}
       columnData={{}}
-      cellDataGetter={function() {}}
+      cellDataGetter={function(): void {}}
       cellRenderer={undefined}
       columnKey={"campaign.name"}
       height={32}
@@ -4608,10 +4608,10 @@ const FixedDataTableCellDefault407 = function() {
     <div
       dataKey={"campaignGroup.name"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={150}
       columnData={{}}
-      cellDataGetter={function() {}}
+      cellDataGetter={function(): void {}}
       cellRenderer={undefined}
       columnKey={"campaignGroup.name"}
       height={32}
@@ -4645,11 +4645,11 @@ const TransitionCell410 = function() {
     <div
       dataKey={"ad.id"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={120}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"ad.id"}
       height={32}
       rowIndex={0}
@@ -4678,11 +4678,11 @@ const TransitionCell412 = function() {
     <div
       dataKey={"campaignGroup.objective"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={80}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"campaignGroup.objective"}
       height={32}
       rowIndex={0}
@@ -4711,11 +4711,11 @@ const TransitionCell414 = function() {
     <div
       dataKey={"stats.spent_100"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={70}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"stats.spent_100"}
       height={32}
       rowIndex={0}
@@ -4748,11 +4748,11 @@ const TransitionCell417 = function() {
     <div
       dataKey={"derivedCampaign.startDate"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={113}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"derivedCampaign.startDate"}
       height={32}
       rowIndex={0}
@@ -4783,11 +4783,11 @@ const TransitionCell419 = function() {
     <div
       dataKey={"derivedCampaign.endDate"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={113}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"derivedCampaign.endDate"}
       height={32}
       rowIndex={0}
@@ -4820,11 +4820,11 @@ const TransitionCell422 = function() {
     <div
       dataKey={"ad.created_time"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={113}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"ad.created_time"}
       height={32}
       rowIndex={0}
@@ -4859,11 +4859,11 @@ const TransitionCell425 = function() {
     <div
       dataKey={"ad.updated_time"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={113}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"ad.updated_time"}
       height={32}
       rowIndex={0}
@@ -4894,11 +4894,11 @@ const TransitionCell427 = function() {
     <div
       dataKey={"ad.title"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={80}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"ad.title"}
       height={32}
       rowIndex={0}
@@ -4927,11 +4927,11 @@ const TransitionCell429 = function() {
     <div
       dataKey={"ad.creative.body"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={80}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"ad.creative.body"}
       height={32}
       rowIndex={0}
@@ -4960,11 +4960,11 @@ const TransitionCell431 = function() {
     <div
       dataKey={"destination"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={92}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"destination"}
       height={32}
       rowIndex={0}
@@ -4993,11 +4993,11 @@ const TransitionCell433 = function() {
     <div
       dataKey={"ad.creative.link_url"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={70}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"ad.creative.link_url"}
       height={32}
       rowIndex={0}
@@ -5026,11 +5026,11 @@ const FixedDataTableCellDefault435 = function() {
     <div
       dataKey={"page"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={92}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"page"}
       height={32}
       rowIndex={0}
@@ -5064,7 +5064,7 @@ const Link438 = function() {
       href={"https://www.facebook.com/?demo_ad=98010048849345&h=AQA24w3temAtB-5f#pagelet_ego_pane"}
       target={"_blank"}
       rel={undefined}
-      onClick={function() {}}
+      onClick={function(): void {}}
     >
       {"Preview Ad"}
     </a>
@@ -5077,7 +5077,7 @@ const ReactImage439 = function() {
 
 const AdsPopoverLink440 = function() {
   return (
-    <span onMouseEnter={function() {}} onMouseLeave={function() {}}>
+    <span onMouseEnter={function(): void {}} onMouseLeave={function(): void {}}>
       <span className={"_3o_j"} />
       <ReactImage439 />
     </span>
@@ -5093,11 +5093,11 @@ const TransitionCell442 = function() {
     <div
       dataKey={"ad.demolink_hash"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={100}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"ad.demolink_hash"}
       height={32}
       rowIndex={0}
@@ -5129,11 +5129,11 @@ const TransitionCell444 = function() {
     <div
       dataKey={"scrollbar_spacer"}
       className={"_4lgc _4h2u"}
-      rowGetter={function() {}}
+      rowGetter={function(): void {}}
       width={25}
       columnData={{}}
-      cellDataGetter={function() {}}
-      cellRenderer={function() {}}
+      cellDataGetter={function(): void {}}
+      cellRenderer={function(): void {}}
       columnKey={"scrollbar_spacer"}
       height={32}
       rowIndex={0}
@@ -5213,7 +5213,7 @@ const FixedDataTableRowImpl448 = function() {
       className={"_1gd4 _4li _52no _35m0 _35m1 _3c7k _4efq _4efs"}
       onClick={null}
       onDoubleClick={null}
-      onMouseDown={function() {}}
+      onMouseDown={function(): void {}}
       onMouseEnter={null}
       onMouseLeave={null}
       style={{ width: 1083, height: 32 }}
@@ -5262,11 +5262,11 @@ const FixedDataTableBufferedRows450 = function() {
 const Scrollbar451 = function() {
   return (
     <div
-      onFocus={function() {}}
-      onBlur={function() {}}
-      onKeyDown={function() {}}
-      onMouseDown={function() {}}
-      onWheel={function() {}}
+      onFocus={function(): void {}}
+      onBlur={function(): void {}}
+      onKeyDown={function(): void {}}
+      onMouseDown={function(): void {}}
+      onWheel={function(): void {}}
       className={"_1t0r _1t0t _4jdr _1t0u"}
       style={{ width: 1083, zIndex: 99 }}
       tabIndex={0}
@@ -5303,7 +5303,7 @@ const HorizontalScrollbar452 = function() {
 
 const FixedDataTable453 = function() {
   return (
-    <div className={"_3h1i _1mie"} onWheel={function() {}} style={{ height: 532, width: 1083 }}>
+    <div className={"_3h1i _1mie"} onWheel={function(): void {}} style={{ height: 532, width: 1083 }}>
       <div className={"_3h1j"} style={{ height: 515, width: 1083 }}>
         <FixedDataTableColumnResizeHandle178 />
         <FixedDataTableRow206 key={"group_header"} />
@@ -5333,7 +5333,7 @@ const AdsSelectableFixedDataTable455 = function() {
 
 const AdsDataTableKeyboardSupportDecorator456 = function() {
   return (
-    <div onKeyDown={function() {}}>
+    <div onKeyDown={function(): void {}}>
       <AdsSelectableFixedDataTable455 />
     </div>
   );
@@ -5341,7 +5341,7 @@ const AdsDataTableKeyboardSupportDecorator456 = function() {
 
 const AdsEditableDataTableDecorator457 = function() {
   return (
-    <div onCopy={function() {}}>
+    <div onCopy={function(): void {}}>
       <AdsDataTableKeyboardSupportDecorator456 />
     </div>
   );
@@ -5359,7 +5359,7 @@ const AdsPEDataTableContainer458 = function() {
 
 const ResponsiveBlock459 = function() {
   return (
-    <div onResize={function() {}} className={"_4u-c"}>
+    <div onResize={function(): void {}} className={"_4u-c"}>
       <AdsPEDataTableContainer458 />
       <div className={"_4u-f"}>
         <iframe tabIndex={"-1"} />
@@ -5428,7 +5428,7 @@ const ReactImage467 = function() {
 
 const AdsPESideTrayTabButton468 = function() {
   return (
-    <div onClick={function() {}} className={"_1-ly _59j9 _d9a"}>
+    <div onClick={function(): void {}} className={"_1-ly _59j9 _d9a"}>
       <ReactImage467 />
       <div className={"_vf7"} />
       <div className={"_vf8"} />
@@ -5446,7 +5446,7 @@ const ReactImage470 = function() {
 
 const AdsPESideTrayTabButton471 = function() {
   return (
-    <div onClick={function() {}} className={" _1-lz _d9a"}>
+    <div onClick={function(): void {}} className={" _1-lz _d9a"}>
       <ReactImage470 />
       <div className={"_vf7"} />
       <div className={"_vf8"} />
@@ -5472,17 +5472,17 @@ const FBDragHandle475 = function() {
       style={{ height: 550 }}
       className={"_4a2j _2ciy _2ciz"}
       horizontal={true}
-      onStart={function() {}}
-      onEnd={function() {}}
-      onChange={function() {}}
-      initialData={function() {}}
+      onStart={function(): void {}}
+      onEnd={function(): void {}}
+      onChange={function(): void {}}
+      initialData={function(): void {}}
       vertical={false}
       throttle={25}
       delay={0}
       threshold={0}
-      onMouseDown={function() {}}
-      onMouseUp={function() {}}
-      onMouseLeave={function() {}}
+      onMouseDown={function(): void {}}
+      onMouseUp={function(): void {}}
+      onMouseLeave={function(): void {}}
     />
   );
 };
@@ -5584,10 +5584,10 @@ const Link488 = function() {
     <a
       className={"_5ir9"}
       label={"Rename using available fields"}
-      onMouseDown={function() {}}
+      onMouseDown={function(): void {}}
       href={"#"}
       rel={undefined}
-      onClick={function() {}}
+      onClick={function(): void {}}
     >
       {"Rename using available fields"}
     </a>
@@ -5623,7 +5623,7 @@ const BUISwitch492 = function() {
     <div
       value={true}
       disabled={true}
-      onToggle={function() {}}
+      onToggle={function(): void {}}
       data-hover={"tooltip"}
       data-tooltip-position={"below"}
       aria-label={"Currently active and you can not deactivate it."}
@@ -5634,9 +5634,9 @@ const BUISwitch492 = function() {
     >
       <div
         className={"_128o"}
-        onClick={function() {}}
-        onKeyDown={function() {}}
-        onMouseDown={function() {}}
+        onClick={function(): void {}}
+        onKeyDown={function(): void {}}
+        onMouseDown={function(): void {}}
         tabIndex={"-1"}
       >
         <div className={"_128p"} />
@@ -5741,7 +5741,7 @@ const XUIText505 = function() {
 
 const Link506 = function() {
   return (
-    <a target={"_blank"} href={"/ads/manager/ad/?ids=98010048849345"} onClick={function() {}} rel={undefined}>
+    <a target={"_blank"} href={"/ads/manager/ad/?ids=98010048849345"} onClick={function(): void {}} rel={undefined}>
       {"Open in Ads Manager"}
     </a>
   );
@@ -5749,7 +5749,7 @@ const Link506 = function() {
 
 const Link507 = function() {
   return (
-    <a target={"_blank"} href={"#"} onClick={function() {}} rel={undefined}>
+    <a target={"_blank"} href={"#"} onClick={function(): void {}} rel={undefined}>
       {"Open in Ads Reporting"}
     </a>
   );
@@ -5760,7 +5760,7 @@ const Link508 = function() {
     <a
       target={"_blank"}
       href={"https://www.facebook.com/?demo_ad=98010048849345&h=AQA24w3temAtB-5f#pagelet_ego_pane"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       rel={undefined}
     >
       {"View on Desktop Right Column"}
@@ -5773,7 +5773,7 @@ const Link509 = function() {
     <a
       target={"_blank"}
       href={"/ads/manage/powereditor/?act=10149999073643408&adgroup=98010048849345"}
-      onClick={function() {}}
+      onClick={function(): void {}}
       rel={undefined}
     >
       {"Open Power Editor with this ad selected"}
@@ -5892,7 +5892,7 @@ const AdsCardHeader522 = function() {
 
 const PillButton523 = function() {
   return (
-    <a label={null} selected={true} onClick={function() {}} href={"#"} className={"uiPillButton uiPillButtonSelected"}>
+    <a label={null} selected={true} onClick={function(): void {}} href={"#"} className={"uiPillButton uiPillButtonSelected"}>
       {"Desktop Right Column"}
     </a>
   );
@@ -6087,7 +6087,7 @@ const AdsCardHeader547 = function() {
 
 const Link548 = function() {
   return (
-    <a className={"fwb"} onClick={function() {}} href={"#"} rel={undefined}>
+    <a className={"fwb"} onClick={function(): void {}} href={"#"} rel={undefined}>
       {"Connect a Facebook Page"}
     </a>
   );
@@ -6180,7 +6180,7 @@ const ReactImage562 = function() {
 
 const AdsPopoverLink563 = function() {
   return (
-    <span onMouseEnter={function() {}} onMouseLeave={function() {}}>
+    <span onMouseEnter={function(): void {}} onMouseLeave={function(): void {}}>
       <span className={"_3o_j"} />
       <ReactImage562 />
     </span>
@@ -6249,7 +6249,7 @@ const ReactImage570 = function() {
 
 const AdsPopoverLink571 = function() {
   return (
-    <span onMouseEnter={function() {}} onMouseLeave={function() {}}>
+    <span onMouseEnter={function(): void {}} onMouseLeave={function(): void {}}>
       <span className={"_3o_j"} />
       <ReactImage570 />
     </span>
@@ -6375,7 +6375,7 @@ const AbstractButton583 = function() {
   return (
     <button
       label={null}
-      onClick={function() {}}
+      onClick={function(): void {}}
       size={"large"}
       use={"default"}
       borderShade={"light"}
@@ -6459,7 +6459,7 @@ const CenteredContainer589 = function() {
 
 const Link590 = function() {
   return (
-    <a href={"/business/ads-guide/"} target={"_blank"} rel={undefined} onClick={function() {}}>
+    <a href={"/business/ads-guide/"} target={"_blank"} rel={undefined} onClick={function(): void {}}>
       {"Facebook Ad Guidelines"}
     </a>
   );
@@ -6632,7 +6632,7 @@ const ReactImage613 = function() {
 
 const AdsPopoverLink614 = function() {
   return (
-    <span onMouseEnter={function() {}} onMouseLeave={function() {}}>
+    <span onMouseEnter={function(): void {}} onMouseLeave={function(): void {}}>
       <span className={"_3o_j"} />
       <ReactImage613 />
     </span>
@@ -6682,7 +6682,7 @@ const XUIText621 = function() {
 
 const Link622 = function() {
   return (
-    <a href={"/help/336923339852238"} target={"_blank"} rel={undefined} onClick={function() {}}>
+    <a href={"/help/336923339852238"} target={"_blank"} rel={undefined} onClick={function(): void {}}>
       <XUIText621 />
     </a>
   );
@@ -6708,7 +6708,7 @@ const AbstractButton625 = function() {
     <button
       className={"_23ng _4jy0 _4jy4 _4jy1 _51sy selected _42ft"}
       label={null}
-      onClick={function() {}}
+      onClick={function(): void {}}
       size={"large"}
       use={"confirm"}
       borderShade={"light"}
@@ -7009,8 +7009,10 @@ const AdsPEContainer661 = function() {
   );
 };
 
-export function Component() {
+function Benchmark() {
   return <AdsPEContainer661 />;
 }
 
-Component.compileRootComponent = true;
+Benchmark.compileRootComponent = true;
+
+module.exports = Benchmark;

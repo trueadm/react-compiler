@@ -13,11 +13,11 @@ export const LOGICAL = 7;
 export const TEMPLATE_FUNCTION_CALL = 8;
 export const MULTI_CONDITIONAL = 9;
 export const TEXT_ARRAY = 10;
-export const REFERENCE_COMPONENT = 11;
-export const VNODE = 12;
-export const REFERENCE_VNODE = 13;
+export const VNODE_ARRAY = 11;
+export const REFERENCE_COMPONENT = 12;
+export const REFERENCE_REACT_NODE = 13;
 export const MULTI_RETURN_CONDITIONAL = 14;
-export const VNODE_COLLECTION = 15;
+export const VNODE = 15;
 export const CONTEXT_PROVIDER = 16;
 export const CONTEXT_CONSUMER = 17;
 
@@ -31,9 +31,10 @@ export const HAS_CHILDREN = 1 << 11;
 export const HAS_STATIC_TEXT_CONTENT = 1 << 12;
 export const HAS_DYNAMIC_TEXT_CONTENT = 1 << 13;
 export const HAS_DYNAMIC_TEXT_ARRAY_CONTENT = 1 << 14;
-export const IS_STATIC = 1 << 15;
-export const IS_SVG = 1 << 16;
-export const IS_VOID = 1 << 17;
+export const IS_SHALLOW_STATIC = 1 << 15;
+export const IS_DEEP_STATIC = 1 << 16;
+export const IS_SVG = 1 << 17;
+export const IS_VOID = 1 << 18;
 
 // Components
 export const HAS_HOOKS = 1 << 6;
@@ -73,7 +74,8 @@ export class ComponentTemplateNode {
   ) {
     this.name = name;
     this.componentPath = componentPath;
-    this.isStatic = false;
+    this.isDeeplyStatic = true;
+    this.isShallowStatic = true;
     this.computeFunctionRef = null;
     this.templateNode = null;
     this.isRootComponent = isRootComponent;
@@ -97,15 +99,18 @@ export class ComponentTemplateNode {
   toAST() {
     const ASTNode = [];
     let flag = this.isRootComponent ? ROOT_COMPONENT : COMPONENT;
-    if (this.isStatic) {
-      flag |= IS_STATIC;
+    if (this.isDeeplyStatic) {
+      flag |= IS_DEEP_STATIC;
+    }
+    if (this.isShallowStatic) {
+      flag |= IS_SHALLOW_STATIC;
     }
     if (this.usesHooks) {
       flag |= HAS_HOOKS;
     }
     // TODO: Maybe change to hex if less bytes?
     ASTNode.push(t.numericLiteral(flag));
-    if (!this.isStatic) {
+    if (!this.templateNode.isStatic) {
       if (this.isRootComponent) {
         if (this.shapeOfPropsObject === null) {
           ASTNode.push(t.numericLiteral(0));
@@ -147,7 +152,7 @@ export class ReferenceComponentTemplateNode {
   }
 }
 
-export class ReferenceVNode {
+export class ReferenceReactNode {
   constructor(valueIndex) {
     this.valueIndex = valueIndex;
   }
@@ -157,7 +162,7 @@ export class ReferenceVNode {
   }
 
   toAST() {
-    return t.arrayExpression([t.numericLiteral(REFERENCE_VNODE), t.numericLiteral(this.valueIndex)]);
+    return t.arrayExpression([t.numericLiteral(REFERENCE_REACT_NODE), t.numericLiteral(this.valueIndex)]);
   }
 }
 
@@ -241,7 +246,8 @@ export class HostComponentTemplateNode {
     let dynamicStylesASTNode = null;
 
     if (this.isStatic) {
-      flag |= IS_STATIC;
+      flag |= IS_DEEP_STATIC;
+      flag |= IS_SHALLOW_STATIC;
     }
     if (this.isVoidElement) {
       flag |= IS_VOID;
@@ -379,7 +385,7 @@ export class StaticTextTemplateNode {
   }
 
   toAST() {
-    return t.arrayExpression([t.numericLiteral(TEXT | IS_STATIC), t.stringLiteral(this.text + "")]);
+    return t.arrayExpression([t.numericLiteral(TEXT | IS_SHALLOW_STATIC), t.stringLiteral(this.text + "")]);
   }
 }
 
@@ -418,7 +424,7 @@ export class StaticValueTemplateNode {
   }
 
   toAST() {
-    return t.arrayExpression([t.numericLiteral(VALUE | IS_STATIC), valueToBabelNode(this.value)]);
+    return t.arrayExpression([t.numericLiteral(VALUE | IS_SHALLOW_STATIC), valueToBabelNode(this.value)]);
   }
 }
 
@@ -547,7 +553,7 @@ export class LogicalTemplateNode {
   }
 }
 
-export class VNodeCollectionTemplateNode {
+export class VNodeArrayTemplateNode {
   constructor(valueIndex, templateNode) {
     this.valueIndex = valueIndex;
     this.templateNode = templateNode;
@@ -558,11 +564,21 @@ export class VNodeCollectionTemplateNode {
   }
 
   toAST() {
-    let flags = VNODE_COLLECTION;
+    let flags = VNODE_ARRAY;
 
     if (!t.isNullLiteral(this.getKeyASTNode())) {
       flags |= HAS_KEYS;
     }
     return t.arrayExpression([t.numericLiteral(flags), t.numericLiteral(this.valueIndex)]);
+  }
+}
+
+export class FunctionTemplateNode {
+  constructor(functionPath) {
+    this.functionPath = functionPath;
+  }
+
+  toAST() {
+    debugger;
   }
 }

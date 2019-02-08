@@ -33,17 +33,18 @@ export function compileReactFunctionComponent(componentPath, state) {
       removePath(defaultProps.parentPath);
     });
   }
-
   const previousComponentTemplateNode = state.componentTemplateNode;
   state.componentTemplateNode = componentTemplateNode;
   const { computeFunctionRef, isStatic, templateNode } = compileReactComputeFunction(componentPath, state, true, false);
-  componentTemplateNode.isStatic = isStatic;
+  const deeplyStatic = componentTemplateNode.isDeeplyStatic === true && isStatic;
+  componentTemplateNode.isDeeplyStatic = deeplyStatic;
+  componentTemplateNode.isShallowStatic = isStatic;
   componentTemplateNode.computeFunctionRef = computeFunctionRef;
   componentTemplateNode.templateNode = templateNode;
 
   if (!isRootComponent) {
     state.componentTemplateNode = previousComponentTemplateNode;
-    if (!isStatic && previousComponentTemplateNode !== null) {
+    if (!deeplyStatic && previousComponentTemplateNode !== null) {
       previousComponentTemplateNode.childComponents.push(componentTemplateNode);
     }
   }
@@ -58,7 +59,6 @@ export function compileReactFunctionComponent(componentPath, state) {
     componentTemplateNode,
     componentPath,
     computeFunction,
-    isStatic,
     name,
     state,
   );
@@ -69,7 +69,6 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
   componentTemplateNode,
   componentPath,
   computeFunction,
-  isStatic,
   name,
   state,
 ) {
@@ -77,7 +76,7 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
   if (t.isFunctionDeclaration(computeFunction)) {
     const identifier = t.identifier(name);
 
-    if (isStatic) {
+    if (componentTemplateNode.isStatic) {
       const templateDeclaration = t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]);
       componentPath.replaceWith(templateDeclaration);
       componentTemplateNode.insertionPath = componentPath;
@@ -118,22 +117,23 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
     const parentPath = componentPath.parentPath;
 
     if (t.isVariableDeclarator(parentPath.node) && t.isIdentifier(parentPath.node.id)) {
+      const declarationPath = parentPath.parentPath;
       markNodeAsUsed(parentPath.node.id);
       const identifier = t.identifier(name);
       markNodeAsUsed(identifier);
 
-      if (isStatic) {
+      if (componentTemplateNode.isStatic) {
         parentPath.node.id.name = name;
         componentPath.replaceWith(templateAST);
         componentTemplateNode.insertionPath = componentPath;
         if (state.componentTemplateNode !== null && !state.isRootComponent) {
-          componentPath.remove();
+          declarationPath.remove();
         }
       } else {
         const templateDeclaration = t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]);
-        const declarationPath = parentPath.parentPath;
+        const computeFunctionDeclaration = t.variableDeclaration(parentPath.parentPath.node.kind, [parentPath.node]);
         declarationPath.replaceWith(templateDeclaration);
-        declarationPath.insertBefore(parentPath.node);
+        declarationPath.insertBefore(computeFunctionDeclaration);
         componentTemplateNode.insertionPath = declarationPath;
         componentTemplateNode.insertionNode = templateDeclaration;
         if (state.componentTemplateNode !== null && !state.isRootComponent) {

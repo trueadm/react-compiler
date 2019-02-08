@@ -40,11 +40,11 @@ import {
   isReferenceReactContextProvider,
 } from "./context";
 import { compileReactContextConsumer } from "./context";
-import { compileMutatedBinding, compileNode } from "../nodes";
+import { compileMutatedBinding, compileFunction, compileNode } from "../nodes";
 import { hyphenateStyleName } from "./style";
 import { compileReactFunctionComponent } from "./components";
 import { compileReactComputeFunction } from "./functions";
-import { getPropInformation, isUnitlessNumber } from "./prop-information";
+import { PROP_IS_EVENT, filterStaticPropValue, getPropInformation, isUnitlessNumber } from "./prop-information";
 import { validateArgumentsDoNotContainTemplateNodes, validateParamsDoNotConflictOuterScope } from "../validation";
 import invariant from "../invariant";
 import * as t from "@babel/types";
@@ -60,11 +60,12 @@ import {
   HostComponentTemplateNode,
   LogicalTemplateNode,
   ReferenceComponentTemplateNode,
-  ReferenceVNode,
+  ReferenceReactNode,
   StaticTextTemplateNode,
   StaticValueTemplateNode,
   TemplateFunctionCallTemplateNode,
-  VNodeCollectionTemplateNode,
+  VNodeArrayTemplateNode,
+  FunctionTemplateNode,
 } from "../templates";
 
 const emptyPlaceholderNode = t.nullLiteral();
@@ -97,8 +98,8 @@ function compileArrayMapTemplate(childPath, state, componentPath) {
   const mapFunctionPath = getReferenceFromExpression(args[0], state);
   // Compiles the array map function to return vNodes
   const { templateNode } = compileReactComputeFunction(mapFunctionPath, state, false, true);
-  const vNodeCollectionValueIndex = getRuntimeValueIndex(childPath.node, state);
-  return new VNodeCollectionTemplateNode(vNodeCollectionValueIndex, templateNode);
+  const vNodeArrayValueIndex = getRuntimeValueIndex(childPath.node, state);
+  return new VNodeArrayTemplateNode(vNodeArrayValueIndex, templateNode);
 }
 
 function compileHostComponentPropValue(templateNode, tagName, valuePath, propNameStr, state, componentPath) {
@@ -146,6 +147,12 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
   }
   const [propName, propInformation] = getPropInformation(propNameStr);
 
+  if (propTemplateNode instanceof FunctionTemplateNode) {
+    if ((propInformation & PROP_IS_EVENT) === 0) {
+      return;
+    }
+    propTemplateNode = compileFunction(propTemplateNode.functionPath, componentPath, state);
+  }
   // Static vs dynamic
   if (!isPartialTemplate && runtimeValueHash === getRuntimeValueHash(state)) {
     if (propNameStr === "value" && tagName === "textarea") {
@@ -153,10 +160,18 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
       return;
     }
     if (propTemplateNode instanceof StaticTextTemplateNode) {
-      templateNode.staticProps.push([propName, propInformation, propTemplateNode.text]);
+      const filteredValue = filterStaticPropValue(propName, propInformation, propTemplateNode.text);
+      if (filteredValue === undefined) {
+        return;
+      }
+      templateNode.staticProps.push([propName, propInformation, filteredValue]);
     } else if (propTemplateNode instanceof StaticValueTemplateNode) {
       if (propTemplateNode.value !== undefined && propTemplateNode.value !== null) {
-        templateNode.staticProps.push([propName, propInformation, propTemplateNode.value]);
+        const filteredValue = filterStaticPropValue(propName, propInformation, propTemplateNode.value);
+        if (filteredValue === undefined) {
+          return;
+        }
+        templateNode.staticProps.push([propName, propInformation, filteredValue]);
       }
     } else {
       invariant(false, "TODO");
@@ -241,7 +256,7 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
     childTemplateNode instanceof StaticTextTemplateNode ||
     childTemplateNode instanceof DynamicTextTemplateNode ||
     childTemplateNode instanceof TemplateFunctionCallTemplateNode ||
-    childTemplateNode instanceof ReferenceVNode ||
+    childTemplateNode instanceof ReferenceReactNode ||
     childTemplateNode instanceof ReferenceComponentTemplateNode ||
     childTemplateNode instanceof ConditionalTemplateNode ||
     childTemplateNode instanceof LogicalTemplateNode ||
@@ -267,7 +282,7 @@ function compileHostComponentChildren(templateNode, childPath, state, componentP
       );
     }
     const reactNodeValueIndex = getRuntimeValueIndex(refChildPath.node, state);
-    templateNode.children.push(new ReferenceVNode(reactNodeValueIndex));
+    templateNode.children.push(new ReferenceReactNode(reactNodeValueIndex));
     return;
   }
   if (childTemplateNode instanceof DynamicValueTemplateNode) {
@@ -927,24 +942,26 @@ function createPropsArrayForCompositeComponent(
   let keyASTNode = t.nullLiteral();
   const propsArray = [];
 
-  for (let propShape of shapeOfPropsObject) {
-    const propName = propShape.key;
-    const { node, canInline } = getPropNodeForCompositeComponent(
-      propName,
-      attributesPath,
-      childrenPath,
-      defaultProps,
-      state,
-      componentPath,
-    );
-    if (propName === "key") {
-      keyASTNode = node;
-      continue;
+  if (shapeOfPropsObject !== null) {
+    for (let propShape of shapeOfPropsObject) {
+      const propName = propShape.key;
+      const { node, canInline } = getPropNodeForCompositeComponent(
+        propName,
+        attributesPath,
+        childrenPath,
+        defaultProps,
+        state,
+        componentPath,
+      );
+      if (propName === "key") {
+        keyASTNode = node;
+        continue;
+      }
+      if (!canInline) {
+        canInlineArray = false;
+      }
+      propsArray.push(node);
     }
-    if (!canInline) {
-      canInlineArray = false;
-    }
-    propsArray.push(node);
   }
 
   return {
@@ -978,7 +995,7 @@ function compileCompositeComponent(path, componentName, attributesPath, children
   }
   if (compiledComponentCache.has(componentName)) {
     componentTemplateNode = compiledComponentCache.get(componentName);
-    if (!componentTemplateNode.isStatic) {
+    if (!componentTemplateNode.isDeeplyStatic) {
       state.componentTemplateNode.childComponents.push(componentTemplateNode);
     }
   } else {
@@ -1004,21 +1021,30 @@ function compileCompositeComponent(path, componentName, attributesPath, children
     };
     componentTemplateNode = compileReactFunctionComponent(compositeComponentPath, childState);
   }
-  const { defaultProps, isStatic, shapeOfPropsObject, templateNode } = componentTemplateNode;
+  const { defaultProps, isDeeplyStatic, isShallowStatic, shapeOfPropsObject, templateNode } = componentTemplateNode;
 
-  if (isStatic) {
-    // We can remove the component entirely and just inline the template into the existing tree
-    if (Array.isArray(attributesPath)) {
-      for (let attributePath of attributesPath) {
-        markNodeAsDCE(attributePath.node);
-      }
+  // TODO look into this, it's a circular reference case, which results in less-than-optimal code
+  // because we can't properly tag components as being static.
+  if (templateNode === null) {
+    componentTemplateNode.isDeeplyStatic = false;
+  } else {
+    if (!isDeeplyStatic) {
+      state.componentTemplateNode.isDeeplyStatic = false;
     }
-    if (Array.isArray(childrenPath)) {
-      for (let childPath of childrenPath) {
-        markNodeAsDCE(childPath.node);
+    if (isShallowStatic) {
+      // We can remove the component entirely and just inline the template into the existing tree
+      if (Array.isArray(attributesPath)) {
+        for (let attributePath of attributesPath) {
+          markNodeAsDCE(attributePath.node);
+        }
       }
+      if (Array.isArray(childrenPath)) {
+        for (let childPath of childrenPath) {
+          markNodeAsDCE(childPath.node);
+        }
+      }
+      return templateNode;
     }
-    return templateNode;
   }
   const { keyASTNode, propsArray, canInlineArray } = createPropsArrayForCompositeComponent(
     path,
@@ -1360,6 +1386,11 @@ export function compileReactCreateElement(path, state, componentPath) {
   const typePath = args[0];
 
   const templateNode = compileReactCreateElementType(typePath, args, state, componentPath);
+  if (templateNode === null) {
+    debugger;
+    var x = compileReactCreateElementType(typePath, args, state, componentPath);
+    debugger;
+  }
   if (t.isBlockStatement(path.node)) {
     const body = path.get("body");
     const returnStatement = body[body.length - 1];
