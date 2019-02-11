@@ -271,11 +271,16 @@ function mountTextTemplate(templateTypeAndFlags, textTemplate, parentDOMNode, va
   const templateFlags = templateTypeAndFlags & ~0x3f;
   const isStatic = (templateFlags & IS_SHALLOW_STATIC) !== 0;
   let text = isStatic === true ? textTemplate[1] : values[textTemplate[1]];
-  const textDOMNode = createTextNode(text);
-  if (parentDOMNode !== null) {
-    appendChild(parentDOMNode, textDOMNode);
+  let hostNode;
+  if (isStatic === false && (text === null || text === undefined)) {
+    hostNode = createPlaceholder();
+  } else {
+    hostNode = createTextNode(text);
   }
-  return textDOMNode;
+  if (parentDOMNode !== null) {
+    appendChild(parentDOMNode, hostNode);
+  }
+  return hostNode;
 }
 
 function mountMultiConditionalTemplate(multiConditionalTemplate, parentDOMNode, values, currentFiber) {
@@ -482,6 +487,46 @@ function mountTextArrayTemplate(templateTypeAndFlags, textTemplate, parentDOMNod
   return mountTextArray(textArray, parentDOMNode);
 }
 
+function mountTemplateFunctionCallTemplate(templateFunctionCallTemplate, parentDOMNode, values, currentFiber) {
+  const functionCallTemplateNode = templateFunctionCallTemplate[1];
+  const functionCallValuesIndex = templateFunctionCallTemplate[2];
+  const functionCallValues = values[functionCallValuesIndex];
+  if (functionCallValues === null) {
+    return createPlaceholder();
+  }
+  return mountTemplateNode(functionCallTemplateNode, parentDOMNode, functionCallValues, currentFiber);
+}
+
+function mountLogicalTemplate(templateTypeAndFlags, logicalTemplate, parentDOMNode, values, currentFiber) {
+  const templateFlags = templateTypeAndFlags & ~0x3f;
+  const logicalFiber = createFiber(logicalTemplate, values);
+  insertFiber(currentFiber, logicalFiber);
+  const leftTemplateNode = logicalTemplate[1];
+  const leftTemplateHostNode = mountTemplateNode(leftTemplateNode, null, values, logicalFiber);
+
+  if ((templateFlags & LOGICAL_OR) !== 0) {
+    if (leftTemplateHostNode !== undefined) {
+      logicalFiber.hostNode = leftTemplateHostNode;
+      appendChild(parentDOMNode, leftTemplateHostNode);
+      return leftTemplateHostNode;
+    }
+    const rightTemplateNode = logicalTemplate[2];
+    const rightTemplateHostNode = mountTemplateNode(rightTemplateNode, parentDOMNode, values, logicalFiber);
+    logicalFiber.hostNode = rightTemplateHostNode;
+    return rightTemplateHostNode;
+  } else if ((templateFlags & LOGICAL_AND) !== 0) {
+    if (leftTemplateHostNode === undefined) {
+      const hostNode = createPlaceholder();
+      logicalFiber.hostNode = hostNode;
+      return hostNode;
+    }
+    const rightTemplateNode = logicalTemplate[2];
+    const rightTemplateHostNode = mountTemplateNode(rightTemplateNode, parentDOMNode, values, logicalFiber);
+    logicalFiber.hostNode = rightTemplateHostNode;
+    return rightTemplateHostNode;
+  }
+}
+
 function mountTemplateNode(templateNode, parentDOMNode, values, currentFiber) {
   const templateTypeAndFlags = templateNode[0];
   const templateType = templateTypeAndFlags & 0x3f;
@@ -516,9 +561,9 @@ function mountTemplateNode(templateNode, parentDOMNode, values, currentFiber) {
     case CONDITIONAL:
       return mountConditionalTemplate(templateNode, parentDOMNode, values, currentFiber);
     case LOGICAL:
-      throw new Error("TODO");
+      return mountLogicalTemplate(templateTypeAndFlags, templateNode, parentDOMNode, values, currentFiber);
     case TEMPLATE_FUNCTION_CALL:
-      throw new Error("TODO");
+      return mountTemplateFunctionCallTemplate(templateNode, parentDOMNode, values, currentFiber);
     case MULTI_CONDITIONAL:
       return mountMultiConditionalTemplate(templateNode, parentDOMNode, values, currentFiber);
     case TEXT_ARRAY:
