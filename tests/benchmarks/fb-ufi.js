@@ -913,10 +913,6 @@ function UFI2ActionLink({
   );
 }
 
-function UFIReactionsMenu() {
-  return null;
-}
-
 function AWithFocusEvents({
   children,
   onKeyboardFocus,
@@ -976,27 +972,7 @@ function UFI2ReactionLink({
     textColor = color;
   }
 
-  function $UFI2ReactionLink_getSupportedReactions() {
-    return ((feedback != null ? feedback.supported_reactions : feedback) || [])
-      .map(function(_) {
-        return _.key;
-      })
-      .filter(Boolean);
-  }
-
-  var menu =
-    state.menuShown && UFIReactionsMenu
-      ? React.createElement(UFIReactionsMenu, {
-          initialReaction: reactionKey,
-          onBlur: null,
-          onFocus: null,
-          onMouseEnter: null,
-          onMouseLeave: null,
-          onReactionClick: null,
-          shown: state.menuShown,
-          supportedReactions: $UFI2ReactionLink_getSupportedReactions(),
-        })
-      : null;
+  var menu = null;
 
   return React.createElement(
     React.Fragment,

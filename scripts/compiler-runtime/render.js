@@ -134,6 +134,28 @@ function mountPropValue(DOMNode, propFlags, propName, propValue) {
   }
 }
 
+function mountTextArray(textArray, parentDOMNode) {
+  const childrenTextArrayLength = textArray.length;
+  let hostNode;
+
+  for (let i = 0; i < childrenTextArrayLength; ++i) {
+    const childText = textArray[i];
+    if (childText !== null && childText !== undefined && typeof childText !== "boolean") {
+      hostNode = createTextNode(childText);
+      if (parentDOMNode !== null) {
+        parentDOMNode.appendChild(hostNode);
+      }
+    } else {
+      hostNode = createPlaceholder();
+    }
+    if (parentDOMNode !== null) {
+      parentDOMNode.appendChild(hostNode);
+    }
+  }
+  // TODO
+  return null;
+}
+
 function mountHostComponentTemplate(templateTypeAndFlags, hostComponentTemplate, parentDOMNode, values, currentFiber) {
   const templateFlags = templateTypeAndFlags & ~0x3f;
   const tagName = hostComponentTemplate[1];
@@ -233,6 +255,10 @@ function mountHostComponentTemplate(templateTypeAndFlags, hostComponentTemplate,
     for (let i = 0, length = childrenTemplateNodes.length; i < length; ++i) {
       mountTemplateNode(childrenTemplateNodes[i], DOMNode, values, currentFiber);
     }
+  } else if ((templateFlags & HAS_DYNAMIC_TEXT_ARRAY_CONTENT) !== 0) {
+    const textChildrenArrayValueIndex = hostComponentTemplate[childrenTemplateIndex];
+    const textChildrenArray = values[textChildrenArrayValueIndex];
+    mountTextArray(textChildrenArray, DOMNode);
   }
 
   if (parentDOMNode !== null) {
@@ -425,6 +451,37 @@ function mountValue(templateTypeAndFlags, textTemplate, parentDOMNode, values, c
   return hostNode;
 }
 
+function mountVNodeArrayTemplate(templateTypeAndFlags, vNodeArrayTemplate, parentDOMNode, values, currentFiber) {
+  const vNodeArrayValueIndex = vNodeArrayTemplate[1];
+  const vNodeArray = values[vNodeArrayValueIndex];
+  const vNodeArrayLength = vNodeArray.length;
+  const vNodeArrayFiber = createFiber(vNodeArrayTemplate, vNodeArray);
+  insertFiber(currentFiber, vNodeArrayFiber);
+
+  for (let i = 0; i < vNodeArrayLength; ++i) {
+    mountVNode(vNodeArray[i], parentDOMNode, vNodeArrayFiber);
+  }
+  // TODO
+  return null;
+}
+
+function mountFragmentTemplate(fragmentTemplate, parentDOMNode, values, currentFiber) {
+  const fragment = fragmentTemplate[1];
+
+  for (let i = 0, length = fragment.length; i < length; ++i) {
+    mountTemplateNode(fragment[i], parentDOMNode, values, currentFiber);
+  }
+  // TODO
+  return null;
+}
+
+function mountTextArrayTemplate(templateTypeAndFlags, textTemplate, parentDOMNode, values, currentFiber) {
+  const templateFlags = templateTypeAndFlags & ~0x3f;
+  const isStatic = (templateFlags & IS_SHALLOW_STATIC) !== 0;
+  const textArray = isStatic === true ? textTemplate[1] : values[textTemplate[1]];
+  return mountTextArray(textArray, parentDOMNode);
+}
+
 function mountTemplateNode(templateNode, parentDOMNode, values, currentFiber) {
   const templateTypeAndFlags = templateNode[0];
   const templateType = templateTypeAndFlags & 0x3f;
@@ -455,7 +512,7 @@ function mountTemplateNode(templateNode, parentDOMNode, values, currentFiber) {
     case VALUE:
       return mountValue(templateTypeAndFlags, templateNode, parentDOMNode, values, currentFiber);
     case FRAGMENT:
-      throw new Error("TODO");
+      return mountFragmentTemplate(templateNode, parentDOMNode, values, currentFiber);
     case CONDITIONAL:
       return mountConditionalTemplate(templateNode, parentDOMNode, values, currentFiber);
     case LOGICAL:
@@ -465,9 +522,9 @@ function mountTemplateNode(templateNode, parentDOMNode, values, currentFiber) {
     case MULTI_CONDITIONAL:
       return mountMultiConditionalTemplate(templateNode, parentDOMNode, values, currentFiber);
     case TEXT_ARRAY:
-      throw new Error("TODO");
+      return mountTextArrayTemplate(templateTypeAndFlags, templateNode, parentDOMNode, values, currentFiber);
     case VNODE_ARRAY:
-      throw new Error("TODO");
+      return mountVNodeArrayTemplate(templateTypeAndFlags, templateNode, parentDOMNode, values, currentFiber);
     case REFERENCE_COMPONENT:
       return mountReferenceComponentTemplate(templateTypeAndFlags, templateNode, parentDOMNode, values, currentFiber);
     case REFERENCE_REACT_NODE:

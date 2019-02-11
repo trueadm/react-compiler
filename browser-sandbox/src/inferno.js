@@ -1181,8 +1181,7 @@ const props = {
       "url": "https://backchannel.com/how-the-internet-gave-mail-order-brides-the-power-1af8c8a40562"
     }
   ]
-}
-;
+};
 
 const start = performance.now();
 render(<Component {...props} />, root);

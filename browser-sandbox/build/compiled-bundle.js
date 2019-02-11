@@ -3,977 +3,53 @@
   factory();
 }(function () { 'use strict';
 
-  var Link0_ComputeFunction = function Link0_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var Link2_ComputeFunction = function Link2_ComputeFunction() {
-    return [{}, function () {}, function () {}];
-  };
-
-  var AbstractButton9_ComputeFunction = function AbstractButton9_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AbstractButton13_ComputeFunction = function AbstractButton13_ComputeFunction() {
-    return [{}, function () {}];
-  };
-
-  var AbstractButton16_ComputeFunction = function AbstractButton16_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AbstractButton19_ComputeFunction = function AbstractButton19_ComputeFunction() {
-    return [{}];
-  };
-
-  var InlineBlock21_ComputeFunction = function InlineBlock21_ComputeFunction() {
-    return [{}];
-  };
-
-  var Wrapper27_ComputeFunction = function Wrapper27_ComputeFunction() {
-    return [function () {}, function () {}, function () {}, function () {}, function () {}];
-  };
-
-  var Wrapper31_ComputeFunction = function Wrapper31_ComputeFunction() {
-    return [function () {}, function () {}, function () {}, function () {}, function () {}];
-  };
-
-  var Wrapper35_ComputeFunction = function Wrapper35_ComputeFunction() {
-    return [function () {}, function () {}, function () {}, function () {}, function () {}];
-  };
-
-  var Wrapper39_ComputeFunction = function Wrapper39_ComputeFunction() {
-    return [function () {}, function () {}, function () {}, function () {}, function () {}];
-  };
-
-  var Wrapper43_ComputeFunction = function Wrapper43_ComputeFunction() {
-    return [function () {}, function () {}, function () {}, function () {}, function () {}];
-  };
-
-  var InlineBlock48_ComputeFunction = function InlineBlock48_ComputeFunction() {
-    return [{}, {}];
-  };
-
-  var TabBar51_ComputeFunction = function TabBar51_ComputeFunction() {
-    return [function () {}, function () {}, function () {}, function () {}];
-  };
-
-  var Link58_ComputeFunction = function Link58_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var Link63_ComputeFunction = function Link63_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var ReactTransitionGroup66_ComputeFunction = function ReactTransitionGroup66_ComputeFunction() {
-    return [{}];
-  };
-
-  var Link72_ComputeFunction = function Link72_ComputeFunction() {
-    return [{}, function () {}];
-  };
-
-  var Link79_ComputeFunction = function Link79_ComputeFunction() {
-    return [{}, function () {}];
-  };
-
-  var AbstractButton86_ComputeFunction = function AbstractButton86_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AdsPopoverLink91_ComputeFunction = function AdsPopoverLink91_ComputeFunction() {
-    return [function () {}, function () {}];
-  };
-
-  var AbstractButton93_ComputeFunction = function AbstractButton93_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var BUIFilterToken96_ComputeFunction = function BUIFilterToken96_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AbstractButton98_ComputeFunction = function AbstractButton98_ComputeFunction() {
-    return [function () {}, {}];
-  };
-
-  var Link111_ComputeFunction = function Link111_ComputeFunction() {
-    return [{}, {}, function () {}];
-  };
-
-  var InlineBlock117_ComputeFunction = function InlineBlock117_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AbstractButton120_ComputeFunction = function AbstractButton120_ComputeFunction() {
-    return [{}, function () {}];
-  };
-
-  var AbstractButton126_ComputeFunction = function AbstractButton126_ComputeFunction() {
-    return [function () {}, {}];
-  };
-
-  var AbstractButton129_ComputeFunction = function AbstractButton129_ComputeFunction() {
-    return [{}];
-  };
-
-  var InlineBlock131_ComputeFunction = function InlineBlock131_ComputeFunction() {
-    return [{}, {}];
-  };
-
-  var AbstractButton135_ComputeFunction = function AbstractButton135_ComputeFunction() {
-    return [{}, function () {}];
-  };
-
-  var AbstractButton138_ComputeFunction = function AbstractButton138_ComputeFunction() {
-    return [{}, function () {}];
-  };
-
-  var AbstractButton141_ComputeFunction = function AbstractButton141_ComputeFunction() {
-    return [{}, function () {}];
-  };
-
-  var AbstractButton144_ComputeFunction = function AbstractButton144_ComputeFunction() {
-    return [{}, function () {}];
-  };
-
-  var AbstractButton148_ComputeFunction = function AbstractButton148_ComputeFunction() {
-    return [{}, function () {}];
-  };
-
-  var AbstractButton151_ComputeFunction = function AbstractButton151_ComputeFunction() {
-    return [function () {}, {}];
-  };
-
-  var InlineBlock153_ComputeFunction = function InlineBlock153_ComputeFunction() {
-    return [{}];
-  };
-
-  var AbstractButton161_ComputeFunction = function AbstractButton161_ComputeFunction() {
-    return [function () {}, {}];
-  };
-
-  var AbstractButton163_ComputeFunction = function AbstractButton163_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AbstractButton170_ComputeFunction = function AbstractButton170_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AbstractButton172_ComputeFunction = function AbstractButton172_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AbstractButton174_ComputeFunction = function AbstractButton174_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell181_ComputeFunction = function TransitionCell181_ComputeFunction() {
-    return [{}, {}];
-  };
-
-  var TransitionCell186_ComputeFunction = function TransitionCell186_ComputeFunction() {
-    return [{}, {}];
-  };
-
-  var TransitionCell189_ComputeFunction = function TransitionCell189_ComputeFunction() {
-    return [{}, {}];
-  };
-
-  var TransitionCell192_ComputeFunction = function TransitionCell192_ComputeFunction() {
-    return [{}, {}];
-  };
-
-  var TransitionCell195_ComputeFunction = function TransitionCell195_ComputeFunction() {
-    return [{}, {}];
-  };
-
-  var TransitionCell198_ComputeFunction = function TransitionCell198_ComputeFunction() {
-    return [{}, {}];
-  };
-
-  var TransitionCell201_ComputeFunction = function TransitionCell201_ComputeFunction() {
-    return [{}, {}];
-  };
-
-  var AbstractCheckboxInput207_ComputeFunction = function AbstractCheckboxInput207_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell209_ComputeFunction = function TransitionCell209_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableAbstractSortableHeader212_ComputeFunction = function FixedDataTableAbstractSortableHeader212_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell214_ComputeFunction = function TransitionCell214_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell215_ComputeFunction = function FixedDataTableCell215_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader218_ComputeFunction = function FixedDataTableAbstractSortableHeader218_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell220_ComputeFunction = function TransitionCell220_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableAbstractSortableHeader224_ComputeFunction = function FixedDataTableAbstractSortableHeader224_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell226_ComputeFunction = function TransitionCell226_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableAbstractSortableHeader229_ComputeFunction = function FixedDataTableAbstractSortableHeader229_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell231_ComputeFunction = function TransitionCell231_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableAbstractSortableHeader234_ComputeFunction = function FixedDataTableAbstractSortableHeader234_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell236_ComputeFunction = function TransitionCell236_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell237_ComputeFunction = function FixedDataTableCell237_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader241_ComputeFunction = function FixedDataTableAbstractSortableHeader241_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell243_ComputeFunction = function TransitionCell243_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell244_ComputeFunction = function FixedDataTableCell244_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader246_ComputeFunction = function FixedDataTableAbstractSortableHeader246_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell248_ComputeFunction = function TransitionCell248_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell249_ComputeFunction = function FixedDataTableCell249_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader251_ComputeFunction = function FixedDataTableAbstractSortableHeader251_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell253_ComputeFunction = function TransitionCell253_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell254_ComputeFunction = function FixedDataTableCell254_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader256_ComputeFunction = function FixedDataTableAbstractSortableHeader256_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell258_ComputeFunction = function TransitionCell258_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell259_ComputeFunction = function FixedDataTableCell259_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell261_ComputeFunction = function TransitionCell261_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell262_ComputeFunction = function FixedDataTableCell262_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell264_ComputeFunction = function TransitionCell264_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell265_ComputeFunction = function FixedDataTableCell265_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader267_ComputeFunction = function FixedDataTableAbstractSortableHeader267_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell269_ComputeFunction = function TransitionCell269_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell270_ComputeFunction = function FixedDataTableCell270_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader272_ComputeFunction = function FixedDataTableAbstractSortableHeader272_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell274_ComputeFunction = function TransitionCell274_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell275_ComputeFunction = function FixedDataTableCell275_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader277_ComputeFunction = function FixedDataTableAbstractSortableHeader277_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell279_ComputeFunction = function TransitionCell279_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell280_ComputeFunction = function FixedDataTableCell280_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader282_ComputeFunction = function FixedDataTableAbstractSortableHeader282_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell284_ComputeFunction = function TransitionCell284_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell285_ComputeFunction = function FixedDataTableCell285_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader287_ComputeFunction = function FixedDataTableAbstractSortableHeader287_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell289_ComputeFunction = function TransitionCell289_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell290_ComputeFunction = function FixedDataTableCell290_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader292_ComputeFunction = function FixedDataTableAbstractSortableHeader292_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell294_ComputeFunction = function TransitionCell294_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell295_ComputeFunction = function FixedDataTableCell295_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader297_ComputeFunction = function FixedDataTableAbstractSortableHeader297_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell299_ComputeFunction = function TransitionCell299_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell300_ComputeFunction = function FixedDataTableCell300_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader302_ComputeFunction = function FixedDataTableAbstractSortableHeader302_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell304_ComputeFunction = function TransitionCell304_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell305_ComputeFunction = function FixedDataTableCell305_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader307_ComputeFunction = function FixedDataTableAbstractSortableHeader307_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell309_ComputeFunction = function TransitionCell309_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell310_ComputeFunction = function FixedDataTableCell310_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader312_ComputeFunction = function FixedDataTableAbstractSortableHeader312_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell314_ComputeFunction = function TransitionCell314_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell315_ComputeFunction = function FixedDataTableCell315_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader317_ComputeFunction = function FixedDataTableAbstractSortableHeader317_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell319_ComputeFunction = function TransitionCell319_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell320_ComputeFunction = function FixedDataTableCell320_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader322_ComputeFunction = function FixedDataTableAbstractSortableHeader322_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell324_ComputeFunction = function TransitionCell324_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell325_ComputeFunction = function FixedDataTableCell325_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader327_ComputeFunction = function FixedDataTableAbstractSortableHeader327_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell329_ComputeFunction = function TransitionCell329_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell330_ComputeFunction = function FixedDataTableCell330_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader332_ComputeFunction = function FixedDataTableAbstractSortableHeader332_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell334_ComputeFunction = function TransitionCell334_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell335_ComputeFunction = function FixedDataTableCell335_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader337_ComputeFunction = function FixedDataTableAbstractSortableHeader337_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell339_ComputeFunction = function TransitionCell339_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell340_ComputeFunction = function FixedDataTableCell340_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader342_ComputeFunction = function FixedDataTableAbstractSortableHeader342_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell344_ComputeFunction = function TransitionCell344_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell345_ComputeFunction = function FixedDataTableCell345_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FixedDataTableAbstractSortableHeader347_ComputeFunction = function FixedDataTableAbstractSortableHeader347_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell349_ComputeFunction = function TransitionCell349_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell350_ComputeFunction = function FixedDataTableCell350_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell352_ComputeFunction = function TransitionCell352_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCell353_ComputeFunction = function FixedDataTableCell353_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell355_ComputeFunction = function TransitionCell355_ComputeFunction() {
-    return [{}];
-  };
-
-  var AbstractCheckboxInput361_ComputeFunction = function AbstractCheckboxInput361_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var TransitionCell363_ComputeFunction = function TransitionCell363_ComputeFunction() {
-    return [{}, function () {}];
-  };
-
-  var AdsEditableTextCellDisplay365_ComputeFunction = function AdsEditableTextCellDisplay365_ComputeFunction() {
-    return [function () {}, function () {}, function () {}];
-  };
-
-  var TransitionCell367_ComputeFunction = function TransitionCell367_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCellDefault369_ComputeFunction = function FixedDataTableCellDefault369_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCellDefault372_ComputeFunction = function FixedDataTableCellDefault372_ComputeFunction() {
-    return [{}];
-  };
-
-  var BUISwitch375_ComputeFunction = function BUISwitch375_ComputeFunction() {
-    return [function () {}, function () {}, function () {}, function () {}];
-  };
-
-  var TransitionCell378_ComputeFunction = function TransitionCell378_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell382_ComputeFunction = function TransitionCell382_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell386_ComputeFunction = function TransitionCell386_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell388_ComputeFunction = function TransitionCell388_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell390_ComputeFunction = function TransitionCell390_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell392_ComputeFunction = function TransitionCell392_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell394_ComputeFunction = function TransitionCell394_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell396_ComputeFunction = function TransitionCell396_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell398_ComputeFunction = function TransitionCell398_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell400_ComputeFunction = function TransitionCell400_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell402_ComputeFunction = function TransitionCell402_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCellDefault404_ComputeFunction = function FixedDataTableCellDefault404_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCellDefault407_ComputeFunction = function FixedDataTableCellDefault407_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell410_ComputeFunction = function TransitionCell410_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell412_ComputeFunction = function TransitionCell412_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell414_ComputeFunction = function TransitionCell414_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell417_ComputeFunction = function TransitionCell417_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell419_ComputeFunction = function TransitionCell419_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell422_ComputeFunction = function TransitionCell422_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell425_ComputeFunction = function TransitionCell425_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell427_ComputeFunction = function TransitionCell427_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell429_ComputeFunction = function TransitionCell429_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell431_ComputeFunction = function TransitionCell431_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell433_ComputeFunction = function TransitionCell433_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableCellDefault435_ComputeFunction = function FixedDataTableCellDefault435_ComputeFunction() {
-    return [{}];
-  };
-
-  var Link438_ComputeFunction = function Link438_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AdsPopoverLink440_ComputeFunction = function AdsPopoverLink440_ComputeFunction() {
-    return [function () {}, function () {}];
-  };
-
-  var TransitionCell442_ComputeFunction = function TransitionCell442_ComputeFunction() {
-    return [{}];
-  };
-
-  var TransitionCell444_ComputeFunction = function TransitionCell444_ComputeFunction() {
-    return [{}];
-  };
-
-  var FixedDataTableRowImpl448_ComputeFunction = function FixedDataTableRowImpl448_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var Scrollbar451_ComputeFunction = function Scrollbar451_ComputeFunction() {
-    return [function () {}, function () {}, function () {}, function () {}, function () {}];
-  };
-
-  var FixedDataTable453_ComputeFunction = function FixedDataTable453_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AdsDataTableKeyboardSupportDecorator456_ComputeFunction = function AdsDataTableKeyboardSupportDecorator456_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AdsEditableDataTableDecorator457_ComputeFunction = function AdsEditableDataTableDecorator457_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var ResponsiveBlock459_ComputeFunction = function ResponsiveBlock459_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AdsPESideTrayTabButton468_ComputeFunction = function AdsPESideTrayTabButton468_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AdsPESideTrayTabButton471_ComputeFunction = function AdsPESideTrayTabButton471_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var FBDragHandle475_ComputeFunction = function FBDragHandle475_ComputeFunction() {
-    return [function () {}, function () {}, function () {}, function () {}, function () {}, function () {}];
-  };
-
-  var Link488_ComputeFunction = function Link488_ComputeFunction() {
-    return [function () {}, function () {}];
-  };
-
-  var BUISwitch492_ComputeFunction = function BUISwitch492_ComputeFunction() {
-    return [function () {}, function () {}, function () {}, function () {}];
-  };
-
-  var Link506_ComputeFunction = function Link506_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var Link507_ComputeFunction = function Link507_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var Link508_ComputeFunction = function Link508_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var Link509_ComputeFunction = function Link509_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var PillButton523_ComputeFunction = function PillButton523_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var Link548_ComputeFunction = function Link548_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AdsPopoverLink563_ComputeFunction = function AdsPopoverLink563_ComputeFunction() {
-    return [function () {}, function () {}];
-  };
-
-  var AdsPopoverLink571_ComputeFunction = function AdsPopoverLink571_ComputeFunction() {
-    return [function () {}, function () {}];
-  };
-
-  var AbstractButton583_ComputeFunction = function AbstractButton583_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var Link590_ComputeFunction = function Link590_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AdsPopoverLink614_ComputeFunction = function AdsPopoverLink614_ComputeFunction() {
-    return [function () {}, function () {}];
-  };
-
-  var Link622_ComputeFunction = function Link622_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AbstractButton625_ComputeFunction = function AbstractButton625_ComputeFunction() {
-    return [function () {}];
-  };
-
-  var AdsPEMultiTabDrawer654_ComputeFunction = function AdsPEMultiTabDrawer654_ComputeFunction() {
-    return [{}, {}];
-  };
-
-  var Link0 = [1, Link0_ComputeFunction, [194, "a", ["href", 0, "/", "className", 0, "_5ljn"], ["click", 1, 0]]];
-  var Link2 = [1, Link2_ComputeFunction, [2498, "a", ["className", 0, "_387r _55pi _2agf _387r _55pi _4jy0 _4jy3 _517h _51sy _42ft", "href", 0, "#", "use", 0, "default", "borderShade", 0, "light"], ["max-width", "200px"], ["imageRight", 0, 0, "click", 1, 1, "onToggle", 1, 2], [[4418, "span", ["className", 0, "_55pe"], ["max-width", "186px"], "Dick Madanson (10149999073643408)"], [98370, "i", ["alt", 0, "", "className", 0, "_3-99 img sp_UuU9HmrQ397 sx_7e56e9"]]]]];
-  var AbstractButton9 = [1, AbstractButton9_ComputeFunction, [4290, "button", ["id", 0, "downloadButton", "className", 0, "_5lk0 _4jy0 _4jy3 _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], "Download to Power Editor"]];
-  var AbstractButton13 = [1, AbstractButton13_ComputeFunction, [2242, "button", ["id", 0, "uploadButton", "className", 0, "_5lk0 _4jy0 _4jy3 _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0, "click", 1, 1], [[98370, "i", ["alt", 0, "", "className", 0, "_3-8_ img sp_UuU9HmrQ397 sx_dbc06a"]], [32771, "Upload Changes"]]]];
-  var AbstractButton16 = [1, AbstractButton16_ComputeFunction, [4290, "button", ["className", 0, "_5ljz _4jy0 _4jy3 _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], "Help"]];
-  var AbstractButton19 = [1, AbstractButton19_ComputeFunction, [1218, "button", ["className", 0, "_5ljw _p _4jy0 _4jy3 _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_d5a685"]]]];
-  var InlineBlock21 = [1, InlineBlock21_ComputeFunction, [1218, "div", ["className", 0, "_5ljz uiPopover _6a _6b", "alignh", 0, "right", "alignv", 0, "middle"], ["menu", 0, 0], [76, AbstractButton19, []]]];
-  var Wrapper27 = [1, Wrapper27_ComputeFunction, [1218, "li", ["selected", 130, true, "className", 0, "_5vwz _5vwy _45hc _1hqh", "role", 0, "presentation"], ["click", 1, 0, "onMouseDown", 1, 1, "onFocus", 1, 2, "onBlur", 1, 3], [2242, "a", ["aria-selected", 0, true], ["onKeyDown", 1, 4], [[4162, "div", ["className", 0, "_4jq5"], "Manage Ads"], [66, "span", ["className", 0, "_13xf"]]]]]];
-  var Wrapper31 = [1, Wrapper31_ComputeFunction, [1218, "li", ["className", 0, "_5vwz _45hc", "role", 0, "presentation"], ["click", 1, 0, "onMouseDown", 1, 1, "onFocus", 1, 2, "onBlur", 1, 3], [2242, "a", ["aria-selected", 0, false], ["onKeyDown", 1, 4], [[4162, "div", ["className", 0, "_4jq5"], "Audiences"], [66, "span", ["className", 0, "_13xf"]]]]]];
-  var Wrapper35 = [1, Wrapper35_ComputeFunction, [1218, "li", ["className", 0, "_5vwz _45hc", "role", 0, "presentation"], ["click", 1, 0, "onMouseDown", 1, 1, "onFocus", 1, 2, "onBlur", 1, 3], [2242, "a", ["aria-selected", 0, false], ["onKeyDown", 1, 4], [[4162, "div", ["className", 0, "_4jq5"], "Image Library"], [66, "span", ["className", 0, "_13xf"]]]]]];
-  var Wrapper39 = [1, Wrapper39_ComputeFunction, [1218, "li", ["className", 0, "_5vwz _45hc", "role", 0, "presentation"], ["click", 1, 0, "onMouseDown", 1, 1, "onFocus", 1, 2, "onBlur", 1, 3], [2242, "a", ["aria-selected", 0, false], ["onKeyDown", 1, 4], [[4162, "div", ["className", 0, "_4jq5"], "Reporting"], [66, "span", ["className", 0, "_13xf"]]]]]];
-  var Wrapper43 = [1, Wrapper43_ComputeFunction, [1218, "li", ["className", 0, "_5vwz _45hc", "role", 0, "presentation"], ["click", 1, 0, "onMouseDown", 1, 1, "onFocus", 1, 2, "onBlur", 1, 3], [2242, "a", ["aria-selected", 0, false], ["onKeyDown", 1, 4], [[4162, "div", ["className", 0, "_4jq5"], "Page Posts"], [66, "span", ["className", 0, "_13xf"]]]]]];
-  var InlineBlock48 = [1, InlineBlock48_ComputeFunction, [1218, "div", ["alignv", 0, "middle", "className", 0, "uiPopover _6a _6b"], ["menu", 0, 0, "layerBehaviors", 0, 1], [99394, "a", ["aria-selected", 0, false], [2114, "span", ["className", 0, "_1b0"], [[32771, "Tools"], [4162, "span", ["className", 0, "accessible_elem"], "additional tabs menu"]]]]]];
-  var TabBar51 = [1, TabBar51_ComputeFunction, [2242, "ul", ["activeTabKey", 0, "MANAGE_ADS", "maxTabsVisible", 0, 5, "moreLabel", 0, "Tools", "className", 0, "_43o4", "role", 0, "tablist"], ["onTabClick", 1, 0, "onWidthCalculated", 1, 1, "onKeyDown", 1, 2, "onKeyUp", 1, 3], [[76, Wrapper27, []], [76, Wrapper31, []], [76, Wrapper35, []], [76, Wrapper39, []], [76, Wrapper43, []], [99394, "li", ["className", 0, " _45hd", "role", 0, "tab"], [76, InlineBlock48, []]]]]];
-  var Link58 = [1, Link58_ComputeFunction, [4290, "a", ["className", 0, "_585q _50zy _50-0 _50z- _5upp _42ft", "href", 0, "#", "shade", 0, "dark", "title", 0, "Remove"], ["click", 1, 0], "Remove"]];
-  var Link63 = [1, Link63_ComputeFunction, [1218, "a", ["href", 0, "/ads/manage/billing.php?act=10149999073643408", "target", 0, "_blank"], ["click", 1, 0], [102466, "span", ["weight", 0, "bold", "display", 0, "inline", "className", 0, " _50f7"], "Ads Manager"]]];
-  var ReactTransitionGroup66 = [1, ReactTransitionGroup66_ComputeFunction, [1218, "span", ["transitionEnterTimeout", 0, 500, "transitionLeaveTimeout", 0, 500, "component", 0, "span"], ["transitionName", 0, 0], [100418, "div", ["className", 0, "_585n _585o _2wdd"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [76, Link58, []], [2114, "div", ["className", 0, "_585r _2i-a _50f4"], [[32771, "Please go to "], [76, Link63, []], [32771, " to set up a payment method for this ad account."]]]]]]];
-  var Link72 = [1, Link72_ComputeFunction, [2498, "a", ["className", 0, " _5bbf _55pi _2agf  _5bbf _55pi _4jy0 _4jy4 _517h _51sy _42ft", "href", 0, "#", "use", 0, "default", "borderShade", 0, "light"], ["max-width", "200px"], ["imageRight", 0, 0, "click", 1, 1], [[2370, "span", ["className", 0, "_55pe"], ["max-width", "186px"], [[98370, "i", ["className", 0, "_3-8_ img sp_UuU9HmrQ397 sx_bae57d"]], [32771, "Search"]]], [98370, "i", ["alt", 0, "", "className", 0, "_3-99 img sp_UuU9HmrQ397 sx_7e56e9"]]]]];
-  var Link79 = [1, Link79_ComputeFunction, [2498, "a", ["className", 0, " _5bbf _55pi _2agf  _5bbf _55pi _4jy0 _4jy4 _517h _51sy _42ft", "href", 0, "#", "use", 0, "default", "borderShade", 0, "light"], ["max-width", "200px"], ["imageRight", 0, 0, "click", 1, 1], [[2370, "span", ["className", 0, "_55pe"], ["max-width", "186px"], [[98370, "i", ["className", 0, "_3-8_ img sp_UuU9HmrQ397 sx_81d5f0"]], [32771, "Filters"]]], [98370, "i", ["alt", 0, "", "className", 0, "_3-99 img sp_UuU9HmrQ397 sx_7e56e9"]]]]];
-  var AbstractButton86 = [1, AbstractButton86_ComputeFunction, [4290, "button", ["className", 0, "_3yz9 _1t-2 _50z_ _50zy _50zz _50z- _5upp _42ft", "shade", 0, "dark", "type", 0, "button", "title", 0, "Remove"], ["click", 1, 0], "Remove"]];
-  var AdsPopoverLink91 = [1, AdsPopoverLink91_ComputeFunction, [2178, "span", ["onMouseEnter", 1, 0, "onMouseLeave", 1, 1], [[66, "span", ["className", 0, "_3o_j"]], [98370, "i", ["className", 0, "_541d img sp_R48dKBxiJkP sx_dc2cdb"]]]]];
-  var AbstractButton93 = [1, AbstractButton93_ComputeFunction, [4290, "button", ["className", 0, "_5b5u _5b5v _4jy0 _4jy3 _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], "Apply"]];
-  var BUIFilterToken96 = [1, BUIFilterToken96_ComputeFunction, [2114, "div", ["className", 0, "_3yz1 _3yz2 _3dad"], [[2114, "div", ["aria-hidden", 0, false], [[2242, "div", ["className", 0, "_3yz5"], ["click", 1, 0], [[98370, "i", ["className", 0, "_3yz6 _5whs img sp_UuU9HmrQ397 sx_5fe5c2"]], [4162, "div", ["className", 0, "_3yz7"], "Ads:"], [4162, "div", ["className", 0, "ellipsis _3yz8", "data-hover", 0, "tooltip", "data-tooltip-display", 0, "overflow"], "(1)"]]], [76, AbstractButton86, []]]], [100418, "div", ["className", 0, "_5b5o _3yz3 _4cld"], [[2114, "div", ["className", 0, "_5b5t _2d2k"], [[98370, "i", ["className", 0, "_5b5p _4gem img sp_UuU9HmrQ397 sx_5fe5c2"]], [2114, "div", ["className", 0, "_5b5r"], [[32771, "Ads: (1)"], [76, AdsPopoverLink91, []]]]]], [76, AbstractButton93, []]]]]]];
-  var AbstractButton98 = [1, AbstractButton98_ComputeFunction, [1218, "button", ["className", 0, "_1wdf _4jy0 _517i _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0, "image", 0, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_158e8d"]]]];
-  var Link111 = [1, Link111_ComputeFunction, [2498, "a", ["className", 0, "_55pi _2agf _55pi _4jy0 _4jy4 _517h _51sy _42ft", "href", 0, "#", "use", 0, "default", "borderShade", 0, "light"], ["max-width", "200px"], ["imageRight", 0, 0, "chevron", 0, 1, "click", 1, 2], [[4418, "span", ["className", 0, "_55pe"], ["max-width", "186px"], "Lifetime"], [98370, "i", ["alt", 0, "", "className", 0, "_3-99 img sp_UuU9HmrQ397 sx_132804"]]]]];
-  var InlineBlock117 = [1, InlineBlock117_ComputeFunction, [2242, "div", ["className", 0, "_3c5o _3c5p _6a _6b", "defaultValue", 64, "LIFETIME", "alignv", 0, "middle"], ["onChange", 1, 0], [[262210, "input", ["type", 0, "hidden", "autoComplete", 0, "off", "value", 32, "LIFETIME"]], [76, Link111, []]]]];
-  var AbstractButton120 = [1, AbstractButton120_ComputeFunction, [1218, "button", ["aria-label", 0, "List Settings", "className", 0, "_u_k _3c5o _1-r0 _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0, "click", 1, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_6c732d"]]]];
-  var AbstractButton126 = [1, AbstractButton126_ComputeFunction, [2242, "button", ["className", 0, "_u_k _4jy0 _4jy4 _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0, "image", 0, 1], [[98370, "i", ["alt", 0, "", "className", 0, "_3-8_ img sp_UuU9HmrQ397 sx_158e8d"]], [32771, "Create Ad"]]]];
-  var AbstractButton129 = [1, AbstractButton129_ComputeFunction, [1218, "button", ["className", 0, "_u_k _p _4jy0 _4jy4 _517h _51sy _42ft", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_d5a685"]]]];
-  var InlineBlock131 = [1, InlineBlock131_ComputeFunction, [1218, "div", ["alignh", 0, "right", "alignv", 0, "middle", "className", 0, "uiPopover _6a _6b"], ["menu", 0, 0, "layerBehaviors", 0, 1], [76, AbstractButton129, []]]];
-  var AbstractButton135 = [1, AbstractButton135_ComputeFunction, [2242, "button", ["className", 0, "_d2_ _u_k _5n7z _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "aria-label", 0, "Edit Ads (Ctrl+U)", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0, "click", 1, 1], [[98370, "i", ["alt", 0, "", "className", 0, "_3-8_ img sp_UuU9HmrQ397 sx_990b54"]], [32771, "Edit"]]]];
-  var AbstractButton138 = [1, AbstractButton138_ComputeFunction, [1218, "button", ["aria-label", 0, "Duplicate", "className", 0, "_u_k _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0, "click", 1, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_203adb"]]]];
-  var AbstractButton141 = [1, AbstractButton141_ComputeFunction, [1218, "button", ["aria-label", 0, "Revert", "className", 0, "_u_k _4jy0 _4jy4 _517h _51sy _42ft _42fr", "data-hover", 0, "tooltip", "disabled", 2, true, "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0, "click", 1, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_0c342e"]]]];
-  var AbstractButton144 = [1, AbstractButton144_ComputeFunction, [1218, "button", ["aria-label", 0, "Delete", "className", 0, "_u_k _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0, "click", 1, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_0e75f5"]]]];
-  var AbstractButton148 = [1, AbstractButton148_ComputeFunction, [1218, "button", ["className", 0, "_u_k _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "aria-label", 0, "Save Audience", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["image", 0, 0, "click", 1, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_8c19ae"]]]];
-  var AbstractButton151 = [1, AbstractButton151_ComputeFunction, [1218, "button", ["className", 0, "_u_k noMargin _p _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "aria-label", 0, "Export &amp; Import", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0, "image", 0, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_d2b33c"]]]];
-  var InlineBlock153 = [1, InlineBlock153_ComputeFunction, [1218, "div", ["alignv", 0, "middle", "className", 0, "uiPopover _6a _6b"], ["menu", 0, 0], [76, AbstractButton151, []]]];
-  var AbstractButton161 = [1, AbstractButton161_ComputeFunction, [1474, "button", ["className", 0, "_u_k _5n7z _4jy0 _4jy4 _517h _51sy _42ft", "data-hover", 0, "tooltip", "aria-label", 0, "Create Report", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["box-sizing", "border-box", "height", "28px", "width", "48px"], ["click", 1, 0, "image", 0, 1], [98370, "i", ["className", 0, "img sp_UuU9HmrQ397 sx_872db1"]]]];
-  var AbstractButton163 = [1, AbstractButton163_ComputeFunction, [4290, "button", ["disabled", 2, true, "className", 0, "hidden_elem _5n7z _4jy0 _4jy4 _517h _51sy _42ft _42fr", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], "Generate Variations"]];
-  var AbstractButton170 = [1, AbstractButton170_ComputeFunction, [1218, "button", ["className", 0, "_tm3 _tm6 _4jy0 _4jy6 _517h _51sy _42ft", "data-tooltip-position", 0, "right", "aria-label", 0, "Campaigns", "data-hover", 0, "tooltip", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], [2050, "div", [[66, "div", ["className", 0, "_tma"]], [66, "div", ["className", 0, "_tm8"]], [4162, "div", ["className", 0, "_tm9"], "1"]]]]];
-  var AbstractButton172 = [1, AbstractButton172_ComputeFunction, [1218, "button", ["className", 0, "_tm4 _tm6 _4jy0 _4jy6 _517h _51sy _42ft", "data-tooltip-position", 0, "right", "aria-label", 0, "Ad Sets", "data-hover", 0, "tooltip", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], [2050, "div", [[66, "div", ["className", 0, "_tma"]], [66, "div", ["className", 0, "_tm8"]], [4162, "div", ["className", 0, "_tm9"], "1"]]]]];
-  var AbstractButton174 = [1, AbstractButton174_ComputeFunction, [1218, "button", ["className", 0, "_tm5 _tm6 _tm7 _4jy0 _4jy6 _517h _51sy _42ft", "data-tooltip-position", 0, "right", "aria-label", 0, "Ads", "data-hover", 0, "tooltip", "use", 0, "default", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], [2050, "div", [[66, "div", ["className", 0, "_tma"]], [66, "div", ["className", 0, "_tm8"]], [4162, "div", ["className", 0, "_tm9"], "1"]]]]];
-  var TransitionCell181 = [1, TransitionCell181_ComputeFunction, [1474, "div", ["label", 0, "Ads", "dataKey", 0, 0, "height", 0, 40, "width", 0, 521, "rowIndex", 0, 0, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "521px"], ["groupHeaderLabels", 0, 0, "groupHeaderData", 0, 1], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [100418, "div", ["className", 0, "_1cig _1ksv _1vd7 _4h2r"], [[98370, "i", ["className", 0, "_1cie _1cif img sp_R48dKBxiJkP sx_dc0ad2"]], [4162, "span", ["className", 0, "_1cid"], "Ads"]]]]]]];
-  var TransitionCell186 = [1, TransitionCell186_ComputeFunction, [1474, "div", ["label", 0, "Delivery", "dataKey", 0, 1, "height", 0, 40, "width", 0, 298, "rowIndex", 0, 0, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "298px"], ["groupHeaderLabels", 0, 0, "groupHeaderData", 0, 1], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _1vd7 _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Delivery"]]]]]];
-  var TransitionCell189 = [1, TransitionCell189_ComputeFunction, [1474, "div", ["label", 0, "Performance", "dataKey", 0, 2, "height", 0, 40, "width", 0, 490, "rowIndex", 0, 0, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "490px"], ["groupHeaderLabels", 0, 0, "groupHeaderData", 0, 1], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _1vd7 _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Performance"]]]]]];
-  var TransitionCell192 = [1, TransitionCell192_ComputeFunction, [1474, "div", ["label", 0, "Overview", "dataKey", 0, 3, "height", 0, 40, "width", 0, 972, "rowIndex", 0, 0, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "972px"], ["groupHeaderLabels", 0, 0, "groupHeaderData", 0, 1], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _1vd7 _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Overview"]]]]]];
-  var TransitionCell195 = [1, TransitionCell195_ComputeFunction, [1474, "div", ["label", 0, "Creative Assets", "dataKey", 0, 4, "height", 0, 40, "width", 0, 514, "rowIndex", 0, 0, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "514px"], ["groupHeaderLabels", 0, 0, "groupHeaderData", 0, 1], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _1vd7 _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Creative Assets"]]]]]];
-  var TransitionCell198 = [1, TransitionCell198_ComputeFunction, [1474, "div", ["label", 0, "Toplines", "dataKey", 0, 5, "height", 0, 40, "width", 0, 0, "rowIndex", 0, 0, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", 0], ["groupHeaderLabels", 0, 0, "groupHeaderData", 0, 1], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _1vd7 _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Toplines"]]]]]];
-  var TransitionCell201 = [1, TransitionCell201_ComputeFunction, [1474, "div", ["label", 0, "", "dataKey", 0, 6, "height", 0, 40, "width", 0, 25, "rowIndex", 0, 0, "className", 0, "_4lgc _4h2u"], ["height", "40px", "width", "25px"], ["groupHeaderLabels", 0, 0, "groupHeaderData", 0, 1], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [98370, "div", ["className", 0, "_1cig _1vd7 _4h2r"]]]]]];
-  var AbstractCheckboxInput207 = [1, AbstractCheckboxInput207_ComputeFunction, [2114, "label", ["className", 0, "_4h2r _55sg _kv1"], [[262338, "input", ["type", 0, "checkbox"], ["onChange", 1, 0]], [2, "span"]]]];
-  var TransitionCell209 = [1, TransitionCell209_ComputeFunction, [1474, "div", ["width", 0, 42, "dataKey", 0, "common.id", "className", 0, "_4lgc _4h2u", "columnKey", 0, "common.id", "height", 0, 25], ["height", "25px", "width", "42px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, AbstractCheckboxInput207, []]]]]];
-  var FixedDataTableAbstractSortableHeader212 = [1, FixedDataTableAbstractSortableHeader212_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Ad Name"]]]]];
-  var TransitionCell214 = [1, TransitionCell214_ComputeFunction, [1474, "div", ["label", 0, "Ad Name", "width", 0, 200, "dataKey", 0, "ad.name", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.name", "height", 0, 25], ["height", "25px", "width", "200px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader212, []]]]]];
-  var FixedDataTableCell215 = [1, FixedDataTableCell215_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "200px", "left", "42px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell214, []]]]];
-  var FixedDataTableAbstractSortableHeader218 = [1, FixedDataTableAbstractSortableHeader218_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _1kst _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [98370, "i", ["className", 0, "_1cie img sp_UuU9HmrQ397 sx_844e7d"]]]]]];
-  var TransitionCell220 = [1, TransitionCell220_ComputeFunction, [1474, "div", ["width", 0, 33, "dataKey", 0, "edit_status", "className", 0, "_4lgc _4h2u", "columnKey", 0, "edit_status", "height", 0, 25], ["height", "25px", "width", "33px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader218, []]]]]];
-  var FixedDataTableAbstractSortableHeader224 = [1, FixedDataTableAbstractSortableHeader224_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _1kst _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [98370, "i", ["className", 0, "_1cie img sp_UuU9HmrQ397 sx_36dc45"]]]]]];
-  var TransitionCell226 = [1, TransitionCell226_ComputeFunction, [1474, "div", ["width", 0, 36, "dataKey", 0, "errors", "className", 0, "_4lgc _4h2u", "columnKey", 0, "errors", "height", 0, 25], ["height", "25px", "width", "36px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader224, []]]]]];
-  var FixedDataTableAbstractSortableHeader229 = [1, FixedDataTableAbstractSortableHeader229_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Status"]]]]];
-  var TransitionCell231 = [1, TransitionCell231_ComputeFunction, [1474, "div", ["label", 0, "Status", "width", 0, 60, "dataKey", 0, "ad.adgroup_status", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.adgroup_status", "height", 0, 25], ["height", "25px", "width", "60px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader229, []]]]]];
-  var FixedDataTableAbstractSortableHeader234 = [1, FixedDataTableAbstractSortableHeader234_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Delivery"]]]]];
-  var TransitionCell236 = [1, TransitionCell236_ComputeFunction, [1474, "div", ["label", 0, "Delivery", "width", 0, 150, "dataKey", 0, "ukiAdData.computed_activity_status", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ukiAdData.computed_activity_status", "height", 0, 25], ["height", "25px", "width", "150px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader234, []]]]]];
-  var FixedDataTableCell237 = [1, FixedDataTableCell237_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "150px", "left", "371px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell236, []]]]];
-  var FixedDataTableAbstractSortableHeader241 = [1, FixedDataTableAbstractSortableHeader241_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Reach"]]]]];
-  var TransitionCell243 = [1, TransitionCell243_ComputeFunction, [1474, "div", ["label", 0, "Reach", "width", 0, 60, "dataKey", 0, "stats.unique_impressions", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.unique_impressions", "height", 0, 25], ["height", "25px", "width", "60px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader241, []]]]]];
-  var FixedDataTableCell244 = [1, FixedDataTableCell244_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "60px", "left", 0], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell243, []]]]];
-  var FixedDataTableAbstractSortableHeader246 = [1, FixedDataTableAbstractSortableHeader246_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Ad Impressions"]]]]];
-  var TransitionCell248 = [1, TransitionCell248_ComputeFunction, [1474, "div", ["label", 0, "Ad Impressions", "width", 0, 80, "dataKey", 0, "stats.impressions", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.impressions", "height", 0, 25], ["height", "25px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader246, []]]]]];
-  var FixedDataTableCell249 = [1, FixedDataTableCell249_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "80px", "left", "60px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell248, []]]]];
-  var FixedDataTableAbstractSortableHeader251 = [1, FixedDataTableAbstractSortableHeader251_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Avg. CPM"]]]]];
-  var TransitionCell253 = [1, TransitionCell253_ComputeFunction, [1474, "div", ["label", 0, "Avg. CPM", "width", 0, 80, "dataKey", 0, "stats.avg_cpm", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.avg_cpm", "height", 0, 25], ["height", "25px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader251, []]]]]];
-  var FixedDataTableCell254 = [1, FixedDataTableCell254_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "80px", "left", "140px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell253, []]]]];
-  var FixedDataTableAbstractSortableHeader256 = [1, FixedDataTableAbstractSortableHeader256_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Avg. CPC"]]]]];
-  var TransitionCell258 = [1, TransitionCell258_ComputeFunction, [1474, "div", ["label", 0, "Avg. CPC", "width", 0, 78, "dataKey", 0, "stats.avg_cpc", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.avg_cpc", "height", 0, 25], ["height", "25px", "width", "78px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader256, []]]]]];
-  var FixedDataTableCell259 = [1, FixedDataTableCell259_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "78px", "left", "220px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell258, []]]]];
-  var TransitionCell261 = [1, TransitionCell261_ComputeFunction, [1474, "div", ["label", 0, "Results", "width", 0, 140, "dataKey", 0, "stats.actions", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.actions", "height", 0, 25], ["height", "25px", "width", "140px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _25fg _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Results"]]]]]];
-  var FixedDataTableCell262 = [1, FixedDataTableCell262_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "140px", "left", "298px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell261, []]]]];
-  var TransitionCell264 = [1, TransitionCell264_ComputeFunction, [1474, "div", ["label", 0, "Cost", "width", 0, 140, "dataKey", 0, "stats.cpa", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.cpa", "height", 0, 25], ["height", "25px", "width", "140px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _25fg _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Cost"]]]]]];
-  var FixedDataTableCell265 = [1, FixedDataTableCell265_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "140px", "left", "438px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell264, []]]]];
-  var FixedDataTableAbstractSortableHeader267 = [1, FixedDataTableAbstractSortableHeader267_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Clicks"]]]]];
-  var TransitionCell269 = [1, TransitionCell269_ComputeFunction, [1474, "div", ["label", 0, "Clicks", "width", 0, 60, "dataKey", 0, "stats.clicks", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.clicks", "height", 0, 25], ["height", "25px", "width", "60px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader267, []]]]]];
-  var FixedDataTableCell270 = [1, FixedDataTableCell270_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "60px", "left", "578px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell269, []]]]];
-  var FixedDataTableAbstractSortableHeader272 = [1, FixedDataTableAbstractSortableHeader272_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "CTR %"]]]]];
-  var TransitionCell274 = [1, TransitionCell274_ComputeFunction, [1474, "div", ["label", 0, "CTR %", "width", 0, 70, "dataKey", 0, "stats.ctr", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.ctr", "height", 0, 25], ["height", "25px", "width", "70px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader272, []]]]]];
-  var FixedDataTableCell275 = [1, FixedDataTableCell275_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "70px", "left", "638px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell274, []]]]];
-  var FixedDataTableAbstractSortableHeader277 = [1, FixedDataTableAbstractSortableHeader277_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Social %"]]]]];
-  var TransitionCell279 = [1, TransitionCell279_ComputeFunction, [1474, "div", ["label", 0, "Social %", "width", 0, 80, "dataKey", 0, "stats.social_percent", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.social_percent", "height", 0, 25], ["height", "25px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader277, []]]]]];
-  var FixedDataTableCell280 = [1, FixedDataTableCell280_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "80px", "left", "708px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell279, []]]]];
-  var FixedDataTableAbstractSortableHeader282 = [1, FixedDataTableAbstractSortableHeader282_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Ad Set Name"]]]]];
-  var TransitionCell284 = [1, TransitionCell284_ComputeFunction, [1474, "div", ["label", 0, "Ad Set Name", "width", 0, 100, "dataKey", 0, "campaign.name", "className", 0, "_4lgc _4h2u", "columnKey", 0, "campaign.name", "height", 0, 25], ["height", "25px", "width", "100px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader282, []]]]]];
-  var FixedDataTableCell285 = [1, FixedDataTableCell285_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "100px", "left", "788px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell284, []]]]];
-  var FixedDataTableAbstractSortableHeader287 = [1, FixedDataTableAbstractSortableHeader287_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Campaign Name"]]]]];
-  var TransitionCell289 = [1, TransitionCell289_ComputeFunction, [1474, "div", ["label", 0, "Campaign Name", "width", 0, 150, "dataKey", 0, "campaignGroup.name", "className", 0, "_4lgc _4h2u", "columnKey", 0, "campaignGroup.name", "height", 0, 25], ["height", "25px", "width", "150px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader287, []]]]]];
-  var FixedDataTableCell290 = [1, FixedDataTableCell290_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "150px", "left", "888px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell289, []]]]];
-  var FixedDataTableAbstractSortableHeader292 = [1, FixedDataTableAbstractSortableHeader292_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Ad ID"]]]]];
-  var TransitionCell294 = [1, TransitionCell294_ComputeFunction, [1474, "div", ["label", 0, "Ad ID", "width", 0, 120, "dataKey", 0, "ad.id", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.id", "height", 0, 25], ["height", "25px", "width", "120px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader292, []]]]]];
-  var FixedDataTableCell295 = [1, FixedDataTableCell295_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "120px", "left", "1038px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell294, []]]]];
-  var FixedDataTableAbstractSortableHeader297 = [1, FixedDataTableAbstractSortableHeader297_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Objective"]]]]];
-  var TransitionCell299 = [1, TransitionCell299_ComputeFunction, [1474, "div", ["label", 0, "Objective", "width", 0, 80, "dataKey", 0, "campaignGroup.objective", "className", 0, "_4lgc _4h2u", "columnKey", 0, "campaignGroup.objective", "height", 0, 25], ["height", "25px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader297, []]]]]];
-  var FixedDataTableCell300 = [1, FixedDataTableCell300_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "80px", "left", "1158px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell299, []]]]];
-  var FixedDataTableAbstractSortableHeader302 = [1, FixedDataTableAbstractSortableHeader302_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Spent"]]]]];
-  var TransitionCell304 = [1, TransitionCell304_ComputeFunction, [1474, "div", ["label", 0, "Spent", "width", 0, 70, "dataKey", 0, "stats.spent_100", "className", 0, "_4lgc _4h2u", "columnKey", 0, "stats.spent_100", "height", 0, 25], ["height", "25px", "width", "70px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader302, []]]]]];
-  var FixedDataTableCell305 = [1, FixedDataTableCell305_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "25px", "width", "70px", "left", "1238px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell304, []]]]];
-  var FixedDataTableAbstractSortableHeader307 = [1, FixedDataTableAbstractSortableHeader307_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Start"]]]]];
-  var TransitionCell309 = [1, TransitionCell309_ComputeFunction, [1474, "div", ["label", 0, "Start", "width", 0, 113, "dataKey", 0, "derivedCampaign.startDate", "className", 0, "_4lgc _4h2u", "columnKey", 0, "derivedCampaign.startDate", "height", 0, 25], ["height", "25px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader307, []]]]]];
-  var FixedDataTableCell310 = [1, FixedDataTableCell310_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "113px", "left", "1308px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell309, []]]]];
-  var FixedDataTableAbstractSortableHeader312 = [1, FixedDataTableAbstractSortableHeader312_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "End"]]]]];
-  var TransitionCell314 = [1, TransitionCell314_ComputeFunction, [1474, "div", ["label", 0, "End", "width", 0, 113, "dataKey", 0, "derivedCampaign.endDate", "className", 0, "_4lgc _4h2u", "columnKey", 0, "derivedCampaign.endDate", "height", 0, 25], ["height", "25px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader312, []]]]]];
-  var FixedDataTableCell315 = [1, FixedDataTableCell315_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "113px", "left", "1421px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell314, []]]]];
-  var FixedDataTableAbstractSortableHeader317 = [1, FixedDataTableAbstractSortableHeader317_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Date created"]]]]];
-  var TransitionCell319 = [1, TransitionCell319_ComputeFunction, [1474, "div", ["label", 0, "Date created", "width", 0, 113, "dataKey", 0, "ad.created_time", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.created_time", "height", 0, 25], ["height", "25px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader317, []]]]]];
-  var FixedDataTableCell320 = [1, FixedDataTableCell320_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "113px", "left", "1534px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell319, []]]]];
-  var FixedDataTableAbstractSortableHeader322 = [1, FixedDataTableAbstractSortableHeader322_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Date last edited"]]]]];
-  var TransitionCell324 = [1, TransitionCell324_ComputeFunction, [1474, "div", ["label", 0, "Date last edited", "width", 0, 113, "dataKey", 0, "ad.updated_time", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.updated_time", "height", 0, 25], ["height", "25px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader322, []]]]]];
-  var FixedDataTableCell325 = [1, FixedDataTableCell325_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "113px", "left", "1647px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell324, []]]]];
-  var FixedDataTableAbstractSortableHeader327 = [1, FixedDataTableAbstractSortableHeader327_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Title"]]]]];
-  var TransitionCell329 = [1, TransitionCell329_ComputeFunction, [1474, "div", ["label", 0, "Title", "width", 0, 80, "dataKey", 0, "ad.title", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.title", "height", 0, 25], ["height", "25px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader327, []]]]]];
-  var FixedDataTableCell330 = [1, FixedDataTableCell330_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "80px", "left", "1760px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell329, []]]]];
-  var FixedDataTableAbstractSortableHeader332 = [1, FixedDataTableAbstractSortableHeader332_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Body"]]]]];
-  var TransitionCell334 = [1, TransitionCell334_ComputeFunction, [1474, "div", ["label", 0, "Body", "width", 0, 80, "dataKey", 0, "ad.creative.body", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.creative.body", "height", 0, 25], ["height", "25px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader332, []]]]]];
-  var FixedDataTableCell335 = [1, FixedDataTableCell335_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "80px", "left", "1840px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell334, []]]]];
-  var FixedDataTableAbstractSortableHeader337 = [1, FixedDataTableAbstractSortableHeader337_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Destination"]]]]];
-  var TransitionCell339 = [1, TransitionCell339_ComputeFunction, [1474, "div", ["label", 0, "Destination", "width", 0, 92, "dataKey", 0, "destination", "className", 0, "_4lgc _4h2u", "columnKey", 0, "destination", "height", 0, 25], ["height", "25px", "width", "92px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader337, []]]]]];
-  var FixedDataTableCell340 = [1, FixedDataTableCell340_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "92px", "left", "1920px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell339, []]]]];
-  var FixedDataTableAbstractSortableHeader342 = [1, FixedDataTableAbstractSortableHeader342_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Link"]]]]];
-  var TransitionCell344 = [1, TransitionCell344_ComputeFunction, [1474, "div", ["label", 0, "Link", "width", 0, 70, "dataKey", 0, "ad.creative.link_url", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.creative.link_url", "height", 0, 25], ["height", "25px", "width", "70px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader342, []]]]]];
-  var FixedDataTableCell345 = [1, FixedDataTableCell345_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "70px", "left", "2012px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell344, []]]]];
-  var FixedDataTableAbstractSortableHeader347 = [1, FixedDataTableAbstractSortableHeader347_ComputeFunction, [1218, "div", ["className", 0, "_54_8 _4h2r _2wzx"], ["click", 1, 0], [1090, "div", ["className", 0, "_2eq6"], [99394, "div", ["className", 0, "_1cig _25fg"], [4162, "span", ["className", 0, "_1cid"], "Related Page"]]]]];
-  var TransitionCell349 = [1, TransitionCell349_ComputeFunction, [1474, "div", ["label", 0, "Related Page", "width", 0, 92, "dataKey", 0, "page", "className", 0, "_4lgc _4h2u", "columnKey", 0, "page", "height", 0, 25], ["height", "25px", "width", "92px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [76, FixedDataTableAbstractSortableHeader347, []]]]]];
-  var FixedDataTableCell350 = [1, FixedDataTableCell350_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "92px", "left", "2082px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell349, []]]]];
-  var TransitionCell352 = [1, TransitionCell352_ComputeFunction, [1474, "div", ["label", 0, "Preview Link", "width", 0, 100, "dataKey", 0, "ad.demolink_hash", "className", 0, "_4lgc _4h2u", "columnKey", 0, "ad.demolink_hash", "height", 0, 25], ["height", "25px", "width", "100px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_1cig _25fg _4h2r"], [4162, "span", ["className", 0, "_1cid"], "Preview Link"]]]]]];
-  var FixedDataTableCell353 = [1, FixedDataTableCell353_ComputeFunction, [2370, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "100px", "left", "2174px"], [[1474, "div", ["className", 0, "_4lg9"], ["height", "25px"], ["onMouseDown", 1, 0], [322, "div", ["className", 0, "_4lga _4lgb"], ["height", "25px"]]], [76, TransitionCell352, []]]]];
-  var TransitionCell355 = [1, TransitionCell355_ComputeFunction, [1474, "div", ["label", 0, "", "width", 0, 25, "dataKey", 0, "scrollbar_spacer", "className", 0, "_4lgc _4h2u", "columnKey", 0, "scrollbar_spacer", "height", 0, 25], ["height", "25px", "width", "25px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [98370, "div", ["className", 0, "_1cig _25fg _4h2r"]]]]]];
-  var AbstractCheckboxInput361 = [1, AbstractCheckboxInput361_ComputeFunction, [2114, "label", ["className", 0, "_5hhv _55sg _kv1"], [[194, "lol", ["checked", 130, true, "type", 0, "checkbox"], ["onChange", 1, 0]], [2, "span"]]]];
-  var TransitionCell363 = [1, TransitionCell363_ComputeFunction, [1474, "div", ["dataKey", 0, "common.id", "className", 0, "_4lgc _4h2u", "width", 0, 42, "columnKey", 0, "common.id", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "42px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [1218, "span", ["className", 0, "_5hhu _4h2r"], ["onMouseDown", 1, 1], [76, AbstractCheckboxInput361, []]]]]]];
-  var AdsEditableTextCellDisplay365 = [1, AdsEditableTextCellDisplay365_ComputeFunction, [1218, "div", ["className", 0, "_vew"], ["onDoubleClick", 1, 0, "onMouseEnter", 1, 1, "onMouseLeave", 1, 2], [2114, "div", ["className", 0, "_vex _5w6k"], [[4162, "div", ["className", 0, "_vey"], "Test Ad"], [66, "div", ["className", 0, "_5w6_"]]]]]];
-  var TransitionCell367 = [1, TransitionCell367_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.name", "className", 0, "_4lgc _4h2u", "width", 0, 200, "columnKey", 0, "ad.name", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "200px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [99394, "div", ["className", 0, "_2d6h _2-ev _4h2r _5abb"], [76, AdsEditableTextCellDisplay365, []]]]]]];
-  var FixedDataTableCellDefault369 = [1, FixedDataTableCellDefault369_ComputeFunction, [1474, "div", ["dataKey", 0, "edit_status", "className", 0, "_4lgc _4h2u", "width", 0, 33, "columnKey", 0, "edit_status", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "33px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_4h2r"], ""]]]]];
-  var FixedDataTableCellDefault372 = [1, FixedDataTableCellDefault372_ComputeFunction, [1474, "div", ["dataKey", 0, "errors", "className", 0, "_4lgc _4h2u", "width", 0, 36, "columnKey", 0, "errors", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "36px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [66, "div", ["className", 0, "_4h2r"]]]]]];
-  var BUISwitch375 = [1, BUISwitch375_ComputeFunction, [1218, "lol2", ["value", 32, true, "disabled", 2, true, "data-hover", 0, "tooltip", "data-tooltip-position", 0, "below", "aria-label", 0, "Currently active and you can not deactivate it.", "className", 0, "_128j _128k _128m _128n", "role", 0, "checkbox", "aria-checked", 0, "true"], ["onToggle", 1, 0], [1218, "div", ["className", 0, "_128o", "tabindex", 0, "-1"], ["click", 1, 1, "onKeyDown", 1, 2, "onMouseDown", 1, 3], [66, "div", ["className", 0, "_128p"]]]]];
-  var TransitionCell378 = [1, TransitionCell378_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.adgroup_status", "className", 0, "_4lgc _4h2u", "width", 0, 60, "columnKey", 0, "ad.adgroup_status", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "60px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [1090, "div", ["className", 0, "_15si _4h2r"], [76, BUISwitch375, []]]]]]];
-  var TransitionCell382 = [1, TransitionCell382_ComputeFunction, [1474, "div", ["dataKey", 0, "ukiAdData.computed_activity_status", "className", 0, "_4lgc _4h2u", "width", 0, 150, "columnKey", 0, "ukiAdData.computed_activity_status", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "150px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [1090, "div", ["className", 0, "_2d6h _4h2r"], [100418, "div", ["className", 0, "_k4-"], [[98370, "i", ["aria-label", 0, "Pending Review", "data-hover", 0, "tooltip", "className", 0, "_4ms8 img sp_UuU9HmrQ397 sx_ced63f", "width", 0, "7", "height", 0, "7"]], [32771, "Pending Review"]]]]]]]];
-  var TransitionCell386 = [1, TransitionCell386_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.unique_impressions", "className", 0, "_4lgc _4h2u", "width", 0, 60, "columnKey", 0, "stats.unique_impressions", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "60px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
-  var TransitionCell388 = [1, TransitionCell388_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.impressions", "className", 0, "_4lgc _4h2u", "width", 0, 80, "columnKey", 0, "stats.impressions", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
-  var TransitionCell390 = [1, TransitionCell390_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.avg_cpm", "className", 0, "_4lgc _4h2u", "width", 0, 80, "columnKey", 0, "stats.avg_cpm", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
-  var TransitionCell392 = [1, TransitionCell392_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.avg_cpc", "className", 0, "_4lgc _4h2u", "width", 0, 78, "columnKey", 0, "stats.avg_cpc", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "78px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
-  var TransitionCell394 = [1, TransitionCell394_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.actions", "className", 0, "_4lgc _4h2u", "width", 0, 140, "columnKey", 0, "stats.actions", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "140px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
-  var TransitionCell396 = [1, TransitionCell396_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.cpa", "className", 0, "_4lgc _4h2u", "width", 0, 140, "columnKey", 0, "stats.cpa", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "140px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
-  var TransitionCell398 = [1, TransitionCell398_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.clicks", "className", 0, "_4lgc _4h2u", "width", 0, 60, "columnKey", 0, "stats.clicks", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "60px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
-  var TransitionCell400 = [1, TransitionCell400_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.ctr", "className", 0, "_4lgc _4h2u", "width", 0, 70, "columnKey", 0, "stats.ctr", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "70px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
-  var TransitionCell402 = [1, TransitionCell402_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.social_percent", "className", 0, "_4lgc _4h2u", "width", 0, 80, "columnKey", 0, "stats.social_percent", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
-  var FixedDataTableCellDefault404 = [1, FixedDataTableCellDefault404_ComputeFunction, [1474, "div", ["dataKey", 0, "campaign.name", "className", 0, "_4lgc _4h2u", "width", 0, 100, "columnKey", 0, "campaign.name", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "100px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_4h2r"], "Test Ad Set"]]]]];
-  var FixedDataTableCellDefault407 = [1, FixedDataTableCellDefault407_ComputeFunction, [1474, "div", ["dataKey", 0, "campaignGroup.name", "className", 0, "_4lgc _4h2u", "width", 0, 150, "columnKey", 0, "campaignGroup.name", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "150px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_4h2r"], "Test Campaign"]]]]];
-  var TransitionCell410 = [1, TransitionCell410_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.id", "className", 0, "_4lgc _4h2u", "width", 0, 120, "columnKey", 0, "ad.id", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "120px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _4h2r"], "98010048849345"]]]]];
-  var TransitionCell412 = [1, TransitionCell412_ComputeFunction, [1474, "div", ["dataKey", 0, "campaignGroup.objective", "className", 0, "_4lgc _4h2u", "width", 0, 80, "columnKey", 0, "campaignGroup.objective", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _4h2r"], "Clicks to Website"]]]]];
-  var TransitionCell414 = [1, TransitionCell414_ComputeFunction, [1474, "div", ["dataKey", 0, "stats.spent_100", "className", 0, "_4lgc _4h2u", "width", 0, 70, "columnKey", 0, "stats.spent_100", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "70px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _2g7x _4h2r"], " \u2014 "]]]]];
-  var TransitionCell417 = [1, TransitionCell417_ComputeFunction, [1474, "div", ["dataKey", 0, "derivedCampaign.startDate", "className", 0, "_4lgc _4h2u", "width", 0, 113, "columnKey", 0, "derivedCampaign.startDate", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [1090, "div", ["className", 0, "_2d6h _4h2r"], [102402, "span", "10/24/2015"]]]]]];
-  var TransitionCell419 = [1, TransitionCell419_ComputeFunction, [1474, "div", ["dataKey", 0, "derivedCampaign.endDate", "className", 0, "_4lgc _4h2u", "width", 0, 113, "columnKey", 0, "derivedCampaign.endDate", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _4h2r"], "Ongoing"]]]]];
-  var TransitionCell422 = [1, TransitionCell422_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.created_time", "className", 0, "_4lgc _4h2u", "width", 0, 113, "columnKey", 0, "ad.created_time", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [1090, "div", ["className", 0, "_2d6h _4h2r"], [102402, "span", "10/24/2015"]]]]]];
-  var TransitionCell425 = [1, TransitionCell425_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.updated_time", "className", 0, "_4lgc _4h2u", "width", 0, 113, "columnKey", 0, "ad.updated_time", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "113px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [1090, "div", ["className", 0, "_2d6h _4h2r"], [102402, "span", "10/24/2015"]]]]]];
-  var TransitionCell427 = [1, TransitionCell427_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.title", "className", 0, "_4lgc _4h2u", "width", 0, 80, "columnKey", 0, "ad.title", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _4h2r"], "Example"]]]]];
-  var TransitionCell429 = [1, TransitionCell429_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.creative.body", "className", 0, "_4lgc _4h2u", "width", 0, 80, "columnKey", 0, "ad.creative.body", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "80px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _4h2r"], "It&#x27;s an example."]]]]];
-  var TransitionCell431 = [1, TransitionCell431_ComputeFunction, [1474, "div", ["dataKey", 0, "destination", "className", 0, "_4lgc _4h2u", "width", 0, 92, "columnKey", 0, "destination", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "92px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [66, "div", ["className", 0, "_2d6h _4h2r"]]]]]];
-  var TransitionCell433 = [1, TransitionCell433_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.creative.link_url", "className", 0, "_4lgc _4h2u", "width", 0, 70, "columnKey", 0, "ad.creative.link_url", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "70px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [4162, "div", ["className", 0, "_2d6h _4h2r"], "http://www.example.com/"]]]]];
-  var FixedDataTableCellDefault435 = [1, FixedDataTableCellDefault435_ComputeFunction, [1474, "div", ["dataKey", 0, "page", "className", 0, "_4lgc _4h2u", "width", 0, 92, "columnKey", 0, "page", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "92px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [66, "div", ["className", 0, "_4h2r"]]]]]];
-  var Link438 = [1, Link438_ComputeFunction, [4290, "a", ["href", 0, "https://www.facebook.com/?demo_ad=98010048849345&amp;h=AQA24w3temAtB-5f#pagelet_ego_pane", "target", 0, "_blank"], ["click", 1, 0], "Preview Ad"]];
-  var AdsPopoverLink440 = [1, AdsPopoverLink440_ComputeFunction, [2178, "span", ["onMouseEnter", 1, 0, "onMouseLeave", 1, 1], [[66, "span", ["className", 0, "_3o_j"]], [98370, "i", ["className", 0, "_541d img sp_R48dKBxiJkP sx_dc2cdb"]]]]];
-  var TransitionCell442 = [1, TransitionCell442_ComputeFunction, [1474, "div", ["dataKey", 0, "ad.demolink_hash", "className", 0, "_4lgc _4h2u", "width", 0, 100, "columnKey", 0, "ad.demolink_hash", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "100px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [2114, "div", ["className", 0, "_4h2r"], [[76, Link438, []], [76, AdsPopoverLink440, []]]]]]]];
-  var TransitionCell444 = [1, TransitionCell444_ComputeFunction, [1474, "div", ["dataKey", 0, "scrollbar_spacer", "className", 0, "_4lgc _4h2u", "width", 0, 25, "columnKey", 0, "scrollbar_spacer", "height", 0, 32, "rowIndex", 0, 0], ["height", "32px", "width", "25px"], ["columnData", 0, 0], [1090, "div", ["className", 0, "_4lgd _4h2w"], [1090, "div", ["className", 0, "_4lge _4h2x"], [66, "div", ["className", 0, "_2d6h _4h2r"]]]]]];
-  var FixedDataTableRowImpl448 = [1, FixedDataTableRowImpl448_ComputeFunction, [1474, "div", ["className", 0, "_1gd4 _4li _52no _35m0 _35m1 _3c7k _4efq _4efs"], ["width", "1083px", "height", "32px"], ["onMouseDown", 1, 0], [2114, "div", ["className", 0, "_1gd5"], [[99650, "div", ["className", 0, "_3pzk"], ["height", "32px", "left", 0], [100674, "div", ["className", 0, "_3pzj"], ["height", "32px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4lg6 _4h2m"], ["height", "32px", "width", "42px", "left", 0], [76, TransitionCell363, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "200px", "left", "42px"], [76, TransitionCell367, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "33px", "left", "242px"], [76, FixedDataTableCellDefault369, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "36px", "left", "275px"], [76, FixedDataTableCellDefault372, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "60px", "left", "311px"], [76, TransitionCell378, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "150px", "left", "371px"], [76, TransitionCell382, []]]]]], [99650, "div", ["className", 0, "_3pzk"], ["height", "32px", "left", "521px"], [100674, "div", ["className", 0, "_3pzj"], ["height", "32px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "60px", "left", 0], [76, TransitionCell386, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "80px", "left", "60px"], [76, TransitionCell388, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "80px", "left", "140px"], [76, TransitionCell390, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "78px", "left", "220px"], [76, TransitionCell392, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "140px", "left", "298px"], [76, TransitionCell394, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "140px", "left", "438px"], [76, TransitionCell396, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "60px", "left", "578px"], [76, TransitionCell398, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "70px", "left", "638px"], [76, TransitionCell400, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "80px", "left", "708px"], [76, TransitionCell402, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "100px", "left", "788px"], [76, FixedDataTableCellDefault404, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "150px", "left", "888px"], [76, FixedDataTableCellDefault407, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "120px", "left", "1038px"], [76, TransitionCell410, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "80px", "left", "1158px"], [76, TransitionCell412, []]], [99650, "div", ["className", 0, "_4lg0 _4lg5 _4h2p _4h2m"], ["height", "32px", "width", "70px", "left", "1238px"], [76, TransitionCell414, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1308px"], [76, TransitionCell417, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1421px"], [76, TransitionCell419, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1534px"], [76, TransitionCell422, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "113px", "left", "1647px"], [76, TransitionCell425, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "80px", "left", "1760px"], [76, TransitionCell427, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "80px", "left", "1840px"], [76, TransitionCell429, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "92px", "left", "1920px"], [76, TransitionCell431, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "70px", "left", "2012px"], [76, TransitionCell433, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "92px", "left", "2082px"], [76, FixedDataTableCellDefault435, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "100px", "left", "2174px"], [76, TransitionCell442, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "32px", "width", "25px", "left", "2274px"], [76, TransitionCell444, []]]]]], [322, "div", ["className", 0, "_1gd6 _1gd8"], ["left", "521px", "height", "32px"]]]]]];
-  var Scrollbar451 = [1, Scrollbar451_ComputeFunction, [1474, "div", ["className", 0, "_1t0r _1t0t _4jdr _1t0u", "tabindex", 0, 0], ["width", "1083px", "z-index", 99], ["onFocus", 1, 0, "onBlur", 1, 1, "onKeyDown", 1, 2, "onMouseDown", 1, 3, "onWheel", 1, 4], [258, "div", ["width", "407.918085106383px", "transform", "translate3d(4px,0px,0)", "backface-visibility", "hidden"]]]];
-  var FixedDataTable453 = [1, FixedDataTable453_ComputeFunction, [2498, "div", ["className", 0, "_3h1i _1mie"], ["height", "532px", "width", "1083px"], ["onWheel", 1, 0], [[2370, "div", ["className", 0, "_3h1j"], ["height", "515px", "width", "1083px"], [[99650, "div", ["className", 0, "_3487 _3488 _3489"], ["width", 0, "height", "532px", "left", 0], [322, "div", ["className", 0, "_348a"], ["height", "532px"]]], [99650, "div", ["className", 0, "_1gda"], ["width", "1083px", "height", "40px", "z-index", 1, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [99650, "div", ["className", 0, "_1gd4 _4li _52no _3h1a _1mib"], ["width", "1083px", "height", "40px"], [2114, "div", ["className", 0, "_1gd5"], [[99650, "div", ["className", 0, "_3pzk"], ["height", "40px", "left", 0], [99650, "div", ["className", 0, "_3pzj"], ["height", "40px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "521px", "left", 0], [76, TransitionCell181, []]]]], [99650, "div", ["className", 0, "_3pzk"], ["height", "40px", "left", "521px"], [100674, "div", ["className", 0, "_3pzj"], ["height", "40px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "298px", "left", 0], [76, TransitionCell186, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "490px", "left", "298px"], [76, TransitionCell189, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "972px", "left", "788px"], [76, TransitionCell192, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "514px", "left", "1760px"], [76, TransitionCell195, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", 0, "left", "2274px"], [76, TransitionCell198, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "40px", "width", "25px", "left", "2274px"], [76, TransitionCell201, []]]]]], [322, "div", ["className", 0, "_1gd6 _1gd8"], ["left", "521px", "height", "40px"]]]]]], [99650, "div", ["className", 0, "_1gda"], ["width", "1083px", "height", "25px", "z-index", 1, "transform", "translate3d(0px,40px,0)", "backface-visibility", "hidden"], [99650, "div", ["className", 0, "_1gd4 _4li _3h1a _1mib"], ["width", "1083px", "height", "25px"], [2114, "div", ["className", 0, "_1gd5"], [[99650, "div", ["className", 0, "_3pzk"], ["height", "25px", "left", 0], [100674, "div", ["className", 0, "_3pzj"], ["height", "25px", "position", "absolute", "width", "521px", "z-index", 2, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[99650, "div", ["className", 0, "_4lg0 _4lg6 _4h2m"], ["height", "25px", "width", "42px", "left", 0], [76, TransitionCell209, []]], [76, FixedDataTableCell215, []], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "33px", "left", "242px"], [76, TransitionCell220, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "36px", "left", "275px"], [76, TransitionCell226, []]], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "60px", "left", "311px"], [76, TransitionCell231, []]], [76, FixedDataTableCell237, []]]]], [99650, "div", ["className", 0, "_3pzk"], ["height", "25px", "left", "521px"], [100674, "div", ["className", 0, "_3pzj"], ["height", "25px", "position", "absolute", "width", "2299px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [[76, FixedDataTableCell244, []], [76, FixedDataTableCell249, []], [76, FixedDataTableCell254, []], [76, FixedDataTableCell259, []], [76, FixedDataTableCell262, []], [76, FixedDataTableCell265, []], [76, FixedDataTableCell270, []], [76, FixedDataTableCell275, []], [76, FixedDataTableCell280, []], [76, FixedDataTableCell285, []], [76, FixedDataTableCell290, []], [76, FixedDataTableCell295, []], [76, FixedDataTableCell300, []], [76, FixedDataTableCell305, []], [76, FixedDataTableCell310, []], [76, FixedDataTableCell315, []], [76, FixedDataTableCell320, []], [76, FixedDataTableCell325, []], [76, FixedDataTableCell330, []], [76, FixedDataTableCell335, []], [76, FixedDataTableCell340, []], [76, FixedDataTableCell345, []], [76, FixedDataTableCell350, []], [76, FixedDataTableCell353, []], [99650, "div", ["className", 0, "_4lg0 _4h2m"], ["height", "25px", "width", "25px", "left", "2274px"], [76, TransitionCell355, []]]]]], [322, "div", ["className", 0, "_1gd6 _1gd8"], ["left", "521px", "height", "25px"]]]]]], [99586, "div", ["position", "absolute", "pointer-events", "auto", "transform", "translate3d(0px,65px,0)", "backface-visibility", "hidden"], [99650, "div", ["className", 0, "_1gda"], ["width", "1083px", "height", "32px", "z-index", 0, "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [76, FixedDataTableRowImpl448, []]]]]], [99650, "div", ["className", 0, "_3h1k _3h1m"], ["height", "15px", "width", "1083px"], [1282, "div", ["height", "15px", "position", "absolute", "overflow", "hidden", "width", "1083px", "transform", "translate3d(0px,0px,0)", "backface-visibility", "hidden"], [76, Scrollbar451, []]]]]]];
-  var AdsDataTableKeyboardSupportDecorator456 = [1, AdsDataTableKeyboardSupportDecorator456_ComputeFunction, [1154, "div", ["onKeyDown", 1, 0], [99394, "div", ["className", 0, "_5hht"], [76, FixedDataTable453, []]]]];
-  var AdsEditableDataTableDecorator457 = [1, AdsEditableDataTableDecorator457_ComputeFunction, [1154, "div", ["onCopy", 1, 0], [76, AdsDataTableKeyboardSupportDecorator456, []]]];
-  var ResponsiveBlock459 = [1, ResponsiveBlock459_ComputeFunction, [2242, "div", ["className", 0, "_4u-c"], ["onResize", 1, 0], [[99394, "div", ["className", 0, "_35l_"], [76, AdsEditableDataTableDecorator457, []]], [1090, "div", ["className", 0, "_4u-f"], [66, "iframe", ["tabindex", 0, "-1"]]]]]];
-  var AdsPESideTrayTabButton468 = [1, AdsPESideTrayTabButton468_ComputeFunction, [2242, "div", ["className", 0, "_1-ly _59j9 _d9a"], ["click", 1, 0], [[98370, "i", ["className", 0, "_1-lx img sp_UuU9HmrQ397 sx_990b54"]], [66, "div", ["className", 0, "_vf7"]], [66, "div", ["className", 0, "_vf8"]]]]];
-  var AdsPESideTrayTabButton471 = [1, AdsPESideTrayTabButton471_ComputeFunction, [2242, "div", ["className", 0, " _1-lz _d9a"], ["click", 1, 0], [[98370, "i", ["className", 0, "_1-lx img sp_UuU9HmrQ397 sx_94017f"]], [66, "div", ["className", 0, "_vf7"]], [66, "div", ["className", 0, "_vf8"]]]]];
-  var FBDragHandle475 = [1, FBDragHandle475_ComputeFunction, [450, "div", ["className", 0, "_4a2j _2ciy _2ciz", "throttle", 0, 25, "delay", 0, 0, "threshold", 0, 0], ["height", "550px"], ["onStart", 1, 0, "onEnd", 1, 1, "onChange", 1, 2, "onMouseDown", 1, 3, "onMouseUp", 1, 4, "onMouseLeave", 1, 5]]];
-  var Link488 = [1, Link488_ComputeFunction, [4290, "a", ["className", 0, "_5ir9", "label", 0, "Rename using available fields", "href", 0, "#"], ["onMouseDown", 1, 0, "click", 1, 1], "Rename using available fields"]];
-  var BUISwitch492 = [1, BUISwitch492_ComputeFunction, [1218, "div", ["value", 32, true, "disabled", 2, true, "data-hover", 0, "tooltip", "data-tooltip-position", 0, "below", "aria-label", 0, "Currently active and you can not deactivate it.", "className", 0, "_128j _128k _128m _128n", "role", 0, "checkbox", "aria-checked", 0, "true"], ["onToggle", 1, 0], [1218, "div", ["className", 0, "_128o", "tabindex", 0, "-1"], ["click", 1, 1, "onKeyDown", 1, 2, "onMouseDown", 1, 3], [66, "div", ["className", 0, "_128p"]]]]];
-  var Link506 = [1, Link506_ComputeFunction, [4290, "a", ["target", 0, "_blank", "href", 0, "/ads/manager/ad/?ids=98010048849345"], ["click", 1, 0], "Open in Ads Manager"]];
-  var Link507 = [1, Link507_ComputeFunction, [4290, "a", ["target", 0, "_blank", "href", 0, "#"], ["click", 1, 0], "Open in Ads Reporting"]];
-  var Link508 = [1, Link508_ComputeFunction, [4290, "a", ["target", 0, "_blank", "href", 0, "https://www.facebook.com/?demo_ad=98010048849345&amp;h=AQA24w3temAtB-5f#pagelet_ego_pane"], ["click", 1, 0], "View on Desktop Right Column"]];
-  var Link509 = [1, Link509_ComputeFunction, [4290, "a", ["target", 0, "_blank", "href", 0, "/ads/manage/powereditor/?act=10149999073643408&amp;adgroup=98010048849345"], ["click", 1, 0], "Open Power Editor with this ad selected"]];
-  var PillButton523 = [1, PillButton523_ComputeFunction, [4290, "a", ["selected", 130, true, "href", 0, "#", "className", 0, "uiPillButton uiPillButtonSelected"], ["click", 1, 0], "Desktop Right Column"]];
-  var Link548 = [1, Link548_ComputeFunction, [4290, "a", ["className", 0, "fwb", "href", 0, "#"], ["click", 1, 0], "Connect a Facebook Page"]];
-  var AdsPopoverLink563 = [1, AdsPopoverLink563_ComputeFunction, [2178, "span", ["onMouseEnter", 1, 0, "onMouseLeave", 1, 1], [[66, "span", ["className", 0, "_3o_j"]], [98370, "i", ["className", 0, "_541d img sp_R48dKBxiJkP sx_dc2cdb"]]]]];
-  var AdsPopoverLink571 = [1, AdsPopoverLink571_ComputeFunction, [2178, "span", ["onMouseEnter", 1, 0, "onMouseLeave", 1, 1], [[66, "span", ["className", 0, "_3o_j"]], [98370, "i", ["className", 0, "_541d img sp_R48dKBxiJkP sx_dc2cdb"]]]]];
-  var AbstractButton583 = [1, AbstractButton583_ComputeFunction, [4290, "button", ["use", 0, "default", "borderShade", 0, "light", "className", 0, "_4jy0 _4jy4 _517h _51sy _42ft", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], "Change Image"]];
-  var Link590 = [1, Link590_ComputeFunction, [4290, "a", ["href", 0, "/business/ads-guide/", "target", 0, "_blank"], ["click", 1, 0], "Facebook Ad Guidelines"]];
-  var AdsPopoverLink614 = [1, AdsPopoverLink614_ComputeFunction, [2178, "span", ["onMouseEnter", 1, 0, "onMouseLeave", 1, 1], [[66, "span", ["className", 0, "_3o_j"]], [98370, "i", ["className", 0, "_5s_w _541d img sp_R48dKBxiJkP sx_dc2cdb"]]]]];
-  var Link622 = [1, Link622_ComputeFunction, [1218, "a", ["href", 0, "/help/336923339852238", "target", 0, "_blank"], ["click", 1, 0], [102466, "span", ["weight", 0, "inherit", "display", 0, "inline", "className", 0, " _50f4"], "Learn More"]]];
-  var AbstractButton625 = [1, AbstractButton625_ComputeFunction, [4290, "button", ["className", 0, "_23ng _4jy0 _4jy4 _4jy1 _51sy selected _42ft", "use", 0, "confirm", "borderShade", 0, "light", "type", 0, "submit", "value", 32, "1"], ["click", 1, 0], "Create a Pixel"]];
-  var AdsPEMultiTabDrawer654 = [1, AdsPEMultiTabDrawer654_ComputeFunction, [2498, "div", ["className", 0, "_2kev _2kew _2kex"], ["height", "550px", "width", "1027px"], ["tabButtons", 0, 0, "tabContentPanes", 0, 1], [[2114, "div", ["className", 0, "_2kf0"], [[76, AdsPESideTrayTabButton468, []], [76, AdsPESideTrayTabButton471, []]]], [2114, "div", ["className", 0, "_2kf1"], [[76, FBDragHandle475, []], [99394, "div", ["className", 0, "_1o_8 _44ra _5cyn"], [100354, "div", [[100418, "div", ["className", 0, "_yke"], [[66, "div", ["className", 0, "_2x9d _pry"]], [102466, "span", ["weight", 0, "bold", "className", 0, "_2x9f  _50f5 _50f7", "display", 0, "inline"], "Editing Ad"], [1090, "div", ["className", 0, "_3a-a"], [1090, "div", ["className", 0, "_3a-b"], [102466, "span", ["weight", 0, "bold", "display", 0, "inline", "className", 0, " _50f5 _50f7"], "Test Ad"]]]]], [100418, "div", ["className", 0, "_2j_c _ykd"], [[1026, "div", [99394, "div", ["className", 0, "_5ir8 _12k2 _4-u2  _4-u8", "xuiErrorPosition", 0, "above", "background", 0, "white"], [100418, "div", ["className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohe lfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Ad Name", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Ad Name"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [2114, "span", ["className", 0, "_5irl"], [[99394, "div", ["className", 0, "_5ira _2vl4 _1h18"], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Test Ad"]], [66, "div", ["className", 0, "_2vlk"]]]]]], [99330, "span", [76, Link488, []]]]]]]], [1090, "div", ["className", 0, "_ohf rfloat"], [2050, "div", [[100418, "div", ["className", 0, "_5ir9 _3bvz", "label", 0, "Status", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Status"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1090, "div", ["className", 0, "_5irp"], [76, BUISwitch492, []]]]]]]]]], [100418, "div", ["flex", 0, "left", "direction", 0, "right", "className", 0, "clearfix"], [[1090, "div", ["className", 0, "_ohf rfloat"], [1090, "div", ["className", 0, "_20ro _20rp"], [2050, "div", [[99330, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Ad Links"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[102466, "div", ["className", 0, "_502s", "display", 0, "block", "weight", 0, "inherit"], "Ad ID 98010048849345"], [100418, "ul", ["spacing", 0, "small", "border", 0, "none", "direction", 0, "vertical", "valign", 0, "top", "className", 0, "uiList _4kg _6-i _6-h _704"], [[1026, "li", [76, Link506, []]], [1026, "li", [76, Link507, []]], [1026, "li", [76, Link508, []]], [1026, "li", [76, Link509, []]]]]]]]]]], [99330, "div", [1026, "div", [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Preview"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [100354, "div", [[99394, "div", ["background", 0, "light-wash", "className", 0, "_14p9 _12jy _4-u3  _57d8"], [1090, "div", ["className", 0, "_3-8j"], [99394, "ul", ["className", 0, "uiList  _4ki _509- _6-i _6-h _704", "border", 0, "none", "direction", 0, "horizontal", "spacing", 0, "small", "valign", 0, "top"], [1026, "li", [76, PillButton523, []]]]]], [99650, "div", ["className", 0, "_3m4g _12jy _4-u3", "background", 0, "transparent"], ["max-height", "425px"], [1090, "div", ["className", 0, "_3-8j"], [1090, "div", ["className", 0, "_14p7"], [1090, "div", ["className", 0, "_14p8"], [99394, "div", ["className", 0, "_2hm6"], [2050, "div", [[1090, "div", ["className", 0, "_3akw"], [98370, "span", ["className", 0, "hidden_elem img _55ym _55yq _55yo", "background", 0, "light", "aria-label", 0, "Loading...", "aria-busy", 0, true]]], [1090, "div", ["className", 0, "hidden_elem"], [100418, "div", ["className", 0, "_585n _585o"], [[99394, "i", ["alt", 0, "Warning", "className", 0, "_585p img sp_R48dKBxiJkP sx_aed870"], [4098, "u", "Warning"]], [4162, "div", ["className", 0, "_585r _50f4"], "Unable to display a preview for this ad."]]]], [66, "div", ["className", 0, ""]]]]]]]]]]]]]]]]]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef"], [2050, "div", [[100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Facebook Page"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[4162, "div", ["className", 0, "_3-95"], "This ad is not connected to a Facebook Page. It will not show in News Feed."], [76, Link548, []]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Creative"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [2114, "div", ["className", 0, "_3-8j"], [[2, "div"], [100354, "div", [[100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "1001"], [100418, "div", ["label", 0, "Website URL", "helpText", 0, "Enter the website URL you want to promote. Ex: http://www.example.com/page", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Website URL"], [32771, " "]]], [76, AdsPopoverLink563, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "http://www.example.com/"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [100418, "div", ["className", 0, "_gon _2vl4 _1h18"], [[4162, "div", ["className", 0, "_2vln"], "18"], [100418, "div", ["label", 0, "Headline", "helpText", 0, "Your headline text will appear differently depending on the placement of your ad. Check the previews to make sure your headline looks the way you want in the placements it appears in.", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Headline"], [32771, " "]]], [76, AdsPopoverLink571, []], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "Example"]], [66, "div", ["className", 0, "_2vlk"]]]]]]], [99330, "div", [100418, "div", ["className", 0, "_gon _2vl4 _2vl6 _1h18 _1h1a"], [[4162, "div", ["className", 0, "_2vln"], "74"], [100418, "div", ["label", 0, "Text", "labelSize", 0, "small", "className", 0, "_3bvz"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Text"], [32771, " "]]], [66, "div", ["className", 0, "_3bv-"]]]], [1346, "div", ["className", 0, "_2vl9 _1h1f"], ["background-color", "#fff"], [2114, "div", ["className", 0, "_2vla _1h1g"], [[1026, "div", [4098, "textarea", "It&#x27; s an example."]], [66, "div", ["className", 0, "_2vlk"]]]]]]]], [100418, "div", ["className", 0, "_3-96 _3bvz", "label", 0, "Image", "labelSize", 0, "small"], [[2114, "label", ["className", 0, "_4el4 _3qwj _3hy-"], [[32771, "Image"], [32771, " "]]], [1090, "div", ["className", 0, "_3bv-"], [100354, "div", [[1026, "div", [76, AbstractButton583, []]], [1090, "div", ["className", 0, "_50vh _3-8n _2ph_"], [2114, "div", ["className", 0, "_37xq"], [[1090, "div", ["className", 0, "_3-90"], [1090, "div", ["className", 0, " _1yi2"], [99650, "div", ["src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png", "width", 0, 114.6, "height", 0, 60, "backgroundSize", 0, "contain", "loadingIndicatorStyle", 0, "none", "className", 0, "_5f0d"], ["width", "114.6px", "height", "60px"], [262466, "img", ["alt", 0, "", "className", 0, "_5i4g", "src", 0, "https://scontent.xx.fbcdn.net/hads-xap1/t45.1600-4/12124737_98010048849339_1665004369_n.png"], ["width", "90px", "height", "60px", "left", "12px", "top", "0px"]]]]], [99394, "div", ["className", 0, "_50vi"], [1090, "div", ["className", 0, "_3bwv"], [2114, "div", ["className", 0, "_3bwy"], [[1090, "div", ["className", 0, "_3bwx"], [100418, "div", ["className", 0, "_3-95  _50f7", "display", 0, "block", "weight", 0, "bold"], [[32771, "untitled \u2013 "], [102466, "span", ["shade", 0, "light", "className", 0, "_50f8", "weight", 0, "inherit", "display", 0, "inline"], "1000 \xD7 667"], [32771, ""]]]], [66, "div", ["className", 0, "_3bwx"]]]]]]]]], [100418, "div", ["className", 0, "_3-96", "display", 0, "block", "weight", 0, "inherit"], [[32771, "For questions and more information, see the "], [76, Link590, []], [32771, "."]]]]]]]]]]]]]]], [100418, "div", ["xuiErrorPosition", 0, "above", "className", 0, "_12k2 _4-u2  _4-u8", "background", 0, "white"], [[100418, "div", ["className", 0, "_5dw9 _5dwa _4-u3", "background", 0, "transparent"], [[100418, "span", ["itemComponent", 0, "span", "className", 0, "_38my"], [[32771, "Tracking"], [66, "span", ["className", 0, "_c1c"]]]], [66, "div", ["className", 0, "_3s3-"]]]], [99394, "div", ["className", 0, "_12jy _4-u3", "background", 0, "transparent"], [1090, "div", ["className", 0, "_3-8j"], [100354, "div", [[1090, "div", ["className", 0, "_3-96"], [100354, "div", [[100418, "div", ["className", 0, "_3gay"], [[102466, "span", ["weight", 0, "bold", "className", 0, "_3ga-  _50f7", "display", 0, "inline"], "Conversion Tracking"], [76, AdsPopoverLink614, []]]], [1090, "div", ["className", 0, "_3-8x"], [2, "div"]], [99394, "div", ["className", 0, "_3-8x _4fsk"], [99394, "div", ["className", 0, "_2pie"], [1090, "div", ["className", 0, "_23ne _4fsl"], [100418, "div", ["className", 0, "_23nf clearfix", "direction", 0, "left"], [[1090, "div", ["className", 0, "_ohe lfloat"], [98370, "i", ["className", 0, "img _8o _8r img sp_UuU9HmrQ397 sx_ad67ef"]]], [1090, "div", ["className", 0, ""], [1090, "div", ["className", 0, "_42ef _8u"], [2050, "div", [[102466, "div", ["weight", 0, "bold", "shade", 0, "medium", "display", 0, "block", "className", 0, "_3-8m  _c24  _50f4 _50f7"], "Facebook Pixel"], [100418, "span", ["shade", 0, "medium", "className", 0, " _c24  _50f4", "weight", 0, "inherit", "display", 0, "inline"], [[32771, "You can now create one pixel for tracking, optimization and remarketing."], [1090, "span", ["className", 0, "_3-99"], [76, Link622, []]]]], [1090, "div", ["className", 0, "_3-8x"], [76, AbstractButton625, []]]]]]]]]]]]]]], [66, "div", ["className", 0, "_3-96"]]]]]]]]]]]]]]]]]]]]]]]];
-  var Component = [32768, [100418, "div", ["id", 0, "ads_pe_container"], [[100418, "div", ["className", 0, "_5ljl", "id", 0, "ads_pe_top_nav"], [[2114, "div", ["className", 0, "_5ljm"], [[76, Link0, []], [1090, "div", ["className", 0, "_5rne"], [4162, "span", ["className", 0, "_5ljs", "data-testid", 0, "PETopNavLogoText"], "Power Editor"]], [4162, "span", ["className", 0, "_5ljt _5lju"], "Dick Madanson"]]], [2114, "div", ["className", 0, "_5ljy"], [[2114, "div", ["className", 0, "_5ljz _5mun"], [[76, Link2, []], [4162, "div", ["className", 0, "_5lj- _5lju"], "Account 10149999073643408"]]], [2114, "div", ["className", 0, "_5ljz"], [[1090, "div", ["className", 0, "_5lj_"], [76, AbstractButton9, []]], [1090, "div", ["className", 0, "_5lj- _5lju"], [100354, "div", [[32771, "Last downloaded"], [32771, " "], [4162, "abbr", ["className", 0, "livetimestamp", "data-utime", 0, 1446062352, "data-shorten", 0, false], "a few seconds ago"]]]]]], [2114, "div", ["className", 0, "_5ljz"], [[1090, "div", ["className", 0, "_5lj_"], [76, AbstractButton13, []]], [1090, "div", ["className", 0, "_5lj- _5lju"], [98306, "div"]]]]]], [1090, "div", ["className", 0, "_5lk3"], [100418, "div", ["className", 0, "_13xj _51xa", "id", 0, "helpButton"], [[76, AbstractButton16, []], [76, InlineBlock21, []]]]], [98306, "span"]]], [99394, "div", ["className", 0, "_5_a", "id", 0, "ads_pe_navigation_bar"], [99394, "div", ["className", 0, "_5vx2 _5vx4 _5vx6 _5kkt"], [99394, "div", ["className", 0, "_5vx7 clearfix"], [1090, "div", ["className", 0, "_ohe lfloat"], [76, TabBar51, []]]]]], [100674, "div", ["className", 0, "mainWrapper"], ["width", "1192px"], [[99394, "div", ["className", 0, "_2wdc"], [76, ReactTransitionGroup66, []]], [100418, "div", ["className", 0, "_2utw"], [[2114, "div", ["className", 0, "_2utx _41tt"], [[100418, "div", ["className", 0, "_4rw_"], [[100418, "span", ["className", 0, "_5b-l  _5bbe"], [[76, Link72, []], [76, Link79, []]]], [100418, "div", ["className", 0, "_5b-m _3o1v clearfix"], [[76, BUIFilterToken96, []], [99394, "div", ["className", 0, "_1tc"], [76, AbstractButton98, []]], [66, "div", ["className", 0, "_49u3"]]]], [32771, ""], [98306, "span"]]], [98306, "div"]]], [1090, "div", ["className", 0, " _41ts"], [99330, "div", [99394, "div", ["className", 0, "_3c5b clearfix"], [100418, "div", ["className", 0, "clearfix"], [[99394, "div", ["className", 0, "_4bl8 _4bl7"], [2114, "div", ["className", 0, "_3c5f"], [[66, "div", ["className", 0, "_3c5i"]], [100418, "div", ["className", 0, "_3c5k"], [[4162, "span", ["className", 0, "_3c5j"], "Stats:"], [2114, "span", ["className", 0, "_3c5l"], [[76, InlineBlock117, []], [76, AbstractButton120, []]]]]]]]], [99394, "div", ["className", 0, "_4bl9"], [2114, "span", ["className", 0, "_3c5e"], [[2050, "span", [[100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton126, []], [76, InlineBlock131, []]]], [76, AbstractButton135, []], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton138, []], [76, AbstractButton141, []], [76, AbstractButton144, []]]]]], [100418, "div", ["className", 0, "_5n7z _51xa"], [[76, AbstractButton148, []], [99330, "span", [76, InlineBlock153, []]], [76, AbstractButton161, []], [76, AbstractButton163, []]]]]]]]]]]], [2114, "div", ["className", 0, "_2utz"], [[1090, "div", ["className", 0, "_2ut-"], [99330, "div", [100418, "div", ["className", 0, "_tm2"], [[76, AbstractButton170, []], [76, AbstractButton172, []], [76, AbstractButton174, []]]]]], [1090, "div", ["className", 0, "_2ut_"], [76, ResponsiveBlock459, []]]]]]]]], [76, AdsPEMultiTabDrawer654, []], [98306, "div"]]]];
+  function createVNode(t, v, k) {
+    return {
+      f: null,
+      k: k === undefined ? null : k,
+      t: t,
+      v: v || null
+    };
+  }
+
+  function timeAge(time) {
+    var now = new Date()["getTime"]() / 1000;
+    var minutes = (now - time) / 60;
+
+    if (minutes < 60) {
+      return Math["round"](minutes) + " minutes ago";
+    }
+
+    return Math["round"](minutes / 60) + " hours ago";
+  }
+
+  function getHostUrl(url) {
+    return (url + "")["replace"]("https://", "")["replace"]("http://", "")["split"]("/")[0];
+  }
+
+  function Story_ComputeFunction(rank, story) {
+    var __cached__1;
+
+    var __cached__0;
+
+    __cached__1 = timeAge(story["time"]);
+    __cached__0 = getHostUrl(story["url"]);
+    return [rank + ".", story["title"], story["url"], __cached__0, story["score"] + " points", story["by"], __cached__1, (story["descendants"] || 0) + " comments"];
+  }
+
+  function StoryList_ComputeFunction(stories) {
+    return [stories["map"](function (story, i) {
+      return createVNode([12, Story, 0], [[++i, story]], null);
+    })];
+  }
+
+  function Component_ComputeFunction(stories) {
+    return [[stories]];
+  }
+
+  var Story = [1, Story_ComputeFunction, [5, [[2114, "tr", ["className", 0, "athing"], [[1346, "td", ["className", 0, "title"], ["vertical-align", "top", "text-align", "right"], [8258, "span", ["className", 0, "rank"], 0]], [1346, "td", ["className", 0, "votelinks"], ["vertical-align", "top"], [1026, "center", [1090, "a", ["href", 0, "#"], [66, "div", ["className", 0, "votearrow", "title", 0, "upvote"]]]]], [2114, "td", ["className", 0, "title"], [[8258, "a", ["href", 0, "#", "className", 0, "storylink"], 1], [6, 2, [2114, "span", ["className", 0, "sitebit comhead"], [[32771, " ("], [8258, "a", ["href", 0, "#"], 3], [32771, ")"]]], [32772, null]]]]]], [2050, "tr", [[66, "td", ["colSpan", 0, 2]], [2114, "td", ["className", 0, "subtext"], [[8258, "span", ["className", 0, "score"], 4], [32771, " by "], [8258, "a", ["href", 0, "#", "className", 0, "hnuser"], 5], [32771, " "], [1090, "span", ["className", 0, "age"], [8258, "a", ["href", 0, "#"], 6]], [32771, " | "], [4162, "a", ["href", 0, "#"], "hide"], [32771, " | "], [8258, "a", ["href", 0, "#"], 7]]]]], [322, "tr", ["className", 0, "spacer"], ["height", "5px"]]]]];
+  var StoryList = [1, StoryList_ComputeFunction, [1026, "tr", [1026, "td", [1090, "table", ["cellPadding", 0, 0, "cellSpacing", 0, 0, "classList", 0, "itemlist"], [1026, "tbody", [11, 0]]]]]];
+  var Component = [0, ["stories"], Component_ComputeFunction, [1026, "center", [1346, "table", ["id", 0, "hnmain", "border", 0, 0, "cellPadding", 0, 0, "cellSpacing", 0, 0, "width", 0, "85%"], ["background-color", "#f6f6ef"], [2050, "tbody", [[99586, "tr", ["background-color", "#222"], [1346, "table", ["width", 0, "100%", "cellSpacing", 0, 0, "cellPadding", 0, 0], ["padding", "4px"], [1026, "tbody", [2050, "tr", [[1282, "td", ["width", "18px", "padding-right", "4px"], [1090, "a", ["href", 0, "#"], [262466, "img", ["src", 0, "logo.png", "width", 0, 16, "height", 0, 16], ["border", "1px solid #00d8ff"]]]], [1346, "td", ["height", 0, 10], ["line-height", "12pt"], [2114, "span", ["className", 0, "pagetop"], [[4162, "b", ["className", 0, "hnname"], "React HN Benchmark"], [4162, "a", ["href", 0, "#"], "new"], [32771, " | "], [4162, "a", ["href", 0, "#"], "comments"], [32771, " | "], [4162, "a", ["href", 0, "#"], "show"], [32771, " | "], [4162, "a", ["href", 0, "#"], "ask"], [32771, " | "], [4162, "a", ["href", 0, "#"], "jobs"], [32771, " | "], [4162, "a", ["href", 0, "#"], "submit"]]]]]]]]], [66, "tr", ["height", 0, 10]], [12, StoryList, 0]]]]]];
 
   var reactElementSymbol = Symbol.for("react.element");
   var isArray = Array.isArray;
@@ -1068,19 +144,22 @@
   var HAS_CHILDREN = 1 << 11;
   var HAS_STATIC_TEXT_CONTENT = 1 << 12;
   var HAS_DYNAMIC_TEXT_CONTENT = 1 << 13;
-  var IS_STATIC = 1 << 15;
+  var HAS_DYNAMIC_TEXT_ARRAY_CONTENT = 1 << 14;
+  var IS_SHALLOW_STATIC = 1 << 15;
 
   var HAS_HOOKS = 1 << 6; // Collection
   var PROP_IS_EVENT = 1;
   var PROP_IS_BOOLEAN = 1 << 1;
   var PROP_IS_POSITIVE_NUMBER = 1 << 2;
+  var PROP_IS_RESERVED = 1 << 6;
+  var PROP_IS_PROPEPRTY = 1 << 7;
   var componentTemplateCache = new Map();
   var rootFibers = new Map();
 
   function mountFunctionComponentTemplate(isRoot, templateTypeAndFlags, componentTemplate, parentDOMNode, values, currentFiber) {
     var templateFlags = templateTypeAndFlags & ~0x3f;
 
-    if ((templateFlags & IS_STATIC) === 0) {
+    if ((templateFlags & IS_SHALLOW_STATIC) === 0) {
       var componentProps = null;
       var computeFunction;
 
@@ -1138,6 +217,32 @@
     }
   }
 
+  function mountTextArray(textArray, parentDOMNode) {
+    var childrenTextArrayLength = textArray.length;
+    var hostNode;
+
+    for (var i = 0; i < childrenTextArrayLength; ++i) {
+      var childText = textArray[i];
+
+      if (childText !== null && childText !== undefined && typeof childText !== "boolean") {
+        hostNode = createTextNode(childText);
+
+        if (parentDOMNode !== null) {
+          parentDOMNode.appendChild(hostNode);
+        }
+      } else {
+        hostNode = createPlaceholder();
+      }
+
+      if (parentDOMNode !== null) {
+        parentDOMNode.appendChild(hostNode);
+      }
+    } // TODO
+
+
+    return null;
+  }
+
   function mountHostComponentTemplate(templateTypeAndFlags, hostComponentTemplate, parentDOMNode, values, currentFiber) {
     var templateFlags = templateTypeAndFlags & ~0x3f;
     var tagName = hostComponentTemplate[1];
@@ -1150,14 +255,28 @@
 
       for (var i = 0, length = staticProps.length; i < length; i += 3) {
         var propName = staticProps[i];
-        var staticPropFlags = staticProps[i + 1];
-        var staticPropValue = staticProps[i + 2];
+        var propFlags = staticProps[i + 1];
 
-        if (staticPropValue === undefined || staticPropValue === null) {
+        if ((propFlags & PROP_IS_RESERVED) !== 0) {
+          continue;
+        } else if ((propFlags & PROP_IS_EVENT) !== 0) {
+          // TODO
           continue;
         }
 
-        mountPropValue(DOMNode, staticPropFlags, propName, staticPropValue);
+        var staticPropValue = staticProps[i + 2];
+
+        if (propName === "className") {
+          DOMNode.className = staticPropValue;
+        } else if ((propFlags & PROP_IS_PROPEPRTY) !== 0) {
+          DOMNode[propName] = staticPropValue;
+        } else {
+          if ((propFlags & PROP_IS_BOOLEAN) !== 0) {
+            staticPropValue = "";
+          }
+
+          DOMNode.setAttribute(propName, staticPropValue);
+        }
       }
     }
 
@@ -1238,6 +357,10 @@
       for (var _i4 = 0, _length4 = childrenTemplateNodes.length; _i4 < _length4; ++_i4) {
         mountTemplateNode(childrenTemplateNodes[_i4], DOMNode, values, currentFiber);
       }
+    } else if ((templateFlags & HAS_DYNAMIC_TEXT_ARRAY_CONTENT) !== 0) {
+      var textChildrenArrayValueIndex = hostComponentTemplate[childrenTemplateIndex];
+      var textChildrenArray = values[textChildrenArrayValueIndex];
+      mountTextArray(textChildrenArray, DOMNode);
     }
 
     if (parentDOMNode !== null) {
@@ -1249,7 +372,7 @@
 
   function mountTextTemplate(templateTypeAndFlags, textTemplate, parentDOMNode, values, currentFiber) {
     var templateFlags = templateTypeAndFlags & ~0x3f;
-    var isStatic = (templateFlags & IS_STATIC) !== 0;
+    var isStatic = (templateFlags & IS_SHALLOW_STATIC) !== 0;
     var text = isStatic === true ? textTemplate[1] : values[textTemplate[1]];
     var textDOMNode = createTextNode(text);
 
@@ -1428,7 +551,7 @@
 
   function mountValue(templateTypeAndFlags, textTemplate, parentDOMNode, values, currentFiber) {
     var templateFlags = templateTypeAndFlags & ~0x3f;
-    var isStatic = (templateFlags & IS_STATIC) !== 0;
+    var isStatic = (templateFlags & IS_SHALLOW_STATIC) !== 0;
     var value = isStatic === true ? textTemplate[1] : values[textTemplate[1]];
     var hostNode;
 
@@ -1447,6 +570,39 @@
     }
 
     return hostNode;
+  }
+
+  function mountVNodeArrayTemplate(templateTypeAndFlags, vNodeArrayTemplate, parentDOMNode, values, currentFiber) {
+    var vNodeArrayValueIndex = vNodeArrayTemplate[1];
+    var vNodeArray = values[vNodeArrayValueIndex];
+    var vNodeArrayLength = vNodeArray.length;
+    var vNodeArrayFiber = createFiber(vNodeArrayTemplate, vNodeArray);
+    insertFiber(currentFiber, vNodeArrayFiber);
+
+    for (var i = 0; i < vNodeArrayLength; ++i) {
+      mountVNode(vNodeArray[i], parentDOMNode, vNodeArrayFiber);
+    } // TODO
+
+
+    return null;
+  }
+
+  function mountFragmentTemplate(fragmentTemplate, parentDOMNode, values, currentFiber) {
+    var fragment = fragmentTemplate[1];
+
+    for (var i = 0, length = fragment.length; i < length; ++i) {
+      mountTemplateNode(fragment[i], parentDOMNode, values, currentFiber);
+    } // TODO
+
+
+    return null;
+  }
+
+  function mountTextArrayTemplate(templateTypeAndFlags, textTemplate, parentDOMNode, values, currentFiber) {
+    var templateFlags = templateTypeAndFlags & ~0x3f;
+    var isStatic = (templateFlags & IS_SHALLOW_STATIC) !== 0;
+    var textArray = isStatic === true ? textTemplate[1] : values[textTemplate[1]];
+    return mountTextArray(textArray, parentDOMNode);
   }
 
   function mountTemplateNode(templateNode, parentDOMNode, values, currentFiber) {
@@ -1470,7 +626,7 @@
         return mountValue(templateTypeAndFlags, templateNode, parentDOMNode, values, currentFiber);
 
       case FRAGMENT:
-        throw new Error("TODO");
+        return mountFragmentTemplate(templateNode, parentDOMNode, values, currentFiber);
 
       case CONDITIONAL:
         return mountConditionalTemplate(templateNode, parentDOMNode, values, currentFiber);
@@ -1485,10 +641,10 @@
         return mountMultiConditionalTemplate(templateNode, parentDOMNode, values, currentFiber);
 
       case TEXT_ARRAY:
-        throw new Error("TODO");
+        return mountTextArrayTemplate(templateTypeAndFlags, templateNode, parentDOMNode, values, currentFiber);
 
       case VNODE_ARRAY:
-        throw new Error("TODO");
+        return mountVNodeArrayTemplate(templateTypeAndFlags, templateNode, parentDOMNode, values, currentFiber);
 
       case REFERENCE_COMPONENT:
         return mountReferenceComponentTemplate(templateTypeAndFlags, templateNode, parentDOMNode, values, currentFiber);
@@ -1572,7 +728,505 @@
     }
   };
   var root = document.getElementById("root");
-  var props = {};
+  var props = {
+    "stories": [{
+      "by": "rendx",
+      "descendants": 49,
+      "id": 14201562,
+      "kids": [14201704, 14202297, 14202233, 14201771, 14201765, 14201897, 14201750, 14201913, 14201854, 14201667, 14201759, 14202073],
+      "score": 186,
+      "time": 1493197629,
+      "title": "Postal: Open source mail delivery platform, alternative to Mailgun or Sendgrid",
+      "type": "story",
+      "url": "https://github.com/atech/postal"
+    }, {
+      "by": "rabyss",
+      "descendants": 4,
+      "id": 14202124,
+      "kids": [14202293, 14202249],
+      "score": 16,
+      "time": 1493205989,
+      "title": "Show HN: BreakLock – A hybrid of Mastermind and the Android pattern lock",
+      "type": "story",
+      "url": "https://maxwellito.github.io/breaklock/"
+    }, {
+      "by": "morid1n",
+      "descendants": 137,
+      "id": 14200563,
+      "kids": [14201274, 14200711, 14201147, 14201365, 14201499, 14200618, 14201169, 14200911, 14200734, 14201083, 14200706, 14200785, 14201032],
+      "score": 178,
+      "time": 1493183234,
+      "title": "My Hackintosh Hardware Spec – clean, based on a 2013 iMac",
+      "type": "story",
+      "url": "https://infinitediaries.net/my-exact-hackintosh-spec/"
+    }, {
+      "by": "robertwiblin",
+      "descendants": 203,
+      "id": 14196731,
+      "kids": [14201298, 14201838, 14201381, 14197574, 14201398, 14199764, 14198491, 14197000, 14198224, 14200614, 14201983, 14200697, 14199252, 14201214, 14198923, 14200224, 14197509, 14200859, 14200064, 14200114, 14197256, 14197220, 14200653, 14197186, 14199258, 14197155, 14197344, 14198361, 14197969, 14199813, 14197259, 14197503],
+      "score": 562,
+      "time": 1493145853,
+      "title": "Evidence-based advice we've found on how to be successful in a job",
+      "type": "story",
+      "url": "https://80000hours.org/career-guide/how-to-be-successful/"
+    }, {
+      "by": "ryan_j_naughton",
+      "descendants": 565,
+      "id": 14196812,
+      "kids": [14198306, 14197339, 14200899, 14198165, 14198750, 14202199, 14201432, 14197619, 14197471, 14201113, 14202214, 14202043, 14197313, 14197751, 14197332, 14198050, 14201616, 14197404, 14199730, 14198007, 14197358, 14197283, 14200959, 14197891, 14198203, 14197312, 14200796, 14201528, 14197249, 14198271, 14197989, 14198842, 14197205, 14199148, 14197458, 14200457, 14197330, 14199993, 14197855, 14200102, 14197378, 14199315, 14198240, 14198397, 14199326, 14200159, 14198798, 14201296, 14198173, 14197323, 14197383, 14197459, 14197275, 14198305, 14198005, 14198015, 14199380, 14199079, 14198413, 14197334, 14197327, 14197234],
+      "score": 385,
+      "time": 1493146342,
+      "title": "Is Every Speed Limit Too Low?",
+      "type": "story",
+      "url": "https://priceonomics.com/is-every-speed-limit-too-low/"
+    }, {
+      "by": "monort",
+      "descendants": 63,
+      "id": 14196322,
+      "kids": [14197628, 14200026, 14197457, 14197486, 14202126, 14201266, 14197227, 14199404, 14199338, 14196382, 14200598, 14197377, 14199689, 14198538, 14196905, 14200404, 14198781, 14197278, 14197888, 14197742, 14197764],
+      "score": 316,
+      "time": 1493143464,
+      "title": "Experimental Nighttime Photography with Nexus and Pixel",
+      "type": "story",
+      "url": "https://research.googleblog.com/2017/04/experimental-nighttime-photography-with.html"
+    }, {
+      "by": "networked",
+      "descendants": 9,
+      "id": 14199028,
+      "kids": [14201588, 14200361, 14200314, 14200338],
+      "score": 121,
+      "time": 1493161601,
+      "title": "JPEG Huffman Coding Tutorial",
+      "type": "story",
+      "url": "http://www.impulseadventure.com/photo/jpeg-huffman-coding.html"
+    }, {
+      "by": "jasontan",
+      "id": 14202227,
+      "score": 1,
+      "time": 1493207865,
+      "title": "Are you adept at understanding concurrency problems? Sift Science is hiring",
+      "type": "job",
+      "url": "https://boards.greenhouse.io/siftscience/jobs/550699#.WPUZhlMrLfY"
+    }, {
+      "by": "pouwerkerk",
+      "descendants": 80,
+      "id": 14196077,
+      "kids": [14199434, 14196279, 14196604, 14197440, 14201734, 14200922, 14200452, 14197115, 14199837, 14199894, 14196596, 14198243, 14196565, 14197400, 14197049, 14197686, 14198545, 14198475],
+      "score": 717,
+      "time": 1493142008,
+      "title": "Painting with Code: Introducing our new open source library React Sketch.app",
+      "type": "story",
+      "url": "http://airbnb.design/painting-with-code/"
+    }, {
+      "by": "mromnia",
+      "descendants": 16,
+      "id": 14201670,
+      "kids": [14201835, 14202115, 14202176, 14201890, 14202325, 14201859, 14202158, 14201763, 14201902],
+      "score": 62,
+      "time": 1493198949,
+      "title": "How to mod a Porsche 911 to run Doom [video]",
+      "type": "story",
+      "url": "https://www.youtube.com/watch?v=NRMpNA86e8Q"
+    }, {
+      "by": "rbanffy",
+      "descendants": 16,
+      "id": 14192383,
+      "kids": [14197494, 14201805, 14197484],
+      "score": 194,
+      "time": 1493118160,
+      "title": "Go programming language secure coding practices guide",
+      "type": "story",
+      "url": "https://github.com/Checkmarx/Go-SCP"
+    }, {
+      "by": "intous",
+      "descendants": 0,
+      "id": 14200446,
+      "score": 39,
+      "time": 1493181245,
+      "title": "Building Functional Chatbot for Messenger with Ruby on Rails",
+      "type": "story",
+      "url": "https://tutorials.botsfloor.com/chatbot-development-tutorial-how-to-build-a-fully-functional-weather-bot-on-facebook-messenger-c94ac7c59185"
+    }, {
+      "by": "nanospeck",
+      "descendants": 23,
+      "id": 14201207,
+      "kids": [14202252, 14201646, 14201620, 14202076, 14201511, 14201324, 14201940, 14201425, 14201505, 14201304, 14201435, 14201287, 14201739, 14202031, 14202018],
+      "score": 57,
+      "text": "This question was asked on both 2015 &amp; 2016 in HN. I would like to ask it again today to know what are the newest options for this.<p>Q: What would you recommend as a reasonably priced (sub 150$) quad-copter&#x2F;drone, that has a camera, the ability to be programmed (so that I can process video&#x2F;write my own stability algorithms for it), good range, and reasonable flying time?\nIn the event nothing fits that price point, any pointers on what the state of the art is?<p>Thanks!",
+      "time": 1493192641,
+      "title": "Ask HN (again): What is the best affordable programmable drone?",
+      "type": "story"
+    }, {
+      "by": "geuis",
+      "descendants": 57,
+      "id": 14196708,
+      "kids": [14197480, 14198523, 14198705, 14200969, 14200079, 14197605, 14198979, 14202203, 14197679, 14198461, 14200389, 14198065, 14197883, 14197908],
+      "score": 123,
+      "time": 1493145655,
+      "title": "Hackpad shutting down",
+      "type": "story",
+      "url": "https://hackpad.com/"
+    }, {
+      "by": "jfoutz",
+      "descendants": 55,
+      "id": 14195956,
+      "kids": [14199594, 14196972, 14202101, 14198197, 14196771, 14197326, 14196956, 14200842, 14201529, 14198581, 14196777, 14200177, 14200422, 14198571],
+      "score": 167,
+      "time": 1493141367,
+      "title": "Linkerd 1.0",
+      "type": "story",
+      "url": "https://blog.buoyant.io/2017/04/25/announcing-linkerd-1.0/index.html"
+    }, {
+      "by": "DavidBuchanan",
+      "descendants": 19,
+      "id": 14199364,
+      "kids": [14199735, 14200889, 14202245, 14200205, 14200104, 14201697, 14200061, 14199996, 14199867],
+      "score": 66,
+      "time": 1493164755,
+      "title": "Show HN: TARDIS – Warp a process's perspective of time by hooking syscalls",
+      "type": "story",
+      "url": "https://github.com/DavidBuchanan314/TARDIS"
+    }, {
+      "by": "rchen8",
+      "descendants": 121,
+      "id": 14195664,
+      "kids": [14196654, 14196206, 14196677, 14197035, 14196041, 14196399, 14196200, 14196140, 14196216, 14196421, 14196370, 14196146, 14197601, 14197107, 14196866, 14196691, 14197704, 14196772, 14200089, 14198588, 14196937, 14198530, 14197119, 14197247, 14198632, 14196137, 14200323, 14196346],
+      "score": 486,
+      "time": 1493139957,
+      "title": "How to Become Well-Connected",
+      "type": "story",
+      "url": "http://firstround.com/review/how-to-become-insanely-well-connected/"
+    }, {
+      "by": "dbrgn",
+      "descendants": 89,
+      "id": 14191186,
+      "kids": [14200855, 14200035, 14200110, 14201408, 14202159, 14197876, 14200348, 14198720, 14198183, 14199824, 14198281, 14201643, 14201591, 14199541, 14198423, 14201738, 14200037, 14201349, 14200028, 14201206, 14197995, 14197830, 14199603],
+      "score": 135,
+      "time": 1493100791,
+      "title": "How to Say (Almost) Everything in a Hundred-Word Language (2015)",
+      "type": "story",
+      "url": "https://www.theatlantic.com/technology/archive/2015/07/toki-pona-smallest-language/398363/?single_page=true"
+    }, {
+      "by": "runesoerensen",
+      "descendants": 62,
+      "id": 14198866,
+      "kids": [14199494, 14199495, 14200288, 14201118, 14199599],
+      "score": 155,
+      "time": 1493160263,
+      "title": "Nginx 1.13 released with TLS 1.3 support",
+      "type": "story",
+      "url": "http://mailman.nginx.org/pipermail/nginx-announce/2017/000195.html"
+    }, {
+      "by": "bcherny",
+      "descendants": 20,
+      "id": 14199299,
+      "kids": [14200694, 14201832, 14200517, 14201760, 14200966, 14200558, 14201815, 14201231, 14201073, 14201124],
+      "score": 54,
+      "time": 1493163960,
+      "title": "Show HN: JSONSchema to TypeScript compiler",
+      "type": "story",
+      "url": "https://github.com/bcherny/json-schema-to-typescript"
+    }, {
+      "by": "tormeh",
+      "descendants": 37,
+      "id": 14198557,
+      "kids": [14201027, 14199082, 14201023, 14201160, 14200367, 14200647],
+      "score": 70,
+      "time": 1493158034,
+      "title": "A practitioner’s guide to hedonism (2007)",
+      "type": "story",
+      "url": "https://www.1843magazine.com/story/a-practitioners-guide-to-hedonism"
+    }, {
+      "by": "nickreiner",
+      "descendants": 33,
+      "id": 14199125,
+      "kids": [14202332, 14201634, 14201200, 14201215, 14201157, 14201898, 14201969, 14201125],
+      "score": 52,
+      "time": 1493162517,
+      "title": "Best Linux Distros for Gaming in 2017",
+      "type": "story",
+      "url": "https://thishosting.rocks/best-linux-distros-for-gaming/"
+    }, {
+      "by": "BinaryIdiot",
+      "descendants": 170,
+      "id": 14200486,
+      "kids": [14200680, 14200677, 14201515, 14200793, 14200534, 14200908, 14200649, 14200633, 14200701, 14202295, 14200578, 14200709, 14200580, 14201107, 14201779, 14200773, 14200804, 14200720, 14202060, 14200948, 14200903, 14200748, 14200875, 14200750, 14200821, 14200756, 14201707, 14201689, 14200669, 14200997, 14200818, 14201586, 14200603, 14201054, 14201457, 14200616, 14201095, 14200915, 14200878, 14200629, 14201523, 14200620, 14202099],
+      "score": 316,
+      "time": 1493181945,
+      "title": "Suicide of an Uber engineer: Widow blames job stress",
+      "type": "story",
+      "url": "http://www.sfchronicle.com/business/article/Suicide-of-an-Uber-engineer-widow-blames-job-11095807.php?t=7e40d1f554&cmpid=fb-premium&cmpid=twitter-premium"
+    }, {
+      "by": "catc",
+      "descendants": 34,
+      "id": 14195522,
+      "kids": [14202316, 14202278, 14197167, 14199152, 14202077, 14197239, 14197721, 14197632, 14197219, 14198296, 14197245, 14197201, 14197403, 14198051, 14196747],
+      "score": 87,
+      "time": 1493139414,
+      "title": "Show HN: React Timekeeper – Time picker based on the style of Google Keep",
+      "type": "story",
+      "url": "https://catc.github.io/react-timekeeper/"
+    }, {
+      "by": "Integer",
+      "descendants": 152,
+      "id": 14192353,
+      "kids": [14197671, 14197754, 14199091, 14198533, 14201249, 14198626, 14198263, 14198009, 14195130, 14199551, 14197663, 14198285, 14199611, 14199835, 14197482, 14198924, 14198943],
+      "score": 273,
+      "time": 1493117771,
+      "title": "Windows Is Bloated, Thanks to Adobe’s Extensible Metadata Platform",
+      "type": "story",
+      "url": "https://www.thurrott.com/windows/109962/windows-bloated-thanks-adobes-extensible-metadata-platform"
+    }, {
+      "by": "craigcannon",
+      "descendants": 23,
+      "id": 14197852,
+      "kids": [14200024, 14199986, 14202106, 14198011, 14199228, 14202138, 14198917, 14198607],
+      "score": 58,
+      "time": 1493153342,
+      "title": "New England Lost Ski Areas Project",
+      "type": "story",
+      "url": "http://www.nelsap.org/"
+    }, {
+      "by": "golfer",
+      "descendants": 105,
+      "id": 14198229,
+      "kids": [14200202, 14198948, 14199770, 14198634, 14200263, 14198797, 14198919, 14200447, 14198645, 14199267, 14199124, 14198833, 14199059],
+      "score": 282,
+      "time": 1493155745,
+      "title": "Uber must turn over information about its acquisition of Otto to Waymo",
+      "type": "story",
+      "url": "https://techcrunch.com/2017/04/25/uber-must-turn-over-information-about-its-acquisition-of-otto-to-waymo-court-rules/"
+    }, {
+      "by": "JoshTriplett",
+      "descendants": 116,
+      "id": 14198403,
+      "kids": [14199771, 14199980, 14198664, 14198764, 14201086, 14200307, 14199294, 14198860, 14198817],
+      "score": 139,
+      "time": 1493156882,
+      "title": "Shutting down public FTP services",
+      "type": "story",
+      "url": "https://lists.debian.org/debian-announce/2017/msg00001.html"
+    }, {
+      "by": "mabynogy",
+      "descendants": 50,
+      "id": 14191577,
+      "kids": [14194021, 14195402, 14193886, 14193792, 14194355, 14197136, 14200386, 14194151, 14193989, 14193798, 14194042, 14197100, 14198984, 14193925, 14194170],
+      "score": 365,
+      "time": 1493107104,
+      "title": "A Primer on Bézier Curves",
+      "type": "story",
+      "url": "https://pomax.github.io/bezierinfo#preface"
+    }, {
+      "by": "robertothais",
+      "descendants": 29,
+      "id": 14192946,
+      "kids": [14202311, 14202299, 14201900, 14200029, 14198260, 14198605, 14201850, 14199858, 14198223, 14198610],
+      "score": 61,
+      "time": 1493124627,
+      "title": "Consciousness as a State of Matter (2014)",
+      "type": "story",
+      "url": "https://arxiv.org/abs/1401.1219"
+    }, {
+      "by": "leephillips",
+      "descendants": 2,
+      "id": 14202078,
+      "kids": [14202122],
+      "score": 5,
+      "time": 1493205152,
+      "title": "The Republican Lawmaker Who Secretly Created Reddit’s Women-Hating ‘Red Pill’",
+      "type": "story",
+      "url": "http://www.thedailybeast.com/articles/2017/04/25/the-republican-lawmaker-who-secretly-created-reddit-s-women-hating-red-pill.html"
+    }, {
+      "by": "anguswithgusto",
+      "descendants": 55,
+      "id": 14196325,
+      "kids": [14197131, 14196789, 14197299, 14197466, 14196737, 14199929, 14197550, 14197511, 14196888, 14200109, 14197101],
+      "score": 80,
+      "time": 1493143475,
+      "title": "Gett in advanced talks to buy Juno for $250M as Uber rivals consolidate",
+      "type": "story",
+      "url": "https://techcrunch.com/2017/04/25/gett-in-advanced-talks-to-buy-juno-for-250m-as-uber-rivals-consolidate/"
+    }, {
+      "by": "fabuzaid",
+      "descendants": 2,
+      "id": 14196339,
+      "kids": [14201557, 14201170],
+      "score": 46,
+      "time": 1493143560,
+      "title": "Implementing a Fast Research Compiler in Rust",
+      "type": "story",
+      "url": "http://dawn.cs.stanford.edu/blog/weld.html"
+    }, {
+      "by": "bluesilver07",
+      "descendants": 61,
+      "id": 14196154,
+      "kids": [14197614, 14196853, 14197074, 14197050, 14200090, 14197731, 14196352, 14197442],
+      "score": 72,
+      "time": 1493142448,
+      "title": "Xenko Game Engine 2.0 released",
+      "type": "story",
+      "url": "http://xenko.com/blog/release-xenko-2-0-0/"
+    }, {
+      "by": "molecule",
+      "descendants": 254,
+      "id": 14189392,
+      "kids": [14190198, 14190800, 14193591, 14190274, 14189796, 14190118, 14190405, 14190006, 14189430, 14190244, 14189877, 14190064, 14190211, 14189918, 14190071, 14191312, 14195969, 14190542, 14194775, 14189900, 14190032, 14189847, 14192128, 14191737, 14191047, 14190992, 14192759, 14191405, 14190815, 14194136, 14190737, 14190552, 14191385, 14189816, 14191316, 14193780, 14193979, 14190768, 14192973, 14191217, 14190879, 14190780, 14189914, 14190925, 14192906, 14190528, 14189893, 14190007, 14189929, 14190049, 14191859, 14191304, 14190177, 14193355, 14193352, 14190324, 14190846, 14189803],
+      "score": 630,
+      "time": 1493076480,
+      "title": "Robert M. Pirsig has died",
+      "type": "story",
+      "url": "http://www.npr.org/sections/thetwo-way/2017/04/24/525443040/-zen-and-the-art-of-motorcycle-maintenance-author-robert-m-pirsig-dies-at-88"
+    }, {
+      "by": "artsandsci",
+      "descendants": 67,
+      "id": 14194422,
+      "kids": [14199418, 14196266, 14197226, 14196647, 14196324, 14201761, 14196265, 14195599, 14199054, 14196057],
+      "score": 127,
+      "time": 1493134376,
+      "title": "An extra-uterine system to physiologically support the extreme premature lamb",
+      "type": "story",
+      "url": "https://www.nature.com/articles/ncomms15112"
+    }, {
+      "by": "miobrien",
+      "descendants": 9,
+      "id": 14198261,
+      "kids": [14199610, 14199447, 14199862, 14201753, 14199068],
+      "score": 30,
+      "time": 1493155969,
+      "title": "Prior Indigenous Technological Species",
+      "type": "story",
+      "url": "https://arxiv.org/abs/1704.07263"
+    }, {
+      "by": "zdw",
+      "descendants": 2,
+      "id": 14199197,
+      "kids": [14200610],
+      "score": 12,
+      "time": 1493163087,
+      "title": "Should Curve25519 keys be validated?",
+      "type": "story",
+      "url": "https://research.kudelskisecurity.com/2017/04/25/should-ecdh-keys-be-validated/"
+    }, {
+      "by": "spearo77",
+      "descendants": 213,
+      "id": 14189688,
+      "kids": [14191654, 14192373, 14190683, 14192095, 14191856, 14190771, 14190570, 14190599, 14190721, 14192049, 14189694, 14191430, 14193610, 14190543, 14190372, 14191818, 14192171, 14192177, 14192135, 14191483, 14190560, 14190341, 14190362, 14190452, 14192563, 14190458, 14195245, 14190809, 14192706, 14192959, 14190636, 14190634, 14190368, 14191163, 14191379, 14190668, 14191673, 14190884, 14192565, 14190480, 14190442],
+      "score": 447,
+      "time": 1493079289,
+      "title": "WikiTribune – Evidence-based journalism",
+      "type": "story",
+      "url": "https://www.wikitribune.com"
+    }, {
+      "by": "adbrebs",
+      "descendants": 294,
+      "id": 14182262,
+      "kids": [14183335, 14183715, 14182725, 14183897, 14185812, 14184510, 14182468, 14183231, 14182580, 14183996, 14182449, 14185671, 14182428, 14182666, 14186599, 14182519, 14185571, 14185159, 14182636, 14185864, 14188340, 14183433, 14183146, 14184034, 14184363, 14183368, 14183098, 14182495, 14182753, 14184720, 14188085, 14187692, 14183633, 14188137, 14182606, 14186796, 14196166, 14185084, 14185899, 14188219, 14186885, 14183406, 14185561, 14183388, 14191457, 14183281, 14183399, 14183674, 14183236, 14183990, 14183760, 14183248, 14184114, 14183318, 14183457, 14186509, 14186900, 14186695, 14188405, 14184636, 14184630, 14188301, 14184144, 14183023, 14184555, 14185946, 14184611, 14184490, 14183653, 14183881, 14182715, 14184440, 14182573, 14183251, 14184962, 14187249, 14182545, 14192314],
+      "score": 1356,
+      "time": 1493014335,
+      "title": "Lyrebird – An API to copy the voice of anyone",
+      "type": "story",
+      "url": "https://lyrebird.ai/demo"
+    }, {
+      "by": "mathgenius",
+      "descendants": 6,
+      "id": 14192442,
+      "kids": [14197265, 14195645],
+      "score": 43,
+      "time": 1493118936,
+      "title": "Quantum – Open journal for quantum science",
+      "type": "story",
+      "url": "http://quantum-journal.org/papers/"
+    }, {
+      "by": "tjalfi",
+      "descendants": 5,
+      "id": 14190937,
+      "kids": [14199744, 14197114, 14190946],
+      "score": 107,
+      "time": 1493097061,
+      "title": "A Seven Dimensional Analysis of Hashing Methods [pdf]",
+      "type": "story",
+      "url": "http://www.vldb.org/pvldb/vol9/p96-richter.pdf"
+    }, {
+      "by": "mxstbr",
+      "descendants": 0,
+      "id": 14196935,
+      "score": 24,
+      "time": 1493147015,
+      "title": "One GraphQL Client for JavaScript, iOS, and Android",
+      "type": "story",
+      "url": "https://dev-blog.apollodata.com/one-graphql-client-for-javascript-ios-and-android-64993c1b7991"
+    }, {
+      "by": "uptown",
+      "descendants": 166,
+      "id": 14192817,
+      "kids": [14197690, 14195597, 14196750, 14195237, 14196320, 14195150, 14198816, 14194916, 14197746, 14196332, 14194695, 14196726, 14194947, 14199715, 14195059, 14195778, 14196204, 14200435, 14194780, 14195030, 14198452, 14199023, 14194852, 14197577, 14197778, 14195361, 14196368, 14194948, 14199024, 14195060, 14199498],
+      "score": 226,
+      "time": 1493123621,
+      "title": "How Yahoo Killed Flickr (2012)",
+      "type": "story",
+      "url": "https://gizmodo.com/5910223/how-yahoo-killed-flickr-and-lost-the-internet"
+    }, {
+      "by": "mattklein123",
+      "descendants": 42,
+      "id": 14194026,
+      "kids": [14194573, 14195577, 14194430, 14195407, 14194569, 14195298, 14200054, 14194456, 14198329, 14199198],
+      "score": 167,
+      "time": 1493131921,
+      "title": "Envoy: 7 months later",
+      "type": "story",
+      "url": "https://eng.lyft.com/envoy-7-months-later-41986c2fd443"
+    }, {
+      "by": "misnamed",
+      "descendants": 2,
+      "id": 14191333,
+      "kids": [14197296],
+      "score": 29,
+      "time": 1493103250,
+      "title": "Modern Hieroglyphs: Binary Logic Behind the Universal “Power Symbol”",
+      "type": "story",
+      "url": "http://99percentinvisible.org/article/modern-hieroglyphics-binary-logic-behind-universal-power-symbol/"
+    }, {
+      "by": "LaFolle",
+      "descendants": 92,
+      "id": 14191681,
+      "kids": [14192477, 14194490, 14192316, 14193364, 14192065, 14193499, 14194324, 14192622, 14192020, 14195866, 14192496, 14196391, 14192138, 14192714, 14195151, 14195094, 14192110, 14192155],
+      "score": 138,
+      "time": 1493108371,
+      "title": "Feynman Algorithm (2014)",
+      "type": "story",
+      "url": "http://wiki.c2.com/?FeynmanAlgorithm"
+    }, {
+      "by": "Thevet",
+      "descendants": 18,
+      "id": 14190736,
+      "kids": [14197744, 14195753, 14197880, 14197735, 14195874, 14197023, 14196660],
+      "score": 81,
+      "time": 1493093860,
+      "title": "The legend of the Legion",
+      "type": "story",
+      "url": "https://aeon.co/essays/why-young-men-queue-up-to-die-in-the-french-foreign-legion"
+    }, {
+      "by": "bufordsharkley",
+      "descendants": 92,
+      "id": 14197013,
+      "kids": [14197983, 14197168, 14197701, 14198239, 14197514, 14198064, 14197476, 14198489, 14197761, 14197080, 14198905, 14198068, 14198579],
+      "score": 69,
+      "time": 1493147532,
+      "title": "Cracking the Mystery of Labor's Falling Share of GDP",
+      "type": "story",
+      "url": "https://www.bloomberg.com/view/articles/2017-04-24/cracking-the-mystery-of-labor-s-falling-share-of-gdp"
+    }, {
+      "by": "rbanffy",
+      "descendants": 27,
+      "id": 14198470,
+      "kids": [14199443, 14201987, 14199461, 14199729, 14201519, 14198762, 14199524],
+      "score": 52,
+      "time": 1493157378,
+      "title": "How the Internet Gave Mail-Order Brides the Power",
+      "type": "story",
+      "url": "https://backchannel.com/how-the-internet-gave-mail-order-brides-the-power-1af8c8a40562"
+    }]
+  };
   var start = performance.now();
   render(React.createElement(Component, props), root);
   alert(performance.now() - start);

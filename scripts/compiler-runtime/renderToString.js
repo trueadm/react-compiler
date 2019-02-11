@@ -396,14 +396,14 @@ function renderTextArrayTemplateToString(templateTypeAndFlags, textTemplate, val
   return renderTextArrayToString(textArray, state);
 }
 
-function renderVNodeCollectionTemplateToString(vNodeCollectionTemplate, values, isOnlyChild, state) {
-  const vNodeCollectionValueIndex = vNodeCollectionTemplate[1];
-  const vNodeCollection = values[vNodeCollectionValueIndex];
-  const vNodeCollectionLength = vNodeCollection.length;
+function renderVNodeArrayTemplateToString(vNodeArrayTemplate, values, isOnlyChild, state) {
+  const vNodeArrayValueIndex = vNodeArrayTemplate[1];
+  const vNodeArray = values[vNodeArrayValueIndex];
+  const vNodeArrayLength = vNodeArray.length;
 
   let collectionString = "";
-  for (let i = 0; i < vNodeCollectionLength; ++i) {
-    collectionString += renderReactNodeToString(vNodeCollection[i], false, state);
+  for (let i = 0; i < vNodeArrayLength; ++i) {
+    collectionString += renderReactNodeToString(vNodeArray[i], false, state);
   }
   return collectionString;
 }
@@ -583,7 +583,7 @@ function renderTemplateToString(templateNode, values, isOnlyChild, state) {
     case TEXT_ARRAY:
       return renderTextArrayTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
     case VNODE_ARRAY:
-      return renderVNodeCollectionTemplateToString(templateNode, values, isOnlyChild, state);
+      return renderVNodeArrayTemplateToString(templateNode, values, isOnlyChild, state);
     case REFERENCE_COMPONENT:
       return renderReferenceComponentTemplateToString(templateTypeAndFlags, templateNode, values, isOnlyChild, state);
     case REFERENCE_REACT_NODE:
