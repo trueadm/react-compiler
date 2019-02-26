@@ -76,7 +76,7 @@ function convertReactFunctionComponentToComputeFunctionAndEmitTemplateNode(
   if (t.isFunctionDeclaration(computeFunction)) {
     const identifier = t.identifier(name);
 
-    if (componentTemplateNode.isStatic) {
+    if (componentTemplateNode.isShallowStatic) {
       const templateDeclaration = t.variableDeclaration("const", [t.variableDeclarator(identifier, templateAST)]);
       componentPath.replaceWith(templateDeclaration);
       componentTemplateNode.insertionPath = componentPath;
