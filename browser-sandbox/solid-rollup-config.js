@@ -5,9 +5,9 @@ import babel from "rollup-plugin-babel";
 import closure from 'rollup-plugin-google-closure-compiler';
 
 export default {
-  input: "src/compiled.js",
+  input: "src/solid.js",
   output: {
-    file: "build/compiled-bundle.js",
+    file: "build/solid-bundle.js",
     format: "umd",
     name: "App",
   },
@@ -27,19 +27,14 @@ export default {
             },
           },
         ],
-        "@babel/preset-react",
+        'solid',
       ],
     }),
     nodeResolve({
       jsnext: true,
       main: true,
     }),
-    commonjs({
-      ignore: ["react"],
-    }),
-    closure({
-      language_in: 'ECMASCRIPT5_STRICT',
-      language_out: 'ECMASCRIPT5_STRICT',
-    }),
+    commonjs(),
+    closure(),
   ],
 };

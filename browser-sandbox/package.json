@@ -7,6 +7,7 @@
     "build-react-bundle": "rollup --config react-rollup-config.js",
     "build-inferno-bundle": "rollup --config inferno-rollup-config.js",
     "build-svelte-bundle": "rollup --config svelte-rollup-config.js",
+    "build-solid-bundle": "rollup --config solid-rollup-config.js",
     "build": "yarn compile && yarn build-compiled-bundle && yarn build-react-bundle && yarn build-inferno-bundle && yarn build-svelte-bundle"
   },
   "author": "Dominic Gannaway",
@@ -18,10 +19,11 @@
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-flow": "^7.0.0",
     "babel-plugin-inferno": "^6.0.4",
+    "babel-preset-solid": "^0.18.4",
     "cx": "file:../scripts/cx",
     "fbt": "file:../scripts/fbt",
-    "inferno": "^7.0.5",
-    "react": "16.8.0",
+    "inferno": "^7.4.2",
+    "react": "^16.13.1",
     "react-compiler-runtime": "file:../scripts/compiler-runtime/",
     "react-dom": "16.8.0",
     "rollup": "^1.0.1",
@@ -31,6 +33,7 @@
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-svelte": "^5.0.1",
-    "svelte": "^2.16.0"
+    "solid-js": "^0.18.4",
+    "svelte": "^3.23.0"
   }
 }

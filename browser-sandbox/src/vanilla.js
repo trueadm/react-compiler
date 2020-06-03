@@ -49,12 +49,14 @@
   function HeaderBar() {
     const tr = createElement("tr");
     setStyle(tr, "background-color", "#222");
+    const td = createElement("td");
+    appendChild(tr, td);
     const table = createElement("table");
     setAttr(table, "cellPadding", 0);
     setAttr(table, "cellSpacing", 0);
     setAttr(table, "width", "100%");
     setStyle(table, "padding", "4px");
-    appendChild(tr, table);
+    appendChild(td, table);
     const tbody = createElement("tbody");
     const td1 = createElement("td");
     setStyle(td1, "width", "18px");
