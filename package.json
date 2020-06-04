@@ -9,7 +9,7 @@
     "test-ssr": "babel-node --expose-gc scripts/test.js --mode=ssr",
     "test-dom": "babel-node --expose-gc scripts/test.js --mode=dom",
     "test": "yarn test-ssr",
-    "sandbox": "node lib/cli.js --entry=sandbox/App.js"
+    "sandbox": "node lib/cli.js --entry=node-sandbox/App.js"
   },
   "author": "Dominic Gannaway",
   "license": "MIT",

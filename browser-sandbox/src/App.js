@@ -29,6 +29,36 @@ function getHostUrl(url): string {
     .split("/")[0];
 }
 
+function Image({
+  src,
+  style,
+  width,
+  height,
+}: {
+  src: string,
+  style: { border: string },
+  width: string,
+  height: string,
+}) {
+  return <img src={src} width={width} height={height} style={style} />;
+}
+
+function Link({
+  children,
+  href,
+  className,
+}: {
+  children: string | React.Node,
+  href: string | void,
+  className: void | string,
+}) {
+  return (
+    <a href={href || "#"} className={className}>
+      {children}
+    </a>
+  );
+}
+
 function HeaderBar() {
   return (
     <tr style={{ "background-color": "#222" }}>
@@ -37,24 +67,24 @@ function HeaderBar() {
           <tbody>
             <tr>
               <td style={{ width: "18px", "padding-right": "4px" }}>
-                <a href="#">
-                  <img src="logo.png" width="16" height="16" style={{ border: "1px solid #00d8ff" }} />
-                </a>
+                <Link>
+                  <Image src="logo.png" width="16" height="16" style={{ border: "1px solid #00d8ff" }} />
+                </Link>
               </td>
               <td style={{ "line-height": "12pt" }} height="10">
                 <span className="pagetop">
                   <b className="hnname">React HN Benchmark</b>
-                  <a href="#">new</a>
+                  <Link>new</Link>
                   {" | "}
-                  <a href="#">comments</a>
+                  <Link>comments</Link>
                   {" | "}
-                  <a href="#">show</a>
+                  <Link>show</Link>
                   {" | "}
-                  <a href="#">ask</a>
+                  <Link>ask</Link>
                   {" | "}
-                  <a href="#">jobs</a>
+                  <Link>jobs</Link>
                   {" | "}
-                  <a href="#">submit</a>
+                  <Link>submit</Link>
                 </span>
               </td>
             </tr>
@@ -69,98 +99,44 @@ function Story({ story, rank }: { story: StoryType, rank: number }) {
   return (
     <>
       <tr className="athing">
-        <td className="title" style={{'vertical-align': 'top', 'text-align': 'right'}}>
+        <td className="title" style={{ "vertical-align": "top", "text-align": "right" }}>
           <span className="rank">{rank}.</span>
         </td>
-        <td className="votelinks" style={{'vertical-align': 'top'}}>
+        <td className="votelinks" style={{ "vertical-align": "top" }}>
           <center>
-            <a href="#">
+            <Link>
               <div className="votearrow" title="upvote" />
-            </a>
+            </Link>
           </center>
         </td>
         <td className="title">
-          <a href="#" className="storylink">
-            {story.title}
-          </a>
+          <Link className="storylink">{story.title}</Link>
           {story.url ? (
-            <span className="sitebit comhead"> (<a href="#">{getHostUrl(story.url)}</a>)</span>
+            <span className="sitebit comhead">
+              {" "}
+              (<Link>{getHostUrl(story.url)}</Link>)
+            </span>
           ) : null}
         </td>
       </tr>
       <tr>
         <td colSpan="2" />
         <td className="subtext">
-          <span className="score">{story.score} points</span>{' by '}
-          <a href="#" className="hnuser">{story.by}</a>{' '}
+          <span className="score">{story.score} points</span>
+          {" by "}
+          <Link className="hnuser">{story.by}</Link>{" "}
           <span className="age">
-            <a href="#">{timeAge(story.time)}</a>
+            <Link>{timeAge(story.time)}</Link>
           </span>
-          {' | '}
-          <a href="#">hide</a>
-          {' | '}
-          <a href="#">{story.descendants || 0} comments</a>
+          {" | "}
+          <Link>hide</Link>
+          {" | "}
+          <Link>{story.descendants || 0} comments</Link>
         </td>
       </tr>
       <tr className="spacer" height="5" />
     </>
   );
-
-
-  //         "span",
-  //         {
-  //           className: "score",
-  //         },
-  //         `${story.score} points`,
-  //       ),
-  //       " by ",
-  //       e(
-  //         "a",
-  //         {
-  //           href: "#",
-  //           className: "hnuser",
-  //         },
-  //         story.by,
-  //       ),
-  //       " ",
-  //       e(
-  //         "span",
-  //         {
-  //           className: "age",
-  //         },
-  //         e(
-  //           "a",
-  //           {
-  //             href: "#",
-  //           },
-  //           timeAge(story.time),
-  //         ),
-  //       ),
-  //       " | ",
-  //       e(
-  //         "a",
-  //         {
-  //           href: "#",
-  //         },
-  //         "hide",
-  //       ),
-  //       " | ",
-  //       e(
-  //         "a",
-  //         {
-  //           href: "#",
-  //         },
-  //         `${story.descendants || 0} comments`,
-  //       ),
-  //     ),
-  //   ),
-  //   e("tr", {
-  //     style: {
-  //       height: 5,
-  //     },
-  //     className: "spacer",
-  //   }),
-  // );
 }
 
 function StoryList({ stories }: { stories: Array<StoryType> }) {

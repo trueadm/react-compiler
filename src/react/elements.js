@@ -503,7 +503,7 @@ function createPropTemplateFromJSXElement(path, state, componentPath) {
 
   state.helpers.add("createVNode");
   if (runtimeValues.size === 0) {
-    return [t.callExpression(t.identifier("createVNode"), [referenceVNodeTemplateNode(templateNode, state)]), true];
+    return [t.callExpression(t.identifier("createVNode"), [referenceVNodeTemplateNode(templateNode, state)]), false];
   } else {
     const runtimeValuesArray = [];
     for (let [runtimeValue, { index }] of runtimeValues) {

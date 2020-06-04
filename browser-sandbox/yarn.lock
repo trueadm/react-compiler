@@ -674,20 +674,20 @@ babel-plugin-inferno@^6.0.4:
     "@babel/plugin-syntax-jsx" "^7"
     "@babel/types" "^7"
 
-babel-plugin-jsx-dom-expressions@~0.18.5:
-  version "0.18.7"
-  resolved "https://registry.yarnpkg.com/babel-plugin-jsx-dom-expressions/-/babel-plugin-jsx-dom-expressions-0.18.7.tgz#8fd894bddbd85cf027052c7ef2c87d12293f535c"
-  integrity sha512-HHUBuKXFr9gBvV4IkRi/SqwLSZXEbzg7ZcAFD6aCe8x9LMJM+vok3j3Y5UIbtVebEf03f7aXwpVIEMn0J/KEwQ==
+babel-plugin-jsx-dom-expressions@~0.18.8:
+  version "0.18.8"
+  resolved "https://registry.yarnpkg.com/babel-plugin-jsx-dom-expressions/-/babel-plugin-jsx-dom-expressions-0.18.8.tgz#77e9e33df7c4a0f884dce62739c027a4b5f6c27b"
+  integrity sha512-RO7vVFDQkvUVDdTCdoRfr8flFSjmIrc9Qr/DTzmy5ND8zoMgRwB+hmJ/5yv/SPWvUiPSOHHaqK4GUCzN2FQSdQ==
   dependencies:
     "@babel/helper-module-imports" "^7.8.3"
     "@babel/plugin-syntax-jsx" "^7.8.3"
 
-babel-preset-solid@^0.18.4:
-  version "0.18.4"
-  resolved "https://registry.yarnpkg.com/babel-preset-solid/-/babel-preset-solid-0.18.4.tgz#bf9060683edf7e61f758c1d8a104feee522a89df"
-  integrity sha512-e608MU4qAQ+2j/jOmGlaNs8QRzq4rI+0aqlFbte4rK7qKtxokbL4ulptP3I5cKjMG4Vn5X2p5CkK1OqRVvzksQ==
+babel-preset-solid@^0.18.6:
+  version "0.18.6"
+  resolved "https://registry.yarnpkg.com/babel-preset-solid/-/babel-preset-solid-0.18.6.tgz#fa8dfe4446da9fa6d641626452326d190e05f0f9"
+  integrity sha512-TnZ4+Zc9UNJxMn+WaFDKohwwK4spnhf9J2VmMWGB/tPN7mAMOUfHpDU0lMZ7FKJvEwAubzK/9mqJFcoDK9hqcw==
   dependencies:
-    babel-plugin-jsx-dom-expressions "~0.18.5"
+    babel-plugin-jsx-dom-expressions "~0.18.8"
 
 balanced-match@^1.0.0:
   version "1.0.0"
@@ -1457,10 +1457,10 @@ semver@^5.3.0:
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
   integrity sha512-RS9R6R35NYgQn++fkDWaOmqGoj4Ek9gGs+DPxNUZKuwE183xjJroKvyo1IzVFeXvUrvmALy6FWD5xrdJT25gMg==
 
-solid-js@^0.18.4:
-  version "0.18.4"
-  resolved "https://registry.yarnpkg.com/solid-js/-/solid-js-0.18.4.tgz#ee8e411f92a0aca52f48f47ed126bc687f61ab85"
-  integrity sha512-DOtnO9QwpaExTYodQmPqTkXhpmia7LkuHMgw+QfIWNS2016Of7p0I0oI1L/7wD9mUfAquOSli3bFonhXpEJLyQ==
+solid-js@^0.18.5:
+  version "0.18.5"
+  resolved "https://registry.yarnpkg.com/solid-js/-/solid-js-0.18.5.tgz#5c6029dcb064443c2277275315d9d2d5befaf56b"
+  integrity sha512-pLVkIzL/ACzauRXPiRT148kF4i0JsEx/lIIma8WMw8H4LNTtlIGl1v1dJBYpSeHdwAgjV1UMm7BLJZ7cnLMQGQ==
 
 source-map@^0.5.0, source-map@^0.5.1:
   version "0.5.7"
