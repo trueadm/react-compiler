@@ -1859,19 +1859,9 @@
     }
   }
 
-  function renderBenchmark() {
-    render(null, root);
-    render(React.createElement(Component, props), root);
-  }
-
-  
-  setTimeout(() => {
-    const start = performance.now();
-    for (let i = 0; i < 10; i++) {
-      renderBenchmark()
-    }
-    const end = performance.now() - start;
-    alert(end)
-  }, 100);
+  const start = performance.now();
+  render(React.createElement(Component, props), root);
+  const end = performance.now() - start;
+  alert(end)
 
 })();

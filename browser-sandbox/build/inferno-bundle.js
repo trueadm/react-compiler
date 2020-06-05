@@ -1,82 +1,3806 @@
-var $jscomp=$jscomp||{};$jscomp.scope={};$jscomp.owns=function(k,v){return Object.prototype.hasOwnProperty.call(k,v)};$jscomp.assign="function"==typeof Object.assign?Object.assign:function(k,v){for(var m=1;m<arguments.length;m++){var y=arguments[m];if(y)for(var u in y)$jscomp.owns(y,u)&&(k[u]=y[u])}return k};$jscomp.ASSUME_ES5=!1;$jscomp.ASSUME_NO_NATIVE_MAP=!1;$jscomp.ASSUME_NO_NATIVE_SET=!1;$jscomp.SIMPLE_FROUND_POLYFILL=!1;
-$jscomp.defineProperty=$jscomp.ASSUME_ES5||"function"==typeof Object.defineProperties?Object.defineProperty:function(k,v,m){k!=Array.prototype&&k!=Object.prototype&&(k[v]=m.value)};$jscomp.getGlobal=function(k){return"undefined"!=typeof window&&window===k?k:"undefined"!=typeof global&&null!=global?global:k};$jscomp.global=$jscomp.getGlobal(this);
-$jscomp.polyfill=function(k,v,m,y){if(v){m=$jscomp.global;k=k.split(".");for(y=0;y<k.length-1;y++){var u=k[y];u in m||(m[u]={});m=m[u]}k=k[k.length-1];y=m[k];v=v(y);v!=y&&null!=v&&$jscomp.defineProperty(m,k,{configurable:!0,writable:!0,value:v})}};$jscomp.polyfill("Object.assign",function(k){return k||$jscomp.assign},"es6","es3");$jscomp.arrayIteratorImpl=function(k){var v=0;return function(){return v<k.length?{done:!1,value:k[v++]}:{done:!0}}};$jscomp.arrayIterator=function(k){return{next:$jscomp.arrayIteratorImpl(k)}};
-$jscomp.SYMBOL_PREFIX="jscomp_symbol_";$jscomp.initSymbol=function(){$jscomp.initSymbol=function(){};$jscomp.global.Symbol||($jscomp.global.Symbol=$jscomp.Symbol)};$jscomp.Symbol=function(){var k=0;return function(v){return $jscomp.SYMBOL_PREFIX+(v||"")+k++}}();
-$jscomp.initSymbolIterator=function(){$jscomp.initSymbol();var k=$jscomp.global.Symbol.iterator;k||(k=$jscomp.global.Symbol.iterator=$jscomp.global.Symbol("iterator"));"function"!=typeof Array.prototype[k]&&$jscomp.defineProperty(Array.prototype,k,{configurable:!0,writable:!0,value:function(){return $jscomp.iteratorPrototype($jscomp.arrayIteratorImpl(this))}});$jscomp.initSymbolIterator=function(){}};
-$jscomp.initSymbolAsyncIterator=function(){$jscomp.initSymbol();var k=$jscomp.global.Symbol.asyncIterator;k||(k=$jscomp.global.Symbol.asyncIterator=$jscomp.global.Symbol("asyncIterator"));$jscomp.initSymbolAsyncIterator=function(){}};$jscomp.iteratorPrototype=function(k){$jscomp.initSymbolIterator();k={next:k};k[$jscomp.global.Symbol.iterator]=function(){return this};return k};
-$jscomp.iteratorFromArray=function(k,v){$jscomp.initSymbolIterator();k instanceof String&&(k+="");var m=0,y={next:function(){if(m<k.length){var u=m++;return{value:v(u,k[u]),done:!1}}y.next=function(){return{done:!0,value:void 0}};return y.next()}};y[Symbol.iterator]=function(){return y};return y};$jscomp.polyfill("Array.prototype.keys",function(k){return k?k:function(){return $jscomp.iteratorFromArray(this,function(k){return k})}},"es6","es3");
-(function(k){"function"===typeof define&&define.amd?define(k):k()})(function(){function k(){k=Object.assign||function(a){for(var b=1;b<arguments.length;b++){var c=arguments[b],d;for(d in c)Object.prototype.hasOwnProperty.call(c,d)&&(a[d]=c[d])}return a};return k.apply(this,arguments)}function v(a){a=typeof a;return"string"===a||"number"===a}function m(a){return void 0===a||null===a}function y(a){return null===a||!1===a||!0===a||void 0===a}function u(a){return"function"===typeof a}function N(a){return"string"===
-typeof a}function M(a,b){var c={};if(a)for(var d in a)c[d]=a[d];if(b)for(var e in b)c[e]=b[e];return c}function ba(a){return null!==a&&"object"===typeof a}function T(a,b,c){null===c?a.appendChild(b):a.insertBefore(b,c)}function G(a,b){for(var c;a;){c=a.flags;if(c&2033)return a.dom;var d=a.children;a=c&4?d.$LI:c&8192?2===a.childFlags?d:d[b?0:d.length-1]:d}return null}function O(a,b){do{var c=a.flags;if(c&2033){b.removeChild(a.dom);break}var d=a.children;c&4&&(a=d.$LI);c&8&&(a=d);if(c&8192)if(2===a.childFlags)a=
-d;else{a=0;for(c=d.length;a<c;++a)O(d[a],b);break}}while(a)}function ma(a,b,c){do{var d=a.flags;if(d&2033){T(b,a.dom,c);break}var e=a.children;d&4&&(a=e.$LI);d&8&&(a=e);if(d&8192)if(2===a.childFlags)a=e;else{a=0;for(d=e.length;a<d;++a)ma(e[a],b,c);break}}while(a)}function na(a,b,c){return a.constructor.getDerivedStateFromProps?M(c,a.constructor.getDerivedStateFromProps(b,c)):c}function oa(a,b){return ba(a)&&a.event===b.event&&a.data===b.data}function pa(a,b){for(var c in b)void 0===a[c]&&(a[c]=b[c]);
-return a}function ca(a,b){return!!u(a)&&(a(b),!0)}function U(a,b,c,d,e,g,f,h){this.childFlags=a;this.children=b;this.className=c;this.dom=null;this.flags=d;this.key=void 0===e?null:e;this.props=void 0===g?null:g;this.ref=void 0===f?null:f;this.type=h}function r(a,b,c,d,e,g,f,h){e=void 0===e?1:e;a=new U(e,d,c,a,f,g,h,b);0===e&&qa(a,a.children);return a}function A(a,b,c,d,e){var g=a=a&12?a:b.prototype&&b.prototype.render?4:b.render?32776:8;var f=(a&32768?b.render:b).defaultProps;c=m(f)?c:m(c)?M(f,null):
-pa(c,f);a&4||(a=(a&32768?b.render:b).defaultHooks,e=m(a)?e:m(e)?a:pa(e,a));return new U(1,null,null,g,d,c,e,b)}function E(a,b){return new U(1,m(a)||!0===a||!1===a?"":a,null,16,b,null,null,null)}function da(a,b,c){b=r(8192,8192,null,a,b,null,c,null);switch(b.childFlags){case 1:b.children=E("",null);b.childFlags=2;break;case 16:b.children=[E(a)],b.childFlags=4}return b}function B(a){var b=a.flags&-16385,c=a.props;if(b&14&&null!==c){var d=c;c={};for(var e in d)c[e]=d[e]}if(0===(b&8192))return new U(a.childFlags,
-a.children,a.className,b,a.key,c,a.ref,a.type);b=a.children;c=a.childFlags;if(2===c)var g=B(b);else if(c&12)for(g=[],d=0,e=b.length;d<e;++d)g.push(B(b[d]));return da(g,c,a.key)}function ra(a,b,c,d){for(var e=a.length;c<e;c++){var g=a[c];if(!y(g)){var f=d+"$"+c;if(P(g))ra(g,b,0,f);else{if(v(g))g=E(g,f);else{var h=g.key,k=N(h)&&"$"===h[0];if(g.flags&81920||k)g=B(g);g.flags|=65536;k?h.substring(0,d.length)!==d&&(g.key=d+h):g.key=null===h?f:d+h}b.push(g)}}}}function qa(a,b){var c=1;if(y(b))var d=b;else if(v(b))c=
-16,d=b;else if(P(b)){c=b.length;for(var e=0;e<c;++e){var g=b[e];if(y(g)||P(g)){d=d||b.slice(0,e);ra(b,d,e,"");break}else if(v(g))d=d||b.slice(0,e),d.push(E(g,"$"+e));else{var f=g.key,h=0<(g.flags&81920),k=null===f;f=N(f)&&"$"===f[0];if(h||k||f){d=d||b.slice(0,e);if(h||f)g=B(g);if(k||f)g.key="$"+e;d.push(g)}else d&&d.push(g);g.flags|=65536}}d=d||b;c=0===d.length?1:8}else d=b,d.flags|=65536,b.flags&81920&&(d=B(b)),c=2;a.children=d;a.childFlags=c;return a}function ea(a){return y(a)||v(a)?E(a,null):P(a)?
-da(a,0,null):a.flags&16384?B(a):a}function V(a){return{onClick:a,onDblClick:a,onFocusIn:a,onFocusOut:a,onKeyDown:a,onKeyPress:a,onKeyUp:a,onMouseDown:a,onMouseMove:a,onMouseUp:a,onTouchEnd:a,onTouchMove:a,onTouchStart:a}}function sa(a,b){var c=b.$EV;c||(c=b.$EV=V(null));c[a]||1!==++ta[a]||(b="onClick"===a||"onDblClick"===a?Ga(a):Ha(a),document.addEventListener(a.substr(2).toLowerCase(),b),fa[a]=b);return c}function ua(a,b){(b=b.$EV)&&b[a]&&(0===--ta[a]&&(document.removeEventListener(a.substr(2).toLowerCase(),
-fa[a]),fa[a]=null),b[a]=null)}function va(a,b,c,d){var e=u(a.composedPath)?a.composedPath()[0]:a.target;do{if(b&&e.disabled)break;var g=e.$EV;if(g&&(g=g[c])&&(d.dom=e,g.event?g.event(g.data,a):g(a),a.cancelBubble))break;e=e.parentNode}while(null!==e)}function Ia(){this.cancelBubble=!0;this.immediatePropagationStopped||this.stopImmediatePropagation()}function Ja(){return this.defaultPrevented}function Ka(){return this.cancelBubble}function wa(a){var b={dom:document};a.isDefaultPrevented=Ja;a.isPropagationStopped=
-Ka;a.stopPropagation=Ia;Object.defineProperty(a,"currentTarget",{configurable:!0,get:function(){return b.dom}});return b}function Ga(a){return function(b){0!==b.button?b.stopPropagation():va(b,!0,a,wa(b))}}function Ha(a){return function(b){va(b,!1,a,wa(b))}}function xa(a,b,c){if(a[b])a=a[b],a.event?a.event(a.data,c):a(c);else if(b=b.toLowerCase(),a[b])a[b](c)}function Q(a,b){var c=function(c){var d=this.$V;if(d){var g=d.props||z;d=d.dom;if(N(a))xa(g,a,c);else for(var f=0;f<a.length;++f)xa(g,a[f],
-c);u(b)&&(c=this.$V,b(c.props||z,d,!1,c))}};Object.defineProperty(c,"wrapped",{configurable:!1,enumerable:!1,value:!0,writable:!1});return c}function K(a,b,c){var d="$"+b,e=a[d];if(e){if(e[1].wrapped)return;a.removeEventListener(e[0],e[1]);a[d]=null}u(c)&&(a.addEventListener(b,c),a[d]=[b,c])}function ha(a){return"checkbox"===a||"radio"===a}function ya(a){a.stopPropagation()}function W(a,b){var c=a.type,d=a.value,e=a.checked,g=a.multiple;a=a.defaultValue;var f=!m(d);c&&c!==b.type&&b.setAttribute("type",
-c);m(g)||g===b.multiple||(b.multiple=g);m(a)||f||(b.defaultValue=a+"");ha(c)?(f&&(b.value=d),m(e)||(b.checked=e)):f&&b.value!==d?(b.defaultValue=d,b.value=d):m(e)||(b.checked=e)}function R(a,b){if("option"===a.type){var c=a.props||z;a=a.dom;a.value=c.value;c.value===b||P(b)&&-1!==b.indexOf(c.value)?a.selected=!0:m(b)&&m(c.selected)||(a.selected=c.selected||!1)}else{c=a.children;var d=a.flags;if(d&4)R(c.$LI,b);else if(d&8)R(c,b);else if(2===a.childFlags)R(c,b);else if(a.childFlags&12)for(a=0,d=c.length;a<
-d;++a)R(c[a],b)}}function ia(a,b,c,d){var e=!!a.multiple;m(a.multiple)||e===b.multiple||(b.multiple=e);e=a.selectedIndex;-1===e&&(b.selectedIndex=-1);if(1!==d.childFlags){var g=a.value;"number"===typeof e&&-1<e&&b.options[e]&&(g=b.options[e].value);c&&m(g)&&(g=a.defaultValue);R(d,g)}}function ja(a,b,c){var d=a.value,e=b.value;m(d)?c&&(a=a.defaultValue,m(a)||a===e||(b.defaultValue=a,b.value=a)):e!==d&&(b.defaultValue=d,b.value=d)}function za(a){return a.type&&ha(a.type)?!m(a.checked):!m(a.value)}function X(a){a&&
-!ca(a,null)&&a.current&&(a.current=null)}function Y(a,b,c){a&&(u(a)||void 0!==a.current)&&c.push(function(){ca(a,b)||void 0===a.current||(a.current=b)})}function F(a,b){H(a);O(a,b)}function H(a){var b=a.flags,c=a.children;if(b&481){b=a.ref;var d=a.props;X(b);b=a.childFlags;if(null!==d){d=Object.keys(d);for(var e=0,g=d.length;e<g;e++){var f=d[e];Aa[f]&&ua(f,a.dom)}}b&12?S(c):2===b&&H(c)}else if(c)if(b&4)u(c.componentWillUnmount)&&c.componentWillUnmount(),X(a.ref),c.$UN=!0,H(c.$LI);else if(b&8){b=a.ref;
-if(!m(b)&&u(b.onComponentWillUnmount))b.onComponentWillUnmount(G(a,!0),a.props||z);H(c)}else b&1024?F(c,a.ref):b&8192&&a.childFlags&12&&S(c)}function S(a){for(var b=0,c=a.length;b<c;++b)H(a[b])}function Z(a,b,c){S(c);b.flags&8192?O(b,a):a.textContent=""}function La(a){var b=a.event;return function(c){b(a.data,c)}}function ka(a,b,c,d,e,g,f){switch(a){case "children":case "childrenType":case "className":case "defaultValue":case "key":case "multiple":case "ref":case "selectedIndex":break;case "autoFocus":d.autofocus=
-!!c;break;case "allowfullscreen":case "autoplay":case "capture":case "checked":case "controls":case "default":case "disabled":case "hidden":case "indeterminate":case "loop":case "muted":case "novalidate":case "open":case "readOnly":case "required":case "reversed":case "scoped":case "seamless":case "selected":d[a]=!!c;break;case "defaultChecked":case "value":case "volume":if(g&&"value"===a)break;b=m(c)?"":c;d[a]!==b&&(d[a]=b);break;case "style":if(m(c))d.removeAttribute("style");else{d=d.style;var h;
-if(N(c))d.cssText=c;else if(m(b)||N(b))for(h in c)f=c[h],d.setProperty(h,f);else{for(h in c)f=c[h],f!==b[h]&&d.setProperty(h,f);for(h in b)m(c[h])&&d.removeProperty(h)}}break;case "dangerouslySetInnerHTML":a=c&&c.__html||"";if(b=(b&&b.__html||"")!==a)if(b=!m(a))b=document.createElement("i"),b.innerHTML=a,b=b.innerHTML!==d.innerHTML;b&&(null!==f&&(f.childFlags&12?S(f.children):2===f.childFlags&&H(f.children),f.children=null,f.childFlags=1),d.innerHTML=a);break;default:if(Aa[a])u(c)?sa(a,d)[a]=c:ba(c)?
-oa(b,c)||(sa(a,d)[a]=c):ua(a,d);else if(111===a.charCodeAt(0)&&110===a.charCodeAt(1))a:{f=c;if(ba(f)){if(oa(b,f))break a;f=La(f)}K(d,a.substr(2).toLowerCase(),f)}else m(c)?d.removeAttribute(a):e&&Ba[a]?d.setAttributeNS(Ba[a],a,c):d.setAttribute(a,c)}}function Ca(a,b,c){b=ea(a.render(b,a.state,c));var d=c;u(a.getChildContext)&&(d=M(c,a.getChildContext()));a.$CX=d;return b}function C(a,b,c,d,e,g){var f=a.flags|=16384;if(f&481){var h=d;d=a.flags;var k=a.props,w=a.className,n=a.children,q=a.childFlags;
-f=a.type;f=(h=h||0<(d&32))?document.createElementNS("http://www.w3.org/2000/svg",f):document.createElement(f);f=a.dom=f;m(w)||""===w||(h?f.setAttribute("class",w):f.className=w);16===q?f.textContent=n:1!==q&&(w=h&&"foreignObject"!==a.type,2===q?(n.flags&16384&&(a.children=n=B(n)),C(n,f,c,w,null,g)):8!==q&&4!==q||L(n,f,c,w,null,g));null===b||T(b,f,e);if(null!==k){b=h;e=!1;if(c=0<(d&448))if(e=za(k))d&64?ha(k.type)?(K(f,"change",Ma),K(f,"click",ya)):K(f,"input",Na):d&256?K(f,"change",Oa):d&128&&(K(f,
-"input",Pa),k.onChange&&K(f,"change",Qa));for(var p in k)ka(p,null,k[p],f,b,e,null);c&&(b=e,d&64?W(k,f):d&256?ia(k,f,!0,a):d&128&&ja(k,f,!0),b&&(f.$V=a))}Y(a.ref,f,g)}else if(f&4){h=a.type;p=a.props||z;f=new h(p,c);h=f.$N=!(!h.getDerivedStateFromProps&&!f.getSnapshotBeforeUpdate);f.$SVG=d;f.$L=g;a.children=f;f.$BS=!1;f.context=c;f.props===z&&(f.props=p);if(h)f.state=na(f,p,f.state);else if(u(f.componentWillMount)){f.$BR=!0;f.componentWillMount();h=f.$PS;if(null!==h){n=f.state;if(null===n)f.state=
-h;else for(k in h)n[k]=h[k];f.$PS=null}f.$BR=!1}f.$LI=Ca(f,p,c);C(f.$LI,b,f.$CX,d,e,g);Y(a.ref,f,g);u(f.componentDidMount)&&g.push(Ra(f))}else f&8?(p=a.flags&32768?a.type.render(a.props||z,a.ref,c):a.type(a.props||z,c),C(a.children=ea(p),b,c,d,e,g),b=a.ref,m(b)||(ca(b.onComponentWillMount,a.props||z),u(b.onComponentDidMount)&&g.push(Sa(b,a)))):f&512||f&16?(a=a.dom=document.createTextNode(a.children),null!==b&&T(b,a,e)):f&8192?(p=a.children,k=a.childFlags,k&12&&0===p.length&&(k=a.childFlags=2,p=a.children=
-E("",null)),2===k?C(p,b,e,d,e,g):L(p,b,c,d,e,g)):f&1024&&(C(a.children,a.ref,c,!1,null,g),g=E("",null),c=g.dom=document.createTextNode(g.children),null!==b&&T(b,c,e),a.dom=g.dom)}function L(a,b,c,d,e,g){for(var f=0;f<a.length;++f){var h=a[f];h.flags&16384&&(a[f]=h=B(h));C(h,b,c,d,e,g)}}function Ra(a){return function(){a.componentDidMount()}}function Sa(a,b){return function(){a.onComponentDidMount(G(b,!0),b.props||z)}}function I(a,b,c,d,e,g,f){var h=b.flags|=16384;if(a.flags!==h||a.type!==b.type||
-a.key!==b.key||h&2048)a.flags&16384?(H(a),0!==(b.flags&a.flags&2033)?(C(b,null,d,e,null,f),c.replaceChild(b.dom,a.dom)):(C(b,c,d,e,G(a,!0),f),O(a,c))):C(b,c,d,e,g,f);else if(h&481){c=b.dom=a.dom;var k=a.props,w=b.props,n=!1;g=!1;e=e||0<(h&32);if(k!==w){k=k||z;var q=w||z;if(q!==z){(n=0<(h&448))&&(g=za(q));for(var p in q){w=k[p];var t=q[p];w!==t&&ka(p,w,t,c,e,g,a)}}if(k!==z)for(var l in k)m(q[l])&&!m(k[l])&&ka(l,k[l],null,c,e,g,a)}p=b.children;l=b.className;a.className!==l&&(m(l)?c.removeAttribute("class"):
-e?c.setAttribute("class",l):c.className=l);h&4096?c.textContent!==p&&(c.textContent=p):la(a.childFlags,b.childFlags,a.children,p,c,d,e&&"foreignObject"!==b.type,null,a,f);n&&(d=q,e=g,h&64?W(d,c):h&256?ia(d,c,!1,b):h&128&&ja(d,c,!1),e&&(c.$V=b));d=b.ref;a=a.ref;a!==d&&(X(a),Y(d,c,f))}else if(h&4)a:{if(h=b.children=a.children,null!==h){h.$L=f;q=b.props||z;b=b.ref;a=a.ref;n=h.state;if(!h.$N){if(u(h.componentWillReceiveProps)){h.$BR=!0;h.componentWillReceiveProps(q,d);if(h.$UN)break a;h.$BR=!1}null!==
-h.$PS&&(n=M(n,h.$PS),h.$PS=null)}w=n;n=h.state;p=h.props;l=!!h.$N;k=u(h.shouldComponentUpdate);l&&(w=na(h,q,w!==n?M(n,w):w));!k||k&&h.shouldComponentUpdate(q,w,d)?(!l&&u(h.componentWillUpdate)&&h.componentWillUpdate(q,w,d),h.props=q,h.state=w,h.context=d,w=null,d=Ca(h,q,d),l&&u(h.getSnapshotBeforeUpdate)&&(w=h.getSnapshotBeforeUpdate(p,n)),I(h.$LI,d,c,h.$CX,e,g,f),h.$LI=d,u(h.componentDidUpdate)&&Ta(h,p,n,w,f)):(h.props=q,h.state=w,h.context=d);a!==b&&(X(a),Y(b,h,f))}}else if(h&8)if(l=!0,h=b.props||
-z,q=b.ref,n=a.props,p=!m(q),a=a.children,p&&u(q.onComponentShouldUpdate)&&(l=q.onComponentShouldUpdate(n,h)),!1!==l){if(p&&u(q.onComponentWillUpdate))q.onComponentWillUpdate(n,h);l=b.type;l=ea(b.flags&32768?l.render(h,q,d):l(h,d));I(a,l,c,d,e,g,f);b.children=l;if(p&&u(q.onComponentDidUpdate))q.onComponentDidUpdate(n,h)}else b.children=a;else h&16?(f=b.children,d=b.dom=a.dom,f!==a.children&&(d.nodeValue=f)):h&512?b.dom=a.dom:h&8192?(g=a.children,h=b.children,q=a.childFlags,n=b.childFlags,p=null,n&
-12&&0===h.length&&(n=b.childFlags=2,h=b.children=E("",null)),b=0!==(n&2),q&12&&(l=g.length,q&8&&n&8||b||!b&&h.length>l)&&(p=G(g[l-1],!1).nextSibling),la(q,n,g,h,c,d,e,p,a,f)):(e=a.ref,c=b.ref,g=b.children,la(a.childFlags,b.childFlags,a.children,g,e,d,!1,null,a,f),b.dom=a.dom,e===c||y(g)||(f=g.dom,e.removeChild(f),c.appendChild(f)))}function la(a,b,c,d,e,g,f,h,k,m){switch(a){case 2:switch(b){case 2:I(c,d,e,g,f,h,m);break;case 1:F(c,e);break;case 16:H(c);e.textContent=d;break;default:H(c),L(d,e,g,f,
-G(c,!0),m),O(c,e)}break;case 1:switch(b){case 2:C(d,e,g,f,h,m);break;case 1:break;case 16:e.textContent=d;break;default:L(d,e,g,f,h,m)}break;case 16:switch(b){case 16:c!==d&&(""!==c?e.firstChild.nodeValue=d:e.textContent=d);break;case 2:e.textContent="";C(d,e,g,f,h,m);break;case 1:e.textContent="";break;default:e.textContent="",L(d,e,g,f,h,m)}break;default:switch(b){case 16:S(c);e.textContent=d;break;case 2:Z(e,k,c);C(d,e,g,f,h,m);break;case 1:Z(e,k,c);break;default:var n=c.length|0,q=d.length|0;
-if(0===n)0<q&&L(d,e,g,f,h,m);else if(0===q)Z(e,k,c);else if(8===b&&8===a){var p=n-1;b=q-1;a=0;var t=c[a],l=d[a];a:{for(;t.key===l.key;){l.flags&16384&&(d[a]=l=B(l));I(t,l,e,g,f,h,m);c[a]=l;++a;if(a>p||a>b)break a;t=c[a];l=d[a]}t=c[p];for(l=d[b];t.key===l.key;){l.flags&16384&&(d[b]=l=B(l));I(t,l,e,g,f,h,m);c[p]=l;p--;b--;if(a>p||a>b)break a;t=c[p];l=d[b]}}if(a>p){if(a<=b)for(c=b+1,h=c<q?G(d[c],!0):h;a<=b;)l=d[a],l.flags&16384&&(d[a]=l=B(l)),++a,C(l,e,g,f,h,m)}else if(a>b)for(;a<=p;)F(c[a++],e);else{var r=
-b;t=a;var u=t;a=t;var x=p-t+1;l=r-t+1;b=new Int32Array(l+1);var w=x===n,y=!1,v=0,A=0;if(4>q||32>(x|l))for(x=u;x<=p;++x){var z=c[x];if(A<l){for(t=a;t<=r;t++)if(n=d[t],z.key===n.key){b[t-a]=x+1;if(w)for(w=!1;u<x;)F(c[u++],e);v>t?y=!0:v=t;n.flags&16384&&(d[t]=n=B(n));I(z,n,e,g,f,h,m);++A;break}!w&&t>r&&F(z,e)}else w||F(z,e)}else{var D={};for(x=a;x<=r;++x)D[d[x].key]=x;for(x=u;x<=p;++x)if(z=c[x],A<l)if(t=D[z.key],void 0!==t){if(w)for(w=!1;x>u;)F(c[u++],e);b[t-a]=x+1;v>t?y=!0:v=t;n=d[t];n.flags&16384&&
-(d[t]=n=B(n));I(z,n,e,g,f,h,m);++A}else w||F(z,e);else w||F(z,e)}if(w)Z(e,k,c),L(d,e,g,f,h,m);else if(y){n=k=0;r=b.length;r>Da&&(Da=r,J=new Int32Array(r),aa=new Int32Array(r));for(;k<r;++k)if(c=b[k],0!==c)if(p=J[n],b[p]<c)aa[k]=p,J[++n]=k;else{p=0;for(t=n;p<t;)x=p+t>>1,b[J[x]]<c?p=x+1:t=x;c<b[J[p]]&&(0<p&&(aa[k]=J[p-1]),J[p]=k)}p=n+1;c=new Int32Array(p);for(t=J[p-1];0<p--;)c[p]=t,t=aa[t],J[p]=0;t=c.length-1;for(x=l-1;0<=x;x--)0===b[x]?(v=x+a,n=d[v],n.flags&16384&&(d[v]=n=B(n)),l=v+1,C(n,e,g,f,l<q?
-G(d[l],!0):h,m)):0>t||x!==c[t]?(v=x+a,n=d[v],l=v+1,ma(n,e,l<q?G(d[l],!0):h)):t--}else if(A!==l)for(x=l-1;0<=x;x--)0===b[x]&&(v=x+a,n=d[v],n.flags&16384&&(d[v]=n=B(n)),l=v+1,C(n,e,g,f,l<q?G(d[l],!0):h,m))}}else{a=n>q?q:n;for(b=0;b<a;++b)l=d[b],k=c[b],l.flags&16384&&(l=d[b]=B(l)),I(k,l,e,g,f,h,m),c[b]=l;if(n<q)for(b=a;b<q;++b)l=d[b],l.flags&16384&&(l=d[b]=B(l)),C(l,e,g,f,h,m);else if(n>q)for(b=a;b<n;++b)F(c[b],e)}}}}function Ta(a,b,c,d,e){e.push(function(){a.componentDidUpdate(b,c,d)})}function Ua(a){return r(1,
-"img",null,null,1,{src:a.src,width:a.width,height:a.height,style:a.style})}function D(a){return r(1,"a",a.className,a.children,0,{href:a.href||"#"})}function Va(){return r(1,"tr",null,r(1,"td",null,r(1,"table",null,r(1,"tbody",null,r(1,"tr",null,[r(1,"td",null,A(2,D,{children:A(2,Ua,{src:"logo.png",width:"16",height:"16",style:{border:"1px solid #00d8ff"}})}),2,{style:{width:"18px","padding-right":"4px"}}),r(1,"td",null,r(1,"span","pagetop",[r(1,"b","hnname","React HN Benchmark",16),A(2,D,{children:"new"}),
-" | ",A(2,D,{children:"comments"})," | ",A(2,D,{children:"show"})," | ",A(2,D,{children:"ask"})," | ",A(2,D,{children:"jobs"})," | ",A(2,D,{children:"submit"})],0),2,{style:{"line-height":"12pt"},height:"10"})],4),2),2,{style:{padding:"4px"},width:"100%",cellSpacing:"0",cellPadding:"0"}),2),2,{style:{"background-color":"#222"}})}function Wa(a){var b=a.story;a=r(1,"tr","athing",[r(1,"td","title",r(1,"span","rank",[a.rank,E(".")],0),2,{style:{"vertical-align":"top","text-align":"right"}}),r(1,"td",
-"votelinks",r(1,"center",null,A(2,D,{children:r(1,"div","votearrow",null,1,{title:"upvote"})}),2),2,{style:{"vertical-align":"top"}}),r(1,"td","title",[A(2,D,{className:"storylink",children:b.title}),b.url?r(1,"span","sitebit comhead",[E(" "),E("("),A(2,D,{children:(b.url+"").replace("https://","").replace("http://","").split("/")[0]}),E(")")],0):null],0)],4);var c=r(1,"td",null,null,1,{colSpan:"2"}),d=r(1,"span","score",[b.score,E(" points")],0),e=A(2,D,{className:"hnuser",children:b.by});var g=
-b.time;g=((new Date).getTime()/1E3-g)/60;g=60>g?Math.round(g)+" minutes ago":Math.round(g/60)+" hours ago";return da([a,r(1,"tr",null,[c,r(1,"td","subtext",[d," by ",e," ",r(1,"span","age",A(2,D,{children:g}),2)," | ",A(2,D,{children:"hide"})," | ",A(2,D,{children:[b.descendants||0," comments"]})],0)],4),r(1,"tr","spacer",null,1,{height:"5"})],4)}function Xa(a){return r(1,"tr",null,r(1,"td",null,r(1,"table",null,r(1,"tbody",null,a.stories.map(function(a,c){return A(2,Wa,{story:a,rank:++c},a.id)}),
-0),2,{cellPadding:"0",cellSpacing:"0",classList:"itemlist"}),2),2)}function Ea(a){a=a.stories;return r(1,"center",null,r(1,"table",null,r(1,"tbody",null,[A(2,Va),r(1,"tr",null,null,1,{height:"10"}),A(2,Xa,{stories:a})],4),2,{id:"hnmain",border:"0",cellPadding:"0",cellSpacing:"0",width:"85%",style:{"background-color":"#f6f6ef"}}),2)}var P=Array.isArray,z={},Fa={componentComparator:null,createVNode:null,renderComplete:null},Ba={"xlink:actuate":"http://www.w3.org/1999/xlink","xlink:arcrole":"http://www.w3.org/1999/xlink",
-"xlink:href":"http://www.w3.org/1999/xlink","xlink:role":"http://www.w3.org/1999/xlink","xlink:show":"http://www.w3.org/1999/xlink","xlink:title":"http://www.w3.org/1999/xlink","xlink:type":"http://www.w3.org/1999/xlink","xml:base":"http://www.w3.org/XML/1998/namespace","xml:lang":"http://www.w3.org/XML/1998/namespace","xml:space":"http://www.w3.org/XML/1998/namespace"},ta=V(0),fa=V(null),Aa=V(!0),Na=Q("onInput",W),Ma=Q(["onClick","onChange"],W);ya.wrapped=!0;var Oa=Q("onChange",ia),Pa=Q("onInput",
-ja),Qa=Q("onChange"),J,aa,Da=0;"undefined"!==typeof document&&window.Node&&(Node.prototype.$EV=null,Node.prototype.$V=null);"undefined"!==typeof Promise&&Promise.resolve().then.bind(Promise.resolve());Ea.compileRootComponent=!0;var Ya=document.getElementById("root"),Za=performance.now();(function(a,b,c,d){void 0===c&&(c=null);void 0===d&&(d=z);var e=d;d=[];var g=b.$V;m(g)?m(a)||(a.flags&16384&&(a=B(a)),C(a,b,e,!1,null,d),g=b.$V=a):m(a)?(F(g,b),b.$V=null):(a.flags&16384&&(a=B(a)),I(g,a,b,e,!1,null,
-d),g=b.$V=a);for(a=0;a<d.length;a++)d[a]();u(c)&&c();u(Fa.renderComplete)&&Fa.renderComplete(g,b)})(function(a){var b=a.props;if(b){var c=a.flags;c&481&&(void 0!==b.children&&m(a.children)&&qa(a,b.children),void 0!==b.className&&(a.className=b.className||null,b.className=void 0));void 0!==b.key&&(a.key=b.key,b.key=void 0);void 0!==b.ref&&(a.ref=c&8?M(a.ref,b.ref):b.ref,b.ref=void 0)}return a}(A(2,Ea,k({},{stories:[{by:"rendx",descendants:49,id:14201562,kids:[14201704,14202297,14202233,14201771,14201765,
-14201897,14201750,14201913,14201854,14201667,14201759,14202073],score:186,time:1493197629,title:"Postal: Open source mail delivery platform, alternative to Mailgun or Sendgrid",type:"story",url:"https://github.com/atech/postal"},{by:"rabyss",descendants:4,id:14202124,kids:[14202293,14202249],score:16,time:1493205989,title:"Show HN: BreakLock \u2013 A hybrid of Mastermind and the Android pattern lock",type:"story",url:"https://maxwellito.github.io/breaklock/"},{by:"morid1n",descendants:137,id:14200563,
-kids:[14201274,14200711,14201147,14201365,14201499,14200618,14201169,14200911,14200734,14201083,14200706,14200785,14201032],score:178,time:1493183234,title:"My Hackintosh Hardware Spec \u2013 clean, based on a 2013 iMac",type:"story",url:"https://infinitediaries.net/my-exact-hackintosh-spec/"},{by:"robertwiblin",descendants:203,id:14196731,kids:[14201298,14201838,14201381,14197574,14201398,14199764,14198491,14197E3,14198224,14200614,14201983,14200697,14199252,14201214,14198923,14200224,14197509,14200859,
-14200064,14200114,14197256,14197220,14200653,14197186,14199258,14197155,14197344,14198361,14197969,14199813,14197259,14197503],score:562,time:1493145853,title:"Evidence-based advice we've found on how to be successful in a job",type:"story",url:"https://80000hours.org/career-guide/how-to-be-successful/"},{by:"ryan_j_naughton",descendants:565,id:14196812,kids:[14198306,14197339,14200899,14198165,14198750,14202199,14201432,14197619,14197471,14201113,14202214,14202043,14197313,14197751,14197332,14198050,
-14201616,14197404,14199730,14198007,14197358,14197283,14200959,14197891,14198203,14197312,14200796,14201528,14197249,14198271,14197989,14198842,14197205,14199148,14197458,14200457,14197330,14199993,14197855,14200102,14197378,14199315,14198240,14198397,14199326,14200159,14198798,14201296,14198173,14197323,14197383,14197459,14197275,14198305,14198005,14198015,14199380,14199079,14198413,14197334,14197327,14197234],score:385,time:1493146342,title:"Is Every Speed Limit Too Low?",type:"story",url:"https://priceonomics.com/is-every-speed-limit-too-low/"},
-{by:"monort",descendants:63,id:14196322,kids:[14197628,14200026,14197457,14197486,14202126,14201266,14197227,14199404,14199338,14196382,14200598,14197377,14199689,14198538,14196905,14200404,14198781,14197278,14197888,14197742,14197764],score:316,time:1493143464,title:"Experimental Nighttime Photography with Nexus and Pixel",type:"story",url:"https://research.googleblog.com/2017/04/experimental-nighttime-photography-with.html"},{by:"networked",descendants:9,id:14199028,kids:[14201588,14200361,14200314,
-14200338],score:121,time:1493161601,title:"JPEG Huffman Coding Tutorial",type:"story",url:"http://www.impulseadventure.com/photo/jpeg-huffman-coding.html"},{by:"jasontan",id:14202227,score:1,time:1493207865,title:"Are you adept at understanding concurrency problems? Sift Science is hiring",type:"job",url:"https://boards.greenhouse.io/siftscience/jobs/550699#.WPUZhlMrLfY"},{by:"pouwerkerk",descendants:80,id:14196077,kids:[14199434,14196279,14196604,14197440,14201734,14200922,14200452,14197115,14199837,
-14199894,14196596,14198243,14196565,14197400,14197049,14197686,14198545,14198475],score:717,time:1493142008,title:"Painting with Code: Introducing our new open source library React Sketch.app",type:"story",url:"http://airbnb.design/painting-with-code/"},{by:"mromnia",descendants:16,id:14201670,kids:[14201835,14202115,14202176,14201890,14202325,14201859,14202158,14201763,14201902],score:62,time:1493198949,title:"How to mod a Porsche 911 to run Doom [video]",type:"story",url:"https://www.youtube.com/watch?v=NRMpNA86e8Q"},
-{by:"rbanffy",descendants:16,id:14192383,kids:[14197494,14201805,14197484],score:194,time:1493118160,title:"Go programming language secure coding practices guide",type:"story",url:"https://github.com/Checkmarx/Go-SCP"},{by:"intous",descendants:0,id:14200446,score:39,time:1493181245,title:"Building Functional Chatbot for Messenger with Ruby on Rails",type:"story",url:"https://tutorials.botsfloor.com/chatbot-development-tutorial-how-to-build-a-fully-functional-weather-bot-on-facebook-messenger-c94ac7c59185"},
-{by:"nanospeck",descendants:23,id:14201207,kids:[14202252,14201646,14201620,14202076,14201511,14201324,14201940,14201425,14201505,14201304,14201435,14201287,14201739,14202031,14202018],score:57,text:"This question was asked on both 2015 &amp; 2016 in HN. I would like to ask it again today to know what are the newest options for this.<p>Q: What would you recommend as a reasonably priced (sub 150$) quad-copter&#x2F;drone, that has a camera, the ability to be programmed (so that I can process video&#x2F;write my own stability algorithms for it), good range, and reasonable flying time?\nIn the event nothing fits that price point, any pointers on what the state of the art is?<p>Thanks!",
-time:1493192641,title:"Ask HN (again): What is the best affordable programmable drone?",type:"story"},{by:"geuis",descendants:57,id:14196708,kids:[14197480,14198523,14198705,14200969,14200079,14197605,14198979,14202203,14197679,14198461,14200389,14198065,14197883,14197908],score:123,time:1493145655,title:"Hackpad shutting down",type:"story",url:"https://hackpad.com/"},{by:"jfoutz",descendants:55,id:14195956,kids:[14199594,14196972,14202101,14198197,14196771,14197326,14196956,14200842,14201529,14198581,
-14196777,14200177,14200422,14198571],score:167,time:1493141367,title:"Linkerd 1.0",type:"story",url:"https://blog.buoyant.io/2017/04/25/announcing-linkerd-1.0/index.html"},{by:"DavidBuchanan",descendants:19,id:14199364,kids:[14199735,14200889,14202245,14200205,14200104,14201697,14200061,14199996,14199867],score:66,time:1493164755,title:"Show HN: TARDIS \u2013 Warp a process's perspective of time by hooking syscalls",type:"story",url:"https://github.com/DavidBuchanan314/TARDIS"},{by:"rchen8",descendants:121,
-id:14195664,kids:[14196654,14196206,14196677,14197035,14196041,14196399,14196200,14196140,14196216,14196421,14196370,14196146,14197601,14197107,14196866,14196691,14197704,14196772,14200089,14198588,14196937,14198530,14197119,14197247,14198632,14196137,14200323,14196346],score:486,time:1493139957,title:"How to Become Well-Connected",type:"story",url:"http://firstround.com/review/how-to-become-insanely-well-connected/"},{by:"dbrgn",descendants:89,id:14191186,kids:[14200855,14200035,14200110,14201408,
-14202159,14197876,14200348,14198720,14198183,14199824,14198281,14201643,14201591,14199541,14198423,14201738,14200037,14201349,14200028,14201206,14197995,14197830,14199603],score:135,time:1493100791,title:"How to Say (Almost) Everything in a Hundred-Word Language (2015)",type:"story",url:"https://www.theatlantic.com/technology/archive/2015/07/toki-pona-smallest-language/398363/?single_page=true"},{by:"runesoerensen",descendants:62,id:14198866,kids:[14199494,14199495,14200288,14201118,14199599],score:155,
-time:1493160263,title:"Nginx 1.13 released with TLS 1.3 support",type:"story",url:"http://mailman.nginx.org/pipermail/nginx-announce/2017/000195.html"},{by:"bcherny",descendants:20,id:14199299,kids:[14200694,14201832,14200517,14201760,14200966,14200558,14201815,14201231,14201073,14201124],score:54,time:1493163960,title:"Show HN: JSONSchema to TypeScript compiler",type:"story",url:"https://github.com/bcherny/json-schema-to-typescript"},{by:"tormeh",descendants:37,id:14198557,kids:[14201027,14199082,
-14201023,14201160,14200367,14200647],score:70,time:1493158034,title:"A practitioner\u2019s guide to hedonism (2007)",type:"story",url:"https://www.1843magazine.com/story/a-practitioners-guide-to-hedonism"},{by:"nickreiner",descendants:33,id:14199125,kids:[14202332,14201634,14201200,14201215,14201157,14201898,14201969,14201125],score:52,time:1493162517,title:"Best Linux Distros for Gaming in 2017",type:"story",url:"https://thishosting.rocks/best-linux-distros-for-gaming/"},{by:"BinaryIdiot",descendants:170,
-id:14200486,kids:[14200680,14200677,14201515,14200793,14200534,14200908,14200649,14200633,14200701,14202295,14200578,14200709,14200580,14201107,14201779,14200773,14200804,14200720,14202060,14200948,14200903,14200748,14200875,14200750,14200821,14200756,14201707,14201689,14200669,14200997,14200818,14201586,14200603,14201054,14201457,14200616,14201095,14200915,14200878,14200629,14201523,14200620,14202099],score:316,time:1493181945,title:"Suicide of an Uber engineer: Widow blames job stress",type:"story",
-url:"http://www.sfchronicle.com/business/article/Suicide-of-an-Uber-engineer-widow-blames-job-11095807.php?t=7e40d1f554&cmpid=fb-premium&cmpid=twitter-premium"},{by:"catc",descendants:34,id:14195522,kids:[14202316,14202278,14197167,14199152,14202077,14197239,14197721,14197632,14197219,14198296,14197245,14197201,14197403,14198051,14196747],score:87,time:1493139414,title:"Show HN: React Timekeeper \u2013 Time picker based on the style of Google Keep",type:"story",url:"https://catc.github.io/react-timekeeper/"},
-{by:"Integer",descendants:152,id:14192353,kids:[14197671,14197754,14199091,14198533,14201249,14198626,14198263,14198009,14195130,14199551,14197663,14198285,14199611,14199835,14197482,14198924,14198943],score:273,time:1493117771,title:"Windows Is Bloated, Thanks to Adobe\u2019s Extensible Metadata Platform",type:"story",url:"https://www.thurrott.com/windows/109962/windows-bloated-thanks-adobes-extensible-metadata-platform"},{by:"craigcannon",descendants:23,id:14197852,kids:[14200024,14199986,14202106,
-14198011,14199228,14202138,14198917,14198607],score:58,time:1493153342,title:"New England Lost Ski Areas Project",type:"story",url:"http://www.nelsap.org/"},{by:"golfer",descendants:105,id:14198229,kids:[14200202,14198948,14199770,14198634,14200263,14198797,14198919,14200447,14198645,14199267,14199124,14198833,14199059],score:282,time:1493155745,title:"Uber must turn over information about its acquisition of Otto to Waymo",type:"story",url:"https://techcrunch.com/2017/04/25/uber-must-turn-over-information-about-its-acquisition-of-otto-to-waymo-court-rules/"},
-{by:"JoshTriplett",descendants:116,id:14198403,kids:[14199771,14199980,14198664,14198764,14201086,14200307,14199294,14198860,14198817],score:139,time:1493156882,title:"Shutting down public FTP services",type:"story",url:"https://lists.debian.org/debian-announce/2017/msg00001.html"},{by:"mabynogy",descendants:50,id:14191577,kids:[14194021,14195402,14193886,14193792,14194355,14197136,14200386,14194151,14193989,14193798,14194042,14197100,14198984,14193925,14194170],score:365,time:1493107104,title:"A Primer on B\u00e9zier Curves",
-type:"story",url:"https://pomax.github.io/bezierinfo#preface"},{by:"robertothais",descendants:29,id:14192946,kids:[14202311,14202299,14201900,14200029,14198260,14198605,14201850,14199858,14198223,14198610],score:61,time:1493124627,title:"Consciousness as a State of Matter (2014)",type:"story",url:"https://arxiv.org/abs/1401.1219"},{by:"leephillips",descendants:2,id:14202078,kids:[14202122],score:5,time:1493205152,title:"The Republican Lawmaker Who Secretly Created Reddit\u2019s Women-Hating \u2018Red Pill\u2019",
-type:"story",url:"http://www.thedailybeast.com/articles/2017/04/25/the-republican-lawmaker-who-secretly-created-reddit-s-women-hating-red-pill.html"},{by:"anguswithgusto",descendants:55,id:14196325,kids:[14197131,14196789,14197299,14197466,14196737,14199929,14197550,14197511,14196888,14200109,14197101],score:80,time:1493143475,title:"Gett in advanced talks to buy Juno for $250M as Uber rivals consolidate",type:"story",url:"https://techcrunch.com/2017/04/25/gett-in-advanced-talks-to-buy-juno-for-250m-as-uber-rivals-consolidate/"},
-{by:"fabuzaid",descendants:2,id:14196339,kids:[14201557,14201170],score:46,time:1493143560,title:"Implementing a Fast Research Compiler in Rust",type:"story",url:"http://dawn.cs.stanford.edu/blog/weld.html"},{by:"bluesilver07",descendants:61,id:14196154,kids:[14197614,14196853,14197074,14197050,14200090,14197731,14196352,14197442],score:72,time:1493142448,title:"Xenko Game Engine 2.0 released",type:"story",url:"http://xenko.com/blog/release-xenko-2-0-0/"},{by:"molecule",descendants:254,id:14189392,
-kids:[14190198,14190800,14193591,14190274,14189796,14190118,14190405,14190006,14189430,14190244,14189877,14190064,14190211,14189918,14190071,14191312,14195969,14190542,14194775,14189900,14190032,14189847,14192128,14191737,14191047,14190992,14192759,14191405,14190815,14194136,14190737,14190552,14191385,14189816,14191316,14193780,14193979,14190768,14192973,14191217,14190879,14190780,14189914,14190925,14192906,14190528,14189893,14190007,14189929,14190049,14191859,14191304,14190177,14193355,14193352,
-14190324,14190846,14189803],score:630,time:1493076480,title:"Robert M. Pirsig has died",type:"story",url:"http://www.npr.org/sections/thetwo-way/2017/04/24/525443040/-zen-and-the-art-of-motorcycle-maintenance-author-robert-m-pirsig-dies-at-88"},{by:"artsandsci",descendants:67,id:14194422,kids:[14199418,14196266,14197226,14196647,14196324,14201761,14196265,14195599,14199054,14196057],score:127,time:1493134376,title:"An extra-uterine system to physiologically support the extreme premature lamb",type:"story",
-url:"https://www.nature.com/articles/ncomms15112"},{by:"miobrien",descendants:9,id:14198261,kids:[14199610,14199447,14199862,14201753,14199068],score:30,time:1493155969,title:"Prior Indigenous Technological Species",type:"story",url:"https://arxiv.org/abs/1704.07263"},{by:"zdw",descendants:2,id:14199197,kids:[14200610],score:12,time:1493163087,title:"Should Curve25519 keys be validated?",type:"story",url:"https://research.kudelskisecurity.com/2017/04/25/should-ecdh-keys-be-validated/"},{by:"spearo77",
-descendants:213,id:14189688,kids:[14191654,14192373,14190683,14192095,14191856,14190771,14190570,14190599,14190721,14192049,14189694,14191430,14193610,14190543,14190372,14191818,14192171,14192177,14192135,14191483,14190560,14190341,14190362,14190452,14192563,14190458,14195245,14190809,14192706,14192959,14190636,14190634,14190368,14191163,14191379,14190668,14191673,14190884,14192565,14190480,14190442],score:447,time:1493079289,title:"WikiTribune \u2013 Evidence-based journalism",type:"story",url:"https://www.wikitribune.com"},
-{by:"adbrebs",descendants:294,id:14182262,kids:[14183335,14183715,14182725,14183897,14185812,14184510,14182468,14183231,14182580,14183996,14182449,14185671,14182428,14182666,14186599,14182519,14185571,14185159,14182636,14185864,14188340,14183433,14183146,14184034,14184363,14183368,14183098,14182495,14182753,14184720,14188085,14187692,14183633,14188137,14182606,14186796,14196166,14185084,14185899,14188219,14186885,14183406,14185561,14183388,14191457,14183281,14183399,14183674,14183236,14183990,14183760,
-14183248,14184114,14183318,14183457,14186509,14186900,14186695,14188405,14184636,14184630,14188301,14184144,14183023,14184555,14185946,14184611,14184490,14183653,14183881,14182715,14184440,14182573,14183251,14184962,14187249,14182545,14192314],score:1356,time:1493014335,title:"Lyrebird \u2013 An API to copy the voice of anyone",type:"story",url:"https://lyrebird.ai/demo"},{by:"mathgenius",descendants:6,id:14192442,kids:[14197265,14195645],score:43,time:1493118936,title:"Quantum \u2013 Open journal for quantum science",
-type:"story",url:"http://quantum-journal.org/papers/"},{by:"tjalfi",descendants:5,id:14190937,kids:[14199744,14197114,14190946],score:107,time:1493097061,title:"A Seven Dimensional Analysis of Hashing Methods [pdf]",type:"story",url:"http://www.vldb.org/pvldb/vol9/p96-richter.pdf"},{by:"mxstbr",descendants:0,id:14196935,score:24,time:1493147015,title:"One GraphQL Client for JavaScript, iOS, and Android",type:"story",url:"https://dev-blog.apollodata.com/one-graphql-client-for-javascript-ios-and-android-64993c1b7991"},
-{by:"uptown",descendants:166,id:14192817,kids:[14197690,14195597,14196750,14195237,14196320,14195150,14198816,14194916,14197746,14196332,14194695,14196726,14194947,14199715,14195059,14195778,14196204,14200435,14194780,14195030,14198452,14199023,14194852,14197577,14197778,14195361,14196368,14194948,14199024,14195060,14199498],score:226,time:1493123621,title:"How Yahoo Killed Flickr (2012)",type:"story",url:"https://gizmodo.com/5910223/how-yahoo-killed-flickr-and-lost-the-internet"},{by:"mattklein123",
-descendants:42,id:14194026,kids:[14194573,14195577,14194430,14195407,14194569,14195298,14200054,14194456,14198329,14199198],score:167,time:1493131921,title:"Envoy: 7 months later",type:"story",url:"https://eng.lyft.com/envoy-7-months-later-41986c2fd443"},{by:"misnamed",descendants:2,id:14191333,kids:[14197296],score:29,time:1493103250,title:"Modern Hieroglyphs: Binary Logic Behind the Universal \u201cPower Symbol\u201d",type:"story",url:"http://99percentinvisible.org/article/modern-hieroglyphics-binary-logic-behind-universal-power-symbol/"},
-{by:"LaFolle",descendants:92,id:14191681,kids:[14192477,14194490,14192316,14193364,14192065,14193499,14194324,14192622,14192020,14195866,14192496,14196391,14192138,14192714,14195151,14195094,14192110,14192155],score:138,time:1493108371,title:"Feynman Algorithm (2014)",type:"story",url:"http://wiki.c2.com/?FeynmanAlgorithm"},{by:"Thevet",descendants:18,id:14190736,kids:[14197744,14195753,14197880,14197735,14195874,14197023,14196660],score:81,time:1493093860,title:"The legend of the Legion",type:"story",
-url:"https://aeon.co/essays/why-young-men-queue-up-to-die-in-the-french-foreign-legion"},{by:"bufordsharkley",descendants:92,id:14197013,kids:[14197983,14197168,14197701,14198239,14197514,14198064,14197476,14198489,14197761,14197080,14198905,14198068,14198579],score:69,time:1493147532,title:"Cracking the Mystery of Labor's Falling Share of GDP",type:"story",url:"https://www.bloomberg.com/view/articles/2017-04-24/cracking-the-mystery-of-labor-s-falling-share-of-gdp"},{by:"rbanffy",descendants:27,id:14198470,
-kids:[14199443,14201987,14199461,14199729,14201519,14198762,14199524],score:52,time:1493157378,title:"How the Internet Gave Mail-Order Brides the Power",type:"story",url:"https://backchannel.com/how-the-internet-gave-mail-order-brides-the-power-1af8c8a40562"}]}))),Ya);alert(performance.now()-Za)});
+(function (factory) {
+  typeof define === 'function' && define.amd ? define(factory) :
+  factory();
+}(function () { 'use strict';
+
+  function _extends() {
+    _extends = Object.assign || function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+
+      return target;
+    };
+
+    return _extends.apply(this, arguments);
+  }
+
+  var isArray = Array.isArray;
+
+  function isStringOrNumber(o) {
+    var type = typeof o;
+    return type === 'string' || type === 'number';
+  }
+
+  function isNullOrUndef(o) {
+    return o === void 0 || o === null;
+  }
+
+  function isInvalid(o) {
+    return o === null || o === false || o === true || o === void 0;
+  }
+
+  function isFunction(o) {
+    return typeof o === 'function';
+  }
+
+  function isString(o) {
+    return typeof o === 'string';
+  }
+
+  function isNumber(o) {
+    return typeof o === 'number';
+  }
+
+  function isNull(o) {
+    return o === null;
+  }
+
+  function isUndefined(o) {
+    return o === void 0;
+  }
+
+  function combineFrom(first, second) {
+    var out = {};
+
+    if (first) {
+      for (var key in first) {
+        out[key] = first[key];
+      }
+    }
+
+    if (second) {
+      for (var key$1 in second) {
+        out[key$1] = second[key$1];
+      }
+    }
+
+    return out;
+  }
+
+
+  function isLinkEventObject(o) {
+    return !isNull(o) && typeof o === 'object';
+  } // We need EMPTY_OBJ defined in one place.
+  // Its used for comparison so we cant inline it into shared
+
+
+  var EMPTY_OBJ = {};
+
+  function normalizeEventName(name) {
+    return name.substr(2).toLowerCase();
+  }
+
+  function appendChild(parentDOM, dom) {
+    parentDOM.appendChild(dom);
+  }
+
+  function insertOrAppend(parentDOM, newNode, nextNode) {
+    if (isNull(nextNode)) {
+      appendChild(parentDOM, newNode);
+    } else {
+      parentDOM.insertBefore(newNode, nextNode);
+    }
+  }
+
+  function documentCreateElement(tag, isSVG) {
+    if (isSVG) {
+      return document.createElementNS('http://www.w3.org/2000/svg', tag);
+    }
+
+    return document.createElement(tag);
+  }
+
+  function replaceChild(parentDOM, newDom, lastDom) {
+    parentDOM.replaceChild(newDom, lastDom);
+  }
+
+  function removeChild(parentDOM, childNode) {
+    parentDOM.removeChild(childNode);
+  }
+
+  function callAll(arrayFn) {
+    for (var i = 0; i < arrayFn.length; i++) {
+      arrayFn[i]();
+    }
+  }
+
+  function findChildVNode(vNode, startEdge, flags) {
+    var children = vNode.children;
+
+    if (flags & 4
+    /* ComponentClass */
+    ) {
+        return children.$LI;
+      }
+
+    if (flags & 8192
+    /* Fragment */
+    ) {
+        return vNode.childFlags === 2
+        /* HasVNodeChildren */
+        ? children : children[startEdge ? 0 : children.length - 1];
+      }
+
+    return children;
+  }
+
+  function findDOMfromVNode(vNode, startEdge) {
+    var flags;
+
+    while (vNode) {
+      flags = vNode.flags;
+
+      if (flags & 2033
+      /* DOMRef */
+      ) {
+          return vNode.dom;
+        }
+
+      vNode = findChildVNode(vNode, startEdge, flags);
+    }
+
+    return null;
+  }
+
+  function removeVNodeDOM(vNode, parentDOM) {
+    do {
+      var flags = vNode.flags;
+
+      if (flags & 2033
+      /* DOMRef */
+      ) {
+          removeChild(parentDOM, vNode.dom);
+          return;
+        }
+
+      var children = vNode.children;
+
+      if (flags & 4
+      /* ComponentClass */
+      ) {
+          vNode = children.$LI;
+        }
+
+      if (flags & 8
+      /* ComponentFunction */
+      ) {
+          vNode = children;
+        }
+
+      if (flags & 8192
+      /* Fragment */
+      ) {
+          if (vNode.childFlags === 2
+          /* HasVNodeChildren */
+          ) {
+              vNode = children;
+            } else {
+            for (var i = 0, len = children.length; i < len; ++i) {
+              removeVNodeDOM(children[i], parentDOM);
+            }
+
+            return;
+          }
+        }
+    } while (vNode);
+  }
+
+  function moveVNodeDOM(vNode, parentDOM, nextNode) {
+    do {
+      var flags = vNode.flags;
+
+      if (flags & 2033
+      /* DOMRef */
+      ) {
+          insertOrAppend(parentDOM, vNode.dom, nextNode);
+          return;
+        }
+
+      var children = vNode.children;
+
+      if (flags & 4
+      /* ComponentClass */
+      ) {
+          vNode = children.$LI;
+        }
+
+      if (flags & 8
+      /* ComponentFunction */
+      ) {
+          vNode = children;
+        }
+
+      if (flags & 8192
+      /* Fragment */
+      ) {
+          if (vNode.childFlags === 2
+          /* HasVNodeChildren */
+          ) {
+              vNode = children;
+            } else {
+            for (var i = 0, len = children.length; i < len; ++i) {
+              moveVNodeDOM(children[i], parentDOM, nextNode);
+            }
+
+            return;
+          }
+        }
+    } while (vNode);
+  }
+
+  function createDerivedState(instance, nextProps, state) {
+    if (instance.constructor.getDerivedStateFromProps) {
+      return combineFrom(state, instance.constructor.getDerivedStateFromProps(nextProps, state));
+    }
+
+    return state;
+  }
+  var options = {
+    componentComparator: null,
+    createVNode: null,
+    renderComplete: null
+  };
+
+  function setTextContent(dom, children) {
+    dom.textContent = children;
+  } // Calling this function assumes, nextValue is linkEvent
+
+
+  function isLastValueSameLinkEvent(lastValue, nextValue) {
+    return isLinkEventObject(lastValue) && lastValue.event === nextValue.event && lastValue.data === nextValue.data;
+  }
+
+  function mergeUnsetProperties(to, from) {
+    for (var propName in from) {
+      if (isUndefined(to[propName])) {
+        to[propName] = from[propName];
+      }
+    }
+
+    return to;
+  }
+
+  function safeCall1(method, arg1) {
+    return !!isFunction(method) && (method(arg1), true);
+  }
+
+  var keyPrefix = '$';
+
+  function V(childFlags, children, className, flags, key, props, ref, type) {
+    this.childFlags = childFlags;
+    this.children = children;
+    this.className = className;
+    this.dom = null;
+    this.flags = flags;
+    this.key = key === void 0 ? null : key;
+    this.props = props === void 0 ? null : props;
+    this.ref = ref === void 0 ? null : ref;
+    this.type = type;
+  }
+
+  function createVNode(flags, type, className, children, childFlags, props, key, ref) {
+    var childFlag = childFlags === void 0 ? 1
+    /* HasInvalidChildren */
+    : childFlags;
+    var vNode = new V(childFlag, children, className, flags, key, props, ref, type);
+
+    if (childFlag === 0
+    /* UnknownChildren */
+    ) {
+        normalizeChildren(vNode, vNode.children);
+      }
+
+    return vNode;
+  }
+
+  function mergeDefaultHooks(flags, type, ref) {
+    if (flags & 4
+    /* ComponentClass */
+    ) {
+        return ref;
+      }
+
+    var defaultHooks = (flags & 32768
+    /* ForwardRef */
+    ? type.render : type).defaultHooks;
+
+    if (isNullOrUndef(defaultHooks)) {
+      return ref;
+    }
+
+    if (isNullOrUndef(ref)) {
+      return defaultHooks;
+    }
+
+    return mergeUnsetProperties(ref, defaultHooks);
+  }
+
+  function mergeDefaultProps(flags, type, props) {
+    // set default props
+    var defaultProps = (flags & 32768
+    /* ForwardRef */
+    ? type.render : type).defaultProps;
+
+    if (isNullOrUndef(defaultProps)) {
+      return props;
+    }
+
+    if (isNullOrUndef(props)) {
+      return combineFrom(defaultProps, null);
+    }
+
+    return mergeUnsetProperties(props, defaultProps);
+  }
+
+  function resolveComponentFlags(flags, type) {
+    if (flags & 12
+    /* ComponentKnown */
+    ) {
+        return flags;
+      }
+
+    if (type.prototype && type.prototype.render) {
+      return 4
+      /* ComponentClass */
+      ;
+    }
+
+    if (type.render) {
+      return 32776
+      /* ForwardRefComponent */
+      ;
+    }
+
+    return 8
+    /* ComponentFunction */
+    ;
+  }
+
+  function createComponentVNode(flags, type, props, key, ref) {
+    flags = resolveComponentFlags(flags, type);
+    var vNode = new V(1
+    /* HasInvalidChildren */
+    , null, null, flags, key, mergeDefaultProps(flags, type, props), mergeDefaultHooks(flags, type, ref), type);
+
+    return vNode;
+  }
+
+  function createTextVNode(text, key) {
+    return new V(1
+    /* HasInvalidChildren */
+    , isNullOrUndef(text) || text === true || text === false ? '' : text, null, 16
+    /* Text */
+    , key, null, null, null);
+  }
+
+  function createFragment(children, childFlags, key) {
+    var fragment = createVNode(8192
+    /* Fragment */
+    , 8192
+    /* Fragment */
+    , null, children, childFlags, null, key, null);
+
+    switch (fragment.childFlags) {
+      case 1
+      /* HasInvalidChildren */
+      :
+        fragment.children = createVoidVNode();
+        fragment.childFlags = 2
+        /* HasVNodeChildren */
+        ;
+        break;
+
+      case 16
+      /* HasTextChildren */
+      :
+        fragment.children = [createTextVNode(children)];
+        fragment.childFlags = 4
+        /* HasNonKeyedChildren */
+        ;
+        break;
+    }
+
+    return fragment;
+  }
+
+  function normalizeProps(vNode) {
+    var props = vNode.props;
+
+    if (props) {
+      var flags = vNode.flags;
+
+      if (flags & 481
+      /* Element */
+      ) {
+          if (props.children !== void 0 && isNullOrUndef(vNode.children)) {
+            normalizeChildren(vNode, props.children);
+          }
+
+          if (props.className !== void 0) {
+            vNode.className = props.className || null;
+            props.className = undefined;
+          }
+        }
+
+      if (props.key !== void 0) {
+        vNode.key = props.key;
+        props.key = undefined;
+      }
+
+      if (props.ref !== void 0) {
+        if (flags & 8
+        /* ComponentFunction */
+        ) {
+            vNode.ref = combineFrom(vNode.ref, props.ref);
+          } else {
+          vNode.ref = props.ref;
+        }
+
+        props.ref = undefined;
+      }
+    }
+
+    return vNode;
+  }
+  /*
+   * Fragment is different than normal vNode,
+   * because when it needs to be cloned we need to clone its children too
+   * But not normalize, because otherwise those possibly get KEY and re-mount
+   */
+
+
+  function cloneFragment(vNodeToClone) {
+    var clonedChildren;
+    var oldChildren = vNodeToClone.children;
+    var childFlags = vNodeToClone.childFlags;
+
+    if (childFlags === 2
+    /* HasVNodeChildren */
+    ) {
+        clonedChildren = directClone(oldChildren);
+      } else if (childFlags & 12
+    /* MultipleChildren */
+    ) {
+        clonedChildren = [];
+
+        for (var i = 0, len = oldChildren.length; i < len; ++i) {
+          clonedChildren.push(directClone(oldChildren[i]));
+        }
+      }
+
+    return createFragment(clonedChildren, childFlags, vNodeToClone.key);
+  }
+
+  function directClone(vNodeToClone) {
+    var flags = vNodeToClone.flags & -16385
+    /* ClearInUse */
+    ;
+    var props = vNodeToClone.props;
+
+    if (flags & 14
+    /* Component */
+    ) {
+        if (!isNull(props)) {
+          var propsToClone = props;
+          props = {};
+
+          for (var key in propsToClone) {
+            props[key] = propsToClone[key];
+          }
+        }
+      }
+
+    if ((flags & 8192
+    /* Fragment */
+    ) === 0) {
+      return new V(vNodeToClone.childFlags, vNodeToClone.children, vNodeToClone.className, flags, vNodeToClone.key, props, vNodeToClone.ref, vNodeToClone.type);
+    }
+
+    return cloneFragment(vNodeToClone);
+  }
+
+  function createVoidVNode() {
+    return createTextVNode('', null);
+  }
+
+  function _normalizeVNodes(nodes, result, index, currentKey) {
+    for (var len = nodes.length; index < len; index++) {
+      var n = nodes[index];
+
+      if (!isInvalid(n)) {
+        var newKey = currentKey + keyPrefix + index;
+
+        if (isArray(n)) {
+          _normalizeVNodes(n, result, 0, newKey);
+        } else {
+          if (isStringOrNumber(n)) {
+            n = createTextVNode(n, newKey);
+          } else {
+            var oldKey = n.key;
+            var isPrefixedKey = isString(oldKey) && oldKey[0] === keyPrefix;
+
+            if (n.flags & 81920
+            /* InUseOrNormalized */
+            || isPrefixedKey) {
+              n = directClone(n);
+            }
+
+            n.flags |= 65536
+            /* Normalized */
+            ;
+
+            if (!isPrefixedKey) {
+              if (isNull(oldKey)) {
+                n.key = newKey;
+              } else {
+                n.key = currentKey + oldKey;
+              }
+            } else if (oldKey.substring(0, currentKey.length) !== currentKey) {
+              n.key = currentKey + oldKey;
+            }
+          }
+
+          result.push(n);
+        }
+      }
+    }
+  }
+
+  function normalizeChildren(vNode, children) {
+    var newChildren;
+    var newChildFlags = 1
+    /* HasInvalidChildren */
+    ; // Don't change children to match strict equal (===) true in patching
+
+    if (isInvalid(children)) {
+      newChildren = children;
+    } else if (isStringOrNumber(children)) {
+      newChildFlags = 16
+      /* HasTextChildren */
+      ;
+      newChildren = children;
+    } else if (isArray(children)) {
+      var len = children.length;
+
+      for (var i = 0; i < len; ++i) {
+        var n = children[i];
+
+        if (isInvalid(n) || isArray(n)) {
+          newChildren = newChildren || children.slice(0, i);
+
+          _normalizeVNodes(children, newChildren, i, '');
+
+          break;
+        } else if (isStringOrNumber(n)) {
+          newChildren = newChildren || children.slice(0, i);
+          newChildren.push(createTextVNode(n, keyPrefix + i));
+        } else {
+          var key = n.key;
+          var needsCloning = (n.flags & 81920
+          /* InUseOrNormalized */
+          ) > 0;
+          var isNullKey = isNull(key);
+          var isPrefixed = isString(key) && key[0] === keyPrefix;
+
+          if (needsCloning || isNullKey || isPrefixed) {
+            newChildren = newChildren || children.slice(0, i);
+
+            if (needsCloning || isPrefixed) {
+              n = directClone(n);
+            }
+
+            if (isNullKey || isPrefixed) {
+              n.key = keyPrefix + i;
+            }
+
+            newChildren.push(n);
+          } else if (newChildren) {
+            newChildren.push(n);
+          }
+
+          n.flags |= 65536
+          /* Normalized */
+          ;
+        }
+      }
+
+      newChildren = newChildren || children;
+
+      if (newChildren.length === 0) {
+        newChildFlags = 1
+        /* HasInvalidChildren */
+        ;
+      } else {
+        newChildFlags = 8
+        /* HasKeyedChildren */
+        ;
+      }
+    } else {
+      newChildren = children;
+      newChildren.flags |= 65536
+      /* Normalized */
+      ;
+
+      if (children.flags & 81920
+      /* InUseOrNormalized */
+      ) {
+          newChildren = directClone(children);
+        }
+
+      newChildFlags = 2
+      /* HasVNodeChildren */
+      ;
+    }
+
+    vNode.children = newChildren;
+    vNode.childFlags = newChildFlags;
+    return vNode;
+  }
+
+  function normalizeRoot(input) {
+    if (isInvalid(input) || isStringOrNumber(input)) {
+      return createTextVNode(input, null);
+    }
+
+    if (isArray(input)) {
+      return createFragment(input, 0
+      /* UnknownChildren */
+      , null);
+    }
+
+    return input.flags & 16384
+    /* InUse */
+    ? directClone(input) : input;
+  }
+
+  var xlinkNS = 'http://www.w3.org/1999/xlink';
+  var xmlNS = 'http://www.w3.org/XML/1998/namespace';
+  var namespaces = {
+    'xlink:actuate': xlinkNS,
+    'xlink:arcrole': xlinkNS,
+    'xlink:href': xlinkNS,
+    'xlink:role': xlinkNS,
+    'xlink:show': xlinkNS,
+    'xlink:title': xlinkNS,
+    'xlink:type': xlinkNS,
+    'xml:base': xmlNS,
+    'xml:lang': xmlNS,
+    'xml:space': xmlNS
+  };
+
+  function getDelegatedEventObject(v) {
+    return {
+      onClick: v,
+      onDblClick: v,
+      onFocusIn: v,
+      onFocusOut: v,
+      onKeyDown: v,
+      onKeyPress: v,
+      onKeyUp: v,
+      onMouseDown: v,
+      onMouseMove: v,
+      onMouseUp: v,
+      onTouchEnd: v,
+      onTouchMove: v,
+      onTouchStart: v
+    };
+  }
+
+  var attachedEventCounts = getDelegatedEventObject(0);
+  var attachedEvents = getDelegatedEventObject(null);
+  var syntheticEvents = getDelegatedEventObject(true);
+
+  function updateOrAddSyntheticEvent(name, dom) {
+    var eventsObject = dom.$EV;
+
+    if (!eventsObject) {
+      eventsObject = dom.$EV = getDelegatedEventObject(null);
+    }
+
+    if (!eventsObject[name]) {
+      if (++attachedEventCounts[name] === 1) {
+        attachedEvents[name] = attachEventToDocument(name);
+      }
+    }
+
+    return eventsObject;
+  }
+
+  function unmountSyntheticEvent(name, dom) {
+    var eventsObject = dom.$EV;
+
+    if (eventsObject && eventsObject[name]) {
+      if (--attachedEventCounts[name] === 0) {
+        document.removeEventListener(normalizeEventName(name), attachedEvents[name]);
+        attachedEvents[name] = null;
+      }
+
+      eventsObject[name] = null;
+    }
+  }
+
+  function handleSyntheticEvent(name, lastEvent, nextEvent, dom) {
+    if (isFunction(nextEvent)) {
+      updateOrAddSyntheticEvent(name, dom)[name] = nextEvent;
+    } else if (isLinkEventObject(nextEvent)) {
+      if (isLastValueSameLinkEvent(lastEvent, nextEvent)) {
+        return;
+      }
+
+      updateOrAddSyntheticEvent(name, dom)[name] = nextEvent;
+    } else {
+      unmountSyntheticEvent(name, dom);
+    }
+  } // When browsers fully support event.composedPath we could loop it through instead of using parentNode property
+
+
+  function getTargetNode(event) {
+    return isFunction(event.composedPath) ? event.composedPath()[0] : event.target;
+  }
+
+  function dispatchEvents(event, isClick, name, eventData) {
+    var dom = getTargetNode(event);
+
+    do {
+      // Html Nodes can be nested fe: span inside button in that scenario browser does not handle disabled attribute on parent,
+      // because the event listener is on document.body
+      // Don't process clicks on disabled elements
+      if (isClick && dom.disabled) {
+        return;
+      }
+
+      var eventsObject = dom.$EV;
+
+      if (eventsObject) {
+        var currentEvent = eventsObject[name];
+
+        if (currentEvent) {
+          // linkEvent object
+          eventData.dom = dom;
+          currentEvent.event ? currentEvent.event(currentEvent.data, event) : currentEvent(event);
+
+          if (event.cancelBubble) {
+            return;
+          }
+        }
+      }
+
+      dom = dom.parentNode;
+    } while (!isNull(dom));
+  }
+
+  function stopPropagation() {
+    this.cancelBubble = true;
+
+    if (!this.immediatePropagationStopped) {
+      this.stopImmediatePropagation();
+    }
+  }
+
+  function isDefaultPrevented() {
+    return this.defaultPrevented;
+  }
+
+  function isPropagationStopped() {
+    return this.cancelBubble;
+  }
+
+  function extendEventProperties(event) {
+    // Event data needs to be object to save reference to currentTarget getter
+    var eventData = {
+      dom: document
+    };
+    event.isDefaultPrevented = isDefaultPrevented;
+    event.isPropagationStopped = isPropagationStopped;
+    event.stopPropagation = stopPropagation;
+    Object.defineProperty(event, 'currentTarget', {
+      configurable: true,
+      get: function get() {
+        return eventData.dom;
+      }
+    });
+    return eventData;
+  }
+
+  function rootClickEvent(name) {
+    return function (event) {
+      if (event.button !== 0) {
+        // Firefox incorrectly triggers click event for mid/right mouse buttons.
+        // This bug has been active for 17 years.
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=184051
+        event.stopPropagation();
+        return;
+      }
+
+      dispatchEvents(event, true, name, extendEventProperties(event));
+    };
+  }
+
+  function rootEvent(name) {
+    return function (event) {
+      dispatchEvents(event, false, name, extendEventProperties(event));
+    };
+  }
+
+  function attachEventToDocument(name) {
+    var attachedEvent = name === 'onClick' || name === 'onDblClick' ? rootClickEvent(name) : rootEvent(name);
+    document.addEventListener(normalizeEventName(name), attachedEvent);
+    return attachedEvent;
+  }
+
+  function isSameInnerHTML(dom, innerHTML) {
+    var tempdom = document.createElement('i');
+    tempdom.innerHTML = innerHTML;
+    return tempdom.innerHTML === dom.innerHTML;
+  }
+
+  function triggerEventListener(props, methodName, e) {
+    if (props[methodName]) {
+      var listener = props[methodName];
+
+      if (listener.event) {
+        listener.event(listener.data, e);
+      } else {
+        listener(e);
+      }
+    } else {
+      var nativeListenerName = methodName.toLowerCase();
+
+      if (props[nativeListenerName]) {
+        props[nativeListenerName](e);
+      }
+    }
+  }
+
+  function createWrappedFunction(methodName, applyValue) {
+    var fnMethod = function fnMethod(e) {
+      var vNode = this.$V; // If vNode is gone by the time event fires, no-op
+
+      if (!vNode) {
+        return;
+      }
+
+      var props = vNode.props || EMPTY_OBJ;
+      var dom = vNode.dom;
+
+      if (isString(methodName)) {
+        triggerEventListener(props, methodName, e);
+      } else {
+        for (var i = 0; i < methodName.length; ++i) {
+          triggerEventListener(props, methodName[i], e);
+        }
+      }
+
+      if (isFunction(applyValue)) {
+        var newVNode = this.$V;
+        var newProps = newVNode.props || EMPTY_OBJ;
+        applyValue(newProps, dom, false, newVNode);
+      }
+    };
+
+    Object.defineProperty(fnMethod, 'wrapped', {
+      configurable: false,
+      enumerable: false,
+      value: true,
+      writable: false
+    });
+    return fnMethod;
+  }
+
+  function attachEvent(dom, eventName, handler) {
+    var previousKey = "$" + eventName;
+    var previousArgs = dom[previousKey];
+
+    if (previousArgs) {
+      if (previousArgs[1].wrapped) {
+        return;
+      }
+
+      dom.removeEventListener(previousArgs[0], previousArgs[1]);
+      dom[previousKey] = null;
+    }
+
+    if (isFunction(handler)) {
+      dom.addEventListener(eventName, handler);
+      dom[previousKey] = [eventName, handler];
+    }
+  }
+
+  function isCheckedType(type) {
+    return type === 'checkbox' || type === 'radio';
+  }
+
+  var onTextInputChange = createWrappedFunction('onInput', applyValueInput);
+  var wrappedOnChange = createWrappedFunction(['onClick', 'onChange'], applyValueInput);
+  /* tslint:disable-next-line:no-empty */
+
+  function emptywrapper(event) {
+    event.stopPropagation();
+  }
+
+  emptywrapper.wrapped = true;
+
+  function inputEvents(dom, nextPropsOrEmpty) {
+    if (isCheckedType(nextPropsOrEmpty.type)) {
+      attachEvent(dom, 'change', wrappedOnChange);
+      attachEvent(dom, 'click', emptywrapper);
+    } else {
+      attachEvent(dom, 'input', onTextInputChange);
+    }
+  }
+
+  function applyValueInput(nextPropsOrEmpty, dom) {
+    var type = nextPropsOrEmpty.type;
+    var value = nextPropsOrEmpty.value;
+    var checked = nextPropsOrEmpty.checked;
+    var multiple = nextPropsOrEmpty.multiple;
+    var defaultValue = nextPropsOrEmpty.defaultValue;
+    var hasValue = !isNullOrUndef(value);
+
+    if (type && type !== dom.type) {
+      dom.setAttribute('type', type);
+    }
+
+    if (!isNullOrUndef(multiple) && multiple !== dom.multiple) {
+      dom.multiple = multiple;
+    }
+
+    if (!isNullOrUndef(defaultValue) && !hasValue) {
+      dom.defaultValue = defaultValue + '';
+    }
+
+    if (isCheckedType(type)) {
+      if (hasValue) {
+        dom.value = value;
+      }
+
+      if (!isNullOrUndef(checked)) {
+        dom.checked = checked;
+      }
+    } else {
+      if (hasValue && dom.value !== value) {
+        dom.defaultValue = value;
+        dom.value = value;
+      } else if (!isNullOrUndef(checked)) {
+        dom.checked = checked;
+      }
+    }
+  }
+
+  function updateChildOptions(vNode, value) {
+    if (vNode.type === 'option') {
+      updateChildOption(vNode, value);
+    } else {
+      var children = vNode.children;
+      var flags = vNode.flags;
+
+      if (flags & 4
+      /* ComponentClass */
+      ) {
+          updateChildOptions(children.$LI, value);
+        } else if (flags & 8
+      /* ComponentFunction */
+      ) {
+          updateChildOptions(children, value);
+        } else if (vNode.childFlags === 2
+      /* HasVNodeChildren */
+      ) {
+          updateChildOptions(children, value);
+        } else if (vNode.childFlags & 12
+      /* MultipleChildren */
+      ) {
+          for (var i = 0, len = children.length; i < len; ++i) {
+            updateChildOptions(children[i], value);
+          }
+        }
+    }
+  }
+
+  function updateChildOption(vNode, value) {
+    var props = vNode.props || EMPTY_OBJ;
+    var dom = vNode.dom; // we do this as multiple may have changed
+
+    dom.value = props.value;
+
+    if (props.value === value || isArray(value) && value.indexOf(props.value) !== -1) {
+      dom.selected = true;
+    } else if (!isNullOrUndef(value) || !isNullOrUndef(props.selected)) {
+      dom.selected = props.selected || false;
+    }
+  }
+
+  var onSelectChange = createWrappedFunction('onChange', applyValueSelect);
+
+  function selectEvents(dom) {
+    attachEvent(dom, 'change', onSelectChange);
+  }
+
+  function applyValueSelect(nextPropsOrEmpty, dom, mounting, vNode) {
+    var multiplePropInBoolean = Boolean(nextPropsOrEmpty.multiple);
+
+    if (!isNullOrUndef(nextPropsOrEmpty.multiple) && multiplePropInBoolean !== dom.multiple) {
+      dom.multiple = multiplePropInBoolean;
+    }
+
+    var index = nextPropsOrEmpty.selectedIndex;
+
+    if (index === -1) {
+      dom.selectedIndex = -1;
+    }
+
+    var childFlags = vNode.childFlags;
+
+    if (childFlags !== 1
+    /* HasInvalidChildren */
+    ) {
+        var value = nextPropsOrEmpty.value;
+
+        if (isNumber(index) && index > -1 && dom.options[index]) {
+          value = dom.options[index].value;
+        }
+
+        if (mounting && isNullOrUndef(value)) {
+          value = nextPropsOrEmpty.defaultValue;
+        }
+
+        updateChildOptions(vNode, value);
+      }
+  }
+
+  var onTextareaInputChange = createWrappedFunction('onInput', applyValueTextArea);
+  var wrappedOnChange$1 = createWrappedFunction('onChange');
+
+  function textAreaEvents(dom, nextPropsOrEmpty) {
+    attachEvent(dom, 'input', onTextareaInputChange);
+
+    if (nextPropsOrEmpty.onChange) {
+      attachEvent(dom, 'change', wrappedOnChange$1);
+    }
+  }
+
+  function applyValueTextArea(nextPropsOrEmpty, dom, mounting) {
+    var value = nextPropsOrEmpty.value;
+    var domValue = dom.value;
+
+    if (isNullOrUndef(value)) {
+      if (mounting) {
+        var defaultValue = nextPropsOrEmpty.defaultValue;
+
+        if (!isNullOrUndef(defaultValue) && defaultValue !== domValue) {
+          dom.defaultValue = defaultValue;
+          dom.value = defaultValue;
+        }
+      }
+    } else if (domValue !== value) {
+      /* There is value so keep it controlled */
+      dom.defaultValue = value;
+      dom.value = value;
+    }
+  }
+  /**
+   * There is currently no support for switching same input between controlled and nonControlled
+   * If that ever becomes a real issue, then re design controlled elements
+   * Currently user must choose either controlled or non-controlled and stick with that
+   */
+
+
+  function processElement(flags, vNode, dom, nextPropsOrEmpty, mounting, isControlled) {
+    if (flags & 64
+    /* InputElement */
+    ) {
+        applyValueInput(nextPropsOrEmpty, dom);
+      } else if (flags & 256
+    /* SelectElement */
+    ) {
+        applyValueSelect(nextPropsOrEmpty, dom, mounting, vNode);
+      } else if (flags & 128
+    /* TextareaElement */
+    ) {
+        applyValueTextArea(nextPropsOrEmpty, dom, mounting);
+      }
+
+    if (isControlled) {
+      dom.$V = vNode;
+    }
+  }
+
+  function addFormElementEventHandlers(flags, dom, nextPropsOrEmpty) {
+    if (flags & 64
+    /* InputElement */
+    ) {
+        inputEvents(dom, nextPropsOrEmpty);
+      } else if (flags & 256
+    /* SelectElement */
+    ) {
+        selectEvents(dom);
+      } else if (flags & 128
+    /* TextareaElement */
+    ) {
+        textAreaEvents(dom, nextPropsOrEmpty);
+      }
+  }
+
+  function isControlledFormElement(nextPropsOrEmpty) {
+    return nextPropsOrEmpty.type && isCheckedType(nextPropsOrEmpty.type) ? !isNullOrUndef(nextPropsOrEmpty.checked) : !isNullOrUndef(nextPropsOrEmpty.value);
+  }
+
+  function unmountRef(ref) {
+    if (ref) {
+      if (!safeCall1(ref, null) && ref.current) {
+        ref.current = null;
+      }
+    }
+  }
+
+  function mountRef(ref, value, lifecycle) {
+    if (ref && (isFunction(ref) || ref.current !== void 0)) {
+      lifecycle.push(function () {
+        if (!safeCall1(ref, value) && ref.current !== void 0) {
+          ref.current = value;
+        }
+      });
+    }
+  }
+
+  function remove(vNode, parentDOM) {
+    unmount(vNode);
+    removeVNodeDOM(vNode, parentDOM);
+  }
+
+  function unmount(vNode) {
+    var flags = vNode.flags;
+    var children = vNode.children;
+    var ref;
+
+    if (flags & 481
+    /* Element */
+    ) {
+        ref = vNode.ref;
+        var props = vNode.props;
+        unmountRef(ref);
+        var childFlags = vNode.childFlags;
+
+        if (!isNull(props)) {
+          var keys = Object.keys(props);
+
+          for (var i = 0, len = keys.length; i < len; i++) {
+            var key = keys[i];
+
+            if (syntheticEvents[key]) {
+              unmountSyntheticEvent(key, vNode.dom);
+            }
+          }
+        }
+
+        if (childFlags & 12
+        /* MultipleChildren */
+        ) {
+            unmountAllChildren(children);
+          } else if (childFlags === 2
+        /* HasVNodeChildren */
+        ) {
+            unmount(children);
+          }
+      } else if (children) {
+      if (flags & 4
+      /* ComponentClass */
+      ) {
+          if (isFunction(children.componentWillUnmount)) {
+            children.componentWillUnmount();
+          }
+
+          unmountRef(vNode.ref);
+          children.$UN = true;
+          unmount(children.$LI);
+        } else if (flags & 8
+      /* ComponentFunction */
+      ) {
+          ref = vNode.ref;
+
+          if (!isNullOrUndef(ref) && isFunction(ref.onComponentWillUnmount)) {
+            ref.onComponentWillUnmount(findDOMfromVNode(vNode, true), vNode.props || EMPTY_OBJ);
+          }
+
+          unmount(children);
+        } else if (flags & 1024
+      /* Portal */
+      ) {
+          remove(children, vNode.ref);
+        } else if (flags & 8192
+      /* Fragment */
+      ) {
+          if (vNode.childFlags & 12
+          /* MultipleChildren */
+          ) {
+              unmountAllChildren(children);
+            }
+        }
+    }
+  }
+
+  function unmountAllChildren(children) {
+    for (var i = 0, len = children.length; i < len; ++i) {
+      unmount(children[i]);
+    }
+  }
+
+  function clearDOM(dom) {
+    // Optimization for clearing dom
+    dom.textContent = '';
+  }
+
+  function removeAllChildren(dom, vNode, children) {
+    unmountAllChildren(children);
+
+    if (vNode.flags & 8192
+    /* Fragment */
+    ) {
+        removeVNodeDOM(vNode, dom);
+      } else {
+      clearDOM(dom);
+    }
+  }
+
+  function wrapLinkEvent(nextValue) {
+    // This variable makes sure there is no "this" context in callback
+    var ev = nextValue.event;
+    return function (e) {
+      ev(nextValue.data, e);
+    };
+  }
+
+  function patchEvent(name, lastValue, nextValue, dom) {
+    if (isLinkEventObject(nextValue)) {
+      if (isLastValueSameLinkEvent(lastValue, nextValue)) {
+        return;
+      }
+
+      nextValue = wrapLinkEvent(nextValue);
+    }
+
+    attachEvent(dom, normalizeEventName(name), nextValue);
+  } // We are assuming here that we come from patchProp routine
+  // -nextAttrValue cannot be null or undefined
+
+
+  function patchStyle(lastAttrValue, nextAttrValue, dom) {
+    if (isNullOrUndef(nextAttrValue)) {
+      dom.removeAttribute('style');
+      return;
+    }
+
+    var domStyle = dom.style;
+    var style;
+    var value;
+
+    if (isString(nextAttrValue)) {
+      domStyle.cssText = nextAttrValue;
+      return;
+    }
+
+    if (!isNullOrUndef(lastAttrValue) && !isString(lastAttrValue)) {
+      for (style in nextAttrValue) {
+        // do not add a hasOwnProperty check here, it affects performance
+        value = nextAttrValue[style];
+
+        if (value !== lastAttrValue[style]) {
+          domStyle.setProperty(style, value);
+        }
+      }
+
+      for (style in lastAttrValue) {
+        if (isNullOrUndef(nextAttrValue[style])) {
+          domStyle.removeProperty(style);
+        }
+      }
+    } else {
+      for (style in nextAttrValue) {
+        value = nextAttrValue[style];
+        domStyle.setProperty(style, value);
+      }
+    }
+  }
+
+  function patchDangerInnerHTML(lastValue, nextValue, lastVNode, dom) {
+    var lastHtml = lastValue && lastValue.__html || '';
+    var nextHtml = nextValue && nextValue.__html || '';
+
+    if (lastHtml !== nextHtml) {
+      if (!isNullOrUndef(nextHtml) && !isSameInnerHTML(dom, nextHtml)) {
+        if (!isNull(lastVNode)) {
+          if (lastVNode.childFlags & 12
+          /* MultipleChildren */
+          ) {
+              unmountAllChildren(lastVNode.children);
+            } else if (lastVNode.childFlags === 2
+          /* HasVNodeChildren */
+          ) {
+              unmount(lastVNode.children);
+            }
+
+          lastVNode.children = null;
+          lastVNode.childFlags = 1
+          /* HasInvalidChildren */
+          ;
+        }
+
+        dom.innerHTML = nextHtml;
+      }
+    }
+  }
+
+  function patchProp(prop, lastValue, nextValue, dom, isSVG, hasControlledValue, lastVNode) {
+    switch (prop) {
+      case 'children':
+      case 'childrenType':
+      case 'className':
+      case 'defaultValue':
+      case 'key':
+      case 'multiple':
+      case 'ref':
+      case 'selectedIndex':
+        break;
+
+      case 'autoFocus':
+        dom.autofocus = !!nextValue;
+        break;
+
+      case 'allowfullscreen':
+      case 'autoplay':
+      case 'capture':
+      case 'checked':
+      case 'controls':
+      case 'default':
+      case 'disabled':
+      case 'hidden':
+      case 'indeterminate':
+      case 'loop':
+      case 'muted':
+      case 'novalidate':
+      case 'open':
+      case 'readOnly':
+      case 'required':
+      case 'reversed':
+      case 'scoped':
+      case 'seamless':
+      case 'selected':
+        dom[prop] = !!nextValue;
+        break;
+
+      case 'defaultChecked':
+      case 'value':
+      case 'volume':
+        if (hasControlledValue && prop === 'value') {
+          break;
+        }
+
+        var value = isNullOrUndef(nextValue) ? '' : nextValue;
+
+        if (dom[prop] !== value) {
+          dom[prop] = value;
+        }
+
+        break;
+
+      case 'style':
+        patchStyle(lastValue, nextValue, dom);
+        break;
+
+      case 'dangerouslySetInnerHTML':
+        patchDangerInnerHTML(lastValue, nextValue, lastVNode, dom);
+        break;
+
+      default:
+        if (syntheticEvents[prop]) {
+          handleSyntheticEvent(prop, lastValue, nextValue, dom);
+        } else if (prop.charCodeAt(0) === 111 && prop.charCodeAt(1) === 110) {
+          patchEvent(prop, lastValue, nextValue, dom);
+        } else if (isNullOrUndef(nextValue)) {
+          dom.removeAttribute(prop);
+        } else if (isSVG && namespaces[prop]) {
+          // We optimize for isSVG being false
+          // If we end up in this path we can read property again
+          dom.setAttributeNS(namespaces[prop], prop, nextValue);
+        } else {
+          dom.setAttribute(prop, nextValue);
+        }
+
+        break;
+    }
+  }
+
+  function mountProps(vNode, flags, props, dom, isSVG) {
+    var hasControlledValue = false;
+    var isFormElement = (flags & 448
+    /* FormElement */
+    ) > 0;
+
+    if (isFormElement) {
+      hasControlledValue = isControlledFormElement(props);
+
+      if (hasControlledValue) {
+        addFormElementEventHandlers(flags, dom, props);
+      }
+    }
+
+    for (var prop in props) {
+      // do not add a hasOwnProperty check here, it affects performance
+      patchProp(prop, null, props[prop], dom, isSVG, hasControlledValue, null);
+    }
+
+    if (isFormElement) {
+      processElement(flags, vNode, dom, props, true, hasControlledValue);
+    }
+  }
+
+  function renderNewInput(instance, props, context) {
+    var nextInput = normalizeRoot(instance.render(props, instance.state, context));
+    var childContext = context;
+
+    if (isFunction(instance.getChildContext)) {
+      childContext = combineFrom(context, instance.getChildContext());
+    }
+
+    instance.$CX = childContext;
+    return nextInput;
+  }
+
+  function createClassComponentInstance(vNode, Component, props, context, isSVG, lifecycle) {
+    var instance = new Component(props, context);
+    var usesNewAPI = instance.$N = Boolean(Component.getDerivedStateFromProps || instance.getSnapshotBeforeUpdate);
+    instance.$SVG = isSVG;
+    instance.$L = lifecycle;
+    vNode.children = instance;
+    instance.$BS = false;
+    instance.context = context;
+
+    if (instance.props === EMPTY_OBJ) {
+      instance.props = props;
+    }
+
+    if (!usesNewAPI) {
+      if (isFunction(instance.componentWillMount)) {
+        instance.$BR = true;
+        instance.componentWillMount();
+        var pending = instance.$PS;
+
+        if (!isNull(pending)) {
+          var state = instance.state;
+
+          if (isNull(state)) {
+            instance.state = pending;
+          } else {
+            for (var key in pending) {
+              state[key] = pending[key];
+            }
+          }
+
+          instance.$PS = null;
+        }
+
+        instance.$BR = false;
+      }
+    } else {
+      instance.state = createDerivedState(instance, props, instance.state);
+    }
+
+    instance.$LI = renderNewInput(instance, props, context);
+    return instance;
+  }
+
+  function mount(vNode, parentDOM, context, isSVG, nextNode, lifecycle) {
+    var flags = vNode.flags |= 16384
+    /* InUse */
+    ;
+
+    if (flags & 481
+    /* Element */
+    ) {
+        mountElement(vNode, parentDOM, context, isSVG, nextNode, lifecycle);
+      } else if (flags & 4
+    /* ComponentClass */
+    ) {
+        mountClassComponent(vNode, parentDOM, context, isSVG, nextNode, lifecycle);
+      } else if (flags & 8
+    /* ComponentFunction */
+    ) {
+        mountFunctionalComponent(vNode, parentDOM, context, isSVG, nextNode, lifecycle);
+        mountFunctionalComponentCallbacks(vNode, lifecycle);
+      } else if (flags & 512
+    /* Void */
+    || flags & 16
+    /* Text */
+    ) {
+        mountText(vNode, parentDOM, nextNode);
+      } else if (flags & 8192
+    /* Fragment */
+    ) {
+        mountFragment(vNode, context, parentDOM, isSVG, nextNode, lifecycle);
+      } else if (flags & 1024
+    /* Portal */
+    ) {
+        mountPortal(vNode, context, parentDOM, nextNode, lifecycle);
+      }
+  }
+
+  function mountPortal(vNode, context, parentDOM, nextNode, lifecycle) {
+    mount(vNode.children, vNode.ref, context, false, null, lifecycle);
+    var placeHolderVNode = createVoidVNode();
+    mountText(placeHolderVNode, parentDOM, nextNode);
+    vNode.dom = placeHolderVNode.dom;
+  }
+
+  function mountFragment(vNode, context, parentDOM, isSVG, nextNode, lifecycle) {
+    var children = vNode.children;
+    var childFlags = vNode.childFlags; // When fragment is optimized for multiple children, check if there is no children and change flag to invalid
+    // This is the only normalization always done, to keep optimization flags API same for fragments and regular elements
+
+    if (childFlags & 12
+    /* MultipleChildren */
+    && children.length === 0) {
+      childFlags = vNode.childFlags = 2
+      /* HasVNodeChildren */
+      ;
+      children = vNode.children = createVoidVNode();
+    }
+
+    if (childFlags === 2
+    /* HasVNodeChildren */
+    ) {
+        mount(children, parentDOM, nextNode, isSVG, nextNode, lifecycle);
+      } else {
+      mountArrayChildren(children, parentDOM, context, isSVG, nextNode, lifecycle);
+    }
+  }
+
+  function mountText(vNode, parentDOM, nextNode) {
+    var dom = vNode.dom = document.createTextNode(vNode.children);
+
+    if (!isNull(parentDOM)) {
+      insertOrAppend(parentDOM, dom, nextNode);
+    }
+  }
+
+  function mountElement(vNode, parentDOM, context, isSVG, nextNode, lifecycle) {
+    var flags = vNode.flags;
+    var props = vNode.props;
+    var className = vNode.className;
+    var children = vNode.children;
+    var childFlags = vNode.childFlags;
+    var dom = vNode.dom = documentCreateElement(vNode.type, isSVG = isSVG || (flags & 32
+    /* SvgElement */
+    ) > 0);
+
+    if (!isNullOrUndef(className) && className !== '') {
+      if (isSVG) {
+        dom.setAttribute('class', className);
+      } else {
+        dom.className = className;
+      }
+    }
+
+    if (childFlags === 16
+    /* HasTextChildren */
+    ) {
+        setTextContent(dom, children);
+      } else if (childFlags !== 1
+    /* HasInvalidChildren */
+    ) {
+        var childrenIsSVG = isSVG && vNode.type !== 'foreignObject';
+
+        if (childFlags === 2
+        /* HasVNodeChildren */
+        ) {
+            if (children.flags & 16384
+            /* InUse */
+            ) {
+                vNode.children = children = directClone(children);
+              }
+
+            mount(children, dom, context, childrenIsSVG, null, lifecycle);
+          } else if (childFlags === 8
+        /* HasKeyedChildren */
+        || childFlags === 4
+        /* HasNonKeyedChildren */
+        ) {
+            mountArrayChildren(children, dom, context, childrenIsSVG, null, lifecycle);
+          }
+      }
+
+    if (!isNull(parentDOM)) {
+      insertOrAppend(parentDOM, dom, nextNode);
+    }
+
+    if (!isNull(props)) {
+      mountProps(vNode, flags, props, dom, isSVG);
+    }
+
+    mountRef(vNode.ref, dom, lifecycle);
+  }
+
+  function mountArrayChildren(children, dom, context, isSVG, nextNode, lifecycle) {
+    for (var i = 0; i < children.length; ++i) {
+      var child = children[i];
+
+      if (child.flags & 16384
+      /* InUse */
+      ) {
+          children[i] = child = directClone(child);
+        }
+
+      mount(child, dom, context, isSVG, nextNode, lifecycle);
+    }
+  }
+
+  function mountClassComponent(vNode, parentDOM, context, isSVG, nextNode, lifecycle) {
+    var instance = createClassComponentInstance(vNode, vNode.type, vNode.props || EMPTY_OBJ, context, isSVG, lifecycle);
+    mount(instance.$LI, parentDOM, instance.$CX, isSVG, nextNode, lifecycle);
+    mountClassComponentCallbacks(vNode.ref, instance, lifecycle);
+  }
+
+  function renderFunctionalComponent(vNode, context) {
+    return vNode.flags & 32768
+    /* ForwardRef */
+    ? vNode.type.render(vNode.props || EMPTY_OBJ, vNode.ref, context) : vNode.type(vNode.props || EMPTY_OBJ, context);
+  }
+
+  function mountFunctionalComponent(vNode, parentDOM, context, isSVG, nextNode, lifecycle) {
+    mount(vNode.children = normalizeRoot(renderFunctionalComponent(vNode, context)), parentDOM, context, isSVG, nextNode, lifecycle);
+  }
+
+  function createClassMountCallback(instance) {
+    return function () {
+      instance.componentDidMount();
+    };
+  }
+
+  function mountClassComponentCallbacks(ref, instance, lifecycle) {
+    mountRef(ref, instance, lifecycle);
+
+    if (isFunction(instance.componentDidMount)) {
+      lifecycle.push(createClassMountCallback(instance));
+    }
+  }
+
+  function createOnMountCallback(ref, vNode) {
+    return function () {
+      ref.onComponentDidMount(findDOMfromVNode(vNode, true), vNode.props || EMPTY_OBJ);
+    };
+  }
+
+  function mountFunctionalComponentCallbacks(vNode, lifecycle) {
+    var ref = vNode.ref;
+
+    if (!isNullOrUndef(ref)) {
+      safeCall1(ref.onComponentWillMount, vNode.props || EMPTY_OBJ);
+
+      if (isFunction(ref.onComponentDidMount)) {
+        lifecycle.push(createOnMountCallback(ref, vNode));
+      }
+    }
+  }
+
+  function replaceWithNewNode(lastVNode, nextVNode, parentDOM, context, isSVG, lifecycle) {
+    unmount(lastVNode);
+
+    if ((nextVNode.flags & lastVNode.flags & 2033
+    /* DOMRef */
+    ) !== 0) {
+      mount(nextVNode, null, context, isSVG, null, lifecycle); // Single DOM operation, when we have dom references available
+
+      replaceChild(parentDOM, nextVNode.dom, lastVNode.dom);
+    } else {
+      mount(nextVNode, parentDOM, context, isSVG, findDOMfromVNode(lastVNode, true), lifecycle);
+      removeVNodeDOM(lastVNode, parentDOM);
+    }
+  }
+
+  function patch(lastVNode, nextVNode, parentDOM, context, isSVG, nextNode, lifecycle) {
+    var nextFlags = nextVNode.flags |= 16384
+    /* InUse */
+    ;
+
+    if (lastVNode.flags !== nextFlags || lastVNode.type !== nextVNode.type || lastVNode.key !== nextVNode.key || nextFlags & 2048
+    /* ReCreate */
+    ) {
+        if (lastVNode.flags & 16384
+        /* InUse */
+        ) {
+            replaceWithNewNode(lastVNode, nextVNode, parentDOM, context, isSVG, lifecycle);
+          } else {
+          // Last vNode is not in use, it has crashed at application level. Just mount nextVNode and ignore last one
+          mount(nextVNode, parentDOM, context, isSVG, nextNode, lifecycle);
+        }
+      } else if (nextFlags & 481
+    /* Element */
+    ) {
+        patchElement(lastVNode, nextVNode, context, isSVG, nextFlags, lifecycle);
+      } else if (nextFlags & 4
+    /* ComponentClass */
+    ) {
+        patchClassComponent(lastVNode, nextVNode, parentDOM, context, isSVG, nextNode, lifecycle);
+      } else if (nextFlags & 8
+    /* ComponentFunction */
+    ) {
+        patchFunctionalComponent(lastVNode, nextVNode, parentDOM, context, isSVG, nextNode, lifecycle);
+      } else if (nextFlags & 16
+    /* Text */
+    ) {
+        patchText(lastVNode, nextVNode);
+      } else if (nextFlags & 512
+    /* Void */
+    ) {
+        nextVNode.dom = lastVNode.dom;
+      } else if (nextFlags & 8192
+    /* Fragment */
+    ) {
+        patchFragment(lastVNode, nextVNode, parentDOM, context, isSVG, lifecycle);
+      } else {
+      patchPortal(lastVNode, nextVNode, context, lifecycle);
+    }
+  }
+
+  function patchSingleTextChild(lastChildren, nextChildren, parentDOM) {
+    if (lastChildren !== nextChildren) {
+      if (lastChildren !== '') {
+        parentDOM.firstChild.nodeValue = nextChildren;
+      } else {
+        setTextContent(parentDOM, nextChildren);
+      }
+    }
+  }
+
+  function patchContentEditableChildren(dom, nextChildren) {
+    if (dom.textContent !== nextChildren) {
+      dom.textContent = nextChildren;
+    }
+  }
+
+  function patchFragment(lastVNode, nextVNode, parentDOM, context, isSVG, lifecycle) {
+    var lastChildren = lastVNode.children;
+    var nextChildren = nextVNode.children;
+    var lastChildFlags = lastVNode.childFlags;
+    var nextChildFlags = nextVNode.childFlags;
+    var nextNode = null; // When fragment is optimized for multiple children, check if there is no children and change flag to invalid
+    // This is the only normalization always done, to keep optimization flags API same for fragments and regular elements
+
+    if (nextChildFlags & 12
+    /* MultipleChildren */
+    && nextChildren.length === 0) {
+      nextChildFlags = nextVNode.childFlags = 2
+      /* HasVNodeChildren */
+      ;
+      nextChildren = nextVNode.children = createVoidVNode();
+    }
+
+    var nextIsSingle = (nextChildFlags & 2
+    /* HasVNodeChildren */
+    ) !== 0;
+
+    if (lastChildFlags & 12
+    /* MultipleChildren */
+    ) {
+        var lastLen = lastChildren.length; // We need to know Fragment's edge node when
+
+        if ( // It uses keyed algorithm
+        lastChildFlags & 8
+        /* HasKeyedChildren */
+        && nextChildFlags & 8
+        /* HasKeyedChildren */
+        || // It transforms from many to single
+        nextIsSingle || // It will append more nodes
+        !nextIsSingle && nextChildren.length > lastLen) {
+          // When fragment has multiple children there is always at least one vNode
+          nextNode = findDOMfromVNode(lastChildren[lastLen - 1], false).nextSibling;
+        }
+      }
+
+    patchChildren(lastChildFlags, nextChildFlags, lastChildren, nextChildren, parentDOM, context, isSVG, nextNode, lastVNode, lifecycle);
+  }
+
+  function patchPortal(lastVNode, nextVNode, context, lifecycle) {
+    var lastContainer = lastVNode.ref;
+    var nextContainer = nextVNode.ref;
+    var nextChildren = nextVNode.children;
+    patchChildren(lastVNode.childFlags, nextVNode.childFlags, lastVNode.children, nextChildren, lastContainer, context, false, null, lastVNode, lifecycle);
+    nextVNode.dom = lastVNode.dom;
+
+    if (lastContainer !== nextContainer && !isInvalid(nextChildren)) {
+      var node = nextChildren.dom;
+      removeChild(lastContainer, node);
+      appendChild(nextContainer, node);
+    }
+  }
+
+  function patchElement(lastVNode, nextVNode, context, isSVG, nextFlags, lifecycle) {
+    var dom = nextVNode.dom = lastVNode.dom;
+    var lastProps = lastVNode.props;
+    var nextProps = nextVNode.props;
+    var isFormElement = false;
+    var hasControlledValue = false;
+    var nextPropsOrEmpty;
+    isSVG = isSVG || (nextFlags & 32
+    /* SvgElement */
+    ) > 0; // inlined patchProps  -- starts --
+
+    if (lastProps !== nextProps) {
+      var lastPropsOrEmpty = lastProps || EMPTY_OBJ;
+      nextPropsOrEmpty = nextProps || EMPTY_OBJ;
+
+      if (nextPropsOrEmpty !== EMPTY_OBJ) {
+        isFormElement = (nextFlags & 448
+        /* FormElement */
+        ) > 0;
+
+        if (isFormElement) {
+          hasControlledValue = isControlledFormElement(nextPropsOrEmpty);
+        }
+
+        for (var prop in nextPropsOrEmpty) {
+          var lastValue = lastPropsOrEmpty[prop];
+          var nextValue = nextPropsOrEmpty[prop];
+
+          if (lastValue !== nextValue) {
+            patchProp(prop, lastValue, nextValue, dom, isSVG, hasControlledValue, lastVNode);
+          }
+        }
+      }
+
+      if (lastPropsOrEmpty !== EMPTY_OBJ) {
+        for (var prop$1 in lastPropsOrEmpty) {
+          if (isNullOrUndef(nextPropsOrEmpty[prop$1]) && !isNullOrUndef(lastPropsOrEmpty[prop$1])) {
+            patchProp(prop$1, lastPropsOrEmpty[prop$1], null, dom, isSVG, hasControlledValue, lastVNode);
+          }
+        }
+      }
+    }
+
+    var nextChildren = nextVNode.children;
+    var nextClassName = nextVNode.className; // inlined patchProps  -- ends --
+
+    if (lastVNode.className !== nextClassName) {
+      if (isNullOrUndef(nextClassName)) {
+        dom.removeAttribute('class');
+      } else if (isSVG) {
+        dom.setAttribute('class', nextClassName);
+      } else {
+        dom.className = nextClassName;
+      }
+    }
+
+    if (nextFlags & 4096
+    /* ContentEditable */
+    ) {
+        patchContentEditableChildren(dom, nextChildren);
+      } else {
+      patchChildren(lastVNode.childFlags, nextVNode.childFlags, lastVNode.children, nextChildren, dom, context, isSVG && nextVNode.type !== 'foreignObject', null, lastVNode, lifecycle);
+    }
+
+    if (isFormElement) {
+      processElement(nextFlags, nextVNode, dom, nextPropsOrEmpty, false, hasControlledValue);
+    }
+
+    var nextRef = nextVNode.ref;
+    var lastRef = lastVNode.ref;
+
+    if (lastRef !== nextRef) {
+      unmountRef(lastRef);
+      mountRef(nextRef, dom, lifecycle);
+    }
+  }
+
+  function replaceOneVNodeWithMultipleVNodes(lastChildren, nextChildren, parentDOM, context, isSVG, lifecycle) {
+    unmount(lastChildren);
+    mountArrayChildren(nextChildren, parentDOM, context, isSVG, findDOMfromVNode(lastChildren, true), lifecycle);
+    removeVNodeDOM(lastChildren, parentDOM);
+  }
+
+  function patchChildren(lastChildFlags, nextChildFlags, lastChildren, nextChildren, parentDOM, context, isSVG, nextNode, parentVNode, lifecycle) {
+    switch (lastChildFlags) {
+      case 2
+      /* HasVNodeChildren */
+      :
+        switch (nextChildFlags) {
+          case 2
+          /* HasVNodeChildren */
+          :
+            patch(lastChildren, nextChildren, parentDOM, context, isSVG, nextNode, lifecycle);
+            break;
+
+          case 1
+          /* HasInvalidChildren */
+          :
+            remove(lastChildren, parentDOM);
+            break;
+
+          case 16
+          /* HasTextChildren */
+          :
+            unmount(lastChildren);
+            setTextContent(parentDOM, nextChildren);
+            break;
+
+          default:
+            replaceOneVNodeWithMultipleVNodes(lastChildren, nextChildren, parentDOM, context, isSVG, lifecycle);
+            break;
+        }
+
+        break;
+
+      case 1
+      /* HasInvalidChildren */
+      :
+        switch (nextChildFlags) {
+          case 2
+          /* HasVNodeChildren */
+          :
+            mount(nextChildren, parentDOM, context, isSVG, nextNode, lifecycle);
+            break;
+
+          case 1
+          /* HasInvalidChildren */
+          :
+            break;
+
+          case 16
+          /* HasTextChildren */
+          :
+            setTextContent(parentDOM, nextChildren);
+            break;
+
+          default:
+            mountArrayChildren(nextChildren, parentDOM, context, isSVG, nextNode, lifecycle);
+            break;
+        }
+
+        break;
+
+      case 16
+      /* HasTextChildren */
+      :
+        switch (nextChildFlags) {
+          case 16
+          /* HasTextChildren */
+          :
+            patchSingleTextChild(lastChildren, nextChildren, parentDOM);
+            break;
+
+          case 2
+          /* HasVNodeChildren */
+          :
+            clearDOM(parentDOM);
+            mount(nextChildren, parentDOM, context, isSVG, nextNode, lifecycle);
+            break;
+
+          case 1
+          /* HasInvalidChildren */
+          :
+            clearDOM(parentDOM);
+            break;
+
+          default:
+            clearDOM(parentDOM);
+            mountArrayChildren(nextChildren, parentDOM, context, isSVG, nextNode, lifecycle);
+            break;
+        }
+
+        break;
+
+      default:
+        switch (nextChildFlags) {
+          case 16
+          /* HasTextChildren */
+          :
+            unmountAllChildren(lastChildren);
+            setTextContent(parentDOM, nextChildren);
+            break;
+
+          case 2
+          /* HasVNodeChildren */
+          :
+            removeAllChildren(parentDOM, parentVNode, lastChildren);
+            mount(nextChildren, parentDOM, context, isSVG, nextNode, lifecycle);
+            break;
+
+          case 1
+          /* HasInvalidChildren */
+          :
+            removeAllChildren(parentDOM, parentVNode, lastChildren);
+            break;
+
+          default:
+            var lastLength = lastChildren.length | 0;
+            var nextLength = nextChildren.length | 0; // Fast path's for both algorithms
+
+            if (lastLength === 0) {
+              if (nextLength > 0) {
+                mountArrayChildren(nextChildren, parentDOM, context, isSVG, nextNode, lifecycle);
+              }
+            } else if (nextLength === 0) {
+              removeAllChildren(parentDOM, parentVNode, lastChildren);
+            } else if (nextChildFlags === 8
+            /* HasKeyedChildren */
+            && lastChildFlags === 8
+            /* HasKeyedChildren */
+            ) {
+                patchKeyedChildren(lastChildren, nextChildren, parentDOM, context, isSVG, lastLength, nextLength, nextNode, parentVNode, lifecycle);
+              } else {
+              patchNonKeyedChildren(lastChildren, nextChildren, parentDOM, context, isSVG, lastLength, nextLength, nextNode, lifecycle);
+            }
+
+            break;
+        }
+
+        break;
+    }
+  }
+
+  function createDidUpdate(instance, lastProps, lastState, snapshot, lifecycle) {
+    lifecycle.push(function () {
+      instance.componentDidUpdate(lastProps, lastState, snapshot);
+    });
+  }
+
+  function updateClassComponent(instance, nextState, nextProps, parentDOM, context, isSVG, force, nextNode, lifecycle) {
+    var lastState = instance.state;
+    var lastProps = instance.props;
+    var usesNewAPI = Boolean(instance.$N);
+    var hasSCU = isFunction(instance.shouldComponentUpdate);
+
+    if (usesNewAPI) {
+      nextState = createDerivedState(instance, nextProps, nextState !== lastState ? combineFrom(lastState, nextState) : nextState);
+    }
+
+    if (force || !hasSCU || hasSCU && instance.shouldComponentUpdate(nextProps, nextState, context)) {
+      if (!usesNewAPI && isFunction(instance.componentWillUpdate)) {
+        instance.componentWillUpdate(nextProps, nextState, context);
+      }
+
+      instance.props = nextProps;
+      instance.state = nextState;
+      instance.context = context;
+      var snapshot = null;
+      var nextInput = renderNewInput(instance, nextProps, context);
+
+      if (usesNewAPI && isFunction(instance.getSnapshotBeforeUpdate)) {
+        snapshot = instance.getSnapshotBeforeUpdate(lastProps, lastState);
+      }
+
+      patch(instance.$LI, nextInput, parentDOM, instance.$CX, isSVG, nextNode, lifecycle); // Dont update Last input, until patch has been succesfully executed
+
+      instance.$LI = nextInput;
+
+      if (isFunction(instance.componentDidUpdate)) {
+        createDidUpdate(instance, lastProps, lastState, snapshot, lifecycle);
+      }
+    } else {
+      instance.props = nextProps;
+      instance.state = nextState;
+      instance.context = context;
+    }
+  }
+
+  function patchClassComponent(lastVNode, nextVNode, parentDOM, context, isSVG, nextNode, lifecycle) {
+    var instance = nextVNode.children = lastVNode.children; // If Component has crashed, ignore it to stay functional
+
+    if (isNull(instance)) {
+      return;
+    }
+
+    instance.$L = lifecycle;
+    var nextProps = nextVNode.props || EMPTY_OBJ;
+    var nextRef = nextVNode.ref;
+    var lastRef = lastVNode.ref;
+    var nextState = instance.state;
+
+    if (!instance.$N) {
+      if (isFunction(instance.componentWillReceiveProps)) {
+        instance.$BR = true;
+        instance.componentWillReceiveProps(nextProps, context); // If instance component was removed during its own update do nothing.
+
+        if (instance.$UN) {
+          return;
+        }
+
+        instance.$BR = false;
+      }
+
+      if (!isNull(instance.$PS)) {
+        nextState = combineFrom(nextState, instance.$PS);
+        instance.$PS = null;
+      }
+    }
+
+    updateClassComponent(instance, nextState, nextProps, parentDOM, context, isSVG, false, nextNode, lifecycle);
+
+    if (lastRef !== nextRef) {
+      unmountRef(lastRef);
+      mountRef(nextRef, instance, lifecycle);
+    }
+  }
+
+  function patchFunctionalComponent(lastVNode, nextVNode, parentDOM, context, isSVG, nextNode, lifecycle) {
+    var shouldUpdate = true;
+    var nextProps = nextVNode.props || EMPTY_OBJ;
+    var nextRef = nextVNode.ref;
+    var lastProps = lastVNode.props;
+    var nextHooksDefined = !isNullOrUndef(nextRef);
+    var lastInput = lastVNode.children;
+
+    if (nextHooksDefined && isFunction(nextRef.onComponentShouldUpdate)) {
+      shouldUpdate = nextRef.onComponentShouldUpdate(lastProps, nextProps);
+    }
+
+    if (shouldUpdate !== false) {
+      if (nextHooksDefined && isFunction(nextRef.onComponentWillUpdate)) {
+        nextRef.onComponentWillUpdate(lastProps, nextProps);
+      }
+
+      var type = nextVNode.type;
+      var nextInput = normalizeRoot(nextVNode.flags & 32768
+      /* ForwardRef */
+      ? type.render(nextProps, nextRef, context) : type(nextProps, context));
+      patch(lastInput, nextInput, parentDOM, context, isSVG, nextNode, lifecycle);
+      nextVNode.children = nextInput;
+
+      if (nextHooksDefined && isFunction(nextRef.onComponentDidUpdate)) {
+        nextRef.onComponentDidUpdate(lastProps, nextProps);
+      }
+    } else {
+      nextVNode.children = lastInput;
+    }
+  }
+
+  function patchText(lastVNode, nextVNode) {
+    var nextText = nextVNode.children;
+    var dom = nextVNode.dom = lastVNode.dom;
+
+    if (nextText !== lastVNode.children) {
+      dom.nodeValue = nextText;
+    }
+  }
+
+  function patchNonKeyedChildren(lastChildren, nextChildren, dom, context, isSVG, lastChildrenLength, nextChildrenLength, nextNode, lifecycle) {
+    var commonLength = lastChildrenLength > nextChildrenLength ? nextChildrenLength : lastChildrenLength;
+    var i = 0;
+    var nextChild;
+    var lastChild;
+
+    for (; i < commonLength; ++i) {
+      nextChild = nextChildren[i];
+      lastChild = lastChildren[i];
+
+      if (nextChild.flags & 16384
+      /* InUse */
+      ) {
+          nextChild = nextChildren[i] = directClone(nextChild);
+        }
+
+      patch(lastChild, nextChild, dom, context, isSVG, nextNode, lifecycle);
+      lastChildren[i] = nextChild;
+    }
+
+    if (lastChildrenLength < nextChildrenLength) {
+      for (i = commonLength; i < nextChildrenLength; ++i) {
+        nextChild = nextChildren[i];
+
+        if (nextChild.flags & 16384
+        /* InUse */
+        ) {
+            nextChild = nextChildren[i] = directClone(nextChild);
+          }
+
+        mount(nextChild, dom, context, isSVG, nextNode, lifecycle);
+      }
+    } else if (lastChildrenLength > nextChildrenLength) {
+      for (i = commonLength; i < lastChildrenLength; ++i) {
+        remove(lastChildren[i], dom);
+      }
+    }
+  }
+
+  function patchKeyedChildren(a, b, dom, context, isSVG, aLength, bLength, outerEdge, parentVNode, lifecycle) {
+    var aEnd = aLength - 1;
+    var bEnd = bLength - 1;
+    var j = 0;
+    var aNode = a[j];
+    var bNode = b[j];
+    var nextPos;
+    var nextNode; // Step 1
+    // tslint:disable-next-line
+
+    outer: {
+      // Sync nodes with the same key at the beginning.
+      while (aNode.key === bNode.key) {
+        if (bNode.flags & 16384
+        /* InUse */
+        ) {
+            b[j] = bNode = directClone(bNode);
+          }
+
+        patch(aNode, bNode, dom, context, isSVG, outerEdge, lifecycle);
+        a[j] = bNode;
+        ++j;
+
+        if (j > aEnd || j > bEnd) {
+          break outer;
+        }
+
+        aNode = a[j];
+        bNode = b[j];
+      }
+
+      aNode = a[aEnd];
+      bNode = b[bEnd]; // Sync nodes with the same key at the end.
+
+      while (aNode.key === bNode.key) {
+        if (bNode.flags & 16384
+        /* InUse */
+        ) {
+            b[bEnd] = bNode = directClone(bNode);
+          }
+
+        patch(aNode, bNode, dom, context, isSVG, outerEdge, lifecycle);
+        a[aEnd] = bNode;
+        aEnd--;
+        bEnd--;
+
+        if (j > aEnd || j > bEnd) {
+          break outer;
+        }
+
+        aNode = a[aEnd];
+        bNode = b[bEnd];
+      }
+    }
+
+    if (j > aEnd) {
+      if (j <= bEnd) {
+        nextPos = bEnd + 1;
+        nextNode = nextPos < bLength ? findDOMfromVNode(b[nextPos], true) : outerEdge;
+
+        while (j <= bEnd) {
+          bNode = b[j];
+
+          if (bNode.flags & 16384
+          /* InUse */
+          ) {
+              b[j] = bNode = directClone(bNode);
+            }
+
+          ++j;
+          mount(bNode, dom, context, isSVG, nextNode, lifecycle);
+        }
+      }
+    } else if (j > bEnd) {
+      while (j <= aEnd) {
+        remove(a[j++], dom);
+      }
+    } else {
+      patchKeyedChildrenComplex(a, b, context, aLength, bLength, aEnd, bEnd, j, dom, isSVG, outerEdge, parentVNode, lifecycle);
+    }
+  }
+
+  function patchKeyedChildrenComplex(a, b, context, aLength, bLength, aEnd, bEnd, j, dom, isSVG, outerEdge, parentVNode, lifecycle) {
+    var aNode;
+    var bNode;
+    var nextPos;
+    var i = 0;
+    var aStart = j;
+    var bStart = j;
+    var aLeft = aEnd - j + 1;
+    var bLeft = bEnd - j + 1;
+    var sources = new Int32Array(bLeft + 1); // Keep track if its possible to remove whole DOM using textContent = '';
+
+    var canRemoveWholeContent = aLeft === aLength;
+    var moved = false;
+    var pos = 0;
+    var patched = 0; // When sizes are small, just loop them through
+
+    if (bLength < 4 || (aLeft | bLeft) < 32) {
+      for (i = aStart; i <= aEnd; ++i) {
+        aNode = a[i];
+
+        if (patched < bLeft) {
+          for (j = bStart; j <= bEnd; j++) {
+            bNode = b[j];
+
+            if (aNode.key === bNode.key) {
+              sources[j - bStart] = i + 1;
+
+              if (canRemoveWholeContent) {
+                canRemoveWholeContent = false;
+
+                while (aStart < i) {
+                  remove(a[aStart++], dom);
+                }
+              }
+
+              if (pos > j) {
+                moved = true;
+              } else {
+                pos = j;
+              }
+
+              if (bNode.flags & 16384
+              /* InUse */
+              ) {
+                  b[j] = bNode = directClone(bNode);
+                }
+
+              patch(aNode, bNode, dom, context, isSVG, outerEdge, lifecycle);
+              ++patched;
+              break;
+            }
+          }
+
+          if (!canRemoveWholeContent && j > bEnd) {
+            remove(aNode, dom);
+          }
+        } else if (!canRemoveWholeContent) {
+          remove(aNode, dom);
+        }
+      }
+    } else {
+      var keyIndex = {}; // Map keys by their index
+
+      for (i = bStart; i <= bEnd; ++i) {
+        keyIndex[b[i].key] = i;
+      } // Try to patch same keys
+
+
+      for (i = aStart; i <= aEnd; ++i) {
+        aNode = a[i];
+
+        if (patched < bLeft) {
+          j = keyIndex[aNode.key];
+
+          if (j !== void 0) {
+            if (canRemoveWholeContent) {
+              canRemoveWholeContent = false;
+
+              while (i > aStart) {
+                remove(a[aStart++], dom);
+              }
+            }
+
+            sources[j - bStart] = i + 1;
+
+            if (pos > j) {
+              moved = true;
+            } else {
+              pos = j;
+            }
+
+            bNode = b[j];
+
+            if (bNode.flags & 16384
+            /* InUse */
+            ) {
+                b[j] = bNode = directClone(bNode);
+              }
+
+            patch(aNode, bNode, dom, context, isSVG, outerEdge, lifecycle);
+            ++patched;
+          } else if (!canRemoveWholeContent) {
+            remove(aNode, dom);
+          }
+        } else if (!canRemoveWholeContent) {
+          remove(aNode, dom);
+        }
+      }
+    } // fast-path: if nothing patched remove all old and add all new
+
+
+    if (canRemoveWholeContent) {
+      removeAllChildren(dom, parentVNode, a);
+      mountArrayChildren(b, dom, context, isSVG, outerEdge, lifecycle);
+    } else if (moved) {
+      var seq = lis_algorithm(sources);
+      j = seq.length - 1;
+
+      for (i = bLeft - 1; i >= 0; i--) {
+        if (sources[i] === 0) {
+          pos = i + bStart;
+          bNode = b[pos];
+
+          if (bNode.flags & 16384
+          /* InUse */
+          ) {
+              b[pos] = bNode = directClone(bNode);
+            }
+
+          nextPos = pos + 1;
+          mount(bNode, dom, context, isSVG, nextPos < bLength ? findDOMfromVNode(b[nextPos], true) : outerEdge, lifecycle);
+        } else if (j < 0 || i !== seq[j]) {
+          pos = i + bStart;
+          bNode = b[pos];
+          nextPos = pos + 1;
+          moveVNodeDOM(bNode, dom, nextPos < bLength ? findDOMfromVNode(b[nextPos], true) : outerEdge);
+        } else {
+          j--;
+        }
+      }
+    } else if (patched !== bLeft) {
+      // when patched count doesn't match b length we need to insert those new ones
+      // loop backwards so we can use insertBefore
+      for (i = bLeft - 1; i >= 0; i--) {
+        if (sources[i] === 0) {
+          pos = i + bStart;
+          bNode = b[pos];
+
+          if (bNode.flags & 16384
+          /* InUse */
+          ) {
+              b[pos] = bNode = directClone(bNode);
+            }
+
+          nextPos = pos + 1;
+          mount(bNode, dom, context, isSVG, nextPos < bLength ? findDOMfromVNode(b[nextPos], true) : outerEdge, lifecycle);
+        }
+      }
+    }
+  }
+
+  var result;
+  var p;
+  var maxLen = 0; // https://en.wikipedia.org/wiki/Longest_increasing_subsequence
+
+  function lis_algorithm(arr) {
+    var arrI = 0;
+    var i = 0;
+    var j = 0;
+    var k = 0;
+    var u = 0;
+    var v = 0;
+    var c = 0;
+    var len = arr.length;
+
+    if (len > maxLen) {
+      maxLen = len;
+      result = new Int32Array(len);
+      p = new Int32Array(len);
+    }
+
+    for (; i < len; ++i) {
+      arrI = arr[i];
+
+      if (arrI !== 0) {
+        j = result[k];
+
+        if (arr[j] < arrI) {
+          p[i] = j;
+          result[++k] = i;
+          continue;
+        }
+
+        u = 0;
+        v = k;
+
+        while (u < v) {
+          c = u + v >> 1;
+
+          if (arr[result[c]] < arrI) {
+            u = c + 1;
+          } else {
+            v = c;
+          }
+        }
+
+        if (arrI < arr[result[u]]) {
+          if (u > 0) {
+            p[i] = result[u - 1];
+          }
+
+          result[u] = i;
+        }
+      }
+    }
+
+    u = k + 1;
+    var seq = new Int32Array(u);
+    v = result[u - 1];
+
+    while (u-- > 0) {
+      seq[u] = v;
+      v = p[v];
+      result[u] = 0;
+    }
+
+    return seq;
+  }
+
+  var hasDocumentAvailable = typeof document !== 'undefined';
+
+  if (hasDocumentAvailable) {
+    /*
+     * Defining $EV and $V properties on Node.prototype
+     * fixes v8 "wrong map" de-optimization
+     */
+    if (window.Node) {
+      Node.prototype.$EV = null;
+      Node.prototype.$V = null;
+    }
+  }
+
+  function __render(input, parentDOM, callback, context) {
+    var lifecycle = [];
+    var rootInput = parentDOM.$V;
+
+    if (isNullOrUndef(rootInput)) {
+      if (!isNullOrUndef(input)) {
+        if (input.flags & 16384
+        /* InUse */
+        ) {
+            input = directClone(input);
+          }
+
+        mount(input, parentDOM, context, false, null, lifecycle);
+        parentDOM.$V = input;
+        rootInput = input;
+      }
+    } else {
+      if (isNullOrUndef(input)) {
+        remove(rootInput, parentDOM);
+        parentDOM.$V = null;
+      } else {
+        if (input.flags & 16384
+        /* InUse */
+        ) {
+            input = directClone(input);
+          }
+
+        patch(rootInput, input, parentDOM, context, false, null, lifecycle);
+        rootInput = parentDOM.$V = input;
+      }
+    }
+
+    callAll(lifecycle);
+
+    if (isFunction(callback)) {
+      callback();
+    }
+
+    if (isFunction(options.renderComplete)) {
+      options.renderComplete(rootInput, parentDOM);
+    }
+  }
+
+  function render(input, parentDOM, callback, context) {
+    if (callback === void 0) callback = null;
+    if (context === void 0) context = EMPTY_OBJ;
+
+    __render(input, parentDOM, callback, context);
+  }
+  var nextTick = typeof Promise !== 'undefined' ? Promise.resolve().then.bind(Promise.resolve()) : function (a) {
+    window.setTimeout(a, 0);
+  };
+
+  function createCommonjsModule(fn, module) {
+  	return module = { exports: {} }, fn(module, module.exports), module.exports;
+  }
+
+  /*
+  object-assign
+  (c) Sindre Sorhus
+  @license MIT
+  */
+  /* eslint-disable no-unused-vars */
+
+  var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+  var hasOwnProperty = Object.prototype.hasOwnProperty;
+  var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+  function toObject(val) {
+    if (val === null || val === undefined) {
+      throw new TypeError('Object.assign cannot be called with null or undefined');
+    }
+
+    return Object(val);
+  }
+
+  function shouldUseNative() {
+    try {
+      if (!Object.assign) {
+        return false;
+      } // Detect buggy property enumeration order in older V8 versions.
+      // https://bugs.chromium.org/p/v8/issues/detail?id=4118
+
+
+      var test1 = new String('abc'); // eslint-disable-line no-new-wrappers
+
+      test1[5] = 'de';
+
+      if (Object.getOwnPropertyNames(test1)[0] === '5') {
+        return false;
+      } // https://bugs.chromium.org/p/v8/issues/detail?id=3056
+
+
+      var test2 = {};
+
+      for (var i = 0; i < 10; i++) {
+        test2['_' + String.fromCharCode(i)] = i;
+      }
+
+      var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+        return test2[n];
+      });
+
+      if (order2.join('') !== '0123456789') {
+        return false;
+      } // https://bugs.chromium.org/p/v8/issues/detail?id=3056
+
+
+      var test3 = {};
+      'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+        test3[letter] = letter;
+      });
+
+      if (Object.keys(Object.assign({}, test3)).join('') !== 'abcdefghijklmnopqrst') {
+        return false;
+      }
+
+      return true;
+    } catch (err) {
+      // We don't expect any of the above to throw, but better to be safe.
+      return false;
+    }
+  }
+
+  var objectAssign = shouldUseNative() ? Object.assign : function (target, source) {
+    var from;
+    var to = toObject(target);
+    var symbols;
+
+    for (var s = 1; s < arguments.length; s++) {
+      from = Object(arguments[s]);
+
+      for (var key in from) {
+        if (hasOwnProperty.call(from, key)) {
+          to[key] = from[key];
+        }
+      }
+
+      if (getOwnPropertySymbols) {
+        symbols = getOwnPropertySymbols(from);
+
+        for (var i = 0; i < symbols.length; i++) {
+          if (propIsEnumerable.call(from, symbols[i])) {
+            to[symbols[i]] = from[symbols[i]];
+          }
+        }
+      }
+    }
+
+    return to;
+  };
+
+  var n = "function" === typeof Symbol && Symbol.for,
+      p$1 = n ? Symbol.for("react.element") : 60103,
+      q = n ? Symbol.for("react.portal") : 60106,
+      r = n ? Symbol.for("react.fragment") : 60107,
+      t = n ? Symbol.for("react.strict_mode") : 60108,
+      u = n ? Symbol.for("react.profiler") : 60114,
+      v = n ? Symbol.for("react.provider") : 60109,
+      w = n ? Symbol.for("react.context") : 60110,
+      x = n ? Symbol.for("react.forward_ref") : 60112,
+      y = n ? Symbol.for("react.suspense") : 60113,
+      z = n ? Symbol.for("react.memo") : 60115,
+      A = n ? Symbol.for("react.lazy") : 60116,
+      B = "function" === typeof Symbol && Symbol.iterator;
+
+  function C(a) {
+    for (var b = "https://reactjs.org/docs/error-decoder.html?invariant=" + a, c = 1; c < arguments.length; c++) {
+      b += "&args[]=" + encodeURIComponent(arguments[c]);
+    }
+
+    return "Minified React error #" + a + "; visit " + b + " for the full message or use the non-minified dev environment for full errors and additional helpful warnings.";
+  }
+
+  var D = {
+    isMounted: function isMounted() {
+      return !1;
+    },
+    enqueueForceUpdate: function enqueueForceUpdate() {},
+    enqueueReplaceState: function enqueueReplaceState() {},
+    enqueueSetState: function enqueueSetState() {}
+  },
+      E = {};
+
+  function F(a, b, c) {
+    this.props = a;
+    this.context = b;
+    this.refs = E;
+    this.updater = c || D;
+  }
+
+  F.prototype.isReactComponent = {};
+
+  F.prototype.setState = function (a, b) {
+    if ("object" !== typeof a && "function" !== typeof a && null != a) throw Error(C(85));
+    this.updater.enqueueSetState(this, a, b, "setState");
+  };
+
+  F.prototype.forceUpdate = function (a) {
+    this.updater.enqueueForceUpdate(this, a, "forceUpdate");
+  };
+
+  function G() {}
+
+  G.prototype = F.prototype;
+
+  function H(a, b, c) {
+    this.props = a;
+    this.context = b;
+    this.refs = E;
+    this.updater = c || D;
+  }
+
+  var I = H.prototype = new G();
+  I.constructor = H;
+  objectAssign(I, F.prototype);
+  I.isPureReactComponent = !0;
+  var J = {
+    current: null
+  },
+      K = Object.prototype.hasOwnProperty,
+      L = {
+    key: !0,
+    ref: !0,
+    __self: !0,
+    __source: !0
+  };
+
+  function M(a, b, c) {
+    var e,
+        d = {},
+        g = null,
+        k = null;
+    if (null != b) for (e in void 0 !== b.ref && (k = b.ref), void 0 !== b.key && (g = "" + b.key), b) {
+      K.call(b, e) && !L.hasOwnProperty(e) && (d[e] = b[e]);
+    }
+    var f = arguments.length - 2;
+    if (1 === f) d.children = c;else if (1 < f) {
+      for (var h = Array(f), m = 0; m < f; m++) {
+        h[m] = arguments[m + 2];
+      }
+
+      d.children = h;
+    }
+    if (a && a.defaultProps) for (e in f = a.defaultProps, f) {
+      void 0 === d[e] && (d[e] = f[e]);
+    }
+    return {
+      $$typeof: p$1,
+      type: a,
+      key: g,
+      ref: k,
+      props: d,
+      _owner: J.current
+    };
+  }
+
+  function N(a, b) {
+    return {
+      $$typeof: p$1,
+      type: a.type,
+      key: b,
+      ref: a.ref,
+      props: a.props,
+      _owner: a._owner
+    };
+  }
+
+  function O(a) {
+    return "object" === typeof a && null !== a && a.$$typeof === p$1;
+  }
+
+  function escape(a) {
+    var b = {
+      "=": "=0",
+      ":": "=2"
+    };
+    return "$" + ("" + a).replace(/[=:]/g, function (a) {
+      return b[a];
+    });
+  }
+
+  var P = /\/+/g,
+      Q = [];
+
+  function R(a, b, c, e) {
+    if (Q.length) {
+      var d = Q.pop();
+      d.result = a;
+      d.keyPrefix = b;
+      d.func = c;
+      d.context = e;
+      d.count = 0;
+      return d;
+    }
+
+    return {
+      result: a,
+      keyPrefix: b,
+      func: c,
+      context: e,
+      count: 0
+    };
+  }
+
+  function S(a) {
+    a.result = null;
+    a.keyPrefix = null;
+    a.func = null;
+    a.context = null;
+    a.count = 0;
+    10 > Q.length && Q.push(a);
+  }
+
+  function T(a, b, c, e) {
+    var d = typeof a;
+    if ("undefined" === d || "boolean" === d) a = null;
+    var g = !1;
+    if (null === a) g = !0;else switch (d) {
+      case "string":
+      case "number":
+        g = !0;
+        break;
+
+      case "object":
+        switch (a.$$typeof) {
+          case p$1:
+          case q:
+            g = !0;
+        }
+
+    }
+    if (g) return c(e, a, "" === b ? "." + U(a, 0) : b), 1;
+    g = 0;
+    b = "" === b ? "." : b + ":";
+    if (Array.isArray(a)) for (var k = 0; k < a.length; k++) {
+      d = a[k];
+      var f = b + U(d, k);
+      g += T(d, f, c, e);
+    } else if (null === a || "object" !== typeof a ? f = null : (f = B && a[B] || a["@@iterator"], f = "function" === typeof f ? f : null), "function" === typeof f) for (a = f.call(a), k = 0; !(d = a.next()).done;) {
+      d = d.value, f = b + U(d, k++), g += T(d, f, c, e);
+    } else if ("object" === d) throw c = "" + a, Error(C(31, "[object Object]" === c ? "object with keys {" + Object.keys(a).join(", ") + "}" : c, ""));
+    return g;
+  }
+
+  function V$1(a, b, c) {
+    return null == a ? 0 : T(a, "", b, c);
+  }
+
+  function U(a, b) {
+    return "object" === typeof a && null !== a && null != a.key ? escape(a.key) : b.toString(36);
+  }
+
+  function W(a, b) {
+    a.func.call(a.context, b, a.count++);
+  }
+
+  function aa(a, b, c) {
+    var e = a.result,
+        d = a.keyPrefix;
+    a = a.func.call(a.context, b, a.count++);
+    Array.isArray(a) ? X(a, e, c, function (a) {
+      return a;
+    }) : null != a && (O(a) && (a = N(a, d + (!a.key || b && b.key === a.key ? "" : ("" + a.key).replace(P, "$&/") + "/") + c)), e.push(a));
+  }
+
+  function X(a, b, c, e, d) {
+    var g = "";
+    null != c && (g = ("" + c).replace(P, "$&/") + "/");
+    b = R(b, g, e, d);
+    V$1(a, aa, b);
+    S(b);
+  }
+
+  var Y = {
+    current: null
+  };
+
+  function Z() {
+    var a = Y.current;
+    if (null === a) throw Error(C(321));
+    return a;
+  }
+
+  var ba = {
+    ReactCurrentDispatcher: Y,
+    ReactCurrentBatchConfig: {
+      suspense: null
+    },
+    ReactCurrentOwner: J,
+    IsSomeRendererActing: {
+      current: !1
+    },
+    assign: objectAssign
+  };
+  var Children = {
+    map: function map(a, b, c) {
+      if (null == a) return a;
+      var e = [];
+      X(a, e, null, b, c);
+      return e;
+    },
+    forEach: function forEach(a, b, c) {
+      if (null == a) return a;
+      b = R(null, null, b, c);
+      V$1(a, W, b);
+      S(b);
+    },
+    count: function count(a) {
+      return V$1(a, function () {
+        return null;
+      }, null);
+    },
+    toArray: function toArray(a) {
+      var b = [];
+      X(a, b, null, function (a) {
+        return a;
+      });
+      return b;
+    },
+    only: function only(a) {
+      if (!O(a)) throw Error(C(143));
+      return a;
+    }
+  };
+  var Component$1 = F;
+  var Fragment$1 = r;
+  var Profiler = u;
+  var PureComponent = H;
+  var StrictMode = t;
+  var Suspense = y;
+  var __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ba;
+
+  var cloneElement = function (a, b, c) {
+    if (null === a || void 0 === a) throw Error(C(267, a));
+    var e = objectAssign({}, a.props),
+        d = a.key,
+        g = a.ref,
+        k = a._owner;
+
+    if (null != b) {
+      void 0 !== b.ref && (g = b.ref, k = J.current);
+      void 0 !== b.key && (d = "" + b.key);
+      if (a.type && a.type.defaultProps) var f = a.type.defaultProps;
+
+      for (h in b) {
+        K.call(b, h) && !L.hasOwnProperty(h) && (e[h] = void 0 === b[h] && void 0 !== f ? f[h] : b[h]);
+      }
+    }
+
+    var h = arguments.length - 2;
+    if (1 === h) e.children = c;else if (1 < h) {
+      f = Array(h);
+
+      for (var m = 0; m < h; m++) {
+        f[m] = arguments[m + 2];
+      }
+
+      e.children = f;
+    }
+    return {
+      $$typeof: p$1,
+      type: a.type,
+      key: d,
+      ref: g,
+      props: e,
+      _owner: k
+    };
+  };
+
+  var createContext = function (a, b) {
+    void 0 === b && (b = null);
+    a = {
+      $$typeof: w,
+      _calculateChangedBits: b,
+      _currentValue: a,
+      _currentValue2: a,
+      _threadCount: 0,
+      Provider: null,
+      Consumer: null
+    };
+    a.Provider = {
+      $$typeof: v,
+      _context: a
+    };
+    return a.Consumer = a;
+  };
+
+  var createElement = M;
+
+  var createFactory = function (a) {
+    var b = M.bind(null, a);
+    b.type = a;
+    return b;
+  };
+
+  var createRef$1 = function () {
+    return {
+      current: null
+    };
+  };
+
+  var forwardRef$1 = function (a) {
+    return {
+      $$typeof: x,
+      render: a
+    };
+  };
+
+  var isValidElement = O;
+
+  var lazy = function (a) {
+    return {
+      $$typeof: A,
+      _ctor: a,
+      _status: -1,
+      _result: null
+    };
+  };
+
+  var memo = function (a, b) {
+    return {
+      $$typeof: z,
+      type: a,
+      compare: void 0 === b ? null : b
+    };
+  };
+
+  var useCallback = function (a, b) {
+    return Z().useCallback(a, b);
+  };
+
+  var useContext = function (a, b) {
+    return Z().useContext(a, b);
+  };
+
+  var useDebugValue = function () {};
+
+  var useEffect = function (a, b) {
+    return Z().useEffect(a, b);
+  };
+
+  var useImperativeHandle = function (a, b, c) {
+    return Z().useImperativeHandle(a, b, c);
+  };
+
+  var useLayoutEffect = function (a, b) {
+    return Z().useLayoutEffect(a, b);
+  };
+
+  var useMemo = function (a, b) {
+    return Z().useMemo(a, b);
+  };
+
+  var useReducer = function (a, b, c) {
+    return Z().useReducer(a, b, c);
+  };
+
+  var useRef = function (a) {
+    return Z().useRef(a);
+  };
+
+  var useState = function (a) {
+    return Z().useState(a);
+  };
+
+  var version$1 = "16.13.1";
+
+  var react_production_min = {
+  	Children: Children,
+  	Component: Component$1,
+  	Fragment: Fragment$1,
+  	Profiler: Profiler,
+  	PureComponent: PureComponent,
+  	StrictMode: StrictMode,
+  	Suspense: Suspense,
+  	__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED,
+  	cloneElement: cloneElement,
+  	createContext: createContext,
+  	createElement: createElement,
+  	createFactory: createFactory,
+  	createRef: createRef$1,
+  	forwardRef: forwardRef$1,
+  	isValidElement: isValidElement,
+  	lazy: lazy,
+  	memo: memo,
+  	useCallback: useCallback,
+  	useContext: useContext,
+  	useDebugValue: useDebugValue,
+  	useEffect: useEffect,
+  	useImperativeHandle: useImperativeHandle,
+  	useLayoutEffect: useLayoutEffect,
+  	useMemo: useMemo,
+  	useReducer: useReducer,
+  	useRef: useRef,
+  	useState: useState,
+  	version: version$1
+  };
+
+  var react = createCommonjsModule(function (module) {
+
+  {
+    module.exports = react_production_min;
+  }
+  });
+
+  function timeAge(time) {
+    var now = new Date().getTime() / 1000;
+    var minutes = (now - time) / 60;
+
+    if (minutes < 60) {
+      return Math.round(minutes) + " minutes ago";
+    }
+
+    return Math.round(minutes / 60) + " hours ago";
+  }
+
+  function getHostUrl(url) {
+    return (url + "").replace("https://", "").replace("http://", "").split("/")[0];
+  }
+
+  function Image(_ref) {
+    var src = _ref.src,
+        style = _ref.style,
+        width = _ref.width,
+        height = _ref.height;
+    return createVNode(1, "img", null, null, 1, {
+      "src": src,
+      "width": width,
+      "height": height,
+      "style": style
+    });
+  }
+
+  function Link(_ref2) {
+    var children = _ref2.children,
+        href = _ref2.href,
+        className = _ref2.className;
+    return createVNode(1, "a", className, children, 0, {
+      "href": href || "#"
+    });
+  }
+
+  function HeaderBar() {
+    return createVNode(1, "tr", null, createVNode(1, "td", null, createVNode(1, "table", null, createVNode(1, "tbody", null, createVNode(1, "tr", null, [createVNode(1, "td", null, createComponentVNode(2, Link, {
+      children: createComponentVNode(2, Image, {
+        "src": "logo.png",
+        "width": "16",
+        "height": "16",
+        "style": {
+          border: "1px solid #00d8ff"
+        }
+      })
+    }), 2, {
+      "style": {
+        width: "18px",
+        "padding-right": "4px"
+      }
+    }), createVNode(1, "td", null, createVNode(1, "span", "pagetop", [createVNode(1, "b", "hnname", "React HN Benchmark", 16), createComponentVNode(2, Link, {
+      children: "new"
+    }), " | ", createComponentVNode(2, Link, {
+      children: "comments"
+    }), " | ", createComponentVNode(2, Link, {
+      children: "show"
+    }), " | ", createComponentVNode(2, Link, {
+      children: "ask"
+    }), " | ", createComponentVNode(2, Link, {
+      children: "jobs"
+    }), " | ", createComponentVNode(2, Link, {
+      children: "submit"
+    })], 0), 2, {
+      "style": {
+        "line-height": "12pt"
+      },
+      "height": "10"
+    })], 4), 2), 2, {
+      "style": {
+        padding: "4px"
+      },
+      "width": "100%",
+      "cellSpacing": "0",
+      "cellPadding": "0"
+    }), 2), 2, {
+      "style": {
+        "background-color": "#222"
+      }
+    });
+  }
+
+  function Story(_ref3) {
+    var story = _ref3.story,
+        rank = _ref3.rank;
+    return createFragment([createVNode(1, "tr", "athing", [createVNode(1, "td", "title", createVNode(1, "span", "rank", [rank, createTextVNode(".")], 0), 2, {
+      "style": {
+        "vertical-align": "top",
+        "text-align": "right"
+      }
+    }), createVNode(1, "td", "votelinks", createVNode(1, "center", null, createComponentVNode(2, Link, {
+      children: createVNode(1, "div", "votearrow", null, 1, {
+        "title": "upvote"
+      })
+    }), 2), 2, {
+      "style": {
+        "vertical-align": "top"
+      }
+    }), createVNode(1, "td", "title", [createComponentVNode(2, Link, {
+      "className": "storylink",
+      children: story.title
+    }), story.url ? createVNode(1, "span", "sitebit comhead", [createTextVNode(" "), createTextVNode("("), createComponentVNode(2, Link, {
+      children: getHostUrl(story.url)
+    }), createTextVNode(")")], 0) : null], 0)], 4), createVNode(1, "tr", null, [createVNode(1, "td", null, null, 1, {
+      "colSpan": "2"
+    }), createVNode(1, "td", "subtext", [createVNode(1, "span", "score", [story.score, createTextVNode(" points")], 0), " by ", createComponentVNode(2, Link, {
+      "className": "hnuser",
+      children: story.by
+    }), " ", createVNode(1, "span", "age", createComponentVNode(2, Link, {
+      children: timeAge(story.time)
+    }), 2), " | ", createComponentVNode(2, Link, {
+      children: "hide"
+    }), " | ", createComponentVNode(2, Link, {
+      children: [story.descendants || 0, " comments"]
+    })], 0)], 4), createVNode(1, "tr", "spacer", null, 1, {
+      "height": "5"
+    })], 4);
+  }
+
+  function StoryList(_ref4) {
+    var stories = _ref4.stories;
+    return createVNode(1, "tr", null, createVNode(1, "td", null, createVNode(1, "table", null, createVNode(1, "tbody", null, stories.map(function (story, i) {
+      return createComponentVNode(2, Story, {
+        "story": story,
+        "rank": ++i
+      }, story.id);
+    }), 0), 2, {
+      "cellPadding": "0",
+      "cellSpacing": "0",
+      "classList": "itemlist"
+    }), 2), 2);
+  }
+
+  function Component$2(_ref5) {
+    var stories = _ref5.stories;
+    return createVNode(1, "center", null, createVNode(1, "table", null, createVNode(1, "tbody", null, [createComponentVNode(2, HeaderBar), createVNode(1, "tr", null, null, 1, {
+      "height": "10"
+    }), createComponentVNode(2, StoryList, {
+      "stories": stories
+    })], 4), 2, {
+      "id": "hnmain",
+      "border": "0",
+      "cellPadding": "0",
+      "cellSpacing": "0",
+      "width": "85%",
+      "style": {
+        "background-color": "#f6f6ef"
+      }
+    }), 2);
+  }
+  Component$2.compileRootComponent = true;
+
+  var root = document.getElementById("root");
+  var props = {
+    "stories": [{
+      "by": "rendx",
+      "descendants": 49,
+      "id": 14201562,
+      "kids": [14201704, 14202297, 14202233, 14201771, 14201765, 14201897, 14201750, 14201913, 14201854, 14201667, 14201759, 14202073],
+      "score": 186,
+      "time": 1493197629,
+      "title": "Postal: Open source mail delivery platform, alternative to Mailgun or Sendgrid",
+      "type": "story",
+      "url": "https://github.com/atech/postal"
+    }, {
+      "by": "rabyss",
+      "descendants": 4,
+      "id": 14202124,
+      "kids": [14202293, 14202249],
+      "score": 16,
+      "time": 1493205989,
+      "title": "Show HN: BreakLock – A hybrid of Mastermind and the Android pattern lock",
+      "type": "story",
+      "url": "https://maxwellito.github.io/breaklock/"
+    }, {
+      "by": "morid1n",
+      "descendants": 137,
+      "id": 14200563,
+      "kids": [14201274, 14200711, 14201147, 14201365, 14201499, 14200618, 14201169, 14200911, 14200734, 14201083, 14200706, 14200785, 14201032],
+      "score": 178,
+      "time": 1493183234,
+      "title": "My Hackintosh Hardware Spec – clean, based on a 2013 iMac",
+      "type": "story",
+      "url": "https://infinitediaries.net/my-exact-hackintosh-spec/"
+    }, {
+      "by": "robertwiblin",
+      "descendants": 203,
+      "id": 14196731,
+      "kids": [14201298, 14201838, 14201381, 14197574, 14201398, 14199764, 14198491, 14197000, 14198224, 14200614, 14201983, 14200697, 14199252, 14201214, 14198923, 14200224, 14197509, 14200859, 14200064, 14200114, 14197256, 14197220, 14200653, 14197186, 14199258, 14197155, 14197344, 14198361, 14197969, 14199813, 14197259, 14197503],
+      "score": 562,
+      "time": 1493145853,
+      "title": "Evidence-based advice we've found on how to be successful in a job",
+      "type": "story",
+      "url": "https://80000hours.org/career-guide/how-to-be-successful/"
+    }, {
+      "by": "ryan_j_naughton",
+      "descendants": 565,
+      "id": 14196812,
+      "kids": [14198306, 14197339, 14200899, 14198165, 14198750, 14202199, 14201432, 14197619, 14197471, 14201113, 14202214, 14202043, 14197313, 14197751, 14197332, 14198050, 14201616, 14197404, 14199730, 14198007, 14197358, 14197283, 14200959, 14197891, 14198203, 14197312, 14200796, 14201528, 14197249, 14198271, 14197989, 14198842, 14197205, 14199148, 14197458, 14200457, 14197330, 14199993, 14197855, 14200102, 14197378, 14199315, 14198240, 14198397, 14199326, 14200159, 14198798, 14201296, 14198173, 14197323, 14197383, 14197459, 14197275, 14198305, 14198005, 14198015, 14199380, 14199079, 14198413, 14197334, 14197327, 14197234],
+      "score": 385,
+      "time": 1493146342,
+      "title": "Is Every Speed Limit Too Low?",
+      "type": "story",
+      "url": "https://priceonomics.com/is-every-speed-limit-too-low/"
+    }, {
+      "by": "monort",
+      "descendants": 63,
+      "id": 14196322,
+      "kids": [14197628, 14200026, 14197457, 14197486, 14202126, 14201266, 14197227, 14199404, 14199338, 14196382, 14200598, 14197377, 14199689, 14198538, 14196905, 14200404, 14198781, 14197278, 14197888, 14197742, 14197764],
+      "score": 316,
+      "time": 1493143464,
+      "title": "Experimental Nighttime Photography with Nexus and Pixel",
+      "type": "story",
+      "url": "https://research.googleblog.com/2017/04/experimental-nighttime-photography-with.html"
+    }, {
+      "by": "networked",
+      "descendants": 9,
+      "id": 14199028,
+      "kids": [14201588, 14200361, 14200314, 14200338],
+      "score": 121,
+      "time": 1493161601,
+      "title": "JPEG Huffman Coding Tutorial",
+      "type": "story",
+      "url": "http://www.impulseadventure.com/photo/jpeg-huffman-coding.html"
+    }, {
+      "by": "jasontan",
+      "id": 14202227,
+      "score": 1,
+      "time": 1493207865,
+      "title": "Are you adept at understanding concurrency problems? Sift Science is hiring",
+      "type": "job",
+      "url": "https://boards.greenhouse.io/siftscience/jobs/550699#.WPUZhlMrLfY"
+    }, {
+      "by": "pouwerkerk",
+      "descendants": 80,
+      "id": 14196077,
+      "kids": [14199434, 14196279, 14196604, 14197440, 14201734, 14200922, 14200452, 14197115, 14199837, 14199894, 14196596, 14198243, 14196565, 14197400, 14197049, 14197686, 14198545, 14198475],
+      "score": 717,
+      "time": 1493142008,
+      "title": "Painting with Code: Introducing our new open source library React Sketch.app",
+      "type": "story",
+      "url": "http://airbnb.design/painting-with-code/"
+    }, {
+      "by": "mromnia",
+      "descendants": 16,
+      "id": 14201670,
+      "kids": [14201835, 14202115, 14202176, 14201890, 14202325, 14201859, 14202158, 14201763, 14201902],
+      "score": 62,
+      "time": 1493198949,
+      "title": "How to mod a Porsche 911 to run Doom [video]",
+      "type": "story",
+      "url": "https://www.youtube.com/watch?v=NRMpNA86e8Q"
+    }, {
+      "by": "rbanffy",
+      "descendants": 16,
+      "id": 14192383,
+      "kids": [14197494, 14201805, 14197484],
+      "score": 194,
+      "time": 1493118160,
+      "title": "Go programming language secure coding practices guide",
+      "type": "story",
+      "url": "https://github.com/Checkmarx/Go-SCP"
+    }, {
+      "by": "intous",
+      "descendants": 0,
+      "id": 14200446,
+      "score": 39,
+      "time": 1493181245,
+      "title": "Building Functional Chatbot for Messenger with Ruby on Rails",
+      "type": "story",
+      "url": "https://tutorials.botsfloor.com/chatbot-development-tutorial-how-to-build-a-fully-functional-weather-bot-on-facebook-messenger-c94ac7c59185"
+    }, {
+      "by": "nanospeck",
+      "descendants": 23,
+      "id": 14201207,
+      "kids": [14202252, 14201646, 14201620, 14202076, 14201511, 14201324, 14201940, 14201425, 14201505, 14201304, 14201435, 14201287, 14201739, 14202031, 14202018],
+      "score": 57,
+      "text": "This question was asked on both 2015 &amp; 2016 in HN. I would like to ask it again today to know what are the newest options for this.<p>Q: What would you recommend as a reasonably priced (sub 150$) quad-copter&#x2F;drone, that has a camera, the ability to be programmed (so that I can process video&#x2F;write my own stability algorithms for it), good range, and reasonable flying time?\nIn the event nothing fits that price point, any pointers on what the state of the art is?<p>Thanks!",
+      "time": 1493192641,
+      "title": "Ask HN (again): What is the best affordable programmable drone?",
+      "type": "story"
+    }, {
+      "by": "geuis",
+      "descendants": 57,
+      "id": 14196708,
+      "kids": [14197480, 14198523, 14198705, 14200969, 14200079, 14197605, 14198979, 14202203, 14197679, 14198461, 14200389, 14198065, 14197883, 14197908],
+      "score": 123,
+      "time": 1493145655,
+      "title": "Hackpad shutting down",
+      "type": "story",
+      "url": "https://hackpad.com/"
+    }, {
+      "by": "jfoutz",
+      "descendants": 55,
+      "id": 14195956,
+      "kids": [14199594, 14196972, 14202101, 14198197, 14196771, 14197326, 14196956, 14200842, 14201529, 14198581, 14196777, 14200177, 14200422, 14198571],
+      "score": 167,
+      "time": 1493141367,
+      "title": "Linkerd 1.0",
+      "type": "story",
+      "url": "https://blog.buoyant.io/2017/04/25/announcing-linkerd-1.0/index.html"
+    }, {
+      "by": "DavidBuchanan",
+      "descendants": 19,
+      "id": 14199364,
+      "kids": [14199735, 14200889, 14202245, 14200205, 14200104, 14201697, 14200061, 14199996, 14199867],
+      "score": 66,
+      "time": 1493164755,
+      "title": "Show HN: TARDIS – Warp a process's perspective of time by hooking syscalls",
+      "type": "story",
+      "url": "https://github.com/DavidBuchanan314/TARDIS"
+    }, {
+      "by": "rchen8",
+      "descendants": 121,
+      "id": 14195664,
+      "kids": [14196654, 14196206, 14196677, 14197035, 14196041, 14196399, 14196200, 14196140, 14196216, 14196421, 14196370, 14196146, 14197601, 14197107, 14196866, 14196691, 14197704, 14196772, 14200089, 14198588, 14196937, 14198530, 14197119, 14197247, 14198632, 14196137, 14200323, 14196346],
+      "score": 486,
+      "time": 1493139957,
+      "title": "How to Become Well-Connected",
+      "type": "story",
+      "url": "http://firstround.com/review/how-to-become-insanely-well-connected/"
+    }, {
+      "by": "dbrgn",
+      "descendants": 89,
+      "id": 14191186,
+      "kids": [14200855, 14200035, 14200110, 14201408, 14202159, 14197876, 14200348, 14198720, 14198183, 14199824, 14198281, 14201643, 14201591, 14199541, 14198423, 14201738, 14200037, 14201349, 14200028, 14201206, 14197995, 14197830, 14199603],
+      "score": 135,
+      "time": 1493100791,
+      "title": "How to Say (Almost) Everything in a Hundred-Word Language (2015)",
+      "type": "story",
+      "url": "https://www.theatlantic.com/technology/archive/2015/07/toki-pona-smallest-language/398363/?single_page=true"
+    }, {
+      "by": "runesoerensen",
+      "descendants": 62,
+      "id": 14198866,
+      "kids": [14199494, 14199495, 14200288, 14201118, 14199599],
+      "score": 155,
+      "time": 1493160263,
+      "title": "Nginx 1.13 released with TLS 1.3 support",
+      "type": "story",
+      "url": "http://mailman.nginx.org/pipermail/nginx-announce/2017/000195.html"
+    }, {
+      "by": "bcherny",
+      "descendants": 20,
+      "id": 14199299,
+      "kids": [14200694, 14201832, 14200517, 14201760, 14200966, 14200558, 14201815, 14201231, 14201073, 14201124],
+      "score": 54,
+      "time": 1493163960,
+      "title": "Show HN: JSONSchema to TypeScript compiler",
+      "type": "story",
+      "url": "https://github.com/bcherny/json-schema-to-typescript"
+    }, {
+      "by": "tormeh",
+      "descendants": 37,
+      "id": 14198557,
+      "kids": [14201027, 14199082, 14201023, 14201160, 14200367, 14200647],
+      "score": 70,
+      "time": 1493158034,
+      "title": "A practitioner’s guide to hedonism (2007)",
+      "type": "story",
+      "url": "https://www.1843magazine.com/story/a-practitioners-guide-to-hedonism"
+    }, {
+      "by": "nickreiner",
+      "descendants": 33,
+      "id": 14199125,
+      "kids": [14202332, 14201634, 14201200, 14201215, 14201157, 14201898, 14201969, 14201125],
+      "score": 52,
+      "time": 1493162517,
+      "title": "Best Linux Distros for Gaming in 2017",
+      "type": "story",
+      "url": "https://thishosting.rocks/best-linux-distros-for-gaming/"
+    }, {
+      "by": "BinaryIdiot",
+      "descendants": 170,
+      "id": 14200486,
+      "kids": [14200680, 14200677, 14201515, 14200793, 14200534, 14200908, 14200649, 14200633, 14200701, 14202295, 14200578, 14200709, 14200580, 14201107, 14201779, 14200773, 14200804, 14200720, 14202060, 14200948, 14200903, 14200748, 14200875, 14200750, 14200821, 14200756, 14201707, 14201689, 14200669, 14200997, 14200818, 14201586, 14200603, 14201054, 14201457, 14200616, 14201095, 14200915, 14200878, 14200629, 14201523, 14200620, 14202099],
+      "score": 316,
+      "time": 1493181945,
+      "title": "Suicide of an Uber engineer: Widow blames job stress",
+      "type": "story",
+      "url": "http://www.sfchronicle.com/business/article/Suicide-of-an-Uber-engineer-widow-blames-job-11095807.php?t=7e40d1f554&cmpid=fb-premium&cmpid=twitter-premium"
+    }, {
+      "by": "catc",
+      "descendants": 34,
+      "id": 14195522,
+      "kids": [14202316, 14202278, 14197167, 14199152, 14202077, 14197239, 14197721, 14197632, 14197219, 14198296, 14197245, 14197201, 14197403, 14198051, 14196747],
+      "score": 87,
+      "time": 1493139414,
+      "title": "Show HN: React Timekeeper – Time picker based on the style of Google Keep",
+      "type": "story",
+      "url": "https://catc.github.io/react-timekeeper/"
+    }, {
+      "by": "Integer",
+      "descendants": 152,
+      "id": 14192353,
+      "kids": [14197671, 14197754, 14199091, 14198533, 14201249, 14198626, 14198263, 14198009, 14195130, 14199551, 14197663, 14198285, 14199611, 14199835, 14197482, 14198924, 14198943],
+      "score": 273,
+      "time": 1493117771,
+      "title": "Windows Is Bloated, Thanks to Adobe’s Extensible Metadata Platform",
+      "type": "story",
+      "url": "https://www.thurrott.com/windows/109962/windows-bloated-thanks-adobes-extensible-metadata-platform"
+    }, {
+      "by": "craigcannon",
+      "descendants": 23,
+      "id": 14197852,
+      "kids": [14200024, 14199986, 14202106, 14198011, 14199228, 14202138, 14198917, 14198607],
+      "score": 58,
+      "time": 1493153342,
+      "title": "New England Lost Ski Areas Project",
+      "type": "story",
+      "url": "http://www.nelsap.org/"
+    }, {
+      "by": "golfer",
+      "descendants": 105,
+      "id": 14198229,
+      "kids": [14200202, 14198948, 14199770, 14198634, 14200263, 14198797, 14198919, 14200447, 14198645, 14199267, 14199124, 14198833, 14199059],
+      "score": 282,
+      "time": 1493155745,
+      "title": "Uber must turn over information about its acquisition of Otto to Waymo",
+      "type": "story",
+      "url": "https://techcrunch.com/2017/04/25/uber-must-turn-over-information-about-its-acquisition-of-otto-to-waymo-court-rules/"
+    }, {
+      "by": "JoshTriplett",
+      "descendants": 116,
+      "id": 14198403,
+      "kids": [14199771, 14199980, 14198664, 14198764, 14201086, 14200307, 14199294, 14198860, 14198817],
+      "score": 139,
+      "time": 1493156882,
+      "title": "Shutting down public FTP services",
+      "type": "story",
+      "url": "https://lists.debian.org/debian-announce/2017/msg00001.html"
+    }, {
+      "by": "mabynogy",
+      "descendants": 50,
+      "id": 14191577,
+      "kids": [14194021, 14195402, 14193886, 14193792, 14194355, 14197136, 14200386, 14194151, 14193989, 14193798, 14194042, 14197100, 14198984, 14193925, 14194170],
+      "score": 365,
+      "time": 1493107104,
+      "title": "A Primer on Bézier Curves",
+      "type": "story",
+      "url": "https://pomax.github.io/bezierinfo#preface"
+    }, {
+      "by": "robertothais",
+      "descendants": 29,
+      "id": 14192946,
+      "kids": [14202311, 14202299, 14201900, 14200029, 14198260, 14198605, 14201850, 14199858, 14198223, 14198610],
+      "score": 61,
+      "time": 1493124627,
+      "title": "Consciousness as a State of Matter (2014)",
+      "type": "story",
+      "url": "https://arxiv.org/abs/1401.1219"
+    }, {
+      "by": "leephillips",
+      "descendants": 2,
+      "id": 14202078,
+      "kids": [14202122],
+      "score": 5,
+      "time": 1493205152,
+      "title": "The Republican Lawmaker Who Secretly Created Reddit’s Women-Hating ‘Red Pill’",
+      "type": "story",
+      "url": "http://www.thedailybeast.com/articles/2017/04/25/the-republican-lawmaker-who-secretly-created-reddit-s-women-hating-red-pill.html"
+    }, {
+      "by": "anguswithgusto",
+      "descendants": 55,
+      "id": 14196325,
+      "kids": [14197131, 14196789, 14197299, 14197466, 14196737, 14199929, 14197550, 14197511, 14196888, 14200109, 14197101],
+      "score": 80,
+      "time": 1493143475,
+      "title": "Gett in advanced talks to buy Juno for $250M as Uber rivals consolidate",
+      "type": "story",
+      "url": "https://techcrunch.com/2017/04/25/gett-in-advanced-talks-to-buy-juno-for-250m-as-uber-rivals-consolidate/"
+    }, {
+      "by": "fabuzaid",
+      "descendants": 2,
+      "id": 14196339,
+      "kids": [14201557, 14201170],
+      "score": 46,
+      "time": 1493143560,
+      "title": "Implementing a Fast Research Compiler in Rust",
+      "type": "story",
+      "url": "http://dawn.cs.stanford.edu/blog/weld.html"
+    }, {
+      "by": "bluesilver07",
+      "descendants": 61,
+      "id": 14196154,
+      "kids": [14197614, 14196853, 14197074, 14197050, 14200090, 14197731, 14196352, 14197442],
+      "score": 72,
+      "time": 1493142448,
+      "title": "Xenko Game Engine 2.0 released",
+      "type": "story",
+      "url": "http://xenko.com/blog/release-xenko-2-0-0/"
+    }, {
+      "by": "molecule",
+      "descendants": 254,
+      "id": 14189392,
+      "kids": [14190198, 14190800, 14193591, 14190274, 14189796, 14190118, 14190405, 14190006, 14189430, 14190244, 14189877, 14190064, 14190211, 14189918, 14190071, 14191312, 14195969, 14190542, 14194775, 14189900, 14190032, 14189847, 14192128, 14191737, 14191047, 14190992, 14192759, 14191405, 14190815, 14194136, 14190737, 14190552, 14191385, 14189816, 14191316, 14193780, 14193979, 14190768, 14192973, 14191217, 14190879, 14190780, 14189914, 14190925, 14192906, 14190528, 14189893, 14190007, 14189929, 14190049, 14191859, 14191304, 14190177, 14193355, 14193352, 14190324, 14190846, 14189803],
+      "score": 630,
+      "time": 1493076480,
+      "title": "Robert M. Pirsig has died",
+      "type": "story",
+      "url": "http://www.npr.org/sections/thetwo-way/2017/04/24/525443040/-zen-and-the-art-of-motorcycle-maintenance-author-robert-m-pirsig-dies-at-88"
+    }, {
+      "by": "artsandsci",
+      "descendants": 67,
+      "id": 14194422,
+      "kids": [14199418, 14196266, 14197226, 14196647, 14196324, 14201761, 14196265, 14195599, 14199054, 14196057],
+      "score": 127,
+      "time": 1493134376,
+      "title": "An extra-uterine system to physiologically support the extreme premature lamb",
+      "type": "story",
+      "url": "https://www.nature.com/articles/ncomms15112"
+    }, {
+      "by": "miobrien",
+      "descendants": 9,
+      "id": 14198261,
+      "kids": [14199610, 14199447, 14199862, 14201753, 14199068],
+      "score": 30,
+      "time": 1493155969,
+      "title": "Prior Indigenous Technological Species",
+      "type": "story",
+      "url": "https://arxiv.org/abs/1704.07263"
+    }, {
+      "by": "zdw",
+      "descendants": 2,
+      "id": 14199197,
+      "kids": [14200610],
+      "score": 12,
+      "time": 1493163087,
+      "title": "Should Curve25519 keys be validated?",
+      "type": "story",
+      "url": "https://research.kudelskisecurity.com/2017/04/25/should-ecdh-keys-be-validated/"
+    }, {
+      "by": "spearo77",
+      "descendants": 213,
+      "id": 14189688,
+      "kids": [14191654, 14192373, 14190683, 14192095, 14191856, 14190771, 14190570, 14190599, 14190721, 14192049, 14189694, 14191430, 14193610, 14190543, 14190372, 14191818, 14192171, 14192177, 14192135, 14191483, 14190560, 14190341, 14190362, 14190452, 14192563, 14190458, 14195245, 14190809, 14192706, 14192959, 14190636, 14190634, 14190368, 14191163, 14191379, 14190668, 14191673, 14190884, 14192565, 14190480, 14190442],
+      "score": 447,
+      "time": 1493079289,
+      "title": "WikiTribune – Evidence-based journalism",
+      "type": "story",
+      "url": "https://www.wikitribune.com"
+    }, {
+      "by": "adbrebs",
+      "descendants": 294,
+      "id": 14182262,
+      "kids": [14183335, 14183715, 14182725, 14183897, 14185812, 14184510, 14182468, 14183231, 14182580, 14183996, 14182449, 14185671, 14182428, 14182666, 14186599, 14182519, 14185571, 14185159, 14182636, 14185864, 14188340, 14183433, 14183146, 14184034, 14184363, 14183368, 14183098, 14182495, 14182753, 14184720, 14188085, 14187692, 14183633, 14188137, 14182606, 14186796, 14196166, 14185084, 14185899, 14188219, 14186885, 14183406, 14185561, 14183388, 14191457, 14183281, 14183399, 14183674, 14183236, 14183990, 14183760, 14183248, 14184114, 14183318, 14183457, 14186509, 14186900, 14186695, 14188405, 14184636, 14184630, 14188301, 14184144, 14183023, 14184555, 14185946, 14184611, 14184490, 14183653, 14183881, 14182715, 14184440, 14182573, 14183251, 14184962, 14187249, 14182545, 14192314],
+      "score": 1356,
+      "time": 1493014335,
+      "title": "Lyrebird – An API to copy the voice of anyone",
+      "type": "story",
+      "url": "https://lyrebird.ai/demo"
+    }, {
+      "by": "mathgenius",
+      "descendants": 6,
+      "id": 14192442,
+      "kids": [14197265, 14195645],
+      "score": 43,
+      "time": 1493118936,
+      "title": "Quantum – Open journal for quantum science",
+      "type": "story",
+      "url": "http://quantum-journal.org/papers/"
+    }, {
+      "by": "tjalfi",
+      "descendants": 5,
+      "id": 14190937,
+      "kids": [14199744, 14197114, 14190946],
+      "score": 107,
+      "time": 1493097061,
+      "title": "A Seven Dimensional Analysis of Hashing Methods [pdf]",
+      "type": "story",
+      "url": "http://www.vldb.org/pvldb/vol9/p96-richter.pdf"
+    }, {
+      "by": "mxstbr",
+      "descendants": 0,
+      "id": 14196935,
+      "score": 24,
+      "time": 1493147015,
+      "title": "One GraphQL Client for JavaScript, iOS, and Android",
+      "type": "story",
+      "url": "https://dev-blog.apollodata.com/one-graphql-client-for-javascript-ios-and-android-64993c1b7991"
+    }, {
+      "by": "uptown",
+      "descendants": 166,
+      "id": 14192817,
+      "kids": [14197690, 14195597, 14196750, 14195237, 14196320, 14195150, 14198816, 14194916, 14197746, 14196332, 14194695, 14196726, 14194947, 14199715, 14195059, 14195778, 14196204, 14200435, 14194780, 14195030, 14198452, 14199023, 14194852, 14197577, 14197778, 14195361, 14196368, 14194948, 14199024, 14195060, 14199498],
+      "score": 226,
+      "time": 1493123621,
+      "title": "How Yahoo Killed Flickr (2012)",
+      "type": "story",
+      "url": "https://gizmodo.com/5910223/how-yahoo-killed-flickr-and-lost-the-internet"
+    }, {
+      "by": "mattklein123",
+      "descendants": 42,
+      "id": 14194026,
+      "kids": [14194573, 14195577, 14194430, 14195407, 14194569, 14195298, 14200054, 14194456, 14198329, 14199198],
+      "score": 167,
+      "time": 1493131921,
+      "title": "Envoy: 7 months later",
+      "type": "story",
+      "url": "https://eng.lyft.com/envoy-7-months-later-41986c2fd443"
+    }, {
+      "by": "misnamed",
+      "descendants": 2,
+      "id": 14191333,
+      "kids": [14197296],
+      "score": 29,
+      "time": 1493103250,
+      "title": "Modern Hieroglyphs: Binary Logic Behind the Universal “Power Symbol”",
+      "type": "story",
+      "url": "http://99percentinvisible.org/article/modern-hieroglyphics-binary-logic-behind-universal-power-symbol/"
+    }, {
+      "by": "LaFolle",
+      "descendants": 92,
+      "id": 14191681,
+      "kids": [14192477, 14194490, 14192316, 14193364, 14192065, 14193499, 14194324, 14192622, 14192020, 14195866, 14192496, 14196391, 14192138, 14192714, 14195151, 14195094, 14192110, 14192155],
+      "score": 138,
+      "time": 1493108371,
+      "title": "Feynman Algorithm (2014)",
+      "type": "story",
+      "url": "http://wiki.c2.com/?FeynmanAlgorithm"
+    }, {
+      "by": "Thevet",
+      "descendants": 18,
+      "id": 14190736,
+      "kids": [14197744, 14195753, 14197880, 14197735, 14195874, 14197023, 14196660],
+      "score": 81,
+      "time": 1493093860,
+      "title": "The legend of the Legion",
+      "type": "story",
+      "url": "https://aeon.co/essays/why-young-men-queue-up-to-die-in-the-french-foreign-legion"
+    }, {
+      "by": "bufordsharkley",
+      "descendants": 92,
+      "id": 14197013,
+      "kids": [14197983, 14197168, 14197701, 14198239, 14197514, 14198064, 14197476, 14198489, 14197761, 14197080, 14198905, 14198068, 14198579],
+      "score": 69,
+      "time": 1493147532,
+      "title": "Cracking the Mystery of Labor's Falling Share of GDP",
+      "type": "story",
+      "url": "https://www.bloomberg.com/view/articles/2017-04-24/cracking-the-mystery-of-labor-s-falling-share-of-gdp"
+    }, {
+      "by": "rbanffy",
+      "descendants": 27,
+      "id": 14198470,
+      "kids": [14199443, 14201987, 14199461, 14199729, 14201519, 14198762, 14199524],
+      "score": 52,
+      "time": 1493157378,
+      "title": "How the Internet Gave Mail-Order Brides the Power",
+      "type": "story",
+      "url": "https://backchannel.com/how-the-internet-gave-mail-order-brides-the-power-1af8c8a40562"
+    }]
+  };
+  var start = performance.now();
+  render(normalizeProps(createComponentVNode(2, Component$2, _extends({}, props))), root);
+  alert(performance.now() - start);
+
+}));

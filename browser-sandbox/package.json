@@ -8,6 +8,7 @@
     "build-inferno-bundle": "rollup --config inferno-rollup-config.js",
     "build-svelte-bundle": "rollup --config svelte-rollup-config.js",
     "build-solid-bundle": "rollup --config solid-rollup-config.js",
+    "build-experiment7-bundle": "rollup --config experiment7-rollup-config.js",
     "build": "yarn compile && yarn build-compiled-bundle && yarn build-react-bundle && yarn build-inferno-bundle && yarn build-svelte-bundle"
   },
   "author": "Dominic Gannaway",

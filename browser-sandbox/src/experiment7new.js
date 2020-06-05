@@ -1,360 +1,77 @@
 (function() {
-  "use strict";
 
-  const _ = void 0;
-  const isArray = Array.isArray;
+  // React
 
-  
-  const reactElementSymbol = Symbol.for("react.element");
-  const CREATION_PHASE = 0;
-  const UPDATE_PHASE = 1;
+  let currentNode = null;
+  let phase = 0;
 
-  const ROOT_COMPONENT = 1;
-  const STATIC_COMPONENT = 1 << 1;
+  function openElement(tag, attrs, children) {
+    if (phase === 0) {
+      const nextNode = document.createElement(tag);
+      if (attrs !== undefined) {
+        const style = nextNode.style;
+        for (let i = 0; i < attrs.length; i += 2) {
+          const attrName = attrs[i];
+          const attrValue = attrs[i + 1];
 
-  // State
-  let currentPhase = 0;
-  let currentFiber = null;
-  let currentDOMElement = null;
-  let currentLastValues = null;
-  let currentNextValues = null;
-
-  const ReactCurrentRenderer = {
-    current: null,
-  };
-
-  function setInitialElementProps(props, DOMElement) {
-    const propsLength = props.length;
-
-    for (let i = 0; i < propsLength; i += 2) {
-      const propName = props[i];
-      const propValue = props[i + 1];
-
-      if (propName === "className") {
-        DOMElement.className = propValue;
-      } else if (propName === "id") {
-        DOMElement.id = propValue;
-      } else if (propName === "style") {
-        const DOMElementStyle = DOMElement.style;
-        for (let x = 0, length = propValue.length; x < length; x += 2) {
-          const styleName = propValue[x];
-          const styleValue = propValue[x + 1];
-          DOMElementStyle.setProperty(styleName, styleValue);
-        }
-      } else {
-        DOMElement.setAttribute(propName, propValue);
-      }
-    }
-  }
-
-  const DOMRenderer = {
-    openFragment() {
-      // pushElement([]);
-    },
-    openElement(tagName, staticProps, textContentOrValueIndex) {
-      if (currentPhase === CREATION_PHASE) {
-        const DOMElement = createElement(tagName);
-        if (staticProps !== undefined) {
-          setInitialElementProps(staticProps, DOMElement);
-        }
-        if (currentFiber.hostNode === null) {
-          currentFiber.hostNode = DOMElement;
-        }
-        const parentDOMElement = currentDOMElement;
-        if (textContentOrValueIndex !== undefined) {
-          if (typeof textContentOrValueIndex === "string") {
-            DOMElement.textContent = textContentOrValueIndex;
-          } else {
-            DOMElement.textContent = currentNextValues[textContentOrValueIndex];
+          if (attrValue == null) {
+            continue;
           }
-        } else {
-          currentDOMElement = DOMElement;
-        }
-        appendChild(parentDOMElement, DOMElement);
-      } else {
-        if (textContentOrValueIndex !== undefined) {
-          if (typeof textContentOrValueIndex !== "string") {
-            const lastTextContent = currentLastValues[textContentOrValueIndex];
-            const nextTextContent = currentNextValues[textContentOrValueIndex];
 
-            if (lastTextContent !== nextTextContent) {
-              // TODO
+          if (attrName === 'className') {
+            nextNode.className = attrValue;
+          } else if (attrName === 'style') {
+            for (let s = 0; s < attrValue.length; s += 2) {
+              const styleName = attrValue[s];
+              const styleValue = attrValue[s + 1];
+
+              style.setProperty(styleName, styleValue);
             }
-          }
-        }
-      }
-    },
-    staticText(text) {
-      if (currentPhase === CREATION_PHASE) {
-        const DOMTextNode = createTextNode(text);
-        appendChild(currentDOMElement, DOMTextNode);
-      }
-    },
-    close() {
-      if (currentPhase === CREATION_PHASE) {
-        currentDOMElement = currentDOMElement.parentNode;
-      }
-    },
-    conditional(conditionalValueIndex, consequentTemplateFunction, alternateTemplateFunction) {
-      if (currentPhase === CREATION_PHASE) {
-        const conditionValue = currentNextValues[conditionalValueIndex];
-  
-        if (conditionValue) {
-          if (consequentTemplateFunction !== undefined) {
-            consequentTemplateFunction();
-          }
-        } else {
-          if (alternateTemplateFunction !== undefined) {
-            alternateTemplateFunction();
-          }
-        }
-      }
-    },
-    arrayMap(arrayValueIndex, arrayMapComputeFunctionValueIndex, arrayMapTemplateFunction) {
-      const nextArray = currentNextValues[arrayValueIndex];
-      const nextArrayMapComputeFunction = currentNextValues[arrayMapComputeFunctionValueIndex];
-      const nextArrayLength = nextArray.length;
-  
-      if (currentPhase === CREATION_PHASE) {
-        const arrayMapFiber = createFiber();
-        insertChildFiberIntoParentFiber(currentFiber, arrayMapFiber);
-  
-        for (let i = 0; i < nextArrayLength; ++i) {
-          const element = nextArray[i];
-          const elementValues = nextArrayMapComputeFunction(element, i, nextArray);
-          const elementFiber = createFiber();
-          insertChildFiberIntoParentFiber(arrayMapFiber, elementFiber);
-          elementFiber.values = elementValues;
-          renderTemplateFunctionWith(arrayMapTemplateFunction, CREATION_PHASE, elementFiber, currentDOMElement, _, elementValues);
-        }
-      } else {
-        const arrayMapFiber = currentFiber.children[currentFiber.childIndex++];
-        const arrayMapFiberChildren = arrayMapFiber.children;
-
-        for (let i = 0; i < nextArrayLength; ++i) {
-          const element = nextArray[i];
-          const nextElementValues = nextArrayMapComputeFunction(element, i, nextArray);
-          const elementFiber = arrayMapFiberChildren[i];
-          const lastElementValues = elementFiber.values;
-          elementFiber.values = nextElementValues;
-          renderTemplateFunctionWith(arrayMapTemplateFunction, UPDATE_PHASE, elementFiber, currentDOMElement, lastElementValues, nextElementValues);
-          elementFiber.childIndex = 0;
-        }
-      }
-    },
-    component(flags, templateFunction, computeFunction, propsOrPropsIndex) {
-      if (currentPhase === CREATION_PHASE) {
-        if ((flags & STATIC_COMPONENT) === 0) {
-          let componentProps = null;
-  
-          if ((flags & ROOT_COMPONENT) !== 0) {
-            componentProps = convertRootPropsToPropsArray(currentFiber.props, propsOrPropsIndex);
           } else {
-            componentProps = currentNextValues[propsOrPropsIndex];
+            nextNode.setAttribute(attrName, attrValue);
           }
-          const componentFiber = createFiber();
-          insertChildFiberIntoParentFiber(currentFiber, componentFiber);
-          const componentValues = callComputeFunctionWithArray(computeFunction, componentProps);
-          componentFiber.values = componentValues;
-          renderTemplateFunctionWith(templateFunction, CREATION_PHASE, componentFiber, currentDOMElement, _, componentValues);
-        } else {
-          renderTemplateFunctionWith(templateFunction, CREATION_PHASE, currentFiber, currentDOMElement, _, currentNextValues);
-        }
-      } else if (currentPhase === UPDATE_PHASE) {
-        if ((flags & STATIC_COMPONENT) !== 0) {
-          return;
-        }
-        let componentProps = null;
-  
-        if ((flags & ROOT_COMPONENT) !== 0) {
-          componentProps = convertRootPropsToPropsArray(currentFiber.props, propsOrPropsIndex);
-        } else {
-          componentProps = currentNextValues[propsOrPropsIndex];
-        }
-        const componentFiber = currentFiber.children[currentFiber.childIndex++];
-        const lastComponentValues = componentFiber.values;
-        const nextComponentValues = callComputeFunctionWithArray(computeFunction, componentProps);
-        componentFiber.values = nextComponentValues;
-        renderTemplateFunctionWith(templateFunction, UPDATE_PHASE, componentFiber, currentDOMElement, lastComponentValues, nextComponentValues);
-        componentFiber.childIndex = 0;
-      }
-    }
-  }
-
-  function insertChildFiberIntoParentFiber(parent, child) {
-    child.parent = parent;
-    let children = parent.children;
-    if (children === null) {
-      children = parent.children = [];
-    }
-    children.push(child);
-  }
-
-  let rootFibers = new Map();
-
-  function renderTemplateFunctionWith(template, phase, fiber, DOMElement, lastValues, nextValues) {
-    const _Phase = currentPhase;
-    const _Fiber = currentFiber;
-    const _DOMElement = DOMElement;
-    const _lastValues = lastValues;
-    const _nextValues = nextValues;
-    currentPhase = phase;
-    currentFiber = fiber;
-    currentDOMElement = DOMElement;
-    currentLastValues = lastValues;
-    currentNextValues = nextValues;
-    template();
-    currentPhase = _Phase;
-    currentFiber = _Fiber;
-    currentDOMElement = _DOMElement;
-    currentLastValues = _lastValues;
-    currentNextValues = _nextValues;
-  }
-
-  function renderNodeToRootContainer(node, DOMContainer) {
-    let rootFiber = rootFibers.get(DOMContainer);
-  
-    if (node === null || node === undefined) {
-      if (rootFiber !== undefined) {
-        const childFiber = rootFiber.children[0];
-        removeChild(DOMContainer, childFiber.hostNode);
-        rootFibers.delete(DOMContainer);
-      }
-    } else if (node.$$typeof === reactElementSymbol) {
-      const type = node.type;
-      const props = node.props;
-
-      if (isArray(type)) {
-        const rootTemplateFunction = type[0];
-        if (rootFiber === undefined) {
-          rootFiber = createFiber();
-          rootFiber.props = props;
-          rootFibers.set(DOMContainer, rootFiber);
-          renderTemplateFunctionWith(rootTemplateFunction, CREATION_PHASE, rootFiber, DOMContainer, _, _);
-        } else {
-          rootFiber.props = props;
-          renderTemplateFunctionWith(rootTemplateFunction, UPDATE_PHASE, rootFiber, DOMContainer, _, _);
-          rootFiber.childIndex = 0;
         }
       }
-    } else {
-      throw new Error("render() expects a ReactElement as the first argument");
-    }
-  }
-
-  function createFiber() {
-    return {
-      childIndex: 0,
-      children: null,
-      hostNode: null,
-      parent: null,
-      props: null,
-      values: null,
-    };
-  }
-
-  function convertRootPropsToPropsArray(rootProps, rootPropsShape) {
-    const props = [];
-    if (rootPropsShape !== 0) {
-      for (let i = 0, length = rootPropsShape.length; i < length; i++) {
-        let propShape = rootPropsShape[i];
-        props.push(rootProps[propShape]);
+      const current = currentNode;
+      currentNode = nextNode;
+      if (children !== undefined) {
+        if (typeof children === 'function') {
+          children();
+        } else if (typeof children === 'string') {
+          nextNode.textContent = children;
+        }
       }
-    }
-    return props;
-  }
-
-  function callComputeFunctionWithArray(computeFunction, arr) {
-    if (arr === null) {
-      return computeFunction();
-    }
-    switch (arr.length) {
-      case 0:
-        return computeFunction();
-      case 1:
-        return computeFunction(arr[0]);
-      case 2:
-        return computeFunction(arr[0], arr[1]);
-      case 3:
-        return computeFunction(arr[0], arr[1], arr[2]);
-      case 4:
-        return computeFunction(arr[0], arr[1], arr[2], arr[3]);
-      case 7:
-        return computeFunction(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
-      default:
-        return computeFunction.apply(null, arr);
+      current.appendChild(nextNode);
     }
   }
 
-  function appendChild(parent, element) {
-    parent.appendChild(element);
+  function closeElement() {
+    currentNode = currentNode.parentNode;
   }
 
-  function removeChild(parent, child) {
-    parent.removeChild(child);
+  function openSelfClosingElement(tag, attrs, children) {
+    openElement(tag, attrs, children);
+    closeElement();
   }
 
-  function createElement(tagName) {
-    return document.createElement(tagName);
+  function component(component, props, key) {
+    component(props);
   }
 
-  function createTextNode(text) {
-    return document.createTextNode(text);
+  function staticText(text) {
+    const node = document.createTextNode(text);
+    currentNode.appendChild(node);
   }
 
-  function createPlaceholder() {
-    return createTextNode("");
-  }
-
-  function render(node, DOMContainer) {
-    const previousRenderer = ReactCurrentRenderer.current;
-    ReactCurrentRenderer.current = DOMRenderer;
-    renderNodeToRootContainer(node, DOMContainer);
-    ReactCurrentRenderer.current = previousRenderer;
-  }
-
-  function openElement(a, b, c) {
-    ReactCurrentRenderer.current.openElement(a, b, c);
-  }
-
-  function openFragment() {
-    ReactCurrentRenderer.current.openFragment();
-  }
-
-  function close(a, b, c) {
-    ReactCurrentRenderer.current.close();
-  }
-
-  function staticText(a) {
-    ReactCurrentRenderer.current.staticText(a);
-  }
-
-  function arrayMap(a, b, c) {
-    ReactCurrentRenderer.current.arrayMap(a, b, c);
-  }
-
-  function conditional(a, b, c) {
-    ReactCurrentRenderer.current.conditional(a, b, c);
-  }
-
-  function component(a, b, c, d) {
-    ReactCurrentRenderer.current.component(a, b, c, d);
-  }
-
-  function timeAge(time) {
-    const now = new Date()["getTime"]() / 1000;
-    const minutes = (now - time) / 60;
-  
-    if (minutes < 60) {
-      return Math["round"](minutes) + " minutes ago";
-    }
-  
-    return Math["round"](minutes / 60) + " hours ago";
+  function render(input, rootElem) {
+    const [node, props] = input;
+    phase = 0;
+    currentNode = rootElem;
+    node(props);
+    currentNode = null;
   }
   
-  function getHostUrl(url) {
-    return (url + "")["replace"]("https://", "")["replace"]("http://", "")["split"]("/")[0];
-  }
+  // App
 
   const arr4 = [
     "style", ["background-color", "#222"],
@@ -369,181 +86,215 @@
     "style", ["width", "18px", "padding-right", "4px"],
   ];
   const arr7 = [
-    "href", "#",
-  ];
-  const arr8 = [
-    "src", "logo.png",
-    "width", 16,
-    "height", 16,
-    "style", ["border", "1px solid #00d8ff"],
-  ];
-  const arr9 = [
     "height", 10,
     "style", ["line-height", "12pt"],
   ];
-  const arr10 = [
+  const arr8 = [
     "className", "pagetop"
   ];
-  const arr11 = [
+  const arr9 = [
     "className", "hnname",
   ];
-  const arr12 = [
-    "href", "#",
-  ];
 
-  function HeaderBar_TemplateFunction() {
+  function getHostUrl(url) {
+    return (url + "")["replace"]("https://", "")["replace"]("http://", "")["split"]("/")[0];
+  }
+
+  function timeAge(time) {
+    const now = new Date()["getTime"]() / 1000;
+    const minutes = (now - time) / 60;
+  
+    if (minutes < 60) {
+      return Math["round"](minutes) + " minutes ago";
+    }
+  
+    return Math["round"](minutes / 60) + " hours ago";
+  }
+  
+
+  function Image({src, width, height, style}) {
+    openSelfClosingElement('img', ['src', src, 'width', width, 'height', height, 'style', style]);
+  }
+
+  function Link({children, href, className}) {
+    openSelfClosingElement('a', ['href', href || "#", 'className', className], children);
+  }
+
+  function HeaderBar_Link_children() {
+    component(Image, {
+      src: "logo.png",
+      width: "16",
+      height: "16",
+      style: ['border', "1px solid #00d8ff"],
+    })
+  }
+
+  function HeaderBar() {
     openElement('tr', arr4);
-      openElement('table', arr5);
-        openElement('tbody');
-          openElement('tr');
-            openElement('td', arr6);
-              openElement('a', arr7);
-                openElement('img', arr8);
-                close();
-              close();
-            close();
-            openElement('td', arr9);
-              openElement('span', arr10);
-                openElement('b', arr11, "React HN Benchmark");
-                openElement('a', arr12, "new");
-                staticText(' | ');
-                openElement('a', arr12, "comments");
-                staticText(' | ');
-                openElement('a', arr12, "show");
-                staticText(' | ');
-                openElement('a', arr12, "ask");
-                staticText(' | ');
-                openElement('a', arr12, "jobs");
-                staticText(' | ');
-                openElement('a', arr12, "submit");
-              close();
-            close();
-          close();
-        close();
-      close();
-    close();
+      openElement('tr');
+        openElement('table', arr5);
+          openElement('tbody');
+            openElement('tr');
+              openElement('td', arr6);
+                component(Link, {
+                  children: HeaderBar_Link_children,
+                });
+              closeElement();
+              openElement('td', arr7);
+                openElement('span', arr8);
+                  openSelfClosingElement('b', arr9, "React HN Benchmark");
+                  component(Link, {
+                    children: 'new',
+                  });
+                  staticText(' | ');
+                  component(Link, {
+                    children: 'comments',
+                  });
+                  staticText(' | ');
+                  component(Link, {
+                    children: 'show',
+                  });
+                  staticText(' | ');
+                  component(Link, {
+                    children: 'ask',
+                  });
+                  staticText(' | ');
+                  component(Link, {
+                    children: 'jobs',
+                  });
+                  staticText(' | ');
+                  component(Link, {
+                    children: 'submit',
+                  });
+                closeElement();
+              closeElement();
+            closeElement();
+          closeElement();
+        closeElement();
+      closeElement();
+    closeElement();
   }
 
-  const arr21 = [
-    "className", "sitebit comhead",
-  ];
-  const arr22 = [
-    "href", "#",
-  ];
-
-  function Story_Conditional_Consequent_TemplateFunction() {
-    openElement('span', arr21);
-      staticText(" (");
-      openElement('a', arr22, 3);
-      staticText(")");
-    close();
-  }
-
-  const arr13 = [
+  const arr10 = [
     "className", "athing"
   ];
-  const arr14 = [
+
+  const arr11 = [
     "className", "title",
     "style", ["vertical-align", "top", "text-align", "right"],
   ];
-  const arr15 = [
+
+  const arr12 = [
     "className", "rank",
   ];
-  const arr16 = [
+
+  const arr13 = [
     "className", "votelinks",
     "style", ["vertical-align", "top"],
   ];
-  const arr17 = [
-    "href", "#"
-  ];
-  const arr18 = [
+
+  const arr14 = [
     "className", "votearrow",
     "title", "upvote",
   ];
-  const arr19 = [
+
+  const arr15 = [
     "className", "title",
   ];
-  const arr20 = [
-    "href", "#",
-    "className", "storylink",
+
+  const arr16 = [
+    "className", "sitebit comhead",
   ];
-  const arr23 = [
+
+  const arr17 = [
     "colspan", 2,
   ];
-  const arr24 = [
+
+  const arr18 = [
     "className", "subtext",
   ];
-  const arr25 = [
+
+  const arr19 = [
     "className", "score",
   ];
-  const arr26 = [
-    "href", "#",
-    "className", "hnuser",
-  ];
-  const arr27 = [
+
+  const arr20 = [
     "className", "age",
   ];
-  const arr28 = [
+
+  const arr21 = [
     "href", "#",
   ];
-  const arr29 = [
+
+  const arr22 = [
     "className", "spacer",
     "style",  ["height", "5px"],
   ];
 
-  function Story_TemplateFunction() {
-    openFragment();
-      openElement('tr', arr13);
-        openElement('td', arr14);
-          openElement('span', arr15, 0);
-        close();
-        openElement('td', arr16);
-          openElement('center');
-            openElement('a', arr17);
-              openElement('div', arr18);
-              close();
-            close();
-          close();
-        close();
-        openElement('td', arr19);
-          openElement('a', arr20, 1);
-          conditional(2, Story_Conditional_Consequent_TemplateFunction, _);
-        close();
-      close();
-      openElement('tr');
-        openElement('td', arr23);
-        close();
-        openElement('td', arr24);
-          openElement('span', arr25, 4);
-          staticText(" by ");
-          openElement('a', arr26, 5);
-          staticText(" ");
-          openElement('span', arr27);
-            openElement('a', arr28, 6);
-          close();
-          staticText(" | ");
-          openElement('a', arr28, "hide");
-          staticText(" | ");
-          openElement('a', arr28, 7);
-        close();
-      close();
-      openElement('tr', arr29);
-      close();
-    // close();
+  const arr23 = [
+    "className", "spacer",
+    "style",  ["height", "5px"],
+  ];
+  
+  function Story_Link_children() {
+    openSelfClosingElement('div', arr14)
   }
 
-  function Story_ComputeFunction(rank, story) {
-    var __cached__1;
-
-    var __cached__0;
-
-    __cached__1 = timeAge(story["time"]);
-    __cached__0 = getHostUrl(story["url"]);
-    return [`${rank}.`, story["title"], story["url"], __cached__0, `${story["score"]} points`, story["by"], __cached__1, `${story["descendants"] || 0} comments`];
-  }
-
-  function StoryList_MapTemplateFunction() {
-    component(0, Story_TemplateFunction, Story_ComputeFunction, 0);
+  function Story({rank, story}) {
+    openElement('tr', arr10);
+      openElement('td', arr11);
+        openSelfClosingElement('span', arr12, rank + '.');
+      closeElement();
+      openElement('td', arr13);
+        openElement('center');
+          component(Link, {
+            children: Story_Link_children,
+          });
+        closeElement();
+      closeElement();
+      openElement('td', arr15);
+        component(Link, {
+          className: 'storylink',
+          children: story.title,
+        });
+        const url = story.url;
+        if (url) {
+          openElement('span', arr16)
+          staticText(" (");
+          component(Link, {
+            children: getHostUrl(story.url),
+          });
+          staticText(")");
+          closeElement();
+        }
+      closeElement();
+    closeElement();
+    openElement('tr');
+      openSelfClosingElement('td', arr17);
+      openElement('td', arr18);
+        openSelfClosingElement('span', arr19, story.score + ' points');
+        staticText(" by ");
+        component(Link, {
+          className: 'hnuser',
+          children: story.by,
+        });
+        staticText(" ");
+        openElement('span', arr20);
+          component(Link, {
+            children: timeAge(story.time),
+          });
+        closeElement();
+        staticText(" | ");
+        component(Link, {
+          children: 'hide',
+        });
+        staticText(" | ");
+        component(Link, {
+          children: (story.descendants || 0) + ' comments',
+        });
+      closeElement();
+    closeElement();
+    openSelfClosingElement('tr', arr23);
   }
 
   const arr3 = [
@@ -552,31 +303,26 @@
     "classlist", "itemlist",
   ];
 
-  function StoryList_TemplateFunction() {
+  function StoryList({stories}) {
     openElement('tr');
       openElement('td');
         openElement('table', arr3);
           openElement('tbody');
-            arrayMap(0, 1, StoryList_MapTemplateFunction);
-          close();
-        close();
-      close();
-    close();
-  }
-
-  function StoryList_ComputeFunction(stories) {
-    return [stories, (story, i) => [[++i, story]]];
-  }
-
-  function App_ComputeFunction(stories) {
-    return [[stories]];
+            for (let i = 0; i < stories.length; i++) {
+              const story = stories[i];
+              component(Story, {story, rank: i + 1}, story.id)
+            }
+          closeElement();
+        closeElement();
+      closeElement();
+    closeElement();
   }
 
   const arr1 = [
     "id", "hnmain",
-    "border", 0,
-    "cellpadding", 0,
-    "cellspacing", 0,
+    "border", '0',
+    "cellpadding", '0',
+    "cellspacing", '0',
     "width", "85%",
     "style", ["background-color", "#f6f6ef"]
   ];
@@ -585,24 +331,17 @@
     "height", 10
   ];
 
-  function App_TemplateFunction() {
+  function Component({ stories }) {
     openElement('center');
-      openElement('table', arr1);
+      openElement('table', arr1)
         openElement('tbody');
-          component(STATIC_COMPONENT, HeaderBar_TemplateFunction);
-          openElement('tr', arr2)
-          close();
-          component(0, StoryList_TemplateFunction, StoryList_ComputeFunction, 0);
-        close();
-      close();
-    close();
+          component(HeaderBar);
+          openSelfClosingElement('tr', arr2);
+          component(StoryList, {stories});
+        closeElement();
+      closeElement();
+    closeElement();
   }
-
-  function Component_TemplateFunction() {
-    component(ROOT_COMPONENT, App_TemplateFunction, App_ComputeFunction, ['stories']);
-  }
-
-  const Component = [Component_TemplateFunction];
 
   const props = {
     "stories": [
@@ -1785,20 +1524,8 @@
 
   const root = document.getElementById("root");
 
-  const React = {
-    createElement(type, props) {
-      return {
-        $$typeof: reactElementSymbol,
-        key: null,
-        props,
-        ref: null,
-        type,
-      };
-    }
-  }
-
   const start = performance.now();
-  render(React.createElement(Component, props), root);
+  render([Component, props], root)
   const end = performance.now() - start;
   alert(end)
 })();

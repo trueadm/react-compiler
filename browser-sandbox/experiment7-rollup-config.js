@@ -5,9 +5,9 @@ import babel from "rollup-plugin-babel";
 import closure from 'rollup-plugin-google-closure-compiler';
 
 export default {
-  input: "src/inferno.js",
+  input: "src/experiment7new.js",
   output: {
-    file: "build/inferno-bundle.js",
+    file: "build/compiled-experiment7.js",
     format: "umd",
     name: "App",
   },
@@ -28,13 +28,17 @@ export default {
           },
         ],
       ],
-      plugins: ["babel-plugin-inferno"],
     }),
     nodeResolve({
       jsnext: true,
       main: true,
     }),
-    commonjs(),
-    // closure(),
+    commonjs({
+      ignore: ["react"],
+    }),
+    closure({
+      language_in: 'ECMASCRIPT5_STRICT',
+      language_out: 'ECMASCRIPT5_STRICT',
+    }),
   ],
 };
