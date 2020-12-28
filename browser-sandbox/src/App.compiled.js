@@ -1,5 +1,4 @@
 import { createVNode } from "react-compiler-runtime";
-// import React from "react";
 type StoryType = {
   by: string,
   descendants: number,

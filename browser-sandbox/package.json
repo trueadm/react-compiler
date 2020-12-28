@@ -4,8 +4,7 @@
   "scripts": {
     "compile": "node ../lib/cli.js --entry=src/App.js",
     "build-compiled-bundle": "rollup --config compiled-rollup-config.js",
-    "build-react-bundle": "rollup --config react-rollup-config.js",
-    "build": "yarn compile && yarn build-compiled-bundle && yarn build-react-bundle"
+    "build": "yarn compile && yarn build-compiled-bundle"
   },
   "author": "Dominic Gannaway",
   "license": "MIT",
