@@ -1,7 +1,7 @@
 {
-  "name": "babel-plugin-react",
+  "name": "react-compiler",
   "version": "1.0.0",
-  "description": "",
+  "description": "React compiler project",
   "main": "index.js",
   "scripts": {
     "build": "babel src --out-dir lib --source-maps",
@@ -33,7 +33,6 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
     "babel-eslint": "^10.0.1",
-    "cx": "file:scripts/cx",
     "eslint": "^5.9.0",
     "eslint-plugin-babel": "^5.2.1",
     "eslint-plugin-flow-header": "^0.2.0",

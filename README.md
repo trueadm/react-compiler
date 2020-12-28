@@ -1,5 +1,9 @@
 # react-compiler
 
+Note: This project is unmaintained and is highly experimental.
+
+This was a personal side-project to investigate various different implementations of how you might ahead-of-time compile React applications (with contraints in place) in the pursuit of performance and code size wins. The primary reason for open sourcing this code is to share the ideas explored in this project, so others can make better use of them.
+
 ## Tests
 Run tests:
 
