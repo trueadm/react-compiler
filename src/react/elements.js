@@ -48,7 +48,7 @@ import { PROP_IS_EVENT, filterStaticPropValue, getPropInformation, isUnitlessNum
 import { validateArgumentsDoNotContainTemplateNodes, validateParamsDoNotConflictOuterScope } from "../validation";
 import invariant from "../invariant";
 import * as t from "@babel/types";
-import { compileCxMockCall } from "../mocks/cx";
+// import { compileCxMockCall } from "../mocks/cx";
 import {
   ConditionalTemplateNode,
   ContextConsumerTemplateNode,
@@ -136,7 +136,7 @@ function compileHostComponentPropValue(templateNode, tagName, valuePath, propNam
   let propTemplateNode;
 
   if (isFbCxCall(valuePath, state)) {
-    propTemplateNode = compileCxMockCall(valueRefPath, state);
+    // propTemplateNode = compileCxMockCall(valueRefPath, state);
   } else {
     propTemplateNode = compileNode(valuePath, valueRefPath, state, componentPath, false);
   }

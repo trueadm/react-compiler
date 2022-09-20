@@ -6,6 +6,14 @@ This was a personal side-project to investigate various different implementation
 
 ## Getting started
 
+Upon cloning the repository, run
+
+```sh
+npm install && npm run build
+```
+
+If you use VSCode, you'll find launch options available for compiling the `node-sandbox` directory.
+
 ### SSR
 
 You can see quick working examples in the `tests` directory. If you copy them into `node-sandbox/App.js` and then run:
